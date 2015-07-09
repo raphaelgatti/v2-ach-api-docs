@@ -9,14 +9,14 @@ language_tabs:
   - javascript: node.js
 
 toc_footers:
-  - <a href='https://www.dwolla.com/applications/create' target="_blank">Get API Credentials</a>
   - <a href="https://discuss.dwolla.com/c/api-support" target="_blank">Get some help</a>
   - <a href='https://developers.dwolla.com/dev/pages/sandbox' target="_blank">Sandbox Environment</a>
   - <a href='http://github.com/tripit/slate' target="_blank">Documentation Powered by Slate</a>
 
 includes:
-  # overview
   - introduction
+  - oauth
+  - customers
 
 search: true
 
