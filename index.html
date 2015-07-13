@@ -94,43 +94,21 @@ Authorization: Bearer myOAuthAccessToken123
 GET https://www.dwolla.com/oauth/rest/transactions?client_id<span class="o">=</span>XYZ&amp;client_secret<span class="o">=</span>JJJ&amp;limit<span class="o">=</span>10
 </code></pre>
 
-<p><code class="prettyprint">POST</code> requests must have a JSON encoded body and the 
-<code class="prettyprint">Content-Type: application/json</code> header.</p>
+<p>All requests should supply the following headers:</p>
 
-<p>All requests must be made over HTTPS.  Any HTTP requests are met with a HTTP 302 to its HTTPS equivalent.</p>
+<p><code class="prettyprint">Accept: application/vnd.dwolla.v1.hal+json</code></p>
 
-<aside class="notice">
-Remember to [url-encode](http://en.wikipedia.org/wiki/Percent-encoding) all GET querystring parameters!
-</aside>
-<h2 id='responses'>Responses</h2>
-<blockquote>
-<p>Success response</p>
-</blockquote>
-<pre class="highlight shell"><code><span class="o">{</span>
-    <span class="s2">"Success"</span>: <span class="nb">true</span>,
-    <span class="s2">"Message"</span>: <span class="s2">"Success"</span>,
-    <span class="s2">"Response"</span>: 71332,
-    <span class="s2">"_links"</span>: null
-<span class="o">}</span>
-</code></pre>
+<p><code class="prettyprint">Content-Type: application/vnd.dwolla.v1.hal+json</code></p>
 
-<blockquote>
-<p>Error response</p>
-</blockquote>
-<pre class="highlight shell"><code>cf-ray → 20365e143336220a-EWR
-content-length → 48
-content-type → application/json; <span class="nv">charset</span><span class="o">=</span>UTF-8
-date → Thu, 09 Jul 2015 19:17:10 GMT
-server → cloudflare-nginx
-status → 401 Unauthorized
-version → HTTP/1.1
-x-request-id → cc94309f-d6f2-4687-9a51-463ba0593f4c
+<p>Requests must be made over HTTPS.  Any non-secure requests are met with a redirect (HTTP 302) to the HTTPS equivalent URI.</p>
+<h3 id='authorization'>Authorization</h3>
+<p>All requests require either an OAuth access token or a <code class="prettyprint">client_id</code> and <code class="prettyprint">client_secret</code>.  OAuth access tokens are passed via the <code class="prettyprint">Authorization</code> HTTP header:</p>
 
-<span class="o">{</span>
-  <span class="s2">"code"</span>: 1,
-  <span class="s2">"description"</span>: <span class="s2">"Expired access token."</span>
-<span class="o">}</span>
-</code></pre>
+<p><code class="prettyprint">Authorization: Bearer {access_token_here}</code></p>
+
+<p>Requests that require an client_id and client_secret are passed in the JSON request body for <code class="prettyprint">POST</code> requests or as querystring parameters for <code class="prettyprint">GET</code> requests:</p>
+
+<p><code class="prettyprint">GET https://api.dwolla.com/example?client_id={client_id}&amp;client_secret={client_secret}</code></p>
 <h2 id='errors'>Errors</h2>
 <blockquote>
 <p>Example error.  HTTP 401:</p>
@@ -147,13 +125,35 @@ x-request-id → cc94309f-d6f2-4687-9a51-463ba0593f4c
 
 <table><thead>
 <tr>
-<th>Error String</th>
+<th>HTTP Status</th>
+<th>Error Code</th>
 <th>Description</th>
 </tr>
 </thead><tbody>
 <tr>
-<td>foo</td>
-<td>bar</td>
+<td>401</td>
+<td>1</td>
+<td>Expired access token.</td>
+</tr>
+<tr>
+<td>401</td>
+<td>InvalidCredentials</td>
+<td>Invalid access token.</td>
+</tr>
+<tr>
+<td>401</td>
+<td>InvalidCredentials</td>
+<td>Missing or invalid credentials.</td>
+</tr>
+<tr>
+<td>404</td>
+<td>NotFound</td>
+<td>The requested resource was not found.</td>
+</tr>
+<tr>
+<td>500</td>
+<td>ServerError</td>
+<td>A server error occurred. Error ID: 63e92a2a-fb48-4a23-ab4c-24a6764f1593.</td>
 </tr>
 </tbody></table>
 
@@ -203,9 +203,9 @@ x-request-id → cc94309f-d6f2-4687-9a51-463ba0593f4c
 </code></pre>
 
 <blockquote>
-<p>Example initiation URL:</p>
+<p>Example initiation URL (send the user there):</p>
 </blockquote>
-<pre class="highlight shell"><code>https://www.dwolla.com/oauth/v2/authenticate?client_id<span class="o">=</span>abcdefg&amp;response_type<span class="o">=</span>code&amp;redirect_uri<span class="o">=</span>https%3A%2F%2Fwww.myredirect.com%2Fredirect&amp;scope<span class="o">=</span>send|transactions
+<pre class="highlight shell"><code>https://uat.dwolla.com/oauth/v2/authenticate?client_id<span class="o">=</span>PO%2BSzGAsZCE4BTG7Cw4OAL40Tpf1008mDjGBSVo6QLNfM4mD%2Ba&amp;response_type<span class="o">=</span>code&amp;redirect_uri<span class="o">=</span>https://developers.dwolla.com/dev/token/callback?env<span class="o">=</span>sandbox&amp;scope<span class="o">=</span>Balance%7CAccountInfoFull
 </code></pre>
 
 <p>To start the OAuth process, construct the initiation URL which the user will visit in order to grant permission to your application.  It describes the permissions your application requires (<code class="prettyprint">scope</code>), who the client application is (<code class="prettyprint">client_id</code>), and where the user should be redirected to after they grant or deny permissions to your application (<code class="prettyprint">redirect_uri</code>).</p>
@@ -247,11 +247,8 @@ https://www.dwolla.com/oauth/v2/authenticate?client_id={client_id}&amp;response_
 <td>Require new users opting to register for Dwolla to create a fully-verified Dwolla account instead of a default lightweight Direct account.</td>
 </tr>
 </tbody></table>
-
-<aside class="notice">
-Remember to url-encode all querystring parameters!
-</aside>
-<h3 id='oauth-scopes'>OAuth Scopes</h3>
+<aside class="notice"><p>Remember to url-encode all querystring parameters!</p>
+</aside><h3 id='oauth-scopes'>OAuth Scopes</h3>
 <p>Applications may request the following permission scopes when generating an access token:</p>
 
 <table><thead>
@@ -296,6 +293,10 @@ Remember to url-encode all querystring parameters!
 <td>Scheduled</td>
 <td>Allow scheduling one-time and recurring payments.</td>
 </tr>
+<tr>
+<td>ManageCustomers</td>
+<td>Includes create customer records, manage their funding sources, and allow related money movement</td>
+</tr>
 </tbody></table>
 <h2 id='finish-authorization'>Finish Authorization</h2><pre class="highlight php"><code><span class="cp">&lt;?php</span>
 
@@ -336,11 +337,12 @@ Remember to url-encode all querystring parameters!
 <p>Successful Response:</p>
 </blockquote>
 <pre class="highlight shell"><code><span class="o">{</span>
-  <span class="s2">"access_token"</span>: <span class="s2">"YLAZSreh165CAD2tPhAEzFCYYIrVyFomLWUDMGFBZIw9KtIg4q"</span>,
+  <span class="s2">"access_token"</span>: <span class="s2">"4Qu79qhO5GkPwo4fsbuc9ve4mJKN/XnxcT34F812y6SBIyGrnP"</span>,
   <span class="s2">"expires_in"</span>: 3600,
-  <span class="s2">"refresh_token"</span>: <span class="s2">"Pgk+l9okjwTCfsvIvEDPrsomE1er1txeyoaAkTIBAuXza8WvZY"</span>,
-  <span class="s2">"refresh_expires_in"</span>: 5184000,
-  <span class="s2">"token_type"</span>: <span class="s2">"bearer"</span>
+  <span class="s2">"refresh_token"</span>: <span class="s2">"mRRYs+CXrwe67kIDa1XFIiZJsEzUEbMerrU3zlmFSqo51obG3d"</span>,
+  <span class="s2">"refresh_expires_in"</span>: 5183765,
+  <span class="s2">"token_type"</span>: <span class="s2">"bearer"</span>,
+  <span class="s2">"scope"</span>: <span class="s2">"balance|accountinfofull|send|request|transactions|contacts|funding|manageaccount|scheduled|managecustomers"</span>
 <span class="o">}</span>
 </code></pre>
 
@@ -402,6 +404,10 @@ Remember to url-encode all querystring parameters!
 <td>token_type</td>
 <td>Always <code class="prettyprint">bearer</code>.</td>
 </tr>
+<tr>
+<td>scope</td>
+<td>Pipe (`</td>
+</tr>
 </tbody></table>
 <h2 id='refresh-authorization'>Refresh Authorization</h2><pre class="highlight json"><code><span class="p">{</span><span class="w">
   </span><span class="nt">"client_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"JCGQXLrlfuOqdUYdTcLz3rBiCZQDRvdWIUPkw++GMuGhkem9Bo"</span><span class="p">,</span><span class="w">
@@ -440,11 +446,12 @@ Remember to url-encode all querystring parameters!
 <p>Successful Response:</p>
 </blockquote>
 <pre class="highlight shell"><code><span class="o">{</span>
-  <span class="s2">"access_token"</span>: <span class="s2">"hr1tSJk23tOv9RxR8cQuDpUD/kpUgf0cb9WfKtRoPxTw8ymbVt"</span>,
+  <span class="s2">"access_token"</span>: <span class="s2">"4Qu79qhO5GkPwo4fsbuc9ve4mJKN/XnxcT34F812y6SBIyGrnP"</span>,
   <span class="s2">"expires_in"</span>: 3600,
-  <span class="s2">"refresh_token"</span>: <span class="s2">"lqopeyjq5AJln5fpMedElUULz+XBNNw9nAkIinxE0g4aEzxmDc"</span>,
+  <span class="s2">"refresh_token"</span>: <span class="s2">"mRRYs+CXrwe67kIDa1XFIiZJsEzUEbMerrU3zlmFSqo51obG3d"</span>,
   <span class="s2">"refresh_expires_in"</span>: 5184000,
-  <span class="s2">"token_type"</span>: <span class="s2">"bearer"</span>
+  <span class="s2">"token_type"</span>: <span class="s2">"bearer"</span>,
+  <span class="s2">"scope"</span>: <span class="s2">"balance|accountinfofull|send|request|transactions|contacts|funding|manageaccount|scheduled|managecustomers"</span>
 <span class="o">}</span>
 </code></pre>
 
@@ -488,6 +495,10 @@ Remember to url-encode all querystring parameters!
 <tr>
 <td>grant_type</td>
 <td>This must be set to <code class="prettyprint">refresh_token</code></td>
+</tr>
+<tr>
+<td>scope</td>
+<td>Pipe (`</td>
 </tr>
 </tbody></table>
 <h3 id='response-parameters'>Response Parameters</h3>
@@ -593,9 +604,8 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 </span></code></pre>
 
 <p>Fetch a list of Customers which belong to the authorized user.</p>
-
-<aside class="reminder">This endpoint [requires](#authentication) an OAuth access token with the `ManageCustomers` scope.</aside>
-<h3 id='http-request'>HTTP Request</h3>
+<aside class="reminder"><p>This endpoint <a href="#authentication">requires</a> an OAuth access token with the <code>ManageCustomers</code> scope.</p>
+</aside><h3 id='http-request'>HTTP Request</h3>
 <p><code class="prettyprint">GET https://api.dwolla.com/customers</code></p>
 <h3 id='errors'>Errors</h3>
 <table><thead>
@@ -614,11 +624,12 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 <p>Request:</p>
 </blockquote>
 <pre class="highlight shell"><code>POST /customers
-
+Content-Type: application/vnd.dwolla.v1.hal+json
+Accept: application/vnd.dwolla.v1.hal+json
 </code></pre>
 <pre class="highlight json"><code><span class="p">{</span><span class="w">
-  </span><span class="nt">"firstName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Sam"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"lastName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"McSammons"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"firstName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Bob"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"lastName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Dole"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"gordon+1@dwolla.com"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"ipAddress"</span><span class="p">:</span><span class="w"> </span><span class="s2">"99.99.99.99"</span><span class="w">
 </span><span class="p">}</span><span class="w">
@@ -630,7 +641,7 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 <pre class="highlight json"><code><span class="p">{</span><span class="w">
   </span><span class="nt">"_links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="nt">"self"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.uat.dwolla.com/customers/6f80efc0-b158-4df1-9b11-da85f0bffdd4"</span><span class="w">
+      </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.dwolla.com/customers/6f80efc0-b158-4df1-9b11-da85f0bffdd4"</span><span class="w">
     </span><span class="p">}</span><span class="w">
   </span><span class="p">},</span><span class="w">
   </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"6f80efc0-b158-4df1-9b11-da85f0bffdd4"</span><span class="p">,</span><span class="w">
@@ -641,9 +652,8 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 </span></code></pre>
 
 <p>Create a new Customer.</p>
-
-<aside class="reminder">This endpoint [requires](#authentication) an OAuth access token with the `ManageCustomers` scope.</aside>
-<h3 id='http-request'>HTTP Request</h3>
+<aside class="reminder"><p>This endpoint <a href="#authentication">requires</a> an OAuth access token with the <code>ManageCustomers</code> scope.</p>
+</aside><h3 id='http-request'>HTTP Request</h3>
 <p><code class="prettyprint">POST https://api.dwolla.com/customers</code></p>
 <h3 id='request-parameters'>Request Parameters</h3>
 <table><thead>
