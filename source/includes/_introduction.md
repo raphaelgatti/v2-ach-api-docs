@@ -49,6 +49,8 @@ Requests must be made over HTTPS.  Any non-secure requests are met with a redire
 
 ### Authorization
 
+Request and response bodies are JSON encoded.
+
 All requests require either an OAuth access token or a `client_id` and `client_secret`.  OAuth access tokens are passed via the `Authorization` HTTP header:
 
 `Authorization: Bearer {access_token_here}`
