@@ -13,7 +13,7 @@
 
       <script>
         $(function() {
-          setupLanguages(["json","php","ruby","python","javascript"]);
+          setupLanguages(["json"]);
         });
       </script>
 
@@ -42,10 +42,6 @@
 
         <div class="lang-selector">
               <a href="#" data-language-name="json">json</a>
-              <a href="#" data-language-name="php">php</a>
-              <a href="#" data-language-name="ruby">ruby</a>
-              <a href="#" data-language-name="python">python</a>
-              <a href="#" data-language-name="javascript">node.js</a>
         </div>
         <div class="search">
           <input type="text" class="search" id="input-search" placeholder="Search">
@@ -102,6 +98,8 @@ GET https://www.dwolla.com/oauth/rest/transactions?client_id<span class="o">=</s
 
 <p>Requests must be made over HTTPS.  Any non-secure requests are met with a redirect (HTTP 302) to the HTTPS equivalent URI.</p>
 <h3 id='authorization'>Authorization</h3>
+<p>Request and response bodies are JSON encoded.</p>
+
 <p>All requests require either an OAuth access token or a <code class="prettyprint">client_id</code> and <code class="prettyprint">client_secret</code>.  OAuth access tokens are passed via the <code class="prettyprint">Authorization</code> HTTP header:</p>
 
 <p><code class="prettyprint">Authorization: Bearer {access_token_here}</code></p>
@@ -298,24 +296,7 @@ https://www.dwolla.com/oauth/v2/authenticate?client_id={client_id}&amp;response_
 <td>Includes create customer records, manage their funding sources, and allow related money movement</td>
 </tr>
 </tbody></table>
-<h2 id='finish-authorization'>Finish Authorization</h2><pre class="highlight php"><code><span class="cp">&lt;?php</span>
-
-<span class="nv">$OAuth</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Dwolla\OAuth</span><span class="p">();</span>
-<span class="nv">$OAuth</span><span class="o">-&gt;</span><span class="na">settings</span><span class="o">-&gt;</span><span class="na">client_id</span> <span class="o">=</span> <span class="nv">$apiKey</span><span class="p">;</span>
-<span class="nv">$OAuth</span><span class="o">-&gt;</span><span class="na">settings</span><span class="o">-&gt;</span><span class="na">client_secret</span> <span class="o">=</span> <span class="nv">$apiSecret</span><span class="p">;</span>
-
-<span class="nv">$authorizationCode</span> <span class="o">=</span> <span class="s2">"J9kkk2JbX7Yjl4L28fM13il46QI="</span><span class="p">;</span>
-<span class="nv">$redirect_uri</span> <span class="o">=</span> <span class="s2">"https://www.myredirect.com/redirect"</span><span class="p">;</span>
-<span class="nv">$result</span> <span class="o">=</span> <span class="nv">$OAuth</span><span class="o">-&gt;</span><span class="na">get</span><span class="p">(</span><span class="nv">$authorizationCode</span><span class="p">,</span> <span class="nv">$redirect_uri</span><span class="p">);</span>
-
-<span class="nb">print_r</span><span class="p">(</span><span class="nv">$result</span><span class="p">);</span>
-<span class="cp">?&gt;</span>
-</code></pre>
-<pre class="highlight python"><code><span class="c"># Get access key and refresh token pair</span>
-<span class="n">access_set</span> <span class="o">=</span> <span class="n">oauth</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">"Z/KHDIyWO/LboIGn3wGGs1+sRWg="</span><span class="p">,</span> <span class="s">"http://requestb.in/122rdhc1"</span><span class="p">)</span>
-<span class="k">print</span><span class="p">(</span><span class="n">access_set</span><span class="p">)</span>
-</code></pre>
-<pre class="highlight json"><code><span class="p">{</span><span class="w">
+<h2 id='finish-authorization'>Finish Authorization</h2><pre class="highlight json"><code><span class="p">{</span><span class="w">
   </span><span class="nt">"client_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"JCGQXLrlfuOqdUYdTcLz3rBiCZQDRvdWIUPkw++GMuGhkem9Bo"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"client_secret"</span><span class="p">:</span><span class="w"> </span><span class="s2">"g7QLwvO37aN2HoKx1amekWi8a2g7AIuPbD5C/JSLqXIcDOxfTr"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"h6TvQZH+5BsV//O43uOJ0uRkBLk="</span><span class="p">,</span><span class="w">
@@ -323,15 +304,6 @@ https://www.dwolla.com/oauth/v2/authenticate?client_id={client_id}&amp;response_
   </span><span class="nt">"redirect_uri"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://www.myredirect.com/redirect"</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
-<pre class="highlight javascript"><code><span class="nx">Dwolla</span><span class="p">.</span><span class="nx">finishAuth</span><span class="p">(</span><span class="nx">authorizationCode</span><span class="p">,</span> <span class="nx">redirect_uri</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">auth</span><span class="p">)</span> <span class="p">{</span>
-  <span class="kd">var</span> <span class="nx">access_token</span> <span class="o">=</span> <span class="nx">auth</span><span class="p">.</span><span class="nx">access_token</span><span class="p">;</span>
-  <span class="kd">var</span> <span class="nx">refresh_token</span> <span class="o">=</span> <span class="nx">auth</span><span class="p">.</span><span class="nx">refresh_token</span><span class="p">;</span>
-<span class="p">});</span>
-</code></pre>
-<pre class="highlight ruby"><code><span class="n">info</span> <span class="o">=</span> <span class="no">Dwolla</span><span class="o">::</span><span class="no">OAuth</span><span class="p">.</span><span class="nf">get_token</span><span class="p">(</span><span class="n">code</span><span class="p">,</span> <span class="n">redirect_uri</span><span class="p">)</span>
-<span class="n">token</span> <span class="o">=</span> <span class="n">info</span><span class="p">[</span><span class="s1">'access_token'</span><span class="p">]</span>
-<span class="n">refresh_token</span> <span class="o">=</span> <span class="n">info</span><span class="p">[</span><span class="s1">'refresh_token'</span><span class="p">]</span>
-</code></pre>
 
 <blockquote>
 <p>Successful Response:</p>
@@ -416,31 +388,6 @@ https://www.dwolla.com/oauth/v2/authenticate?client_id={client_id}&amp;response_
   </span><span class="nt">"grant_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"refresh_token"</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
-<pre class="highlight python"><code><span class="c"># Exchange your expiring refresh token in "access_set" for another</span>
-<span class="c"># access/refresh token pair</span>
-
-<span class="k">print</span><span class="p">(</span><span class="n">oauth</span><span class="o">.</span><span class="n">refresh</span><span class="p">(</span><span class="n">access_set</span><span class="p">[</span><span class="s">'refresh_token'</span><span class="p">]))</span>
-</code></pre>
-<pre class="highlight javascript"><code><span class="nx">Dwolla</span><span class="p">.</span><span class="nx">refreshAuth</span><span class="p">(</span><span class="nx">refreshToken</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">auth</span><span class="p">)</span> <span class="p">{</span>
-  <span class="kd">var</span> <span class="nx">new_access_token</span> <span class="o">=</span> <span class="nx">auth</span><span class="p">.</span><span class="nx">access_token</span><span class="p">;</span>
-  <span class="kd">var</span> <span class="nx">new_refresh_token</span> <span class="o">=</span> <span class="nx">auth</span><span class="p">.</span><span class="nx">refresh_token</span><span class="p">;</span>
-<span class="p">});</span>
-</code></pre>
-<pre class="highlight ruby"><code><span class="n">info</span> <span class="o">=</span> <span class="no">Dwolla</span><span class="o">::</span><span class="no">OAuth</span><span class="p">.</span><span class="nf">refresh_auth</span><span class="p">(</span><span class="n">refresh_token</span><span class="p">)</span>
-<span class="n">token</span> <span class="o">=</span> <span class="n">info</span><span class="p">[</span><span class="s1">'access_token'</span><span class="p">]</span>
-<span class="n">refresh_token</span> <span class="o">=</span> <span class="n">info</span><span class="p">[</span><span class="s1">'refresh_token'</span><span class="p">]</span>
-</code></pre>
-<pre class="highlight php"><code><span class="cp">&lt;?php</span>
-
-<span class="nv">$OAuth</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Dwolla\OAuth</span><span class="p">();</span>
-<span class="nv">$OAuth</span><span class="o">-&gt;</span><span class="na">settings</span><span class="o">-&gt;</span><span class="na">client_id</span> <span class="o">=</span> <span class="nv">$apiKey</span><span class="p">;</span>
-<span class="nv">$OAuth</span><span class="o">-&gt;</span><span class="na">settings</span><span class="o">-&gt;</span><span class="na">client_secret</span> <span class="o">=</span> <span class="nv">$apiSecret</span><span class="p">;</span>
-
-<span class="nv">$refreshToken</span> <span class="o">=</span> <span class="s2">"Cr72k48ogBXh+PLwZ/gq2hAtRYSTQl+NW9W0fTxYjaYKRdEsKI"</span><span class="p">;</span>
-
-<span class="nv">$result</span> <span class="o">=</span> <span class="nv">$OAuth</span><span class="o">-&gt;</span><span class="na">refresh</span><span class="p">(</span><span class="nv">$refreshToken</span><span class="p">);</span>
-<span class="cp">?&gt;</span>
-</code></pre>
 
 <blockquote>
 <p>Successful Response:</p>
@@ -709,10 +656,6 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
       <div class="dark-box">
           <div class="lang-selector">
                 <a href="#" data-language-name="json">json</a>
-                <a href="#" data-language-name="php">php</a>
-                <a href="#" data-language-name="ruby">ruby</a>
-                <a href="#" data-language-name="python">python</a>
-                <a href="#" data-language-name="javascript">node.js</a>
           </div>
       </div>
     </div>
