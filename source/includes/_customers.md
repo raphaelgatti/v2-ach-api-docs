@@ -80,13 +80,14 @@ Fetch a list of Customers which belong to the authorized user.
 
 ```shell
 POST /customers
-
+Content-Type: application/vnd.dwolla.v1.hal+json
+Accept: application/vnd.dwolla.v1.hal+json
 ```
 
 ```json
 {
-  "firstName": "Sam",
-  "lastName": "McSammons",
+  "firstName": "Bob",
+  "lastName": "Dole",
   "email": "gordon+1@dwolla.com",
   "ipAddress": "99.99.99.99"
 }
@@ -98,7 +99,7 @@ POST /customers
 {
   "_links": {
     "self": {
-      "href": "https://api.uat.dwolla.com/customers/6f80efc0-b158-4df1-9b11-da85f0bffdd4"
+      "href": "https://api.dwolla.com/customers/6f80efc0-b158-4df1-9b11-da85f0bffdd4"
     }
   },
   "id": "6f80efc0-b158-4df1-9b11-da85f0bffdd4",
