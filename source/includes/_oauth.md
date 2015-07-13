@@ -103,25 +103,6 @@ ManageCustomers | Includes create customer records, manage their funding sources
 
 ## Finish Authorization
 
-```php
-<?php
-
-$OAuth = new Dwolla\OAuth();
-$OAuth->settings->client_id = $apiKey;
-$OAuth->settings->client_secret = $apiSecret;
-
-$authorizationCode = "J9kkk2JbX7Yjl4L28fM13il46QI=";
-$redirect_uri = "https://www.myredirect.com/redirect";
-$result = $OAuth->get($authorizationCode, $redirect_uri);
-
-print_r($result);
-?>
-```
-```python
-# Get access key and refresh token pair
-access_set = oauth.get("Z/KHDIyWO/LboIGn3wGGs1+sRWg=", "http://requestb.in/122rdhc1")
-print(access_set)
-```
 ```json
 {
   "client_id": "JCGQXLrlfuOqdUYdTcLz3rBiCZQDRvdWIUPkw++GMuGhkem9Bo",
@@ -130,19 +111,6 @@ print(access_set)
   "grant_type": "authorization_code",
   "redirect_uri": "https://www.myredirect.com/redirect"
 }
-```
-
-```js
-Dwolla.finishAuth(authorizationCode, redirect_uri, function(error, auth) {
-  var access_token = auth.access_token;
-  var refresh_token = auth.refresh_token;
-});
-```
-
-```ruby
-info = Dwolla::OAuth.get_token(code, redirect_uri)
-token = info['access_token']
-refresh_token = info['refresh_token']
 ```
 
 > Successful Response:
@@ -190,37 +158,6 @@ scope | Pipe (`|`) delimited list of permission scopes granted
   "refresh_token": "Pgk+l9okjwTCfsvIvEDPrsomE1er1txeyoaAkTIBAuXza8WvZY",
   "grant_type": "refresh_token"
 }
-```
-```python
-# Exchange your expiring refresh token in "access_set" for another
-# access/refresh token pair
-
-print(oauth.refresh(access_set['refresh_token']))
-```
-```js
-Dwolla.refreshAuth(refreshToken, function(error, auth) {
-  var new_access_token = auth.access_token;
-  var new_refresh_token = auth.refresh_token;
-});
-```
-
-```ruby
-info = Dwolla::OAuth.refresh_auth(refresh_token)
-token = info['access_token']
-refresh_token = info['refresh_token']
-```
-
-```php
-<?php
-
-$OAuth = new Dwolla\OAuth();
-$OAuth->settings->client_id = $apiKey;
-$OAuth->settings->client_secret = $apiSecret;
-
-$refreshToken = "Cr72k48ogBXh+PLwZ/gq2hAtRYSTQl+NW9W0fTxYjaYKRdEsKI";
-
-$result = $OAuth->refresh($refreshToken);
-?>
 ```
 
 > Successful Response:
