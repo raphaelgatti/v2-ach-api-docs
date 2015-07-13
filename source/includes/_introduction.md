@@ -39,45 +39,24 @@ Authorization: Bearer myOAuthAccessToken123
 GET https://www.dwolla.com/oauth/rest/transactions?client_id=XYZ&client_secret=JJJ&limit=10
 ```
 
-`POST` requests must have a JSON encoded body and the 
-`Content-Type: application/json` header.
+All requests should supply the following headers:
 
-All requests must be made over HTTPS.  Any HTTP requests are met with a HTTP 302 to its HTTPS equivalent.
+`Accept: application/vnd.dwolla.v1.hal+json`
 
-<aside class="notice">
-Remember to [url-encode](http://en.wikipedia.org/wiki/Percent-encoding) all GET querystring parameters!
-</aside>
+`Content-Type: application/vnd.dwolla.v1.hal+json`
 
-## Responses
+Requests must be made over HTTPS.  Any non-secure requests are met with a redirect (HTTP 302) to the HTTPS equivalent URI.
 
-> Success response
+### Authorization
 
-```shell
-{
-    "Success": true,
-    "Message": "Success",
-    "Response": 71332,
-    "_links": null
-}
-```
+All requests require either an OAuth access token or a `client_id` and `client_secret`.  OAuth access tokens are passed via the `Authorization` HTTP header:
 
-> Error response
+`Authorization: Bearer {access_token_here}`
 
-```shell
-cf-ray → 20365e143336220a-EWR
-content-length → 48
-content-type → application/json; charset=UTF-8
-date → Thu, 09 Jul 2015 19:17:10 GMT
-server → cloudflare-nginx
-status → 401 Unauthorized
-version → HTTP/1.1
-x-request-id → cc94309f-d6f2-4687-9a51-463ba0593f4c
+Requests that require an client_id and client_secret are passed in the JSON request body for `POST` requests or as querystring parameters for `GET` requests:
 
-{
-  "code": 1,
-  "description": "Expired access token."
-}
-```
+`GET https://api.dwolla.com/example?client_id={client_id}&client_secret={client_secret}`
+
 
 ## Errors
 
@@ -97,6 +76,10 @@ Error responses use HTTP status codes to indicate the type of error.  The JSON r
 ### Common Errors
 The following errors are common across all API endpoints.
 
-| Error String | Description |
-|--------------|-------------|
-|foo | bar
+| HTTP Status | Error Code | Description
+|-------------|------|-------------
+| 401 | 1 | Expired access token. |
+| 401 | InvalidCredentials | Invalid access token. |
+| 401 | InvalidCredentials | Missing or invalid credentials. |
+| 404 | NotFound | The requested resource was not found. |
+| 500 | ServerError | A server error occurred. Error ID: 63e92a2a-fb48-4a23-ab4c-24a6764f1593. |
