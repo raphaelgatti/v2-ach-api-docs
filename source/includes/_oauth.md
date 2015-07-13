@@ -55,10 +55,10 @@ redirect_uri = "https://www.myredirect.com/redirect"
 authUrl = Dwolla::OAuth.get_auth_url(redirect_uri)
 ```
 
-> Example initiation URL:
+> Example initiation URL (send the user there):
 
 ```shell
-https://www.dwolla.com/oauth/v2/authenticate?client_id=abcdefg&response_type=code&redirect_uri=https%3A%2F%2Fwww.myredirect.com%2Fredirect&scope=send|transactions
+https://uat.dwolla.com/oauth/v2/authenticate?client_id=PO%2BSzGAsZCE4BTG7Cw4OAL40Tpf1008mDjGBSVo6QLNfM4mD%2Ba&response_type=code&redirect_uri=https://developers.dwolla.com/dev/token/callback?env=sandbox&scope=Balance%7CAccountInfoFull
 ```
 
 To start the OAuth process, construct the initiation URL which the user will visit in order to grant permission to your application.  It describes the permissions your application requires (`scope`), who the client application is (`client_id`), and where the user should be redirected to after they grant or deny permissions to your application (`redirect_uri`).
@@ -99,6 +99,7 @@ Request | Send money requests, list them, fulfill them
 Funding | Access the user's funding sources (i.e. connected bank accounts)
 ManageAccount | Manage the user's account settings
 Scheduled | Allow scheduling one-time and recurring payments.
+ManageCustomers | Includes create customer records, manage their funding sources, and allow related money movement
 
 ## Finish Authorization
 
@@ -148,11 +149,12 @@ refresh_token = info['refresh_token']
 
 ```shell
 {
-  "access_token": "YLAZSreh165CAD2tPhAEzFCYYIrVyFomLWUDMGFBZIw9KtIg4q",
+  "access_token": "4Qu79qhO5GkPwo4fsbuc9ve4mJKN/XnxcT34F812y6SBIyGrnP",
   "expires_in": 3600,
-  "refresh_token": "Pgk+l9okjwTCfsvIvEDPrsomE1er1txeyoaAkTIBAuXza8WvZY",
-  "refresh_expires_in": 5184000,
-  "token_type": "bearer"
+  "refresh_token": "mRRYs+CXrwe67kIDa1XFIiZJsEzUEbMerrU3zlmFSqo51obG3d",
+  "refresh_expires_in": 5183765,
+  "token_type": "bearer",
+  "scope": "balance|accountinfofull|send|request|transactions|contacts|funding|manageaccount|scheduled|managecustomers"
 }
 ```
 
@@ -178,6 +180,7 @@ expires_in | The lifetime of the access token, in seconds.  Default is 3600.
 refresh_token | New refresh token
 refresh_expires_in | The lifetime of the refresh token, in seconds.  Default is 5184000.
 token_type | Always `bearer`.
+scope | Pipe (`|`) delimited list of permission scopes granted
 
 ## Refresh Authorization
 ```json
@@ -224,11 +227,12 @@ $result = $OAuth->refresh($refreshToken);
 
 ```shell
 {
-  "access_token": "hr1tSJk23tOv9RxR8cQuDpUD/kpUgf0cb9WfKtRoPxTw8ymbVt",
+  "access_token": "4Qu79qhO5GkPwo4fsbuc9ve4mJKN/XnxcT34F812y6SBIyGrnP",
   "expires_in": 3600,
-  "refresh_token": "lqopeyjq5AJln5fpMedElUULz+XBNNw9nAkIinxE0g4aEzxmDc",
+  "refresh_token": "mRRYs+CXrwe67kIDa1XFIiZJsEzUEbMerrU3zlmFSqo51obG3d",
   "refresh_expires_in": 5184000,
-  "token_type": "bearer"
+  "token_type": "bearer",
+  "scope": "balance|accountinfofull|send|request|transactions|contacts|funding|manageaccount|scheduled|managecustomers"
 }
 ```
 
@@ -258,6 +262,7 @@ client_id | Application key
 client_secret | Application secret
 refresh_token | A valid refresh token
 grant_type | This must be set to `refresh_token`
+scope | Pipe (`|`) delimited list of permission scopes granted
 
 ### Response Parameters
 
