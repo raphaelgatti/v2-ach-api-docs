@@ -13,6 +13,7 @@ includes:
   - introduction
   - oauth
   - customers
+  - fundingsrcs
 
 search: true
 
