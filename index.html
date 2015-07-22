@@ -490,7 +490,7 @@ https://www.dwolla.com/oauth/v2/authenticate?client_id={client_id}&amp;response_
 <span class="o">}</span>
 </code></pre>
 
-<p>Create a Customer.  A customer represents an individual or business with whom you intend to transact with.  In order to manage a user&rsquo;s Customers, the <code class="prettyprint">ManageCustomers</code> OAuth scope is required.</p>
+<p>A customer represents an individual or business with whom you intend to transact with.  In order to manage a user&rsquo;s Customers, the <code class="prettyprint">ManageCustomers</code> OAuth scope is required.</p>
 <h3 id='customer-resource'>Customer Resource</h3>
 <table><thead>
 <tr>
@@ -584,7 +584,10 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 </span></code></pre>
 
 <blockquote>
-<p>Response:</p>
+<p>Response:
+<code class="prettyprint">shell
+HTTP 201
+</code></p>
 </blockquote>
 <pre class="highlight json"><code><span class="p">{</span><span class="w">
   </span><span class="nt">"_links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
@@ -625,6 +628,377 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 <tr>
 <td>ipAddress</td>
 <td>Customer&rsquo;s IP address</td>
+</tr>
+</tbody></table>
+<h3 id='errors'>Errors</h3>
+<table><thead>
+<tr>
+<th>HTTP Status</th>
+<th>Message</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>400</td>
+<td>A customer record with this information already exists.</td>
+</tr>
+<tr>
+<td>400</td>
+<td>Validation errors. Another object is included the response to list the parameters and errors.</td>
+</tr>
+<tr>
+<td>401</td>
+<td>You do not have access to this resource.</td>
+</tr>
+<tr>
+<td>500</td>
+<td>An unexpected error occurred.</td>
+</tr>
+</tbody></table>
+<h2 id='list-documents'>List Documents</h2>
+<blockquote>
+<p>Request:</p>
+</blockquote>
+<pre class="highlight shell"><code>GET /customers/6f80efc0-b158-4df1-9b11-da85f0bffdd4/documents
+Accept: application/vnd.dwolla.v1.hal+json
+Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
+</code></pre>
+
+<blockquote>
+<p>Response:</p>
+</blockquote>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"_links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"self"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.dwolla.com/customers/6f80efc0-b158-4df1-9b11-da85f0bffdd4/documents"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="nt">"total"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"items"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"_links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"self"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.dwolla.com/customers/99bfb139-eadd-4cdf-b346-7504f0c16c60/documents/e6c141d5-0922-4d18-ad00-4789a37f288f"</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"e6c141d5-0922-4d18-ad00-4789a37f288f"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"mimetype"</span><span class="p">:</span><span class="w"> </span><span class="s2">"image/png"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"documentType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"passport"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<p>Fetch a list of Documents which belong to a Customer. </p>
+<aside class="reminder"><p>This endpoint <a href="#authentication">requires</a> an OAuth access token with the <code>ManageCustomers</code> scope.</p>
+</aside><h3 id='http-request'>HTTP Request</h3>
+<p><code class="prettyprint">GET https://api.dwolla.com/customers/{id}/documents</code></p>
+<h3 id='errors'>Errors</h3>
+<table><thead>
+<tr>
+<th>HTTP Status</th>
+<th>Message</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>404</td>
+<td>No active customer record</td>
+</tr>
+</tbody></table>
+
+          <h1 id='funding-sources'>Funding Sources</h1><pre class="highlight json"><code><span class="p">{</span><span class="w">
+    </span><span class="nt">"account_number"</span><span class="p">:</span><span class="w"> </span><span class="s2">"12345678"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"routing_number"</span><span class="p">:</span><span class="w"> </span><span class="s2">"87654321"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"account_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Checking"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"My Bank"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"isVerified"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<p>Add ACH bank accounts via Funding Sources, which are available to the <code class="prettyprint">Customers</code> and <code class="prettyprint">Accounts</code> resources. </p>
+<h3 id='funding-source-resource'>Funding Source Resource</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>id</td>
+<td>The funding source&rsquo;s unique identifier.</td>
+</tr>
+<tr>
+<td>account_number</td>
+<td>The bank account number</td>
+</tr>
+<tr>
+<td>routing_number</td>
+<td>The bank account&rsquo;s routing number.</td>
+</tr>
+<tr>
+<td>account_type</td>
+<td>Type of bank account: <code class="prettyprint">Checking</code> or <code class="prettyprint">Savings</code>.</td>
+</tr>
+<tr>
+<td>name</td>
+<td>Arbitrary nickname for the funding source</td>
+</tr>
+<tr>
+<td>isVerified</td>
+<td>(Boolean) Is the funding source verified?</td>
+</tr>
+</tbody></table>
+<h2 id='list-funding-sources-customer'>List Funding Sources (Customer)</h2>
+<blockquote>
+<p>Request:</p>
+</blockquote>
+<pre class="highlight shell"><code>GET /customers/99bfb139-eadd-4cdf-b346-7504f0c16c60/funding-sources
+Accept: application/vnd.dwolla.v1.hal+json
+Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
+</code></pre>
+
+<blockquote>
+<p>Response:</p>
+</blockquote>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"_links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"self"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.dwolla.com/customers/99bfb139-eadd-4cdf-b346-7504f0c16c60/funding-sources"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="nt">"total"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"items"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"_links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"self"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.dwolla.com/customers/99bfb139-eadd-4cdf-b346-7504f0c16c60/funding-sources/684862bc-8d94-4e53-9c41-26398b4b7fac"</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+        </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"684862bc-8d94-4e53-9c41-26398b4b7fac"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"account_number"</span><span class="p">:</span><span class="w"> </span><span class="s2">"12345678"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"routing_number"</span><span class="p">:</span><span class="w"> </span><span class="s2">"87654321"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"account_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Checking"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"My Bank"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"isVerified"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<p>Fetch a list of Funding Sources that belong to a Customer.</p>
+<aside class="reminder"><p>This endpoint <a href="#authentication">requires</a> an OAuth access token with the <code>ManageCustomers</code> scope.</p>
+</aside><h3 id='http-request'>HTTP Request</h3>
+<p><code class="prettyprint">
+GET https://api.dwolla.com/customers/{id}/funding-sources
+</code></p>
+<h3 id='errors'>Errors</h3>
+<table><thead>
+<tr>
+<th>HTTP Status</th>
+<th>Message</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>404</td>
+<td>No active customer record</td>
+</tr>
+</tbody></table>
+<h2 id='new-funding-source-customer'>New Funding Source (Customer)</h2>
+<blockquote>
+<p>Request:</p>
+</blockquote>
+<pre class="highlight shell"><code>POST /customers/99bfb139-eadd-4cdf-b346-7504f0c16c60/funding-sources/create
+Content-Type: application/vnd.dwolla.v1.hal+json
+Accept: application/vnd.dwolla.v1.hal+json
+Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
+</code></pre>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+    </span><span class="nt">"account_number"</span><span class="p">:</span><span class="w"> </span><span class="s2">"12345678"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"routing_number"</span><span class="p">:</span><span class="w"> </span><span class="s2">"87654321"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"account_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Checking"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"My Bank"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<blockquote>
+<p>Response:</p>
+</blockquote>
+<pre class="highlight shell"><code>HTTP 201
+</code></pre>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"_links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"self"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.dwolla.com/customers/99bfb139-eadd-4cdf-b346-7504f0c16c60/funding-sources/create"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"dfe6e760-4e74-45c3-8454-ded22c4c1e7c"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<p>Create a new Funding Source for a Customer.</p>
+<aside class="reminder"><p>This endpoint <a href="#authentication">requires</a> an OAuth access token with the <code>ManageCustomers</code> scope.</p>
+</aside><h3 id='http-request'>HTTP Request</h3>
+<p><code class="prettyprint">POST https://api.dwolla.com/customers/{id}/create</code></p>
+<h3 id='request-parameters'>Request Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>account_number</td>
+<td>The bank account number</td>
+</tr>
+<tr>
+<td>routing_number</td>
+<td>The bank account&rsquo;s routing number.</td>
+</tr>
+<tr>
+<td>account_type</td>
+<td>Type of bank account: <code class="prettyprint">Checking</code> or <code class="prettyprint">Savings</code>.</td>
+</tr>
+<tr>
+<td>name</td>
+<td>Arbitrary nickname for the funding source</td>
+</tr>
+</tbody></table>
+<h3 id='errors'>Errors</h3>
+<table><thead>
+<tr>
+<th>HTTP Status</th>
+<th>Message</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>400</td>
+<td>A customer record with this information already exists.</td>
+</tr>
+<tr>
+<td>400</td>
+<td>Validation errors. Another object is included the response to list the parameters and errors.</td>
+</tr>
+<tr>
+<td>401</td>
+<td>You do not have access to this resource.</td>
+</tr>
+<tr>
+<td>500</td>
+<td>An unexpected error occurred.</td>
+</tr>
+</tbody></table>
+<h2 id='list-funding-sources-account'>List Funding Sources (Account)</h2>
+<blockquote>
+<p>Request:</p>
+</blockquote>
+<pre class="highlight shell"><code>GET /accounts/99bfb139-eadd-4cdf-b346-7504f0c16c60/funding-sources
+Accept: application/vnd.dwolla.v1.hal+json
+Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
+</code></pre>
+
+<blockquote>
+<p>Response:</p>
+</blockquote>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"_links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"self"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.dwolla.com/accounts/99bfb139-eadd-4cdf-b346-7504f0c16c60/funding-sources"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="nt">"total"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"items"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"_links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"self"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.dwolla.com/accounts/99bfb139-eadd-4cdf-b346-7504f0c16c60/funding-sources/684862bc-8d94-4e53-9c41-26398b4b7fac"</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+        </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"684862bc-8d94-4e53-9c41-26398b4b7fac"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"account_number"</span><span class="p">:</span><span class="w"> </span><span class="s2">"12345678"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"routing_number"</span><span class="p">:</span><span class="w"> </span><span class="s2">"87654321"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"account_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Checking"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"My Bank"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"isVerified"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<p>Fetch a list of Funding Sources that belong to an Account.</p>
+<aside class="reminder"><p>This endpoint <a href="#authentication">requires</a> an OAuth access token with the <code>ManageCustomers</code> scope.</p>
+</aside><h3 id='http-request'>HTTP Request</h3>
+<p><code class="prettyprint">
+GET https://api.dwolla.com/accounts/{id}/funding-sources
+</code></p>
+<h3 id='errors'>Errors</h3>
+<table><thead>
+<tr>
+<th>HTTP Status</th>
+<th>Message</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>404</td>
+<td>No active customer record</td>
+</tr>
+</tbody></table>
+<h2 id='new-funding-source-account'>New Funding Source (Account)</h2>
+<blockquote>
+<p>Request:</p>
+</blockquote>
+<pre class="highlight shell"><code>POST https://api.dwolla.com/accounts/99bfb139-eadd-4cdf-b346-7504f0c16c60/funding-sources/create
+Content-Type: application/vnd.dwolla.v1.hal+json
+Accept: application/vnd.dwolla.v1.hal+json
+Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
+</code></pre>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+    </span><span class="nt">"account_number"</span><span class="p">:</span><span class="w"> </span><span class="s2">"12345678"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"routing_number"</span><span class="p">:</span><span class="w"> </span><span class="s2">"87654321"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"account_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Checking"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"My Bank"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<blockquote>
+<p>Response:</p>
+</blockquote>
+<pre class="highlight shell"><code>HTTP 201
+</code></pre>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"_links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"self"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.dwolla.com/accounts/99bfb139-eadd-4cdf-b346-7504f0c16c60/funding-sources/create"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"dfe6e760-4e74-45c3-8454-ded22c4c1e7c"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<p>Create a new Funding Source for an Account.</p>
+<aside class="reminder"><p>This endpoint <a href="#authentication">requires</a> an OAuth access token with the <code>ManageCustomers</code> scope.</p>
+</aside><h3 id='http-request'>HTTP Request</h3>
+<p><code class="prettyprint">POST https://api.dwolla.com/accounts/{id}/create</code></p>
+<h3 id='request-parameters'>Request Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>account_number</td>
+<td>The bank account number</td>
+</tr>
+<tr>
+<td>routing_number</td>
+<td>The bank account&rsquo;s routing number.</td>
+</tr>
+<tr>
+<td>account_type</td>
+<td>Type of bank account: <code class="prettyprint">Checking</code> or <code class="prettyprint">Savings</code>.</td>
+</tr>
+<tr>
+<td>name</td>
+<td>Arbitrary nickname for the funding source</td>
 </tr>
 </tbody></table>
 <h3 id='errors'>Errors</h3>
