@@ -14,7 +14,7 @@
 }
 ```
 
-Create a Customer.  A customer represents an individual or business with whom you intend to transact with.  In order to manage a user's Customers, the `ManageCustomers` OAuth scope is required.
+A customer represents an individual or business with whom you intend to transact with.  In order to manage a user's Customers, the `ManageCustomers` OAuth scope is required.
 
 ### Customer Resource
 
@@ -95,6 +95,9 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 ```
 
 > Response:
+```shell
+HTTP 201
+```
 
 ```json
 {
@@ -132,3 +135,50 @@ ipAddress | Customer's IP address
 | 400 | Validation errors. Another object is included the response to list the parameters and errors. 
 | 401 | You do not have access to this resource.
 | 500 | An unexpected error occurred.
+
+## List Documents
+
+> Request:
+
+```shell
+GET /customers/6f80efc0-b158-4df1-9b11-da85f0bffdd4/documents
+Accept: application/vnd.dwolla.v1.hal+json
+Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
+```
+
+> Response:
+
+```json
+{
+  "_links": {
+    "self": {
+      "href": "https://api.dwolla.com/customers/6f80efc0-b158-4df1-9b11-da85f0bffdd4/documents"
+    }
+  },
+  "total": 1,
+  "items": [
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.dwolla.com/customers/99bfb139-eadd-4cdf-b346-7504f0c16c60/documents/e6c141d5-0922-4d18-ad00-4789a37f288f"
+        }
+      },
+      "id": "e6c141d5-0922-4d18-ad00-4789a37f288f",
+      "mimetype": "image/png",
+      "documentType": "passport"
+    }
+  ]
+}
+```
+
+Fetch a list of Documents which belong to a Customer. 
+
+<aside class="reminder">This endpoint [requires](#authentication) an OAuth access token with the `ManageCustomers` scope.</aside>
+
+### HTTP Request
+`GET https://api.dwolla.com/customers/{id}/documents`
+
+### Errors
+| HTTP Status | Message |
+|--------------|-------------|
+| 404 | No active customer record |

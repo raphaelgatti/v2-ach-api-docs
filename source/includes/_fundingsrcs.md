@@ -29,7 +29,7 @@ isVerified | (Boolean) Is the funding source verified?
 > Request:
 
 ```shell
-GET https://api.dwolla.com/customers/99bfb139-eadd-4cdf-b346-7504f0c16c60/funding-sources
+GET /customers/99bfb139-eadd-4cdf-b346-7504f0c16c60/funding-sources
 Accept: application/vnd.dwolla.v1.hal+json
 Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 ```
@@ -81,7 +81,7 @@ GET https://api.dwolla.com/customers/{id}/funding-sources
 > Request:
 
 ```shell
-POST https://api.dwolla.com/customers/99bfb139-eadd-4cdf-b346-7504f0c16c60/funding-sources/create
+POST /customers/99bfb139-eadd-4cdf-b346-7504f0c16c60/funding-sources/create
 Content-Type: application/vnd.dwolla.v1.hal+json
 Accept: application/vnd.dwolla.v1.hal+json
 Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
@@ -140,7 +140,7 @@ name | Arbitrary nickname for the funding source
 > Request:
 
 ```shell
-GET https://api.dwolla.com/accounts/99bfb139-eadd-4cdf-b346-7504f0c16c60/funding-sources
+GET /accounts/99bfb139-eadd-4cdf-b346-7504f0c16c60/funding-sources
 Accept: application/vnd.dwolla.v1.hal+json
 Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 ```
