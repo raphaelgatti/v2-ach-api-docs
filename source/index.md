@@ -13,7 +13,10 @@ includes:
   - introduction
   - oauth
   - customers
+  - documents
   - fundingsrcs
+  - transfers
+  - webhooks
 
 search: true
 
