@@ -1,5 +1,9 @@
 # Transfers
 
+<aside class="warning">
+This is a draft specification for preview only.  Endpoint URL, request and response parameters are subject to change.  Do not develop against this documentation.
+</aside>
+
 ```shell
 {
   "_links": {},

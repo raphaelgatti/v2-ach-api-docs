@@ -13,6 +13,10 @@
 }
 ```
 
+<aside class="warning">
+This is a draft specification for preview only.  Endpoint URL, request and response parameters are subject to change.  Do not develop against this documentation.
+</aside>
+
 A Document is used to verify the identity of a Customer
 
 ### Document Resource
