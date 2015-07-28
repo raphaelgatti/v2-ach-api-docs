@@ -586,21 +586,10 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 <blockquote>
 <p>Response:
 <code class="prettyprint">shell
-HTTP 201
+HTTP/1.1 201 Created
+Location: https://api.dwolla.com/customers/6f80efc0-b158-4df1-9b11-da85f0bffdd4
 </code></p>
 </blockquote>
-<pre class="highlight json"><code><span class="p">{</span><span class="w">
-  </span><span class="nt">"_links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="nt">"self"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.dwolla.com/customers/6f80efc0-b158-4df1-9b11-da85f0bffdd4"</span><span class="w">
-    </span><span class="p">}</span><span class="w">
-  </span><span class="p">},</span><span class="w">
-  </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"6f80efc0-b158-4df1-9b11-da85f0bffdd4"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"firstName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Bob"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"lastName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Dole"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"active"</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre>
 
 <p>Create a new Customer.</p>
 <aside class="reminder"><p>This endpoint <a href="#authentication">requires</a> an OAuth access token with the <code>ManageCustomers</code> scope.</p>
@@ -762,16 +751,10 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 <blockquote>
 <p>Response:
 <code class="prettyprint">shell
-HTTP 201
+HTTP/1.1 201 Created
+Location: https://api.dwolla.com/customers/6f80efc0-b158-4df1-9b11-da85f0bffdd4/documents/e6c141d5-0922-4d18-ad00-4789a37f288f
 </code></p>
 </blockquote>
-<pre class="highlight json"><code><span class="p">{</span><span class="w">
-  </span><span class="nt">"_links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="nt">"self"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.dwolla.com/customers/6f80efc0-b158-4df1-9b11-da85f0bffdd4/documents/e6c141d5-0922-4d18-ad00-4789a37f288f"</span><span class="w">
-    </span><span class="p">}</span><span class="w">
-  </span><span class="p">}</span><span class="w">
-</span></code></pre>
 
 <p>Create a Document belonging to a Customer. </p>
 <aside class="reminder"><p>This endpoint <a href="#authentication">requires</a> an OAuth access token with the <code>ManageCustomers</code> scope.</p>
@@ -949,17 +932,9 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 <blockquote>
 <p>Response:</p>
 </blockquote>
-<pre class="highlight shell"><code>HTTP 201
+<pre class="highlight shell"><code>HTTP/1.1 201 Created
+Location: https://api.dwolla.com/customers/99bfb139-eadd-4cdf-b346-7504f0c16c60/funding-sources/create
 </code></pre>
-<pre class="highlight json"><code><span class="p">{</span><span class="w">
-  </span><span class="nt">"_links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="nt">"self"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.dwolla.com/customers/99bfb139-eadd-4cdf-b346-7504f0c16c60/funding-sources/create"</span><span class="w">
-    </span><span class="p">}</span><span class="w">
-  </span><span class="p">},</span><span class="w">
-  </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"dfe6e760-4e74-45c3-8454-ded22c4c1e7c"</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre>
 
 <p>Create a new Funding Source for a Customer.</p>
 <aside class="reminder"><p>This endpoint <a href="#authentication">requires</a> an OAuth access token with the <code>ManageCustomers</code> scope.</p>
@@ -1088,17 +1063,9 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 <blockquote>
 <p>Response:</p>
 </blockquote>
-<pre class="highlight shell"><code>HTTP 201
+<pre class="highlight shell"><code>HTTP/1.1 201 Created
+Location: https://api.dwolla.com/accounts/99bfb139-eadd-4cdf-b346-7504f0c16c60/funding-sources/create
 </code></pre>
-<pre class="highlight json"><code><span class="p">{</span><span class="w">
-  </span><span class="nt">"_links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="nt">"self"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.dwolla.com/accounts/99bfb139-eadd-4cdf-b346-7504f0c16c60/funding-sources/create"</span><span class="w">
-    </span><span class="p">}</span><span class="w">
-  </span><span class="p">},</span><span class="w">
-  </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"dfe6e760-4e74-45c3-8454-ded22c4c1e7c"</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre>
 
 <p>Create a new Funding Source for an Account.</p>
 <aside class="reminder"><p>This endpoint <a href="#authentication">requires</a> an OAuth access token with the <code>ManageCustomers</code> scope.</p>
@@ -1503,16 +1470,9 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 <blockquote>
 <p>Response:</p>
 </blockquote>
-<pre class="highlight shell"><code>HTTP 201
+<pre class="highlight shell"><code>HTTP/1.1 201 Created
+Location: https://api.dwolla.com/accounts/99bfb139-eadd-4cdf-b346-7504f0c16c60/transfers/a63526e1-cc8d-4a62-9d26-8f04a39da4f3
 </code></pre>
-<pre class="highlight json"><code><span class="p">{</span><span class="w">
-  </span><span class="nt">"_links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="nt">"self"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.dwolla.com/accounts/99bfb139-eadd-4cdf-b346-7504f0c16c60/transfers/a63526e1-cc8d-4a62-9d26-8f04a39da4f3"</span><span class="w">
-    </span><span class="p">}</span><span class="w">
-  </span><span class="p">}</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre>
 
 <p>Initiate a transfer for either an account or customer resource. </p>
 <aside class="reminder"><p>This endpoint <a href="#authentication">requires</a> an OAuth access token with the <code>ManageCustomers</code> scope.</p>
@@ -1900,16 +1860,9 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 <blockquote>
 <p>Response:</p>
 </blockquote>
-<pre class="highlight shell"><code>HTTP 201
+<pre class="highlight shell"><code>HTTP/1.1 201 Created
+Location: https://api.dwolla.com/webhook-subscriptions/10d4133e-b308-4646-b276-40d9d36def1c
 </code></pre>
-<pre class="highlight json"><code><span class="p">{</span><span class="w">
-  </span><span class="nt">"_links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="nt">"self"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.dwolla.com/webhook-subscriptions/10d4133e-b308-4646-b276-40d9d36def1c"</span><span class="w">
-    </span><span class="p">}</span><span class="w">
-  </span><span class="p">}</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre>
 
 <p>Create a webhook subscription to deliver webhooks to a desired URL. </p>
 <aside class="reminder"><p>This endpoint <a href="#authentication">requires</a> an OAuth access token with the <code>ManageCustomers</code> scope.</p>
