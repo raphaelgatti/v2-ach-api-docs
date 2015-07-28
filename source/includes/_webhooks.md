@@ -314,17 +314,8 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 > Response:
 
 ```shell
-HTTP 201
-```
-
-```json
-{
-  "_links": {
-    "self": {
-      "href": "https://api.dwolla.com/webhook-subscriptions/10d4133e-b308-4646-b276-40d9d36def1c"
-    }
-  }
-}
+HTTP/1.1 201 Created
+Location: https://api.dwolla.com/webhook-subscriptions/10d4133e-b308-4646-b276-40d9d36def1c
 ```
 
 Create a webhook subscription to deliver webhooks to a desired URL. 

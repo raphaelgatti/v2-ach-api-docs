@@ -103,17 +103,8 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 > Response:
 
 ```shell
-HTTP 201
-```
-```json
-{
-  "_links": {
-    "self": {
-      "href": "https://api.dwolla.com/customers/99bfb139-eadd-4cdf-b346-7504f0c16c60/funding-sources/create"
-    }
-  },
-  "id": "dfe6e760-4e74-45c3-8454-ded22c4c1e7c"
-}
+HTTP/1.1 201 Created
+Location: https://api.dwolla.com/customers/99bfb139-eadd-4cdf-b346-7504f0c16c60/funding-sources/create
 ```
 
 Create a new Funding Source for a Customer.
@@ -214,17 +205,8 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 > Response:
 
 ```shell
-HTTP 201
-```
-```json
-{
-  "_links": {
-    "self": {
-      "href": "https://api.dwolla.com/accounts/99bfb139-eadd-4cdf-b346-7504f0c16c60/funding-sources/create"
-    }
-  },
-  "id": "dfe6e760-4e74-45c3-8454-ded22c4c1e7c"
-}
+HTTP/1.1 201 Created
+Location: https://api.dwolla.com/accounts/99bfb139-eadd-4cdf-b346-7504f0c16c60/funding-sources/create
 ```
 
 Create a new Funding Source for an Account.

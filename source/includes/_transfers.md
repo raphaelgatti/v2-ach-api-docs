@@ -304,17 +304,8 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 > Response:
 
 ```shell
-HTTP 201
-```
-
-```json
-{
-  "_links": {
-    "self": {
-      "href": "https://api.dwolla.com/accounts/99bfb139-eadd-4cdf-b346-7504f0c16c60/transfers/a63526e1-cc8d-4a62-9d26-8f04a39da4f3"
-    }
-  }
-}
+HTTP/1.1 201 Created
+Location: https://api.dwolla.com/accounts/99bfb139-eadd-4cdf-b346-7504f0c16c60/transfers/a63526e1-cc8d-4a62-9d26-8f04a39da4f3
 ```
 
 Initiate a transfer for either an account or customer resource. 

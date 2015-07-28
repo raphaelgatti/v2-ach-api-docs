@@ -96,21 +96,8 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 
 > Response:
 ```shell
-HTTP 201
-```
-
-```json
-{
-  "_links": {
-    "self": {
-      "href": "https://api.dwolla.com/customers/6f80efc0-b158-4df1-9b11-da85f0bffdd4"
-    }
-  },
-  "id": "6f80efc0-b158-4df1-9b11-da85f0bffdd4",
-  "firstName": "Bob",
-  "lastName": "Dole",
-  "status": "active"
-}
+HTTP/1.1 201 Created
+Location: https://api.dwolla.com/customers/6f80efc0-b158-4df1-9b11-da85f0bffdd4
 ```
 
 Create a new Customer.

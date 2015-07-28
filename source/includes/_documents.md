@@ -101,16 +101,8 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 
 > Response:
 ```shell
-HTTP 201
-```
-
-```json
-{
-  "_links": {
-    "self": {
-      "href": "https://api.dwolla.com/customers/6f80efc0-b158-4df1-9b11-da85f0bffdd4/documents/e6c141d5-0922-4d18-ad00-4789a37f288f"
-    }
-  }
+HTTP/1.1 201 Created
+Location: https://api.dwolla.com/customers/6f80efc0-b158-4df1-9b11-da85f0bffdd4/documents/e6c141d5-0922-4d18-ad00-4789a37f288f
 ```
 
 Create a Document belonging to a Customer. 
