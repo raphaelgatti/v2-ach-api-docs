@@ -94,7 +94,138 @@ Dwolla will attempt to retry each webhook 8 times over the course of 72 hours. I
 | headers        | Array of objects with keys `name` and `value` representative of HTTP headers. |
 | body           | Event ID for this webhook.                                                    |
 
-## Retrieve webhook by ID
+## Subscribe to a Webhook
+
+> Request:
+
+```shell
+POST /webhook-subscriptions
+Accept: application/vnd.dwolla.v1.hal+json
+Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
+```
+
+```json
+{
+  "url": "http://deliver.webhooks/here",
+  "secret": "shush!"
+}
+```
+
+> Response:
+
+```shell
+HTTP/1.1 201 Created
+Location: https://api.dwolla.com/webhook-subscriptions/10d4133e-b308-4646-b276-40d9d36def1c
+```
+
+Create a webhook subscription to deliver webhooks to a desired URL. 
+
+<aside class="reminder">This endpoint [requires](#authentication) an OAuth access token with the `ManageCustomers` scope.</aside>
+
+### HTTP Request
+`
+POST https://api.dwolla.com/customers/webhook-subscriptions
+`
+
+### Request Parameters
+
+Parameter | Description
+----------|------------
+url | Where Dwolla should deliver the webhook notification.
+secret | Your application secret. 
+
+### Errors
+| HTTP Status | Message |
+|--------------|-------------|
+| 404 | No active customer record |
+
+## Unsubscribe from a Webhook
+
+> Request:
+
+```shell
+DELETE /webhook-subscriptions/10d4133e-b308-4646-b276-40d9d36def1c
+Accept: application/vnd.dwolla.v1.hal+json
+Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
+```
+
+> Response:
+
+```shell
+HTTP 200
+```
+
+Fetch a list of webhooks that the authorized user is currently subscribed to. 
+
+<aside class="reminder">This endpoint [requires](#authentication) an OAuth access token with the `ManageCustomers` scope.</aside>
+
+### HTTP Request
+`
+DELETE https://api.dwolla.com/customers/webhook-subscriptions/{id}
+`
+
+### Request Parameters
+
+Parameter | Description
+----------|------------
+id | Webhook UUID.
+
+
+### Errors
+| HTTP Status | Message |
+|--------------|-------------|
+| 404 | No active customer record |
+
+## List Webhook Subscriptions
+
+> Request:
+
+```shell
+GET /webhook-subscriptions
+Accept: application/vnd.dwolla.v1.hal+json
+Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
+```
+
+> Response:
+
+```json
+{
+  "_links": {
+    "self": {
+      "href": "https://api.dwolla.com/webhook-subscriptions"
+    }
+  },
+  "total": 1,
+  "items": [
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.dwolla.com/webhook-subscriptions/10d4133e-b308-4646-b276-40d9d36def1c"
+        }
+      },
+      "id": "10d4133e-b308-4646-b276-40d9d36def1c",
+      "url": "http://destination.url",
+      "createdDate": "2015-07-23T14:19:36.993Z"
+    }
+  ]
+}
+```
+
+Fetch a list of webhooks that the authorized user is currently subscribed to. 
+
+<aside class="reminder">This endpoint [requires](#authentication) an OAuth access token with the `ManageCustomers` scope.</aside>
+
+### HTTP Request
+`
+GET https://api.dwolla.com/customers/webhook-subscriptions
+`
+
+### Errors
+| HTTP Status | Message |
+|--------------|-------------|
+| 404 | No active customer record |
+
+## Retrieve Webhook by ID
 
 > Request:
 
@@ -162,56 +293,7 @@ GET https://api.dwolla.com/customers/webhook-subscriptions
 |--------------|-------------|
 | 404 | No active customer record |
 
-## List Webhook Subscriptions
-
-> Request:
-
-```shell
-GET /webhook-subscriptions
-Accept: application/vnd.dwolla.v1.hal+json
-Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
-```
-
-> Response:
-
-```json
-{
-  "_links": {
-    "self": {
-      "href": "https://api.dwolla.com/webhook-subscriptions"
-    }
-  },
-  "total": 1,
-  "items": [
-    {
-      "_links": {
-        "self": {
-          "href": "https://api.dwolla.com/webhook-subscriptions/10d4133e-b308-4646-b276-40d9d36def1c"
-        }
-      },
-      "id": "10d4133e-b308-4646-b276-40d9d36def1c",
-      "url": "http://destination.url",
-      "createdDate": "2015-07-23T14:19:36.993Z"
-    }
-  ]
-}
-```
-
-Fetch a list of webhooks that the authorized user is currently subscribed to. 
-
-<aside class="reminder">This endpoint [requires](#authentication) an OAuth access token with the `ManageCustomers` scope.</aside>
-
-### HTTP Request
-`
-GET https://api.dwolla.com/customers/webhook-subscriptions
-`
-
-### Errors
-| HTTP Status | Message |
-|--------------|-------------|
-| 404 | No active customer record |
-
-## Subscription by ID
+## Retrieve Subscription by ID
 
 > Request:
 
@@ -250,7 +332,7 @@ GET https://api.dwolla.com/customers/webhook-subscriptions/{id}
 |--------------|-------------|
 | 404 | No active customer record |
 
-## Hooks belonging to subscription
+## Hooks Belonging to Subscription
 
 > Request:
 
@@ -314,88 +396,6 @@ View all fired webhooks that are associated to a specific subscription, via that
 `
 GET https://api.dwolla.com/customers/webhook-subscriptions/{id}/hooks
 `
-
-### Errors
-| HTTP Status | Message |
-|--------------|-------------|
-| 404 | No active customer record |
-
-## Subscribe to a Webhook
-
-> Request:
-
-```shell
-POST /webhook-subscriptions
-Accept: application/vnd.dwolla.v1.hal+json
-Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
-```
-
-```json
-{
-  "url": "http://deliver.webhooks/here",
-  "secret": "shush!"
-}
-```
-
-> Response:
-
-```shell
-HTTP/1.1 201 Created
-Location: https://api.dwolla.com/webhook-subscriptions/10d4133e-b308-4646-b276-40d9d36def1c
-```
-
-Create a webhook subscription to deliver webhooks to a desired URL. 
-
-<aside class="reminder">This endpoint [requires](#authentication) an OAuth access token with the `ManageCustomers` scope.</aside>
-
-### HTTP Request
-`
-POST https://api.dwolla.com/customers/webhook-subscriptions
-`
-
-### Request Parameters
-
-Parameter | Description
-----------|------------
-url | Where Dwolla should deliver the webhook notification.
-secret | Your application secret. 
-
-### Errors
-| HTTP Status | Message |
-|--------------|-------------|
-| 404 | No active customer record |
-
-## Unsubscribe from a webhook
-
-> Request:
-
-```shell
-DELETE /webhook-subscriptions/10d4133e-b308-4646-b276-40d9d36def1c
-Accept: application/vnd.dwolla.v1.hal+json
-Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
-```
-
-> Response:
-
-```shell
-HTTP 200
-```
-
-Fetch a list of webhooks that the authorized user is currently subscribed to. 
-
-<aside class="reminder">This endpoint [requires](#authentication) an OAuth access token with the `ManageCustomers` scope.</aside>
-
-### HTTP Request
-`
-DELETE https://api.dwolla.com/customers/webhook-subscriptions/{id}
-`
-
-### Request Parameters
-
-Parameter | Description
-----------|------------
-id | Webhook UUID.
-
 
 ### Errors
 | HTTP Status | Message |

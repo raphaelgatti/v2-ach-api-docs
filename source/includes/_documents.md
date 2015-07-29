@@ -27,6 +27,51 @@ A Document is used to verify the identity of a Customer
 |mimetype | Standardized MIME type of document. Only `image/png` and `image/jpg+jpeg` are accepted. 
 |documentType | Either `passport`, `driversLicense`, or `idCard`.
 
+
+## Create a Document
+
+> Request:
+
+```shell
+POST /customers/6f80efc0-b158-4df1-9b11-da85f0bffdd4/documents
+Accept: application/vnd.dwolla.v1.hal+json
+Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
+```
+
+```json
+{
+  "mimetype": "image/png",
+  "documentType": "passport"
+}
+```
+
+```shell
+POST /customers/6f80efc0-b158-4df1-9b11-da85f0bffdd4/documents
+Accept: image/png
+Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
+
+[bytes of image]
+```
+
+> Response:
+```shell
+HTTP/1.1 201 Created
+Location: https://api.dwolla.com/customers/6f80efc0-b158-4df1-9b11-da85f0bffdd4/documents/e6c141d5-0922-4d18-ad00-4789a37f288f
+```
+
+Create a Document belonging to a Customer. 
+
+<aside class="reminder">This endpoint [requires](#authentication) an OAuth access token with the `ManageCustomers` scope.</aside>
+
+### HTTP Request
+1: `POST https://api.dwolla.com/customers/{id}/documents` with `Document` <br />
+2: `POST https://api.dwolla.com/customers/{id}/documents` with a 5MB `*.png` or `*.jpg` image file.
+
+### Errors
+| HTTP Status | Message |
+|--------------|-------------|
+| 404 | No active customer record |
+
 ## List Documents
 
 > Request:
@@ -74,51 +119,7 @@ Fetch a list of Documents which belong to a Customer.
 |--------------|-------------|
 | 404 | No active customer record |
 
-## Create a Document
-
-> Request:
-
-```shell
-POST /customers/6f80efc0-b158-4df1-9b11-da85f0bffdd4/documents
-Accept: application/vnd.dwolla.v1.hal+json
-Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
-```
-
-```json
-{
-  "mimetype": "image/png",
-  "documentType": "passport"
-}
-```
-
-```shell
-POST /customers/6f80efc0-b158-4df1-9b11-da85f0bffdd4/documents
-Accept: image/png
-Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
-
-[bytes of image]
-```
-
-> Response:
-```shell
-HTTP/1.1 201 Created
-Location: https://api.dwolla.com/customers/6f80efc0-b158-4df1-9b11-da85f0bffdd4/documents/e6c141d5-0922-4d18-ad00-4789a37f288f
-```
-
-Create a Document belonging to a Customer. 
-
-<aside class="reminder">This endpoint [requires](#authentication) an OAuth access token with the `ManageCustomers` scope.</aside>
-
-### HTTP Request
-1: `POST https://api.dwolla.com/customers/{id}/documents` with `Document` <br />
-2: `POST https://api.dwolla.com/customers/{id}/documents` with a 5MB `*.png` or `*.jpg` image file.
-
-### Errors
-| HTTP Status | Message |
-|--------------|-------------|
-| 404 | No active customer record |
-
-## Retrieve Document By ID
+## Retrieve Document by ID
 
 > Request:
 

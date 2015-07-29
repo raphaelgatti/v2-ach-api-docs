@@ -55,7 +55,48 @@ A transfer represents money being transferred from a `source` to a `destination`
 |amount | Amount of money. 
 |currency | String, probably `USD`
 
-## Get transfers (Customer) 
+## Initiate Transfer
+
+> Request:
+
+```shell
+POST https://api.dwolla.com/accounts/99bfb139-eadd-4cdf-b346-7504f0c16c60/transfers
+Accept: application/vnd.dwolla.v1.hal+json
+Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
+```
+
+```json
+{
+  "fundingSourceUri": "string",
+  "destinationUri": "string",
+  "money": {
+    "amount": 20,
+    "currency": "USD"
+  },
+  "metadata": "so meta"
+}
+```
+
+> Response:
+
+```shell
+HTTP/1.1 201 Created
+Location: https://api.dwolla.com/accounts/99bfb139-eadd-4cdf-b346-7504f0c16c60/transfers/a63526e1-cc8d-4a62-9d26-8f04a39da4f3
+```
+
+Initiate a transfer for either an account or customer resource. 
+
+<aside class="reminder">This endpoint [requires](#authentication) an OAuth access token with the `ManageCustomers` scope.</aside>
+
+### HTTP Request
+`POST https://api.dwolla.com/accounts/{id}/transfers`
+
+### Errors
+| HTTP Status | Message |
+|--------------|-------------|
+| 404 | No active customer record |
+
+## Get Transfers (Customer) 
 
 > Request:
 
@@ -116,7 +157,7 @@ Fetch a Customer record's list of transfers.
 |--------------|-------------|
 | 404 | No active customer record |
 
-## Get transfers by ID (Customer) 
+## Get Transfers by ID (Customer) 
 
 > Request:
 
@@ -167,7 +208,7 @@ Fetch a Transfer belonging to a Customer record by its ID.
 |--------------|-------------|
 | 404 | No active customer record |
 
-## Get transfers (Account) 
+## Get Transfers (Account) 
 
 > Request:
 
@@ -228,7 +269,7 @@ Fetch an Account record's list of transfers.
 |--------------|-------------|
 | 404 | No active customer record |
 
-## Get transfers by ID (Account) 
+## Get Transfers by ID (Account) 
 
 > Request:
 
@@ -273,47 +314,6 @@ Fetch a Transfer belonging to an Account record by its ID.
 
 ### HTTP Request
 `GET https://api.dwolla.com/accounts/{id}/transfers/{id}`
-
-### Errors
-| HTTP Status | Message |
-|--------------|-------------|
-| 404 | No active customer record |
-
-## Initiate Transfer
-
-> Request:
-
-```shell
-POST https://api.dwolla.com/accounts/99bfb139-eadd-4cdf-b346-7504f0c16c60/transfers
-Accept: application/vnd.dwolla.v1.hal+json
-Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
-```
-
-```json
-{
-  "fundingSourceUri": "string",
-  "destinationUri": "string",
-  "money": {
-    "amount": 20,
-    "currency": "USD"
-  },
-  "metadata": "so meta"
-}
-```
-
-> Response:
-
-```shell
-HTTP/1.1 201 Created
-Location: https://api.dwolla.com/accounts/99bfb139-eadd-4cdf-b346-7504f0c16c60/transfers/a63526e1-cc8d-4a62-9d26-8f04a39da4f3
-```
-
-Initiate a transfer for either an account or customer resource. 
-
-<aside class="reminder">This endpoint [requires](#authentication) an OAuth access token with the `ManageCustomers` scope.</aside>
-
-### HTTP Request
-`POST https://api.dwolla.com/accounts/{id}/transfers`
 
 ### Errors
 | HTTP Status | Message |

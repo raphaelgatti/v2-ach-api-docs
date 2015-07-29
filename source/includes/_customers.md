@@ -26,54 +26,6 @@ A customer represents an individual or business with whom you intend to transact
 |status | Either `active`, `deactivated`, or `suspended`.
 
 
-## List Customers
-
-> Request:
-
-```shell
-GET https://api.dwolla.com/customers
-Accept: application/vnd.dwolla.v1.hal+json
-Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
-```
-
-> Response:
-
-```json
-{
-  "_links": {
-    "self": {
-      "href": "https://api.dwolla.com/customers"
-    }
-  },
-  "total": 1,
-  "items": [
-    {
-      "_links": {
-        "self": {
-          "href": "https://api.dwolla.com/customers/99bfb139-eadd-4cdf-b346-7504f0c16c60"
-        }
-      },
-      "id": "99bfb139-eadd-4cdf-b346-7504f0c16c60",
-      "firstName": "Bob",
-      "lastName": "Dole",
-      "status": "active"
-    }
-  ]
-}
-```
-
-Fetch a list of Customers which belong to the authorized user.
-
-<aside class="reminder">This endpoint [requires](#authentication) an OAuth access token with the `ManageCustomers` scope.</aside>
-
-### HTTP Request
-`GET https://api.dwolla.com/customers`
-
-### Errors
-| HTTP Status | Message |
-|--------------|-------------|
-| 404 | No active customer record |
-
 ## New Customer
 
 > Request:
@@ -122,3 +74,51 @@ ipAddress | Customer's IP address
 | 400 | Validation errors. Another object is included the response to list the parameters and errors. 
 | 401 | You do not have access to this resource.
 | 500 | An unexpected error occurred.
+
+## List Customers
+
+> Request:
+
+```shell
+GET https://api.dwolla.com/customers
+Accept: application/vnd.dwolla.v1.hal+json
+Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
+```
+
+> Response:
+
+```json
+{
+  "_links": {
+    "self": {
+      "href": "https://api.dwolla.com/customers"
+    }
+  },
+  "total": 1,
+  "items": [
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.dwolla.com/customers/99bfb139-eadd-4cdf-b346-7504f0c16c60"
+        }
+      },
+      "id": "99bfb139-eadd-4cdf-b346-7504f0c16c60",
+      "firstName": "Bob",
+      "lastName": "Dole",
+      "status": "active"
+    }
+  ]
+}
+```
+
+Fetch a list of Customers which belong to the authorized user.
+
+<aside class="reminder">This endpoint [requires](#authentication) an OAuth access token with the `ManageCustomers` scope.</aside>
+
+### HTTP Request
+`GET https://api.dwolla.com/customers`
+
+### Errors
+| HTTP Status | Message |
+|--------------|-------------|
+| 404 | No active customer record |
