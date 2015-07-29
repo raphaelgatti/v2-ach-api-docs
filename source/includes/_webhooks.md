@@ -38,7 +38,7 @@
 }
 ```
 
-A webhook notification is sent as a `POST` request to a user defined destination. The whitelabel API will send webhooks to notify an applicaiton as to the status of a Transfer. 
+A webhook notification is sent as a `POST` request to a user defined destination. Dwolla will send webhooks to notify an application about the status of a Transfer. As required in the White Label TOS you will use webhooks to notify your customers via email on the status of a Transfer.
 
 ### Webhook Resource
 
