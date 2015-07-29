@@ -38,7 +38,33 @@
 }
 ```
 
-A webhook notification is sent as a `POST` request to a user defined destination. Dwolla will send webhooks to notify an application about the status of a Transfer. As required in the White Label TOS you will use webhooks to notify your customers via email on the status of a Transfer.
+A webhook notification is sent as a `POST` request to a user defined destination. The whitelabel API will send webhooks to notify an application as to the status of a transfer. As required in the White Label TOS, you will use webhooks to notify your customers via email on the status of a transfer.
+
+### Available notifications
+| Event              | Description                                                                                                       |
+|--------------------|-------------------------------------------------------------------------------------------------------------------|
+| customer_created   | A customer record was created.                                                                                    |
+| transfer_created   | Transfer was created.                                                                                             |
+| transfer_cancelled | A pending transfer has been cancelled, and will not process further.                                              |
+| transfer_failed    | Transaction failed to clear successfully. Usually, this is a result of an ACH failure (insufficient funds, etc.). |
+| transfer_completed | Transfer has cleared successfully.                                                                                |
+| transfer_reclaimed | The transfer was returned to the sender after being unclaimed by the recipient for a period of time.              |
+
+### Acknowledgement and retries
+For webhook notifications, your server should respond with a HTTP 2xx status code to indicate you have successfully received the message. If Dwolla receives a status code greater than a HTTP 400, or you fail to respond within 20 seconds of the attempt, we will retry the call to your subscribed webhook URL. 
+
+Dwolla will attempt to retry each webhook 8 times over the course of 72 hours. If a webhook was successful but you would like information again, you can call [retrieve webhook by ID](#retrieve-webhook-by-id). Failed webhooks are retried on the following backoff schedule:
+
+| Retry number | Interval (relative to last retry) | Interval (relative to original attempt) |
+|:------------:|:---------------------------------:|:---------------------------------------:|
+|       1      |              15 min               |                  15 min                 |
+|       2      |              45 min               |                   1 h                   |
+|       3      |               2 h                 |                   3 h                   |
+|       4      |               3 h                 |                   6 h                   |
+|       5      |               6 h                 |                  12 h                   |
+|       6      |              12 h                 |                  24 h                   |
+|       7      |              24 h                 |                  48 h                   |
+|       8      |              24 h                 |                  72 h                   |
 
 ### Webhook Resource
 
