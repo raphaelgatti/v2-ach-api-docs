@@ -515,6 +515,57 @@ https://www.dwolla.com/oauth/v2/authenticate?client_id={client_id}&amp;response_
 <td>Either <code class="prettyprint">active</code>, <code class="prettyprint">deactivated</code>, or <code class="prettyprint">suspended</code>.</td>
 </tr>
 </tbody></table>
+<h2 id='list-customers'>List Customers</h2>
+<blockquote>
+<p>Request:</p>
+</blockquote>
+<pre class="highlight shell"><code>GET https://api.dwolla.com/customers
+Accept: application/vnd.dwolla.v1.hal+json
+Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
+</code></pre>
+
+<blockquote>
+<p>Response:</p>
+</blockquote>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"_links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"self"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.dwolla.com/customers"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="nt">"total"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"items"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"_links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"self"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.dwolla.com/customers/99bfb139-eadd-4cdf-b346-7504f0c16c60"</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"99bfb139-eadd-4cdf-b346-7504f0c16c60"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"firstName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Bob"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"lastName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Dole"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"active"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<p>Fetch a list of Customers which belong to the authorized user.</p>
+<aside class="reminder"><p>This endpoint <a href="#authentication">requires</a> an OAuth access token with the <code>ManageCustomers</code> scope.</p>
+</aside><h3 id='http-request'>HTTP Request</h3>
+<p><code class="prettyprint">GET https://api.dwolla.com/customers</code></p>
+<h3 id='errors'>Errors</h3>
+<table><thead>
+<tr>
+<th>HTTP Status</th>
+<th>Message</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>404</td>
+<td>No active customer record</td>
+</tr>
+</tbody></table>
 <h2 id='new-customer'>New Customer</h2>
 <blockquote>
 <p>Request:</p>
@@ -592,57 +643,6 @@ Location: https://api.dwolla.com/customers/6f80efc0-b158-4df1-9b11-da85f0bffdd4
 <td>An unexpected error occurred.</td>
 </tr>
 </tbody></table>
-<h2 id='list-customers'>List Customers</h2>
-<blockquote>
-<p>Request:</p>
-</blockquote>
-<pre class="highlight shell"><code>GET https://api.dwolla.com/customers
-Accept: application/vnd.dwolla.v1.hal+json
-Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
-</code></pre>
-
-<blockquote>
-<p>Response:</p>
-</blockquote>
-<pre class="highlight json"><code><span class="p">{</span><span class="w">
-  </span><span class="nt">"_links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="nt">"self"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.dwolla.com/customers"</span><span class="w">
-    </span><span class="p">}</span><span class="w">
-  </span><span class="p">},</span><span class="w">
-  </span><span class="nt">"total"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"items"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-    </span><span class="p">{</span><span class="w">
-      </span><span class="nt">"_links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="nt">"self"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-          </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.dwolla.com/customers/99bfb139-eadd-4cdf-b346-7504f0c16c60"</span><span class="w">
-        </span><span class="p">}</span><span class="w">
-      </span><span class="p">},</span><span class="w">
-      </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"99bfb139-eadd-4cdf-b346-7504f0c16c60"</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"firstName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Bob"</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"lastName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Dole"</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"active"</span><span class="w">
-    </span><span class="p">}</span><span class="w">
-  </span><span class="p">]</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre>
-
-<p>Fetch a list of Customers which belong to the authorized user.</p>
-<aside class="reminder"><p>This endpoint <a href="#authentication">requires</a> an OAuth access token with the <code>ManageCustomers</code> scope.</p>
-</aside><h3 id='http-request'>HTTP Request</h3>
-<p><code class="prettyprint">GET https://api.dwolla.com/customers</code></p>
-<h3 id='errors'>Errors</h3>
-<table><thead>
-<tr>
-<th>HTTP Status</th>
-<th>Message</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>404</td>
-<td>No active customer record</td>
-</tr>
-</tbody></table>
 
           <h1 id='documents'>Documents</h1><pre class="highlight shell"><code><span class="o">{</span>
   <span class="s2">"_links"</span>: <span class="o">{</span>
@@ -676,51 +676,6 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 <tr>
 <td>documentType</td>
 <td>Either <code class="prettyprint">passport</code>, <code class="prettyprint">driversLicense</code>, or <code class="prettyprint">idCard</code>.</td>
-</tr>
-</tbody></table>
-<h2 id='create-a-document'>Create a Document</h2>
-<blockquote>
-<p>Request:</p>
-</blockquote>
-<pre class="highlight shell"><code>POST /customers/6f80efc0-b158-4df1-9b11-da85f0bffdd4/documents
-Accept: application/vnd.dwolla.v1.hal+json
-Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
-</code></pre>
-<pre class="highlight json"><code><span class="p">{</span><span class="w">
-  </span><span class="nt">"mimetype"</span><span class="p">:</span><span class="w"> </span><span class="s2">"image/png"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"documentType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"passport"</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre>
-<pre class="highlight shell"><code>POST /customers/6f80efc0-b158-4df1-9b11-da85f0bffdd4/documents
-Accept: image/png
-Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
-
-<span class="o">[</span>bytes of image]
-</code></pre>
-
-<blockquote>
-<p>Response:
-<code class="prettyprint">shell
-HTTP/1.1 201 Created
-Location: https://api.dwolla.com/customers/6f80efc0-b158-4df1-9b11-da85f0bffdd4/documents/e6c141d5-0922-4d18-ad00-4789a37f288f
-</code></p>
-</blockquote>
-
-<p>Create a Document belonging to a Customer. </p>
-<aside class="reminder"><p>This endpoint <a href="#authentication">requires</a> an OAuth access token with the <code>ManageCustomers</code> scope.</p>
-</aside><h3 id='http-request'>HTTP Request</h3>
-<p>1: <code class="prettyprint">POST https://api.dwolla.com/customers/{id}/documents</code> with <code class="prettyprint">Document</code> <br />
-2: <code class="prettyprint">POST https://api.dwolla.com/customers/{id}/documents</code> with a 5MB <code class="prettyprint">*.png</code> or <code class="prettyprint">*.jpg</code> image file.</p>
-<h3 id='errors'>Errors</h3>
-<table><thead>
-<tr>
-<th>HTTP Status</th>
-<th>Message</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>404</td>
-<td>No active customer record</td>
 </tr>
 </tbody></table>
 <h2 id='list-documents'>List Documents</h2>
@@ -773,7 +728,52 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 <td>No active customer record</td>
 </tr>
 </tbody></table>
-<h2 id='retrieve-document-by-id'>Retrieve Document by ID</h2>
+<h2 id='create-a-document'>Create a Document</h2>
+<blockquote>
+<p>Request:</p>
+</blockquote>
+<pre class="highlight shell"><code>POST /customers/6f80efc0-b158-4df1-9b11-da85f0bffdd4/documents
+Accept: application/vnd.dwolla.v1.hal+json
+Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
+</code></pre>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"mimetype"</span><span class="p">:</span><span class="w"> </span><span class="s2">"image/png"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"documentType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"passport"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<pre class="highlight shell"><code>POST /customers/6f80efc0-b158-4df1-9b11-da85f0bffdd4/documents
+Accept: image/png
+Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
+
+<span class="o">[</span>bytes of image]
+</code></pre>
+
+<blockquote>
+<p>Response:
+<code class="prettyprint">shell
+HTTP/1.1 201 Created
+Location: https://api.dwolla.com/customers/6f80efc0-b158-4df1-9b11-da85f0bffdd4/documents/e6c141d5-0922-4d18-ad00-4789a37f288f
+</code></p>
+</blockquote>
+
+<p>Create a Document belonging to a Customer. </p>
+<aside class="reminder"><p>This endpoint <a href="#authentication">requires</a> an OAuth access token with the <code>ManageCustomers</code> scope.</p>
+</aside><h3 id='http-request'>HTTP Request</h3>
+<p>1: <code class="prettyprint">POST https://api.dwolla.com/customers/{id}/documents</code> with <code class="prettyprint">Document</code> <br />
+2: <code class="prettyprint">POST https://api.dwolla.com/customers/{id}/documents</code> with a 5MB <code class="prettyprint">*.png</code> or <code class="prettyprint">*.jpg</code> image file.</p>
+<h3 id='errors'>Errors</h3>
+<table><thead>
+<tr>
+<th>HTTP Status</th>
+<th>Message</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>404</td>
+<td>No active customer record</td>
+</tr>
+</tbody></table>
+<h2 id='retrieve-document-by-id'>Retrieve Document By ID</h2>
 <blockquote>
 <p>Request:</p>
 </blockquote>
@@ -857,6 +857,61 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 <td>(Boolean) Is the funding source verified?</td>
 </tr>
 </tbody></table>
+<h2 id='list-funding-sources-customer'>List Funding Sources (Customer)</h2>
+<blockquote>
+<p>Request:</p>
+</blockquote>
+<pre class="highlight shell"><code>GET /customers/99bfb139-eadd-4cdf-b346-7504f0c16c60/funding-sources
+Accept: application/vnd.dwolla.v1.hal+json
+Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
+</code></pre>
+
+<blockquote>
+<p>Response:</p>
+</blockquote>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"_links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"self"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.dwolla.com/customers/99bfb139-eadd-4cdf-b346-7504f0c16c60/funding-sources"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="nt">"total"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"items"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"_links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"self"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.dwolla.com/customers/99bfb139-eadd-4cdf-b346-7504f0c16c60/funding-sources/684862bc-8d94-4e53-9c41-26398b4b7fac"</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+        </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"684862bc-8d94-4e53-9c41-26398b4b7fac"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"account_number"</span><span class="p">:</span><span class="w"> </span><span class="s2">"12345678"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"routing_number"</span><span class="p">:</span><span class="w"> </span><span class="s2">"87654321"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"account_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Checking"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"My Bank"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"isVerified"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<p>Fetch a list of Funding Sources that belong to a Customer.</p>
+<aside class="reminder"><p>This endpoint <a href="#authentication">requires</a> an OAuth access token with the <code>ManageCustomers</code> scope.</p>
+</aside><h3 id='http-request'>HTTP Request</h3>
+<p><code class="prettyprint">
+GET https://api.dwolla.com/customers/{id}/funding-sources
+</code></p>
+<h3 id='errors'>Errors</h3>
+<table><thead>
+<tr>
+<th>HTTP Status</th>
+<th>Message</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>404</td>
+<td>No active customer record</td>
+</tr>
+</tbody></table>
 <h2 id='new-funding-source-customer'>New Funding Source (Customer)</h2>
 <blockquote>
 <p>Request:</p>
@@ -933,11 +988,11 @@ Location: https://api.dwolla.com/customers/99bfb139-eadd-4cdf-b346-7504f0c16c60/
 <td>An unexpected error occurred.</td>
 </tr>
 </tbody></table>
-<h2 id='list-funding-sources-customer'>List Funding Sources (Customer)</h2>
+<h2 id='list-funding-sources-account'>List Funding Sources (Account)</h2>
 <blockquote>
 <p>Request:</p>
 </blockquote>
-<pre class="highlight shell"><code>GET /customers/99bfb139-eadd-4cdf-b346-7504f0c16c60/funding-sources
+<pre class="highlight shell"><code>GET /accounts/99bfb139-eadd-4cdf-b346-7504f0c16c60/funding-sources
 Accept: application/vnd.dwolla.v1.hal+json
 Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 </code></pre>
@@ -948,7 +1003,7 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 <pre class="highlight json"><code><span class="p">{</span><span class="w">
   </span><span class="nt">"_links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="nt">"self"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.dwolla.com/customers/99bfb139-eadd-4cdf-b346-7504f0c16c60/funding-sources"</span><span class="w">
+      </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.dwolla.com/accounts/99bfb139-eadd-4cdf-b346-7504f0c16c60/funding-sources"</span><span class="w">
     </span><span class="p">}</span><span class="w">
   </span><span class="p">},</span><span class="w">
   </span><span class="nt">"total"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
@@ -956,25 +1011,25 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
     </span><span class="p">{</span><span class="w">
       </span><span class="nt">"_links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
         </span><span class="nt">"self"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-          </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.dwolla.com/customers/99bfb139-eadd-4cdf-b346-7504f0c16c60/funding-sources/684862bc-8d94-4e53-9c41-26398b4b7fac"</span><span class="w">
+          </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.dwolla.com/accounts/99bfb139-eadd-4cdf-b346-7504f0c16c60/funding-sources/684862bc-8d94-4e53-9c41-26398b4b7fac"</span><span class="w">
         </span><span class="p">}</span><span class="w">
       </span><span class="p">},</span><span class="w">
         </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"684862bc-8d94-4e53-9c41-26398b4b7fac"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"account_number"</span><span class="p">:</span><span class="w"> </span><span class="s2">"12345678"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"routing_number"</span><span class="p">:</span><span class="w"> </span><span class="s2">"87654321"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"account_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Checking"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"My Bank"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"isVerified"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+        </span><span class="nt">"account_number"</span><span class="p">:</span><span class="w"> </span><span class="s2">"12345678"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"routing_number"</span><span class="p">:</span><span class="w"> </span><span class="s2">"87654321"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"account_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Checking"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"My Bank"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"isVerified"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
     </span><span class="p">}</span><span class="w">
   </span><span class="p">]</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 
-<p>Fetch a list of Funding Sources that belong to a Customer.</p>
+<p>Fetch a list of Funding Sources that belong to an Account.</p>
 <aside class="reminder"><p>This endpoint <a href="#authentication">requires</a> an OAuth access token with the <code>ManageCustomers</code> scope.</p>
 </aside><h3 id='http-request'>HTTP Request</h3>
 <p><code class="prettyprint">
-GET https://api.dwolla.com/customers/{id}/funding-sources
+GET https://api.dwolla.com/accounts/{id}/funding-sources
 </code></p>
 <h3 id='errors'>Errors</h3>
 <table><thead>
@@ -1062,61 +1117,6 @@ Location: https://api.dwolla.com/accounts/99bfb139-eadd-4cdf-b346-7504f0c16c60/f
 <tr>
 <td>500</td>
 <td>An unexpected error occurred.</td>
-</tr>
-</tbody></table>
-<h2 id='list-funding-sources-account'>List Funding Sources (Account)</h2>
-<blockquote>
-<p>Request:</p>
-</blockquote>
-<pre class="highlight shell"><code>GET /accounts/99bfb139-eadd-4cdf-b346-7504f0c16c60/funding-sources
-Accept: application/vnd.dwolla.v1.hal+json
-Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
-</code></pre>
-
-<blockquote>
-<p>Response:</p>
-</blockquote>
-<pre class="highlight json"><code><span class="p">{</span><span class="w">
-  </span><span class="nt">"_links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="nt">"self"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.dwolla.com/accounts/99bfb139-eadd-4cdf-b346-7504f0c16c60/funding-sources"</span><span class="w">
-    </span><span class="p">}</span><span class="w">
-  </span><span class="p">},</span><span class="w">
-  </span><span class="nt">"total"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"items"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-    </span><span class="p">{</span><span class="w">
-      </span><span class="nt">"_links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="nt">"self"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-          </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.dwolla.com/accounts/99bfb139-eadd-4cdf-b346-7504f0c16c60/funding-sources/684862bc-8d94-4e53-9c41-26398b4b7fac"</span><span class="w">
-        </span><span class="p">}</span><span class="w">
-      </span><span class="p">},</span><span class="w">
-        </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"684862bc-8d94-4e53-9c41-26398b4b7fac"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"account_number"</span><span class="p">:</span><span class="w"> </span><span class="s2">"12345678"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"routing_number"</span><span class="p">:</span><span class="w"> </span><span class="s2">"87654321"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"account_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Checking"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"My Bank"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"isVerified"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
-    </span><span class="p">}</span><span class="w">
-  </span><span class="p">]</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre>
-
-<p>Fetch a list of Funding Sources that belong to an Account.</p>
-<aside class="reminder"><p>This endpoint <a href="#authentication">requires</a> an OAuth access token with the <code>ManageCustomers</code> scope.</p>
-</aside><h3 id='http-request'>HTTP Request</h3>
-<p><code class="prettyprint">
-GET https://api.dwolla.com/accounts/{id}/funding-sources
-</code></p>
-<h3 id='errors'>Errors</h3>
-<table><thead>
-<tr>
-<th>HTTP Status</th>
-<th>Message</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>404</td>
-<td>No active customer record</td>
 </tr>
 </tbody></table>
 
@@ -1212,49 +1212,7 @@ GET https://api.dwolla.com/accounts/{id}/funding-sources
 <td>String, probably <code class="prettyprint">USD</code></td>
 </tr>
 </tbody></table>
-<h2 id='initiate-transfer'>Initiate Transfer</h2>
-<blockquote>
-<p>Request:</p>
-</blockquote>
-<pre class="highlight shell"><code>POST https://api.dwolla.com/accounts/99bfb139-eadd-4cdf-b346-7504f0c16c60/transfers
-Accept: application/vnd.dwolla.v1.hal+json
-Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
-</code></pre>
-<pre class="highlight json"><code><span class="p">{</span><span class="w">
-  </span><span class="nt">"fundingSourceUri"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"destinationUri"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"money"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="nt">"amount"</span><span class="p">:</span><span class="w"> </span><span class="mi">20</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"currency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"USD"</span><span class="w">
-  </span><span class="p">},</span><span class="w">
-  </span><span class="nt">"metadata"</span><span class="p">:</span><span class="w"> </span><span class="s2">"so meta"</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre>
-
-<blockquote>
-<p>Response:</p>
-</blockquote>
-<pre class="highlight shell"><code>HTTP/1.1 201 Created
-Location: https://api.dwolla.com/accounts/99bfb139-eadd-4cdf-b346-7504f0c16c60/transfers/a63526e1-cc8d-4a62-9d26-8f04a39da4f3
-</code></pre>
-
-<p>Initiate a transfer for either an account or customer resource. </p>
-<aside class="reminder"><p>This endpoint <a href="#authentication">requires</a> an OAuth access token with the <code>ManageCustomers</code> scope.</p>
-</aside><h3 id='http-request'>HTTP Request</h3>
-<p><code class="prettyprint">POST https://api.dwolla.com/accounts/{id}/transfers</code></p>
-<h3 id='errors'>Errors</h3>
-<table><thead>
-<tr>
-<th>HTTP Status</th>
-<th>Message</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>404</td>
-<td>No active customer record</td>
-</tr>
-</tbody></table>
-<h2 id='get-transfers-customer'>Get Transfers (Customer)</h2>
+<h2 id='get-transfers-customer'>Get transfers (Customer)</h2>
 <blockquote>
 <p>Request:</p>
 </blockquote>
@@ -1318,7 +1276,7 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 <td>No active customer record</td>
 </tr>
 </tbody></table>
-<h2 id='get-transfers-by-id-customer'>Get Transfers by ID (Customer)</h2>
+<h2 id='get-transfers-by-id-customer'>Get transfers by ID (Customer)</h2>
 <blockquote>
 <p>Request:</p>
 </blockquote>
@@ -1372,7 +1330,7 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 <td>No active customer record</td>
 </tr>
 </tbody></table>
-<h2 id='get-transfers-account'>Get Transfers (Account)</h2>
+<h2 id='get-transfers-account'>Get transfers (Account)</h2>
 <blockquote>
 <p>Request:</p>
 </blockquote>
@@ -1436,7 +1394,7 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 <td>No active customer record</td>
 </tr>
 </tbody></table>
-<h2 id='get-transfers-by-id-account'>Get Transfers by ID (Account)</h2>
+<h2 id='get-transfers-by-id-account'>Get transfers by ID (Account)</h2>
 <blockquote>
 <p>Request:</p>
 </blockquote>
@@ -1490,6 +1448,48 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 <td>No active customer record</td>
 </tr>
 </tbody></table>
+<h2 id='initiate-transfer'>Initiate Transfer</h2>
+<blockquote>
+<p>Request:</p>
+</blockquote>
+<pre class="highlight shell"><code>POST https://api.dwolla.com/accounts/99bfb139-eadd-4cdf-b346-7504f0c16c60/transfers
+Accept: application/vnd.dwolla.v1.hal+json
+Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
+</code></pre>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"fundingSourceUri"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"destinationUri"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"money"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"amount"</span><span class="p">:</span><span class="w"> </span><span class="mi">20</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"currency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"USD"</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="nt">"metadata"</span><span class="p">:</span><span class="w"> </span><span class="s2">"so meta"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<blockquote>
+<p>Response:</p>
+</blockquote>
+<pre class="highlight shell"><code>HTTP/1.1 201 Created
+Location: https://api.dwolla.com/accounts/99bfb139-eadd-4cdf-b346-7504f0c16c60/transfers/a63526e1-cc8d-4a62-9d26-8f04a39da4f3
+</code></pre>
+
+<p>Initiate a transfer for either an account or customer resource. </p>
+<aside class="reminder"><p>This endpoint <a href="#authentication">requires</a> an OAuth access token with the <code>ManageCustomers</code> scope.</p>
+</aside><h3 id='http-request'>HTTP Request</h3>
+<p><code class="prettyprint">POST https://api.dwolla.com/accounts/{id}/transfers</code></p>
+<h3 id='errors'>Errors</h3>
+<table><thead>
+<tr>
+<th>HTTP Status</th>
+<th>Message</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>404</td>
+<td>No active customer record</td>
+</tr>
+</tbody></table>
 
           <h1 id='webhooks-and-subscriptions'>Webhooks and Subscriptions</h1><pre class="highlight json"><code><span class="p">{</span><span class="w">
   </span><span class="nt">"_links"</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span><span class="w">
@@ -1528,92 +1528,7 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 
-<p>A webhook notification is sent as a <code class="prettyprint">POST</code> request to a user defined destination. The whitelabel API will send webhooks to notify an application as to the status of a transfer. As required in the White Label TOS, you will use webhooks to notify your customers via email on the status of a transfer.</p>
-<h3 id='available-notifications'>Available notifications</h3>
-<table><thead>
-<tr>
-<th>Event</th>
-<th>Description</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>customer_created</td>
-<td>A customer record was created.</td>
-</tr>
-<tr>
-<td>transfer_created</td>
-<td>Transfer was created.</td>
-</tr>
-<tr>
-<td>transfer_cancelled</td>
-<td>A pending transfer has been cancelled, and will not process further.</td>
-</tr>
-<tr>
-<td>transfer_failed</td>
-<td>Transaction failed to clear successfully. Usually, this is a result of an ACH failure (insufficient funds, etc.).</td>
-</tr>
-<tr>
-<td>transfer_completed</td>
-<td>Transfer has cleared successfully.</td>
-</tr>
-<tr>
-<td>transfer_reclaimed</td>
-<td>The transfer was returned to the sender after being unclaimed by the recipient for a period of time.</td>
-</tr>
-</tbody></table>
-<h3 id='acknowledgement-and-retries'>Acknowledgement and retries</h3>
-<p>For webhook notifications, your server should respond with a HTTP 2xx status code to indicate you have successfully received the message. If Dwolla receives a status code greater than a HTTP 400, or you fail to respond within 20 seconds of the attempt, we will retry the call to your subscribed webhook URL. </p>
-
-<p>Dwolla will attempt to retry each webhook 8 times over the course of 72 hours. If a webhook was successful but you would like information again, you can call <a href="#retrieve-webhook-by-id">retrieve webhook by ID</a>. Failed webhooks are retried on the following backoff schedule:</p>
-
-<table><thead>
-<tr>
-<th style="text-align: center">Retry number</th>
-<th style="text-align: center">Interval (relative to last retry)</th>
-<th style="text-align: center">Interval (relative to original attempt)</th>
-</tr>
-</thead><tbody>
-<tr>
-<td style="text-align: center">1</td>
-<td style="text-align: center">15 min</td>
-<td style="text-align: center">15 min</td>
-</tr>
-<tr>
-<td style="text-align: center">2</td>
-<td style="text-align: center">45 min</td>
-<td style="text-align: center">1 h</td>
-</tr>
-<tr>
-<td style="text-align: center">3</td>
-<td style="text-align: center">2 h</td>
-<td style="text-align: center">3 h</td>
-</tr>
-<tr>
-<td style="text-align: center">4</td>
-<td style="text-align: center">3 h</td>
-<td style="text-align: center">6 h</td>
-</tr>
-<tr>
-<td style="text-align: center">5</td>
-<td style="text-align: center">6 h</td>
-<td style="text-align: center">12 h</td>
-</tr>
-<tr>
-<td style="text-align: center">6</td>
-<td style="text-align: center">12 h</td>
-<td style="text-align: center">24 h</td>
-</tr>
-<tr>
-<td style="text-align: center">7</td>
-<td style="text-align: center">24 h</td>
-<td style="text-align: center">48 h</td>
-</tr>
-<tr>
-<td style="text-align: center">8</td>
-<td style="text-align: center">24 h</td>
-<td style="text-align: center">72 h</td>
-</tr>
-</tbody></table>
+<p>A webhook notification is sent as a <code class="prettyprint">POST</code> request to a user defined destination. Dwolla will send webhooks to notify an application about the status of a Transfer. As required in the White Label TOS you will use webhooks to notify your customers via email on the status of a Transfer.</p>
 <h3 id='webhook-resource'>Webhook Resource</h3>
 <table><thead>
 <tr>
@@ -1690,159 +1605,7 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 <td>Event ID for this webhook.</td>
 </tr>
 </tbody></table>
-<h2 id='subscribe-to-a-webhook'>Subscribe to a Webhook</h2>
-<blockquote>
-<p>Request:</p>
-</blockquote>
-<pre class="highlight shell"><code>POST /webhook-subscriptions
-Accept: application/vnd.dwolla.v1.hal+json
-Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
-</code></pre>
-<pre class="highlight json"><code><span class="p">{</span><span class="w">
-  </span><span class="nt">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://deliver.webhooks/here"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"secret"</span><span class="p">:</span><span class="w"> </span><span class="s2">"shush!"</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre>
-
-<blockquote>
-<p>Response:</p>
-</blockquote>
-<pre class="highlight shell"><code>HTTP/1.1 201 Created
-Location: https://api.dwolla.com/webhook-subscriptions/10d4133e-b308-4646-b276-40d9d36def1c
-</code></pre>
-
-<p>Create a webhook subscription to deliver webhooks to a desired URL. </p>
-<aside class="reminder"><p>This endpoint <a href="#authentication">requires</a> an OAuth access token with the <code>ManageCustomers</code> scope.</p>
-</aside><h3 id='http-request'>HTTP Request</h3>
-<p><code class="prettyprint">
-POST https://api.dwolla.com/customers/webhook-subscriptions
-</code></p>
-<h3 id='request-parameters'>Request Parameters</h3>
-<table><thead>
-<tr>
-<th>Parameter</th>
-<th>Description</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>url</td>
-<td>Where Dwolla should deliver the webhook notification.</td>
-</tr>
-<tr>
-<td>secret</td>
-<td>Your application secret.</td>
-</tr>
-</tbody></table>
-<h3 id='errors'>Errors</h3>
-<table><thead>
-<tr>
-<th>HTTP Status</th>
-<th>Message</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>404</td>
-<td>No active customer record</td>
-</tr>
-</tbody></table>
-<h2 id='unsubscribe-from-a-webhook'>Unsubscribe from a Webhook</h2>
-<blockquote>
-<p>Request:</p>
-</blockquote>
-<pre class="highlight shell"><code>DELETE /webhook-subscriptions/10d4133e-b308-4646-b276-40d9d36def1c
-Accept: application/vnd.dwolla.v1.hal+json
-Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
-</code></pre>
-
-<blockquote>
-<p>Response:</p>
-</blockquote>
-<pre class="highlight shell"><code>HTTP 200
-</code></pre>
-
-<p>Fetch a list of webhooks that the authorized user is currently subscribed to. </p>
-<aside class="reminder"><p>This endpoint <a href="#authentication">requires</a> an OAuth access token with the <code>ManageCustomers</code> scope.</p>
-</aside><h3 id='http-request'>HTTP Request</h3>
-<p><code class="prettyprint">
-DELETE https://api.dwolla.com/customers/webhook-subscriptions/{id}
-</code></p>
-<h3 id='request-parameters'>Request Parameters</h3>
-<table><thead>
-<tr>
-<th>Parameter</th>
-<th>Description</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>id</td>
-<td>Webhook UUID.</td>
-</tr>
-</tbody></table>
-<h3 id='errors'>Errors</h3>
-<table><thead>
-<tr>
-<th>HTTP Status</th>
-<th>Message</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>404</td>
-<td>No active customer record</td>
-</tr>
-</tbody></table>
-<h2 id='list-webhook-subscriptions'>List Webhook Subscriptions</h2>
-<blockquote>
-<p>Request:</p>
-</blockquote>
-<pre class="highlight shell"><code>GET /webhook-subscriptions
-Accept: application/vnd.dwolla.v1.hal+json
-Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
-</code></pre>
-
-<blockquote>
-<p>Response:</p>
-</blockquote>
-<pre class="highlight json"><code><span class="p">{</span><span class="w">
-  </span><span class="nt">"_links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="nt">"self"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.dwolla.com/webhook-subscriptions"</span><span class="w">
-    </span><span class="p">}</span><span class="w">
-  </span><span class="p">},</span><span class="w">
-  </span><span class="nt">"total"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"items"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-    </span><span class="p">{</span><span class="w">
-      </span><span class="nt">"_links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="nt">"self"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-          </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.dwolla.com/webhook-subscriptions/10d4133e-b308-4646-b276-40d9d36def1c"</span><span class="w">
-        </span><span class="p">}</span><span class="w">
-      </span><span class="p">},</span><span class="w">
-      </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"10d4133e-b308-4646-b276-40d9d36def1c"</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://destination.url"</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"createdDate"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-07-23T14:19:36.993Z"</span><span class="w">
-    </span><span class="p">}</span><span class="w">
-  </span><span class="p">]</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre>
-
-<p>Fetch a list of webhooks that the authorized user is currently subscribed to. </p>
-<aside class="reminder"><p>This endpoint <a href="#authentication">requires</a> an OAuth access token with the <code>ManageCustomers</code> scope.</p>
-</aside><h3 id='http-request'>HTTP Request</h3>
-<p><code class="prettyprint">
-GET https://api.dwolla.com/customers/webhook-subscriptions
-</code></p>
-<h3 id='errors'>Errors</h3>
-<table><thead>
-<tr>
-<th>HTTP Status</th>
-<th>Message</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>404</td>
-<td>No active customer record</td>
-</tr>
-</tbody></table>
-<h2 id='retrieve-webhook-by-id'>Retrieve Webhook by ID</h2>
+<h2 id='retrieve-webhook-by-id'>Retrieve webhook by ID</h2>
 <blockquote>
 <p>Request:</p>
 </blockquote>
@@ -1913,7 +1676,59 @@ GET https://api.dwolla.com/customers/webhook-subscriptions
 <td>No active customer record</td>
 </tr>
 </tbody></table>
-<h2 id='retrieve-subscription-by-id'>Retrieve Subscription by ID</h2>
+<h2 id='list-webhook-subscriptions'>List Webhook Subscriptions</h2>
+<blockquote>
+<p>Request:</p>
+</blockquote>
+<pre class="highlight shell"><code>GET /webhook-subscriptions
+Accept: application/vnd.dwolla.v1.hal+json
+Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
+</code></pre>
+
+<blockquote>
+<p>Response:</p>
+</blockquote>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"_links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"self"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.dwolla.com/webhook-subscriptions"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="nt">"total"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"items"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"_links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"self"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.dwolla.com/webhook-subscriptions/10d4133e-b308-4646-b276-40d9d36def1c"</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"10d4133e-b308-4646-b276-40d9d36def1c"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://destination.url"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"createdDate"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-07-23T14:19:36.993Z"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<p>Fetch a list of webhooks that the authorized user is currently subscribed to. </p>
+<aside class="reminder"><p>This endpoint <a href="#authentication">requires</a> an OAuth access token with the <code>ManageCustomers</code> scope.</p>
+</aside><h3 id='http-request'>HTTP Request</h3>
+<p><code class="prettyprint">
+GET https://api.dwolla.com/customers/webhook-subscriptions
+</code></p>
+<h3 id='errors'>Errors</h3>
+<table><thead>
+<tr>
+<th>HTTP Status</th>
+<th>Message</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>404</td>
+<td>No active customer record</td>
+</tr>
+</tbody></table>
+<h2 id='subscription-by-id'>Subscription by ID</h2>
 <blockquote>
 <p>Request:</p>
 </blockquote>
@@ -1955,7 +1770,7 @@ GET https://api.dwolla.com/customers/webhook-subscriptions/{id}
 <td>No active customer record</td>
 </tr>
 </tbody></table>
-<h2 id='hooks-belonging-to-subscription'>Hooks Belonging to Subscription</h2>
+<h2 id='hooks-belonging-to-subscription'>Hooks belonging to subscription</h2>
 <blockquote>
 <p>Request:</p>
 </blockquote>
@@ -2016,6 +1831,106 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 <p><code class="prettyprint">
 GET https://api.dwolla.com/customers/webhook-subscriptions/{id}/hooks
 </code></p>
+<h3 id='errors'>Errors</h3>
+<table><thead>
+<tr>
+<th>HTTP Status</th>
+<th>Message</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>404</td>
+<td>No active customer record</td>
+</tr>
+</tbody></table>
+<h2 id='subscribe-to-a-webhook'>Subscribe to a Webhook</h2>
+<blockquote>
+<p>Request:</p>
+</blockquote>
+<pre class="highlight shell"><code>POST /webhook-subscriptions
+Accept: application/vnd.dwolla.v1.hal+json
+Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
+</code></pre>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://deliver.webhooks/here"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"secret"</span><span class="p">:</span><span class="w"> </span><span class="s2">"shush!"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<blockquote>
+<p>Response:</p>
+</blockquote>
+<pre class="highlight shell"><code>HTTP/1.1 201 Created
+Location: https://api.dwolla.com/webhook-subscriptions/10d4133e-b308-4646-b276-40d9d36def1c
+</code></pre>
+
+<p>Create a webhook subscription to deliver webhooks to a desired URL. </p>
+<aside class="reminder"><p>This endpoint <a href="#authentication">requires</a> an OAuth access token with the <code>ManageCustomers</code> scope.</p>
+</aside><h3 id='http-request'>HTTP Request</h3>
+<p><code class="prettyprint">
+POST https://api.dwolla.com/customers/webhook-subscriptions
+</code></p>
+<h3 id='request-parameters'>Request Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>url</td>
+<td>Where Dwolla should deliver the webhook notification.</td>
+</tr>
+<tr>
+<td>secret</td>
+<td>Your application secret.</td>
+</tr>
+</tbody></table>
+<h3 id='errors'>Errors</h3>
+<table><thead>
+<tr>
+<th>HTTP Status</th>
+<th>Message</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>404</td>
+<td>No active customer record</td>
+</tr>
+</tbody></table>
+<h2 id='unsubscribe-from-a-webhook'>Unsubscribe from a webhook</h2>
+<blockquote>
+<p>Request:</p>
+</blockquote>
+<pre class="highlight shell"><code>DELETE /webhook-subscriptions/10d4133e-b308-4646-b276-40d9d36def1c
+Accept: application/vnd.dwolla.v1.hal+json
+Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
+</code></pre>
+
+<blockquote>
+<p>Response:</p>
+</blockquote>
+<pre class="highlight shell"><code>HTTP 200
+</code></pre>
+
+<p>Fetch a list of webhooks that the authorized user is currently subscribed to. </p>
+<aside class="reminder"><p>This endpoint <a href="#authentication">requires</a> an OAuth access token with the <code>ManageCustomers</code> scope.</p>
+</aside><h3 id='http-request'>HTTP Request</h3>
+<p><code class="prettyprint">
+DELETE https://api.dwolla.com/customers/webhook-subscriptions/{id}
+</code></p>
+<h3 id='request-parameters'>Request Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>id</td>
+<td>Webhook UUID.</td>
+</tr>
+</tbody></table>
 <h3 id='errors'>Errors</h3>
 <table><thead>
 <tr>
