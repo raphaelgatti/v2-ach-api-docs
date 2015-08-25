@@ -38,17 +38,7 @@
 }
 ```
 
-A webhook notification is sent as a `POST` request to a user defined destination. The whitelabel API will send webhooks to notify an application as to the status of a transfer. As required in the White Label TOS, you will use webhooks to notify your customers via email on the status of a transfer.
-
-### Available notifications
-| Event              | Description                                                                                                       |
-|--------------------|-------------------------------------------------------------------------------------------------------------------|
-| customer_created   | A customer record was created.                                                                                    |
-| transfer_created   | Transfer was created.                                                                                             |
-| transfer_cancelled | A pending transfer has been cancelled, and will not process further.                                              |
-| transfer_failed    | Transaction failed to clear successfully. Usually, this is a result of an ACH failure (insufficient funds, etc.). |
-| transfer_completed | Transfer has cleared successfully.                                                                                |
-| transfer_reclaimed | The transfer was returned to the sender after being unclaimed by the recipient for a period of time.              |
+A webhook notification is sent as a `POST` request to a user defined destination. The whitelabel API will send webhooks to notify an application as to the status of a transfer. As required in the White Label TOS, you will use webhooks to notify your customers via email on the status of a transfer. Refer to the [events](#available-events) section for the list of events that trigger webhooks.
 
 ### Acknowledgement and retries
 For webhook notifications, your server should respond with a HTTP 2xx status code to indicate you have successfully received the message. If Dwolla receives a status code greater than a HTTP 400, or you fail to respond within 20 seconds of the attempt, we will retry the call to your subscribed webhook URL. 
@@ -70,7 +60,7 @@ Dwolla will attempt to retry each webhook 8 times over the course of 72 hours. I
 
 | Parameter      | Description                                       |
 |----------------|---------------------------------------------------|
-| id             | Unique UUIDv4 identifier.                         |
+| id             | Unique webhook identifier.                        |
 | topic          | Type of webhook subscription.                     |
 | accountId      | Account associated with the webhook notification. |
 | eventId        | Event ID for this webhook.                        |
@@ -124,7 +114,7 @@ Create a webhook subscription to deliver webhooks to a desired URL.
 
 ### HTTP Request
 `
-POST https://api.dwolla.com/customers/webhook-subscriptions
+POST https://api.dwolla.com/webhook-subscriptions
 `
 
 ### Request Parameters
@@ -144,31 +134,43 @@ secret | Your application secret.
 > Request:
 
 ```shell
-DELETE /webhook-subscriptions/10d4133e-b308-4646-b276-40d9d36def1c
+DELETE /webhook-subscriptions/f4d21628-fde2-4d3a-b69a-0a7cb42adc4c
 Accept: application/vnd.dwolla.v1.hal+json
 Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 ```
 
 > Response:
 
-```shell
-HTTP 200
+```json
+{
+  "_links": {
+    "self": {
+      "href": "https://api.dwolla.com/webhook-subscriptions/f4d21628-fde2-4d3a-b69a-0a7cb42adc4c"
+    },
+    "hooks": {
+      "href": "https://api.dwolla.com/webhook-subscriptions/f4d21628-fde2-4d3a-b69a-0a7cb42adc4c/hooks"
+    }
+  },
+  "id": "f4d21628-fde2-4d3a-b69a-0a7cb42adc4c",
+  "url": "https://destination.url",
+  "createdDate": "2015-08-19T21:43:49.000Z"
+}
 ```
 
-Fetch a list of webhooks that the authorized user is currently subscribed to. 
+Delete a webhook subscription. 
 
 <aside class="reminder">This endpoint [requires](#authentication) an OAuth access token with the `ManageCustomers` scope.</aside>
 
 ### HTTP Request
 `
-DELETE https://api.dwolla.com/customers/webhook-subscriptions/{id}
+DELETE https://api.dwolla.com/webhook-subscriptions/{id}
 `
 
 ### Request Parameters
 
 Parameter | Description
 ----------|------------
-id | Webhook UUID.
+id | Webhook unique identifier.
 
 
 ### Errors
@@ -195,97 +197,34 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
       "href": "https://api.dwolla.com/webhook-subscriptions"
     }
   },
-  "total": 1,
-  "items": [
-    {
-      "_links": {
-        "self": {
-          "href": "https://api.dwolla.com/webhook-subscriptions/10d4133e-b308-4646-b276-40d9d36def1c"
-        }
-      },
-      "id": "10d4133e-b308-4646-b276-40d9d36def1c",
-      "url": "http://destination.url",
-      "createdDate": "2015-07-23T14:19:36.993Z"
-    }
-  ]
-}
-```
-
-Fetch a list of webhooks that the authorized user is currently subscribed to. 
-
-<aside class="reminder">This endpoint [requires](#authentication) an OAuth access token with the `ManageCustomers` scope.</aside>
-
-### HTTP Request
-`
-GET https://api.dwolla.com/customers/webhook-subscriptions
-`
-
-### Errors
-| HTTP Status | Message |
-|--------------|-------------|
-| 404 | No active customer record |
-
-## Retrieve Webhook by ID
-
-> Request:
-
-```shell
-GET /hooks/76ce47b9-5b3c-4ac8-a743-ce318afbaecd
-Accept: application/vnd.dwolla.v1.hal+json
-Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
-```
-
-> Response:
-
-```json
-{
-  "_links": {
-    "self": {
-      "href": "https://api.dwolla.com/hooks/76ce47b9-5b3c-4ac8-a743-ce318afbaecd"
-    }
-  },
-  "id": "76ce47b9-5b3c-4ac8-a743-ce318afbaecd",
-  "topic": "string",
-  "accountId": "string",
-  "eventId": "string",
-  "subscriptionId": "string",
-  "attempts": [
-    {
-      "id": "string",
-      "request": {
-        "timestamp": "2015-07-23T14:19:36.981Z",
-        "url": "string",
-        "headers": [
-          {
-            "name": "string",
-            "value": "string"
+  "_embedded": {
+    "webhook-subscriptions": [
+      {
+        "_links": {
+          "self": {
+            "href": "https://api.dwolla.com/webhook-subscriptions/f4d21628-fde2-4d3a-b69a-0a7cb42adc4c"
+          },
+          "hooks": {
+            "href": "https://api.dwolla.com/webhook-subscriptions/f4d21628-fde2-4d3a-b69a-0a7cb42adc4c/hooks"
           }
-        ],
-        "body": "string"
-      },
-      "response": {
-        "timestamp": "2015-07-23T14:19:36.981Z",
-        "headers": [
-          {
-            "name": "string",
-            "value": "string"
-          }
-        ],
-        "statusCode": 0,
-        "body": "string"
+        },
+        "id": "f4d21628-fde2-4d3a-b69a-0a7cb42adc4c",
+        "url": "https://destination.url",
+        "createdDate": "2015-08-19T21:43:49.000Z"
       }
-    }
-  ]
+    ]
+  },
+  "total": 1
 }
 ```
 
-Fetch a list of webhooks that the authorized user is currently subscribed to. 
+Retrieve a list of webhooks that the authorized user is currently subscribed to. 
 
 <aside class="reminder">This endpoint [requires](#authentication) an OAuth access token with the `ManageCustomers` scope.</aside>
 
 ### HTTP Request
 `
-GET https://api.dwolla.com/customers/webhook-subscriptions
+GET https://api.dwolla.com/webhook-subscriptions
 `
 
 ### Errors
@@ -293,12 +232,12 @@ GET https://api.dwolla.com/customers/webhook-subscriptions
 |--------------|-------------|
 | 404 | No active customer record |
 
-## Retrieve Subscription by ID
+## Get Subscription by ID
 
 > Request:
 
 ```shell
-GET /webhook-subscriptions/10d4133e-b308-4646-b276-40d9d36def1c
+GET /webhook-subscriptions/f4d21628-fde2-4d3a-b69a-0a7cb42adc4c
 Accept: application/vnd.dwolla.v1.hal+json
 Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 ```
@@ -309,22 +248,25 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 {
   "_links": {
     "self": {
-      "href": "https://api.dwolla.com/webhook-subscriptions/10d4133e-b308-4646-b276-40d9d36def1c"
+      "href": "https://api.dwolla.com/webhook-subscriptions/f4d21628-fde2-4d3a-b69a-0a7cb42adc4c"
+    },
+    "hooks": {
+      "href": "https://api.dwolla.com/webhook-subscriptions/f4d21628-fde2-4d3a-b69a-0a7cb42adc4c/hooks"
     }
   },
-  "id": "10d4133e-b308-4646-b276-40d9d36def1c",
-  "url": "http://destination.url",
-  "createdDate": "2015-07-23T14:19:36.993Z"
+  "id": "f4d21628-fde2-4d3a-b69a-0a7cb42adc4c",
+  "url": "https://detination.url",
+  "createdDate": "2015-08-19T21:43:49.000Z"
 }
 ```
 
-Fetch a webhook subscription by its ID.
+Retrieve a webhook subscription by its ID.
 
 <aside class="reminder">This endpoint [requires](#authentication) an OAuth access token with the `ManageCustomers` scope.</aside>
 
 ### HTTP Request
 `
-GET https://api.dwolla.com/customers/webhook-subscriptions/{id}
+GET https://api.dwolla.com/webhook-subscriptions/{id}
 `
 
 ### Errors
@@ -394,7 +336,7 @@ View all fired webhooks that are associated to a specific subscription, via that
 
 ### HTTP Request
 `
-GET https://api.dwolla.com/customers/webhook-subscriptions/{id}/hooks
+GET https://api.dwolla.com/webhook-subscriptions/{id}/hooks
 `
 
 ### Errors
