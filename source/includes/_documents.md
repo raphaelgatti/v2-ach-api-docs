@@ -23,7 +23,7 @@ A Document is used to verify the identity of a Customer
 
 | Parameter | Description
 |-----------|------------|
-|id | Customer Record unique identifier.  UUID format.
+|id | Customer Record unique identifier.
 |mimetype | Standardized MIME type of document. Only `image/png` and `image/jpg+jpeg` are accepted. 
 |documentType | Either `passport`, `driversLicense`, or `idCard`.
 
@@ -107,7 +107,7 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 }
 ```
 
-Fetch a list of Documents which belong to a Customer. 
+Retrieve a list of Documents which belong to a Customer. 
 
 <aside class="reminder">This endpoint [requires](#authentication) an OAuth access token with the `ManageCustomers` scope.</aside>
 
@@ -144,7 +144,7 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 }
 ```
 
-Fetch a Document by its ID.
+Retrieve a Document by its ID.
 
 <aside class="reminder">This endpoint [requires](#authentication) an OAuth access token with the `ManageCustomers` scope.</aside>
 

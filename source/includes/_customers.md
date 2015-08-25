@@ -20,7 +20,7 @@ A customer represents an individual or business with whom you intend to transact
 
 | Parameter | Description
 |-----------|------------|
-|id | Customer Record unique identifier.  UUID format.
+|id | Customer Record unique identifier.
 |firstName | Customer's first name.
 |lastName | Customer's last name.
 |status | Either `active`, `deactivated`, or `suspended`.
@@ -168,7 +168,7 @@ Retrieve a Customer which belongs to the authorized user.
 
 Parameter | Optional? | Description
 ----------|------------|-------------
-id | no | Unique customer ID to get.
+id | no | Customer record unique identifier.
 
 ### Errors
 | HTTP Status | Message |
