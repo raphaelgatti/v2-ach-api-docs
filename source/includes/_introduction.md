@@ -59,6 +59,11 @@ Requests that require an client_id and client_secret are passed in the JSON requ
 
 `GET https://api.dwolla.com/example?client_id={client_id}&client_secret={client_secret}`
 
+### API Endpoint
+**Production:** https://api.dwolla.com
+
+**Sandbox:** https://api-uat.dwolla.com
+
 
 ## Errors
 
@@ -66,8 +71,8 @@ Requests that require an client_id and client_secret are passed in the JSON requ
 
 ```shell
 {
-  "code": 1,
-  "description": "Expired access token."
+  "code": "InvalidCredentials",
+  "description": "Invalid access token."
 }
 ```
 
@@ -83,5 +88,7 @@ The following errors are common across all API endpoints.
 | 401 | 1 | Expired access token. |
 | 401 | InvalidCredentials | Invalid access token. |
 | 401 | InvalidCredentials | Missing or invalid credentials. |
+| 403 | Forbidden | The supplied credentials are not authorized for this resource. |
 | 404 | NotFound | The requested resource was not found. |
+| 406 | InvalidVersion | Missing or invalid API version. |
 | 500 | ServerError | A server error occurred. Error ID: 63e92a2a-fb48-4a23-ab4c-24a6764f1593. |
