@@ -38,7 +38,7 @@
 }
 ```
 
-A webhook notification is sent as a `POST` request to a user defined destination. The whitelabel API will send webhooks to notify an application as to the status of a transfer. As required in the White Label TOS, you will use webhooks to notify your customers via email on the status of a transfer. Refer to the [events](#available-events) section for the list of events that trigger webhooks.
+Subscribing to webhooks allows Dwolla to send events as a `POST` request to a user defined callback URL. If you are a White Label partner, you will use these events to notify your customers via email based on the White Label TOS. Refer to the [events](#available-events) section for the list of events that trigger webhooks.
 
 ### Acknowledgement and retries
 For webhook notifications, your server should respond with a HTTP 2xx status code to indicate you have successfully received the message. If Dwolla receives a status code greater than a HTTP 400, or you fail to respond within 20 seconds of the attempt, we will retry the call to your subscribed webhook URL. 
@@ -60,7 +60,7 @@ Dwolla will attempt to retry each webhook 8 times over the course of 72 hours. I
 
 | Parameter      | Description                                       |
 |----------------|---------------------------------------------------|
-| id             | Unique webhook identifier.                        |
+| id             | Webhook unique identifier.                        |
 | topic          | Type of webhook subscription.                     |
 | accountId      | Account associated with the webhook notification. |
 | eventId        | Event ID for this webhook.                        |
@@ -127,7 +127,6 @@ secret | Your application secret.
 ### Errors
 | HTTP Status | Message |
 |--------------|-------------|
-| 404 | No active customer record |
 
 ## Unsubscribe from a Webhook
 
@@ -176,7 +175,7 @@ id | Webhook unique identifier.
 ### Errors
 | HTTP Status | Message |
 |--------------|-------------|
-| 404 | No active customer record |
+| 404 | Webhook subscription not found. |
 
 ## List Webhook Subscriptions
 
@@ -230,7 +229,6 @@ GET https://api.dwolla.com/webhook-subscriptions
 ### Errors
 | HTTP Status | Message |
 |--------------|-------------|
-| 404 | No active customer record |
 
 ## Get Subscription by ID
 
@@ -272,7 +270,7 @@ GET https://api.dwolla.com/webhook-subscriptions/{id}
 ### Errors
 | HTTP Status | Message |
 |--------------|-------------|
-| 404 | No active customer record |
+| 404 | Webhook subscription not found. |
 
 ## Hooks Belonging to Subscription
 
@@ -342,4 +340,3 @@ GET https://api.dwolla.com/webhook-subscriptions/{id}/hooks
 ### Errors
 | HTTP Status | Message |
 |--------------|-------------|
-| 404 | No active customer record |

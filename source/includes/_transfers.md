@@ -31,7 +31,7 @@ A transfer represents money being transferred from a `source` to a `destination`
 
 | Parameter | Description
 |-----------|------------|
-|id | Transfer record unique identifier.
+|id | Transfer unique identifier.
 |status | Either `sent`, `pending`, `cancelled`, `declined`, or `reclaimed`
 |source | Source JSON object. See below. 
 |destination | A Destination JSON object. See below.
@@ -43,7 +43,7 @@ A transfer represents money being transferred from a `source` to a `destination`
 
 | Parameter | Description
 |-----------|------------|
-|name | Name of account or customer. 
+|name | Name of Account or Customer. 
 |accountId | Account unique identifier.
 |displayId | String
 
@@ -68,10 +68,10 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 {
     "_links": {
         "destination": {
-            "href": "http://api.dwolla.com/customers/07D59716-EF22-4FE6-98E8-F3190233DFB8"
+            "href": "https://api.dwolla.com/customers/07D59716-EF22-4FE6-98E8-F3190233DFB8"
         },
         "source": {
-            "href": "http://api.dwolla.com/funding-sources/707177c3-bf15-4e7e-b37c-55c3898d9bf4"
+            "href": "https://api.dwolla.com/funding-sources/707177c3-bf15-4e7e-b37c-55c3898d9bf4"
         }
     },
     "amount": {
@@ -127,7 +127,7 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
       "href": "https://api.dwolla.com/customers/07d59716-ef22-4fe6-98e8-f3190233dfb8/transfers?limit=25&offset=0"
     },
     "self": {
-      "href": "http://api.dwolla.com/customers/07D59716-EF22-4FE6-98E8-F3190233DFB8/transfers"
+      "href": "https://api.dwolla.com/customers/07D59716-EF22-4FE6-98E8-F3190233DFB8/transfers"
     }
   },
   "_embedded": {
@@ -193,7 +193,7 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 }
 ```
 
-Retrieve a Customer record's list of transfers.
+Retrieve a Customer's list of transfers.
 
 <aside class="reminder">This endpoint [requires](#authentication) an OAuth access token with the `ManageCustomers` scope.</aside>
 
@@ -204,7 +204,7 @@ Retrieve a Customer record's list of transfers.
 
 Parameter | Optional? | Description
 ----------|------------|-------------
-id | no | Customers's unique identifier to get transfers for.
+id | no | Customer unique identifier to get transfers for.
 limit | yes | How many results to return.
 offset | yes | How many results to skip.
 
@@ -266,7 +266,7 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 This is a draft specification for preview only.  Endpoint URL, request and response parameters are subject to change.
 </aside>
 
-Retrieve an Account record's list of transfers.
+Retrieve an Account's list of transfers.
 
 <aside class="reminder">This endpoint [requires](#authentication) an OAuth access token with the `ManageCustomers` scope.</aside>
 
@@ -277,7 +277,7 @@ Retrieve an Account record's list of transfers.
 
 Parameter | Optional? | Description
 ----------|------------|-------------
-id | no | Account's unique identifier to get transfers for.
+id | no | Account unique identifier to get transfers for.
 
 ### Errors
 | HTTP Status | Message |
@@ -337,7 +337,7 @@ Retrieve a Transfer belonging to an Account or Customer by its ID.
 
 Parameter | Optional? | Description
 ----------|------------|-------------
-id | no | Account or Customer's unique identifier to get transfers for.
+id | no | Account or Customer unique identifier to get transfers for.
 
 ### Errors
 | HTTP Status | Message |

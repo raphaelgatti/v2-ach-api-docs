@@ -27,7 +27,7 @@ An event is created to notify you that an action occured on your account. When a
 ### Available events
 | Event              | Description                                                                                                       |
 |--------------------|-------------------------------------------------------------------------------------------------------------------|
-| customer_created   | A customer record was created.                                                                                    |
+| customer_created   | A Customer was created.                                                                                    |
 | transfer_created   | Transfer was created.                                                                                             |
 | transfer_cancelled | A pending transfer has been cancelled, and will not process further.                                              |
 | transfer_failed    | Transaction failed to clear successfully. Usually, this is a result of an ACH failure (insufficient funds, etc.). |

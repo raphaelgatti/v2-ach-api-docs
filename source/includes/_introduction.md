@@ -85,10 +85,13 @@ The following errors are common across all API endpoints.
 
 | HTTP Status | Error Code | Description
 |-------------|------|-------------
-| 401 | 1 | Expired access token. |
+| 400 | Validation Error | (varies) |
+| 401 | InvalidCredentials | Expired access token. |
 | 401 | InvalidCredentials | Invalid access token. |
 | 401 | InvalidCredentials | Missing or invalid credentials. |
+| 401 | InvalidScopes | Missing or invalid scopes for requested endpoint. |
 | 403 | Forbidden | The supplied credentials are not authorized for this resource. |
 | 404 | NotFound | The requested resource was not found. |
 | 406 | InvalidVersion | Missing or invalid API version. |
 | 500 | ServerError | A server error occurred. Error ID: 63e92a2a-fb48-4a23-ab4c-24a6764f1593. |
+| 500 | RequestTimeout | The request timed out. |

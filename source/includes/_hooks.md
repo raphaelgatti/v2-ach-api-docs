@@ -93,14 +93,12 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 }
 ```
 
-Retrieve a webhook by its hook ID. 
+Retrieve a webhook by ID. 
 
 <aside class="reminder">This endpoint [requires](#authentication) an OAuth access token with the `ManageCustomers` scope.</aside>
 
 ### HTTP Request
-`
-GET https://api.dwolla.com/hooks
-`
+`GET https://api.dwolla.com/hooks`
 
 ### Request Parameters
 
@@ -164,14 +162,12 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 
 ```
 
-Retrieve webhook retries by hook ID.
+Retrieve webhook retries by ID.
 
 <aside class="reminder">This endpoint [requires](#authentication) an OAuth access token with the `ManageCustomers` scope.</aside>
 
 ### HTTP Request
-`
-GET https://api.dwolla.com/hooks/{id}/retries
-`
+`GET https://api.dwolla.com/hooks/{id}/retries`
 
 ### Request Parameters
 

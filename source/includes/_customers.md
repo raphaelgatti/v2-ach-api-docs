@@ -20,7 +20,7 @@ A customer represents an individual or business with whom you intend to transact
 
 | Parameter | Description
 |-----------|------------|
-|id | Customer Record unique identifier.
+|id | Customer unique identifier.
 |firstName | Customer's first name.
 |lastName | Customer's last name.
 |status | Either `active`, `deactivated`, or `suspended`.
@@ -71,10 +71,9 @@ ipAddress | yes | Customer's IP address
 ### Errors
 | HTTP Status | Message |
 |--------------|-------------|
-| 400 | A customer record with this information already exists.
-| 400 | Validation errors. Another object is included the response to list the parameters and errors. 
-| 401 | You do not have access to this resource.
-| 500 | An unexpected error occurred.
+| 400 | Duplicate customer or validation error.
+| 403 | Not authorized to create customers. 
+| 404 | Customer not found.
 
 ## List Customers
 
@@ -129,7 +128,6 @@ offset | yes | How many results to skip.
 ### Errors
 | HTTP Status | Message |
 |--------------|-------------|
-| 404 | No active customer record |
 
 ## Get a Customer by ID
 
@@ -168,9 +166,10 @@ Retrieve a Customer which belongs to the authorized user.
 
 Parameter | Optional? | Description
 ----------|------------|-------------
-id | no | Customer record unique identifier.
+id | no | Customer unique identifier.
 
 ### Errors
 | HTTP Status | Message |
 |--------------|-------------|
-| 404 | No active customer record |
+| 403 | Not authorized to get a customer by id. |
+| 404 | Customer not found. |

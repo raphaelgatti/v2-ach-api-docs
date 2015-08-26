@@ -2,11 +2,10 @@
 
 ```json
 {
-    "account_number": "12345678",
-    "routing_number": "87654321",
-    "account_type": "Checking",
-    "name": "My Bank",
-    "isVerified": true
+    "routingNumber": "87654321",
+    "accountNumber": "12345678",
+    "type": "Checking",
+    "name": "My Bank"
 }
 ```
 
@@ -16,7 +15,7 @@ Add and retrieve ACH bank accounts via Funding Sources, which are available to t
 
 Parameter | Description
 ----------|------------
-id | The funding source's unique identifier.
+id | The funding source unique identifier.
 accountId | The Customer or Account unique identifier
 status | Is the funding source verified?
 type | Type of funding source
@@ -36,9 +35,9 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 
 ```json
 {
-    "account_number": "12345678",
-    "routing_number": "87654321",
-    "account_type": "Checking",
+    "routingNumber": "87654321",
+    "accountNumber": "12345678",
+    "type": "Checking",
     "name": "My Bank"
 }
 ```
@@ -60,18 +59,16 @@ Create a new Funding Source for a Customer.
 ### Request Parameters
 Parameter | Optional? | Description
 ----------|------------|------------
-account_number | no | The bank account number
-routing_number | no | The bank account's routing number.
-account_type | no | Type of bank account: `Checking` or `Savings`.
+routingNumber | no | The bank account's routing number.
+accountNumber | no | The bank account number
+type | no | Type of bank account: `Checking` or `Savings`.
 name | no | Arbitrary nickname for the funding source
 
 ### Errors
 | HTTP Status | Message |
 |--------------|-------------|
 | 400 | Duplicate funding source or validation error.
-| 401 | You do not have access to this resource.
 | 403 | Not authorized to create funding source.
-| 500 | An unexpected error occurred.
 
 ## List Funding Sources (Customer)
 
@@ -128,7 +125,7 @@ GET https://api.dwolla.com/customers/{id}/funding-sources
 
 Parameter | Optional? | Description
 ----------|------------|-------------
-id | no | Customer record unique identifier.
+id | no | Customer unique identifier.
 
 ### Errors
 | HTTP Status | Message |
@@ -149,9 +146,9 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 
 ```json
 {
-    "account_number": "12345678",
-    "routing_number": "87654321",
-    "account_type": "Checking",
+    "routingNumber": "87654321",
+    "accountNumber": "12345678",
+    "type": "Checking",
     "name": "My Bank"
 }
 ```
@@ -176,18 +173,16 @@ Create a new Funding Source for an Account.
 ### Request Parameters
 Parameter | Description
 ----------|------------
-account_number | The bank account number
-routing_number | The bank account's routing number.
-account_type | Type of bank account: `Checking` or `Savings`.
+accountNumber | The bank account number
+routingNumber | The bank account's routing number.
+type | Type of bank account: `Checking` or `Savings`.
 name | Arbitrary nickname for the funding source
 
 ### Errors
 | HTTP Status | Message |
 |--------------|-------------|
-| 400 | A funding source with this information already exists.
-| 400 | Validation errors. Another object is included the response to list the parameters and errors. 
-| 401 | You do not have access to this resource.
-| 500 | An unexpected error occurred.
+| 400 | Duplicate funding source or validation error.
+| 403 | Not authorized to create funding source.
 
 ## List Funding Sources (Account)
 
@@ -254,7 +249,7 @@ GET https://api.dwolla.com/accounts/{id}/funding-sources
 
 Parameter | Optional? | Description
 ----------|------------|-------------
-id | no | Account's unique identifier to get funding sources for.
+id | no | Account unique identifier to get funding sources for.
 
 ### Errors
 | HTTP Status | Message |
@@ -289,7 +284,7 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 }
 ```
 
-Retrieve a Funding Sources by ID.
+Retrieve a Funding Source by ID.
 
 <aside class="reminder">This endpoint [requires](#authentication) an OAuth access token with the `ManageCustomers` scope.</aside>
 
@@ -307,7 +302,7 @@ id | no | Funding source ID to get.
 ### Errors
 | HTTP Status | Message |
 |--------------|-------------|
-| 404 | Funding Source not found. |
+| 404 | Funding source not found. |
 
 ## Remove a Funding Source
 
@@ -338,7 +333,7 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 }
 ```
 
-Remove a Funding Sources by ID.
+Remove a Funding Source by ID.
 
 <aside class="reminder">This endpoint [requires](#authentication) an OAuth access token with the `ManageCustomers` scope.</aside>
 
@@ -356,4 +351,4 @@ id | no | Funding source ID to delete.
 ### Errors
 | HTTP Status | Message |
 |--------------|-------------|
-| 404 | Funding Source not found. |
+| 404 | Funding source not found. |

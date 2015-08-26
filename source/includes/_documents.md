@@ -23,7 +23,7 @@ A Document is used to verify the identity of a Customer
 
 | Parameter | Description
 |-----------|------------|
-|id | Customer Record unique identifier.
+|id | Customer unique identifier.
 |mimetype | Standardized MIME type of document. Only `image/png` and `image/jpg+jpeg` are accepted. 
 |documentType | Either `passport`, `driversLicense`, or `idCard`.
 
@@ -70,7 +70,6 @@ Create a Document belonging to a Customer.
 ### Errors
 | HTTP Status | Message |
 |--------------|-------------|
-| 404 | No active customer record |
 
 ## List Documents
 
@@ -117,7 +116,6 @@ Retrieve a list of Documents which belong to a Customer.
 ### Errors
 | HTTP Status | Message |
 |--------------|-------------|
-| 404 | No active customer record |
 
 ## Retrieve Document by ID
 
@@ -154,4 +152,3 @@ Retrieve a Document by its ID.
 ### Errors
 | HTTP Status | Message |
 |--------------|-------------|
-| 404 | No active customer record |
