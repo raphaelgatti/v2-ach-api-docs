@@ -2101,7 +2101,7 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 </tr>
 </tbody></table>
 
-          <h1 id='webhooks-and-subscriptions'>Webhooks and Subscriptions</h1><pre class="highlight json"><code><span class="p">{</span><span class="w">
+          <h1 id='webhooks-subscriptions'>Webhooks Subscriptions</h1><pre class="highlight json"><code><span class="p">{</span><span class="w">
   </span><span class="nt">"_links"</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span><span class="w">
   </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"topic"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
@@ -2138,11 +2138,11 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 
-<p>Subscribing to webhooks allows Dwolla to send events as a <code class="prettyprint">POST</code> request to a user defined callback URL. If you are a White Label partner, you will use these events to notify your customers via email based on the White Label TOS. Refer to the <a href="#available-events">events</a> section for the list of events that trigger webhooks.</p>
+<p>Create a Webhook Subscription to receive <code class="prettyprint">POST</code> requests from Dwolla (called Hooks) when Events associated with your application occur.  <a href="#hooks">Hooks</a> are sent to a URL which you provide when creating a Webhook Subscription. If you are a White Label partner, you will use these events to notify your customers via email based on the White Label TOS. Refer to the <a href="#available-events">events</a> section for the list of events that trigger webhooks.</p>
 <h3 id='acknowledgement-and-retries'>Acknowledgement and retries</h3>
-<p>For webhook notifications, your server should respond with a HTTP 2xx status code to indicate you have successfully received the message. If Dwolla receives a status code greater than a HTTP 400, or you fail to respond within 20 seconds of the attempt, we will retry the call to your subscribed webhook URL. </p>
+<p>When your application receives a <a href="#hooks">Hook</a>, it should respond with a HTTP 2xx status code to indicate successful receipt. If Dwolla receives a status code greater than a HTTP 400, or your application fails to respond within 20 seconds of the attempt, another Hook will be sent. </p>
 
-<p>Dwolla will attempt to retry each webhook 8 times over the course of 72 hours. If a webhook was successful but you would like information again, you can call <a href="#retrieve-webhook-by-id">retrieve webhook by ID</a>. Failed webhooks are retried on the following backoff schedule:</p>
+<p>Dwolla will re-attempt delivery 8 times over the course of 72 hours according the backoff schedule below. If a hook was successfully received but you would like the information again, you can call <a href="#retrieve-webhook-by-id">retrieve webhook by ID</a>.</p>
 
 <table><thead>
 <tr>
@@ -2289,8 +2289,8 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 Location: https://api.dwolla.com/webhook-subscriptions/10d4133e-b308-4646-b276-40d9d36def1c
 </code></pre>
 
-<p>Create a webhook subscription to deliver webhooks to a desired URL. </p>
-<aside class="reminder"><p>This endpoint <a href="#authentication">requires</a> an OAuth access token with the <code>ManageCustomers</code> scope.</p>
+<p>Create a webhook subscription to deliver <a href="#hooks">Hooks</a> to a specified URL. </p>
+<aside class="reminder"><p>This endpoint <a href="#authentication">requires</a> an OAuth <em>Application</em> access token.</p>
 </aside><h3 id='http-request'>HTTP Request</h3>
 <p><code class="prettyprint">
 POST https://api.dwolla.com/webhook-subscriptions
@@ -2319,7 +2319,7 @@ POST https://api.dwolla.com/webhook-subscriptions
 </tr>
 </thead><tbody>
 </tbody></table>
-<h2 id='unsubscribe-from-a-webhook'>Unsubscribe from a Webhook</h2>
+<h2 id='delete-a-webhook-subscription'>Delete a Webhook Subscription</h2>
 <blockquote>
 <p>Request:</p>
 </blockquote>
@@ -2346,8 +2346,8 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 
-<p>Delete a webhook subscription. </p>
-<aside class="reminder"><p>This endpoint <a href="#authentication">requires</a> an OAuth access token with the <code>ManageCustomers</code> scope.</p>
+<p>Delete a Webhook Subscription to stop receiving Hooks at the URL specified. </p>
+<aside class="reminder"><p>This endpoint <a href="#authentication">requires</a> an OAuth <em>Application</em> access token.</p>
 </aside><h3 id='http-request'>HTTP Request</h3>
 <p><code class="prettyprint">
 DELETE https://api.dwolla.com/webhook-subscriptions/{id}
@@ -2415,8 +2415,8 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 
-<p>Retrieve a list of webhooks that the authorized user is currently subscribed to. </p>
-<aside class="reminder"><p>This endpoint <a href="#authentication">requires</a> an OAuth access token with the <code>ManageCustomers</code> scope.</p>
+<p>Retrieve a list of webhook subscriptions that belong to an application.</p>
+<aside class="reminder"><p>This endpoint <a href="#authentication">requires</a> an OAuth <em>Application</em> access token.</p>
 </aside><h3 id='http-request'>HTTP Request</h3>
 <p><code class="prettyprint">
 GET https://api.dwolla.com/webhook-subscriptions
@@ -2457,7 +2457,7 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 </span></code></pre>
 
 <p>Retrieve a webhook subscription by its ID.</p>
-<aside class="reminder"><p>This endpoint <a href="#authentication">requires</a> an OAuth access token with the <code>ManageCustomers</code> scope.</p>
+<aside class="reminder"><p>This endpoint <a href="#authentication">requires</a> an OAuth <em>Application</em> access token.</p>
 </aside><h3 id='http-request'>HTTP Request</h3>
 <p><code class="prettyprint">
 GET https://api.dwolla.com/webhook-subscriptions/{id}
@@ -2474,7 +2474,7 @@ GET https://api.dwolla.com/webhook-subscriptions/{id}
 <td>Webhook subscription not found.</td>
 </tr>
 </tbody></table>
-<h2 id='hooks-belonging-to-subscription'>Hooks Belonging to Subscription</h2>
+<h2 id='get-a-webhook-subscription39s-hooks'>Get a Webhook Subscription&rsquo;s Hooks</h2>
 <blockquote>
 <p>Request:</p>
 </blockquote>
@@ -2529,8 +2529,8 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 
-<p>View all fired webhooks that are associated to a specific subscription, via that subscription&rsquo;s ID. </p>
-<aside class="reminder"><p>This endpoint <a href="#authentication">requires</a> an OAuth access token with the <code>ManageCustomers</code> scope.</p>
+<p>View all fired <a href="#hooks">Hooks</a> for a Webhook Subscription.</p>
+<aside class="reminder"><p>This endpoint <a href="#authentication">requires</a> an OAuth <em>Application</em> access token.</p>
 </aside><h3 id='http-request'>HTTP Request</h3>
 <p><code class="prettyprint">
 GET https://api.dwolla.com/webhook-subscriptions/{id}/hooks
