@@ -40,8 +40,6 @@
 
 Create a Webhook Subscription to receive `POST` requests from Dwolla (called Hooks) when Events associated with your application occur.  [Hooks](#hooks) are sent to a URL which you provide when creating a Webhook Subscription. If you are a White Label partner, you will use these events to notify your customers via email based on the White Label TOS. Refer to the [events](#available-events) section for the list of events that trigger webhooks.
 
-You must use an Application Access Token to create a Webhook Subscription.  Hooks are only sent as long as you maintain a valid Application Access Token.  If your Application Access Token expires or is invalidated, and none currently exists, Dwolla will stop sending Hooks.
-
 ### Acknowledgement and retries
 When your application receives a [Hook](#hooks), it should respond with a HTTP 2xx status code to indicate successful receipt. If Dwolla receives a status code greater than a HTTP 400, or your application fails to respond within 20 seconds of the attempt, another Hook will be sent. 
 
