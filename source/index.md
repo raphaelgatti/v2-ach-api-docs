@@ -16,7 +16,9 @@ includes:
   - documents
   - fundingsrcs
   - transfers
+  - events
   - webhooks
+  - hooks
 
 search: true
 

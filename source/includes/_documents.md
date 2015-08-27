@@ -23,7 +23,7 @@ A Document is used to verify the identity of a Customer
 
 | Parameter | Description
 |-----------|------------|
-|id | Customer Record unique identifier.  UUID format.
+|id | Customer unique identifier.
 |mimetype | Standardized MIME type of document. Only `image/png` and `image/jpg+jpeg` are accepted. 
 |documentType | Either `passport`, `driversLicense`, or `idCard`.
 
@@ -70,7 +70,6 @@ Create a Document belonging to a Customer.
 ### Errors
 | HTTP Status | Message |
 |--------------|-------------|
-| 404 | No active customer record |
 
 ## List Documents
 
@@ -107,7 +106,7 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 }
 ```
 
-Fetch a list of Documents which belong to a Customer. 
+Retrieve a list of Documents which belong to a Customer. 
 
 <aside class="reminder">This endpoint [requires](#authentication) an OAuth access token with the `ManageCustomers` scope.</aside>
 
@@ -117,7 +116,6 @@ Fetch a list of Documents which belong to a Customer.
 ### Errors
 | HTTP Status | Message |
 |--------------|-------------|
-| 404 | No active customer record |
 
 ## Retrieve Document by ID
 
@@ -144,7 +142,7 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 }
 ```
 
-Fetch a Document by its ID.
+Retrieve a Document by its ID.
 
 <aside class="reminder">This endpoint [requires](#authentication) an OAuth access token with the `ManageCustomers` scope.</aside>
 
@@ -154,4 +152,3 @@ Fetch a Document by its ID.
 ### Errors
 | HTTP Status | Message |
 |--------------|-------------|
-| 404 | No active customer record |
