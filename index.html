@@ -37,6 +37,16 @@
       </span>
     </a>
     <div class="tocify-wrapper">
+    <div class="notification">
+    <a>API Version: &nbsp;</a>
+        
+        <a href="https://docs.dwolla.com/">
+        <span class="unselected">V1</span>
+        </a>
+        <a href="https://dwolla.github.io/slate-wl">
+        <span>V2</span>
+        </a>
+    </div>
 
       <img class="logo" src="images/logo.png" />
 
@@ -2140,7 +2150,7 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 
 <p>Create a Webhook Subscription to receive <code class="prettyprint">POST</code> requests from Dwolla (called Hooks) when Events associated with your application occur.  <a href="#hooks">Hooks</a> are sent to a URL which you provide when creating a Webhook Subscription. If you are a White Label partner, you will use these events to notify your customers via email based on the White Label TOS. Refer to the <a href="#available-events">events</a> section for the list of events that trigger webhooks.</p>
 <h3 id='acknowledgement-and-retries'>Acknowledgement and retries</h3>
-<p>When your application receives a <a href="#hooks">Hook</a>, it should respond with a HTTP 2xx status code to indicate successful receipt. If Dwolla receives a status code greater than a HTTP 400, or your application fails to respond within 20 seconds of the attempt, another Hook will be sent. </p>
+<p>When your application receives a <a href="#hooks">Hook</a>, it should respond with a HTTP 2xx status code to indicate successful receipt. If Dwolla receives a status code greater than a HTTP 400, or your application fails to respond within 20 seconds of the attempt, another attempt will be made.</p>
 
 <p>Dwolla will re-attempt delivery 8 times over the course of 72 hours according the backoff schedule below. If a hook was successfully received but you would like the information again, you can call <a href="#retrieve-webhook-by-id">retrieve webhook by ID</a>.</p>
 
