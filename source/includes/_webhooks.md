@@ -41,7 +41,7 @@
 Create a Webhook Subscription to receive `POST` requests from Dwolla (called Hooks) when Events associated with your application occur.  [Hooks](#hooks) are sent to a URL which you provide when creating a Webhook Subscription. If you are a White Label partner, you will use these events to notify your customers via email based on the White Label TOS. Refer to the [events](#available-events) section for the list of events that trigger webhooks.
 
 ### Acknowledgement and retries
-When your application receives a [Hook](#hooks), it should respond with a HTTP 2xx status code to indicate successful receipt. If Dwolla receives a status code greater than a HTTP 400, or your application fails to respond within 20 seconds of the attempt, another Hook will be sent. 
+When your application receives a [Hook](#hooks), it should respond with a HTTP 2xx status code to indicate successful receipt. If Dwolla receives a status code greater than a HTTP 400, or your application fails to respond within 20 seconds of the attempt, another attempt will be made.
 
 Dwolla will re-attempt delivery 8 times over the course of 72 hours according the backoff schedule below. If a hook was successfully received but you would like the information again, you can call [retrieve webhook by ID](#retrieve-webhook-by-id).
 
