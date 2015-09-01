@@ -579,7 +579,7 @@ Location: https://api.dwolla.com/customers/6f80efc0-b158-4df1-9b11-da85f0bffdd4
 </code></pre>
 
 <p>Create a new Customer.</p>
-<aside class="reminder"><p>This endpoint <a href="#authentication">requires</a> an OAuth access token with the <code>ManageCustomers</code> scope.</p>
+<aside class="reminder"><p>This endpoint <a href="#authentication">requires</a> an OAuth access token with the <code>ManageCustomers</code> <a href="#oauth-scopes">scope</a>.</p>
 </aside><h3 id='http-request'>HTTP Request</h3>
 <p><code class="prettyprint">POST https://api.dwolla.com/customers</code></p>
 <h3 id='request-parameters'>Request Parameters</h3>
@@ -667,7 +667,7 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 </span></code></pre>
 
 <p>Retrieve a list of Customers which belong to the authorized user.</p>
-<aside class="reminder"><p>This endpoint <a href="#authentication">requires</a> an OAuth access token with the <code>ManageCustomers</code> scope.</p>
+<aside class="reminder"><p>This endpoint <a href="#authentication">requires</a> an OAuth access token with the <code>ManageCustomers</code> <a href="#oauth-scopes">scope</a>.</p>
 </aside><h3 id='http-request'>HTTP Request</h3>
 <p><code class="prettyprint">GET https://api.dwolla.com/customers</code></p>
 <h3 id='request-parameters'>Request Parameters</h3>
@@ -723,7 +723,7 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 </span></code></pre>
 
 <p>Retrieve a Customer which belongs to the authorized user.</p>
-<aside class="reminder"><p>This endpoint <a href="#authentication">requires</a> an OAuth access token with the <code>ManageCustomers</code> scope.</p>
+<aside class="reminder"><p>This endpoint <a href="#authentication">requires</a> an OAuth access token with the <code>ManageCustomers</code> <a href="#oauth-scopes">scope</a>.</p>
 </aside><h3 id='http-request'>HTTP Request</h3>
 <p><code class="prettyprint">GET https://api.dwolla.com/customers/{id}</code></p>
 <h3 id='request-parameters'>Request Parameters</h3>
@@ -820,7 +820,7 @@ Location: https://api.dwolla.com/customers/6f80efc0-b158-4df1-9b11-da85f0bffdd4/
 </blockquote>
 
 <p>Create a Document belonging to a Customer. </p>
-<aside class="reminder"><p>This endpoint <a href="#authentication">requires</a> an OAuth access token with the <code>ManageCustomers</code> scope.</p>
+<aside class="reminder"><p>This endpoint <a href="#authentication">requires</a> an OAuth access token with the <code>ManageCustomers</code> <a href="#oauth-scopes">scope</a>.</p>
 </aside><h3 id='http-request'>HTTP Request</h3>
 <p>1: <code class="prettyprint">POST https://api.dwolla.com/customers/{id}/documents</code> with <code class="prettyprint">Document</code> <br />
 2: <code class="prettyprint">POST https://api.dwolla.com/customers/{id}/documents</code> with a 5MB <code class="prettyprint">*.png</code> or <code class="prettyprint">*.jpg</code> image file.</p>
@@ -867,7 +867,7 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 </span></code></pre>
 
 <p>Retrieve a list of Documents which belong to a Customer. </p>
-<aside class="reminder"><p>This endpoint <a href="#authentication">requires</a> an OAuth access token with the <code>ManageCustomers</code> scope.</p>
+<aside class="reminder"><p>This endpoint <a href="#authentication">requires</a> an OAuth access token with the <code>ManageCustomers</code> <a href="#oauth-scopes">scope</a>.</p>
 </aside><h3 id='http-request'>HTTP Request</h3>
 <p><code class="prettyprint">GET https://api.dwolla.com/customers/{id}/documents</code></p>
 <h3 id='errors'>Errors</h3>
@@ -903,7 +903,7 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 </span></code></pre>
 
 <p>Retrieve a Document by its ID.</p>
-<aside class="reminder"><p>This endpoint <a href="#authentication">requires</a> an OAuth access token with the <code>ManageCustomers</code> scope.</p>
+<aside class="reminder"><p>This endpoint <a href="#authentication">requires</a> an OAuth access token with the <code>ManageCustomers</code> <a href="#oauth-scopes">scope</a>.</p>
 </aside><h3 id='http-request'>HTTP Request</h3>
 <p><code class="prettyprint">GET https://api.dwolla.com/customers/{id}/documents/{id}</code></p>
 <h3 id='errors'>Errors</h3>
@@ -937,7 +937,7 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 </tr>
 <tr>
 <td>accountId</td>
-<td>The Customer or Account unique identifier</td>
+<td>The Customer or Account unique identifier.</td>
 </tr>
 <tr>
 <td>status</td>
@@ -945,14 +945,14 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 </tr>
 <tr>
 <td>type</td>
-<td>Type of funding source</td>
+<td>Type of funding source.</td>
 </tr>
 <tr>
 <td>name</td>
-<td>Arbitrary nickname for the funding source</td>
+<td>Arbitrary nickname for the funding source.</td>
 </tr>
 <tr>
-<td>createdOn</td>
+<td>created</td>
 <td>ISO-8601 timestamp.</td>
 </tr>
 </tbody></table>
@@ -981,7 +981,7 @@ Location: https://api.dwolla.com/funding-sources/58d20353-2b4b-4d68-8b89-3e5dab1
 </code></pre>
 
 <p>Create a new Funding Source for a Customer.</p>
-<aside class="reminder"><p>This endpoint <a href="#authentication">requires</a> an OAuth access token with the <code>ManageCustomers</code> scope.</p>
+<aside class="reminder"><p>This endpoint <a href="#authentication">requires</a> an OAuth access token with the <code>ManageCustomers</code> <a href="#oauth-scopes">scope</a>.</p>
 </aside><h3 id='http-request'>HTTP Request</h3>
 <p><code class="prettyprint">POST https://api.dwolla.com/customers/{id}/funding-sources</code></p>
 <h3 id='request-parameters'>Request Parameters</h3>
@@ -1000,7 +1000,7 @@ Location: https://api.dwolla.com/funding-sources/58d20353-2b4b-4d68-8b89-3e5dab1
 <tr>
 <td>accountNumber</td>
 <td>no</td>
-<td>The bank account number</td>
+<td>The bank account number.</td>
 </tr>
 <tr>
 <td>type</td>
@@ -1010,7 +1010,7 @@ Location: https://api.dwolla.com/funding-sources/58d20353-2b4b-4d68-8b89-3e5dab1
 <tr>
 <td>name</td>
 <td>no</td>
-<td>Arbitrary nickname for the funding source</td>
+<td>Arbitrary nickname for the funding source.</td>
 </tr>
 </tbody></table>
 <h3 id='errors'>Errors</h3>
@@ -1063,7 +1063,7 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
         </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"unverified"</span><span class="p">,</span><span class="w">
         </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"bank"</span><span class="p">,</span><span class="w">
         </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"John Doe checking account"</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"createdOn"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-08-25T13:39:25.737Z"</span><span class="w">
+        </span><span class="nt">"created"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-08-25T13:39:25.737Z"</span><span class="w">
       </span><span class="p">}</span><span class="w">
     </span><span class="p">]</span><span class="w">
   </span><span class="p">}</span><span class="w">
@@ -1071,7 +1071,7 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 </span></code></pre>
 
 <p>Retrieve a list of Funding Sources that belong to a Customer.</p>
-<aside class="reminder"><p>This endpoint <a href="#authentication">requires</a> an OAuth access token with the <code>ManageCustomers</code> scope.</p>
+<aside class="reminder"><p>This endpoint <a href="#authentication">requires</a> an OAuth access token with the <code>ManageCustomers</code> <a href="#oauth-scopes">scope</a>.</p>
 </aside><h3 id='http-request'>HTTP Request</h3>
 <p><code class="prettyprint">
 GET https://api.dwolla.com/customers/{id}/funding-sources
@@ -1132,7 +1132,7 @@ Location: https://api.dwolla.com/accounts/99bfb139-eadd-4cdf-b346-7504f0c16c60/f
 <aside class="warning"><p>This is a draft specification for preview only.  Endpoint URL, request and response parameters are subject to change.</p>
 </aside>
 <p>Create a new Funding Source for an Account.</p>
-<aside class="reminder"><p>This endpoint <a href="#authentication">requires</a> an OAuth access token with the <code>ManageCustomers</code> scope.</p>
+<aside class="reminder"><p>This endpoint <a href="#authentication">requires</a> an OAuth access token with the <code>Funding</code> <a href="#oauth-scopes">scope</a>.</p>
 </aside><h3 id='http-request'>HTTP Request</h3>
 <p><code class="prettyprint">POST https://api.dwolla.com/accounts/{id}/funding-sources</code></p>
 <h3 id='request-parameters'>Request Parameters</h3>
@@ -1144,7 +1144,7 @@ Location: https://api.dwolla.com/accounts/99bfb139-eadd-4cdf-b346-7504f0c16c60/f
 </thead><tbody>
 <tr>
 <td>accountNumber</td>
-<td>The bank account number</td>
+<td>The bank account number.</td>
 </tr>
 <tr>
 <td>routingNumber</td>
@@ -1156,7 +1156,7 @@ Location: https://api.dwolla.com/accounts/99bfb139-eadd-4cdf-b346-7504f0c16c60/f
 </tr>
 <tr>
 <td>name</td>
-<td>Arbitrary nickname for the funding source</td>
+<td>Arbitrary nickname for the funding source.</td>
 </tr>
 </tbody></table>
 <h3 id='errors'>Errors</h3>
@@ -1206,7 +1206,7 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
         </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"verified"</span><span class="p">,</span><span class="w">
         </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"balance"</span><span class="p">,</span><span class="w">
         </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Balance"</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"createdOn"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2014-07-09T20:39:32.940Z"</span><span class="w">
+        </span><span class="nt">"created"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2014-07-09T20:39:32.940Z"</span><span class="w">
       </span><span class="p">},</span><span class="w">
       </span><span class="p">{</span><span class="w">
         </span><span class="nt">"_links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
@@ -1219,7 +1219,7 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
         </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"verified"</span><span class="p">,</span><span class="w">
         </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"bank"</span><span class="p">,</span><span class="w">
         </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"First Midwestern Bank"</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"createdOn"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2014-07-09T20:39:37.043Z"</span><span class="w">
+        </span><span class="nt">"created"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2014-07-09T20:39:37.043Z"</span><span class="w">
       </span><span class="p">}</span><span class="w">
     </span><span class="p">]</span><span class="w">
   </span><span class="p">}</span><span class="w">
@@ -1227,7 +1227,7 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 </span></code></pre>
 
 <p>Retrieve a list of Funding Sources that belong to an Account.</p>
-<aside class="reminder"><p>This endpoint <a href="#authentication">requires</a> an OAuth access token with the <code>ManageCustomers</code> scope.</p>
+<aside class="reminder"><p>This endpoint <a href="#authentication">requires</a> an OAuth access token with the <code>Funding</code> <a href="#oauth-scopes">scope</a>.</p>
 </aside><h3 id='http-request'>HTTP Request</h3>
 <p><code class="prettyprint">
 GET https://api.dwolla.com/accounts/{id}/funding-sources
@@ -1281,12 +1281,12 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
   </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"unverified"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"bank"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Jane Doe checking account"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"createdOn"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-08-20T22:00:07.626Z"</span><span class="w">
+  </span><span class="nt">"created"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-08-20T22:00:07.626Z"</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 
 <p>Retrieve a Funding Source by ID.</p>
-<aside class="reminder"><p>This endpoint <a href="#authentication">requires</a> an OAuth access token with the <code>ManageCustomers</code> scope.</p>
+<aside class="reminder"><p>This endpoint <a href="#authentication">requires</a> an OAuth access token with the <code>Funding</code> <a href="#oauth-scopes">scope</a>.</p>
 </aside><h3 id='http-request'>HTTP Request</h3>
 <p><code class="prettyprint">
 GET https://api.dwolla.com/funding-sources/{id}
@@ -1341,12 +1341,12 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
   </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"unverified"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"bank"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Jane Doe checking account"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"createdOn"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-08-20T22:00:07.626Z"</span><span class="w">
+  </span><span class="nt">"created"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-08-20T22:00:07.626Z"</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 
 <p>Remove a Funding Source by ID.</p>
-<aside class="reminder"><p>This endpoint <a href="#authentication">requires</a> an OAuth access token with the <code>ManageCustomers</code> scope.</p>
+<aside class="reminder"><p>This endpoint <a href="#authentication">requires</a> an OAuth access token with the <code>Funding</code> <a href="#oauth-scopes">scope</a>.</p>
 </aside><h3 id='http-request'>HTTP Request</h3>
 <p><code class="prettyprint">
 DELETE https://api.dwolla.com/funding-sources/{id}
@@ -1511,7 +1511,7 @@ Location: https://api.dwolla.com/transfers/74c9129b-d14a-e511-80da-0aa34a9b2388
 </code></pre>
 
 <p>Initiate a transfer for either an account or customer resource. </p>
-<aside class="reminder"><p>This endpoint <a href="#authentication">requires</a> an OAuth access token with the <code>ManageCustomers</code> scope.</p>
+<aside class="reminder"><p>This endpoint <a href="#authentication">requires</a> an OAuth access token with the <code>Send</code> <a href="#oauth-scopes">scope</a>.</p>
 </aside><h3 id='http-request'>HTTP Request</h3>
 <p><code class="prettyprint">POST https://api.dwolla.com/transfers</code></p>
 <h3 id='errors'>Errors</h3>
@@ -1618,7 +1618,7 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 </span></code></pre>
 
 <p>Retrieve a Customer&rsquo;s list of transfers.</p>
-<aside class="reminder"><p>This endpoint <a href="#authentication">requires</a> an OAuth access token with the <code>ManageCustomers</code> scope.</p>
+<aside class="reminder"><p>This endpoint <a href="#authentication">requires</a> an OAuth access token with the <code>ManageCustomers</code> <a href="#oauth-scopes">scope</a>.</p>
 </aside><h3 id='http-request'>HTTP Request</h3>
 <p><code class="prettyprint">GET https://api.dwolla.com/customers/{id}/transfers</code></p>
 <h3 id='request-parameters'>Request Parameters</h3>
@@ -1711,7 +1711,7 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 <aside class="warning"><p>This is a draft specification for preview only.  Endpoint URL, request and response parameters are subject to change.</p>
 </aside>
 <p>Retrieve an Account&rsquo;s list of transfers.</p>
-<aside class="reminder"><p>This endpoint <a href="#authentication">requires</a> an OAuth access token with the <code>ManageCustomers</code> scope.</p>
+<aside class="reminder"><p>This endpoint <a href="#authentication">requires</a> an OAuth access token with the <code>Transactions</code> <a href="#oauth-scopes">scope</a>.</p>
 </aside><h3 id='http-request'>HTTP Request</h3>
 <p><code class="prettyprint">GET https://api.dwolla.com/accounts/{id}/transfers</code></p>
 <h3 id='request-parameters'>Request Parameters</h3>
@@ -1782,7 +1782,7 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 </span></code></pre>
 
 <p>Retrieve a Transfer belonging to an Account or Customer by its ID.</p>
-<aside class="reminder"><p>This endpoint <a href="#authentication">requires</a> an OAuth access token with the <code>ManageCustomers</code> scope.</p>
+<aside class="reminder"><p>This endpoint <a href="#authentication">requires</a> an OAuth access token with the <code>Transactions</code> <a href="#oauth-scopes">scope</a>.</p>
 </aside><h3 id='http-request'>HTTP Request</h3>
 <p><code class="prettyprint">GET https://api.dwolla.com/transfers/{id}</code></p>
 <h3 id='request-parameters'>Request Parameters</h3>
@@ -1816,7 +1816,7 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
   </span><span class="nt">"_links"</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span><span class="w">
   </span><span class="nt">"_embedded"</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span><span class="w">
   </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"timestamp"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-08-24T14:05:17.399Z"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"created"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-08-24T14:05:17.399Z"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"accountId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"topic"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"resourceId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="w">
@@ -1836,7 +1836,7 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 <td>ID of application event.</td>
 </tr>
 <tr>
-<td>timestamp</td>
+<td>created</td>
 <td>ISO-8601 timestamp.</td>
 </tr>
 <tr>
@@ -1960,7 +1960,7 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
       </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api-uat.dwolla.com/events?limit=25&amp;offset=25"</span><span class="w">
     </span><span class="p">},</span><span class="w">
     </span><span class="nt">"self"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://api-uat.dwolla.com/events"</span><span class="w">
+      </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api-uat.dwolla.com/events"</span><span class="w">
     </span><span class="p">}</span><span class="w">
   </span><span class="p">},</span><span class="w">
   </span><span class="nt">"_embedded"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
@@ -1975,7 +1975,7 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
           </span><span class="p">}</span><span class="w">
         </span><span class="p">},</span><span class="w">
         </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0b7847ea-5520-4456-b8f6-2229196b9709"</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"timestamp"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-08-25T14:56:26.000Z"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"created"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-08-25T14:56:26.000Z"</span><span class="p">,</span><span class="w">
         </span><span class="nt">"accountId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ad5f2162-404a-4c4c-994e-6ab6c3a13254"</span><span class="p">,</span><span class="w">
         </span><span class="nt">"topic"</span><span class="p">:</span><span class="w"> </span><span class="s2">"funding_source_removed"</span><span class="p">,</span><span class="w">
         </span><span class="nt">"resourceId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"48e463c1-b00d-4cfc-80fc-4935b458b419"</span><span class="w">
@@ -1990,7 +1990,7 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
           </span><span class="p">}</span><span class="w">
         </span><span class="p">},</span><span class="w">
         </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"84b6a716-b239-4b08-9a7b-6e11b0ba003a"</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"timestamp"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-08-25T14:40:15.000Z"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"created"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-08-25T14:40:15.000Z"</span><span class="p">,</span><span class="w">
         </span><span class="nt">"accountId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ad5f2162-404a-4c4c-994e-6ab6c3a13254"</span><span class="p">,</span><span class="w">
         </span><span class="nt">"topic"</span><span class="p">:</span><span class="w"> </span><span class="s2">"transfer_created"</span><span class="p">,</span><span class="w">
         </span><span class="nt">"resourceId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"38242332-374B-E511-80DA-0AA34A9B2388"</span><span class="w">
@@ -2005,7 +2005,7 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
           </span><span class="p">}</span><span class="w">
         </span><span class="p">},</span><span class="w">
         </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"5a6c7568-fae1-4e1a-84ee-a62525763244"</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"timestamp"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-08-25T14:29:38.000Z"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"created"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-08-25T14:29:38.000Z"</span><span class="p">,</span><span class="w">
         </span><span class="nt">"accountId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ad5f2162-404a-4c4c-994e-6ab6c3a13254"</span><span class="p">,</span><span class="w">
         </span><span class="nt">"topic"</span><span class="p">:</span><span class="w"> </span><span class="s2">"transfer_created"</span><span class="p">,</span><span class="w">
         </span><span class="nt">"resourceId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"8A1F44B6-354B-E511-80DA-0AA34A9B2388"</span><span class="w">
@@ -2017,7 +2017,7 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 </span></code></pre>
 
 <p>Retrieve a list of events for the authorized user.</p>
-<aside class="reminder"><p>This endpoint <a href="#authentication">requires</a> an OAuth access token with the <code>ManageCustomers</code> scope.</p>
+<aside class="reminder"><p>This endpoint <a href="#authentication">requires</a> an OAuth <em>Application</em> access token.</p>
 </aside><h3 id='http-request'>HTTP Request</h3>
 <p><code class="prettyprint">GET https://api.dwolla.com/events</code></p>
 <h3 id='request-parameters'>Request Parameters</h3>
@@ -2073,7 +2073,7 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
     </span><span class="p">}</span><span class="w">
   </span><span class="p">},</span><span class="w">
   </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"a58be29f-ce03-4b42-9d6c-48ad2b4093ee"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"timestamp"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-08-20T22:45:44.000Z"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"created"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-08-20T22:45:44.000Z"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"accountId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ad5f2162-404a-4c4c-994e-6ab6c3a13254"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"topic"</span><span class="p">:</span><span class="w"> </span><span class="s2">"transfer_created"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"resourceId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"3B192430-8D47-E511-80DA-0AA34A9B2388"</span><span class="w">
@@ -2081,7 +2081,7 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 </span></code></pre>
 
 <p>Retrieve an event by Id. </p>
-<aside class="reminder"><p>This endpoint <a href="#authentication">requires</a> an OAuth access token with the <code>ManageCustomers</code> scope.</p>
+<aside class="reminder"><p>This endpoint <a href="#authentication">requires</a> an OAuth <em>Application</em> access token.</p>
 </aside><h3 id='http-request'>HTTP Request</h3>
 <p><code class="prettyprint">GET https://api.dwolla.com/events/{id}</code></p>
 <h3 id='request-parameters'>Request Parameters</h3>
@@ -2111,7 +2111,7 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 </tr>
 </tbody></table>
 
-          <h1 id='webhooks-subscriptions'>Webhooks Subscriptions</h1><pre class="highlight json"><code><span class="p">{</span><span class="w">
+          <h1 id='webhook-subscriptions'>Webhook Subscriptions</h1><pre class="highlight json"><code><span class="p">{</span><span class="w">
   </span><span class="nt">"_links"</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span><span class="w">
   </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"topic"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
@@ -2122,7 +2122,7 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
     </span><span class="p">{</span><span class="w">
       </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
       </span><span class="nt">"request"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="nt">"timestamp"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-07-23T14:19:36.981Z"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"created"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-07-23T14:19:36.981Z"</span><span class="p">,</span><span class="w">
         </span><span class="nt">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
         </span><span class="nt">"headers"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
           </span><span class="p">{</span><span class="w">
@@ -2133,7 +2133,7 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
         </span><span class="nt">"body"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="w">
       </span><span class="p">},</span><span class="w">
       </span><span class="nt">"response"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="nt">"timestamp"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-07-23T14:19:36.981Z"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"created"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-07-23T14:19:36.981Z"</span><span class="p">,</span><span class="w">
         </span><span class="nt">"headers"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
           </span><span class="p">{</span><span class="w">
             </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
@@ -2262,7 +2262,7 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 </tr>
 </thead><tbody>
 <tr>
-<td>timestamp</td>
+<td>created</td>
 <td>ISO-8601 timestamp.</td>
 </tr>
 <tr>
@@ -2287,7 +2287,7 @@ Accept: application/vnd.dwolla.v1.hal+json
 Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 </code></pre>
 <pre class="highlight json"><code><span class="p">{</span><span class="w">
-  </span><span class="nt">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://deliver.webhooks/here"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://deliver.webhooks/here"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"secret"</span><span class="p">:</span><span class="w"> </span><span class="s2">"shush!"</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
@@ -2352,7 +2352,7 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
   </span><span class="p">},</span><span class="w">
   </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"f4d21628-fde2-4d3a-b69a-0a7cb42adc4c"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://destination.url"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"createdDate"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-08-19T21:43:49.000Z"</span><span class="w">
+  </span><span class="nt">"created"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-08-19T21:43:49.000Z"</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 
@@ -2417,7 +2417,7 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
         </span><span class="p">},</span><span class="w">
         </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"f4d21628-fde2-4d3a-b69a-0a7cb42adc4c"</span><span class="p">,</span><span class="w">
         </span><span class="nt">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://destination.url"</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"createdDate"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-08-19T21:43:49.000Z"</span><span class="w">
+        </span><span class="nt">"created"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-08-19T21:43:49.000Z"</span><span class="w">
       </span><span class="p">}</span><span class="w">
     </span><span class="p">]</span><span class="w">
   </span><span class="p">},</span><span class="w">
@@ -2461,8 +2461,8 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
     </span><span class="p">}</span><span class="w">
   </span><span class="p">},</span><span class="w">
   </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"f4d21628-fde2-4d3a-b69a-0a7cb42adc4c"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://detination.url"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"createdDate"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-08-19T21:43:49.000Z"</span><span class="w">
+  </span><span class="nt">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://destination.url"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"created"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-08-19T21:43:49.000Z"</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 
@@ -2511,7 +2511,7 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
         </span><span class="p">{</span><span class="w">
           </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
           </span><span class="nt">"request"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-            </span><span class="nt">"timestamp"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-07-23T14:19:37.006Z"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"created"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-07-23T14:19:37.006Z"</span><span class="p">,</span><span class="w">
             </span><span class="nt">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
             </span><span class="nt">"headers"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
               </span><span class="p">{</span><span class="w">
@@ -2522,7 +2522,7 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
             </span><span class="nt">"body"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="w">
           </span><span class="p">},</span><span class="w">
           </span><span class="nt">"response"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-            </span><span class="nt">"timestamp"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-07-23T14:19:37.006Z"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"created"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-07-23T14:19:37.006Z"</span><span class="p">,</span><span class="w">
             </span><span class="nt">"headers"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
               </span><span class="p">{</span><span class="w">
                 </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
@@ -2566,7 +2566,7 @@ GET https://api.dwolla.com/webhook-subscriptions/{id}/hooks
     </span><span class="p">{</span><span class="w">
       </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
       </span><span class="nt">"request"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="nt">"timestamp"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-08-24T14:05:17.431Z"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"created"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-08-24T14:05:17.431Z"</span><span class="p">,</span><span class="w">
         </span><span class="nt">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
         </span><span class="nt">"headers"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
           </span><span class="p">{</span><span class="w">
@@ -2577,7 +2577,7 @@ GET https://api.dwolla.com/webhook-subscriptions/{id}/hooks
         </span><span class="nt">"body"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="w">
       </span><span class="p">},</span><span class="w">
       </span><span class="nt">"response"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="nt">"timestamp"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-08-24T14:05:17.431Z"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"created"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-08-24T14:05:17.431Z"</span><span class="p">,</span><span class="w">
         </span><span class="nt">"headers"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
           </span><span class="p">{</span><span class="w">
             </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
@@ -2618,7 +2618,7 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
     </span><span class="p">{</span><span class="w">
       </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
       </span><span class="nt">"request"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="nt">"timestamp"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-07-23T14:19:36.981Z"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"created"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-07-23T14:19:36.981Z"</span><span class="p">,</span><span class="w">
         </span><span class="nt">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
         </span><span class="nt">"headers"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
           </span><span class="p">{</span><span class="w">
@@ -2629,7 +2629,7 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
         </span><span class="nt">"body"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="w">
       </span><span class="p">},</span><span class="w">
       </span><span class="nt">"response"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="nt">"timestamp"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-07-23T14:19:36.981Z"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"created"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-07-23T14:19:36.981Z"</span><span class="p">,</span><span class="w">
         </span><span class="nt">"headers"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
           </span><span class="p">{</span><span class="w">
             </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
@@ -2645,9 +2645,9 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 </span></code></pre>
 
 <p>Retrieve a webhook by ID. </p>
-<aside class="reminder"><p>This endpoint <a href="#authentication">requires</a> an OAuth access token with the <code>ManageCustomers</code> scope.</p>
+<aside class="reminder"><p>This endpoint <a href="#authentication">requires</a> an OAuth <em>Application</em> access token.</p>
 </aside><h3 id='http-request'>HTTP Request</h3>
-<p><code class="prettyprint">GET https://api.dwolla.com/hooks</code></p>
+<p><code class="prettyprint">GET https://api.dwolla.com/hooks/{id}</code></p>
 <h3 id='request-parameters'>Request Parameters</h3>
 <table><thead>
 <tr>
@@ -2691,7 +2691,7 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 </span></code></pre>
 
 <p>Retry a webhook by ID.</p>
-<aside class="reminder"><p>This endpoint <a href="#authentication">requires</a> an OAuth access token with the <code>ManageCustomers</code> scope.</p>
+<aside class="reminder"><p>This endpoint <a href="#authentication">requires</a> an OAuth <em>Application</em> access token.</p>
 </aside><h3 id='http-request'>HTTP Request</h3>
 <p><code class="prettyprint">GET https://api.dwolla.com/hooks/{id}/retries</code></p>
 <h3 id='request-parameters'>Request Parameters</h3>
@@ -2736,7 +2736,7 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 </span></code></pre>
 
 <p>Retrieve webhook retries by ID.</p>
-<aside class="reminder"><p>This endpoint <a href="#authentication">requires</a> an OAuth access token with the <code>ManageCustomers</code> scope.</p>
+<aside class="reminder"><p>This endpoint <a href="#authentication">requires</a> an OAuth <em>Application</em> access token.</p>
 </aside><h3 id='http-request'>HTTP Request</h3>
 <p><code class="prettyprint">GET https://api.dwolla.com/hooks/{id}/retries</code></p>
 <h3 id='request-parameters'>Request Parameters</h3>
