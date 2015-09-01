@@ -16,11 +16,11 @@ Add and retrieve ACH bank accounts via Funding Sources, which are available to t
 Parameter | Description
 ----------|------------
 id | The funding source unique identifier.
-accountId | The Customer or Account unique identifier
+accountId | The Customer or Account unique identifier.
 status | Is the funding source verified?
-type | Type of funding source
-name | Arbitrary nickname for the funding source
-createdOn | ISO-8601 timestamp.
+type | Type of funding source.
+name | Arbitrary nickname for the funding source.
+created | ISO-8601 timestamp.
 
 ## New Funding Source (Customer)
 
@@ -60,9 +60,9 @@ Create a new Funding Source for a Customer.
 Parameter | Optional? | Description
 ----------|------------|------------
 routingNumber | no | The bank account's routing number.
-accountNumber | no | The bank account number
+accountNumber | no | The bank account number.
 type | no | Type of bank account: `Checking` or `Savings`.
-name | no | Arbitrary nickname for the funding source
+name | no | Arbitrary nickname for the funding source.
 
 ### Errors
 | HTTP Status | Message |
@@ -105,7 +105,7 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
         "status": "unverified",
         "type": "bank",
         "name": "John Doe checking account",
-        "createdOn": "2015-08-25T13:39:25.737Z"
+        "created": "2015-08-25T13:39:25.737Z"
       }
     ]
   }
@@ -173,10 +173,10 @@ Create a new Funding Source for an Account.
 ### Request Parameters
 Parameter | Description
 ----------|------------
-accountNumber | The bank account number
+accountNumber | The bank account number.
 routingNumber | The bank account's routing number.
 type | Type of bank account: `Checking` or `Savings`.
-name | Arbitrary nickname for the funding source
+name | Arbitrary nickname for the funding source.
 
 ### Errors
 | HTTP Status | Message |
@@ -216,7 +216,7 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
         "status": "verified",
         "type": "balance",
         "name": "Balance",
-        "createdOn": "2014-07-09T20:39:32.940Z"
+        "created": "2014-07-09T20:39:32.940Z"
       },
       {
         "_links": {
@@ -229,7 +229,7 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
         "status": "verified",
         "type": "bank",
         "name": "First Midwestern Bank",
-        "createdOn": "2014-07-09T20:39:37.043Z"
+        "created": "2014-07-09T20:39:37.043Z"
       }
     ]
   }
@@ -280,7 +280,7 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
   "status": "unverified",
   "type": "bank",
   "name": "Jane Doe checking account",
-  "createdOn": "2015-08-20T22:00:07.626Z"
+  "created": "2015-08-20T22:00:07.626Z"
 }
 ```
 
@@ -329,7 +329,7 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
   "status": "unverified",
   "type": "bank",
   "name": "Jane Doe checking account",
-  "createdOn": "2015-08-20T22:00:07.626Z"
+  "created": "2015-08-20T22:00:07.626Z"
 }
 ```
 

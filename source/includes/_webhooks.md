@@ -1,4 +1,4 @@
-# Webhooks Subscriptions
+# Webhook Subscriptions
 
 ```json
 {
@@ -12,7 +12,7 @@
     {
       "id": "string",
       "request": {
-        "timestamp": "2015-07-23T14:19:36.981Z",
+        "created": "2015-07-23T14:19:36.981Z",
         "url": "string",
         "headers": [
           {
@@ -23,7 +23,7 @@
         "body": "string"
       },
       "response": {
-        "timestamp": "2015-07-23T14:19:36.981Z",
+        "created": "2015-07-23T14:19:36.981Z",
         "headers": [
           {
             "name": "string",
@@ -79,7 +79,7 @@ Dwolla will re-attempt delivery 8 times over the course of 72 hours according th
 
 | Parameter      | Description                                                                   |
 |----------------|-------------------------------------------------------------------------------|
-| timestamp      | ISO-8601 timestamp.                                                           |
+| created        | ISO-8601 timestamp.                                                           |
 | url            | URL where data was sent to/received from.                                     |
 | headers        | Array of objects with keys `name` and `value` representative of HTTP headers. |
 | body           | Event ID for this webhook.                                                    |
@@ -96,7 +96,7 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 
 ```json
 {
-  "url": "http://deliver.webhooks/here",
+  "url": "https://deliver.webhooks/here",
   "secret": "shush!"
 }
 ```
@@ -152,7 +152,7 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
   },
   "id": "f4d21628-fde2-4d3a-b69a-0a7cb42adc4c",
   "url": "https://destination.url",
-  "createdDate": "2015-08-19T21:43:49.000Z"
+  "created": "2015-08-19T21:43:49.000Z"
 }
 ```
 
@@ -209,7 +209,7 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
         },
         "id": "f4d21628-fde2-4d3a-b69a-0a7cb42adc4c",
         "url": "https://destination.url",
-        "createdDate": "2015-08-19T21:43:49.000Z"
+        "created": "2015-08-19T21:43:49.000Z"
       }
     ]
   },
@@ -253,8 +253,8 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
     }
   },
   "id": "f4d21628-fde2-4d3a-b69a-0a7cb42adc4c",
-  "url": "https://detination.url",
-  "createdDate": "2015-08-19T21:43:49.000Z"
+  "url": "https://destination.url",
+  "created": "2015-08-19T21:43:49.000Z"
 }
 ```
 
@@ -300,7 +300,7 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
         {
           "id": "string",
           "request": {
-            "timestamp": "2015-07-23T14:19:37.006Z",
+            "created": "2015-07-23T14:19:37.006Z",
             "url": "string",
             "headers": [
               {
@@ -311,7 +311,7 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
             "body": "string"
           },
           "response": {
-            "timestamp": "2015-07-23T14:19:37.006Z",
+            "created": "2015-07-23T14:19:37.006Z",
             "headers": [
               {
                 "name": "string",

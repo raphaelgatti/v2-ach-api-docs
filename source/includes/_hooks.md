@@ -13,7 +13,7 @@
     {
       "id": "string",
       "request": {
-        "timestamp": "2015-08-24T14:05:17.431Z",
+        "created": "2015-08-24T14:05:17.431Z",
         "url": "string",
         "headers": [
           {
@@ -24,7 +24,7 @@
         "body": "string"
       },
       "response": {
-        "timestamp": "2015-08-24T14:05:17.431Z",
+        "created": "2015-08-24T14:05:17.431Z",
         "headers": [
           {
             "name": "string",
@@ -67,7 +67,7 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
     {
       "id": "string",
       "request": {
-        "timestamp": "2015-07-23T14:19:36.981Z",
+        "created": "2015-07-23T14:19:36.981Z",
         "url": "string",
         "headers": [
           {
@@ -78,7 +78,7 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
         "body": "string"
       },
       "response": {
-        "timestamp": "2015-07-23T14:19:36.981Z",
+        "created": "2015-07-23T14:19:36.981Z",
         "headers": [
           {
             "name": "string",

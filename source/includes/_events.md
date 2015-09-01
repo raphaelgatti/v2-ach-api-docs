@@ -5,7 +5,7 @@
   "_links": {},
   "_embedded": {},
   "id": "string",
-  "timestamp": "2015-08-24T14:05:17.399Z",
+  "created": "2015-08-24T14:05:17.399Z",
   "accountId": "string",
   "topic": "string",
   "resourceId": "string"
@@ -19,7 +19,7 @@ An event is created to notify you that an action occured on your account. When a
 | Parameter | Description
 |-----------|------------|
 |id | ID of application event.
-|timestamp | ISO-8601 timestamp.
+|created | ISO-8601 timestamp.
 |accountId | The Customer or Account unique identifier
 |topic | Type of event. 
 |resourceId | A unique ID of the resource that caused the event.
@@ -87,7 +87,7 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
           }
         },
         "id": "0b7847ea-5520-4456-b8f6-2229196b9709",
-        "timestamp": "2015-08-25T14:56:26.000Z",
+        "created": "2015-08-25T14:56:26.000Z",
         "accountId": "ad5f2162-404a-4c4c-994e-6ab6c3a13254",
         "topic": "funding_source_removed",
         "resourceId": "48e463c1-b00d-4cfc-80fc-4935b458b419"
@@ -102,7 +102,7 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
           }
         },
         "id": "84b6a716-b239-4b08-9a7b-6e11b0ba003a",
-        "timestamp": "2015-08-25T14:40:15.000Z",
+        "created": "2015-08-25T14:40:15.000Z",
         "accountId": "ad5f2162-404a-4c4c-994e-6ab6c3a13254",
         "topic": "transfer_created",
         "resourceId": "38242332-374B-E511-80DA-0AA34A9B2388"
@@ -117,7 +117,7 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
           }
         },
         "id": "5a6c7568-fae1-4e1a-84ee-a62525763244",
-        "timestamp": "2015-08-25T14:29:38.000Z",
+        "created": "2015-08-25T14:29:38.000Z",
         "accountId": "ad5f2162-404a-4c4c-994e-6ab6c3a13254",
         "topic": "transfer_created",
         "resourceId": "8A1F44B6-354B-E511-80DA-0AA34A9B2388"
@@ -170,7 +170,7 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
     }
   },
   "id": "a58be29f-ce03-4b42-9d6c-48ad2b4093ee",
-  "timestamp": "2015-08-20T22:45:44.000Z",
+  "created": "2015-08-20T22:45:44.000Z",
   "accountId": "ad5f2162-404a-4c4c-994e-6ab6c3a13254",
   "topic": "transfer_created",
   "resourceId": "3B192430-8D47-E511-80DA-0AA34A9B2388"
