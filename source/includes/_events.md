@@ -72,7 +72,7 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
       "href": "https://api-uat.dwolla.com/events?limit=25&offset=25"
     },
     "self": {
-      "href": "http://api-uat.dwolla.com/events"
+      "href": "https://api-uat.dwolla.com/events"
     }
   },
   "_embedded": {
@@ -130,7 +130,7 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 
 Retrieve a list of events for the authorized user.
 
-<aside class="reminder">This endpoint [requires](#authentication) an OAuth access token with the `ManageCustomers` scope.</aside>
+<aside class="reminder">This endpoint [requires](#authentication) an OAuth *Application* access token.</aside>
 
 ### HTTP Request
 `GET https://api.dwolla.com/events`
@@ -179,7 +179,7 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 
 Retrieve an event by Id. 
 
-<aside class="reminder">This endpoint [requires](#authentication) an OAuth access token with the `ManageCustomers` scope.</aside>
+<aside class="reminder">This endpoint [requires](#authentication) an OAuth *Application* access token.</aside>
 
 ### HTTP Request
 `GET https://api.dwolla.com/events/{id}`

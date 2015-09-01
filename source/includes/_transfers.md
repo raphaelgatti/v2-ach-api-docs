@@ -94,7 +94,7 @@ Location: https://api.dwolla.com/transfers/74c9129b-d14a-e511-80da-0aa34a9b2388
 
 Initiate a transfer for either an account or customer resource. 
 
-<aside class="reminder">This endpoint [requires](#authentication) an OAuth access token with the `ManageCustomers` scope.</aside>
+<aside class="reminder">This endpoint [requires](#authentication) an OAuth access token with the `Send` [scope](#oauth-scopes).</aside>
 
 ### HTTP Request
 `POST https://api.dwolla.com/transfers`
@@ -195,7 +195,7 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 
 Retrieve a Customer's list of transfers.
 
-<aside class="reminder">This endpoint [requires](#authentication) an OAuth access token with the `ManageCustomers` scope.</aside>
+<aside class="reminder">This endpoint [requires](#authentication) an OAuth access token with the `ManageCustomers` [scope](#oauth-scopes).</aside>
 
 ### HTTP Request
 `GET https://api.dwolla.com/customers/{id}/transfers`
@@ -268,7 +268,7 @@ This is a draft specification for preview only.  Endpoint URL, request and respo
 
 Retrieve an Account's list of transfers.
 
-<aside class="reminder">This endpoint [requires](#authentication) an OAuth access token with the `ManageCustomers` scope.</aside>
+<aside class="reminder">This endpoint [requires](#authentication) an OAuth access token with the `Transactions` [scope](#oauth-scopes).</aside>
 
 ### HTTP Request
 `GET https://api.dwolla.com/accounts/{id}/transfers`
@@ -328,7 +328,7 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 
 Retrieve a Transfer belonging to an Account or Customer by its ID.
 
-<aside class="reminder">This endpoint [requires](#authentication) an OAuth access token with the `ManageCustomers` scope.</aside>
+<aside class="reminder">This endpoint [requires](#authentication) an OAuth access token with the `Transactions` [scope](#oauth-scopes).</aside>
 
 ### HTTP Request
 `GET https://api.dwolla.com/transfers/{id}`

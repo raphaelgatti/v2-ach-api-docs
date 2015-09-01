@@ -51,7 +51,7 @@ Location: https://api.dwolla.com/funding-sources/58d20353-2b4b-4d68-8b89-3e5dab1
 
 Create a new Funding Source for a Customer.
 
-<aside class="reminder">This endpoint [requires](#authentication) an OAuth access token with the `ManageCustomers` scope.</aside>
+<aside class="reminder">This endpoint [requires](#authentication) an OAuth access token with the `ManageCustomers` [scope](#oauth-scopes).</aside>
 
 ### HTTP Request
 `POST https://api.dwolla.com/customers/{id}/funding-sources`
@@ -114,7 +114,7 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 
 Retrieve a list of Funding Sources that belong to a Customer.
 
-<aside class="reminder">This endpoint [requires](#authentication) an OAuth access token with the `ManageCustomers` scope.</aside>
+<aside class="reminder">This endpoint [requires](#authentication) an OAuth access token with the `ManageCustomers` [scope](#oauth-scopes).</aside>
 
 ### HTTP Request
 `
@@ -165,7 +165,7 @@ This is a draft specification for preview only.  Endpoint URL, request and respo
 
 Create a new Funding Source for an Account.
 
-<aside class="reminder">This endpoint [requires](#authentication) an OAuth access token with the `ManageCustomers` scope.</aside>
+<aside class="reminder">This endpoint [requires](#authentication) an OAuth access token with the `Funding` [scope](#oauth-scopes).</aside>
 
 ### HTTP Request
 `POST https://api.dwolla.com/accounts/{id}/funding-sources`
@@ -238,7 +238,7 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 
 Retrieve a list of Funding Sources that belong to an Account.
 
-<aside class="reminder">This endpoint [requires](#authentication) an OAuth access token with the `ManageCustomers` scope.</aside>
+<aside class="reminder">This endpoint [requires](#authentication) an OAuth access token with the `Funding` [scope](#oauth-scopes).</aside>
 
 ### HTTP Request
 `
@@ -286,7 +286,7 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 
 Retrieve a Funding Source by ID.
 
-<aside class="reminder">This endpoint [requires](#authentication) an OAuth access token with the `ManageCustomers` scope.</aside>
+<aside class="reminder">This endpoint [requires](#authentication) an OAuth access token with the `Funding` [scope](#oauth-scopes).</aside>
 
 ### HTTP Request
 `
@@ -335,7 +335,7 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 
 Remove a Funding Source by ID.
 
-<aside class="reminder">This endpoint [requires](#authentication) an OAuth access token with the `ManageCustomers` scope.</aside>
+<aside class="reminder">This endpoint [requires](#authentication) an OAuth access token with the `Funding` [scope](#oauth-scopes).</aside>
 
 ### HTTP Request
 `
