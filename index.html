@@ -2215,11 +2215,11 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 
-<p>Create a Webhook Subscription to receive <code class="prettyprint">POST</code> requests from Dwolla (called Hooks) when Events associated with your application occur.  <a href="#hooks">Hooks</a> are sent to a URL which you provide when creating a Webhook Subscription. If you are a White Label partner, you will use these events to notify your customers via email based on the White Label TOS. Refer to the <a href="#available-events">events</a> section for the list of events that trigger webhooks.</p>
+<p>Create a Webhook Subscription to receive <code class="prettyprint">POST</code> requests from Dwolla (called Webhooks) when Events associated with your application occur.  <a href="#webhooks">Webhooks</a> are sent to a URL which you provide when creating a Webhook Subscription. If you are a White Label partner, you will use these events to notify your customers via email based on the White Label TOS. Refer to the <a href="#available-events">events</a> section for the list of events that trigger webhooks.</p>
 <h3 id='acknowledgement-and-retries'>Acknowledgement and retries</h3>
-<p>When your application receives a <a href="#hooks">Hook</a>, it should respond with a HTTP 2xx status code to indicate successful receipt. If Dwolla receives a status code greater than a HTTP 400, or your application fails to respond within 20 seconds of the attempt, another attempt will be made.</p>
+<p>When your application receives a <a href="#webhooks">Webhook</a>, it should respond with a HTTP 2xx status code to indicate successful receipt. If Dwolla receives a status code greater than a HTTP 400, or your application fails to respond within 20 seconds of the attempt, another attempt will be made.</p>
 
-<p>Dwolla will re-attempt delivery 8 times over the course of 72 hours according the backoff schedule below. If a hook was successfully received but you would like the information again, you can call <a href="#retrieve-webhook-by-id">retrieve webhook by ID</a>.</p>
+<p>Dwolla will re-attempt delivery 8 times over the course of 72 hours according the backoff schedule below. If a webhook was successfully received but you would like the information again, you can call <a href="#retrieve-webhook-by-id">retrieve webhook by ID</a>.</p>
 
 <table><thead>
 <tr>
@@ -2345,7 +2345,7 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 <td>Event ID for this webhook.</td>
 </tr>
 </tbody></table>
-<h2 id='subscribe-to-a-webhook'>Subscribe to a Webhook</h2>
+<h2 id='subscribe-to-webhooks'>Subscribe to Webhooks</h2>
 <blockquote>
 <p>Request:</p>
 </blockquote>
@@ -2366,7 +2366,7 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 Location: https://api.dwolla.com/webhook-subscriptions/10d4133e-b308-4646-b276-40d9d36def1c
 </code></pre>
 
-<p>Create a webhook subscription to deliver <a href="#hooks">Hooks</a> to a specified URL. </p>
+<p>Create a webhook subscription to deliver <a href="#webhooks">Webhooks</a> to a specified URL. </p>
 <aside class="reminder"><p>This endpoint <a href="#authentication">requires</a> an OAuth <em>Application</em> access token.</p>
 </aside><h3 id='http-request'>HTTP Request</h3>
 <p><code class="prettyprint">
@@ -2413,8 +2413,8 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
     </span><span class="nt">"self"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
       </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.dwolla.com/webhook-subscriptions/f4d21628-fde2-4d3a-b69a-0a7cb42adc4c"</span><span class="w">
     </span><span class="p">},</span><span class="w">
-    </span><span class="nt">"hooks"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.dwolla.com/webhook-subscriptions/f4d21628-fde2-4d3a-b69a-0a7cb42adc4c/hooks"</span><span class="w">
+    </span><span class="nt">"webhooks"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.dwolla.com/webhook-subscriptions/f4d21628-fde2-4d3a-b69a-0a7cb42adc4c/webhooks"</span><span class="w">
     </span><span class="p">}</span><span class="w">
   </span><span class="p">},</span><span class="w">
   </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"f4d21628-fde2-4d3a-b69a-0a7cb42adc4c"</span><span class="p">,</span><span class="w">
@@ -2423,7 +2423,7 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 
-<p>Delete a Webhook Subscription to stop receiving Hooks at the URL specified. </p>
+<p>Delete a Webhook Subscription to stop receiving Webhooks at the URL specified. </p>
 <aside class="reminder"><p>This endpoint <a href="#authentication">requires</a> an OAuth <em>Application</em> access token.</p>
 </aside><h3 id='http-request'>HTTP Request</h3>
 <p><code class="prettyprint">
@@ -2478,8 +2478,8 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
           </span><span class="nt">"self"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
             </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.dwolla.com/webhook-subscriptions/f4d21628-fde2-4d3a-b69a-0a7cb42adc4c"</span><span class="w">
           </span><span class="p">},</span><span class="w">
-          </span><span class="nt">"hooks"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-            </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.dwolla.com/webhook-subscriptions/f4d21628-fde2-4d3a-b69a-0a7cb42adc4c/hooks"</span><span class="w">
+          </span><span class="nt">"webhooks"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.dwolla.com/webhook-subscriptions/f4d21628-fde2-4d3a-b69a-0a7cb42adc4c/webhooks"</span><span class="w">
           </span><span class="p">}</span><span class="w">
         </span><span class="p">},</span><span class="w">
         </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"f4d21628-fde2-4d3a-b69a-0a7cb42adc4c"</span><span class="p">,</span><span class="w">
@@ -2523,8 +2523,8 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
     </span><span class="nt">"self"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
       </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.dwolla.com/webhook-subscriptions/f4d21628-fde2-4d3a-b69a-0a7cb42adc4c"</span><span class="w">
     </span><span class="p">},</span><span class="w">
-    </span><span class="nt">"hooks"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.dwolla.com/webhook-subscriptions/f4d21628-fde2-4d3a-b69a-0a7cb42adc4c/hooks"</span><span class="w">
+    </span><span class="nt">"webhooks"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.dwolla.com/webhook-subscriptions/f4d21628-fde2-4d3a-b69a-0a7cb42adc4c/webhooks"</span><span class="w">
     </span><span class="p">}</span><span class="w">
   </span><span class="p">},</span><span class="w">
   </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"f4d21628-fde2-4d3a-b69a-0a7cb42adc4c"</span><span class="p">,</span><span class="w">
@@ -2555,7 +2555,7 @@ GET https://api.dwolla.com/webhook-subscriptions/{id}
 <blockquote>
 <p>Request:</p>
 </blockquote>
-<pre class="highlight shell"><code>GET /webhook-subscriptions/10d4133e-b308-4646-b276-40d9d36def1c/hooks
+<pre class="highlight shell"><code>GET /webhook-subscriptions/10d4133e-b308-4646-b276-40d9d36def1c/webhooks
 Accept: application/vnd.dwolla.v1.hal+json
 Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 </code></pre>
@@ -2606,11 +2606,11 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 
-<p>View all fired <a href="#hooks">Hooks</a> for a Webhook Subscription.</p>
+<p>View all fired <a href="#webhooks">Webhooks</a> for a Webhook Subscription.</p>
 <aside class="reminder"><p>This endpoint <a href="#authentication">requires</a> an OAuth <em>Application</em> access token.</p>
 </aside><h3 id='http-request'>HTTP Request</h3>
 <p><code class="prettyprint">
-GET https://api.dwolla.com/webhook-subscriptions/{id}/hooks
+GET https://api.dwolla.com/webhook-subscriptions/{id}/webhooks
 </code></p>
 <h3 id='errors'>Errors</h3>
 <table><thead>
@@ -2621,7 +2621,7 @@ GET https://api.dwolla.com/webhook-subscriptions/{id}/hooks
 </thead><tbody>
 </tbody></table>
 
-          <h1 id='hooks'>Hooks</h1><pre class="highlight json"><code><span class="p">{</span><span class="w">
+          <h1 id='webhooks'>Webhooks</h1><pre class="highlight json"><code><span class="p">{</span><span class="w">
   </span><span class="nt">"_links"</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span><span class="w">
   </span><span class="nt">"_embedded"</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span><span class="w">
   </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
@@ -2662,7 +2662,7 @@ GET https://api.dwolla.com/webhook-subscriptions/{id}/hooks
 <blockquote>
 <p>Request:</p>
 </blockquote>
-<pre class="highlight shell"><code>GET /hooks/76ce47b9-5b3c-4ac8-a743-ce318afbaecd
+<pre class="highlight shell"><code>GET /webhooks/76ce47b9-5b3c-4ac8-a743-ce318afbaecd
 Accept: application/vnd.dwolla.v1.hal+json
 Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 </code></pre>
@@ -2673,7 +2673,7 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 <pre class="highlight json"><code><span class="p">{</span><span class="w">
   </span><span class="nt">"_links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="nt">"self"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.dwolla.com/hooks/76ce47b9-5b3c-4ac8-a743-ce318afbaecd"</span><span class="w">
+      </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.dwolla.com/webhooks/76ce47b9-5b3c-4ac8-a743-ce318afbaecd"</span><span class="w">
     </span><span class="p">}</span><span class="w">
   </span><span class="p">},</span><span class="w">
   </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"76ce47b9-5b3c-4ac8-a743-ce318afbaecd"</span><span class="p">,</span><span class="w">
@@ -2714,7 +2714,7 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 <p>Retrieve a webhook by ID. </p>
 <aside class="reminder"><p>This endpoint <a href="#authentication">requires</a> an OAuth <em>Application</em> access token.</p>
 </aside><h3 id='http-request'>HTTP Request</h3>
-<p><code class="prettyprint">GET https://api.dwolla.com/hooks/{id}</code></p>
+<p><code class="prettyprint">GET https://api.dwolla.com/webhooks/{id}</code></p>
 <h3 id='request-parameters'>Request Parameters</h3>
 <table><thead>
 <tr>
@@ -2726,7 +2726,7 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 <tr>
 <td>id</td>
 <td>no</td>
-<td>Id of hook to get.</td>
+<td>Id of webhook to get.</td>
 </tr>
 </tbody></table>
 <h3 id='errors'>Errors</h3>
@@ -2738,14 +2738,14 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 </thead><tbody>
 <tr>
 <td>404</td>
-<td>Hook not found.</td>
+<td>Webhook not found.</td>
 </tr>
 </tbody></table>
-<h2 id='retry-a-hook-by-id'>Retry a Hook by ID</h2>
+<h2 id='retry-a-webhook-by-id'>Retry a Webhook by ID</h2>
 <blockquote>
 <p>Request:</p>
 </blockquote>
-<pre class="highlight shell"><code>POST /hooks/10d4133e-b308-4646-b276-40d9d36def1c/retries
+<pre class="highlight shell"><code>POST /webhooks/10d4133e-b308-4646-b276-40d9d36def1c/retries
 Accept: application/vnd.dwolla.v1.hal+json
 Content-Type: application/vnd.dwolla.v1.hal+json
 Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
@@ -2760,7 +2760,7 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 <p>Retry a webhook by ID.</p>
 <aside class="reminder"><p>This endpoint <a href="#authentication">requires</a> an OAuth <em>Application</em> access token.</p>
 </aside><h3 id='http-request'>HTTP Request</h3>
-<p><code class="prettyprint">GET https://api.dwolla.com/hooks/{id}/retries</code></p>
+<p><code class="prettyprint">GET https://api.dwolla.com/webhooks/{id}/retries</code></p>
 <h3 id='request-parameters'>Request Parameters</h3>
 <table><thead>
 <tr>
@@ -2772,7 +2772,7 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 <tr>
 <td>id</td>
 <td>no</td>
-<td>Id of hook to retry.</td>
+<td>Id of webhook to retry.</td>
 </tr>
 </tbody></table>
 <h3 id='errors'>Errors</h3>
@@ -2784,14 +2784,14 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 </thead><tbody>
 <tr>
 <td>404</td>
-<td>Hook not found.</td>
+<td>Webhook not found.</td>
 </tr>
 </tbody></table>
 <h2 id='get-retries-by-id'>Get Retries by ID</h2>
 <blockquote>
 <p>Request:</p>
 </blockquote>
-<pre class="highlight shell"><code>GET /hooks/10d4133e-b308-4646-b276-40d9d36def1c/retries
+<pre class="highlight shell"><code>GET /webhooks/10d4133e-b308-4646-b276-40d9d36def1c/retries
 Accept: application/vnd.dwolla.v1.hal+json
 Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 </code></pre>
@@ -2805,7 +2805,7 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 <p>Retrieve webhook retries by ID.</p>
 <aside class="reminder"><p>This endpoint <a href="#authentication">requires</a> an OAuth <em>Application</em> access token.</p>
 </aside><h3 id='http-request'>HTTP Request</h3>
-<p><code class="prettyprint">GET https://api.dwolla.com/hooks/{id}/retries</code></p>
+<p><code class="prettyprint">GET https://api.dwolla.com/webhooks/{id}/retries</code></p>
 <h3 id='request-parameters'>Request Parameters</h3>
 <table><thead>
 <tr>
@@ -2817,7 +2817,7 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 <tr>
 <td>id</td>
 <td>no</td>
-<td>Id of hook to get retries for.</td>
+<td>Id of webhook to get retries for.</td>
 </tr>
 </tbody></table>
 <h3 id='errors'>Errors</h3>
@@ -2829,7 +2829,7 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 </thead><tbody>
 <tr>
 <td>404</td>
-<td>Hook not found.</td>
+<td>Webhook not found.</td>
 </tr>
 </tbody></table>
 
