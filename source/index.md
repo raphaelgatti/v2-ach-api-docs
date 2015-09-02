@@ -17,8 +17,8 @@ includes:
   - fundingsrcs
   - transfers
   - events
+  - webhookSubscriptions
   - webhooks
-  - hooks
 
 search: true
 
