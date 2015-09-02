@@ -214,7 +214,7 @@ offset | yes | How many results to skip.
 | 403 | Not authorized to list transfers. |
 | 404 | Customer not found. |
 
-## Get Transfers (Account) DRAFT
+## Get Transfers (Account) [DRAFT]
 
 > Request:
 
@@ -262,9 +262,7 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
   ]
 }
 ```
-<aside class="warning">
-This is a draft specification for preview only.  Endpoint URL, request and response parameters are subject to change.
-</aside>
+<aside class="warning">This endpoint is not yet implemented. The following specification is subject to change.</aside>
 
 Retrieve an Account's list of transfers.
 

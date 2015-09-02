@@ -28,7 +28,7 @@ A Document is used to verify the identity of a Customer
 |documentType | Either `passport`, `driversLicense`, or `idCard`.
 
 
-## Create a Document DRAFT
+## Create a Document [DRAFT]
 
 > Request:
 
@@ -61,6 +61,8 @@ Location: https://api.dwolla.com/customers/6f80efc0-b158-4df1-9b11-da85f0bffdd4/
 
 Create a Document belonging to a Customer. 
 
+<aside class="warning">This endpoint is not yet implemented. The following specification is subject to change.</aside>
+
 <aside class="reminder">This endpoint [requires](#authentication) an OAuth access token with the `ManageCustomers` [scope](#oauth-scopes).</aside>
 
 ### HTTP Request
@@ -71,7 +73,7 @@ Create a Document belonging to a Customer.
 | HTTP Status | Message |
 |--------------|-------------|
 
-## List Documents DRAFT
+## List Documents [DRAFT]
 
 > Request:
 
@@ -108,6 +110,8 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 
 Retrieve a list of Documents which belong to a Customer. 
 
+<aside class="warning">This endpoint is not yet implemented. The following specification is subject to change.</aside>
+
 <aside class="reminder">This endpoint [requires](#authentication) an OAuth access token with the `ManageCustomers` [scope](#oauth-scopes).</aside>
 
 ### HTTP Request
@@ -117,7 +121,7 @@ Retrieve a list of Documents which belong to a Customer.
 | HTTP Status | Message |
 |--------------|-------------|
 
-## Retrieve Document by ID DRAFT
+## Retrieve Document by ID [DRAFT]
 
 > Request:
 
@@ -143,6 +147,8 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 ```
 
 Retrieve a Document by its ID.
+
+<aside class="warning">This endpoint is not yet implemented. The following specification is subject to change.</aside>
 
 <aside class="reminder">This endpoint [requires](#authentication) an OAuth access token with the `ManageCustomers` [scope](#oauth-scopes).</aside>
 

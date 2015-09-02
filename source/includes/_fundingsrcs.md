@@ -133,7 +133,7 @@ id | no | Customer unique identifier.
 | 403 | Not authorized to list funding sources.
 | 404 | Customer not found. |
 
-## New Funding Source (Account) DRAFT
+## New Funding Source (Account) [DRAFT]
 
 > Request:
 
@@ -159,9 +159,7 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 HTTP/1.1 201 Created
 Location: https://api.dwolla.com/accounts/99bfb139-eadd-4cdf-b346-7504f0c16c60/funding-sources
 ```
-<aside class="warning">
-This is a draft specification for preview only.  Endpoint URL, request and response parameters are subject to change.
-</aside>
+<aside class="warning">This endpoint is not yet implemented. The following specification is subject to change.</aside>
 
 Create a new Funding Source for an Account.
 
