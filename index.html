@@ -854,7 +854,7 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 <td>Either <code class="prettyprint">passport</code>, <code class="prettyprint">driversLicense</code>, or <code class="prettyprint">idCard</code>.</td>
 </tr>
 </tbody></table>
-<h2 id='create-a-document-draft'>Create a Document DRAFT</h2>
+<h2 id='create-a-document-draft'>Create a Document [DRAFT]</h2>
 <blockquote>
 <p>Request:</p>
 </blockquote>
@@ -883,7 +883,8 @@ Location: https://api.dwolla.com/customers/6f80efc0-b158-4df1-9b11-da85f0bffdd4/
 </blockquote>
 
 <p>Create a Document belonging to a Customer. </p>
-<aside class="reminder"><p>This endpoint <a href="#authentication">requires</a> an OAuth access token with the <code>ManageCustomers</code> <a href="#oauth-scopes">scope</a>.</p>
+<aside class="warning"><p>This endpoint is not yet implemented. The following specification is subject to change.</p>
+</aside><aside class="reminder"><p>This endpoint <a href="#authentication">requires</a> an OAuth access token with the <code>ManageCustomers</code> <a href="#oauth-scopes">scope</a>.</p>
 </aside><h3 id='http-request'>HTTP Request</h3>
 <p>1: <code class="prettyprint">POST https://api.dwolla.com/customers/{id}/documents</code> with <code class="prettyprint">Document</code> <br />
 2: <code class="prettyprint">POST https://api.dwolla.com/customers/{id}/documents</code> with a 5MB <code class="prettyprint">*.png</code> or <code class="prettyprint">*.jpg</code> image file.</p>
@@ -895,7 +896,7 @@ Location: https://api.dwolla.com/customers/6f80efc0-b158-4df1-9b11-da85f0bffdd4/
 </tr>
 </thead><tbody>
 </tbody></table>
-<h2 id='list-documents-draft'>List Documents DRAFT</h2>
+<h2 id='list-documents-draft'>List Documents [DRAFT]</h2>
 <blockquote>
 <p>Request:</p>
 </blockquote>
@@ -930,7 +931,8 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 </span></code></pre>
 
 <p>Retrieve a list of Documents which belong to a Customer. </p>
-<aside class="reminder"><p>This endpoint <a href="#authentication">requires</a> an OAuth access token with the <code>ManageCustomers</code> <a href="#oauth-scopes">scope</a>.</p>
+<aside class="warning"><p>This endpoint is not yet implemented. The following specification is subject to change.</p>
+</aside><aside class="reminder"><p>This endpoint <a href="#authentication">requires</a> an OAuth access token with the <code>ManageCustomers</code> <a href="#oauth-scopes">scope</a>.</p>
 </aside><h3 id='http-request'>HTTP Request</h3>
 <p><code class="prettyprint">GET https://api.dwolla.com/customers/{id}/documents</code></p>
 <h3 id='errors'>Errors</h3>
@@ -941,7 +943,7 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 </tr>
 </thead><tbody>
 </tbody></table>
-<h2 id='retrieve-document-by-id-draft'>Retrieve Document by ID DRAFT</h2>
+<h2 id='retrieve-document-by-id-draft'>Retrieve Document by ID [DRAFT]</h2>
 <blockquote>
 <p>Request:</p>
 </blockquote>
@@ -966,7 +968,8 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 </span></code></pre>
 
 <p>Retrieve a Document by its ID.</p>
-<aside class="reminder"><p>This endpoint <a href="#authentication">requires</a> an OAuth access token with the <code>ManageCustomers</code> <a href="#oauth-scopes">scope</a>.</p>
+<aside class="warning"><p>This endpoint is not yet implemented. The following specification is subject to change.</p>
+</aside><aside class="reminder"><p>This endpoint <a href="#authentication">requires</a> an OAuth access token with the <code>ManageCustomers</code> <a href="#oauth-scopes">scope</a>.</p>
 </aside><h3 id='http-request'>HTTP Request</h3>
 <p><code class="prettyprint">GET https://api.dwolla.com/customers/{id}/documents/{id}</code></p>
 <h3 id='errors'>Errors</h3>
@@ -1169,7 +1172,7 @@ GET https://api.dwolla.com/customers/{id}/funding-sources
 <td>Customer not found.</td>
 </tr>
 </tbody></table>
-<h2 id='new-funding-source-account-draft'>New Funding Source (Account) DRAFT</h2>
+<h2 id='new-funding-source-account-draft'>New Funding Source (Account) [DRAFT]</h2>
 <blockquote>
 <p>Request:</p>
 </blockquote>
@@ -1192,7 +1195,7 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 <pre class="highlight shell"><code>HTTP/1.1 201 Created
 Location: https://api.dwolla.com/accounts/99bfb139-eadd-4cdf-b346-7504f0c16c60/funding-sources
 </code></pre>
-<aside class="warning"><p>This is a draft specification for preview only.  Endpoint URL, request and response parameters are subject to change.</p>
+<aside class="warning"><p>This endpoint is not yet implemented. The following specification is subject to change.</p>
 </aside>
 <p>Create a new Funding Source for an Account.</p>
 <aside class="reminder"><p>This endpoint <a href="#authentication">requires</a> an OAuth access token with the <code>Funding</code> <a href="#oauth-scopes">scope</a>.</p>
@@ -1724,7 +1727,7 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 <td>Customer not found.</td>
 </tr>
 </tbody></table>
-<h2 id='get-transfers-account-draft'>Get Transfers (Account) DRAFT</h2>
+<h2 id='get-transfers-account-draft'>Get Transfers (Account) [DRAFT]</h2>
 <blockquote>
 <p>Request:</p>
 </blockquote>
@@ -1771,7 +1774,7 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
   </span><span class="p">]</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
-<aside class="warning"><p>This is a draft specification for preview only.  Endpoint URL, request and response parameters are subject to change.</p>
+<aside class="warning"><p>This endpoint is not yet implemented. The following specification is subject to change.</p>
 </aside>
 <p>Retrieve an Account&rsquo;s list of transfers.</p>
 <aside class="reminder"><p>This endpoint <a href="#authentication">requires</a> an OAuth access token with the <code>Transactions</code> <a href="#oauth-scopes">scope</a>.</p>
