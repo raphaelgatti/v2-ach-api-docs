@@ -84,7 +84,7 @@ Dwolla will re-attempt delivery 8 times over the course of 72 hours according th
 | headers        | Array of objects with keys `name` and `value` representative of HTTP headers. |
 | body           | Event ID for this webhook.                                                    |
 
-## Subscribe to Webhooks
+## Create a Subscription
 
 > Request:
 
@@ -128,7 +128,7 @@ secret | Your application secret.
 | HTTP Status | Message |
 |--------------|-------------|
 
-## Delete a Webhook Subscription
+## Delete a Subscription
 
 > Request:
 
@@ -177,7 +177,7 @@ id | Webhook unique identifier.
 |--------------|-------------|
 | 404 | Webhook subscription not found. |
 
-## List Webhook Subscriptions
+## List Subscriptions
 
 > Request:
 
