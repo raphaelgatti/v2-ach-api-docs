@@ -43,7 +43,7 @@
         <a href="https://docs.dwolla.com/">
         <span class="unselected">V1</span>
         </a>
-        <a href="https://dwolla.github.io/slate-wl">
+        <a href="https://docsv2.dwolla.com">
         <span>V2</span>
         </a>
     </div>
@@ -102,11 +102,7 @@ Authorization: Bearer myOAuthAccessToken123
 GET https://www.dwolla.com/oauth/rest/transactions?client_id<span class="o">=</span>XYZ&amp;client_secret<span class="o">=</span>JJJ&amp;limit<span class="o">=</span>10
 </code></pre>
 
-<p>All requests should supply the following headers:</p>
-
-<p><code class="prettyprint">Accept: application/vnd.dwolla.v1.hal+json</code></p>
-
-<p><code class="prettyprint">Content-Type: application/vnd.dwolla.v1.hal+json</code></p>
+<p>All requests should supply the <code class="prettyprint">Accept: application/vnd.dwolla.v1.hal+json</code> header. <code class="prettyprint">POST</code> requests must have a JSON encoded body and the <code class="prettyprint">Content-Type: application/vnd.dwolla.v1.hal+json</code> header.</p>
 
 <p>Requests must be made over HTTPS.  Any non-secure requests are met with a redirect (HTTP 302) to the HTTPS equivalent URI.</p>
 <h3 id='authorization'>Authorization</h3>
@@ -419,7 +415,7 @@ https://www.dwolla.com/oauth/v2/authenticate?client_id={client_id}&amp;response_
 </tr>
 <tr>
 <td>scope</td>
-<td>Pipe (<code class="prettyprint">&amp;#124;</code>) delimited list of permission scopes granted</td>
+<td>Pipe <code>&#124;</code> delimited list of permission scopes granted</td>
 </tr>
 </tbody></table>
 <h2 id='refresh-authorization'>Refresh Authorization</h2><pre class="highlight json"><code><span class="p">{</span><span class="w">
@@ -486,7 +482,7 @@ https://www.dwolla.com/oauth/v2/authenticate?client_id={client_id}&amp;response_
 </tr>
 <tr>
 <td>scope</td>
-<td>Pipe (`</td>
+<td>Pipe <code>&#124;</code> delimited list of permission scopes granted</td>
 </tr>
 </tbody></table>
 <h3 id='response-parameters'>Response Parameters</h3>
@@ -579,7 +575,7 @@ https://www.dwolla.com/oauth/v2/authenticate?client_id={client_id}&amp;response_
 </tr>
 <tr>
 <td>scope</td>
-<td>Pipe (<code class="prettyprint">&amp;#124;</code>) delimited list of permission scopes granted</td>
+<td>Pipe <code>&#124;</code> delimited list of permission scopes granted</td>
 </tr>
 </tbody></table>
 
@@ -858,7 +854,7 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 <td>Either <code class="prettyprint">passport</code>, <code class="prettyprint">driversLicense</code>, or <code class="prettyprint">idCard</code>.</td>
 </tr>
 </tbody></table>
-<h2 id='create-a-document'>Create a Document</h2>
+<h2 id='create-a-document-draft'>Create a Document DRAFT</h2>
 <blockquote>
 <p>Request:</p>
 </blockquote>
@@ -899,7 +895,7 @@ Location: https://api.dwolla.com/customers/6f80efc0-b158-4df1-9b11-da85f0bffdd4/
 </tr>
 </thead><tbody>
 </tbody></table>
-<h2 id='list-documents'>List Documents</h2>
+<h2 id='list-documents-draft'>List Documents DRAFT</h2>
 <blockquote>
 <p>Request:</p>
 </blockquote>
@@ -945,7 +941,7 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 </tr>
 </thead><tbody>
 </tbody></table>
-<h2 id='retrieve-document-by-id'>Retrieve Document by ID</h2>
+<h2 id='retrieve-document-by-id-draft'>Retrieve Document by ID DRAFT</h2>
 <blockquote>
 <p>Request:</p>
 </blockquote>
@@ -1173,7 +1169,7 @@ GET https://api.dwolla.com/customers/{id}/funding-sources
 <td>Customer not found.</td>
 </tr>
 </tbody></table>
-<h2 id='new-funding-source-account'>New Funding Source (Account)</h2>
+<h2 id='new-funding-source-account-draft'>New Funding Source (Account) DRAFT</h2>
 <blockquote>
 <p>Request:</p>
 </blockquote>
@@ -1539,7 +1535,7 @@ DELETE https://api.dwolla.com/funding-sources/{id}
 </tr>
 <tr>
 <td>currency</td>
-<td>String, probably <code class="prettyprint">USD</code></td>
+<td>String, <code class="prettyprint">USD</code></td>
 </tr>
 </tbody></table>
 <h2 id='initiate-transfer'>Initiate Transfer</h2>
@@ -1728,7 +1724,7 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 <td>Customer not found.</td>
 </tr>
 </tbody></table>
-<h2 id='get-transfers-account'>Get Transfers (Account)</h2>
+<h2 id='get-transfers-account-draft'>Get Transfers (Account) DRAFT</h2>
 <blockquote>
 <p>Request:</p>
 </blockquote>
@@ -2219,7 +2215,7 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 <h3 id='acknowledgement-and-retries'>Acknowledgement and retries</h3>
 <p>When your application receives a <a href="#webhooks">Webhook</a>, it should respond with a HTTP 2xx status code to indicate successful receipt. If Dwolla receives a status code greater than a HTTP 400, or your application fails to respond within 20 seconds of the attempt, another attempt will be made.</p>
 
-<p>Dwolla will re-attempt delivery 8 times over the course of 72 hours according the backoff schedule below. If a webhook was successfully received but you would like the information again, you can call <a href="#retrieve-webhook-by-id">retrieve webhook by ID</a>.</p>
+<p>Dwolla will re-attempt delivery 8 times over the course of 72 hours according the backoff schedule below. If a webhook was successfully received but you would like the information again, you can call <a href="#get-webhook-by-id">retrieve webhook by ID</a>.</p>
 
 <table><thead>
 <tr>
@@ -2551,7 +2547,7 @@ GET https://api.dwolla.com/webhook-subscriptions/{id}
 <td>Webhook subscription not found.</td>
 </tr>
 </tbody></table>
-<h2 id='get-a-webhook-subscription39s-hooks'>Get a Webhook Subscription&rsquo;s Hooks</h2>
+<h2 id='get-a-subscription39s-webhooks'>Get a Subscription&rsquo;s Webhooks</h2>
 <blockquote>
 <p>Request:</p>
 </blockquote>
