@@ -81,11 +81,13 @@
 
 </code></pre>
 
-<p>Welcome to the Dwolla API V2 reference guide.  Find integration resources and getting started guides at developers.dwolla.com.</p>
-<h2 id='overview'>Overview</h2>
-<p>The Dwolla V2 API is built with REST principles in mind.  JSON-HAL is supported.  Swagger is also supported.</p>
+<p>Welcome to the Dwolla API V2 documentation, currently in active development. Gradually, the functionality of API V1 will be implemented in API V2.  The two versions will operate in parallel for the foreseeable future.  </p>
 
-<p>Dwolla V2 API is a work in progress.  New endpoints will be built on the Dwolla V2 API instead of the previous V1 version.  We encourage all API consumers to use the V2 API where possible, and, once the V2 API supports the same set of features as V1, we encourage all API consumers to migrate to V2.  OAuth access and refresh tokens created in V1 can be used in V2.</p>
+<p>The initial focus of API Version 2 centers around a premium feature: <a href="https://www.dwolla.com/white-label">White Label</a>, and will not provide the same functionality as Version 1 does.  Over time, we will add the same functionality currently currently available in V1 to V2.</p>
+
+<p>Official SDKs for Java, Node.JS, PHP, Ruby, and Python are being actively developed.</p>
+
+<p>It is important to note: White Label is a premium feature that cannot be activated in our production environment until you’ve received our approval to use it and have entered into an agreement with us. Feel free to <a href="https://www.dwolla.com/contact?b=apidocs">contact a sales representative</a> to find the package that best suits your needs.</p>
 <h2 id='making-requests'>Making Requests</h2><pre class="highlight shell"><code>POST https://api.dwolla.com/customers
 Content-Type: application/json
 Accept: application/vnd.dwolla.v1.hal+json
@@ -417,7 +419,7 @@ https://www.dwolla.com/oauth/v2/authenticate?client_id={client_id}&amp;response_
 </tr>
 <tr>
 <td>scope</td>
-<td>Pipe (`</td>
+<td>Pipe (<code class="prettyprint">&amp;#124;</code>) delimited list of permission scopes granted</td>
 </tr>
 </tbody></table>
 <h2 id='refresh-authorization'>Refresh Authorization</h2><pre class="highlight json"><code><span class="p">{</span><span class="w">
@@ -572,16 +574,12 @@ https://www.dwolla.com/oauth/v2/authenticate?client_id={client_id}&amp;response_
 <td>The lifetime of the access token, in seconds.  Default is 3600.</td>
 </tr>
 <tr>
-<td>refresh_token</td>
-<td>New refresh token</td>
-</tr>
-<tr>
-<td>refresh_expires_in</td>
-<td>The lifetime of the refresh token, in seconds.  Default is 5184000.</td>
-</tr>
-<tr>
 <td>token_type</td>
 <td>Always <code class="prettyprint">bearer</code>.</td>
+</tr>
+<tr>
+<td>scope</td>
+<td>Pipe (<code class="prettyprint">&amp;#124;</code>) delimited list of permission scopes granted</td>
 </tr>
 </tbody></table>
 
