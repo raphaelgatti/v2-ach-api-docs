@@ -12,13 +12,13 @@
 
 ```
 
-Welcome to the Dwolla API V2 reference guide.  Find integration resources and getting started guides at developers.dwolla.com.
+Welcome to the Dwolla API V2 documentation, currently in active development. Gradually, the functionality of API V1 will be implemented in API V2.  The two versions will operate in parallel for the foreseeable future.  
 
-## Overview
+The initial focus of API Version 2 centers around a premium feature: [White Label](https://www.dwolla.com/white-label), and will not provide the same functionality as Version 1 does.  Over time, we will add the same functionality currently currently available in V1 to V2.
 
-The Dwolla V2 API is built with REST principles in mind.  JSON-HAL is supported.  Swagger is also supported.
+Official SDKs for Java, Node.JS, PHP, Ruby, and Python are being actively developed.
 
-Dwolla V2 API is a work in progress.  New endpoints will be built on the Dwolla V2 API instead of the previous V1 version.  We encourage all API consumers to use the V2 API where possible, and, once the V2 API supports the same set of features as V1, we encourage all API consumers to migrate to V2.  OAuth access and refresh tokens created in V1 can be used in V2.
+It is important to note: White Label is a premium feature that cannot be activated in our production environment until you’ve received our approval to use it and have entered into an agreement with us. Feel free to [contact a sales representative](https://www.dwolla.com/contact?b=apidocs) to find the package that best suits your needs.
 
 ## Making Requests
 
