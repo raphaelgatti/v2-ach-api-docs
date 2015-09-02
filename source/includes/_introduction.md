@@ -39,11 +39,7 @@ Authorization: Bearer myOAuthAccessToken123
 GET https://www.dwolla.com/oauth/rest/transactions?client_id=XYZ&client_secret=JJJ&limit=10
 ```
 
-All requests should supply the following headers:
-
-`Accept: application/vnd.dwolla.v1.hal+json`
-
-`Content-Type: application/vnd.dwolla.v1.hal+json`
+All requests should supply the `Accept: application/vnd.dwolla.v1.hal+json` header. `POST` requests must have a JSON encoded body and the `Content-Type: application/vnd.dwolla.v1.hal+json` header.
 
 Requests must be made over HTTPS.  Any non-secure requests are met with a redirect (HTTP 302) to the HTTPS equivalent URI.
 

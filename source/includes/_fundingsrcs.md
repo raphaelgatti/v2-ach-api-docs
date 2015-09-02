@@ -133,7 +133,7 @@ id | no | Customer unique identifier.
 | 403 | Not authorized to list funding sources.
 | 404 | Customer not found. |
 
-## New Funding Source (Account)
+## New Funding Source (Account) DRAFT
 
 > Request:
 

@@ -52,7 +52,7 @@ A transfer represents money being transferred from a `source` to a `destination`
 | Parameter | Description
 |-----------|------------|
 |amount | Amount of money. 
-|currency | String, probably `USD`
+|currency | String, `USD`
 
 ## Initiate Transfer
 
@@ -214,7 +214,7 @@ offset | yes | How many results to skip.
 | 403 | Not authorized to list transfers. |
 | 404 | Customer not found. |
 
-## Get Transfers (Account) 
+## Get Transfers (Account) DRAFT
 
 > Request:
 

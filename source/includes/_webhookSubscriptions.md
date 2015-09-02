@@ -43,7 +43,7 @@ Create a Webhook Subscription to receive `POST` requests from Dwolla (called Web
 ### Acknowledgement and retries
 When your application receives a [Webhook](#webhooks), it should respond with a HTTP 2xx status code to indicate successful receipt. If Dwolla receives a status code greater than a HTTP 400, or your application fails to respond within 20 seconds of the attempt, another attempt will be made.
 
-Dwolla will re-attempt delivery 8 times over the course of 72 hours according the backoff schedule below. If a webhook was successfully received but you would like the information again, you can call [retrieve webhook by ID](#retrieve-webhook-by-id).
+Dwolla will re-attempt delivery 8 times over the course of 72 hours according the backoff schedule below. If a webhook was successfully received but you would like the information again, you can call [retrieve webhook by ID](#get-webhook-by-id).
 
 | Retry number | Interval (relative to last retry) | Interval (relative to original attempt) |
 |:------------:|:---------------------------------:|:---------------------------------------:|
@@ -272,7 +272,7 @@ GET https://api.dwolla.com/webhook-subscriptions/{id}
 |--------------|-------------|
 | 404 | Webhook subscription not found. |
 
-## Get a Webhook Subscription's Hooks
+## Get a Subscription's Webhooks
 
 > Request:
 

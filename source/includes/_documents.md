@@ -28,7 +28,7 @@ A Document is used to verify the identity of a Customer
 |documentType | Either `passport`, `driversLicense`, or `idCard`.
 
 
-## Create a Document
+## Create a Document DRAFT
 
 > Request:
 
@@ -71,7 +71,7 @@ Create a Document belonging to a Customer.
 | HTTP Status | Message |
 |--------------|-------------|
 
-## List Documents
+## List Documents DRAFT
 
 > Request:
 
@@ -117,7 +117,7 @@ Retrieve a list of Documents which belong to a Customer.
 | HTTP Status | Message |
 |--------------|-------------|
 
-## Retrieve Document by ID
+## Retrieve Document by ID DRAFT
 
 > Request:
 

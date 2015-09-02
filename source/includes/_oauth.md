@@ -148,7 +148,7 @@ expires_in | The lifetime of the access token, in seconds.  Default is 3600.
 refresh_token | New refresh token
 refresh_expires_in | The lifetime of the refresh token, in seconds.  Default is 5184000.
 token_type | Always `bearer`.
-scope | Pipe (`&#124;`) delimited list of permission scopes granted
+scope | Pipe <code>&#124;</code> delimited list of permission scopes granted
 
 ## Refresh Authorization
 ```json
@@ -199,7 +199,7 @@ client_id | Application key
 client_secret | Application secret
 refresh_token | A valid refresh token
 grant_type | This must be set to `refresh_token`
-scope | Pipe (`|`) delimited list of permission scopes granted
+scope | Pipe <code>&#124;</code> delimited list of permission scopes granted
 
 ### Response Parameters
 
@@ -252,4 +252,4 @@ Parameter | Description
 access_token | A new access token with requested scopes
 expires_in | The lifetime of the access token, in seconds.  Default is 3600.
 token_type | Always `bearer`.
-scope | Pipe (`&#124;`) delimited list of permission scopes granted
+scope | Pipe <code>&#124;</code> delimited list of permission scopes granted
