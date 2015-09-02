@@ -25,7 +25,7 @@ The `access_token` can then be used to make API calls which require user authent
 
 A refresh token can be used within 60 days to generate a new access_token and refresh_token pair.  So long as you [refresh your authorization](#refresh-authorization) at least every 60 days, your application can maintain authorization indefinitely without requiring the user to re-authorize.
 
-## Request Authorization
+## Request User Authorization
 
 ```php
 <?php
@@ -101,7 +101,7 @@ ManageAccount | Manage the user's account settings
 Scheduled | Allow scheduling one-time and recurring payments.
 ManageCustomers | Includes create customer records, manage their funding sources, and allow related money movement
 
-## Finish Authorization
+## Finish User Authorization
 
 ```json
 {
@@ -200,6 +200,50 @@ client_secret | Application secret
 refresh_token | A valid refresh token
 grant_type | This must be set to `refresh_token`
 scope | Pipe (`|`) delimited list of permission scopes granted
+
+### Response Parameters
+
+Parameter | Description
+----------|------------
+access_token | A new access token with requested scopes
+expires_in | The lifetime of the access token, in seconds.  Default is 3600.
+refresh_token | New refresh token
+refresh_expires_in | The lifetime of the refresh token, in seconds.  Default is 5184000.
+token_type | Always `bearer`.
+
+
+## Client Access Token
+
+```
+{
+  "client_id": "JCGQXLrlfuOqdUYdTcLz3rBiCZQDRvdWIUPkw++GMuGhkem9Bo",
+  "client_secret": "g7QLwvO37aN2HoKx1amekWi8a2g7AIuPbD5C/JSLqXIcDOxfTr",
+  "grant_type": "client_credentials"
+}
+```
+
+> Successful Response
+
+```
+{
+  "access_token": "SF8Vxx6H644lekdVKAAHFnqRCFy8WGqltzitpii6w2MVaZp1Nw",
+  "token_type": "bearer",
+  "expires_in": 3600,
+  "scope": "AccountInfoFull|ManageAccount|Contacts|Transactions|Balance|Send|Request|Funding"
+}
+```
+
+Some endpoints require a *client access token*, which is different from a user access token.  Client access tokens don't require any particular user's authorization, since they grant your application access to resources which belong to the application itself, rather than an account.  You'll only need to provide your client credentials to receive a client access token.
+
+### HTTP Request
+
+`POST https://www.dwolla.com/oauth/v2/token`
+
+Parameter | Description
+----------|------------
+client_id | Application key
+client_secret | Application secret
+grant_type | This must be set to `client_credentials`
 
 ### Response Parameters
 
