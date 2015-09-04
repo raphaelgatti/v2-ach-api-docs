@@ -47,7 +47,6 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
   "firstName": "Bob",
   "lastName": "Dole",
   "email": "bob@dole.com",
-  "type": "unverified",
   "ipAddress": "99.99.99.99"
 }
 ```
@@ -72,7 +71,6 @@ Parameter | Optional? | Description
 firstName | no | Customer's first name.
 lastName | no | Customer's last name.
 email | no | Customer's email address.
-type | no | Either `unverified`, `personal`, or `business`.
 ipAddress | yes | Customer's IP address
 
 ### Errors
