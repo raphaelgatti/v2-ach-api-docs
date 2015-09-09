@@ -2,15 +2,18 @@
 
 ```shell
 {
-  "id": "99bfb139-eadd-4cdf-b346-7504f0c16c60",
-  "firstName": "Bob",
-  "lastName": "Dole",
-  "status": "active",
   "_links": {
     "self": {
-      "href": "https://api.dwolla.com/customers/99bfb139-eadd-4cdf-b346-7504f0c16c60"
+      "href": "https://api.dwolla.com/customers/FC451A7A-AE30-4404-AB95-E3553FCD733F"
     }
-  }
+  },
+  "id": "FC451A7A-AE30-4404-AB95-E3553FCD733F",
+  "firstName": "Bob",
+  "lastName": "Dole",
+  "email": "bob@dole.com",
+  "type": "unverified",
+  "status": "unverified",
+  "created": "2015-09-03T23:56:10.023Z"
 }
 ```
 
@@ -23,8 +26,10 @@ A customer represents an individual or business with whom you intend to transact
 |id | Customer unique identifier.
 |firstName | Customer's first name.
 |lastName | Customer's last name.
-|status | Either `active`, `deactivated`, or `suspended`.
-
+|email | Customer's email address.
+|type | Either `unverified`, `personal`, or `business`.
+|status | Either `unverified`, `retry`, `document`, `verified`, or `suspended`.
+|created | ISO-8601 timestamp.
 
 ## New Customer
 
@@ -41,7 +46,7 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 {
   "firstName": "Bob",
   "lastName": "Dole",
-  "email": "gordon+1@dwolla.com",
+  "email": "bob@dole.com",
   "ipAddress": "99.99.99.99"
 }
 ```
@@ -50,7 +55,7 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 
 ```shell
 HTTP/1.1 201 Created
-Location: https://api.dwolla.com/customers/6f80efc0-b158-4df1-9b11-da85f0bffdd4
+Location: https://api.dwolla.com/customers/FC451A7A-AE30-4404-AB95-E3553FCD733F
 ```
 
 Create a new Customer.
@@ -72,7 +77,7 @@ ipAddress | yes | Customer's IP address
 | HTTP Status | Message |
 |--------------|-------------|
 | 400 | Duplicate customer or validation error.
-| 403 | Not authorized to create customers. 
+| 403 | Not authorized to create customers.
 | 404 | Customer not found.
 
 ## List Customers
@@ -90,24 +95,35 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 ```json
 {
   "_links": {
+    "first": {
+      "href": "https://api.dwolla.com/customers?limit=25&offset=0"
+    },
+    "last": {
+      "href": "https://api.dwolla.com/customers?limit=25&offset=0"
+    },
     "self": {
-      "href": "https://api.dwolla.com/customers"
+      "href": "https://api.dwolla.com/customers?limit=25&offset=0"
     }
   },
-  "total": 1,
-  "items": [
-    {
-      "_links": {
-        "self": {
-          "href": "https://api.dwolla.com/customers/99bfb139-eadd-4cdf-b346-7504f0c16c60"
-        }
-      },
-      "id": "99bfb139-eadd-4cdf-b346-7504f0c16c60",
-      "firstName": "Bob",
-      "lastName": "Dole",
-      "status": "active"
-    }
-  ]
+  "_embedded": {
+    "customers": [
+      {
+        "_links": {
+          "self": {
+            "href": "https://api.dwolla.com/customers/FC451A7A-AE30-4404-AB95-E3553FCD733F"
+          }
+        },
+        "id": "FC451A7A-AE30-4404-AB95-E3553FCD733F",
+        "firstName": "Bob",
+        "lastName": "Dole",
+        "email": "bob@dole.com",
+        "type": "unverified",
+        "status": "unverified",
+        "created": "2015-09-03T23:56:10.023Z"
+      }
+    ]
+  },
+  "total": 1
 }
 ```
 
@@ -145,13 +161,16 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 {
   "_links": {
     "self": {
-      "href": "https://api.dwolla.com/customers/07D59716-EF22-4FE6-98E8-F3190233DFB8"
+      "href": "https://api.dwolla.com/customers/FC451A7A-AE30-4404-AB95-E3553FCD733F"
     }
   },
-  "id": "07D59716-EF22-4FE6-98E8-F3190233DFB8",
-  "firstName": "Jane",
-  "lastName": "Doe",
-  "status": "active"
+  "id": "FC451A7A-AE30-4404-AB95-E3553FCD733F",
+  "firstName": "Bob",
+  "lastName": "Dole",
+  "email": "bob@dole1.com",
+  "type": "unverified",
+  "status": "unverified",
+  "created": "2015-09-03T23:56:10.023Z"
 }
 ```
 
