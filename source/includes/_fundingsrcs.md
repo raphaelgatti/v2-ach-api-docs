@@ -4,7 +4,7 @@
 {
     "routingNumber": "87654321",
     "accountNumber": "12345678",
-    "type": "Checking",
+    "type": "checking",
     "name": "My Bank"
 }
 ```
