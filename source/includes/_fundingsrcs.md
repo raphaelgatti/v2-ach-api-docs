@@ -37,7 +37,7 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 {
     "routingNumber": "87654321",
     "accountNumber": "12345678",
-    "type": "Checking",
+    "type": "checking",
     "name": "My Bank"
 }
 ```
@@ -61,7 +61,7 @@ Parameter | Optional? | Description
 ----------|------------|------------
 routingNumber | no | The bank account's routing number.
 accountNumber | no | The bank account number.
-type | no | Type of bank account: `Checking` or `Savings`.
+type | no | Type of bank account: `checking` or `savings`.
 name | no | Arbitrary nickname for the funding source.
 
 ### Errors
@@ -148,7 +148,7 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 {
     "routingNumber": "87654321",
     "accountNumber": "12345678",
-    "type": "Checking",
+    "type": "checking",
     "name": "My Bank"
 }
 ```
@@ -173,7 +173,7 @@ Parameter | Description
 ----------|------------
 accountNumber | The bank account number.
 routingNumber | The bank account's routing number.
-type | Type of bank account: `Checking` or `Savings`.
+type | Type of bank account: `checking` or `savings`.
 name | Arbitrary nickname for the funding source.
 
 ### Errors
