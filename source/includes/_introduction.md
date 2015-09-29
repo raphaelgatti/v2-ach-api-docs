@@ -91,3 +91,39 @@ The following errors are common across all API endpoints.
 | 406 | InvalidVersion | Missing or invalid API version. |
 | 500 | ServerError | A server error occurred. Error ID: 63e92a2a-fb48-4a23-ab4c-24a6764f1593. |
 | 500 | RequestTimeout | The request timed out. |
+
+## Links
+
+```
+{
+  "_links": {
+    "self": {
+      "href": "https://api-uat.dwolla.com/customers/132681FA-1B4D-4181-8FF2-619CA46235B1"
+    },
+    "funding-sources": {
+      "href": "https://api-uat.dwolla.com/customers/132681FA-1B4D-4181-8FF2-619CA46235B1/funding-sources"
+    },
+    "transfers": {
+      "href": "https://api-uat.dwolla.com/customers/132681FA-1B4D-4181-8FF2-619CA46235B1/transfers"
+    },
+    "retry-verification": {
+      "href": "https://api-uat.dwolla.com/customers/132681FA-1B4D-4181-8FF2-619CA46235B1"
+    }
+  },
+  "id": "132681FA-1B4D-4181-8FF2-619CA46235B1",
+  "firstName": "Gordon",
+  "lastName": "Zheng",
+  "email": "gordon+15@dwolla.com",
+  "type": "personal",
+  "status": "retry",
+  "created": "2015-09-29T19:47:28.920Z"
+}
+```
+
+Relationships and available actions for a resource are represented with links.  All resources have a `_links` attribute.  At a minimum, all resources will have a `self` link which indicates the URL of the resource itself.
+
+Some links, such as `funding-sources`, give you a URL which you can follow to access related resources.  For example, the customer resource has a `funding-sources` link which, when followed, will list the customer's available funding sources.
+
+Responses which contain a collection of resources have pagination links, `first`, `next`, `last`.
+
+Other links represent actions which can be done with the resource.  For instance, customers which are eligible to send funds have a `send` link which directs you to the [transfer](#initiate-transfer) endpoint.
