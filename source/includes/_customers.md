@@ -4,20 +4,48 @@
 {
   "_links": {
     "self": {
-      "href": "https://api.dwolla.com/customers/FC451A7A-AE30-4404-AB95-E3553FCD733F"
+      "href": "https://api-uat.dwolla.com/customers/132681FA-1B4D-4181-8FF2-619CA46235B1"
+    },
+    "receive": {
+      "href": "https://api-uat.dwolla.com/transfers"
+    },
+    "funding-sources": {
+      "href": "https://api-uat.dwolla.com/customers/132681FA-1B4D-4181-8FF2-619CA46235B1/funding-sources"
+    },
+    "transfers": {
+      "href": "https://api-uat.dwolla.com/customers/132681FA-1B4D-4181-8FF2-619CA46235B1/transfers"
+    },
+    "send": {
+      "href": "https://api-uat.dwolla.com/transfers"
     }
   },
-  "id": "FC451A7A-AE30-4404-AB95-E3553FCD733F",
-  "firstName": "Bob",
-  "lastName": "Dole",
-  "email": "bob@dole.com",
-  "type": "unverified",
-  "status": "unverified",
-  "created": "2015-09-03T23:56:10.023Z"
+  "id": "132681FA-1B4D-4181-8FF2-619CA46235B1",
+  "firstName": "Gordon",
+  "lastName": "Zheng",
+  "email": "gordon+15@dwolla.com",
+  "type": "personal",
+  "status": "verified",
+  "created": "2015-09-29T19:47:28.920Z"
 }
 ```
 
-A customer represents an individual or business with whom you intend to transact with. In order to manage a user's Customers, the `ManageCustomers` OAuth scope is required.
+A customer represents an individual or business with whom you intend to transact with. In order to manage an account's Customers, the `ManageCustomers` OAuth scope is required.
+
+### Verified and unverified customers
+
+In any transfer, at least one party -- either the sender or the recipient -- must have their identity verified by Dwolla.  In cases where a customer is sending funds to or receiving funds from your account, the customer can remain unverified because your account is already verified.
+
+However, if you need to transfer funds between your customers, at least one of them will need to be verified.
+
+### Customer Links
+| Link | Description|
+|------|------------|
+| self | URL of the Customer resource
+| receive | Follow the link the create a transfer to this customer.
+|funding-sources | GET this link to list the customer's funding sources.
+|transfers | GET this link to list the customer's transfers
+| send | (optional) If this link exists, this user can send funds.  POST to this URL to create a transfer.
+| retry-verification | (optional) If the customer has a `status` of `retry`, POST to this link to attempt to correct their identity verification information.
 
 ### Customer Resource
 
@@ -31,6 +59,16 @@ A customer represents an individual or business with whom you intend to transact
 |status | Either `unverified`, `retry`, `document`, `verified`, or `suspended`.
 |created | ISO-8601 timestamp.
 
+### Customer statuses
+
+| Status | Description
+|--------|------------|
+| unverified | Customers of type `unverified` always have this status.
+| retry | The initial verification attempt failed because the information provided did not satisfy our check.  You can make one additional attempt by changing some or all the attributes of the existing customer with a POST request.
+| document | Dwolla requires additional documentation to identify the customer.  Read about [Documents](#documents).
+| verified | The customer is currently verified.
+| suspended | The customer is suspended, and may neither send nor receive funds.
+
 ## New Customer
 
 > Request:
@@ -42,6 +80,8 @@ Accept: application/vnd.dwolla.v1.hal+json
 Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 ```
 
+> Unverified customer:
+
 ```json
 {
   "firstName": "Bob",
@@ -51,11 +91,40 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 }
 ```
 
-> Response:
+> Verified customer:
+
+```json
+{
+  "firstName": "Gordon",
+  "lastName": "Zheng",
+  "email": "gordon+15@dwolla.com",
+  "ipAddress": "10.10.10.10",
+  "type": "personal",
+  "address1": "6680 Forest Ave.",
+  "address2": "",
+  "city": "Ridgewood",
+  "state": "NY",
+  "postalCode": "11385",
+  "dateOfBirth": "1990-07-11",
+  "tin": "202-99-1516",
+  "phone": "3478589191"
+}
+```
+
+> Successful response:
 
 ```shell
 HTTP/1.1 201 Created
 Location: https://api.dwolla.com/customers/FC451A7A-AE30-4404-AB95-E3553FCD733F
+```
+
+> Validation error:
+
+```
+{
+  "code": "ValidationError",
+  "description": "Phone invalid."
+}
 ```
 
 Create a new Customer.
@@ -65,13 +134,30 @@ Create a new Customer.
 ### HTTP Request
 `POST https://api.dwolla.com/customers`
 
-### Request Parameters
+### Request Parameters - unverified customer
 Parameter | Optional? | Description
 ----------|----------|-------------
 firstName | no | Customer's first name.
 lastName | no | Customer's last name.
 email | no | Customer's email address.
 ipAddress | yes | Customer's IP address
+
+### Request Parameters - verified customer
+Parameter | Optional? | Description
+----------|----------|-------------
+firstName | no | Customer's first name.
+lastName | no | Customer's last name.
+email | no | Customer's email address.
+ipAddress | yes | Customer's IP address
+type | no | Must be set to `personal`.  Note: eventually, `business` will be supported.
+address1 | no | First line of the street address of the customer's permanent residence
+address2 | yes | Second line of the street address of the customer's permanent residence
+city | no | City of customer's peramanent residence
+state | no | Two letter abbreviation of the state in which the customer resides.  e.g. `NY`
+postalCode | no | Postal code of customer's peramanent residence
+dateOfBirth | no | Customer's date of birth in `YYYY-MM-DD` format.
+tin | no | Last four digits of the customer's Taxpayer Identification Number.  For personal accounts, this will be the last four digits of their Social Security Number.
+phone | no | Customer's 10 digit phone number.  No hyphens or other separators.  e.g. `3334447777`
 
 ### Errors
 | HTTP Status | Message |
