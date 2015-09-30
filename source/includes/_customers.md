@@ -101,7 +101,7 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
   "ipAddress": "10.10.10.10",
   "type": "personal",
   "address1": "6680 Forest Ave.",
-  "address2": "",
+  "address2": "Apt 4F",
   "city": "Ridgewood",
   "state": "NY",
   "postalCode": "11385",
@@ -127,7 +127,7 @@ Location: https://api.dwolla.com/customers/FC451A7A-AE30-4404-AB95-E3553FCD733F
 }
 ```
 
-Create a new Customer.
+Create a new Customer.  To create an unverified customer, you only need to provide the customer's full name and email address.  Verified customers require additional information.
 
 <aside class="reminder">This endpoint [requires](#authentication) an OAuth access token with the `ManageCustomers` [scope](#oauth-scopes).</aside>
 
