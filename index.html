@@ -191,6 +191,38 @@ GET https://www.dwolla.com/oauth/rest/transactions?client_id<span class="o">=</s
 <td>The request timed out.</td>
 </tr>
 </tbody></table>
+<h2 id='links'>Links</h2><pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"_links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"self"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api-uat.dwolla.com/customers/132681FA-1B4D-4181-8FF2-619CA46235B1"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nt">"funding-sources"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api-uat.dwolla.com/customers/132681FA-1B4D-4181-8FF2-619CA46235B1/funding-sources"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nt">"transfers"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api-uat.dwolla.com/customers/132681FA-1B4D-4181-8FF2-619CA46235B1/transfers"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nt">"retry-verification"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api-uat.dwolla.com/customers/132681FA-1B4D-4181-8FF2-619CA46235B1"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"132681FA-1B4D-4181-8FF2-619CA46235B1"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"firstName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Gordon"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"lastName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Zheng"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"gordon+15@dwolla.com"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"personal"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"retry"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"created"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-09-29T19:47:28.920Z"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<p>Relationships and available actions for a resource are represented with links.  All resources have a <code class="prettyprint">_links</code> attribute.  At a minimum, all resources will have a <code class="prettyprint">self</code> link which indicates the URL of the resource itself.</p>
+
+<p>Some links, such as <code class="prettyprint">funding-sources</code>, give you a URL which you can follow to access related resources.  For example, the customer resource has a <code class="prettyprint">funding-sources</code> link which, when followed, will list the customer&rsquo;s available funding sources.</p>
+
+<p>Responses which contain a collection of resources have pagination links, <code class="prettyprint">first</code>, <code class="prettyprint">next</code>, <code class="prettyprint">last</code>.</p>
+
+<p>Other links represent actions which can be done with the resource.  For instance, customers which are eligible to send funds have a <code class="prettyprint">send</code> link which directs you to the <a href="#initiate-transfer">transfer</a> endpoint.</p>
 
           <h1 id='oauth'>OAuth</h1><pre class="highlight plaintext"><code>  /$$$$$$   /$$$$$$              /$$     /$$      
  /$$__  $$ /$$__  $$            | $$    | $$      
@@ -582,20 +614,68 @@ https://www.dwolla.com/oauth/v2/authenticate?client_id={client_id}&amp;response_
           <h1 id='customers'>Customers</h1><pre class="highlight shell"><code><span class="o">{</span>
   <span class="s2">"_links"</span>: <span class="o">{</span>
     <span class="s2">"self"</span>: <span class="o">{</span>
-      <span class="s2">"href"</span>: <span class="s2">"https://api.dwolla.com/customers/FC451A7A-AE30-4404-AB95-E3553FCD733F"</span>
+      <span class="s2">"href"</span>: <span class="s2">"https://api-uat.dwolla.com/customers/132681FA-1B4D-4181-8FF2-619CA46235B1"</span>
+    <span class="o">}</span>,
+    <span class="s2">"receive"</span>: <span class="o">{</span>
+      <span class="s2">"href"</span>: <span class="s2">"https://api-uat.dwolla.com/transfers"</span>
+    <span class="o">}</span>,
+    <span class="s2">"funding-sources"</span>: <span class="o">{</span>
+      <span class="s2">"href"</span>: <span class="s2">"https://api-uat.dwolla.com/customers/132681FA-1B4D-4181-8FF2-619CA46235B1/funding-sources"</span>
+    <span class="o">}</span>,
+    <span class="s2">"transfers"</span>: <span class="o">{</span>
+      <span class="s2">"href"</span>: <span class="s2">"https://api-uat.dwolla.com/customers/132681FA-1B4D-4181-8FF2-619CA46235B1/transfers"</span>
+    <span class="o">}</span>,
+    <span class="s2">"send"</span>: <span class="o">{</span>
+      <span class="s2">"href"</span>: <span class="s2">"https://api-uat.dwolla.com/transfers"</span>
     <span class="o">}</span>
   <span class="o">}</span>,
-  <span class="s2">"id"</span>: <span class="s2">"FC451A7A-AE30-4404-AB95-E3553FCD733F"</span>,
-  <span class="s2">"firstName"</span>: <span class="s2">"Bob"</span>,
-  <span class="s2">"lastName"</span>: <span class="s2">"Dole"</span>,
-  <span class="s2">"email"</span>: <span class="s2">"bob@dole.com"</span>,
-  <span class="s2">"type"</span>: <span class="s2">"unverified"</span>,
-  <span class="s2">"status"</span>: <span class="s2">"unverified"</span>,
-  <span class="s2">"created"</span>: <span class="s2">"2015-09-03T23:56:10.023Z"</span>
+  <span class="s2">"id"</span>: <span class="s2">"132681FA-1B4D-4181-8FF2-619CA46235B1"</span>,
+  <span class="s2">"firstName"</span>: <span class="s2">"Gordon"</span>,
+  <span class="s2">"lastName"</span>: <span class="s2">"Zheng"</span>,
+  <span class="s2">"email"</span>: <span class="s2">"gordon+15@dwolla.com"</span>,
+  <span class="s2">"type"</span>: <span class="s2">"personal"</span>,
+  <span class="s2">"status"</span>: <span class="s2">"verified"</span>,
+  <span class="s2">"created"</span>: <span class="s2">"2015-09-29T19:47:28.920Z"</span>
 <span class="o">}</span>
 </code></pre>
 
-<p>A customer represents an individual or business with whom you intend to transact with. In order to manage a user&rsquo;s Customers, the <code class="prettyprint">ManageCustomers</code> OAuth scope is required.</p>
+<p>A customer represents an individual or business with whom you intend to transact with. In order to manage an account&rsquo;s Customers, the <code class="prettyprint">ManageCustomers</code> OAuth scope is required.</p>
+<h3 id='verified-and-unverified-customers'>Verified and unverified customers</h3>
+<p>In any transfer, at least one party &ndash; either the sender or the recipient &ndash; must have their identity verified by Dwolla.  In cases where a customer is sending funds to or receiving funds from your account, the customer can remain unverified because your account is already verified.</p>
+
+<p>However, if you need to transfer funds between your customers, at least one of them will need to be verified.</p>
+<h3 id='customer-links'>Customer Links</h3>
+<table><thead>
+<tr>
+<th>Link</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>self</td>
+<td>URL of the Customer resource</td>
+</tr>
+<tr>
+<td>receive</td>
+<td>Follow the link the create a transfer to this customer.</td>
+</tr>
+<tr>
+<td>funding-sources</td>
+<td>GET this link to list the customer&rsquo;s funding sources.</td>
+</tr>
+<tr>
+<td>transfers</td>
+<td>GET this link to list the customer&rsquo;s transfers</td>
+</tr>
+<tr>
+<td>send</td>
+<td>(optional) If this link exists, this user can send funds.  POST to this URL to create a transfer.</td>
+</tr>
+<tr>
+<td>retry-verification</td>
+<td>(optional) If the customer has a <code class="prettyprint">status</code> of <code class="prettyprint">retry</code>, POST to this link to attempt to correct their identity verification information.</td>
+</tr>
+</tbody></table>
 <h3 id='customer-resource'>Customer Resource</h3>
 <table><thead>
 <tr>
@@ -632,6 +712,34 @@ https://www.dwolla.com/oauth/v2/authenticate?client_id={client_id}&amp;response_
 <td>ISO-8601 timestamp.</td>
 </tr>
 </tbody></table>
+<h3 id='customer-statuses'>Customer statuses</h3>
+<table><thead>
+<tr>
+<th>Status</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>unverified</td>
+<td>Customers of type <code class="prettyprint">unverified</code> always have this status.</td>
+</tr>
+<tr>
+<td>retry</td>
+<td>The initial verification attempt failed because the information provided did not satisfy our check.  You can make one additional attempt by changing some or all the attributes of the existing customer with a POST request.</td>
+</tr>
+<tr>
+<td>document</td>
+<td>Dwolla requires additional documentation to identify the customer.  Read about <a href="#documents">Documents</a>.</td>
+</tr>
+<tr>
+<td>verified</td>
+<td>The customer is currently verified.</td>
+</tr>
+<tr>
+<td>suspended</td>
+<td>The customer is suspended, and may neither send nor receive funds.</td>
+</tr>
+</tbody></table>
 <h2 id='new-customer'>New Customer</h2>
 <blockquote>
 <p>Request:</p>
@@ -641,6 +749,10 @@ Content-Type: application/vnd.dwolla.v1.hal+json
 Accept: application/vnd.dwolla.v1.hal+json
 Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 </code></pre>
+
+<blockquote>
+<p>Unverified customer:</p>
+</blockquote>
 <pre class="highlight json"><code><span class="p">{</span><span class="w">
   </span><span class="nt">"firstName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Bob"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"lastName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Dole"</span><span class="p">,</span><span class="w">
@@ -650,17 +762,46 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 </span></code></pre>
 
 <blockquote>
-<p>Response:</p>
+<p>Verified customer:</p>
+</blockquote>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"firstName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Gordon"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"lastName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Zheng"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"gordon+15@dwolla.com"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"ipAddress"</span><span class="p">:</span><span class="w"> </span><span class="s2">"10.10.10.10"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"personal"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"address1"</span><span class="p">:</span><span class="w"> </span><span class="s2">"6680 Forest Ave."</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"address2"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Apt 4F"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"city"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Ridgewood"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"state"</span><span class="p">:</span><span class="w"> </span><span class="s2">"NY"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"postalCode"</span><span class="p">:</span><span class="w"> </span><span class="s2">"11385"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"dateOfBirth"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1990-07-11"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"tin"</span><span class="p">:</span><span class="w"> </span><span class="s2">"202-99-1516"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"phone"</span><span class="p">:</span><span class="w"> </span><span class="s2">"3478589191"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<blockquote>
+<p>Successful response:</p>
 </blockquote>
 <pre class="highlight shell"><code>HTTP/1.1 201 Created
 Location: https://api.dwolla.com/customers/FC451A7A-AE30-4404-AB95-E3553FCD733F
 </code></pre>
 
-<p>Create a new Customer.</p>
+<blockquote>
+<p>Validation error:</p>
+</blockquote>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ValidationError"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Phone invalid."</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<p>Create a new Customer.  To create an unverified customer, you only need to provide the customer&rsquo;s full name and email address.  Verified customers require additional information.</p>
 <aside class="reminder"><p>This endpoint <a href="#authentication">requires</a> an OAuth access token with the <code>ManageCustomers</code> <a href="#oauth-scopes">scope</a>.</p>
 </aside><h3 id='http-request'>HTTP Request</h3>
 <p><code class="prettyprint">POST https://api.dwolla.com/customers</code></p>
-<h3 id='request-parameters'>Request Parameters</h3>
+<h3 id='request-parameters---unverified-customer'>Request Parameters - unverified customer</h3>
 <table><thead>
 <tr>
 <th>Parameter</th>
@@ -687,6 +828,80 @@ Location: https://api.dwolla.com/customers/FC451A7A-AE30-4404-AB95-E3553FCD733F
 <td>ipAddress</td>
 <td>yes</td>
 <td>Customer&rsquo;s IP address</td>
+</tr>
+</tbody></table>
+<h3 id='request-parameters---verified-customer'>Request Parameters - verified customer</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Optional?</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>firstName</td>
+<td>no</td>
+<td>Customer&rsquo;s first name.</td>
+</tr>
+<tr>
+<td>lastName</td>
+<td>no</td>
+<td>Customer&rsquo;s last name.</td>
+</tr>
+<tr>
+<td>email</td>
+<td>no</td>
+<td>Customer&rsquo;s email address.</td>
+</tr>
+<tr>
+<td>ipAddress</td>
+<td>yes</td>
+<td>Customer&rsquo;s IP address</td>
+</tr>
+<tr>
+<td>type</td>
+<td>no</td>
+<td>Must be set to <code class="prettyprint">personal</code>.  Note: eventually, <code class="prettyprint">business</code> will be supported.</td>
+</tr>
+<tr>
+<td>address1</td>
+<td>no</td>
+<td>First line of the street address of the customer&rsquo;s permanent residence</td>
+</tr>
+<tr>
+<td>address2</td>
+<td>yes</td>
+<td>Second line of the street address of the customer&rsquo;s permanent residence</td>
+</tr>
+<tr>
+<td>city</td>
+<td>no</td>
+<td>City of customer&rsquo;s peramanent residence</td>
+</tr>
+<tr>
+<td>state</td>
+<td>no</td>
+<td>Two letter abbreviation of the state in which the customer resides.  e.g. <code class="prettyprint">NY</code></td>
+</tr>
+<tr>
+<td>postalCode</td>
+<td>no</td>
+<td>Postal code of customer&rsquo;s peramanent residence</td>
+</tr>
+<tr>
+<td>dateOfBirth</td>
+<td>no</td>
+<td>Customer&rsquo;s date of birth in <code class="prettyprint">YYYY-MM-DD</code> format.</td>
+</tr>
+<tr>
+<td>tin</td>
+<td>no</td>
+<td>Last four digits of the customer&rsquo;s Taxpayer Identification Number.  For personal accounts, this will be the last four digits of their Social Security Number.</td>
+</tr>
+<tr>
+<td>phone</td>
+<td>no</td>
+<td>Customer&rsquo;s 10 digit phone number.  No hyphens or other separators.  e.g. <code class="prettyprint">3334447777</code></td>
 </tr>
 </tbody></table>
 <h3 id='errors'>Errors</h3>
@@ -852,17 +1067,17 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
           <h1 id='documents'>Documents</h1><pre class="highlight shell"><code><span class="o">{</span>
   <span class="s2">"_links"</span>: <span class="o">{</span>
     <span class="s2">"self"</span>: <span class="o">{</span>
-      <span class="s2">"href"</span>: <span class="s2">"https://api.dwolla.com/customers/99bfb139-eadd-4cdf-b346-7504f0c16c60/documents/e6c141d5-0922-4d18-ad00-4789a37f288f"</span>
+      <span class="s2">"href"</span>: <span class="s2">"https://api-uat.dwolla.com/documents/56502f7a-fa59-4a2f-8579-0f8bc9d7b9cc"</span>
     <span class="o">}</span>
   <span class="o">}</span>,
-  <span class="s2">"id"</span>: <span class="s2">"e6c141d5-0922-4d18-ad00-4789a37f288f"</span>,
-  <span class="s2">"mimetype"</span>: <span class="s2">"image/png"</span>,
-  <span class="s2">"documentType"</span>: <span class="s2">"passport"</span>
+  <span class="s2">"id"</span>: <span class="s2">"56502f7a-fa59-4a2f-8579-0f8bc9d7b9cc"</span>,
+  <span class="s2">"status"</span>: <span class="s2">"pending"</span>,
+  <span class="s2">"type"</span>: <span class="s2">"passport"</span>,
+  <span class="s2">"created"</span>: <span class="s2">"2015-09-29T21:42:16.000Z"</span>
 <span class="o">}</span>
 </code></pre>
-<aside class="warning"><p>This is a draft specification for preview only.  Endpoint URL, request and response parameters are subject to change.  Do not develop against this documentation.</p>
-</aside>
-<p>A Document is used to verify the identity of a Customer</p>
+
+<p>Customers of type <code class="prettyprint">personal</code> or <code class="prettyprint">business</code> and of status <code class="prettyprint">document</code> require photos of identifying documents to be uploaded for manual review in order to be verified.  </p>
 <h3 id='document-resource'>Document Resource</h3>
 <table><thead>
 <tr>
@@ -872,51 +1087,60 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 </thead><tbody>
 <tr>
 <td>id</td>
-<td>Customer unique identifier.</td>
+<td>Document unique identifier</td>
 </tr>
 <tr>
-<td>mimetype</td>
-<td>Standardized MIME type of document. Only <code class="prettyprint">image/png</code> and <code class="prettyprint">image/jpg+jpeg</code> are accepted.</td>
-</tr>
-<tr>
-<td>documentType</td>
+<td>type</td>
 <td>Either <code class="prettyprint">passport</code>, <code class="prettyprint">driversLicense</code>, or <code class="prettyprint">idCard</code>.</td>
 </tr>
+<tr>
+<td>status</td>
+<td>Either <code class="prettyprint">pending</code> or <code class="prettyprint">reviewed</code>.  When a document has been manually reviewed by Dwolla, its status will be <code class="prettyprint">reviewed</code>.  A reviewed document does not necessarily indicate that the customer has completed the identity verification process.</td>
+</tr>
+<tr>
+<td>created</td>
+<td>ISO 8601 Timestamp of document upload time and date</td>
+</tr>
 </tbody></table>
-<h2 id='create-a-document-draft'>Create a Document [DRAFT]</h2>
+<h2 id='create-a-document'>Create a Document</h2>
 <blockquote>
 <p>Request:</p>
 </blockquote>
-<pre class="highlight shell"><code>POST /customers/6f80efc0-b158-4df1-9b11-da85f0bffdd4/documents
-Accept: application/vnd.dwolla.v1.hal+json
-Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
-</code></pre>
-<pre class="highlight json"><code><span class="p">{</span><span class="w">
-  </span><span class="nt">"mimetype"</span><span class="p">:</span><span class="w"> </span><span class="s2">"image/png"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"documentType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"passport"</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre>
-<pre class="highlight shell"><code>POST /customers/6f80efc0-b158-4df1-9b11-da85f0bffdd4/documents
-Accept: image/png
-Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
-
-<span class="o">[</span>bytes of image]
+<pre class="highlight shell"><code>curl -X POST 
+<span class="se">\ </span>-H <span class="s2">"Authorization: Bearer tJlyMNW6e3QVbzHjeJ9JvAPsRglFjwnba4NdfCzsYJm7XbckcR"</span> 
+<span class="se">\ </span>-H <span class="s2">"Accept: application/vnd.dwolla.v1.hal+json"</span> 
+<span class="se">\ </span>-H <span class="s2">"Cache-Control: no-cache"</span> 
+<span class="se">\ </span>-H <span class="s2">"Content-Type: multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW"</span> 
+<span class="se">\ </span>-F <span class="s2">"documentType=passport"</span> 
+<span class="se">\ </span>-F <span class="s2">"file=@foo.png"</span> 
+<span class="se">\ </span><span class="s1">'https://api-uat.dwolla.com/customers/1DE32EC7-FF0B-4C0C-9F09-19629E6788CE/documents'</span>
 </code></pre>
 
 <blockquote>
-<p>Response:
-<code class="prettyprint">shell
-HTTP/1.1 201 Created
-Location: https://api.dwolla.com/customers/6f80efc0-b158-4df1-9b11-da85f0bffdd4/documents/e6c141d5-0922-4d18-ad00-4789a37f288f
-</code></p>
+<p>Response:</p>
 </blockquote>
+<pre class="highlight shell"><code>HTTP/1.1 201 Created
+Location: https://api-uat.dwolla.com/documents/11fe0bab-39bd-42ee-bb39-275afcc050d0
+</code></pre>
 
-<p>Create a Document belonging to a Customer. </p>
-<aside class="warning"><p>This endpoint is not yet implemented. The following specification is subject to change.</p>
-</aside><aside class="reminder"><p>This endpoint <a href="#authentication">requires</a> an OAuth access token with the <code>ManageCustomers</code> <a href="#oauth-scopes">scope</a>.</p>
+<p>Create a document for a customer pending verification by uploading a photo of the document.  This requires a multipart form-data POST request.  Must provide either a <code class="prettyprint">.jpg</code> or <code class="prettyprint">.png</code> file up to 5MB in size.</p>
+<aside class="reminder"><p>This endpoint <a href="#authentication">requires</a> an OAuth access token with the <code>ManageCustomers</code> <a href="#oauth-scopes">scope</a>.</p>
 </aside><h3 id='http-request'>HTTP Request</h3>
-<p>1: <code class="prettyprint">POST https://api.dwolla.com/customers/{id}/documents</code> with <code class="prettyprint">Document</code> <br />
-2: <code class="prettyprint">POST https://api.dwolla.com/customers/{id}/documents</code> with a 5MB <code class="prettyprint">*.png</code> or <code class="prettyprint">*.jpg</code> image file.</p>
+<table><thead>
+<tr>
+<th>Form Field</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>documentType</td>
+<td>One of <code class="prettyprint">passport</code>, <code class="prettyprint">driversLicense</code>, or <code class="prettyprint">idCard</code></td>
+</tr>
+<tr>
+<td>file</td>
+<td>File contents.</td>
+</tr>
+</tbody></table>
 <h3 id='errors'>Errors</h3>
 <table><thead>
 <tr>
@@ -925,7 +1149,7 @@ Location: https://api.dwolla.com/customers/6f80efc0-b158-4df1-9b11-da85f0bffdd4/
 </tr>
 </thead><tbody>
 </tbody></table>
-<h2 id='list-documents-draft'>List Documents [DRAFT]</h2>
+<h2 id='list-documents'>List Documents</h2>
 <blockquote>
 <p>Request:</p>
 </blockquote>
@@ -940,28 +1164,41 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 <pre class="highlight json"><code><span class="p">{</span><span class="w">
   </span><span class="nt">"_links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="nt">"self"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.dwolla.com/customers/6f80efc0-b158-4df1-9b11-da85f0bffdd4/documents"</span><span class="w">
+      </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api-uat.dwolla.com/customers/176878b8-ecdb-469b-a82b-43ba5e8704b2/documents"</span><span class="w">
     </span><span class="p">}</span><span class="w">
   </span><span class="p">},</span><span class="w">
-  </span><span class="nt">"total"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"items"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-    </span><span class="p">{</span><span class="w">
-      </span><span class="nt">"_links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="nt">"self"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-          </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.dwolla.com/customers/99bfb139-eadd-4cdf-b346-7504f0c16c60/documents/e6c141d5-0922-4d18-ad00-4789a37f288f"</span><span class="w">
-        </span><span class="p">}</span><span class="w">
+  </span><span class="nt">"_embedded"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"documents"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+      </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"_links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="nt">"self"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api-uat.dwolla.com/documents/56502f7a-fa59-4a2f-8579-0f8bc9d7b9cc"</span><span class="w">
+          </span><span class="p">}</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"56502f7a-fa59-4a2f-8579-0f8bc9d7b9cc"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"pending"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"passport"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"created"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-09-29T21:42:16.000Z"</span><span class="w">
       </span><span class="p">},</span><span class="w">
-      </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"e6c141d5-0922-4d18-ad00-4789a37f288f"</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"mimetype"</span><span class="p">:</span><span class="w"> </span><span class="s2">"image/png"</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"documentType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"passport"</span><span class="w">
-    </span><span class="p">}</span><span class="w">
-  </span><span class="p">]</span><span class="w">
+      </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"_links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="nt">"self"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api-uat.dwolla.com/documents/11fe0bab-39bd-42ee-bb39-275afcc050d0"</span><span class="w">
+          </span><span class="p">}</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"11fe0bab-39bd-42ee-bb39-275afcc050d0"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"pending"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"passport"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"created"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-09-29T21:45:37.000Z"</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">]</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="nt">"total"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 
 <p>Retrieve a list of Documents which belong to a Customer. </p>
-<aside class="warning"><p>This endpoint is not yet implemented. The following specification is subject to change.</p>
-</aside><aside class="reminder"><p>This endpoint <a href="#authentication">requires</a> an OAuth access token with the <code>ManageCustomers</code> <a href="#oauth-scopes">scope</a>.</p>
+<aside class="reminder"><p>This endpoint <a href="#authentication">requires</a> an OAuth access token with the <code>ManageCustomers</code> <a href="#oauth-scopes">scope</a>.</p>
 </aside><h3 id='http-request'>HTTP Request</h3>
 <p><code class="prettyprint">GET https://api.dwolla.com/customers/{id}/documents</code></p>
 <h3 id='errors'>Errors</h3>
@@ -972,7 +1209,7 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 </tr>
 </thead><tbody>
 </tbody></table>
-<h2 id='retrieve-document-by-id-draft'>Retrieve Document by ID [DRAFT]</h2>
+<h2 id='retrieve-a-document'>Retrieve a Document</h2>
 <blockquote>
 <p>Request:</p>
 </blockquote>
@@ -985,20 +1222,20 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 <p>Response:</p>
 </blockquote>
 <pre class="highlight json"><code><span class="p">{</span><span class="w">
-    </span><span class="nt">"_links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="nt">"self"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.dwolla.com/customers/99bfb139-eadd-4cdf-b346-7504f0c16c60/documents/e6c141d5-0922-4d18-ad00-4789a37f288f"</span><span class="w">
-      </span><span class="p">}</span><span class="w">
-    </span><span class="p">},</span><span class="w">
-    </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"e6c141d5-0922-4d18-ad00-4789a37f288f"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"mimetype"</span><span class="p">:</span><span class="w"> </span><span class="s2">"image/png"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"documentType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"passport"</span><span class="w">
+  </span><span class="nt">"_links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"self"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api-uat.dwolla.com/documents/56502f7a-fa59-4a2f-8579-0f8bc9d7b9cc"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"56502f7a-fa59-4a2f-8579-0f8bc9d7b9cc"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"pending"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"passport"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"created"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-09-29T21:42:16.000Z"</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 
-<p>Retrieve a Document by its ID.</p>
-<aside class="warning"><p>This endpoint is not yet implemented. The following specification is subject to change.</p>
-</aside><aside class="reminder"><p>This endpoint <a href="#authentication">requires</a> an OAuth access token with the <code>ManageCustomers</code> <a href="#oauth-scopes">scope</a>.</p>
+<p>Retrieve a Document.</p>
+<aside class="reminder"><p>This endpoint <a href="#authentication">requires</a> an OAuth access token with the <code>ManageCustomers</code> <a href="#oauth-scopes">scope</a>.</p>
 </aside><h3 id='http-request'>HTTP Request</h3>
 <p><code class="prettyprint">GET https://api.dwolla.com/customers/{id}/documents/{id}</code></p>
 <h3 id='errors'>Errors</h3>
@@ -1013,7 +1250,7 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
           <h1 id='funding-sources'>Funding Sources</h1><pre class="highlight json"><code><span class="p">{</span><span class="w">
     </span><span class="nt">"routingNumber"</span><span class="p">:</span><span class="w"> </span><span class="s2">"87654321"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"accountNumber"</span><span class="p">:</span><span class="w"> </span><span class="s2">"12345678"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Checking"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"checking"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"My Bank"</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
@@ -1063,7 +1300,7 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 <pre class="highlight json"><code><span class="p">{</span><span class="w">
     </span><span class="nt">"routingNumber"</span><span class="p">:</span><span class="w"> </span><span class="s2">"87654321"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"accountNumber"</span><span class="p">:</span><span class="w"> </span><span class="s2">"12345678"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Checking"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"checking"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"My Bank"</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
@@ -1100,7 +1337,7 @@ Location: https://api.dwolla.com/funding-sources/58d20353-2b4b-4d68-8b89-3e5dab1
 <tr>
 <td>type</td>
 <td>no</td>
-<td>Type of bank account: <code class="prettyprint">Checking</code> or <code class="prettyprint">Savings</code>.</td>
+<td>Type of bank account: <code class="prettyprint">checking</code> or <code class="prettyprint">savings</code>.</td>
 </tr>
 <tr>
 <td>name</td>
@@ -1213,7 +1450,7 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 <pre class="highlight json"><code><span class="p">{</span><span class="w">
     </span><span class="nt">"routingNumber"</span><span class="p">:</span><span class="w"> </span><span class="s2">"87654321"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"accountNumber"</span><span class="p">:</span><span class="w"> </span><span class="s2">"12345678"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Checking"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"checking"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"My Bank"</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
@@ -1247,7 +1484,7 @@ Location: https://api.dwolla.com/accounts/99bfb139-eadd-4cdf-b346-7504f0c16c60/f
 </tr>
 <tr>
 <td>type</td>
-<td>Type of bank account: <code class="prettyprint">Checking</code> or <code class="prettyprint">Savings</code>.</td>
+<td>Type of bank account: <code class="prettyprint">checking</code> or <code class="prettyprint">savings</code>.</td>
 </tr>
 <tr>
 <td>name</td>
