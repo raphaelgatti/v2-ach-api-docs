@@ -157,7 +157,7 @@ state | no | Two letter abbreviation of the state in which the customer resides.
 postalCode | no | Postal code of customer's peramanent residence
 dateOfBirth | no | Customer's date of birth in `YYYY-MM-DD` format.
 tin | no | Last four digits of the customer's Taxpayer Identification Number.  For personal accounts, this will be the last four digits of their Social Security Number.
-phone | no | Customer's 10 digit phone number.  No hyphens or other separators.  e.g. `3334447777`
+phone | yes | Customer's 10 digit phone number.  No hyphens or other separators.  e.g. `3334447777`
 
 ### Errors
 | HTTP Status | Message |
