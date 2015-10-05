@@ -124,6 +124,6 @@ Relationships and available actions for a resource are represented with links.  
 
 Some links, such as `funding-sources`, give you a URL which you can follow to access related resources.  For example, the customer resource has a `funding-sources` link which, when followed, will list the customer's available funding sources.
 
-Responses which contain a collection of resources have pagination links, `first`, `next`, `last`.
+Responses which contain a collection of resources have pagination links, `first`, `next`, `last`, and `prev`.
 
 Other links represent actions which can be done with the resource.  For instance, customers which are eligible to send funds have a `send` link which directs you to the [transfer](#initiate-transfer) endpoint.
