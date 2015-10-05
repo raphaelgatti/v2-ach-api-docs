@@ -16,7 +16,6 @@ Add and retrieve ACH bank accounts via Funding Sources, which are available to t
 Parameter | Description
 ----------|------------
 id | The funding source unique identifier.
-accountId | The Customer or Account unique identifier.
 status | Is the funding source verified?
 type | Type of funding source.
 name | Arbitrary nickname for the funding source.
@@ -75,7 +74,7 @@ name | no | Arbitrary nickname for the funding source.
 > Request:
 
 ```shell
-GET /customers/07d59716-ef22-4fe6-98e8-f3190233dfb8/funding-sources
+GET /customers/5b29279d-6359-4c87-a318-e09095532733/funding-sources
 Accept: application/vnd.dwolla.v1.hal+json
 Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 ```
@@ -86,10 +85,10 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 {
   "_links": {
     "self": {
-      "href": "https://api.dwolla.com/customers/07d59716-ef22-4fe6-98e8-f3190233dfb8/funding-sources"
+      "href": "https://api-uat.dwolla.com/customers/5b29279d-6359-4c87-a318-e09095532733/funding-sources"
     },
     "customer": {
-      "href": "https://api.dwolla.com/customers/07d59716-ef22-4fe6-98e8-f3190233dfb8"
+      "href": "https://api-uat.dwolla.com/customers/5b29279d-6359-4c87-a318-e09095532733"
     }
   },
   "_embedded": {
@@ -97,15 +96,35 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
       {
         "_links": {
           "self": {
-            "href": "https://api.dwolla.com/funding-sources/58d20353-2b4b-4d68-8b89-3e5dab12b15a"
+            "href": "https://api-uat.dwolla.com/funding-sources/ab9cd5de-9435-47af-96fb-8d2fa5db51e8"
+          },
+          "customer": {
+            "href": "https://api-uat.dwolla.com/customers/5b29279d-6359-4c87-a318-e09095532733"
+          },
+          "with-available-balance": {
+            "href": "https://api-uat.dwolla.com/funding-sources/ab9cd5de-9435-47af-96fb-8d2fa5db51e8"
           }
         },
-        "id": "58d20353-2b4b-4d68-8b89-3e5dab12b15a",
-        "accountId": "07d59716-ef22-4fe6-98e8-f3190233dfb8",
-        "status": "unverified",
+        "id": "ab9cd5de-9435-47af-96fb-8d2fa5db51e8",
+        "status": "verified",
+        "type": "balance",
+        "name": "Balance",
+        "created": "2015-10-02T21:00:28.153Z"
+      },
+      {
+        "_links": {
+          "self": {
+            "href": "https://api-uat.dwolla.com/funding-sources/98c209d3-02d6-4bee-bc0f-61e18acf0e33"
+          },
+          "customer": {
+            "href": "https://api-uat.dwolla.com/customers/5b29279d-6359-4c87-a318-e09095532733"
+          }
+        },
+        "id": "98c209d3-02d6-4bee-bc0f-61e18acf0e33",
+        "status": "verified",
         "type": "bank",
-        "name": "John Doe checking account",
-        "created": "2015-08-25T13:39:25.737Z"
+        "name": "John Doe - Checking account1",
+        "created": "2015-10-02T22:03:45.537Z"
       }
     ]
   }
@@ -198,7 +217,7 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 {
   "_links": {
     "self": {
-      "href": "https://api.dwolla.com/accounts/ad5f2162-404a-4c4c-994e-6ab6c3a13254/funding-sources"
+      "href": "https://api-uat.dwolla.com/accounts/ad5f2162-404a-4c4c-994e-6ab6c3a13254/funding-sources"
     }
   },
   "_embedded": {
@@ -206,11 +225,16 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
       {
         "_links": {
           "self": {
-            "href": "https://api.dwolla.com/funding-sources/b268f6b9-db3b-4ecc-83a2-8823a53ec8b7"
+            "href": "https://api-uat.dwolla.com/funding-sources/b268f6b9-db3b-4ecc-83a2-8823a53ec8b7"
+          },
+          "account": {
+            "href": "https://api-uat.dwolla.com/accounts/ad5f2162-404a-4c4c-994e-6ab6c3a13254"
+          },
+          "with-available-balance": {
+            "href": "https://api-uat.dwolla.com/funding-sources/b268f6b9-db3b-4ecc-83a2-8823a53ec8b7"
           }
         },
         "id": "b268f6b9-db3b-4ecc-83a2-8823a53ec8b7",
-        "accountId": "ad5f2162-404a-4c4c-994e-6ab6c3a13254",
         "status": "verified",
         "type": "balance",
         "name": "Balance",
@@ -219,11 +243,13 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
       {
         "_links": {
           "self": {
-            "href": "https://api.dwolla.com/funding-sources/707177c3-bf15-4e7e-b37c-55c3898d9bf4"
+            "href": "https://api-uat.dwolla.com/funding-sources/707177c3-bf15-4e7e-b37c-55c3898d9bf4"
+          },
+          "account": {
+            "href": "https://api-uat.dwolla.com/accounts/ad5f2162-404a-4c4c-994e-6ab6c3a13254"
           }
         },
         "id": "707177c3-bf15-4e7e-b37c-55c3898d9bf4",
-        "accountId": "ad5f2162-404a-4c4c-994e-6ab6c3a13254",
         "status": "verified",
         "type": "bank",
         "name": "First Midwestern Bank",
@@ -259,7 +285,7 @@ id | no | Account unique identifier to get funding sources for.
 > Request:
 
 ```shell
-GET /funding-sources/6c8ac833-444a-4eff-979c-c56cef6be26b
+GET /funding-sources/ab9cd5de-9435-47af-96fb-8d2fa5db51e8
 Accept: application/vnd.dwolla.v1.hal+json
 Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 ```
@@ -270,15 +296,21 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 {
   "_links": {
     "self": {
-      "href": "https://api.dwolla.com/funding-sources/f25a65c4-494b-4619-bbb0-b4babd5093c0"
+      "href": "https://api-uat.dwolla.com/funding-sources/ab9cd5de-9435-47af-96fb-8d2fa5db51e8"
+    },
+    "customer": {
+      "href": "https://api-uat.dwolla.com/customers/5b29279d-6359-4c87-a318-e09095532733"
     }
   },
-  "id": "f25a65c4-494b-4619-bbb0-b4babd5093c0",
-  "accountId": "07d59716-ef22-4fe6-98e8-f3190233dfb8",
-  "status": "unverified",
-  "type": "bank",
-  "name": "Jane Doe checking account",
-  "created": "2015-08-20T22:00:07.626Z"
+  "id": "ab9cd5de-9435-47af-96fb-8d2fa5db51e8",
+  "status": "verified",
+  "type": "balance",
+  "name": "Balance",
+  "created": "2015-10-02T21:00:28.153Z",
+  "balance": {
+    "value": "0.00",
+    "currency": "USD"
+  }
 }
 ```
 
@@ -319,15 +351,17 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 {
   "_links": {
     "self": {
-      "href": "https://api.dwolla.com/funding-sources/f25a65c4-494b-4619-bbb0-b4babd5093c0"
+      "href": "https://api-uat.dwolla.com/funding-sources/c2cefde3-b3a9-4a72-b0a4-1c844dae3604"
+    },
+    "customer": {
+      "href": "https://api-uat.dwolla.com/customers/01b47cb2-52ac-42a7-926c-6f1f50b1f271"
     }
   },
-  "id": "f25a65c4-494b-4619-bbb0-b4babd5093c0",
-  "accountId": "07d59716-ef22-4fe6-98e8-f3190233dfb8",
-  "status": "unverified",
+  "id": "c2cefde3-b3a9-4a72-b0a4-1c844dae3604",
+  "status": "verified",
   "type": "bank",
-  "name": "Jane Doe checking account",
-  "created": "2015-08-20T22:00:07.626Z"
+  "name": "John Doe - Checking account1",
+  "created": "2015-10-02T19:25:50.548Z"
 }
 ```
 
