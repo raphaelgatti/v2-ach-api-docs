@@ -220,7 +220,7 @@ GET https://www.dwolla.com/oauth/rest/transactions?client_id<span class="o">=</s
 
 <p>Some links, such as <code class="prettyprint">funding-sources</code>, give you a URL which you can follow to access related resources.  For example, the customer resource has a <code class="prettyprint">funding-sources</code> link which, when followed, will list the customer&rsquo;s available funding sources.</p>
 
-<p>Responses which contain a collection of resources have pagination links, <code class="prettyprint">first</code>, <code class="prettyprint">next</code>, <code class="prettyprint">last</code>.</p>
+<p>Responses which contain a collection of resources have pagination links, <code class="prettyprint">first</code>, <code class="prettyprint">next</code>, <code class="prettyprint">last</code>, and <code class="prettyprint">prev</code>.</p>
 
 <p>Other links represent actions which can be done with the resource.  For instance, customers which are eligible to send funds have a <code class="prettyprint">send</code> link which directs you to the <a href="#initiate-transfer">transfer</a> endpoint.</p>
 
@@ -1268,10 +1268,6 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 <td>The funding source unique identifier.</td>
 </tr>
 <tr>
-<td>accountId</td>
-<td>The Customer or Account unique identifier.</td>
-</tr>
-<tr>
 <td>status</td>
 <td>Is the funding source verified?</td>
 </tr>
@@ -1365,7 +1361,7 @@ Location: https://api.dwolla.com/funding-sources/58d20353-2b4b-4d68-8b89-3e5dab1
 <blockquote>
 <p>Request:</p>
 </blockquote>
-<pre class="highlight shell"><code>GET /customers/07d59716-ef22-4fe6-98e8-f3190233dfb8/funding-sources
+<pre class="highlight shell"><code>GET /customers/5b29279d-6359-4c87-a318-e09095532733/funding-sources
 Accept: application/vnd.dwolla.v1.hal+json
 Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 </code></pre>
@@ -1376,10 +1372,10 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 <pre class="highlight json"><code><span class="p">{</span><span class="w">
   </span><span class="nt">"_links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="nt">"self"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.dwolla.com/customers/07d59716-ef22-4fe6-98e8-f3190233dfb8/funding-sources"</span><span class="w">
+      </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api-uat.dwolla.com/customers/5b29279d-6359-4c87-a318-e09095532733/funding-sources"</span><span class="w">
     </span><span class="p">},</span><span class="w">
     </span><span class="nt">"customer"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.dwolla.com/customers/07d59716-ef22-4fe6-98e8-f3190233dfb8"</span><span class="w">
+      </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api-uat.dwolla.com/customers/5b29279d-6359-4c87-a318-e09095532733"</span><span class="w">
     </span><span class="p">}</span><span class="w">
   </span><span class="p">},</span><span class="w">
   </span><span class="nt">"_embedded"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
@@ -1387,15 +1383,35 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
       </span><span class="p">{</span><span class="w">
         </span><span class="nt">"_links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
           </span><span class="nt">"self"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-            </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.dwolla.com/funding-sources/58d20353-2b4b-4d68-8b89-3e5dab12b15a"</span><span class="w">
+            </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api-uat.dwolla.com/funding-sources/ab9cd5de-9435-47af-96fb-8d2fa5db51e8"</span><span class="w">
+          </span><span class="p">},</span><span class="w">
+          </span><span class="nt">"customer"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api-uat.dwolla.com/customers/5b29279d-6359-4c87-a318-e09095532733"</span><span class="w">
+          </span><span class="p">},</span><span class="w">
+          </span><span class="nt">"with-available-balance"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api-uat.dwolla.com/funding-sources/ab9cd5de-9435-47af-96fb-8d2fa5db51e8"</span><span class="w">
           </span><span class="p">}</span><span class="w">
         </span><span class="p">},</span><span class="w">
-        </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"58d20353-2b4b-4d68-8b89-3e5dab12b15a"</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"accountId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"07d59716-ef22-4fe6-98e8-f3190233dfb8"</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"unverified"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ab9cd5de-9435-47af-96fb-8d2fa5db51e8"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"verified"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"balance"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Balance"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"created"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-10-02T21:00:28.153Z"</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"_links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="nt">"self"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api-uat.dwolla.com/funding-sources/98c209d3-02d6-4bee-bc0f-61e18acf0e33"</span><span class="w">
+          </span><span class="p">},</span><span class="w">
+          </span><span class="nt">"customer"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api-uat.dwolla.com/customers/5b29279d-6359-4c87-a318-e09095532733"</span><span class="w">
+          </span><span class="p">}</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"98c209d3-02d6-4bee-bc0f-61e18acf0e33"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"verified"</span><span class="p">,</span><span class="w">
         </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"bank"</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"John Doe checking account"</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"created"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-08-25T13:39:25.737Z"</span><span class="w">
+        </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"John Doe - Checking account1"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"created"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-10-02T22:03:45.537Z"</span><span class="w">
       </span><span class="p">}</span><span class="w">
     </span><span class="p">]</span><span class="w">
   </span><span class="p">}</span><span class="w">
@@ -1522,7 +1538,7 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 <pre class="highlight json"><code><span class="p">{</span><span class="w">
   </span><span class="nt">"_links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="nt">"self"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.dwolla.com/accounts/ad5f2162-404a-4c4c-994e-6ab6c3a13254/funding-sources"</span><span class="w">
+      </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api-uat.dwolla.com/accounts/ad5f2162-404a-4c4c-994e-6ab6c3a13254/funding-sources"</span><span class="w">
     </span><span class="p">}</span><span class="w">
   </span><span class="p">},</span><span class="w">
   </span><span class="nt">"_embedded"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
@@ -1530,11 +1546,16 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
       </span><span class="p">{</span><span class="w">
         </span><span class="nt">"_links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
           </span><span class="nt">"self"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-            </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.dwolla.com/funding-sources/b268f6b9-db3b-4ecc-83a2-8823a53ec8b7"</span><span class="w">
+            </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api-uat.dwolla.com/funding-sources/b268f6b9-db3b-4ecc-83a2-8823a53ec8b7"</span><span class="w">
+          </span><span class="p">},</span><span class="w">
+          </span><span class="nt">"account"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api-uat.dwolla.com/accounts/ad5f2162-404a-4c4c-994e-6ab6c3a13254"</span><span class="w">
+          </span><span class="p">},</span><span class="w">
+          </span><span class="nt">"with-available-balance"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api-uat.dwolla.com/funding-sources/b268f6b9-db3b-4ecc-83a2-8823a53ec8b7"</span><span class="w">
           </span><span class="p">}</span><span class="w">
         </span><span class="p">},</span><span class="w">
         </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"b268f6b9-db3b-4ecc-83a2-8823a53ec8b7"</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"accountId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ad5f2162-404a-4c4c-994e-6ab6c3a13254"</span><span class="p">,</span><span class="w">
         </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"verified"</span><span class="p">,</span><span class="w">
         </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"balance"</span><span class="p">,</span><span class="w">
         </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Balance"</span><span class="p">,</span><span class="w">
@@ -1543,11 +1564,13 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
       </span><span class="p">{</span><span class="w">
         </span><span class="nt">"_links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
           </span><span class="nt">"self"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-            </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.dwolla.com/funding-sources/707177c3-bf15-4e7e-b37c-55c3898d9bf4"</span><span class="w">
+            </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api-uat.dwolla.com/funding-sources/707177c3-bf15-4e7e-b37c-55c3898d9bf4"</span><span class="w">
+          </span><span class="p">},</span><span class="w">
+          </span><span class="nt">"account"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api-uat.dwolla.com/accounts/ad5f2162-404a-4c4c-994e-6ab6c3a13254"</span><span class="w">
           </span><span class="p">}</span><span class="w">
         </span><span class="p">},</span><span class="w">
         </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"707177c3-bf15-4e7e-b37c-55c3898d9bf4"</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"accountId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ad5f2162-404a-4c4c-994e-6ab6c3a13254"</span><span class="p">,</span><span class="w">
         </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"verified"</span><span class="p">,</span><span class="w">
         </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"bank"</span><span class="p">,</span><span class="w">
         </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"First Midwestern Bank"</span><span class="p">,</span><span class="w">
@@ -1594,7 +1617,7 @@ GET https://api.dwolla.com/accounts/{id}/funding-sources
 <blockquote>
 <p>Request:</p>
 </blockquote>
-<pre class="highlight shell"><code>GET /funding-sources/6c8ac833-444a-4eff-979c-c56cef6be26b
+<pre class="highlight shell"><code>GET /funding-sources/ab9cd5de-9435-47af-96fb-8d2fa5db51e8
 Accept: application/vnd.dwolla.v1.hal+json
 Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 </code></pre>
@@ -1605,15 +1628,21 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 <pre class="highlight json"><code><span class="p">{</span><span class="w">
   </span><span class="nt">"_links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="nt">"self"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.dwolla.com/funding-sources/f25a65c4-494b-4619-bbb0-b4babd5093c0"</span><span class="w">
+      </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api-uat.dwolla.com/funding-sources/ab9cd5de-9435-47af-96fb-8d2fa5db51e8"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nt">"customer"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api-uat.dwolla.com/customers/5b29279d-6359-4c87-a318-e09095532733"</span><span class="w">
     </span><span class="p">}</span><span class="w">
   </span><span class="p">},</span><span class="w">
-  </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"f25a65c4-494b-4619-bbb0-b4babd5093c0"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"accountId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"07d59716-ef22-4fe6-98e8-f3190233dfb8"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"unverified"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"bank"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Jane Doe checking account"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"created"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-08-20T22:00:07.626Z"</span><span class="w">
+  </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ab9cd5de-9435-47af-96fb-8d2fa5db51e8"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"verified"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"balance"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Balance"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"created"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-10-02T21:00:28.153Z"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"balance"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.00"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"currency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"USD"</span><span class="w">
+  </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 
@@ -1665,15 +1694,17 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 <pre class="highlight json"><code><span class="p">{</span><span class="w">
   </span><span class="nt">"_links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="nt">"self"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.dwolla.com/funding-sources/f25a65c4-494b-4619-bbb0-b4babd5093c0"</span><span class="w">
+      </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api-uat.dwolla.com/funding-sources/c2cefde3-b3a9-4a72-b0a4-1c844dae3604"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nt">"customer"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api-uat.dwolla.com/customers/01b47cb2-52ac-42a7-926c-6f1f50b1f271"</span><span class="w">
     </span><span class="p">}</span><span class="w">
   </span><span class="p">},</span><span class="w">
-  </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"f25a65c4-494b-4619-bbb0-b4babd5093c0"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"accountId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"07d59716-ef22-4fe6-98e8-f3190233dfb8"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"unverified"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"c2cefde3-b3a9-4a72-b0a4-1c844dae3604"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"verified"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"bank"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Jane Doe checking account"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"created"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-08-20T22:00:07.626Z"</span><span class="w">
+  </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"John Doe - Checking account1"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"created"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-10-02T19:25:50.548Z"</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 
@@ -1715,21 +1746,11 @@ DELETE https://api.dwolla.com/funding-sources/{id}
   <span class="s2">"_embedded"</span>: <span class="o">{}</span>,
   <span class="s2">"id"</span>: <span class="s2">"string"</span>,
   <span class="s2">"status"</span>: <span class="s2">"string"</span>,
-  <span class="s2">"source"</span>: <span class="o">{</span>
-    <span class="s2">"name"</span>: <span class="s2">"string"</span>,
-    <span class="s2">"accountId"</span>: <span class="s2">"string"</span>,
-    <span class="s2">"displayId"</span>: <span class="s2">"string"</span>
-  <span class="o">}</span>,
-  <span class="s2">"destination"</span>: <span class="o">{</span>
-    <span class="s2">"name"</span>: <span class="s2">"string"</span>,
-    <span class="s2">"accountId"</span>: <span class="s2">"string"</span>,
-    <span class="s2">"displayId"</span>: <span class="s2">"string"</span>
-  <span class="o">}</span>,
-  <span class="s2">"money"</span>: <span class="o">{</span>
-    <span class="s2">"amount"</span>: 0,
+  <span class="s2">"amount"</span>: <span class="o">{</span>
+    <span class="s2">"value"</span>: <span class="s2">"string"</span>,
     <span class="s2">"currency"</span>: <span class="s2">"string"</span>
   <span class="o">}</span>,
-  <span class="s2">"created"</span>: <span class="s2">"2015-08-24T14:05:17.448Z"</span>,
+  <span class="s2">"created"</span>: <span class="s2">"2015-10-02T19:48:40.485Z"</span>,
   <span class="s2">"metadata"</span>: <span class="o">{}</span>
 <span class="o">}</span>
 </code></pre>
@@ -1748,19 +1769,11 @@ DELETE https://api.dwolla.com/funding-sources/{id}
 </tr>
 <tr>
 <td>status</td>
-<td>Either <code class="prettyprint">sent</code>, <code class="prettyprint">pending</code>, <code class="prettyprint">cancelled</code>, <code class="prettyprint">declined</code>, or <code class="prettyprint">reclaimed</code></td>
+<td>Either <code class="prettyprint">processed</code>, <code class="prettyprint">pending</code>, <code class="prettyprint">cancelled</code>, <code class="prettyprint">failed</code>, or <code class="prettyprint">reclaimed</code></td>
 </tr>
 <tr>
-<td>source</td>
-<td>Source JSON object. See below.</td>
-</tr>
-<tr>
-<td>destination</td>
-<td>A Destination JSON object. See below.</td>
-</tr>
-<tr>
-<td>money</td>
-<td>A Money JSON object. See below.</td>
+<td>amount</td>
+<td>An amount JSON object. See below.</td>
 </tr>
 <tr>
 <td>created</td>
@@ -1771,7 +1784,7 @@ DELETE https://api.dwolla.com/funding-sources/{id}
 <td>A metadata JSON object.</td>
 </tr>
 </tbody></table>
-<h3 id='sourcedestination-json-object'>Source/Destination JSON Object</h3>
+<h3 id='amount-json-object'>Amount JSON Object</h3>
 <table><thead>
 <tr>
 <th>Parameter</th>
@@ -1779,27 +1792,7 @@ DELETE https://api.dwolla.com/funding-sources/{id}
 </tr>
 </thead><tbody>
 <tr>
-<td>name</td>
-<td>Name of Account or Customer.</td>
-</tr>
-<tr>
-<td>accountId</td>
-<td>Account unique identifier.</td>
-</tr>
-<tr>
-<td>displayId</td>
-<td>String</td>
-</tr>
-</tbody></table>
-<h3 id='money-json-object'>Money JSON Object</h3>
-<table><thead>
-<tr>
-<th>Parameter</th>
-<th>Description</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>amount</td>
+<td>value</td>
 <td>Amount of money.</td>
 </tr>
 <tr>
@@ -1866,7 +1859,7 @@ Location: https://api.dwolla.com/transfers/74c9129b-d14a-e511-80da-0aa34a9b2388
 <blockquote>
 <p>Request:</p>
 </blockquote>
-<pre class="highlight shell"><code>GET /customers/99bfb139-eadd-4cdf-b346-7504f0c16c60/transfers
+<pre class="highlight shell"><code>GET /customers/01B47CB2-52AC-42A7-926C-6F1F50B1F271/transfers
 Accept: application/vnd.dwolla.v1.hal+json
 Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 </code></pre>
@@ -1877,13 +1870,13 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 <pre class="highlight json"><code><span class="p">{</span><span class="w">
   </span><span class="nt">"_links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="nt">"first"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.dwolla.com/customers/07d59716-ef22-4fe6-98e8-f3190233dfb8/transfers?limit=25&amp;offset=0"</span><span class="w">
+      </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api-uat.dwolla.com/customers/01b47cb2-52ac-42a7-926c-6f1f50b1f271/transfers?limit=25&amp;offset=0"</span><span class="w">
     </span><span class="p">},</span><span class="w">
     </span><span class="nt">"last"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.dwolla.com/customers/07d59716-ef22-4fe6-98e8-f3190233dfb8/transfers?limit=25&amp;offset=0"</span><span class="w">
+      </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api-uat.dwolla.com/customers/01b47cb2-52ac-42a7-926c-6f1f50b1f271/transfers?limit=25&amp;offset=0"</span><span class="w">
     </span><span class="p">},</span><span class="w">
     </span><span class="nt">"self"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.dwolla.com/customers/07D59716-EF22-4FE6-98E8-F3190233DFB8/transfers"</span><span class="w">
+      </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://api-uat.dwolla.com/customers/01B47CB2-52AC-42A7-926C-6F1F50B1F271/transfers"</span><span class="w">
     </span><span class="p">}</span><span class="w">
   </span><span class="p">},</span><span class="w">
   </span><span class="nt">"_embedded"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
@@ -1891,56 +1884,49 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
       </span><span class="p">{</span><span class="w">
         </span><span class="nt">"_links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
           </span><span class="nt">"self"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-            </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.dwolla.com/transfers/8A1F44B6-354B-E511-80DA-0AA34A9B2388"</span><span class="w">
+            </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api-uat.dwolla.com/transfers/4C8AD8B8-3D69-E511-80DB-0AA34A9B2388"</span><span class="w">
+          </span><span class="p">},</span><span class="w">
+          </span><span class="nt">"source"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api-uat.dwolla.com/accounts/AD5F2162-404A-4C4C-994E-6AB6C3A13254"</span><span class="w">
+          </span><span class="p">},</span><span class="w">
+          </span><span class="nt">"destination"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api-uat.dwolla.com/customers/01B47CB2-52AC-42A7-926C-6F1F50B1F271"</span><span class="w">
           </span><span class="p">}</span><span class="w">
         </span><span class="p">},</span><span class="w">
-        </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"8A1F44B6-354B-E511-80DA-0AA34A9B2388"</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Pending"</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"source"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-          </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Joe Schmoe"</span><span class="p">,</span><span class="w">
-          </span><span class="nt">"accountId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"AD5F2162-404A-4C4C-994E-6AB6C3A13254"</span><span class="p">,</span><span class="w">
-          </span><span class="nt">"displayId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"812-196-5766"</span><span class="w">
-        </span><span class="p">},</span><span class="w">
-        </span><span class="nt">"destination"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-          </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Jane Doe"</span><span class="p">,</span><span class="w">
-          </span><span class="nt">"accountId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"07D59716-EF22-4FE6-98E8-F3190233DFB8"</span><span class="p">,</span><span class="w">
-          </span><span class="nt">"displayId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"812-743-0685"</span><span class="w">
-        </span><span class="p">},</span><span class="w">
-        </span><span class="nt">"money"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-          </span><span class="nt">"amount"</span><span class="p">:</span><span class="w"> </span><span class="mi">2200</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"4C8AD8B8-3D69-E511-80DB-0AA34A9B2388"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"pending"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"amount"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="nt">"value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"225.00"</span><span class="p">,</span><span class="w">
           </span><span class="nt">"currency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"USD"</span><span class="w">
         </span><span class="p">},</span><span class="w">
-        </span><span class="nt">"created"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-08-25T14:29:37.623Z"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"created"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-10-02T19:42:32.950Z"</span><span class="p">,</span><span class="w">
         </span><span class="nt">"metadata"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
           </span><span class="nt">"foo"</span><span class="p">:</span><span class="w"> </span><span class="s2">"bar"</span><span class="p">,</span><span class="w">
-          </span><span class="nt">"baz"</span><span class="p">:</span><span class="w"> </span><span class="s2">"boo"</span><span class="w">
+          </span><span class="nt">"baz"</span><span class="p">:</span><span class="w"> </span><span class="s2">"foo"</span><span class="w">
         </span><span class="p">}</span><span class="w">
       </span><span class="p">},</span><span class="w">
       </span><span class="p">{</span><span class="w">
         </span><span class="nt">"_links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
           </span><span class="nt">"self"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-            </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.dwolla.com/transfers/74C9129B-D14A-E511-80DA-0AA34A9B2388"</span><span class="w">
+            </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api-uat.dwolla.com/transfers/9DC99076-3D69-E511-80DB-0AA34A9B2388"</span><span class="w">
+          </span><span class="p">},</span><span class="w">
+          </span><span class="nt">"source"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api-uat.dwolla.com/accounts/AD5F2162-404A-4C4C-994E-6AB6C3A13254"</span><span class="w">
+          </span><span class="p">},</span><span class="w">
+          </span><span class="nt">"destination"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api-uat.dwolla.com/customers/01B47CB2-52AC-42A7-926C-6F1F50B1F271"</span><span class="w">
           </span><span class="p">}</span><span class="w">
         </span><span class="p">},</span><span class="w">
-        </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"74C9129B-D14A-E511-80DA-0AA34A9B2388"</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Pending"</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"source"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-          </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Joe Schmoe"</span><span class="p">,</span><span class="w">
-          </span><span class="nt">"accountId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"AD5F2162-404A-4C4C-994E-6AB6C3A13254"</span><span class="p">,</span><span class="w">
-          </span><span class="nt">"displayId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"812-196-5766"</span><span class="w">
-        </span><span class="p">},</span><span class="w">
-        </span><span class="nt">"destination"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-          </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Jane Doe"</span><span class="p">,</span><span class="w">
-          </span><span class="nt">"accountId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"07D59716-EF22-4FE6-98E8-F3190233DFB8"</span><span class="p">,</span><span class="w">
-          </span><span class="nt">"displayId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"812-743-0685"</span><span class="w">
-        </span><span class="p">},</span><span class="w">
-        </span><span class="nt">"money"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-          </span><span class="nt">"amount"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"9DC99076-3D69-E511-80DB-0AA34A9B2388"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"pending"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"amount"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="nt">"value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"225.00"</span><span class="p">,</span><span class="w">
           </span><span class="nt">"currency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"USD"</span><span class="w">
         </span><span class="p">},</span><span class="w">
-        </span><span class="nt">"created"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-08-25T02:32:59.243Z"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"created"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-10-02T19:40:41.437Z"</span><span class="p">,</span><span class="w">
         </span><span class="nt">"metadata"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-          </span><span class="nt">"foo"</span><span class="p">:</span><span class="w"> </span><span class="s2">"bar"</span><span class="w">
+          </span><span class="nt">"foo"</span><span class="p">:</span><span class="w"> </span><span class="s2">"bar"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"baz"</span><span class="p">:</span><span class="w"> </span><span class="s2">"foo"</span><span class="w">
         </span><span class="p">}</span><span class="w">
       </span><span class="p">}</span><span class="w">
     </span><span class="p">]</span><span class="w">
@@ -2021,18 +2007,8 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
       </span><span class="p">},</span><span class="w">
       </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
       </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"source"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"accountId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"displayId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="w">
-      </span><span class="p">},</span><span class="w">
-      </span><span class="nt">"destination"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"accountId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"displayId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="w">
-      </span><span class="p">},</span><span class="w">
-      </span><span class="nt">"money"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="nt">"amount"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"amount"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"value"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
         </span><span class="nt">"currency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="w">
       </span><span class="p">},</span><span class="w">
       </span><span class="nt">"created"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-07-23T14:19:36.987Z"</span><span class="w">
@@ -2087,28 +2063,25 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 <pre class="highlight json"><code><span class="p">{</span><span class="w">
   </span><span class="nt">"_links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="nt">"self"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.dwolla.com/transfers/38242332-374B-E511-80DA-0AA34A9B2388"</span><span class="w">
+      </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api-uat.dwolla.com/transfers/4C8AD8B8-3D69-E511-80DB-0AA34A9B2388"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nt">"source"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api-uat.dwolla.com/accounts/AD5F2162-404A-4C4C-994E-6AB6C3A13254"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nt">"destination"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api-uat.dwolla.com/customers/01B47CB2-52AC-42A7-926C-6F1F50B1F271"</span><span class="w">
     </span><span class="p">}</span><span class="w">
   </span><span class="p">},</span><span class="w">
-  </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"38242332-374B-E511-80DA-0AA34A9B2388"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Pending"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"source"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Joe Schmoe"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"accountId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"AD5F2162-404A-4C4C-994E-6AB6C3A13254"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"displayId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"812-196-5766"</span><span class="w">
-  </span><span class="p">},</span><span class="w">
-  </span><span class="nt">"destination"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Jane Doe"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"accountId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"07D59716-EF22-4FE6-98E8-F3190233DFB8"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"displayId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"812-743-0685"</span><span class="w">
-  </span><span class="p">},</span><span class="w">
-  </span><span class="nt">"money"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="nt">"amount"</span><span class="p">:</span><span class="w"> </span><span class="mi">5200</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"4C8AD8B8-3D69-E511-80DB-0AA34A9B2388"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"pending"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"amount"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"225.00"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"currency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"USD"</span><span class="w">
   </span><span class="p">},</span><span class="w">
-  </span><span class="nt">"created"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-08-25T14:40:14.947Z"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"created"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-10-02T19:42:32.950Z"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"metadata"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="nt">"foo"</span><span class="p">:</span><span class="w"> </span><span class="s2">"bar"</span><span class="w">
+    </span><span class="nt">"foo"</span><span class="p">:</span><span class="w"> </span><span class="s2">"bar"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"baz"</span><span class="p">:</span><span class="w"> </span><span class="s2">"foo"</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
