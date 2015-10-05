@@ -6,21 +6,11 @@
   "_embedded": {},
   "id": "string",
   "status": "string",
-  "source": {
-    "name": "string",
-    "accountId": "string",
-    "displayId": "string"
-  },
-  "destination": {
-    "name": "string",
-    "accountId": "string",
-    "displayId": "string"
-  },
-  "money": {
-    "amount": 0,
+  "amount": {
+    "value": "string",
     "currency": "string"
   },
-  "created": "2015-08-24T14:05:17.448Z",
+  "created": "2015-10-02T19:48:40.485Z",
   "metadata": {}
 }
 ```
@@ -32,26 +22,16 @@ A transfer represents money being transferred from a `source` to a `destination`
 | Parameter | Description
 |-----------|------------|
 |id | Transfer unique identifier.
-|status | Either `sent`, `pending`, `cancelled`, `declined`, or `reclaimed`
-|source | Source JSON object. See below. 
-|destination | A Destination JSON object. See below.
-|money| A Money JSON object. See below. 
+|status | Either `processed`, `pending`, `cancelled`, `failed`, or `reclaimed`
+|amount| An amount JSON object. See below. 
 |created | ISO-8601 timestamp.
 |metadata | A metadata JSON object.
 
-### Source/Destination JSON Object
+### Amount JSON Object
 
 | Parameter | Description
 |-----------|------------|
-|name | Name of Account or Customer. 
-|accountId | Account unique identifier.
-|displayId | String
-
-### Money JSON Object
-
-| Parameter | Description
-|-----------|------------|
-|amount | Amount of money. 
+|value | Amount of money. 
 |currency | String, `USD`
 
 ## Initiate Transfer
@@ -110,7 +90,7 @@ Initiate a transfer for either an account or customer resource.
 > Request:
 
 ```shell
-GET /customers/99bfb139-eadd-4cdf-b346-7504f0c16c60/transfers
+GET /customers/01B47CB2-52AC-42A7-926C-6F1F50B1F271/transfers
 Accept: application/vnd.dwolla.v1.hal+json
 Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 ```
@@ -121,13 +101,13 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 {
   "_links": {
     "first": {
-      "href": "https://api.dwolla.com/customers/07d59716-ef22-4fe6-98e8-f3190233dfb8/transfers?limit=25&offset=0"
+      "href": "https://api-uat.dwolla.com/customers/01b47cb2-52ac-42a7-926c-6f1f50b1f271/transfers?limit=25&offset=0"
     },
     "last": {
-      "href": "https://api.dwolla.com/customers/07d59716-ef22-4fe6-98e8-f3190233dfb8/transfers?limit=25&offset=0"
+      "href": "https://api-uat.dwolla.com/customers/01b47cb2-52ac-42a7-926c-6f1f50b1f271/transfers?limit=25&offset=0"
     },
     "self": {
-      "href": "https://api.dwolla.com/customers/07D59716-EF22-4FE6-98E8-F3190233DFB8/transfers"
+      "href": "http://api-uat.dwolla.com/customers/01B47CB2-52AC-42A7-926C-6F1F50B1F271/transfers"
     }
   },
   "_embedded": {
@@ -135,56 +115,49 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
       {
         "_links": {
           "self": {
-            "href": "https://api.dwolla.com/transfers/8A1F44B6-354B-E511-80DA-0AA34A9B2388"
+            "href": "https://api-uat.dwolla.com/transfers/4C8AD8B8-3D69-E511-80DB-0AA34A9B2388"
+          },
+          "source": {
+            "href": "https://api-uat.dwolla.com/accounts/AD5F2162-404A-4C4C-994E-6AB6C3A13254"
+          },
+          "destination": {
+            "href": "https://api-uat.dwolla.com/customers/01B47CB2-52AC-42A7-926C-6F1F50B1F271"
           }
         },
-        "id": "8A1F44B6-354B-E511-80DA-0AA34A9B2388",
-        "status": "Pending",
-        "source": {
-          "name": "Joe Schmoe",
-          "accountId": "AD5F2162-404A-4C4C-994E-6AB6C3A13254",
-          "displayId": "812-196-5766"
-        },
-        "destination": {
-          "name": "Jane Doe",
-          "accountId": "07D59716-EF22-4FE6-98E8-F3190233DFB8",
-          "displayId": "812-743-0685"
-        },
-        "money": {
-          "amount": 2200,
+        "id": "4C8AD8B8-3D69-E511-80DB-0AA34A9B2388",
+        "status": "pending",
+        "amount": {
+          "value": "225.00",
           "currency": "USD"
         },
-        "created": "2015-08-25T14:29:37.623Z",
+        "created": "2015-10-02T19:42:32.950Z",
         "metadata": {
           "foo": "bar",
-          "baz": "boo"
+          "baz": "foo"
         }
       },
       {
         "_links": {
           "self": {
-            "href": "https://api.dwolla.com/transfers/74C9129B-D14A-E511-80DA-0AA34A9B2388"
+            "href": "https://api-uat.dwolla.com/transfers/9DC99076-3D69-E511-80DB-0AA34A9B2388"
+          },
+          "source": {
+            "href": "https://api-uat.dwolla.com/accounts/AD5F2162-404A-4C4C-994E-6AB6C3A13254"
+          },
+          "destination": {
+            "href": "https://api-uat.dwolla.com/customers/01B47CB2-52AC-42A7-926C-6F1F50B1F271"
           }
         },
-        "id": "74C9129B-D14A-E511-80DA-0AA34A9B2388",
-        "status": "Pending",
-        "source": {
-          "name": "Joe Schmoe",
-          "accountId": "AD5F2162-404A-4C4C-994E-6AB6C3A13254",
-          "displayId": "812-196-5766"
-        },
-        "destination": {
-          "name": "Jane Doe",
-          "accountId": "07D59716-EF22-4FE6-98E8-F3190233DFB8",
-          "displayId": "812-743-0685"
-        },
-        "money": {
-          "amount": 1,
+        "id": "9DC99076-3D69-E511-80DB-0AA34A9B2388",
+        "status": "pending",
+        "amount": {
+          "value": "225.00",
           "currency": "USD"
         },
-        "created": "2015-08-25T02:32:59.243Z",
+        "created": "2015-10-02T19:40:41.437Z",
         "metadata": {
-          "foo": "bar"
+          "foo": "bar",
+          "baz": "foo"
         }
       }
     ]
@@ -243,18 +216,8 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
       },
       "id": "string",
       "status": "string",
-      "source": {
-        "name": "string",
-        "accountId": "string",
-        "displayId": "string"
-      },
-      "destination": {
-        "name": "string",
-        "accountId": "string",
-        "displayId": "string"
-      },
-      "money": {
-        "amount": 0,
+      "amount": {
+        "value": 0,
         "currency": "string"
       },
       "created": "2015-07-23T14:19:36.987Z"
@@ -298,28 +261,25 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 {
   "_links": {
     "self": {
-      "href": "https://api.dwolla.com/transfers/38242332-374B-E511-80DA-0AA34A9B2388"
+      "href": "https://api-uat.dwolla.com/transfers/4C8AD8B8-3D69-E511-80DB-0AA34A9B2388"
+    },
+    "source": {
+      "href": "https://api-uat.dwolla.com/accounts/AD5F2162-404A-4C4C-994E-6AB6C3A13254"
+    },
+    "destination": {
+      "href": "https://api-uat.dwolla.com/customers/01B47CB2-52AC-42A7-926C-6F1F50B1F271"
     }
   },
-  "id": "38242332-374B-E511-80DA-0AA34A9B2388",
-  "status": "Pending",
-  "source": {
-    "name": "Joe Schmoe",
-    "accountId": "AD5F2162-404A-4C4C-994E-6AB6C3A13254",
-    "displayId": "812-196-5766"
-  },
-  "destination": {
-    "name": "Jane Doe",
-    "accountId": "07D59716-EF22-4FE6-98E8-F3190233DFB8",
-    "displayId": "812-743-0685"
-  },
-  "money": {
-    "amount": 5200,
+  "id": "4C8AD8B8-3D69-E511-80DB-0AA34A9B2388",
+  "status": "pending",
+  "amount": {
+    "value": "225.00",
     "currency": "USD"
   },
-  "created": "2015-08-25T14:40:14.947Z",
+  "created": "2015-10-02T19:42:32.950Z",
   "metadata": {
-    "foo": "bar"
+    "foo": "bar",
+    "baz": "foo"
   }
 }
 ```
