@@ -4,29 +4,29 @@
 {
   "_links": {
     "self": {
-      "href": "https://api-uat.dwolla.com/customers/132681FA-1B4D-4181-8FF2-619CA46235B1"
+      "href": "https://api-uat.dwolla.com/customers/730CA23F-06C5-45CC-AA6B-8EC2D6EE109F"
     },
     "receive": {
       "href": "https://api-uat.dwolla.com/transfers"
     },
     "funding-sources": {
-      "href": "https://api-uat.dwolla.com/customers/132681FA-1B4D-4181-8FF2-619CA46235B1/funding-sources"
+      "href": "https://api-uat.dwolla.com/customers/730CA23F-06C5-45CC-AA6B-8EC2D6EE109F/funding-sources"
     },
     "transfers": {
-      "href": "https://api-uat.dwolla.com/customers/132681FA-1B4D-4181-8FF2-619CA46235B1/transfers"
+      "href": "https://api-uat.dwolla.com/customers/730CA23F-06C5-45CC-AA6B-8EC2D6EE109F/transfers"
     },
     "send": {
       "href": "https://api-uat.dwolla.com/transfers"
     }
   },
-  "id": "132681FA-1B4D-4181-8FF2-619CA46235B1",
+  "id": "730CA23F-06C5-45CC-AA6B-8EC2D6EE109F",
   "firstName": "Gordon",
   "lastName": "Zheng",
-  "email": "gordon+15@dwolla.com",
+  "email": "gordon+20@dwolla.com",
   "type": "personal",
   "status": "verified",
-  "created": "2015-09-29T19:47:28.920Z"
-}
+  "created": "2015-10-06T01:18:26.923Z"
+},
 ```
 
 A customer represents an individual or business with whom you intend to transact with. In order to manage an account's Customers, the `ManageCustomers` OAuth scope is required.
@@ -42,8 +42,8 @@ However, if you need to transfer funds between your customers, at least one of t
 |------|------------|
 | self | URL of the Customer resource
 | receive | Follow the link the create a transfer to this customer.
-|funding-sources | GET this link to list the customer's funding sources.
-|transfers | GET this link to list the customer's transfers
+| funding-sources | GET this link to list the customer's funding sources.
+| transfers | GET this link to list the customer's transfers
 | send | (optional) If this link exists, this user can send funds.  POST to this URL to create a transfer.
 | retry-verification | (optional) If the customer has a `status` of `retry`, POST to this link to attempt to correct their identity verification information.
 
@@ -106,7 +106,7 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
   "state": "NY",
   "postalCode": "11385",
   "dateOfBirth": "1990-07-11",
-  "tin": "202-99-1516",
+  "ssn": "1516",
   "phone": "3478589191"
 }
 ```
@@ -156,7 +156,7 @@ city | no | City of customer's peramanent residence
 state | no | Two letter abbreviation of the state in which the customer resides.  e.g. `NY`
 postalCode | no | Postal code of customer's peramanent residence
 dateOfBirth | no | Customer's date of birth in `YYYY-MM-DD` format.
-tin | no | Last four digits of the customer's Taxpayer Identification Number.  For personal accounts, this will be the last four digits of their Social Security Number.
+ssn | no | Last four digits of the customer's Social Security Number.
 phone | yes | Customer's 10 digit phone number.  No hyphens or other separators.  e.g. `3334447777`
 
 ### Errors
@@ -164,7 +164,118 @@ phone | yes | Customer's 10 digit phone number.  No hyphens or other separators.
 |--------------|-------------|
 | 400 | Duplicate customer or validation error.
 | 403 | Not authorized to create customers.
-| 404 | Customer not found.
+
+## Retry Verification
+
+> Customer must be in the retry state:
+
+```json
+{
+  "_links": {
+    "self": {
+      "href": "https://api-uat.dwolla.com/customers/730CA23F-06C5-45CC-AA6B-8EC2D6EE109F"
+    },
+    "funding-sources": {
+      "href": "https://api-uat.dwolla.com/customers/730CA23F-06C5-45CC-AA6B-8EC2D6EE109F/funding-sources"
+    },
+    "transfers": {
+      "href": "https://api-uat.dwolla.com/customers/730CA23F-06C5-45CC-AA6B-8EC2D6EE109F/transfers"
+    },
+    "retry-verification": {
+      "href": "https://api-uat.dwolla.com/customers/730CA23F-06C5-45CC-AA6B-8EC2D6EE109F"
+    }
+  },
+  "id": "730CA23F-06C5-45CC-AA6B-8EC2D6EE109F",
+  "firstName": "Gordon",
+  "lastName": "Zheng",
+  "email": "gordon+20@dwolla.com",
+  "type": "personal",
+  "status": "retry",
+  "created": "2015-10-06T01:18:26.923Z"
+}
+```
+
+> Request:
+
+```shell
+POST /customers/730CA23F-06C5-45CC-AA6B-8EC2D6EE109F
+Content-Type: application/vnd.dwolla.v1.hal+json
+Accept: application/vnd.dwolla.v1.hal+json
+Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
+```
+
+```json
+{
+  "firstName": "Gordon",
+  "lastName": "Zheng",
+  "email": "gordon+15@dwolla.com",
+  "ipAddress": "10.10.10.10",
+  "type": "personal",
+  "address1": "6680 Forest Ave.",
+  "address2": "Apt 4F",
+  "city": "Ridgewood",
+  "state": "NY",
+  "postalCode": "11385",
+  "dateOfBirth": "1990-07-11",
+  "ssn": "200-30-1516",
+  "phone": "3478589191"
+}
+```
+
+> Successful response:
+
+```shell
+HTTP/1.1 200 OK
+Location: https://api.dwolla.com/customers/FC451A7A-AE30-4404-AB95-E3553FCD733F
+```
+
+> Validation error:
+
+```
+{
+  "code": "ValidationError",
+  "description": "Phone invalid."
+}
+```
+
+> If you try more than once, or customer is not in retry state:
+
+```
+{
+  "code": "InvalidResourceState",
+  "description": "Resource cannot be modified."
+}
+```
+
+If the customer has a status of `retry`, some information may have been miskeyed. You have one more opportunity to correct any mistakes using this endpoint. This time, you’ll need to provide the customer’s full SSN.
+
+<aside class="reminder">This endpoint [requires](#authentication) an OAuth access token with the `ManageCustomers` [scope](#oauth-scopes).</aside>
+
+### HTTP Request
+`POST https://api.dwolla.com/customers/{id}`
+
+### Request Parameters - retry verified customer
+Parameter | Optional? | Description
+----------|----------|-------------
+firstName | no | Customer's first name.
+lastName | no | Customer's last name.
+email | no | Customer's email address.
+ipAddress | yes | Customer's IP address
+type | no | Must be set to `personal`.  Note: eventually, `business` will be supported.
+address1 | no | First line of the street address of the customer's permanent residence
+address2 | yes | Second line of the street address of the customer's permanent residence
+city | no | City of customer's peramanent residence
+state | no | Two letter abbreviation of the state in which the customer resides.  e.g. `NY`
+postalCode | no | Postal code of customer's peramanent residence
+dateOfBirth | no | Customer's date of birth in `YYYY-MM-DD` format.
+ssn | no | The customer's *full* Social Security Number.
+phone | yes | Customer's 10 digit phone number.  No hyphens or other separators.  e.g. `3334447777`
+
+### Errors
+| HTTP Status | Message |
+|--------------|-------------|
+| 400 | Duplicate customer or validation error.
+| 403 | Not authorized to create customers.
 
 ## List Customers
 
