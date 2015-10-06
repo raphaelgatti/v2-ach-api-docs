@@ -614,29 +614,29 @@ https://www.dwolla.com/oauth/v2/authenticate?client_id={client_id}&amp;response_
           <h1 id='customers'>Customers</h1><pre class="highlight shell"><code><span class="o">{</span>
   <span class="s2">"_links"</span>: <span class="o">{</span>
     <span class="s2">"self"</span>: <span class="o">{</span>
-      <span class="s2">"href"</span>: <span class="s2">"https://api-uat.dwolla.com/customers/132681FA-1B4D-4181-8FF2-619CA46235B1"</span>
+      <span class="s2">"href"</span>: <span class="s2">"https://api-uat.dwolla.com/customers/730CA23F-06C5-45CC-AA6B-8EC2D6EE109F"</span>
     <span class="o">}</span>,
     <span class="s2">"receive"</span>: <span class="o">{</span>
       <span class="s2">"href"</span>: <span class="s2">"https://api-uat.dwolla.com/transfers"</span>
     <span class="o">}</span>,
     <span class="s2">"funding-sources"</span>: <span class="o">{</span>
-      <span class="s2">"href"</span>: <span class="s2">"https://api-uat.dwolla.com/customers/132681FA-1B4D-4181-8FF2-619CA46235B1/funding-sources"</span>
+      <span class="s2">"href"</span>: <span class="s2">"https://api-uat.dwolla.com/customers/730CA23F-06C5-45CC-AA6B-8EC2D6EE109F/funding-sources"</span>
     <span class="o">}</span>,
     <span class="s2">"transfers"</span>: <span class="o">{</span>
-      <span class="s2">"href"</span>: <span class="s2">"https://api-uat.dwolla.com/customers/132681FA-1B4D-4181-8FF2-619CA46235B1/transfers"</span>
+      <span class="s2">"href"</span>: <span class="s2">"https://api-uat.dwolla.com/customers/730CA23F-06C5-45CC-AA6B-8EC2D6EE109F/transfers"</span>
     <span class="o">}</span>,
     <span class="s2">"send"</span>: <span class="o">{</span>
       <span class="s2">"href"</span>: <span class="s2">"https://api-uat.dwolla.com/transfers"</span>
     <span class="o">}</span>
   <span class="o">}</span>,
-  <span class="s2">"id"</span>: <span class="s2">"132681FA-1B4D-4181-8FF2-619CA46235B1"</span>,
+  <span class="s2">"id"</span>: <span class="s2">"730CA23F-06C5-45CC-AA6B-8EC2D6EE109F"</span>,
   <span class="s2">"firstName"</span>: <span class="s2">"Gordon"</span>,
   <span class="s2">"lastName"</span>: <span class="s2">"Zheng"</span>,
-  <span class="s2">"email"</span>: <span class="s2">"gordon+15@dwolla.com"</span>,
+  <span class="s2">"email"</span>: <span class="s2">"gordon+20@dwolla.com"</span>,
   <span class="s2">"type"</span>: <span class="s2">"personal"</span>,
   <span class="s2">"status"</span>: <span class="s2">"verified"</span>,
-  <span class="s2">"created"</span>: <span class="s2">"2015-09-29T19:47:28.920Z"</span>
-<span class="o">}</span>
+  <span class="s2">"created"</span>: <span class="s2">"2015-10-06T01:18:26.923Z"</span>
+<span class="o">}</span>,
 </code></pre>
 
 <p>A customer represents an individual or business with whom you intend to transact with. In order to manage an account&rsquo;s Customers, the <code class="prettyprint">ManageCustomers</code> OAuth scope is required.</p>
@@ -776,7 +776,7 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
   </span><span class="nt">"state"</span><span class="p">:</span><span class="w"> </span><span class="s2">"NY"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"postalCode"</span><span class="p">:</span><span class="w"> </span><span class="s2">"11385"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"dateOfBirth"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1990-07-11"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"tin"</span><span class="p">:</span><span class="w"> </span><span class="s2">"202-99-1516"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"ssn"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1516"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"phone"</span><span class="p">:</span><span class="w"> </span><span class="s2">"3478589191"</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
@@ -894,9 +894,9 @@ Location: https://api.dwolla.com/customers/FC451A7A-AE30-4404-AB95-E3553FCD733F
 <td>Customer&rsquo;s date of birth in <code class="prettyprint">YYYY-MM-DD</code> format.</td>
 </tr>
 <tr>
-<td>tin</td>
+<td>ssn</td>
 <td>no</td>
-<td>Last four digits of the customer&rsquo;s Taxpayer Identification Number.  For personal accounts, this will be the last four digits of their Social Security Number.</td>
+<td>Last four digits of the customer&rsquo;s Social Security Number.</td>
 </tr>
 <tr>
 <td>phone</td>
@@ -919,9 +919,178 @@ Location: https://api.dwolla.com/customers/FC451A7A-AE30-4404-AB95-E3553FCD733F
 <td>403</td>
 <td>Not authorized to create customers.</td>
 </tr>
+</tbody></table>
+<h2 id='retry-verification'>Retry Verification</h2>
+<blockquote>
+<p>Customer must be in the retry state:</p>
+</blockquote>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"_links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"self"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api-uat.dwolla.com/customers/730CA23F-06C5-45CC-AA6B-8EC2D6EE109F"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nt">"funding-sources"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api-uat.dwolla.com/customers/730CA23F-06C5-45CC-AA6B-8EC2D6EE109F/funding-sources"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nt">"transfers"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api-uat.dwolla.com/customers/730CA23F-06C5-45CC-AA6B-8EC2D6EE109F/transfers"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nt">"retry-verification"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api-uat.dwolla.com/customers/730CA23F-06C5-45CC-AA6B-8EC2D6EE109F"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"730CA23F-06C5-45CC-AA6B-8EC2D6EE109F"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"firstName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Gordon"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"lastName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Zheng"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"gordon+20@dwolla.com"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"personal"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"retry"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"created"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-10-06T01:18:26.923Z"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<blockquote>
+<p>Request:</p>
+</blockquote>
+<pre class="highlight shell"><code>POST /customers/730CA23F-06C5-45CC-AA6B-8EC2D6EE109F
+Content-Type: application/vnd.dwolla.v1.hal+json
+Accept: application/vnd.dwolla.v1.hal+json
+Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
+</code></pre>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"firstName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Gordon"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"lastName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Zheng"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"gordon+15@dwolla.com"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"ipAddress"</span><span class="p">:</span><span class="w"> </span><span class="s2">"10.10.10.10"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"personal"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"address1"</span><span class="p">:</span><span class="w"> </span><span class="s2">"6680 Forest Ave."</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"address2"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Apt 4F"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"city"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Ridgewood"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"state"</span><span class="p">:</span><span class="w"> </span><span class="s2">"NY"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"postalCode"</span><span class="p">:</span><span class="w"> </span><span class="s2">"11385"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"dateOfBirth"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1990-07-11"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"ssn"</span><span class="p">:</span><span class="w"> </span><span class="s2">"200-30-1516"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"phone"</span><span class="p">:</span><span class="w"> </span><span class="s2">"3478589191"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<blockquote>
+<p>Successful response:</p>
+</blockquote>
+<pre class="highlight shell"><code>HTTP/1.1 200 OK
+Location: https://api.dwolla.com/customers/FC451A7A-AE30-4404-AB95-E3553FCD733F
+</code></pre>
+
+<blockquote>
+<p>Validation error:</p>
+</blockquote>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ValidationError"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Phone invalid."</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<blockquote>
+<p>If you try more than once, or customer is not in retry state:</p>
+</blockquote>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"InvalidResourceState"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Resource cannot be modified."</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<p>If the customer has a status of <code class="prettyprint">retry</code>, some information may have been miskeyed. You have one more opportunity to correct any mistakes using this endpoint. This time, you’ll need to provide the customer’s full SSN.</p>
+<aside class="reminder"><p>This endpoint <a href="#authentication">requires</a> an OAuth access token with the <code>ManageCustomers</code> <a href="#oauth-scopes">scope</a>.</p>
+</aside><h3 id='http-request'>HTTP Request</h3>
+<p><code class="prettyprint">POST https://api.dwolla.com/customers/{id}</code></p>
+<h3 id='request-parameters---retry-verified-customer'>Request Parameters - retry verified customer</h3>
+<table><thead>
 <tr>
-<td>404</td>
-<td>Customer not found.</td>
+<th>Parameter</th>
+<th>Optional?</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>firstName</td>
+<td>no</td>
+<td>Customer&rsquo;s first name.</td>
+</tr>
+<tr>
+<td>lastName</td>
+<td>no</td>
+<td>Customer&rsquo;s last name.</td>
+</tr>
+<tr>
+<td>email</td>
+<td>no</td>
+<td>Customer&rsquo;s email address.</td>
+</tr>
+<tr>
+<td>ipAddress</td>
+<td>yes</td>
+<td>Customer&rsquo;s IP address</td>
+</tr>
+<tr>
+<td>type</td>
+<td>no</td>
+<td>Must be set to <code class="prettyprint">personal</code>.  Note: eventually, <code class="prettyprint">business</code> will be supported.</td>
+</tr>
+<tr>
+<td>address1</td>
+<td>no</td>
+<td>First line of the street address of the customer&rsquo;s permanent residence</td>
+</tr>
+<tr>
+<td>address2</td>
+<td>yes</td>
+<td>Second line of the street address of the customer&rsquo;s permanent residence</td>
+</tr>
+<tr>
+<td>city</td>
+<td>no</td>
+<td>City of customer&rsquo;s peramanent residence</td>
+</tr>
+<tr>
+<td>state</td>
+<td>no</td>
+<td>Two letter abbreviation of the state in which the customer resides.  e.g. <code class="prettyprint">NY</code></td>
+</tr>
+<tr>
+<td>postalCode</td>
+<td>no</td>
+<td>Postal code of customer&rsquo;s peramanent residence</td>
+</tr>
+<tr>
+<td>dateOfBirth</td>
+<td>no</td>
+<td>Customer&rsquo;s date of birth in <code class="prettyprint">YYYY-MM-DD</code> format.</td>
+</tr>
+<tr>
+<td>ssn</td>
+<td>no</td>
+<td>The customer&rsquo;s <em>full</em> Social Security Number.</td>
+</tr>
+<tr>
+<td>phone</td>
+<td>yes</td>
+<td>Customer&rsquo;s 10 digit phone number.  No hyphens or other separators.  e.g. <code class="prettyprint">3334447777</code></td>
+</tr>
+</tbody></table>
+<h3 id='errors'>Errors</h3>
+<table><thead>
+<tr>
+<th>HTTP Status</th>
+<th>Message</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>400</td>
+<td>Duplicate customer or validation error.</td>
+</tr>
+<tr>
+<td>403</td>
+<td>Not authorized to create customers.</td>
 </tr>
 </tbody></table>
 <h2 id='list-customers'>List Customers</h2>
