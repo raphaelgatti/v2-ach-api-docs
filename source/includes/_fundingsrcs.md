@@ -9,7 +9,7 @@
 }
 ```
 
-Add and retrieve ACH bank accounts via Funding Sources, which are available to the `Customers` and `Accounts` resources. 
+Add and retrieve ACH bank accounts via Funding Sources, which are available to the `Customers` and `Accounts` resources.  Customers can have a maximum of 6 funding sources.
 
 ### Funding Source Resource
 
@@ -48,7 +48,7 @@ HTTP/1.1 201 Created
 Location: https://api.dwolla.com/funding-sources/58d20353-2b4b-4d68-8b89-3e5dab12b15a
 ```
 
-Create a new Funding Source for a Customer.
+Create a new Funding Source for a Customer.  Customers can have a maximum of 6 funding sources.
 
 <aside class="reminder">This endpoint [requires](#authentication) an OAuth access token with the `ManageCustomers` [scope](#oauth-scopes).</aside>
 
