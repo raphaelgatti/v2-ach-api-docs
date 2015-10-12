@@ -1,10 +1,10 @@
 # Introduction
 ```
-  _          _ _             
- | |__   ___| | | ___        
- | '_ \ / _ \ | |/ _ \       
- | | | |  __/ | | (_) |      
- |_| |_|\___|_|_|\___/     _ 
+  _          _ _
+ | |__   ___| | | ___
+ | '_ \ / _ \ | |/ _ \
+ | | | |  __/ | | (_) |
+ |_| |_|\___|_|_|\___/     _
  __      _____  _ __| | __| |
  \ \ /\ / / _ \| '__| |/ _` |
   \ V  V / (_) | |  | | (_| |
@@ -12,7 +12,7 @@
 
 ```
 
-Welcome to the Dwolla API V2 documentation, currently in active development. Gradually, the functionality of API V1 will be implemented in API V2.  The two versions will operate in parallel for the foreseeable future.  
+Welcome to the Dwolla API V2 documentation, currently in active development. Gradually, the functionality of API V1 will be implemented in API V2.  The two versions will operate in parallel for the foreseeable future.
 
 The initial focus of API Version 2 centers around a premium feature: [White Label](https://www.dwolla.com/white-label), and will not provide the same functionality as Version 1 does.  Over time, we will add the same functionality currently currently available in V1 to V2.
 
@@ -81,13 +81,18 @@ The following errors are common across all API endpoints.
 
 | HTTP Status | Error Code | Description
 |-------------|------|-------------
-| 400 | Validation Error | (varies) |
-| 401 | InvalidCredentials | Expired access token. |
-| 401 | InvalidCredentials | Invalid access token. |
-| 401 | InvalidCredentials | Missing or invalid credentials. |
+| 400 | BadRequest | The request body contains bad syntax or is incomplete. |
+| 400 | ValidationError | (varies) |
+| 401 | InvalidCredentials | Missing or invalid Authorization header. |
+| 401 | InvalidAccessToken | Invalid access token. |
+| 401 | ExpiredAccessToken | Generate a new access token using a valid refresh token. |
+| 401 | InvalidAccountStatus | Invalid access token account status. |
+| 401 | InvalidApplicationStatus | Invalid application status. |
 | 401 | InvalidScopes | Missing or invalid scopes for requested endpoint. |
 | 403 | Forbidden | The supplied credentials are not authorized for this resource. |
+| 403 | InvalidResourceState | Resource cannot be modified. |
 | 404 | NotFound | The requested resource was not found. |
+| 405 | MethodNotAllowed | (varies) |
 | 406 | InvalidVersion | Missing or invalid API version. |
 | 500 | ServerError | A server error occurred. Error ID: 63e92a2a-fb48-4a23-ab4c-24a6764f1593. |
 | 500 | RequestTimeout | The request timed out. |
