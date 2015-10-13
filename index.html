@@ -2312,17 +2312,23 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 </tbody></table>
 
           <h1 id='events'>Events</h1><pre class="highlight json"><code><span class="p">{</span><span class="w">
-  </span><span class="nt">"_links"</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span><span class="w">
-  </span><span class="nt">"_embedded"</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span><span class="w">
-  </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"created"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-08-24T14:05:17.399Z"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"accountId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"topic"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"resourceId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="w">
+  </span><span class="nt">"_links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"self"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.dwolla.com/events/12a32a55-dbc8-4ff1-a063-2567d1c4156e"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nt">"resource"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.dwolla.com/transfers/11596661-A870-E511-80DB-0AA34A9B2388"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"12a32a55-dbc8-4ff1-a063-2567d1c4156e"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"created"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-10-12T06:13:41.000Z"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"accountId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"f04631ce-4447-428c-9a3a-342f167bcae6"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"topic"</span><span class="p">:</span><span class="w"> </span><span class="s2">"transfer_completed"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"resourceId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"11596661-A870-E511-80DB-0AA34A9B2388"</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 
-<p>An event is created to notify you that an action occured on your account. When a unique event occurs(e.g. customer_created), we create a new event object. A single API request can create multiple events. For example, if you initiate a transfer from an Account to a Customer then events can be created for <code class="prettyprint">transfer_created</code> and <code class="prettyprint">transfer_completed</code>.</p>
+<p>When a resource&rsquo;s state changes, we create a new event resource to record the change.  For instance, if a customer&rsquo;s status changes to <code class="prettyprint">verified</code>, a <code class="prettyprint">customer_verified</code> event will be created.  Events will trigger a webhook to be fired to any URLs specified by your active <a href="#webhook-subscriptions">Webhook Subscriptions</a>.</p>
 <h3 id='events-resource'>Events Resource</h3>
 <table><thead>
 <tr>
@@ -2331,30 +2337,34 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 </tr>
 </thead><tbody>
 <tr>
+<td>_links</td>
+<td>Contains links to the event and the associated resource</td>
+</tr>
+<tr>
 <td>id</td>
-<td>ID of application event.</td>
+<td>Event ID</td>
 </tr>
 <tr>
 <td>created</td>
-<td>ISO-8601 timestamp.</td>
+<td>ISO-8601 timestamp when event was created</td>
 </tr>
 <tr>
 <td>accountId</td>
-<td>The Customer or Account unique identifier</td>
+<td>ID of the associated account</td>
 </tr>
 <tr>
 <td>topic</td>
-<td>Type of event.</td>
+<td>Type of event</td>
 </tr>
 <tr>
 <td>resourceId</td>
-<td>A unique ID of the resource that caused the event.</td>
+<td>ID of the resource associated with the event.</td>
 </tr>
 </tbody></table>
-<h3 id='available-events'>Available events</h3>
+<h3 id='event-topics'>Event topics</h3>
 <table><thead>
 <tr>
-<th>Event</th>
+<th>Topic</th>
 <th>Description</th>
 </tr>
 </thead><tbody>
@@ -2514,16 +2524,16 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 <pre class="highlight json"><code><span class="p">{</span><span class="w">
   </span><span class="nt">"_links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="nt">"first"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api-uat.dwolla.com/events?limit=25&amp;offset=0"</span><span class="w">
+      </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.dwolla.com/events?limit=25&amp;offset=0"</span><span class="w">
     </span><span class="p">},</span><span class="w">
     </span><span class="nt">"last"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api-uat.dwolla.com/events?limit=25&amp;offset=25"</span><span class="w">
+      </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.dwolla.com/events?limit=25&amp;offset=25"</span><span class="w">
     </span><span class="p">},</span><span class="w">
     </span><span class="nt">"next"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api-uat.dwolla.com/events?limit=25&amp;offset=25"</span><span class="w">
+      </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.dwolla.com/events?limit=25&amp;offset=25"</span><span class="w">
     </span><span class="p">},</span><span class="w">
     </span><span class="nt">"self"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api-uat.dwolla.com/events"</span><span class="w">
+      </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.dwolla.com/events"</span><span class="w">
     </span><span class="p">}</span><span class="w">
   </span><span class="p">},</span><span class="w">
   </span><span class="nt">"_embedded"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
@@ -2531,10 +2541,10 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
       </span><span class="p">{</span><span class="w">
         </span><span class="nt">"_links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
           </span><span class="nt">"self"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-            </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api-uat.dwolla.com/events/0b7847ea-5520-4456-b8f6-2229196b9709"</span><span class="w">
+            </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.dwolla.com/events/0b7847ea-5520-4456-b8f6-2229196b9709"</span><span class="w">
           </span><span class="p">},</span><span class="w">
           </span><span class="nt">"resource"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-            </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api-uat.dwolla.com/funding-sources/48e463c1-b00d-4cfc-80fc-4935b458b419"</span><span class="w">
+            </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.dwolla.com/funding-sources/48e463c1-b00d-4cfc-80fc-4935b458b419"</span><span class="w">
           </span><span class="p">}</span><span class="w">
         </span><span class="p">},</span><span class="w">
         </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0b7847ea-5520-4456-b8f6-2229196b9709"</span><span class="p">,</span><span class="w">
@@ -2546,10 +2556,10 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
       </span><span class="p">{</span><span class="w">
         </span><span class="nt">"_links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
           </span><span class="nt">"self"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-            </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api-uat.dwolla.com/events/84b6a716-b239-4b08-9a7b-6e11b0ba003a"</span><span class="w">
+            </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.dwolla.com/events/84b6a716-b239-4b08-9a7b-6e11b0ba003a"</span><span class="w">
           </span><span class="p">},</span><span class="w">
           </span><span class="nt">"resource"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-            </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api-uat.dwolla.com/transfers/38242332-374B-E511-80DA-0AA34A9B2388"</span><span class="w">
+            </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.dwolla.com/transfers/38242332-374B-E511-80DA-0AA34A9B2388"</span><span class="w">
           </span><span class="p">}</span><span class="w">
         </span><span class="p">},</span><span class="w">
         </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"84b6a716-b239-4b08-9a7b-6e11b0ba003a"</span><span class="p">,</span><span class="w">
@@ -2561,10 +2571,10 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
       </span><span class="p">{</span><span class="w">
         </span><span class="nt">"_links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
           </span><span class="nt">"self"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-            </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api-uat.dwolla.com/events/5a6c7568-fae1-4e1a-84ee-a62525763244"</span><span class="w">
+            </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.dwolla.com/events/5a6c7568-fae1-4e1a-84ee-a62525763244"</span><span class="w">
           </span><span class="p">},</span><span class="w">
           </span><span class="nt">"resource"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-            </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api-uat.dwolla.com/transfers/8A1F44B6-354B-E511-80DA-0AA34A9B2388"</span><span class="w">
+            </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.dwolla.com/transfers/8A1F44B6-354B-E511-80DA-0AA34A9B2388"</span><span class="w">
           </span><span class="p">}</span><span class="w">
         </span><span class="p">},</span><span class="w">
         </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"5a6c7568-fae1-4e1a-84ee-a62525763244"</span><span class="p">,</span><span class="w">
@@ -2629,10 +2639,10 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 <pre class="highlight json"><code><span class="p">{</span><span class="w">
   </span><span class="nt">"_links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="nt">"self"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api-uat.dwolla.com/events/a58be29f-ce03-4b42-9d6c-48ad2b4093ee"</span><span class="w">
+      </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.dwolla.com/events/a58be29f-ce03-4b42-9d6c-48ad2b4093ee"</span><span class="w">
     </span><span class="p">},</span><span class="w">
     </span><span class="nt">"resource"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api-uat.dwolla.com/transfers/3B192430-8D47-E511-80DA-0AA34A9B2388"</span><span class="w">
+      </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.dwolla.com/transfers/3B192430-8D47-E511-80DA-0AA34A9B2388"</span><span class="w">
     </span><span class="p">}</span><span class="w">
   </span><span class="p">},</span><span class="w">
   </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"a58be29f-ce03-4b42-9d6c-48ad2b4093ee"</span><span class="p">,</span><span class="w">
@@ -2675,39 +2685,17 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 </tbody></table>
 
           <h1 id='webhook-subscriptions'>Webhook Subscriptions</h1><pre class="highlight json"><code><span class="p">{</span><span class="w">
-  </span><span class="nt">"_links"</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span><span class="w">
-  </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"topic"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"accountId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"eventId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"subscriptionId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"attempts"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-    </span><span class="p">{</span><span class="w">
-      </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"request"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="nt">"created"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-07-23T14:19:36.981Z"</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"headers"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-          </span><span class="p">{</span><span class="w">
-            </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
-            </span><span class="nt">"value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="w">
-          </span><span class="p">}</span><span class="w">
-        </span><span class="p">],</span><span class="w">
-        </span><span class="nt">"body"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="w">
-      </span><span class="p">},</span><span class="w">
-      </span><span class="nt">"response"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="nt">"created"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-07-23T14:19:36.981Z"</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"headers"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-          </span><span class="p">{</span><span class="w">
-            </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
-            </span><span class="nt">"value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="w">
-          </span><span class="p">}</span><span class="w">
-        </span><span class="p">],</span><span class="w">
-        </span><span class="nt">"statusCode"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"body"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="w">
-      </span><span class="p">}</span><span class="w">
+  </span><span class="nt">"_links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"self"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.dwolla.com/webhook-subscriptions/034a0ae2-fc7f-4922-8e4e-6fb9855ed43b"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nt">"webhooks"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.dwolla.com/webhook-subscriptions/034a0ae2-fc7f-4922-8e4e-6fb9855ed43b/webhooks"</span><span class="w">
     </span><span class="p">}</span><span class="w">
-  </span><span class="p">]</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"034a0ae2-fc7f-4922-8e4e-6fb9855ed43b"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://requestb.in/vbxb1bvb"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"created"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-10-06T01:11:36.000Z"</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 
