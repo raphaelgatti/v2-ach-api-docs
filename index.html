@@ -2328,7 +2328,7 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 
-<p>When a resource&rsquo;s state changes, we create a new event resource to record the change.  For instance, if a customer&rsquo;s status changes to <code class="prettyprint">verified</code>, a <code class="prettyprint">customer_verified</code> event will be created.  Events will trigger a webhook to be fired to any URLs specified by your active <a href="#webhook-subscriptions">Webhook Subscriptions</a>.</p>
+<p>When a resource&rsquo;s state changes, we create a new event resource to record the change.  For instance, if a customer&rsquo;s status changes to <code class="prettyprint">verified</code>, a <code class="prettyprint">customer_verified</code> event will be created.  When an Event is created, a <a href="#webhooks">Webhook</a> will be created to deliver the Event to any URLs specified by your active <a href="#webhook-subscriptions">Webhook Subscriptions</a>.</p>
 <h3 id='events-resource'>Events Resource</h3>
 <table><thead>
 <tr>
@@ -3106,43 +3106,93 @@ GET https://api.dwolla.com/webhook-subscriptions/{id}/webhooks
 </tbody></table>
 
           <h1 id='webhooks'>Webhooks</h1><pre class="highlight json"><code><span class="p">{</span><span class="w">
-  </span><span class="nt">"_links"</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span><span class="w">
-  </span><span class="nt">"_embedded"</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span><span class="w">
-  </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"topic"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"accountId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"eventId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"subscriptionId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"_links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"self"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.dwolla.com/webhooks/3142d495-3653-4470-ba0f-cb8ca8aaa467"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nt">"subscription"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.dwolla.com/webhook-subscriptions/57f49636-82ed-4426-8c6e-65c9beaa28c2"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nt">"retry"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.dwolla.com/webhooks/3142d495-3653-4470-ba0f-cb8ca8aaa467/retries"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nt">"event"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.dwolla.com/events/00aac4a8-acb9-4a0e-bc69-227afdfd19ac"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"3142d495-3653-4470-ba0f-cb8ca8aaa467"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"topic"</span><span class="p">:</span><span class="w"> </span><span class="s2">"transfer_completed"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"accountId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"f04631ce-4447-428c-9a3a-342f167bcae6"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"eventId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"00aac4a8-acb9-4a0e-bc69-227afdfd19ac"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"subscriptionId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"57f49636-82ed-4426-8c6e-65c9beaa28c2"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"attempts"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
     </span><span class="p">{</span><span class="w">
-      </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"bd962253-ceb2-404d-8e76-d28efa09ce0a"</span><span class="p">,</span><span class="w">
       </span><span class="nt">"request"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="nt">"created"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-08-24T14:05:17.431Z"</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"timestamp"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-10-12T06:12:00.772Z"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://shpw2hbiq0qw.runscope.net"</span><span class="p">,</span><span class="w">
         </span><span class="nt">"headers"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
           </span><span class="p">{</span><span class="w">
-            </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
-            </span><span class="nt">"value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="w">
+            </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"X-Dwolla-Topic"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"transfer_completed"</span><span class="w">
+          </span><span class="p">},</span><span class="w">
+          </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"X-Request-Signature"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"6cee485f3ac0638d2f8f27abca2e0896c6d1de8e"</span><span class="w">
           </span><span class="p">}</span><span class="w">
         </span><span class="p">],</span><span class="w">
-        </span><span class="nt">"body"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="w">
+        </span><span class="nt">"body"</span><span class="p">:</span><span class="w"> </span><span class="s2">"{\"id\":\"00aac4a8-acb9-4a0e-bc69-227afdfd19ac\",\"resourceId\":\"2407E724-A870-E511-80DB-0AA34A9B2388\",\"topic\":\"transfer_completed\",\"timestamp\":\"2015-10-12T06:12:00.618Z\",\"accountId\":\"f04631ce-4447-428c-9a3a-342f167bcae6\",\"_links\":{\"self\":\"https://api.dwolla.com/events/00aac4a8-acb9-4a0e-bc69-227afdfd19ac\",\"resource\":\"https://api.dwolla.com/transfers/2407E724-A870-E511-80DB-0AA34A9B2388\"}}"</span><span class="w">
       </span><span class="p">},</span><span class="w">
       </span><span class="nt">"response"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="nt">"created"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-08-24T14:05:17.431Z"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"timestamp"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-10-12T06:12:00.826Z"</span><span class="p">,</span><span class="w">
         </span><span class="nt">"headers"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
           </span><span class="p">{</span><span class="w">
-            </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
-            </span><span class="nt">"value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="w">
+            </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Date"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Mon, 12 Oct 2015 06:12:00 GMT"</span><span class="w">
+          </span><span class="p">},</span><span class="w">
+          </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Content-Type"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"application/json; charset=UTF-8"</span><span class="w">
+          </span><span class="p">},</span><span class="w">
+          </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Content-Length"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1030"</span><span class="w">
+          </span><span class="p">},</span><span class="w">
+          </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Connection"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"keep-alive"</span><span class="w">
+          </span><span class="p">},</span><span class="w">
+          </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Runscope-Message-Id"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"de9795ea-62dc-4038-80f8-0cec3c3a7136"</span><span class="w">
+          </span><span class="p">},</span><span class="w">
+          </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Access-Control-Allow-Methods"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"GET, PUT, POST, PATCH, DELETE, OPTIONS, HEAD"</span><span class="w">
+          </span><span class="p">},</span><span class="w">
+          </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Access-Control-Allow-Origin"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"*"</span><span class="w">
+          </span><span class="p">},</span><span class="w">
+          </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Access-Control-Allow-Credentials"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"true"</span><span class="w">
+          </span><span class="p">},</span><span class="w">
+          </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Server"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Runscope-Gateway/1.0"</span><span class="w">
           </span><span class="p">}</span><span class="w">
         </span><span class="p">],</span><span class="w">
-        </span><span class="nt">"statusCode"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"body"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="w">
+        </span><span class="nt">"statusCode"</span><span class="p">:</span><span class="w"> </span><span class="mi">200</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"body"</span><span class="p">:</span><span class="w"> </span><span class="s2">"{\"body\":\"{\"id\":\"00aac4a8-acb9-4a0e-bc69-227afdfd19ac\",\"resourceId\":\"2407E724-A870-E511-80DB-0AA34A9B2388\",\"topic\":\"transfer_completed\",\"timestamp\":\"2015-10-12T06:12:00.618Z\",\"accountId\":\"f04631ce-4447-428c-9a3a-342f167bcae6\",\"_links\":{\"self\":\"https://api.dwolla.com/events/00aac4a8-acb9-4a0e-bc69-227afdfd19ac\",\"resource\":\"https://api.dwolla.com/transfers/2407E724-A870-E511-80DB-0AA34A9B2388\"}}\",\"files\":[],\"form\":{},\"fragment\":\"\",\"headers\":{\"Connection\":[\"close\"],\"Content-Length\":[\"394\"],\"Content-Type\":[\"application/json; charset=UTF-8\"],\"Host\":[\"shpw2hbiq0qw.runscope.net\"],\"User-Agent\":[\"dwolla-webhooks/1.0\"],\"X-Dwolla-Topic\":[\"transfer_completed\"],\"X-Request-Signature\":[\"6cee485f3ac0638d2f8f27abca2e0896c6d1de8e\"]},\"host\":\"shpw2hbiq0qw.runscope.net\",\"method\":\"POST\",\"params\":{},\"path\":\"/\",\"region\":\"us5\",\"runscope_host\":\"prod078.runscope.in\",\"scheme\":\"https\",\"source\":\"capture\",\"source_ip\":\"54.69.106.185\",\"timestamp\":1.444630320824983e+09,\"url\":\"https://shpw2hbiq0qw.runscope.net/\"}"</span><span class="w">
       </span><span class="p">}</span><span class="w">
     </span><span class="p">}</span><span class="w">
   </span><span class="p">]</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
-<h2 id='get-webhook-by-id'>Get Webhook by ID</h2>
+
+<p>When a new <a href="#events">Event</a> is created and there is an active <a href="#webhook-subscriptions">Webhook Subscription</a>, a new Webhook is created in order to deliver that Event.  Attempted deliveries are recorded under the Webhook&rsquo;s <code class="prettyprint">attempts</code> property.  Each attempt incldues the recorded request and response of the delivery attempt.</p>
+<h2 id='retrieve-webhook'>Retrieve Webhook</h2>
 <blockquote>
 <p>Request:</p>
 </blockquote>
@@ -3157,45 +3207,90 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 <pre class="highlight json"><code><span class="p">{</span><span class="w">
   </span><span class="nt">"_links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="nt">"self"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.dwolla.com/webhooks/76ce47b9-5b3c-4ac8-a743-ce318afbaecd"</span><span class="w">
+      </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.dwolla.com/webhooks/3142d495-3653-4470-ba0f-cb8ca8aaa467"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nt">"subscription"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.dwolla.com/webhook-subscriptions/57f49636-82ed-4426-8c6e-65c9beaa28c2"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nt">"retry"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.dwolla.com/webhooks/3142d495-3653-4470-ba0f-cb8ca8aaa467/retries"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nt">"event"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.dwolla.com/events/00aac4a8-acb9-4a0e-bc69-227afdfd19ac"</span><span class="w">
     </span><span class="p">}</span><span class="w">
   </span><span class="p">},</span><span class="w">
-  </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"76ce47b9-5b3c-4ac8-a743-ce318afbaecd"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"topic"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"accountId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"eventId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"subscriptionId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"3142d495-3653-4470-ba0f-cb8ca8aaa467"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"topic"</span><span class="p">:</span><span class="w"> </span><span class="s2">"transfer_completed"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"accountId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"f04631ce-4447-428c-9a3a-342f167bcae6"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"eventId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"00aac4a8-acb9-4a0e-bc69-227afdfd19ac"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"subscriptionId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"57f49636-82ed-4426-8c6e-65c9beaa28c2"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"attempts"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
     </span><span class="p">{</span><span class="w">
-      </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"bd962253-ceb2-404d-8e76-d28efa09ce0a"</span><span class="p">,</span><span class="w">
       </span><span class="nt">"request"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="nt">"created"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-07-23T14:19:36.981Z"</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"timestamp"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-10-12T06:12:00.772Z"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://shpw2hbiq0qw.runscope.net"</span><span class="p">,</span><span class="w">
         </span><span class="nt">"headers"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
           </span><span class="p">{</span><span class="w">
-            </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
-            </span><span class="nt">"value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="w">
+            </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"X-Dwolla-Topic"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"transfer_completed"</span><span class="w">
+          </span><span class="p">},</span><span class="w">
+          </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"X-Request-Signature"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"6cee485f3ac0638d2f8f27abca2e0896c6d1de8e"</span><span class="w">
           </span><span class="p">}</span><span class="w">
         </span><span class="p">],</span><span class="w">
-        </span><span class="nt">"body"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="w">
+        </span><span class="nt">"body"</span><span class="p">:</span><span class="w"> </span><span class="s2">"{\"id\":\"00aac4a8-acb9-4a0e-bc69-227afdfd19ac\",\"resourceId\":\"2407E724-A870-E511-80DB-0AA34A9B2388\",\"topic\":\"transfer_completed\",\"timestamp\":\"2015-10-12T06:12:00.618Z\",\"accountId\":\"f04631ce-4447-428c-9a3a-342f167bcae6\",\"_links\":{\"self\":\"https://api.dwolla.com/events/00aac4a8-acb9-4a0e-bc69-227afdfd19ac\",\"resource\":\"https://api.dwolla.com/transfers/2407E724-A870-E511-80DB-0AA34A9B2388\"}}"</span><span class="w">
       </span><span class="p">},</span><span class="w">
       </span><span class="nt">"response"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="nt">"created"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-07-23T14:19:36.981Z"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"timestamp"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-10-12T06:12:00.826Z"</span><span class="p">,</span><span class="w">
         </span><span class="nt">"headers"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
           </span><span class="p">{</span><span class="w">
-            </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
-            </span><span class="nt">"value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="w">
+            </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Date"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Mon, 12 Oct 2015 06:12:00 GMT"</span><span class="w">
+          </span><span class="p">},</span><span class="w">
+          </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Content-Type"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"application/json; charset=UTF-8"</span><span class="w">
+          </span><span class="p">},</span><span class="w">
+          </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Content-Length"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1030"</span><span class="w">
+          </span><span class="p">},</span><span class="w">
+          </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Connection"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"keep-alive"</span><span class="w">
+          </span><span class="p">},</span><span class="w">
+          </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Runscope-Message-Id"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"de9795ea-62dc-4038-80f8-0cec3c3a7136"</span><span class="w">
+          </span><span class="p">},</span><span class="w">
+          </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Access-Control-Allow-Methods"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"GET, PUT, POST, PATCH, DELETE, OPTIONS, HEAD"</span><span class="w">
+          </span><span class="p">},</span><span class="w">
+          </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Access-Control-Allow-Origin"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"*"</span><span class="w">
+          </span><span class="p">},</span><span class="w">
+          </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Access-Control-Allow-Credentials"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"true"</span><span class="w">
+          </span><span class="p">},</span><span class="w">
+          </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Server"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Runscope-Gateway/1.0"</span><span class="w">
           </span><span class="p">}</span><span class="w">
         </span><span class="p">],</span><span class="w">
-        </span><span class="nt">"statusCode"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"body"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="w">
+        </span><span class="nt">"statusCode"</span><span class="p">:</span><span class="w"> </span><span class="mi">200</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"body"</span><span class="p">:</span><span class="w"> </span><span class="s2">"{\"body\":\"{\"id\":\"00aac4a8-acb9-4a0e-bc69-227afdfd19ac\",\"resourceId\":\"2407E724-A870-E511-80DB-0AA34A9B2388\",\"topic\":\"transfer_completed\",\"timestamp\":\"2015-10-12T06:12:00.618Z\",\"accountId\":\"f04631ce-4447-428c-9a3a-342f167bcae6\",\"_links\":{\"self\":\"https://api.dwolla.com/events/00aac4a8-acb9-4a0e-bc69-227afdfd19ac\",\"resource\":\"https://api.dwolla.com/transfers/2407E724-A870-E511-80DB-0AA34A9B2388\"}}\",\"files\":[],\"form\":{},\"fragment\":\"\",\"headers\":{\"Connection\":[\"close\"],\"Content-Length\":[\"394\"],\"Content-Type\":[\"application/json; charset=UTF-8\"],\"Host\":[\"shpw2hbiq0qw.runscope.net\"],\"User-Agent\":[\"dwolla-webhooks/1.0\"],\"X-Dwolla-Topic\":[\"transfer_completed\"],\"X-Request-Signature\":[\"6cee485f3ac0638d2f8f27abca2e0896c6d1de8e\"]},\"host\":\"shpw2hbiq0qw.runscope.net\",\"method\":\"POST\",\"params\":{},\"path\":\"/\",\"region\":\"us5\",\"runscope_host\":\"prod078.runscope.in\",\"scheme\":\"https\",\"source\":\"capture\",\"source_ip\":\"54.69.106.185\",\"timestamp\":1.444630320824983e+09,\"url\":\"https://shpw2hbiq0qw.runscope.net/\"}"</span><span class="w">
       </span><span class="p">}</span><span class="w">
     </span><span class="p">}</span><span class="w">
   </span><span class="p">]</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 
-<p>Retrieve a webhook by ID. </p>
+<p>Retrieve a single webhook.</p>
 <aside class="reminder"><p>This endpoint <a href="#authentication">requires</a> an OAuth <em>Application</em> access token.</p>
 </aside><h3 id='http-request'>HTTP Request</h3>
 <p><code class="prettyprint">GET https://api.dwolla.com/webhooks/{id}</code></p>
