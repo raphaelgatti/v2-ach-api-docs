@@ -18,7 +18,7 @@
 }
 ```
 
-When a resource's state changes, we create a new event resource to record the change.  For instance, if a customer's status changes to `verified`, a `customer_verified` event will be created.  Events will trigger a webhook to be fired to any URLs specified by your active [Webhook Subscriptions](#webhook-subscriptions).
+When a resource's state changes, we create a new event resource to record the change.  For instance, if a customer's status changes to `verified`, a `customer_verified` event will be created.  When an Event is created, a [Webhook](#webhooks) will be created to deliver the Event to any URLs specified by your active [Webhook Subscriptions](#webhook-subscriptions).
 
 ### Events Resource 
 
