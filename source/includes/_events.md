@@ -2,30 +2,37 @@
 
 ```json
 {
-  "_links": {},
-  "_embedded": {},
-  "id": "string",
-  "created": "2015-08-24T14:05:17.399Z",
-  "accountId": "string",
-  "topic": "string",
-  "resourceId": "string"
+  "_links": {
+    "self": {
+      "href": "https://api.dwolla.com/events/12a32a55-dbc8-4ff1-a063-2567d1c4156e"
+    },
+    "resource": {
+      "href": "https://api.dwolla.com/transfers/11596661-A870-E511-80DB-0AA34A9B2388"
+    }
+  },
+  "id": "12a32a55-dbc8-4ff1-a063-2567d1c4156e",
+  "created": "2015-10-12T06:13:41.000Z",
+  "accountId": "f04631ce-4447-428c-9a3a-342f167bcae6",
+  "topic": "transfer_completed",
+  "resourceId": "11596661-A870-E511-80DB-0AA34A9B2388"
 }
 ```
 
-An event is created to notify you that an action occured on your account. When a unique event occurs(e.g. customer_created), we create a new event object. A single API request can create multiple events. For example, if you initiate a transfer from an Account to a Customer then events can be created for `transfer_created` and `transfer_completed`.
+When a resource's state changes, we create a new event resource to record the change.  For instance, if a customer's status changes to `verified`, a `customer_verified` event will be created.  Events will trigger a webhook to be fired to any URLs specified by your active [Webhook Subscriptions](#webhook-subscriptions).
 
 ### Events Resource 
 
 | Parameter | Description
 |-----------|------------|
-|id | ID of application event.
-|created | ISO-8601 timestamp.
-|accountId | The Customer or Account unique identifier
-|topic | Type of event. 
-|resourceId | A unique ID of the resource that caused the event.
+|_links | Contains links to the event and the associated resource
+|id | Event ID
+|created | ISO-8601 timestamp when event was created
+|accountId | ID of the associated account
+|topic | Type of event
+|resourceId | ID of the resource associated with the event.
 
-### Available events
-| Event              | Description                                                                                                       |
+### Event topics
+| Topic          | Description                                                                                                       |
 |--------------------|-------------------------------------------------------------------------------------------------------------------|
 | customer_created   | A Customer was created.                                                                                    |
 | transfer_created   | Transfer was created.                                                                                             |
@@ -79,16 +86,16 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 {
   "_links": {
     "first": {
-      "href": "https://api-uat.dwolla.com/events?limit=25&offset=0"
+      "href": "https://api.dwolla.com/events?limit=25&offset=0"
     },
     "last": {
-      "href": "https://api-uat.dwolla.com/events?limit=25&offset=25"
+      "href": "https://api.dwolla.com/events?limit=25&offset=25"
     },
     "next": {
-      "href": "https://api-uat.dwolla.com/events?limit=25&offset=25"
+      "href": "https://api.dwolla.com/events?limit=25&offset=25"
     },
     "self": {
-      "href": "https://api-uat.dwolla.com/events"
+      "href": "https://api.dwolla.com/events"
     }
   },
   "_embedded": {
@@ -96,10 +103,10 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
       {
         "_links": {
           "self": {
-            "href": "https://api-uat.dwolla.com/events/0b7847ea-5520-4456-b8f6-2229196b9709"
+            "href": "https://api.dwolla.com/events/0b7847ea-5520-4456-b8f6-2229196b9709"
           },
           "resource": {
-            "href": "https://api-uat.dwolla.com/funding-sources/48e463c1-b00d-4cfc-80fc-4935b458b419"
+            "href": "https://api.dwolla.com/funding-sources/48e463c1-b00d-4cfc-80fc-4935b458b419"
           }
         },
         "id": "0b7847ea-5520-4456-b8f6-2229196b9709",
@@ -111,10 +118,10 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
       {
         "_links": {
           "self": {
-            "href": "https://api-uat.dwolla.com/events/84b6a716-b239-4b08-9a7b-6e11b0ba003a"
+            "href": "https://api.dwolla.com/events/84b6a716-b239-4b08-9a7b-6e11b0ba003a"
           },
           "resource": {
-            "href": "https://api-uat.dwolla.com/transfers/38242332-374B-E511-80DA-0AA34A9B2388"
+            "href": "https://api.dwolla.com/transfers/38242332-374B-E511-80DA-0AA34A9B2388"
           }
         },
         "id": "84b6a716-b239-4b08-9a7b-6e11b0ba003a",
@@ -126,10 +133,10 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
       {
         "_links": {
           "self": {
-            "href": "https://api-uat.dwolla.com/events/5a6c7568-fae1-4e1a-84ee-a62525763244"
+            "href": "https://api.dwolla.com/events/5a6c7568-fae1-4e1a-84ee-a62525763244"
           },
           "resource": {
-            "href": "https://api-uat.dwolla.com/transfers/8A1F44B6-354B-E511-80DA-0AA34A9B2388"
+            "href": "https://api.dwolla.com/transfers/8A1F44B6-354B-E511-80DA-0AA34A9B2388"
           }
         },
         "id": "5a6c7568-fae1-4e1a-84ee-a62525763244",
@@ -179,10 +186,10 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 {
   "_links": {
     "self": {
-      "href": "https://api-uat.dwolla.com/events/a58be29f-ce03-4b42-9d6c-48ad2b4093ee"
+      "href": "https://api.dwolla.com/events/a58be29f-ce03-4b42-9d6c-48ad2b4093ee"
     },
     "resource": {
-      "href": "https://api-uat.dwolla.com/transfers/3B192430-8D47-E511-80DA-0AA34A9B2388"
+      "href": "https://api.dwolla.com/transfers/3B192430-8D47-E511-80DA-0AA34A9B2388"
     }
   },
   "id": "a58be29f-ce03-4b42-9d6c-48ad2b4093ee",
