@@ -55,7 +55,7 @@ Requests that require an client_id and client_secret are passed in the JSON requ
 
 `GET https://api.dwolla.com/example?client_id={client_id}&client_secret={client_secret}`
 
-### API Endpoint
+### API Host
 **Production:** https://api.dwolla.com
 
 **Sandbox:** https://api-uat.dwolla.com
@@ -103,16 +103,16 @@ The following errors are common across all API endpoints.
 {
   "_links": {
     "self": {
-      "href": "https://api-uat.dwolla.com/customers/132681FA-1B4D-4181-8FF2-619CA46235B1"
+      "href": "https://api.dwolla.com/customers/132681FA-1B4D-4181-8FF2-619CA46235B1"
     },
     "funding-sources": {
-      "href": "https://api-uat.dwolla.com/customers/132681FA-1B4D-4181-8FF2-619CA46235B1/funding-sources"
+      "href": "https://api.dwolla.com/customers/132681FA-1B4D-4181-8FF2-619CA46235B1/funding-sources"
     },
     "transfers": {
-      "href": "https://api-uat.dwolla.com/customers/132681FA-1B4D-4181-8FF2-619CA46235B1/transfers"
+      "href": "https://api.dwolla.com/customers/132681FA-1B4D-4181-8FF2-619CA46235B1/transfers"
     },
     "retry-verification": {
-      "href": "https://api-uat.dwolla.com/customers/132681FA-1B4D-4181-8FF2-619CA46235B1"
+      "href": "https://api.dwolla.com/customers/132681FA-1B4D-4181-8FF2-619CA46235B1"
     }
   },
   "id": "132681FA-1B4D-4181-8FF2-619CA46235B1",

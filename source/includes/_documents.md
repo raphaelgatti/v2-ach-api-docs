@@ -4,7 +4,7 @@
 {
   "_links": {
     "self": {
-      "href": "https://api-uat.dwolla.com/documents/56502f7a-fa59-4a2f-8579-0f8bc9d7b9cc"
+      "href": "https://api.dwolla.com/documents/56502f7a-fa59-4a2f-8579-0f8bc9d7b9cc"
     }
   },
   "id": "56502f7a-fa59-4a2f-8579-0f8bc9d7b9cc",
@@ -38,14 +38,14 @@ curl -X POST
 \ -H "Content-Type: multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW" 
 \ -F "documentType=passport" 
 \ -F "file=@foo.png" 
-\ 'https://api-uat.dwolla.com/customers/1DE32EC7-FF0B-4C0C-9F09-19629E6788CE/documents'
+\ 'https://api.dwolla.com/customers/1DE32EC7-FF0B-4C0C-9F09-19629E6788CE/documents'
 ```
 
 > Response:
 
 ```shell
 HTTP/1.1 201 Created
-Location: https://api-uat.dwolla.com/documents/11fe0bab-39bd-42ee-bb39-275afcc050d0
+Location: https://api.dwolla.com/documents/11fe0bab-39bd-42ee-bb39-275afcc050d0
 ```
 
 Create a document for a customer pending verification by uploading a photo of the document.  This requires a multipart form-data POST request.  Must provide either a `.jpg` or `.png` file up to 5MB in size.
@@ -80,7 +80,7 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 {
   "_links": {
     "self": {
-      "href": "https://api-uat.dwolla.com/customers/176878b8-ecdb-469b-a82b-43ba5e8704b2/documents"
+      "href": "https://api.dwolla.com/customers/176878b8-ecdb-469b-a82b-43ba5e8704b2/documents"
     }
   },
   "_embedded": {
@@ -88,7 +88,7 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
       {
         "_links": {
           "self": {
-            "href": "https://api-uat.dwolla.com/documents/56502f7a-fa59-4a2f-8579-0f8bc9d7b9cc"
+            "href": "https://api.dwolla.com/documents/56502f7a-fa59-4a2f-8579-0f8bc9d7b9cc"
           }
         },
         "id": "56502f7a-fa59-4a2f-8579-0f8bc9d7b9cc",
@@ -99,7 +99,7 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
       {
         "_links": {
           "self": {
-            "href": "https://api-uat.dwolla.com/documents/11fe0bab-39bd-42ee-bb39-275afcc050d0"
+            "href": "https://api.dwolla.com/documents/11fe0bab-39bd-42ee-bb39-275afcc050d0"
           }
         },
         "id": "11fe0bab-39bd-42ee-bb39-275afcc050d0",
@@ -141,7 +141,7 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 {
   "_links": {
     "self": {
-      "href": "https://api-uat.dwolla.com/documents/56502f7a-fa59-4a2f-8579-0f8bc9d7b9cc"
+      "href": "https://api.dwolla.com/documents/56502f7a-fa59-4a2f-8579-0f8bc9d7b9cc"
     }
   },
   "id": "56502f7a-fa59-4a2f-8579-0f8bc9d7b9cc",

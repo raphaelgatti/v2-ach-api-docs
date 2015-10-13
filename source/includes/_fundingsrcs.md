@@ -85,10 +85,10 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 {
   "_links": {
     "self": {
-      "href": "https://api-uat.dwolla.com/customers/5b29279d-6359-4c87-a318-e09095532733/funding-sources"
+      "href": "https://api.dwolla.com/customers/5b29279d-6359-4c87-a318-e09095532733/funding-sources"
     },
     "customer": {
-      "href": "https://api-uat.dwolla.com/customers/5b29279d-6359-4c87-a318-e09095532733"
+      "href": "https://api.dwolla.com/customers/5b29279d-6359-4c87-a318-e09095532733"
     }
   },
   "_embedded": {
@@ -96,13 +96,13 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
       {
         "_links": {
           "self": {
-            "href": "https://api-uat.dwolla.com/funding-sources/ab9cd5de-9435-47af-96fb-8d2fa5db51e8"
+            "href": "https://api.dwolla.com/funding-sources/ab9cd5de-9435-47af-96fb-8d2fa5db51e8"
           },
           "customer": {
-            "href": "https://api-uat.dwolla.com/customers/5b29279d-6359-4c87-a318-e09095532733"
+            "href": "https://api.dwolla.com/customers/5b29279d-6359-4c87-a318-e09095532733"
           },
           "with-available-balance": {
-            "href": "https://api-uat.dwolla.com/funding-sources/ab9cd5de-9435-47af-96fb-8d2fa5db51e8"
+            "href": "https://api.dwolla.com/funding-sources/ab9cd5de-9435-47af-96fb-8d2fa5db51e8"
           }
         },
         "id": "ab9cd5de-9435-47af-96fb-8d2fa5db51e8",
@@ -114,10 +114,10 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
       {
         "_links": {
           "self": {
-            "href": "https://api-uat.dwolla.com/funding-sources/98c209d3-02d6-4bee-bc0f-61e18acf0e33"
+            "href": "https://api.dwolla.com/funding-sources/98c209d3-02d6-4bee-bc0f-61e18acf0e33"
           },
           "customer": {
-            "href": "https://api-uat.dwolla.com/customers/5b29279d-6359-4c87-a318-e09095532733"
+            "href": "https://api.dwolla.com/customers/5b29279d-6359-4c87-a318-e09095532733"
           }
         },
         "id": "98c209d3-02d6-4bee-bc0f-61e18acf0e33",
@@ -217,7 +217,7 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 {
   "_links": {
     "self": {
-      "href": "https://api-uat.dwolla.com/accounts/ad5f2162-404a-4c4c-994e-6ab6c3a13254/funding-sources"
+      "href": "https://api.dwolla.com/accounts/ad5f2162-404a-4c4c-994e-6ab6c3a13254/funding-sources"
     }
   },
   "_embedded": {
@@ -225,13 +225,13 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
       {
         "_links": {
           "self": {
-            "href": "https://api-uat.dwolla.com/funding-sources/b268f6b9-db3b-4ecc-83a2-8823a53ec8b7"
+            "href": "https://api.dwolla.com/funding-sources/b268f6b9-db3b-4ecc-83a2-8823a53ec8b7"
           },
           "account": {
-            "href": "https://api-uat.dwolla.com/accounts/ad5f2162-404a-4c4c-994e-6ab6c3a13254"
+            "href": "https://api.dwolla.com/accounts/ad5f2162-404a-4c4c-994e-6ab6c3a13254"
           },
           "with-available-balance": {
-            "href": "https://api-uat.dwolla.com/funding-sources/b268f6b9-db3b-4ecc-83a2-8823a53ec8b7"
+            "href": "https://api.dwolla.com/funding-sources/b268f6b9-db3b-4ecc-83a2-8823a53ec8b7"
           }
         },
         "id": "b268f6b9-db3b-4ecc-83a2-8823a53ec8b7",
@@ -243,10 +243,10 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
       {
         "_links": {
           "self": {
-            "href": "https://api-uat.dwolla.com/funding-sources/707177c3-bf15-4e7e-b37c-55c3898d9bf4"
+            "href": "https://api.dwolla.com/funding-sources/707177c3-bf15-4e7e-b37c-55c3898d9bf4"
           },
           "account": {
-            "href": "https://api-uat.dwolla.com/accounts/ad5f2162-404a-4c4c-994e-6ab6c3a13254"
+            "href": "https://api.dwolla.com/accounts/ad5f2162-404a-4c4c-994e-6ab6c3a13254"
           }
         },
         "id": "707177c3-bf15-4e7e-b37c-55c3898d9bf4",
@@ -296,10 +296,10 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 {
   "_links": {
     "self": {
-      "href": "https://api-uat.dwolla.com/funding-sources/ab9cd5de-9435-47af-96fb-8d2fa5db51e8"
+      "href": "https://api.dwolla.com/funding-sources/ab9cd5de-9435-47af-96fb-8d2fa5db51e8"
     },
     "customer": {
-      "href": "https://api-uat.dwolla.com/customers/5b29279d-6359-4c87-a318-e09095532733"
+      "href": "https://api.dwolla.com/customers/5b29279d-6359-4c87-a318-e09095532733"
     }
   },
   "id": "ab9cd5de-9435-47af-96fb-8d2fa5db51e8",
@@ -351,10 +351,10 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 {
   "_links": {
     "self": {
-      "href": "https://api-uat.dwolla.com/funding-sources/c2cefde3-b3a9-4a72-b0a4-1c844dae3604"
+      "href": "https://api.dwolla.com/funding-sources/c2cefde3-b3a9-4a72-b0a4-1c844dae3604"
     },
     "customer": {
-      "href": "https://api-uat.dwolla.com/customers/01b47cb2-52ac-42a7-926c-6f1f50b1f271"
+      "href": "https://api.dwolla.com/customers/01b47cb2-52ac-42a7-926c-6f1f50b1f271"
     }
   },
   "id": "c2cefde3-b3a9-4a72-b0a4-1c844dae3604",

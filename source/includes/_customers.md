@@ -4,19 +4,19 @@
 {
   "_links": {
     "self": {
-      "href": "https://api-uat.dwolla.com/customers/730CA23F-06C5-45CC-AA6B-8EC2D6EE109F"
+      "href": "https://api.dwolla.com/customers/730CA23F-06C5-45CC-AA6B-8EC2D6EE109F"
     },
     "receive": {
-      "href": "https://api-uat.dwolla.com/transfers"
+      "href": "https://api.dwolla.com/transfers"
     },
     "funding-sources": {
-      "href": "https://api-uat.dwolla.com/customers/730CA23F-06C5-45CC-AA6B-8EC2D6EE109F/funding-sources"
+      "href": "https://api.dwolla.com/customers/730CA23F-06C5-45CC-AA6B-8EC2D6EE109F/funding-sources"
     },
     "transfers": {
-      "href": "https://api-uat.dwolla.com/customers/730CA23F-06C5-45CC-AA6B-8EC2D6EE109F/transfers"
+      "href": "https://api.dwolla.com/customers/730CA23F-06C5-45CC-AA6B-8EC2D6EE109F/transfers"
     },
     "send": {
-      "href": "https://api-uat.dwolla.com/transfers"
+      "href": "https://api.dwolla.com/transfers"
     }
   },
   "id": "730CA23F-06C5-45CC-AA6B-8EC2D6EE109F",
@@ -173,16 +173,16 @@ phone | yes | Customer's 10 digit phone number.  No hyphens or other separators.
 {
   "_links": {
     "self": {
-      "href": "https://api-uat.dwolla.com/customers/730CA23F-06C5-45CC-AA6B-8EC2D6EE109F"
+      "href": "https://api.dwolla.com/customers/730CA23F-06C5-45CC-AA6B-8EC2D6EE109F"
     },
     "funding-sources": {
-      "href": "https://api-uat.dwolla.com/customers/730CA23F-06C5-45CC-AA6B-8EC2D6EE109F/funding-sources"
+      "href": "https://api.dwolla.com/customers/730CA23F-06C5-45CC-AA6B-8EC2D6EE109F/funding-sources"
     },
     "transfers": {
-      "href": "https://api-uat.dwolla.com/customers/730CA23F-06C5-45CC-AA6B-8EC2D6EE109F/transfers"
+      "href": "https://api.dwolla.com/customers/730CA23F-06C5-45CC-AA6B-8EC2D6EE109F/transfers"
     },
     "retry-verification": {
-      "href": "https://api-uat.dwolla.com/customers/730CA23F-06C5-45CC-AA6B-8EC2D6EE109F"
+      "href": "https://api.dwolla.com/customers/730CA23F-06C5-45CC-AA6B-8EC2D6EE109F"
     }
   },
   "id": "730CA23F-06C5-45CC-AA6B-8EC2D6EE109F",

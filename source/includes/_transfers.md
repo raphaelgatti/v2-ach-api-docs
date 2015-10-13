@@ -101,13 +101,13 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 {
   "_links": {
     "first": {
-      "href": "https://api-uat.dwolla.com/customers/01b47cb2-52ac-42a7-926c-6f1f50b1f271/transfers?limit=25&offset=0"
+      "href": "https://api.dwolla.com/customers/01b47cb2-52ac-42a7-926c-6f1f50b1f271/transfers?limit=25&offset=0"
     },
     "last": {
-      "href": "https://api-uat.dwolla.com/customers/01b47cb2-52ac-42a7-926c-6f1f50b1f271/transfers?limit=25&offset=0"
+      "href": "https://api.dwolla.com/customers/01b47cb2-52ac-42a7-926c-6f1f50b1f271/transfers?limit=25&offset=0"
     },
     "self": {
-      "href": "http://api-uat.dwolla.com/customers/01B47CB2-52AC-42A7-926C-6F1F50B1F271/transfers"
+      "href": "http://api.dwolla.com/customers/01B47CB2-52AC-42A7-926C-6F1F50B1F271/transfers"
     }
   },
   "_embedded": {
@@ -115,13 +115,13 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
       {
         "_links": {
           "self": {
-            "href": "https://api-uat.dwolla.com/transfers/4C8AD8B8-3D69-E511-80DB-0AA34A9B2388"
+            "href": "https://api.dwolla.com/transfers/4C8AD8B8-3D69-E511-80DB-0AA34A9B2388"
           },
           "source": {
-            "href": "https://api-uat.dwolla.com/accounts/AD5F2162-404A-4C4C-994E-6AB6C3A13254"
+            "href": "https://api.dwolla.com/accounts/AD5F2162-404A-4C4C-994E-6AB6C3A13254"
           },
           "destination": {
-            "href": "https://api-uat.dwolla.com/customers/01B47CB2-52AC-42A7-926C-6F1F50B1F271"
+            "href": "https://api.dwolla.com/customers/01B47CB2-52AC-42A7-926C-6F1F50B1F271"
           }
         },
         "id": "4C8AD8B8-3D69-E511-80DB-0AA34A9B2388",
@@ -139,13 +139,13 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
       {
         "_links": {
           "self": {
-            "href": "https://api-uat.dwolla.com/transfers/9DC99076-3D69-E511-80DB-0AA34A9B2388"
+            "href": "https://api.dwolla.com/transfers/9DC99076-3D69-E511-80DB-0AA34A9B2388"
           },
           "source": {
-            "href": "https://api-uat.dwolla.com/accounts/AD5F2162-404A-4C4C-994E-6AB6C3A13254"
+            "href": "https://api.dwolla.com/accounts/AD5F2162-404A-4C4C-994E-6AB6C3A13254"
           },
           "destination": {
-            "href": "https://api-uat.dwolla.com/customers/01B47CB2-52AC-42A7-926C-6F1F50B1F271"
+            "href": "https://api.dwolla.com/customers/01B47CB2-52AC-42A7-926C-6F1F50B1F271"
           }
         },
         "id": "9DC99076-3D69-E511-80DB-0AA34A9B2388",
@@ -261,13 +261,13 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 {
   "_links": {
     "self": {
-      "href": "https://api-uat.dwolla.com/transfers/4C8AD8B8-3D69-E511-80DB-0AA34A9B2388"
+      "href": "https://api.dwolla.com/transfers/4C8AD8B8-3D69-E511-80DB-0AA34A9B2388"
     },
     "source": {
-      "href": "https://api-uat.dwolla.com/accounts/AD5F2162-404A-4C4C-994E-6AB6C3A13254"
+      "href": "https://api.dwolla.com/accounts/AD5F2162-404A-4C4C-994E-6AB6C3A13254"
     },
     "destination": {
-      "href": "https://api-uat.dwolla.com/customers/01B47CB2-52AC-42A7-926C-6F1F50B1F271"
+      "href": "https://api.dwolla.com/customers/01B47CB2-52AC-42A7-926C-6F1F50B1F271"
     }
   },
   "id": "4C8AD8B8-3D69-E511-80DB-0AA34A9B2388",
