@@ -2,39 +2,17 @@
 
 ```json
 {
-  "_links": {},
-  "id": "string",
-  "topic": "string",
-  "accountId": "string",
-  "eventId": "string",
-  "subscriptionId": "string",
-  "attempts": [
-    {
-      "id": "string",
-      "request": {
-        "created": "2015-07-23T14:19:36.981Z",
-        "url": "string",
-        "headers": [
-          {
-            "name": "string",
-            "value": "string"
-          }
-        ],
-        "body": "string"
-      },
-      "response": {
-        "created": "2015-07-23T14:19:36.981Z",
-        "headers": [
-          {
-            "name": "string",
-            "value": "string"
-          }
-        ],
-        "statusCode": 0,
-        "body": "string"
-      }
+  "_links": {
+    "self": {
+      "href": "https://api.dwolla.com/webhook-subscriptions/034a0ae2-fc7f-4922-8e4e-6fb9855ed43b"
+    },
+    "webhooks": {
+      "href": "https://api.dwolla.com/webhook-subscriptions/034a0ae2-fc7f-4922-8e4e-6fb9855ed43b/webhooks"
     }
-  ]
+  },
+  "id": "034a0ae2-fc7f-4922-8e4e-6fb9855ed43b",
+  "url": "http://requestb.in/vbxb1bvb",
+  "created": "2015-10-06T01:11:36.000Z"
 }
 ```
 
