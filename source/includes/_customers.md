@@ -45,7 +45,8 @@ However, if you need to transfer funds between your customers, at least one of t
 | funding-sources | GET this link to list the customer's funding sources.
 | transfers | GET this link to list the customer's transfers
 | send | (optional) If this link exists, this user can send funds.  POST to this URL to create a transfer.
-| retry-verification | (optional) If the customer has a `status` of `retry`, POST to this link to attempt to correct their identity verification information.
+| retry-verification | If the customer has a `status` of `retry`, POST to this link to attempt to correct their identity verification information.
+| verify-with-document | If the customer has a `status` of `document`, POST to this link to upload a new photo document to verify the customer's identity.  Read about [Documents](#documents).
 
 ### Customer Resource
 
@@ -157,7 +158,7 @@ state | no | Two letter abbreviation of the state in which the customer resides.
 postalCode | no | Postal code of customer's peramanent residence
 dateOfBirth | no | Customer's date of birth in `YYYY-MM-DD` format.
 ssn | no | Last four digits of the customer's Social Security Number.
-phone | yes | Customer's 10 digit phone number.  No hyphens or other separators.  e.g. `3334447777`
+phone | no | Customer's 10 digit phone number.  No hyphens or other separators.  e.g. `3334447777`
 
 ### Errors
 | HTTP Status | Message |
