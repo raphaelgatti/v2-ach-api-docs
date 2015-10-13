@@ -46,6 +46,22 @@ An event is created to notify you that an action occured on your account. When a
 | customer_transfer_failed | Transaction failed to clear successfully. Usually, this is a result of an ACH failure (insufficient funds, etc.). |
 | customer_transfer_completed | Transfer has cleared successfully.                                                                   |
 | customer_transfer_reclaimed | The transfer was returned to the sender after being unclaimed by the recipient for a period of time. |
+| customer_verification_document_uploaded | A verification document was uploaded for a Customer. |
+| customer_verification_document_approved | A verification document was approved for a Customer. |
+| customer_verification_document_failed | A verification document has been rejected for a Customer. |
+| customer_verified | A Customer was verified. |
+| customer_suspended | A Customer was suspended. |
+| customer_verification_document_needed | Verification documentation is needed for a Customer. |
+| customer_reverification_needed | Incomplete information received for a Customer.  Updated information is needed to verify the Customer. |
+| customer_bank_transfer_created | A bank transfer was created for a Customer. |
+| customer_bank_transfer_completed | A bank transfer has cleared successfully for a Customer. |
+| customer_bank_transfer_cancelled |  A pending Customer bank transfer has been cancelled, and will not process further. |
+| customer_bank_transfer_failed |  Transaction failed to clear successfully. Usually, this is a result of an ACH failure (insufficient funds, etc.). |
+| account_suspended | An account was suspended. |
+| bank_transfer_cancelled |  A pending bank transfer has been cancelled, and will not process further. |
+| bank_transfer_completed | A bank transfer has cleared successfully. |
+| bank_transfer_created | A bank transfer was created. |
+| bank_transfer_failed |  Transaction failed to clear successfully. Usually, this is a result of an ACH failure (insufficient funds, etc.). |
 
 ## List Events
 
