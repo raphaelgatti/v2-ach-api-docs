@@ -698,7 +698,11 @@ https://www.dwolla.com/oauth/v2/authenticate?client_id={client_id}&amp;response_
 </tr>
 <tr>
 <td>retry-verification</td>
-<td>(optional) If the customer has a <code class="prettyprint">status</code> of <code class="prettyprint">retry</code>, POST to this link to attempt to correct their identity verification information.</td>
+<td>If the customer has a <code class="prettyprint">status</code> of <code class="prettyprint">retry</code>, POST to this link to attempt to correct their identity verification information.</td>
+</tr>
+<tr>
+<td>verify-with-document</td>
+<td>If the customer has a <code class="prettyprint">status</code> of <code class="prettyprint">document</code>, POST to this link to upload a new photo document to verify the customer&rsquo;s identity.  Read about <a href="#documents">Documents</a>.</td>
 </tr>
 </tbody></table>
 <h3 id='customer-resource'>Customer Resource</h3>
@@ -925,7 +929,7 @@ Location: https://api.dwolla.com/customers/FC451A7A-AE30-4404-AB95-E3553FCD733F
 </tr>
 <tr>
 <td>phone</td>
-<td>yes</td>
+<td>no</td>
 <td>Customer&rsquo;s 10 digit phone number.  No hyphens or other separators.  e.g. <code class="prettyprint">3334447777</code></td>
 </tr>
 </tbody></table>
