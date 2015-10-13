@@ -63,21 +63,6 @@ An event is created to notify you that an action occured on your account. When a
 | bank_transfer_created | A bank transfer was created. |
 | bank_transfer_failed |  Transaction failed to clear successfully. Usually, this is a result of an ACH failure (insufficient funds, etc.). |
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 ## List Events
 
 > Request:
