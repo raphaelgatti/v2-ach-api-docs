@@ -79,6 +79,27 @@ Initiate a transfer for either an account or customer resource.
 ### HTTP Request
 `POST https://api.dwolla.com/transfers`
 
+### Request Parameters
+
+Parameter | Optional? | Description
+----------|------------|-------------
+_links | no | A _links JSON object describing the desired `source` and `destination` of a transfer. [See below](#source-and-destination-types) for possible values for `source` and `destination`.
+amount | no | An amount JSON object. [See above](#amount-json-object)
+metadata | yes | A metadata JSON object with a maximum of 10 key-value pairs (each key and value must be less than 255 characters).
+
+### source and destination types
+
+| Source Type | URI | Description
+-------|---------|---------------
+Funding source | https://api.dwolla.com/funding-sources/{id} | A `bank` or `balance` funding source.
+
+| Destination Type | URI | Description
+-------|---------|---------------
+Account | https://api.dwolla.com/accounts/{id} | Destination Account of a transfer.
+Customer | https://api.dwolla.com/customers/{id} | Destination Customer of a transfer.
+Email | mailto: johndoe@email.com | Email address of existing or non-existing account.
+Funding source | https://api.dwolla.com/funding-sources/{id} | Destination of an Account or verified Customer's own `bank` or `balance` funding source. **OR** A Customer's `bank` funding source.
+
 ### Errors
 | HTTP Status | Message |
 |--------------|-------------|
