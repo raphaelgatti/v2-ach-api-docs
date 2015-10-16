@@ -698,11 +698,7 @@ https://www.dwolla.com/oauth/v2/authenticate?client_id={client_id}&amp;response_
 </tr>
 <tr>
 <td>retry-verification</td>
-<td>If the customer has a <code class="prettyprint">status</code> of <code class="prettyprint">retry</code>, POST to this link to attempt to correct their identity verification information.</td>
-</tr>
-<tr>
-<td>verify-with-document</td>
-<td>If the customer has a <code class="prettyprint">status</code> of <code class="prettyprint">document</code>, POST to this link to upload a new photo document to verify the customer&rsquo;s identity.  Read about <a href="#documents">Documents</a>.</td>
+<td>(optional) If the customer has a <code class="prettyprint">status</code> of <code class="prettyprint">retry</code>, POST to this link to attempt to correct their identity verification information.</td>
 </tr>
 </tbody></table>
 <h3 id='customer-resource'>Customer Resource</h3>
@@ -929,7 +925,7 @@ Location: https://api.dwolla.com/customers/FC451A7A-AE30-4404-AB95-E3553FCD733F
 </tr>
 <tr>
 <td>phone</td>
-<td>no</td>
+<td>yes</td>
 <td>Customer&rsquo;s 10 digit phone number.  No hyphens or other separators.  e.g. <code class="prettyprint">3334447777</code></td>
 </tr>
 </tbody></table>
@@ -2000,7 +1996,7 @@ DELETE https://api.dwolla.com/funding-sources/{id}
 </tbody></table>
 <h2 id='initiate-transfer'>Initiate Transfer</h2>
 <blockquote>
-<p>Request:</p>
+<p>Request: (Transfer from Account to Customer)</p>
 </blockquote>
 <pre class="highlight shell"><code>POST /transfers
 Accept: application/vnd.dwolla.v1.hal+json
@@ -2037,6 +2033,73 @@ Location: https://api.dwolla.com/transfers/74c9129b-d14a-e511-80da-0aa34a9b2388
 <aside class="reminder"><p>This endpoint <a href="#authentication">requires</a> an OAuth access token with the <code>Send</code> <a href="#oauth-scopes">scope</a>.</p>
 </aside><h3 id='http-request'>HTTP Request</h3>
 <p><code class="prettyprint">POST https://api.dwolla.com/transfers</code></p>
+<h3 id='request-parameters'>Request Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Optional?</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>_links</td>
+<td>no</td>
+<td>A _links JSON object describing the desired <code class="prettyprint">source</code> and <code class="prettyprint">destination</code> of a transfer. <a href="#source-and-destination-types">See below</a> for possible values for <code class="prettyprint">source</code> and <code class="prettyprint">destination</code>.</td>
+</tr>
+<tr>
+<td>amount</td>
+<td>no</td>
+<td>An amount JSON object. <a href="#amount-json-object">See above</a></td>
+</tr>
+<tr>
+<td>metadata</td>
+<td>yes</td>
+<td>A metadata JSON object with a maximum of 10 key-value pairs (each key and value must be less than 255 characters).</td>
+</tr>
+</tbody></table>
+<h3 id='source-and-destination-types'>source and destination types</h3>
+<table><thead>
+<tr>
+<th>Source Type</th>
+<th>URI</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>Funding source</td>
+<td>https://api.dwolla.com/funding-sources/{id}</td>
+<td>A <code class="prettyprint">bank</code> or <code class="prettyprint">balance</code> funding source.</td>
+</tr>
+</tbody></table>
+
+<table><thead>
+<tr>
+<th>Destination Type</th>
+<th>URI</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>Account</td>
+<td>https://api.dwolla.com/accounts/{id}</td>
+<td>Destination Account of a transfer.</td>
+</tr>
+<tr>
+<td>Customer</td>
+<td>https://api.dwolla.com/customers/{id}</td>
+<td>Destination Customer of a transfer.</td>
+</tr>
+<tr>
+<td>Email</td>
+<td>mailto: johndoe@email.com</td>
+<td>Email address of existing or non-existing account.</td>
+</tr>
+<tr>
+<td>Funding source</td>
+<td>https://api.dwolla.com/funding-sources/{id}</td>
+<td>Destination of an Account or verified Customer&rsquo;s own <code class="prettyprint">bank</code> or <code class="prettyprint">balance</code> funding source. <strong>OR</strong> A Customer&rsquo;s <code class="prettyprint">bank</code> funding source.</td>
+</tr>
+</tbody></table>
 <h3 id='errors'>Errors</h3>
 <table><thead>
 <tr>
@@ -2177,11 +2240,11 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 <td>Customer not found.</td>
 </tr>
 </tbody></table>
-<h2 id='get-transfers-account-draft'>Get Transfers (Account) [DRAFT]</h2>
+<h2 id='get-transfers-account'>Get Transfers (Account)</h2>
 <blockquote>
 <p>Request:</p>
 </blockquote>
-<pre class="highlight shell"><code>GET https://api.dwolla.com/customers/99bfb139-eadd-4cdf-b346-7504f0c16c60/transfers
+<pre class="highlight shell"><code>GET https://api.dwolla.com/accounts/a84222d5-31d2-4290-9a96-089813ef96b3/transfers
 Accept: application/vnd.dwolla.v1.hal+json
 Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 </code></pre>
@@ -2192,30 +2255,63 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 <pre class="highlight json"><code><span class="p">{</span><span class="w">
   </span><span class="nt">"_links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="nt">"self"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.dwolla.com/accounts/99bfb139-eadd-4cdf-b346-7504f0c16c60/transfers"</span><span class="w">
+      </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api-uat.dwolla.com/accounts/a84222d5-31d2-4290-9a96-089813ef96b3/transfers"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nt">"first"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api-uat.dwolla.com/accounts/a84222d5-31d2-4290-9a96-089813ef96b3/transfers?limit=25&amp;offset=0"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nt">"last"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api-uat.dwolla.com/accounts/a84222d5-31d2-4290-9a96-089813ef96b3/transfers?limit=25&amp;offset=0"</span><span class="w">
     </span><span class="p">}</span><span class="w">
   </span><span class="p">},</span><span class="w">
-  </span><span class="nt">"total"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"items"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-    </span><span class="p">{</span><span class="w">
-      </span><span class="nt">"_links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="nt">"self"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-          </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.dwolla.com/accounts/99bfb139-eadd-4cdf-b346-7504f0c16c60/transfers/a63526e1-cc8d-4a62-9d26-8f04a39da4f3"</span><span class="w">
-        </span><span class="p">}</span><span class="w">
+  </span><span class="nt">"_embedded"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"transfers"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+      </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"_links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="nt">"self"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api-uat.dwolla.com/transfers/DC68A3DC-3C61-E511-80DA-0AA34A9B2388"</span><span class="w">
+          </span><span class="p">},</span><span class="w">
+          </span><span class="nt">"source"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api-uat.dwolla.com/accounts/CA32853C-48FA-40BE-AE75-77B37504581B"</span><span class="w">
+          </span><span class="p">},</span><span class="w">
+          </span><span class="nt">"destination"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api-uat.dwolla.com/accounts/A84222D5-31D2-4290-9A96-089813EF96B3"</span><span class="w">
+          </span><span class="p">}</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"DC68A3DC-3C61-E511-80DA-0AA34A9B2388"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"processed"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"amount"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="nt">"value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"50.00"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"currency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"USD"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="nt">"created"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-09-22T15:16:14.180Z"</span><span class="w">
       </span><span class="p">},</span><span class="w">
-      </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"amount"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="nt">"value"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"currency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="w">
-      </span><span class="p">},</span><span class="w">
-      </span><span class="nt">"created"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-07-23T14:19:36.987Z"</span><span class="w">
-    </span><span class="p">}</span><span class="w">
-  </span><span class="p">]</span><span class="w">
+      </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"_links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="nt">"self"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api-uat.dwolla.com/transfers/D36FD9AA-6E5C-E511-80DA-0AA34A9B2388"</span><span class="w">
+          </span><span class="p">},</span><span class="w">
+          </span><span class="nt">"source"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api-uat.dwolla.com/funding-sources/2BFF2631-4006-45D6-BBBD-A7BE4853E870"</span><span class="w">
+          </span><span class="p">},</span><span class="w">
+          </span><span class="nt">"destination"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api-uat.dwolla.com/accounts/A84222D5-31D2-4290-9A96-089813EF96B3"</span><span class="w">
+          </span><span class="p">}</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"D36FD9AA-6E5C-E511-80DA-0AA34A9B2388"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"processed"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"amount"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="nt">"value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"5000.00"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"currency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"USD"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="nt">"created"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-09-03T18:11:53.410Z"</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">]</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="nt">"total"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
-<aside class="warning"><p>This endpoint is not yet implemented. The following specification is subject to change.</p>
-</aside>
+
 <p>Retrieve an Account&rsquo;s list of transfers.</p>
 <aside class="reminder"><p>This endpoint <a href="#authentication">requires</a> an OAuth access token with the <code>Transactions</code> <a href="#oauth-scopes">scope</a>.</p>
 </aside><h3 id='http-request'>HTTP Request</h3>
