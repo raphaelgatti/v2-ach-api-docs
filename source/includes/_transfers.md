@@ -36,7 +36,7 @@ A transfer represents money being transferred from a `source` to a `destination`
 
 ## Initiate Transfer
 
-> Request:
+> Request: (Transfer from Account to Customer)
 
 ```shell
 POST /transfers
@@ -78,6 +78,27 @@ Initiate a transfer for either an account or customer resource.
 
 ### HTTP Request
 `POST https://api.dwolla.com/transfers`
+
+### Request Parameters
+
+Parameter | Optional? | Description
+----------|------------|-------------
+_links | no | A _links JSON object describing the desired `source` and `destination` of a transfer. [See below](#source-and-destination-types) for possible values for `source` and `destination`.
+amount | no | An amount JSON object. [See above](#amount-json-object)
+metadata | yes | A metadata JSON object with a maximum of 10 key-value pairs (each key and value must be less than 255 characters).
+
+### source and destination types
+
+| Source Type | URI | Description
+-------|---------|---------------
+Funding source | https://api.dwolla.com/funding-sources/{id} | A `bank` or `balance` funding source.
+
+| Destination Type | URI | Description
+-------|---------|---------------
+Account | https://api.dwolla.com/accounts/{id} | Destination Account of a transfer.
+Customer | https://api.dwolla.com/customers/{id} | Destination Customer of a transfer.
+Email | mailto: johndoe@email.com | Email address of existing or non-existing account.
+Funding source | https://api.dwolla.com/funding-sources/{id} | Destination of an Account or verified Customer's own `bank` or `balance` funding source. **OR** A Customer's `bank` funding source.
 
 ### Errors
 | HTTP Status | Message |
@@ -187,12 +208,12 @@ offset | yes | How many results to skip.
 | 403 | Not authorized to list transfers. |
 | 404 | Customer not found. |
 
-## Get Transfers (Account) [DRAFT]
+## Get Transfers (Account)
 
 > Request:
 
 ```shell
-GET https://api.dwolla.com/customers/99bfb139-eadd-4cdf-b346-7504f0c16c60/transfers
+GET https://api.dwolla.com/accounts/a84222d5-31d2-4290-9a96-089813ef96b3/transfers
 Accept: application/vnd.dwolla.v1.hal+json
 Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 ```
@@ -203,29 +224,62 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 {
   "_links": {
     "self": {
-      "href": "https://api.dwolla.com/accounts/99bfb139-eadd-4cdf-b346-7504f0c16c60/transfers"
+      "href": "https://api-uat.dwolla.com/accounts/a84222d5-31d2-4290-9a96-089813ef96b3/transfers"
+    },
+    "first": {
+      "href": "https://api-uat.dwolla.com/accounts/a84222d5-31d2-4290-9a96-089813ef96b3/transfers?limit=25&offset=0"
+    },
+    "last": {
+      "href": "https://api-uat.dwolla.com/accounts/a84222d5-31d2-4290-9a96-089813ef96b3/transfers?limit=25&offset=0"
     }
   },
-  "total": 1,
-  "items": [
-    {
-      "_links": {
-        "self": {
-          "href": "https://api.dwolla.com/accounts/99bfb139-eadd-4cdf-b346-7504f0c16c60/transfers/a63526e1-cc8d-4a62-9d26-8f04a39da4f3"
-        }
+  "_embedded": {
+    "transfers": [
+      {
+        "_links": {
+          "self": {
+            "href": "https://api-uat.dwolla.com/transfers/DC68A3DC-3C61-E511-80DA-0AA34A9B2388"
+          },
+          "source": {
+            "href": "https://api-uat.dwolla.com/accounts/CA32853C-48FA-40BE-AE75-77B37504581B"
+          },
+          "destination": {
+            "href": "https://api-uat.dwolla.com/accounts/A84222D5-31D2-4290-9A96-089813EF96B3"
+          }
+        },
+        "id": "DC68A3DC-3C61-E511-80DA-0AA34A9B2388",
+        "status": "processed",
+        "amount": {
+          "value": "50.00",
+          "currency": "USD"
+        },
+        "created": "2015-09-22T15:16:14.180Z"
       },
-      "id": "string",
-      "status": "string",
-      "amount": {
-        "value": 0,
-        "currency": "string"
-      },
-      "created": "2015-07-23T14:19:36.987Z"
-    }
-  ]
+      {
+        "_links": {
+          "self": {
+            "href": "https://api-uat.dwolla.com/transfers/D36FD9AA-6E5C-E511-80DA-0AA34A9B2388"
+          },
+          "source": {
+            "href": "https://api-uat.dwolla.com/funding-sources/2BFF2631-4006-45D6-BBBD-A7BE4853E870"
+          },
+          "destination": {
+            "href": "https://api-uat.dwolla.com/accounts/A84222D5-31D2-4290-9A96-089813EF96B3"
+          }
+        },
+        "id": "D36FD9AA-6E5C-E511-80DA-0AA34A9B2388",
+        "status": "processed",
+        "amount": {
+          "value": "5000.00",
+          "currency": "USD"
+        },
+        "created": "2015-09-03T18:11:53.410Z"
+      }
+    ]
+  },
+  "total": 2
 }
 ```
-<aside class="warning">This endpoint is not yet implemented. The following specification is subject to change.</aside>
 
 Retrieve an Account's list of transfers.
 
