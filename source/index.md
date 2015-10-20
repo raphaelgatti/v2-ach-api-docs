@@ -5,9 +5,9 @@ language_tabs:
   - json
 
 toc_footers:
-  - <a href="https://discuss.dwolla.com/c/api-support" target="_blank">Get some help</a>
-  - <a href='https://developers.dwolla.com/dev/pages/sandbox' target="_blank">Sandbox Environment</a>
-  - <a href='http://github.com/tripit/slate' target="_blank">Documentation Powered by Slate</a>
+  - <a href="https://discuss.dwolla.com/c/api-support" target="_blank" class="icon-sidenav-option">Get some help</a>
+  - <a href='https://developers.dwolla.com/dev/pages/sandbox' target="_blank" class="icon-sidenav-option">Sandbox Environment</a>
+  - <a href='http://github.com/tripit/slate' target="_blank" class="icon-sidenav-option">Documentation Powered by Slate</a>
 
 includes:
   - introduction

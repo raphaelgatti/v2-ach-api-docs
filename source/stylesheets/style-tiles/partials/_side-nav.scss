@@ -1,0 +1,352 @@
+$slide-time: 0.8s;
+$rotation-time: 0.35s;
+
+.side-nav {
+    width: 300px;
+    border-right: 1px solid $color-grey-med;
+    color: $color-grey-dark;
+    background: $color-grey;
+
+    h6 {
+        margin-bottom: 5px;
+        color: $color-black;
+        font-size: rem(12px);
+        letter-spacing: 1px;
+    }
+
+    a {
+        display: block;
+        color: $color-grey-dark;
+        padding: 8px 25px;
+        line-height: rem(16px);
+
+        &:hover {
+            text-decoration: none;
+            color: $color-blue;
+        }
+    }
+
+    ul, ol {
+        font-weight: 600;
+    }
+
+    section {
+        border-bottom: 1px solid $color-grey-med;
+        background: $color-grey;
+
+        @include breakpoint($SIZE_TABLET_SMALL){
+            border: none;
+        }
+
+        &:last-child {
+            border: none;
+        }
+
+        &.side-nav__dropdown {
+
+            h6 {
+                padding: 0;
+
+                &:first-child {
+                    padding-top: 0;
+                }
+            }
+
+            &:last-child {
+                border-bottom: 1px solid $color-grey-med;
+                @include breakpoint($SIZE_TABLET_SMALL){
+                    border: none;
+                }
+            }
+        }
+
+        &.side-nav__options, &.steps-nav {
+            h6:first-child {
+                padding-top: 0;
+            }
+        }
+
+        & > h6 {
+            padding: 0 0 0 25px;
+
+            &:first-child {
+                padding-top: 30px;
+            }
+        }
+
+        & > ul {
+
+            margin-bottom: 25px;
+
+            &:last-child {
+                margin-bottom: 30px;
+            }
+
+            @include breakpoint($SIZE_TABLET_SMALL){
+                border-top: 1px solid $color-grey-med;
+            }
+
+            li {
+                font-size: rem(14px);
+
+                a {
+                    @include breakpoint($SIZE_TABLET_SMALL){
+                        position :relative;
+                        border-bottom: 1px solid $color-grey-med;
+
+                        &:before {
+                            content: "";
+                            position: absolute;
+                            right: 20px;
+                            top: 13px;
+                            @include arrow(6px, $color-grey-dark, "right");
+                        }
+
+                        &:after {
+                            content: "";
+                            position: absolute;
+                            right: 22px;
+                            top: 13px;
+                            @include arrow(6px, $color-grey, "right");
+                        }
+                    }
+
+                    &.active {
+                        margin-right: -1px;
+                        padding-left: 23px;
+                        color: $color-blue;
+                        background: $color-grey-2;
+                        border-left: 3px solid $color-blue;
+
+                        @include breakpoint($SIZE_TABLET_SMALL){
+                            &:not(:only-child) {
+                                border-bottom: none;
+
+                                &:after {
+                                    @include arrow(6px, $color-white, "right");
+                                    transform: rotate(90deg);
+                                }
+
+                                &:before {
+                                    top: 15px;
+                                    right: 22px;
+                                    transform: rotate(90deg);
+                                }
+                            }
+                        }
+
+                        & + ul {
+                            display: block;
+                            li {
+                                a {
+                                    border: none;
+                                    background: $color-grey-2;
+                                    &:after, &:before {
+                                        display: none;
+                                    }
+                                }
+                            }
+                        }
+                    }
+
+                    & + ul {
+                        display: none;
+                    }
+                }
+
+                ul {
+                    margin-right: -1px;
+                    font-size: rem(12px);
+                    background: $color-white;
+                    a {
+                        padding: 9px 15px 9px 30px;
+                        font-size: rem(12px);
+                    }
+                }
+            }   
+        }
+    }
+
+    &__api-ver {
+        padding: 15px;
+        color: $color-black;
+        @extend %clearfix;
+
+        span {
+            padding-top: 8px;
+            display: inline-block;
+            text-transform: uppercase;
+            font-size: rem(12px);
+            font-weight: 600;
+            letter-spacing: 1px;
+        }
+
+        & > div {
+            float: right;
+            background: $color-white;
+            border: 1px solid $color-blue;
+            border-radius: 5px;
+
+            a {
+                padding: 7px 31px;
+                float: left;
+                color: $color-blue;
+
+                &.active {
+                    color: $color-white;
+                    background: $color-blue;
+                }
+            }
+        }   
+    }
+
+    &__dropdown {
+        padding: 30px 25px;
+
+        @include breakpoint($SIZE_TABLET_SMALL){
+            padding: 0; 
+            h6 {
+                display: none;
+            }
+        }
+
+        a, button {
+            padding: 8px 0 8px 20px;
+            color: $color-blue;
+            font-weight: 600;
+            outline: none;
+        }
+
+        h6 {
+            margin-bottom: 12px;
+            padding: 0;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        button  {
+            padding: 0 0 5px 20px;
+            position: relative;
+            border: none;
+            background: transparent;
+
+            @include breakpoint($SIZE_TABLET_SMALL){
+                display: none;
+            }
+
+            & + .icon-side-nav-collapse-minus {
+                display: none;
+            }
+
+            &.showing + .icon-side-nav-collapse-plus {
+                display: none;
+            }
+
+            &.showing + .icon-side-nav-collapse-minus {
+                display: block;
+            }
+        }
+
+        nav {
+            height: 0;
+            overflow: hidden;
+            transition: height $slide-time;
+
+            @include breakpoint($SIZE_TABLET_SMALL){
+                height: auto;
+                border-top: 1px solid $color-grey-med;
+
+                a {
+                    padding: 10px 0 10px 20px;
+                    color: $color-grey-dark;
+                    border-bottom: 1px solid $color-grey-med;
+                    position: relative;
+
+                    &:before {
+                        content: "";
+                        position: absolute;
+                        right: 20px;
+                        top: 13px;
+                        @include arrow(6px, $color-grey-dark, "right");
+                    }
+
+                    &:after {
+                        content: "";
+                        position: absolute;
+                        right: 22px;
+                        top: 13px;
+                        @include arrow(6px, $color-grey, "right");
+                    }
+
+                    &:hover {
+                        text-decoration: none;
+
+                        &:before {
+                            @include arrow(6px, $color-blue, "right");
+                        }
+                    }
+                }
+            }
+        }
+
+        .picker {
+            position: relative;
+
+            .icon {
+                width: 13px;
+                height: 13px;
+                position: absolute;
+                top: 4px;
+                left: 0;
+
+                @include breakpoint($SIZE_TABLET_SMALL){
+                    display: none;
+                }
+            }
+        }
+    }
+
+    &__options {
+        margin-bottom: 15px;
+        padding: 30px 0;
+
+        h6 {
+            padding-left: 20px;
+        }
+
+        a {
+            padding: 9px 25px;
+            font-size: rem(12px);
+            position: relative;
+            display: inline-block;
+
+            &:after, &:before {
+                display: none;
+            }
+
+            &.icon-sidenav-option {
+                &:after {
+                    height: 13px;
+                    width: 13px;
+                    background: #0f0;
+                    content: "";
+                    position: absolute;
+                    right: -2px;
+                    top: 4px;
+                    display: block;
+                    border: none;
+                }
+            }
+        }
+    }
+
+    section.side-nav__options > ul {
+        border: none;
+        
+        li a {
+            border: none;
+        }
+    }
+}

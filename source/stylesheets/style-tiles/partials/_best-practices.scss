@@ -1,0 +1,12 @@
+.best-practices-big {
+    @include breakpoint($SIZE_TABLET_SMALL){
+        display: none;
+    }
+}
+
+.best-pratices-small {
+    display: none;
+    @include breakpoint($SIZE_TABLET_SMALL){
+        display: block;
+    }
+}

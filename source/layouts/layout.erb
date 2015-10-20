@@ -52,9 +52,36 @@ under the License.
       </script>
     <% end %>
   </head>
-
   <body class="<%= page_classes %>">
-    <a href="#" id="nav-button">
+    <div class="cnt-two-col">
+      <div class="page-wrap">
+        <section class="cnt-two-col__nav">
+          <nav class="side-nav active">
+            <% if current_page.data.toc_footers %>
+              <section class="side-nav__options">
+                  <ul>
+                      <% current_page.data.toc_footers.each do |footer| %>
+                        <li><%= footer %></li>
+                      <% end %>
+                  </ul>
+              </section>
+            <% end %>
+          </nav>
+        </section>
+        <section class="cnt-two-col__content">
+          <%= yield %>
+          <% current_page.data.includes && current_page.data.includes.each do |include| %>
+            <%= partial "includes/#{include}" %>
+          <% end %>
+        </section>
+      </div>
+    </div>
+  </body>
+</html>
+
+
+
+<!--     <a href="#" id="nav-button">
       <span>
         NAV
         <%= image_tag('navbar.png') %>
@@ -93,21 +120,12 @@ under the License.
       <% end %>
       <div id="toc">
       </div>
-      <% if current_page.data.toc_footers %>
-        <ul class="toc-footer">
-          <% current_page.data.toc_footers.each do |footer| %>
-            <li><%= footer %></li>
-          <% end %>
-        </ul>
-      <% end %>
+
     </div>
     <div class="page-wrapper">
       <div class="dark-box"></div>
       <div class="content">
-        <%= yield %>
-        <% current_page.data.includes && current_page.data.includes.each do |include| %>
-          <%= partial "includes/#{include}" %>
-        <% end %>
+        
       </div>
       <div class="dark-box">
         <% if language_tabs %>
@@ -122,6 +140,4 @@ under the License.
           </div>
         <% end %>
       </div>
-    </div>
-  </body>
-</html>
+    </div> -->

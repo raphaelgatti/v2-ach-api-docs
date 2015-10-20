@@ -1,6 +1,14 @@
 @charset "utf-8";
-@import url(https://fonts.googleapis.com/css?family=Open+Sans);
-@import 'normalize';
+@import url(http://fonts.googleapis.com/css?family=Roboto+Slab:300|Open+Sans:400,600,700);
+
+//style-tiles
+@import "style-tiles/lib/reset";
+@import "style-tiles/globals/base";
+@import "style-tiles/partials/colors";
+@import "style-tiles/partials/typography";
+@import "style-tiles/partials/containers";
+@import "style-tiles/partials/side-nav";
+
 @import 'compass';
 @import 'variables';
 @import 'syntax';
@@ -50,23 +58,6 @@ under the License.
           background: none;
         }
     }
-}
-
-////////////////////////////////////////////////////////////////////////////////
-// GENERAL STUFF
-////////////////////////////////////////////////////////////////////////////////
-
-html, body {
-  color: $main-text;
-  padding: 22px 0 0 0;
-  margin: 0;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  @extend %default-font;
-  background-color: $main-bg;
-  height: 100%;
-  -webkit-text-size-adjust: none; /* Never autoresize text */
-  //overflow-x: hidden;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -173,7 +164,7 @@ html, body {
   }
 
 
-  .tocify-item>a, .toc-footer li {
+  .tocify-item>a {
     padding: 0 $nav-padding 0 $nav-padding;
     display: block;
     overflow-x: hidden;
@@ -223,28 +214,6 @@ html, body {
       box-shadow: none; // otherwise it'll overflow out of the subheader
     }
   }
-
-  .toc-footer {
-    padding: 1em 0;
-    margin-top: 1em;
-    border-top: 1px solid $nav-footer-border-color;
-
-    li,a {
-      color: $nav-text;
-      text-decoration: none;
-    }
-
-    a:hover {
-      text-decoration: underline;
-    }
-
-    li {
-      font-size: 0.8em;
-      line-height: 1.7;
-      text-decoration: none;
-    }
-  }
-
 }
 
 // button to show navigation on mobile devices
@@ -371,7 +340,7 @@ html, body {
     clear: both;
   }
 
-  &>h1, &>h2, &>h3, &>h4, &>h5, &>h6, &>p, &>table, &>ul, &>ol, &>aside, &>dl {
+  &>table, &>ul, &>ol, &>aside, &>dl {
     margin-right: $examples-width;
     padding: 0 $main-padding;
     @include box-sizing(border-box);
@@ -386,59 +355,8 @@ html, body {
   }
 
   // the div is the tocify hidden div for placeholding stuff
-  &>h1, &>h2, &>div {
+  &>div {
     clear:both;
-  }
-
-  h1 {
-    @extend %header-font;
-    font-size: 30px;
-    padding-top: 0.5em;
-    padding-bottom: 0.5em;
-    border-bottom: 1px solid #ccc;
-    margin-bottom: $h1-margin-bottom;
-    margin-top: 2em;
-    border-top: 1px solid #ddd;
-    @include background-image(
-      linear-gradient(top, #fff, #f9f9f9)
-    );
-  }
-
-  h1:first-child, div:first-child + h1 {
-    border-top-width: 0;
-    margin-top: 0;
-  }
-
-  h2 {
-    @extend %header-font;
-    font-size: 20px;
-    margin-top: 4em;
-    margin-bottom: 0;
-    border-top: 1px solid #ccc;
-    padding-top: 1.2em;
-    padding-bottom: 1.2em;
-    @include background-image(
-      linear-gradient(top, rgba(#fff,0.4), rgba(#fff, 0))
-    );
-  }
-
-  // h2s right after h1s should bump right up
-  // against the h1s.
-  h1 + h2, h1 + div + h2 {
-    margin-top: $h1-margin-bottom * -1;
-    border-top: none;
-  }
-
-  h3, h4, h5, h6 {
-    @extend %header-font;
-    font-size: 12px;
-    margin-top: 2.5em;
-    margin-bottom: 0.8em;
-    text-transform: uppercase;
-  }
-
-  h4, h5, h6 {
-    font-size: 10px;
   }
 
   hr {
@@ -487,7 +405,7 @@ html, body {
     margin-left: 15px;
   }
 
-  p, li, dt, dd {
+  dt, dd {
     line-height: 1.6;
     margin-top: 0;
   }
@@ -501,7 +419,6 @@ html, body {
     padding: 3px;
     border-radius: 3px;
     @extend %break-words;
-    @extend %code-font;
   }
 
   aside {
@@ -581,10 +498,6 @@ html, body {
       text-decoration: none;
       border-bottom: dashed 1px #ccc;
     }
-  }
-
-  pre {
-    @extend %code-font;
   }
 
   blockquote {
