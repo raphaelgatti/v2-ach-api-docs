@@ -698,7 +698,11 @@ https://www.dwolla.com/oauth/v2/authenticate?client_id={client_id}&amp;response_
 </tr>
 <tr>
 <td>retry-verification</td>
-<td>(optional) If the customer has a <code class="prettyprint">status</code> of <code class="prettyprint">retry</code>, POST to this link to attempt to correct their identity verification information.</td>
+<td>If the customer has a <code class="prettyprint">status</code> of <code class="prettyprint">retry</code>, POST to this link to attempt to correct their identity verification information.</td>
+</tr>
+<tr>
+<td>verify-with-document</td>
+<td>If the customer has a <code class="prettyprint">status</code> of <code class="prettyprint">document</code>, POST to this link to upload a new photo document to verify the customer&rsquo;s identity.  Read about <a href="#documents">Documents</a>.</td>
 </tr>
 </tbody></table>
 <h3 id='customer-resource'>Customer Resource</h3>
@@ -925,7 +929,7 @@ Location: https://api.dwolla.com/customers/FC451A7A-AE30-4404-AB95-E3553FCD733F
 </tr>
 <tr>
 <td>phone</td>
-<td>yes</td>
+<td>no</td>
 <td>Customer&rsquo;s 10 digit phone number.  No hyphens or other separators.  e.g. <code class="prettyprint">3334447777</code></td>
 </tr>
 </tbody></table>
@@ -2067,8 +2071,8 @@ Location: https://api.dwolla.com/transfers/74c9129b-d14a-e511-80da-0aa34a9b2388
 </thead><tbody>
 <tr>
 <td>Funding source</td>
-<td>https://api.dwolla.com/funding-sources/{id}</td>
-<td>A <code class="prettyprint">bank</code> or <code class="prettyprint">balance</code> funding source.</td>
+<td><code class="prettyprint">https://api.dwolla.com/funding-sources/{id}</code></td>
+<td>A bank or balance funding source.</td>
 </tr>
 </tbody></table>
 
@@ -2081,23 +2085,23 @@ Location: https://api.dwolla.com/transfers/74c9129b-d14a-e511-80da-0aa34a9b2388
 </thead><tbody>
 <tr>
 <td>Account</td>
-<td>https://api.dwolla.com/accounts/{id}</td>
+<td><code class="prettyprint">https://api.dwolla.com/accounts/{id}</code></td>
 <td>Destination Account of a transfer.</td>
 </tr>
 <tr>
 <td>Customer</td>
-<td>https://api.dwolla.com/customers/{id}</td>
+<td><code class="prettyprint">https://api.dwolla.com/customers/{id}</code></td>
 <td>Destination Customer of a transfer.</td>
 </tr>
 <tr>
 <td>Email</td>
-<td>mailto: johndoe@email.com</td>
-<td>Email address of existing or non-existing account.</td>
+<td><code class="prettyprint">mailto:johndoe@email.com</code></td>
+<td>Email address of existing Dwolla Account or recipient (recipient will create a Dwolla account to claim funds)</td>
 </tr>
 <tr>
 <td>Funding source</td>
-<td>https://api.dwolla.com/funding-sources/{id}</td>
-<td>Destination of an Account or verified Customer&rsquo;s own <code class="prettyprint">bank</code> or <code class="prettyprint">balance</code> funding source. <strong>OR</strong> A Customer&rsquo;s <code class="prettyprint">bank</code> funding source.</td>
+<td><code class="prettyprint">https://api.dwolla.com/funding-sources/{id}</code></td>
+<td>Destination of an Account or verified Customer&rsquo;s own bank or balance funding source. <strong>OR</strong> A Customer&rsquo;s bank funding source.</td>
 </tr>
 </tbody></table>
 <h3 id='errors'>Errors</h3>
@@ -2414,13 +2418,13 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
           <h1 id='events'>Events</h1><pre class="highlight json"><code><span class="p">{</span><span class="w">
   </span><span class="nt">"_links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="nt">"self"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api-uat.dwolla.com/events/f8e70f48-b7ff-47d0-9d3d-62a099363a76"</span><span class="w">
+      </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.dwolla.com/events/f8e70f48-b7ff-47d0-9d3d-62a099363a76"</span><span class="w">
     </span><span class="p">},</span><span class="w">
     </span><span class="nt">"resource"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api-uat.dwolla.com/transfers/48CFDDB4-1E74-E511-80DB-0AA34A9B2388"</span><span class="w">
+      </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.dwolla.com/transfers/48CFDDB4-1E74-E511-80DB-0AA34A9B2388"</span><span class="w">
     </span><span class="p">},</span><span class="w">
     </span><span class="nt">"account"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api-uat.dwolla.com/accounts/ad5f2162-404a-4c4c-994e-6ab6c3a13254"</span><span class="w">
+      </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.dwolla.com/accounts/ad5f2162-404a-4c4c-994e-6ab6c3a13254"</span><span class="w">
     </span><span class="p">}</span><span class="w">
   </span><span class="p">},</span><span class="w">
   </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"f8e70f48-b7ff-47d0-9d3d-62a099363a76"</span><span class="p">,</span><span class="w">
@@ -2622,16 +2626,16 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 <pre class="highlight json"><code><span class="p">{</span><span class="w">
   </span><span class="nt">"_links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="nt">"self"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api-uat.dwolla.com/events"</span><span class="w">
+      </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.dwolla.com/events"</span><span class="w">
     </span><span class="p">},</span><span class="w">
     </span><span class="nt">"first"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api-uat.dwolla.com/events?limit=25&amp;offset=0"</span><span class="w">
+      </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.dwolla.com/events?limit=25&amp;offset=0"</span><span class="w">
     </span><span class="p">},</span><span class="w">
     </span><span class="nt">"last"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api-uat.dwolla.com/events?limit=25&amp;offset=150"</span><span class="w">
+      </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.dwolla.com/events?limit=25&amp;offset=150"</span><span class="w">
     </span><span class="p">},</span><span class="w">
     </span><span class="nt">"next"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api-uat.dwolla.com/events?limit=25&amp;offset=25"</span><span class="w">
+      </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.dwolla.com/events?limit=25&amp;offset=25"</span><span class="w">
     </span><span class="p">}</span><span class="w">
   </span><span class="p">},</span><span class="w">
   </span><span class="nt">"_embedded"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
@@ -2639,13 +2643,13 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
       </span><span class="p">{</span><span class="w">
         </span><span class="nt">"_links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
           </span><span class="nt">"self"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-            </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api-uat.dwolla.com/events/78e57644-56e4-4da2-b743-059479f2e80f"</span><span class="w">
+            </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.dwolla.com/events/78e57644-56e4-4da2-b743-059479f2e80f"</span><span class="w">
           </span><span class="p">},</span><span class="w">
           </span><span class="nt">"resource"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-            </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api-uat.dwolla.com/transfers/47CFDDB4-1E74-E511-80DB-0AA34A9B2388"</span><span class="w">
+            </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.dwolla.com/transfers/47CFDDB4-1E74-E511-80DB-0AA34A9B2388"</span><span class="w">
           </span><span class="p">},</span><span class="w">
           </span><span class="nt">"account"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-            </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api-uat.dwolla.com/accounts/AD5F2162-404A-4C4C-994E-6AB6C3A13254"</span><span class="w">
+            </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.dwolla.com/accounts/AD5F2162-404A-4C4C-994E-6AB6C3A13254"</span><span class="w">
           </span><span class="p">}</span><span class="w">
         </span><span class="p">},</span><span class="w">
         </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"78e57644-56e4-4da2-b743-059479f2e80f"</span><span class="p">,</span><span class="w">
@@ -2656,13 +2660,13 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
       </span><span class="p">{</span><span class="w">
         </span><span class="nt">"_links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
           </span><span class="nt">"self"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-            </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api-uat.dwolla.com/events/f8e70f48-b7ff-47d0-9d3d-62a099363a76"</span><span class="w">
+            </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.dwolla.com/events/f8e70f48-b7ff-47d0-9d3d-62a099363a76"</span><span class="w">
           </span><span class="p">},</span><span class="w">
           </span><span class="nt">"resource"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-            </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api-uat.dwolla.com/transfers/48CFDDB4-1E74-E511-80DB-0AA34A9B2388"</span><span class="w">
+            </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.dwolla.com/transfers/48CFDDB4-1E74-E511-80DB-0AA34A9B2388"</span><span class="w">
           </span><span class="p">},</span><span class="w">
           </span><span class="nt">"account"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-            </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api-uat.dwolla.com/accounts/ad5f2162-404a-4c4c-994e-6ab6c3a13254"</span><span class="w">
+            </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.dwolla.com/accounts/ad5f2162-404a-4c4c-994e-6ab6c3a13254"</span><span class="w">
           </span><span class="p">}</span><span class="w">
         </span><span class="p">},</span><span class="w">
         </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"f8e70f48-b7ff-47d0-9d3d-62a099363a76"</span><span class="p">,</span><span class="w">
@@ -2673,13 +2677,13 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
       </span><span class="p">{</span><span class="w">
         </span><span class="nt">"_links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
           </span><span class="nt">"self"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-            </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api-uat.dwolla.com/events/9f0167e0-dce6-4a1a-ad26-30015d6f1cc1"</span><span class="w">
+            </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.dwolla.com/events/9f0167e0-dce6-4a1a-ad26-30015d6f1cc1"</span><span class="w">
           </span><span class="p">},</span><span class="w">
           </span><span class="nt">"resource"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-            </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api-uat.dwolla.com/transfers/08A166BC-1B74-E511-80DB-0AA34A9B2388"</span><span class="w">
+            </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.dwolla.com/transfers/08A166BC-1B74-E511-80DB-0AA34A9B2388"</span><span class="w">
           </span><span class="p">},</span><span class="w">
           </span><span class="nt">"account"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-            </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api-uat.dwolla.com/accounts/AD5F2162-404A-4C4C-994E-6AB6C3A13254"</span><span class="w">
+            </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.dwolla.com/accounts/AD5F2162-404A-4C4C-994E-6AB6C3A13254"</span><span class="w">
           </span><span class="p">}</span><span class="w">
         </span><span class="p">},</span><span class="w">
         </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"9f0167e0-dce6-4a1a-ad26-30015d6f1cc1"</span><span class="p">,</span><span class="w">
@@ -2690,16 +2694,16 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
       </span><span class="p">{</span><span class="w">
         </span><span class="nt">"_links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
           </span><span class="nt">"self"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-            </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api-uat.dwolla.com/events/81f6e13c-557c-4449-9331-da5c65e61095"</span><span class="w">
+            </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.dwolla.com/events/81f6e13c-557c-4449-9331-da5c65e61095"</span><span class="w">
           </span><span class="p">},</span><span class="w">
           </span><span class="nt">"resource"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-            </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api-uat.dwolla.com/transfers/09A166BC-1B74-E511-80DB-0AA34A9B2388"</span><span class="w">
+            </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.dwolla.com/transfers/09A166BC-1B74-E511-80DB-0AA34A9B2388"</span><span class="w">
           </span><span class="p">},</span><span class="w">
           </span><span class="nt">"account"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-            </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api-uat.dwolla.com/accounts/ad5f2162-404a-4c4c-994e-6ab6c3a13254"</span><span class="w">
+            </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.dwolla.com/accounts/ad5f2162-404a-4c4c-994e-6ab6c3a13254"</span><span class="w">
           </span><span class="p">},</span><span class="w">
           </span><span class="nt">"customer"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-            </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api-uat.dwolla.com/customers/07d59716-ef22-4fe6-98e8-f3190233dfb8"</span><span class="w">
+            </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.dwolla.com/customers/07d59716-ef22-4fe6-98e8-f3190233dfb8"</span><span class="w">
           </span><span class="p">}</span><span class="w">
         </span><span class="p">},</span><span class="w">
         </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"81f6e13c-557c-4449-9331-da5c65e61095"</span><span class="p">,</span><span class="w">
@@ -2763,16 +2767,16 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 <pre class="highlight json"><code><span class="p">{</span><span class="w">
   </span><span class="nt">"_links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="nt">"self"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api-uat.dwolla.com/events/81f6e13c-557c-4449-9331-da5c65e61095"</span><span class="w">
+      </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.dwolla.com/events/81f6e13c-557c-4449-9331-da5c65e61095"</span><span class="w">
     </span><span class="p">},</span><span class="w">
     </span><span class="nt">"resource"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api-uat.dwolla.com/transfers/09A166BC-1B74-E511-80DB-0AA34A9B2388"</span><span class="w">
+      </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.dwolla.com/transfers/09A166BC-1B74-E511-80DB-0AA34A9B2388"</span><span class="w">
     </span><span class="p">},</span><span class="w">
     </span><span class="nt">"account"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api-uat.dwolla.com/accounts/ad5f2162-404a-4c4c-994e-6ab6c3a13254"</span><span class="w">
+      </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.dwolla.com/accounts/ad5f2162-404a-4c4c-994e-6ab6c3a13254"</span><span class="w">
     </span><span class="p">},</span><span class="w">
     </span><span class="nt">"customer"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api-uat.dwolla.com/customers/07d59716-ef22-4fe6-98e8-f3190233dfb8"</span><span class="w">
+      </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.dwolla.com/customers/07d59716-ef22-4fe6-98e8-f3190233dfb8"</span><span class="w">
     </span><span class="p">}</span><span class="w">
   </span><span class="p">},</span><span class="w">
   </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"81f6e13c-557c-4449-9331-da5c65e61095"</span><span class="p">,</span><span class="w">
