@@ -6,8 +6,14 @@
 @import "style-tiles/globals/base";
 @import "style-tiles/partials/colors";
 @import "style-tiles/partials/typography";
+@import "style-tiles/partials/buttons";
+@import "style-tiles/partials/forms";
+@import "style-tiles/partials/header";
 @import "style-tiles/partials/containers";
 @import "style-tiles/partials/side-nav";
+
+//icons
+@import "icons/base/icons.data.svg";
 
 @import 'compass';
 @import 'variables';

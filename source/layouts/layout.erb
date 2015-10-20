@@ -53,10 +53,47 @@ under the License.
     <% end %>
   </head>
   <body class="<%= page_classes %>">
+    <header>
+        <div class="header__primary page-wrap">
+          <div>
+            <a class="logo icon-logo-dwolla-white" href="/">Dwolla</a>
+            <div class="hamburger">
+              <a href="http://dwolla.com/register">Sign Up</a>
+              <a class="btn primary js-hamburger">Menu</a>
+            </div>
+          </div>
+          <nav class="js-hamburger-nav">
+            <a href="https://www.dwolla.com/about">Product</a>
+            <a href="">Developer</a>
+            <a href="https://www.dwolla.com/contact?b=nav">Contact sales</a>
+            <a href="http://dwolla.com/login">Log in</a>
+            <a href="http://dwolla.com/register" class="btn primary">Sign Up</a>
+          </nav>
+      </div>
+      <nav class="header__secondary js-two-col-nav-toggle">
+        <div class="page-wrap">
+          <a href="">Guides</a>
+          <a href="">Reference</a>
+          <a class="active" href="">API Docs</a>
+          <a class="no-nav js-two-col-no-toggle" href="">SDKs</a>
+          <div class="custom-select custom-select--blue">
+            <select id="language_select" name="select">
+              <option value="raw">raw</option> 
+              <option value="php">php</option>
+              <option value="ruby">ruby</option>
+              <option value="python">python</option>
+              <option value="javascript">javascript</option>
+            </select>
+            <div class="arrow"></div>
+          </div>
+        </div>
+      </nav>
+    </header>
     <div class="cnt-two-col">
       <div class="page-wrap">
         <section class="cnt-two-col__nav">
           <nav class="side-nav active">
+            <div id="toc"></div>
             <% if current_page.data.toc_footers %>
               <section class="side-nav__options">
                   <ul>
@@ -118,8 +155,7 @@ under the License.
         </div>
         <ul class="search-results"></ul>
       <% end %>
-      <div id="toc">
-      </div>
+      
 
     </div>
     <div class="page-wrapper">
