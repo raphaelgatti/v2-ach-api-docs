@@ -93,6 +93,13 @@ under the License.
       <div class="page-wrap">
         <section class="cnt-two-col__nav">
           <nav class="side-nav tocify-wrapper active">
+              <section class="side-nav__api-ver">
+                  <span>Api Version</span>
+                  <div>
+                      <a href="https://docs.dwolla.com/">V1</a>
+                      <a class="active" href="https://docsv2.dwolla.com">V2</a>
+                  </div>
+              </section>
               <section id="toc"></section>
               <% if current_page.data.toc_footers %>
               <section class="side-nav__options">
@@ -117,63 +124,21 @@ under the License.
 </html>
 
 
+<!--   <% if current_page.data.search %>
+  <div class="search">
+    <input type="text" class="search" id="input-search" placeholder="Search">
+  </div>
+  <ul class="search-results"></ul>
+<% end %> -->
 
-<!--     <a href="#" id="nav-button">
-      <span>
-        NAV
-        <%= image_tag('navbar.png') %>
-      </span>
-    </a>
-    
-    <div class="notification">
-    <a>API Version: &nbsp;</a>
-        
-        <a href="https://docs.dwolla.com/">
-        <span class="unselected">V1</span>
-        </a>
-        <a href="https://docsv2.dwolla.com">
-        <span>V2</span>
-        </a>
-    </div>
-
-      <%= image_tag "logo.png", class: 'logo' %>
-
-      <% if language_tabs %>
-        <div class="lang-selector">
-          <% language_tabs.each do |lang| %>
-            <% if lang.is_a? Hash %>
-              <a href="#" data-language-name="<%= lang.keys.first %>"><%= lang.values.first %></a>
-            <% else %>
-              <a href="#" data-language-name="<%= lang %>"><%= lang %></a>
-            <% end %>
-          <% end %>
-        </div>
-      <% end %>
-      <% if current_page.data.search %>
-        <div class="search">
-          <input type="text" class="search" id="input-search" placeholder="Search">
-        </div>
-        <ul class="search-results"></ul>
-      <% end %>
-      
-
-
-    <div class="page-wrapper">
-      <div class="dark-box"></div>
-      <div class="content">
-        
-      </div>
-      <div class="dark-box">
-        <% if language_tabs %>
-          <div class="lang-selector">
-            <% language_tabs.each do |lang| %>
-              <% if lang.is_a? Hash %>
-                <a href="#" data-language-name="<%= lang.keys.first %>"><%= lang.values.first %></a>
-              <% else %>
-                <a href="#" data-language-name="<%= lang %>"><%= lang %></a>
-              <% end %>
-            <% end %>
-          </div>
+<!-- <% if language_tabs %>
+    <div class="lang-selector">
+      <% language_tabs.each do |lang| %>
+        <% if lang.is_a? Hash %>
+          <a href="#" data-language-name="<%= lang.keys.first %>"><%= lang.values.first %></a>
+        <% else %>
+          <a href="#" data-language-name="<%= lang %>"><%= lang %></a>
         <% end %>
-      </div>
-    </div> -->
+      <% end %>
+    </div>
+  <% end %> -->

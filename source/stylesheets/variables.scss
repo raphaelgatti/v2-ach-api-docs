@@ -26,7 +26,6 @@ under the License.
 $nav-bg: #F7F7F7;
 $examples-bg: #3e4956;
 $code-bg: #27313e; //2E4961 also looks nice
-$code-annotation-bg: #212a35;
 $nav-active-bg: #2395d6;
 $lang-select-border: #000;
 $lang-select-bg: #27313e;
@@ -51,16 +50,12 @@ $lang-select-pressed-text: #fff; // color of language tab text when mouse is pre
 
 // SIZES
 ////////////////////
-$nav-width: 230px; // width of the navbar
-$examples-width: 50%; // portion of the screen taken up by code examples
 $logo-margin: 20px; // margin between nav items and logo, ignored if search is active
-$main-padding: 28px; // padding to left and right of content & examples
 $nav-padding: 15px; // padding to left and right of navbar
 $nav-v-padding: 10px; // padding used vertically around search boxes and results
-$code-annotation-padding: 13px; // padding inside code annotations
 $h1-margin-bottom: 21px; // padding under the largest header tags
 $tablet-width: 930px; // min width before reverting to tablet size
-$phone-width: $tablet-width - $nav-width; // min width before reverting to mobile size
+$phone-width: $tablet-width - 230px; // min width before reverting to mobile size
 
 
 // FONTS
@@ -84,40 +79,7 @@ $phone-width: $tablet-width - $nav-width; // min width before reverting to mobil
 
 // OTHER
 //////////////////// 
-$nav-active-shadow: #2395d6;
-$nav-footer-border-color: #cbd0d5;
-$nav-embossed-border-top: #2395d6;
-$nav-embossed-border-bottom: #2395d6;
-$main-embossed-text-shadow: 0px 1px 0px #fff;
 $search-box-border-color: #cbd0d5;
-
-//primary
-$color-orange: #ff7404;
-$color-blue: #2395d6;
-$color-white: #fff;
-$color-grey-light: #f6fafc;
-$color-grey: #eef3f6;
-$color-grey-med: #ccd6dd;
-$color-grey-dark: #6f828e;
-$color-black: #3E4956;
-
-//greys
-$color-grey-2: #e2e9ed;
-$color-grey-3: #d8e0e5;
-$color-grey-med-2: #bfccd4;
-$color-grey-med-3: #9daeb8;
-$color-grey-dark-2: #596974;
-$color-black-dark: #27303d;
-
-//money status
-$color-green: #58b467;
-$color-red: #c63c32;
-
-//alerts
-$color-alert-blue: #9fd8f9;
-$color-alert-yellow: #f1dc8f;
-$color-alert-red: #e8b1ad;
-$color-alert-green: #9bd1a3;
 
 
 ////////////////////////////////////////////////////////////////////////////////

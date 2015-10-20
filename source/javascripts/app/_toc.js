@@ -52,7 +52,6 @@
     if(topPos < 0) {
       $('.tocify-wrapper').removeAttr('style');
     }else {
-      console.log($(window).height)
       $('.tocify-wrapper').css('height', $(window).height() - topPos);
       $('.tocify-wrapper').css('top', topPos);
     }
