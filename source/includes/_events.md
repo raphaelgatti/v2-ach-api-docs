@@ -4,17 +4,19 @@
 {
   "_links": {
     "self": {
-      "href": "https://api.dwolla.com/events/12a32a55-dbc8-4ff1-a063-2567d1c4156e"
+      "href": "https://api-uat.dwolla.com/events/f8e70f48-b7ff-47d0-9d3d-62a099363a76"
     },
     "resource": {
-      "href": "https://api.dwolla.com/transfers/11596661-A870-E511-80DB-0AA34A9B2388"
+      "href": "https://api-uat.dwolla.com/transfers/48CFDDB4-1E74-E511-80DB-0AA34A9B2388"
+    },
+    "account": {
+      "href": "https://api-uat.dwolla.com/accounts/ad5f2162-404a-4c4c-994e-6ab6c3a13254"
     }
   },
-  "id": "12a32a55-dbc8-4ff1-a063-2567d1c4156e",
-  "created": "2015-10-12T06:13:41.000Z",
-  "accountId": "f04631ce-4447-428c-9a3a-342f167bcae6",
-  "topic": "transfer_completed",
-  "resourceId": "11596661-A870-E511-80DB-0AA34A9B2388"
+  "id": "f8e70f48-b7ff-47d0-9d3d-62a099363a76",
+  "created": "2015-10-16T15:58:15.000Z",
+  "topic": "transfer_created",
+  "resourceId": "48CFDDB4-1E74-E511-80DB-0AA34A9B2388"
 }
 ```
 
@@ -24,10 +26,9 @@ When a resource's state changes, we create a new event resource to record the ch
 
 | Parameter | Description
 |-----------|------------|
-|_links | Contains links to the event and the associated resource
+|_links | Contains links to the event, associated resource, the account associated with the event, and the customer associated with the event (if any).
 |id | Event ID
 |created | ISO-8601 timestamp when event was created
-|accountId | ID of the associated account
 |topic | Type of event
 |resourceId | ID of the resource associated with the event.
 
@@ -85,17 +86,17 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 ```json
 {
   "_links": {
+    "self": {
+      "href": "https://api-uat.dwolla.com/events"
+    },
     "first": {
-      "href": "https://api.dwolla.com/events?limit=25&offset=0"
+      "href": "https://api-uat.dwolla.com/events?limit=25&offset=0"
     },
     "last": {
-      "href": "https://api.dwolla.com/events?limit=25&offset=25"
+      "href": "https://api-uat.dwolla.com/events?limit=25&offset=150"
     },
     "next": {
-      "href": "https://api.dwolla.com/events?limit=25&offset=25"
-    },
-    "self": {
-      "href": "https://api.dwolla.com/events"
+      "href": "https://api-uat.dwolla.com/events?limit=25&offset=25"
     }
   },
   "_embedded": {
@@ -103,51 +104,77 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
       {
         "_links": {
           "self": {
-            "href": "https://api.dwolla.com/events/0b7847ea-5520-4456-b8f6-2229196b9709"
+            "href": "https://api-uat.dwolla.com/events/78e57644-56e4-4da2-b743-059479f2e80f"
           },
           "resource": {
-            "href": "https://api.dwolla.com/funding-sources/48e463c1-b00d-4cfc-80fc-4935b458b419"
+            "href": "https://api-uat.dwolla.com/transfers/47CFDDB4-1E74-E511-80DB-0AA34A9B2388"
+          },
+          "account": {
+            "href": "https://api-uat.dwolla.com/accounts/AD5F2162-404A-4C4C-994E-6AB6C3A13254"
           }
         },
-        "id": "0b7847ea-5520-4456-b8f6-2229196b9709",
-        "created": "2015-08-25T14:56:26.000Z",
-        "accountId": "ad5f2162-404a-4c4c-994e-6ab6c3a13254",
-        "topic": "funding_source_removed",
-        "resourceId": "48e463c1-b00d-4cfc-80fc-4935b458b419"
+        "id": "78e57644-56e4-4da2-b743-059479f2e80f",
+        "created": "2015-10-16T15:58:18.000Z",
+        "topic": "bank_transfer_created",
+        "resourceId": "47CFDDB4-1E74-E511-80DB-0AA34A9B2388"
       },
       {
         "_links": {
           "self": {
-            "href": "https://api.dwolla.com/events/84b6a716-b239-4b08-9a7b-6e11b0ba003a"
+            "href": "https://api-uat.dwolla.com/events/f8e70f48-b7ff-47d0-9d3d-62a099363a76"
           },
           "resource": {
-            "href": "https://api.dwolla.com/transfers/38242332-374B-E511-80DA-0AA34A9B2388"
+            "href": "https://api-uat.dwolla.com/transfers/48CFDDB4-1E74-E511-80DB-0AA34A9B2388"
+          },
+          "account": {
+            "href": "https://api-uat.dwolla.com/accounts/ad5f2162-404a-4c4c-994e-6ab6c3a13254"
           }
         },
-        "id": "84b6a716-b239-4b08-9a7b-6e11b0ba003a",
-        "created": "2015-08-25T14:40:15.000Z",
-        "accountId": "ad5f2162-404a-4c4c-994e-6ab6c3a13254",
+        "id": "f8e70f48-b7ff-47d0-9d3d-62a099363a76",
+        "created": "2015-10-16T15:58:15.000Z",
         "topic": "transfer_created",
-        "resourceId": "38242332-374B-E511-80DA-0AA34A9B2388"
+        "resourceId": "48CFDDB4-1E74-E511-80DB-0AA34A9B2388"
       },
       {
         "_links": {
           "self": {
-            "href": "https://api.dwolla.com/events/5a6c7568-fae1-4e1a-84ee-a62525763244"
+            "href": "https://api-uat.dwolla.com/events/9f0167e0-dce6-4a1a-ad26-30015d6f1cc1"
           },
           "resource": {
-            "href": "https://api.dwolla.com/transfers/8A1F44B6-354B-E511-80DA-0AA34A9B2388"
+            "href": "https://api-uat.dwolla.com/transfers/08A166BC-1B74-E511-80DB-0AA34A9B2388"
+          },
+          "account": {
+            "href": "https://api-uat.dwolla.com/accounts/AD5F2162-404A-4C4C-994E-6AB6C3A13254"
           }
         },
-        "id": "5a6c7568-fae1-4e1a-84ee-a62525763244",
-        "created": "2015-08-25T14:29:38.000Z",
-        "accountId": "ad5f2162-404a-4c4c-994e-6ab6c3a13254",
-        "topic": "transfer_created",
-        "resourceId": "8A1F44B6-354B-E511-80DA-0AA34A9B2388"
+        "id": "9f0167e0-dce6-4a1a-ad26-30015d6f1cc1",
+        "created": "2015-10-16T15:37:03.000Z",
+        "topic": "bank_transfer_created",
+        "resourceId": "08A166BC-1B74-E511-80DB-0AA34A9B2388"
+      },
+      {
+        "_links": {
+          "self": {
+            "href": "https://api-uat.dwolla.com/events/81f6e13c-557c-4449-9331-da5c65e61095"
+          },
+          "resource": {
+            "href": "https://api-uat.dwolla.com/transfers/09A166BC-1B74-E511-80DB-0AA34A9B2388"
+          },
+          "account": {
+            "href": "https://api-uat.dwolla.com/accounts/ad5f2162-404a-4c4c-994e-6ab6c3a13254"
+          },
+          "customer": {
+            "href": "https://api-uat.dwolla.com/customers/07d59716-ef22-4fe6-98e8-f3190233dfb8"
+          }
+        },
+        "id": "81f6e13c-557c-4449-9331-da5c65e61095",
+        "created": "2015-10-16T15:37:02.000Z",
+        "topic": "customer_transfer_created",
+        "resourceId": "09A166BC-1B74-E511-80DB-0AA34A9B2388"
       }
     ]
   },
-  "total": 3
+  "total": 4
 }
 ```
 
@@ -175,7 +202,7 @@ offset | yes | How many results to skip.
 > Request:
 
 ```shell
-GET /events/a58be29f-ce03-4b42-9d6c-48ad2b4093ee
+GET /events/81f6e13c-557c-4449-9331-da5c65e61095
 Accept: application/vnd.dwolla.v1.hal+json
 Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 ```
@@ -186,17 +213,22 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 {
   "_links": {
     "self": {
-      "href": "https://api.dwolla.com/events/a58be29f-ce03-4b42-9d6c-48ad2b4093ee"
+      "href": "https://api-uat.dwolla.com/events/81f6e13c-557c-4449-9331-da5c65e61095"
     },
     "resource": {
-      "href": "https://api.dwolla.com/transfers/3B192430-8D47-E511-80DA-0AA34A9B2388"
+      "href": "https://api-uat.dwolla.com/transfers/09A166BC-1B74-E511-80DB-0AA34A9B2388"
+    },
+    "account": {
+      "href": "https://api-uat.dwolla.com/accounts/ad5f2162-404a-4c4c-994e-6ab6c3a13254"
+    },
+    "customer": {
+      "href": "https://api-uat.dwolla.com/customers/07d59716-ef22-4fe6-98e8-f3190233dfb8"
     }
   },
-  "id": "a58be29f-ce03-4b42-9d6c-48ad2b4093ee",
-  "created": "2015-08-20T22:45:44.000Z",
-  "accountId": "ad5f2162-404a-4c4c-994e-6ab6c3a13254",
-  "topic": "transfer_created",
-  "resourceId": "3B192430-8D47-E511-80DA-0AA34A9B2388"
+  "id": "81f6e13c-557c-4449-9331-da5c65e61095",
+  "created": "2015-10-16T15:37:02.000Z",
+  "topic": "customer_transfer_created",
+  "resourceId": "09A166BC-1B74-E511-80DB-0AA34A9B2388"
 }
 ```
 
