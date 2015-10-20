@@ -1,0 +1,42 @@
+.tocify-wrapper {
+    overflow-y: auto;
+    overflow-x: hidden;
+    position: fixed;
+    z-index: 30;
+    top: 0;
+    left: 0;
+    bottom: 0;
+
+    #toc {
+        padding-bottom: 30px;
+
+        ul {
+            margin: 0;
+        }
+
+        .tocify-focus {
+            background: $color-grey-2;
+            a {
+                padding-left: 22px;
+                color: $color-blue;
+                border-left: 3px solid $color-blue;
+            }
+        }
+
+        .tocify-subheader {
+            //tocify needs this to start
+            display: none;
+            background: $color-grey-2;
+            a {
+                font-size: rem(12px);
+            }
+
+            .tocify-focus {
+                a {
+                    padding-left: 25px;
+                    border: none;
+                }
+            }
+        }
+    }
+}

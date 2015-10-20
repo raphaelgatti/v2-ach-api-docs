@@ -37,14 +37,35 @@
 
   // Hack to make already open sections to start opened,
   // instead of displaying an ugly animation
+  var HEADER_HEIGHT = 138;
+
   function animate () {
     setTimeout(function() {
       toc.setOption('showEffectSpeed', 180);
     }, 50);
   }
 
+  // Handels gap of header
+  function updateTocPos () {
+    var topPos = HEADER_HEIGHT - $(window).scrollTop();
+
+    if(topPos < 0) {
+      $('.tocify-wrapper').removeAttr('style');
+    }else {
+      console.log($(window).height)
+      $('.tocify-wrapper').css('height', $(window).height() - topPos);
+      $('.tocify-wrapper').css('top', topPos);
+    }
+  }
+
+  function addListeners () {
+    $(window).on('scroll', updateTocPos);
+  }
+
   $(makeToc);
   $(animate);
+  $(updateTocPos);
+  $(addListeners);
 
 })(window);
 
