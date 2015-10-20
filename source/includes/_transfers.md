@@ -91,14 +91,14 @@ metadata | yes | A metadata JSON object with a maximum of 10 key-value pairs (ea
 
 | Source Type | URI | Description
 -------|---------|---------------
-Funding source | https://api.dwolla.com/funding-sources/{id} | A `bank` or `balance` funding source.
+Funding source | `https://api.dwolla.com/funding-sources/{id}` | A bank or balance funding source.
 
 | Destination Type | URI | Description
 -------|---------|---------------
-Account | https://api.dwolla.com/accounts/{id} | Destination Account of a transfer.
-Customer | https://api.dwolla.com/customers/{id} | Destination Customer of a transfer.
-Email | mailto: johndoe@email.com | Email address of existing or non-existing account.
-Funding source | https://api.dwolla.com/funding-sources/{id} | Destination of an Account or verified Customer's own `bank` or `balance` funding source. **OR** A Customer's `bank` funding source.
+Account | `https://api.dwolla.com/accounts/{id}` | Destination Account of a transfer.
+Customer | `https://api.dwolla.com/customers/{id}` | Destination Customer of a transfer.
+Email | `mailto:johndoe@email.com` | Email address of existing Dwolla Account or recipient (recipient will create a Dwolla account to claim funds)
+Funding source | `https://api.dwolla.com/funding-sources/{id}` | Destination of an Account or verified Customer's own bank or balance funding source. **OR** A Customer's bank funding source.
 
 ### Errors
 | HTTP Status | Message |
