@@ -6,6 +6,7 @@
 @import "style-tiles/globals/base";
 @import "style-tiles/partials/colors";
 @import "style-tiles/partials/typography";
+@import "style-tiles/partials/alerts";
 @import "style-tiles/partials/buttons";
 @import "style-tiles/partials/forms";
 @import "style-tiles/partials/header";
@@ -14,6 +15,7 @@
 
 //icons
 @import "icons/base/icons.data.svg";
+@import "icons/developer/icons.data.svg";
 
 @import 'overrides/toc';
 
@@ -218,10 +220,6 @@ aside:before {
   border: 1px solid #F7E633;
   text-shadow: 1px 1px 0 #666;
   @include background(linear-gradient(bottom right, #F7E633 0%, #F1D32F 100%));
-}
-
-aside.notice:before {
-  @extend %icon-info-sign;
 }
 
 aside.warning:before {

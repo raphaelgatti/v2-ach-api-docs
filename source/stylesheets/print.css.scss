@@ -6,6 +6,7 @@
 @import "style-tiles/globals/base";
 @import "style-tiles/partials/colors";
 @import "style-tiles/partials/typography";
+@import "style-tiles/partials/alerts";
 @import "style-tiles/partials/buttons";
 @import "style-tiles/partials/forms";
 @import "style-tiles/partials/header";
@@ -14,6 +15,7 @@
 
 //icons
 @import "icons/base/icons.data.svg";
+@import "icons/developer/icons.data.svg";
 
 @import 'overrides/toc';
 
