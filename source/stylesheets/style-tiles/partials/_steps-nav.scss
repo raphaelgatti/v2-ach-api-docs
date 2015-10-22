@@ -41,10 +41,6 @@
                 &.active {
                     color: $color-blue;
                     background-color: $color-grey-2;
-
-                    &:after {
-                        @extend .icon-dot-active;
-                    }
                 }
 
                 &:before {
@@ -134,6 +130,127 @@
         &:last-child {
             & > a:before {
                 height: 50%;
+            }
+        }
+    }
+}
+
+.steps-nav-interior {
+    padding: 30px;
+    background: $color-grey;
+    font-weight: 600;
+
+    a {
+        display: block;
+        color: $color-grey-dark;
+        line-height: rem(16px);
+
+        &:hover {
+            text-decoration: none;
+            color: $color-blue;
+        }
+    }
+
+    h6 {
+        margin-bottom: 5px;
+        color: $color-grey-dark;
+        font-size: rem(12px);
+        letter-spacing: 0.5px;
+    }
+
+    section {
+        border-bottom: 1px solid $color-grey-med;
+
+        &:last-child {
+            border: none;
+        }
+    }
+
+    & > div {
+        background: $color-white;
+        border: 1px solid $color-grey-med;
+        border-radius: 5px;
+
+        section {
+            background: $color-white;
+        }
+
+        & > a {
+            padding: 12px 15px;
+            color: $color-blue;
+            font-weight: 600;
+            text-align: center;
+            border-bottom: 1px solid $color-grey-med;
+
+            &.active {
+                background: $color-blue;
+                color: $color-white;
+            }
+        }
+    }
+
+    ol {
+        margin: 0;
+        padding: 10px 15px 10px 30px;
+        font-size: rem(12px);
+        list-style-type: decimal;
+
+        li {
+            margin-bottom: 5px;
+            padding-left: 5px;
+            font-size: rem(12px);
+            
+            a {
+                padding: 8px 10px;
+                background: $color-grey;
+                border-radius: 5px;
+
+                &:hover {
+                    color: $color-blue;
+                    text-decoration: none;
+                }
+
+                &.active {
+                    color: $color-white;
+                    background: $color-blue;
+                }
+            }
+        }
+
+        .twofer {
+            //explicit height as list-type is removed when clearfix is applied.
+            height: 70px;
+            padding-bottom: 8px;
+            position: relative;
+            
+
+            span {
+                margin-bottom: 8px;
+                display: block;
+            }
+
+            a {
+                width: 43%;
+                float: left;
+                text-align: center;
+
+                &:nth-child(2):after {
+                    width: 50%;
+                    height: 20px;
+                    margin: -8px 0 0 10px;
+                    top: 65%;
+                    left: 0;
+                    position: absolute;
+                    content: "or";
+                    text-transform: uppercase;
+                    color: $color-grey-dark;
+                    text-align: right;
+                }
+
+                &:last-child {
+                    padding-left: 15px;
+                    float: right;
+                }
             }
         }
     }

@@ -186,8 +186,41 @@ code {
 
 pre {
     margin-bottom: 40px;
+    padding: 14px 0 14px 14px;
+    overflow: auto;
     code {
         padding: 0;
         background: transparent;
+    }
+}
+
+table {
+    margin-bottom: 30px;
+    
+    thead {
+        th {
+            padding: 6px 15px;
+            font-size: rem(13px);
+            font-weight: 700;
+            text-align: left;
+        }
+    }
+
+    tbody {
+        border-top: 1px solid $color-grey-3;
+        border-bottom: 1px solid $color-grey-3;
+        background: $color-grey-light;
+
+        tr {
+            
+           &:nth-child(even) {
+                background: $color-grey;
+            } 
+
+            td {
+                padding: 6px 15px;
+                font-size: rem(13px);
+            }
+        }
     }
 }

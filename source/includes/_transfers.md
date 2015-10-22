@@ -74,7 +74,9 @@ Location: https://api.dwolla.com/transfers/74c9129b-d14a-e511-80da-0aa34a9b2388
 
 Initiate a transfer for either an account or customer resource. 
 
-<aside class="reminder">This endpoint [requires](#authentication) an OAuth access token with the `Send` [scope](#oauth-scopes).</aside>
+<ol class="alerts">
+    <li class="alert icon-alert-alert">This endpoint <a href="#authentication">requires</a> an OAuth access token with the `Send` <a href="#oauth-scopes">scope</a>.</li>
+</ol>
 
 ### HTTP Request
 `POST https://api.dwolla.com/transfers`
@@ -189,7 +191,9 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 
 Retrieve a Customer's list of transfers.
 
-<aside class="reminder">This endpoint [requires](#authentication) an OAuth access token with the `ManageCustomers` [scope](#oauth-scopes).</aside>
+<ol class="alerts">
+    <li class="alert icon-alert-alert">This endpoint <a href="#authentication">requires</a> an OAuth access token with the `ManageCustomers` <a href="#oauth-scopes">scope</a>.</li>
+</ol>
 
 ### HTTP Request
 `GET https://api.dwolla.com/customers/{id}/transfers`
@@ -283,7 +287,9 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 
 Retrieve an Account's list of transfers.
 
-<aside class="reminder">This endpoint [requires](#authentication) an OAuth access token with the `Transactions` [scope](#oauth-scopes).</aside>
+<ol class="alerts">
+    <li class="alert icon-alert-alert">This endpoint <a href="#authentication">requires</a> an OAuth access token with the `Transactions` <a href="#oauth-scopes">scope</a>.</li>
+</ol>
 
 ### HTTP Request
 `GET https://api.dwolla.com/accounts/{id}/transfers`
@@ -340,7 +346,9 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 
 Retrieve a Transfer belonging to an Account or Customer by its ID.
 
-<aside class="reminder">This endpoint [requires](#authentication) an OAuth access token with the `Transactions` [scope](#oauth-scopes).</aside>
+<ol class="alerts">
+    <li class="alert icon-alert-alert">This endpoint <a href="#authentication">requires</a> an OAuth access token with the `Transactions` <a href="#oauth-scopes">scope</a>.</li>
+</ol>
 
 ### HTTP Request
 `GET https://api.dwolla.com/transfers/{id}`

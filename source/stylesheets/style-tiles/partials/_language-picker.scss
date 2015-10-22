@@ -5,21 +5,30 @@
     @extend %clearfix;
 
     @include breakpoint($SIZE_TABLET_SMALL){
+        padding-bottom: 20px;
         display: block;
     }
 
     h6 {
+        padding-top: 3px;
         float: left;
-        color: $color-grey-dark;
+        color: $color-black;
+        font-size: rem(12px);
+        letter-spacing: 1px;
     }
 
     .custom-select {
         width: 65%;
+        height: 35px;
         margin-top: -3px;
         float: right;
 
         select {
             width: 100%;
+        }
+
+        .arrow {
+            top: 3px;
         }
     }
 }

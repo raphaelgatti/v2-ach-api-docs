@@ -1,65 +1,53 @@
 .big-grid-nav {
-    max-width: 927px;
+    margin-bottom: -30px;
+    display: flex;
+    display: -ms-flexbox;
+    flex-wrap: wrap;
+    -ms-flex-wrap: wrap;
+
+    text-align: center;
     @extend %clearfix;
 
-    div {
-        width: 45%;
-        margin-bottom: 30px;
-        float: left;
-
-        @include breakpoint($SIZE_TABLET_SMALL){
-            width: 100%;
-            max-width: 400px;
-            margin: 0 auto 30px;
-            float: none;
-        }
-
-        &:nth-child(odd) {
-            margin-right: 10%;
-
-            @include breakpoint($SIZE_TABLET_SMALL){
-                margin-right: auto;
-            }
-        }
+    h3 {
+        color: $color-blue;
     }
 
     a {
+        width: 48%;
+        margin: 0 4% 30px 0;
+        padding: 130px 46px 68px;
         display: block;
-        margin-bottom: 15px;
-        padding-top: 68%;
-        background: url("http://placehold.it/405x260") no-repeat;
-        background-size: contain;
-        font-size: rem(20px);
-    }
+        border: 1px solid $color-grey-med;
+        background-position: 50% 30px;
 
-    p {
-        margin: 0;
-    }
+        @include breakpoint($SIZE_DESKTOP_SMALL){
+            width: 100%;
+            margin-right: 0;
+            padding: 120px 30px 30px;
+            background-position: 50% 25px;
+        }
 
-    &__decision {
-        text-align: center;
+        @include breakpoint($SIZE_MOBILE){
+            padding: 100px 20px 20px;
+            background-size: 60px;
+        }
 
-        div {
-            &:first-child {
-                position: relative;
+        &:nth-child(even) {
+            margin-right: 0;
+        }
 
-                &:after {
-                    content: "OR";
-                    position: absolute;
-                    right: -10%;
-                    top: 50%;
-                    margin: -35px -15px 0 0;
-                    font-size: rem(20px);
+        &:hover {
+            text-decoration: none;
+        }
 
-                    @include breakpoint($SIZE_TABLET){
-                        font-size: rem(12px);
-                        margin: -30px -10px 0 0;
-                    }
+        p {
+            margin: 0 auto;
+            max-width: 75%;
+            color: $color-black;
 
-                    @include breakpoint($SIZE_TABLET_SMALL){
-                        display: none;
-                    }
-                }
+            @include breakpoint($SIZE_MOBILE){
+                max-width: 100%;
+                font-size: rem(14px);
             }
         }
     }

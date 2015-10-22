@@ -88,7 +88,9 @@ Location: https://api.dwolla.com/webhook-subscriptions/10d4133e-b308-4646-b276-4
 
 Create a webhook subscription to deliver [Webhooks](#webhooks) to a specified URL. 
 
-<aside class="reminder">This endpoint [requires](#authentication) an OAuth *Application* access token.</aside>
+<ol class="alerts">
+    <li class="alert icon-alert-alert">This endpoint <a href="#authentication">requires</a> an OAuth *Application* access token.</li>
+</ol>
 
 ### HTTP Request
 `
@@ -136,7 +138,9 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 
 Delete a Webhook Subscription to stop receiving Webhooks at the URL specified. 
 
-<aside class="reminder">This endpoint [requires](#authentication) an OAuth *Application* access token.</aside>
+<ol class="alerts">
+    <li class="alert icon-alert-alert">This endpoint <a href="#authentication">requires</a> an OAuth *Application* access token.</li>
+</ol>
 
 ### HTTP Request
 `
@@ -197,7 +201,9 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 
 Retrieve a list of webhook subscriptions that belong to an application.
 
-<aside class="reminder">This endpoint [requires](#authentication) an OAuth *Application* access token.</aside>
+<ol class="alerts">
+    <li class="alert icon-alert-alert">This endpoint <a href="#authentication">requires</a> an OAuth *Application* access token.</li>
+</ol>
 
 ### HTTP Request
 `
@@ -238,7 +244,9 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 
 Retrieve a webhook subscription by its ID.
 
-<aside class="reminder">This endpoint [requires](#authentication) an OAuth *Application* access token.</aside>
+<ol class="alerts">
+    <li class="alert icon-alert-alert">This endpoint <a href="#authentication">requires</a> an OAuth *Application* access token.</li>
+</ol>
 
 ### HTTP Request
 `
@@ -308,7 +316,9 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 
 View all fired [Webhooks](#webhooks) for a Webhook Subscription.
 
-<aside class="reminder">This endpoint [requires](#authentication) an OAuth *Application* access token.</aside>
+<ol class="alerts">
+    <li class="alert icon-alert-alert">This endpoint <a href="#authentication">requires</a> an OAuth *Application* access token.</li>
+</ol>
 
 ### HTTP Request
 `

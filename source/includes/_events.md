@@ -180,7 +180,9 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 
 Retrieve a list of events for the authorized user.
 
-<aside class="reminder">This endpoint [requires](#authentication) an OAuth *Application* access token.</aside>
+<ol class="alerts">
+    <li class="alert icon-alert-alert">This endpoint <a href="#authentication">requires</a> an OAuth *Application* access token.</li>
+</ol>
 
 ### HTTP Request
 `GET https://api.dwolla.com/events`
@@ -234,7 +236,9 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 
 Retrieve an event by Id. 
 
-<aside class="reminder">This endpoint [requires](#authentication) an OAuth *Application* access token.</aside>
+<ol class="alerts">
+    <li class="alert icon-alert-alert">This endpoint <a href="#authentication">requires</a> an OAuth *Application* access token.</li>
+</ol>
 
 ### HTTP Request
 `GET https://api.dwolla.com/events/{id}`

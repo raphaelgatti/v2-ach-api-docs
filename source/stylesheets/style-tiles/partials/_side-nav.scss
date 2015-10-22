@@ -24,6 +24,22 @@ $rotation-time: 0.35s;
             text-decoration: none;
             color: $color-blue;
         }
+
+        &.icon-sidenav-option {
+            display: inline-block;
+            background-position: 100% 10px;
+            border: none;
+
+            @include breakpoint($SIZE_TABLET_SMALL){
+                display: block;
+                border-bottom: 1px solid $color-grey-med;
+                background-position: right 22px top 10px;
+            }
+
+            &:after, &:before {
+                display: none;
+            }
+        }
     }
 
     ul, ol {
@@ -49,6 +65,10 @@ $rotation-time: 0.35s;
 
                 &:first-child {
                     padding-top: 0;
+                    @include breakpoint($SIZE_TABLET_SMALL){
+                        margin-bottom: 10px;
+                        padding-left: 20px;
+                    }
                 }
             }
 
@@ -69,8 +89,15 @@ $rotation-time: 0.35s;
         & > h6 {
             padding: 0 0 0 25px;
 
+            @include breakpoint($SIZE_TABLET_SMALL){
+                padding-left: 20px;
+            }
+
             &:first-child {
                 padding-top: 30px;
+                @include breakpoint($SIZE_TABLET_SMALL){
+                    padding-top: 0;
+                }
             }
         }
 
@@ -92,6 +119,7 @@ $rotation-time: 0.35s;
                 a {
                     @include breakpoint($SIZE_TABLET_SMALL){
                         position :relative;
+                        padding-left: 20px;
                         border-bottom: 1px solid $color-grey-med;
 
                         &:before {
@@ -119,11 +147,14 @@ $rotation-time: 0.35s;
                         border-left: 3px solid $color-blue;
 
                         @include breakpoint($SIZE_TABLET_SMALL){
+                            &:after {
+                                @include arrow(6px, $color-grey-2, "right");
+                            }
+
                             &:not(:only-child) {
                                 border-bottom: none;
 
                                 &:after {
-                                    @include arrow(6px, $color-white, "right");
                                     transform: rotate(90deg);
                                 }
 
@@ -133,6 +164,7 @@ $rotation-time: 0.35s;
                                     transform: rotate(90deg);
                                 }
                             }
+                           
                         }
 
                         & + ul {
@@ -168,9 +200,13 @@ $rotation-time: 0.35s;
     }
 
     &__api-ver {
-        padding: 15px;
+        padding: 15px 15px 15px 25px;
         color: $color-black;
         @extend %clearfix;
+
+        @include breakpoint($SIZE_TABLET_SMALL){
+            padding: 0 20px 20px;
+        }
 
         span {
             padding-top: 8px;
@@ -205,9 +241,6 @@ $rotation-time: 0.35s;
 
         @include breakpoint($SIZE_TABLET_SMALL){
             padding: 0; 
-            h6 {
-                display: none;
-            }
         }
 
         a, button {
@@ -322,31 +355,13 @@ $rotation-time: 0.35s;
             position: relative;
             display: inline-block;
 
+            @include breakpoint($SIZE_TABLET_SMALL){
+                padding-left: 20px;
+            }
+
             &:after, &:before {
                 display: none;
             }
-
-            &.icon-sidenav-option {
-                &:after {
-                    height: 13px;
-                    width: 13px;
-                    background: #0f0;
-                    content: "";
-                    position: absolute;
-                    right: -2px;
-                    top: 4px;
-                    display: block;
-                    border: none;
-                }
-            }
-        }
-    }
-
-    section.side-nav__options > ul {
-        border: none;
-        
-        li a {
-            border: none;
         }
     }
 }

@@ -80,7 +80,7 @@ scope | | Permissions you are requesting.  See [below](#oauth-scopes) for list o
 verified_account | yes | Require new users opting to register for Dwolla to create a fully-verified Dwolla account instead of a default lightweight Direct account.
 
 <ol class="alerts">
-    <li class="alert icon-alert-alert">Remember to url-encode all querystring parameters!</li>
+    <li class="information icon-alert-info">Remember to url-encode all querystring parameters!</li>
 </ol>
 
 ### OAuth Scopes

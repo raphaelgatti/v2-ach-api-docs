@@ -29,8 +29,16 @@ $border-radius: 3px;
             border-radius: $border-radius;
         }
 
+        &.information {
+            background-color: $color-alert-yellow;
+        }
+
         &.alert {
             background-color: $color-alert-yellow;
+        }
+
+        &.error {
+            background-color: $color-alert-red;
         }
     }
     
