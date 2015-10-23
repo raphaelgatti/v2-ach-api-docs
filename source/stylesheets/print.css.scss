@@ -19,8 +19,7 @@
 
 @import 'overrides/toc';
 
-@import 'compass';
-@import 'variables';
+@import 'partials/vars';
 
 /*
 Copyright 2008-2013 Concur Technologies, Inc.
@@ -37,3 +36,50 @@ WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
 License for the specific language governing permissions and limitations
 under the License.
 */
+
+.print-only {
+    display: block;
+}
+
+pre {
+    border: 1px solid $color-grey-dark;
+}
+
+body > header {
+    background: transparent;
+
+    .page-wrap {
+        max-width: none;
+        padding: 0 30px;
+
+        & > div .logo {
+            display: none;
+        }
+    }
+
+    .header__primary {
+        nav {
+            display: none;
+        }
+    }
+
+    .header__secondary {
+        display: none;
+    }
+}
+
+.cnt-two-col {
+    .page-wrap {
+        display: block;
+    }
+
+    &__nav  {
+        display: none;
+    }
+
+    &__content {
+        width: inherit;
+        margin: 0;
+        padding: 30px;
+    }
+}
