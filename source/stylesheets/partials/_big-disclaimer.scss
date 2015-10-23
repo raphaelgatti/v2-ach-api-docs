@@ -1,0 +1,7 @@
+.big-disclaimer {
+    padding-left: 300px;
+
+    @include breakpoint($SIZE_TABLET_SMALL){
+        padding-left: 0;
+    }
+}
