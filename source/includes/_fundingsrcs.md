@@ -50,7 +50,9 @@ Location: https://api.dwolla.com/funding-sources/58d20353-2b4b-4d68-8b89-3e5dab1
 
 Create a new Funding Source for a Customer.  Customers can have a maximum of 6 funding sources.
 
-<aside class="reminder">This endpoint [requires](#authentication) an OAuth access token with the `ManageCustomers` [scope](#oauth-scopes).</aside>
+<ol class="alerts">
+    <li class="alert icon-alert-alert">This endpoint <a href="#authentication">requires</a> an OAuth access token with the `ManageCustomers` <a href="#oauth-scopes">scope</a>.</li>
+</ol>
 
 ### HTTP Request
 `POST https://api.dwolla.com/customers/{id}/funding-sources`
@@ -133,7 +135,9 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 
 Retrieve a list of Funding Sources that belong to a Customer.
 
-<aside class="reminder">This endpoint [requires](#authentication) an OAuth access token with the `ManageCustomers` [scope](#oauth-scopes).</aside>
+<ol class="alerts">
+    <li class="alert icon-alert-alert">This endpoint <a href="#authentication">requires</a> an OAuth access token with the `ManageCustomers` <a href="#oauth-scopes">scope</a>.</li>
+</ol>
 
 ### HTTP Request
 `
@@ -178,11 +182,16 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 HTTP/1.1 201 Created
 Location: https://api.dwolla.com/accounts/99bfb139-eadd-4cdf-b346-7504f0c16c60/funding-sources
 ```
-<aside class="warning">This endpoint is not yet implemented. The following specification is subject to change.</aside>
+
+<ol class="alerts">
+    <li class="error icon-alert-cross">This endpoint is not yet implemented. The following specification is subject to change.</li>
+</ol>
 
 Create a new Funding Source for an Account.
 
-<aside class="reminder">This endpoint [requires](#authentication) an OAuth access token with the `Funding` [scope](#oauth-scopes).</aside>
+<ol class="alerts">
+    <li class="alert icon-alert-alert">This endpoint <a href="#authentication">requires</a> an OAuth access token with the `Funding` <a href="#oauth-scopes">scope</a>.</li>
+</ol>
 
 ### HTTP Request
 `POST https://api.dwolla.com/accounts/{id}/funding-sources`
@@ -262,7 +271,9 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 
 Retrieve a list of Funding Sources that belong to an Account.
 
-<aside class="reminder">This endpoint [requires](#authentication) an OAuth access token with the `Funding` [scope](#oauth-scopes).</aside>
+<ol class="alerts">
+    <li class="alert icon-alert-alert">This endpoint <a href="#authentication">requires</a> an OAuth access token with the `Funding` <a href="#oauth-scopes">scope</a>.</li>
+</ol>
 
 ### HTTP Request
 `
@@ -316,7 +327,9 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 
 Retrieve a Funding Source by ID.
 
-<aside class="reminder">This endpoint [requires](#authentication) an OAuth access token with the `Funding` [scope](#oauth-scopes).</aside>
+<ol class="alerts">
+    <li class="alert icon-alert-alert">This endpoint <a href="#authentication">requires</a> an OAuth access token with the `Funding` <a href="#oauth-scopes">scope</a>.</li>
+</ol>
 
 ### HTTP Request
 `
@@ -367,7 +380,9 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 
 Remove a Funding Source by ID.
 
-<aside class="reminder">This endpoint [requires](#authentication) an OAuth access token with the `Funding` [scope](#oauth-scopes).</aside>
+<ol class="alerts">
+    <li class="alert icon-alert-alert">This endpoint <a href="#authentication">requires</a> an OAuth access token with the `Funding` <a href="#oauth-scopes">scope</a>.</li>
+</ol>
 
 ### HTTP Request
 `

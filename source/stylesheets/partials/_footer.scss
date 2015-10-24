@@ -1,0 +1,8 @@
+body > footer {
+    padding-left: 300px;
+    background: transparent;
+
+    @include breakpoint($SIZE_TABLET_SMALL){
+        padding-left: 0;
+    }
+}

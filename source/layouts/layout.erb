@@ -52,76 +52,120 @@ under the License.
       </script>
     <% end %>
   </head>
-
   <body class="<%= page_classes %>">
-    <a href="#" id="nav-button">
-      <span>
-        NAV
-        <%= image_tag('navbar.png') %>
-      </span>
-    </a>
-    <div class="tocify-wrapper">
-    <div class="notification">
-    <a>API Version: &nbsp;</a>
-        
-        <a href="https://docs.dwolla.com/">
-        <span class="unselected">V1</span>
-        </a>
-        <a href="https://docsv2.dwolla.com">
-        <span>V2</span>
-        </a>
-    </div>
-
-      <%= image_tag "logo.png", class: 'logo' %>
-
-      <% if language_tabs %>
-        <div class="lang-selector">
-          <% language_tabs.each do |lang| %>
-            <% if lang.is_a? Hash %>
-              <a href="#" data-language-name="<%= lang.keys.first %>"><%= lang.values.first %></a>
-            <% else %>
-              <a href="#" data-language-name="<%= lang %>"><%= lang %></a>
-            <% end %>
-          <% end %>
-        </div>
-      <% end %>
-      <% if current_page.data.search %>
-        <div class="search">
-          <input type="text" class="search" id="input-search" placeholder="Search">
-        </div>
-        <ul class="search-results"></ul>
-      <% end %>
-      <div id="toc">
-      </div>
-      <% if current_page.data.toc_footers %>
-        <ul class="toc-footer">
-          <% current_page.data.toc_footers.each do |footer| %>
-            <li><%= footer %></li>
-          <% end %>
-        </ul>
-      <% end %>
-    </div>
-    <div class="page-wrapper">
-      <div class="dark-box"></div>
-      <div class="content">
-        <%= yield %>
-        <% current_page.data.includes && current_page.data.includes.each do |include| %>
-          <%= partial "includes/#{include}" %>
-        <% end %>
-      </div>
-      <div class="dark-box">
-        <% if language_tabs %>
-          <div class="lang-selector">
-            <% language_tabs.each do |lang| %>
-              <% if lang.is_a? Hash %>
-                <a href="#" data-language-name="<%= lang.keys.first %>"><%= lang.values.first %></a>
-              <% else %>
-                <a href="#" data-language-name="<%= lang %>"><%= lang %></a>
-              <% end %>
-            <% end %>
+    <header>
+        <div class="header__primary page-wrap">
+          <div>
+            <a class="logo icon-logo-dwolla-white" href="/">Dwolla</a>
+            <img src="images/logo-dwolla-orange.png" alt="Dwolla" class="print-only" />
+            <div class="hamburger">
+              <a href="http://dwolla.com/register">Sign Up</a>
+              <a class="btn primary js-hamburger">Menu</a>
+            </div>
           </div>
-        <% end %>
+          <nav class="js-hamburger-nav">
+            <a href="https://www.dwolla.com/about">Product</a>
+            <a href="https://developer.dwolla.com">Developer</a>
+            <a href="https://www.dwolla.com/contact?b=nav">Contact sales</a>
+            <a href="http://dwolla.com/login">Log in</a>
+            <a href="http://dwolla.com/register" class="btn primary">Sign Up</a>
+          </nav>
+      </div>
+      <nav class="header__secondary js-two-col-nav-toggle">
+        <div class="page-wrap">
+          <!-- <a href="">Guides</a> -->
+          <!-- <a href="">Reference</a> -->
+          <a class="active">API Docs</a>
+          <!-- <a class="no-nav js-two-col-no-toggle" href="">SDKs</a> -->
+          <div class="custom-select custom-select--blue">
+            <select id="language_select" name="select">
+              <option value="json">json</option>
+            </select>
+            <div class="arrow"></div>
+          </div>
+        </div>
+      </nav>
+    </header>
+    <div class="cnt-two-col">
+      <div class="page-wrap">
+        <section class="cnt-two-col__nav js-two-col-nav">
+          <div class="close">
+              <button class="js-two-col-nav-close icon-cnt-two-col-close"></button>
+          </div>
+          <div class="language-picker">
+              <h6>Language</h6>
+              <div class="custom-select custom-select--blue">
+                  <select id="select" name="select">
+                      <option value="json">json</option>
+                  </select>
+                  <div class="arrow"></div>
+              </div>
+          </div>
+          <nav class="side-nav tocify-wrapper active">
+              <section class="side-nav__api-ver">
+                  <span>Api Version</span>
+                  <div>
+                      <a href="https://docs.dwolla.com/">V1</a>
+                      <a class="active" href="https://docsv2.dwolla.com">V2</a>
+                  </div>
+              </section>
+              <section id="toc"></section>
+              <% if current_page.data.toc_footers %>
+              <section class="side-nav__options">
+                  <ul>
+                      <% current_page.data.toc_footers.each do |footer| %>
+                        <li><%= footer %></li>
+                      <% end %>
+                  </ul>
+              </section>
+            <% end %>
+          </nav>
+        </section>
+        <section class="cnt-two-col__content">
+          <%= yield %>
+          <% current_page.data.includes && current_page.data.includes.each do |include| %>
+            <%= partial "includes/#{include}" %>
+          <% end %>
+        </section>
       </div>
     </div>
+    <section class="big-disclaimer">
+      <div class="page-wrap">
+        <h5>Financial institutions play an important role in the Dwolla network.</h5>
+        <p>Dwolla, Inc. is an agent of Veridian Credit Union and all funds associated with your account in the Dwolla network are held in a pooled account at Veridian Credit Union. These funds are not eligible for individual insurance, and may not be eligible for share insurance by the National Credit Union Share Insurance Fund. Dwolla, Inc. is the operator of a software platform that communicates user instructions for funds transfers to Veridian Credit Union.</p>
+      </div>
+    </section>
+    <footer>
+      <div class="page-wrap">
+        <nav>
+          <a href="https://about.dwolla.com">About</a>
+          <a href="https://www.dwolla.com/support">Support</a>
+          <a href="https://www.dwolla.com/security">Security</a>
+          <a href="https://about.dwolla.com/pricing">Pricing</a>
+          <a href="http://press.dwolla.com/">Press</a>
+          <a href="http://blog.dwolla.com/">Blog</a>
+          <a href="https://www.dwolla.com/careers">Careers</a>
+          <a href="https://about.dwolla.com/contact">Contact</a>
+        </nav>
+        <nav class="disclaimer">
+          <span>&copy; 2015 Dwolla, Inc</span>
+          <a href="https://legal.dwolla.com/privacy/">Privacy</a>
+          <a href="https://legal.dwolla.com/tos/">Legal</a>
+          <a href="https://legal.dwolla.com/about-our-financial-institution-partner/">Dwolla, Inc. is an agent of its Financial Institution Partner(s)</a>
+        </nav>
+      </div>
+    </footer>
   </body>
 </html>
+
+<!-- <% if language_tabs %>
+    <div class="lang-selector">
+      <% language_tabs.each do |lang| %>
+        <% if lang.is_a? Hash %>
+          <a href="#" data-language-name="<%= lang.keys.first %>"><%= lang.values.first %></a>
+        <% else %>
+          <a href="#" data-language-name="<%= lang %>"><%= lang %></a>
+        <% end %>
+      <% end %>
+    </div>
+  <% end %> -->

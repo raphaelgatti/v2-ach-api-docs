@@ -79,10 +79,9 @@ redirect_uri | | URL where the user will be redirected to afterwards. The value 
 scope | | Permissions you are requesting.  See [below](#oauth-scopes) for list of available scopes.  Scopes are delimited by a pipe ("&#124;")
 verified_account | yes | Require new users opting to register for Dwolla to create a fully-verified Dwolla account instead of a default lightweight Direct account.
 
-<aside class="notice">
-Remember to url-encode all querystring parameters!
-</aside>
-
+<ol class="alerts">
+    <li class="information icon-alert-info">Remember to url-encode all querystring parameters!</li>
+</ol>
 
 ### OAuth Scopes
 

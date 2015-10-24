@@ -1,0 +1,46 @@
+.side-by-side-compare {
+    @extend %clearfix;
+
+    h1 {
+        margin: 0;
+    }
+
+    a {
+        font-size: rem(16px);
+    }
+
+    p {
+        margin-bottom: 12px;
+        font-weight: 600;
+        color: $color-grey-dark;
+    }
+
+    & > div {
+        float: left;
+        &:first-child {
+            margin-right: 10%;
+            @include breakpoint($SIZE_TABLET){
+                margin-right: 0;
+                float: none;
+            }
+        }
+    }
+
+    ul {
+        margin-bottom: 20px;
+        color: $color-grey-dark;
+        li {
+            margin-bottom: 3px;
+            font-size: 14px;
+            font-style: italic;
+
+            &:before {
+                content: "* ";
+            }
+        }
+    }
+
+    & + .btn {
+        margin-bottom: 50px;
+    }
+}

@@ -1,8 +1,27 @@
 @charset "utf-8";
-@import 'normalize';
-@import 'compass';
-@import 'variables';
-@import 'icon-font';
+@import url(http://fonts.googleapis.com/css?family=Roboto+Slab:300|Open+Sans:400,600,700);
+
+//style-tiles
+@import "style-tiles/lib/reset";
+@import "style-tiles/globals/base";
+@import "style-tiles/partials/colors";
+@import "style-tiles/partials/big-disclaimer";
+@import "style-tiles/partials/footer";
+@import "style-tiles/partials/typography";
+@import "style-tiles/partials/alerts";
+@import "style-tiles/partials/buttons";
+@import "style-tiles/partials/forms";
+@import "style-tiles/partials/header";
+@import "style-tiles/partials/containers";
+@import "style-tiles/partials/side-nav";
+
+//icons
+@import "icons/base/icons.data.svg";
+@import "icons/developer/icons.data.svg";
+
+@import 'overrides/toc';
+
+@import 'partials/vars';
 
 /*
 Copyright 2008-2013 Concur Technologies, Inc.
@@ -20,123 +39,49 @@ License for the specific language governing permissions and limitations
 under the License.
 */
 
-$print-color: #999;
-$print-color-light: #ccc;
-$print-font-size: 12px;
-
-body {
-  @extend %default-font;
+.print-only {
+    display: block;
 }
 
-.tocify, .toc-footer, .lang-selector, .search, #nav-button {
-  display: none;
+pre {
+    border: 1px solid $color-grey-dark;
 }
 
-.tocify-wrapper>img {
-  margin: 0 auto;
-  display: block;
-}
+body > header {
+    background: transparent;
 
-.content {
-  font-size: 12px;
+    .page-wrap {
+        max-width: none;
+        padding: 0 30px;
 
-  pre, code {
-    @extend %code-font;
-    @extend %break-words;
-    border: 1px solid $print-color;
-    border-radius: 5px;
-    font-size: 0.8em;
-  }
-
-  pre {
-    padding: 1.3em;
-  }
-
-  code {
-    padding: 0.2em;
-  }
-
-  table {
-    border: 1px solid $print-color;
-    tr {
-      border-bottom: 1px solid $print-color;
+        & > div .logo {
+            display: none;
+        }
     }
-    td,th {
-      padding: 0.7em;
+
+    .header__primary {
+        nav {
+            display: none;
+        }
     }
-  }
 
-  p {
-    line-height: 1.5;
-  }
+    .header__secondary {
+        display: none;
+    }
+}
 
-  a {
-    text-decoration: none;
-    color: #000;
-  }
+.cnt-two-col {
+    .page-wrap {
+        display: block;
+    }
 
-  h1 {
-    @extend %header-font;
-    font-size: 2.5em;
-    padding-top: 0.5em;
-    padding-bottom: 0.5em;
-    margin-top: 1em;
-    margin-bottom: $h1-margin-bottom;
-    border: 2px solid $print-color-light;
-    border-width: 2px 0;
-    text-align: center;
-  }
+    &__nav  {
+        display: none;
+    }
 
-  h2 {
-    @extend %header-font;
-    font-size: 1.8em;
-    margin-top: 2em;
-    border-top: 2px solid $print-color-light;
-    padding-top: 0.8em;
-  }
-
-  h1+h2, h1+div+h2 {
-    border-top: none;
-    padding-top: 0;
-    margin-top: 0;
-  }
-
-  h3, h4 {
-    @extend %header-font;
-    font-size: 0.8em;
-    margin-top: 1.5em;
-    margin-bottom: 0.8em;
-    text-transform: uppercase;
-  }
-
-  h5, h6 {
-    text-transform: uppercase;
-  }
-
-  aside {
-    padding: 1em;
-    border: 1px solid $print-color-light;
-    border-radius: 5px;
-    margin-top: 1.5em;
-    margin-bottom: 1.5em;
-    line-height: 1.6;
-  }
-
-  aside:before {
-    vertical-align: middle;
-    padding-right: 0.5em;
-    font-size: 14px;
-  }
-
-  aside.notice:before {
-    @extend %icon-info-sign;
-  }
-
-  aside.warning:before {
-    @extend %icon-exclamation-sign;
-  }
-
-  aside.success:before {
-    @extend %icon-ok-sign;
-  }
+    &__content {
+        width: inherit;
+        margin: 0;
+        padding: 30px;
+    }
 }

@@ -190,7 +190,9 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 
 Retrieve a single webhook.
 
-<aside class="reminder">This endpoint [requires](#authentication) an OAuth *Application* access token.</aside>
+<ol class="alerts">
+    <li class="alert icon-alert-alert">This endpoint <a href="#authentication">requires</a> an OAuth *Application* access token.</li>
+</ol>
 
 ### HTTP Request
 `GET https://api.dwolla.com/webhooks/{id}`
@@ -225,7 +227,9 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 
 Retry a webhook by ID.
 
-<aside class="reminder">This endpoint [requires](#authentication) an OAuth *Application* access token.</aside>
+<ol class="alerts">
+    <li class="alert icon-alert-alert">This endpoint <a href="#authentication">requires</a> an OAuth *Application* access token.</li>
+</ol>
 
 ### HTTP Request
 `GET https://api.dwolla.com/webhooks/{id}/retries`
@@ -259,7 +263,9 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 
 Retrieve webhook retries by ID.
 
-<aside class="reminder">This endpoint [requires](#authentication) an OAuth *Application* access token.</aside>
+<ol class="alerts">
+    <li class="alert icon-alert-alert">This endpoint <a href="#authentication">requires</a> an OAuth *Application* access token.</li>
+</ol>
 
 ### HTTP Request
 `GET https://api.dwolla.com/webhooks/{id}/retries`

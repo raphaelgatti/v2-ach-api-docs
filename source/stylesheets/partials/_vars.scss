@@ -14,14 +14,6 @@ License for the specific language governing permissions and limitations
 under the License.
 */
 
-@import 'variables';
-
-<%= Rouge::Themes::Base16::Monokai.render(:scope => '.highlight') %>
-
-.highlight .c, .highlight .cm, .highlight .c1, .highlight .cs {
-  color: #909090;
-}
-
-.highlight, .highlight .w {
-  background-color: $code-bg;
-}
+// BACKGROUND COLORS
+////////////////////
+$code-bg: #27313e; //2E4961 also looks nice
