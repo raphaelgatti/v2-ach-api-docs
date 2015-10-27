@@ -7,9 +7,6 @@
     left: 0;
     bottom: 0;
 
-    @include breakpoint($SIZE_TABLET_SMALL){
-        overflow-y: hidden;
-    }
 
     #toc {
         padding-bottom: 30px;
