@@ -28,48 +28,76 @@
 
       </script>
   </head>
-
   <body class="index">
-    <a href="#" id="nav-button">
-      <span>
-        NAV
-        <img src="images/navbar.png" />
-      </span>
-    </a>
-    <div class="tocify-wrapper">
-    <div class="notification">
-    <a>API Version: &nbsp;</a>
-        
-        <a href="https://docs.dwolla.com/">
-        <span class="unselected">V1</span>
-        </a>
-        <a href="https://docsv2.dwolla.com">
-        <span>V2</span>
-        </a>
-    </div>
-
-      <img class="logo" src="images/logo.png" />
-
-        <div class="lang-selector">
-              <a href="#" data-language-name="json">json</a>
-        </div>
-        <div class="search">
-          <input type="text" class="search" id="input-search" placeholder="Search">
-        </div>
-        <ul class="search-results"></ul>
-      <div id="toc">
+    <header>
+        <div class="header__primary page-wrap">
+          <div>
+            <a class="logo icon-logo-dwolla-white" href="/">Dwolla</a>
+            <img src="images/logo-dwolla-orange.png" alt="Dwolla" class="print-only" />
+            <div class="hamburger">
+              <a href="http://dwolla.com/register">Sign Up</a>
+              <a class="btn primary js-hamburger">Menu</a>
+            </div>
+          </div>
+          <nav class="js-hamburger-nav">
+            <a href="https://www.dwolla.com/about">Product</a>
+            <a href="https://developer.dwolla.com">Developer</a>
+            <a href="https://www.dwolla.com/contact?b=nav">Contact sales</a>
+            <a href="http://dwolla.com/login">Log in</a>
+            <a href="http://dwolla.com/register" class="btn primary">Sign Up</a>
+          </nav>
       </div>
-        <ul class="toc-footer">
-            <li><a href="https://discuss.dwolla.com/c/api-support" target="_blank">Get some help</a></li>
-            <li><a href='https://developers.dwolla.com/dev/pages/sandbox' target="_blank">Sandbox Environment</a></li>
-            <li><a href='http://github.com/tripit/slate' target="_blank">Documentation Powered by Slate</a></li>
-        </ul>
-    </div>
-    <div class="page-wrapper">
-      <div class="dark-box"></div>
-      <div class="content">
-        
-          <h1 id='introduction'>Introduction</h1><pre class="highlight plaintext"><code>  _          _ _
+      <nav class="header__secondary js-two-col-nav-toggle">
+        <div class="page-wrap">
+          <!-- <a href="">Guides</a> -->
+          <!-- <a href="">Reference</a> -->
+          <a class="active">API Docs</a>
+          <!-- <a class="no-nav js-two-col-no-toggle" href="">SDKs</a> -->
+          <div class="custom-select custom-select--blue">
+            <select id="language_select" name="select">
+              <option value="json">json</option>
+            </select>
+            <div class="arrow"></div>
+          </div>
+        </div>
+      </nav>
+    </header>
+    <div class="cnt-two-col">
+      <div class="page-wrap">
+        <section class="cnt-two-col__nav js-two-col-nav">
+          <div class="close">
+              <button class="js-two-col-nav-close icon-cnt-two-col-close"></button>
+          </div>
+          <div class="language-picker">
+              <h6>Language</h6>
+              <div class="custom-select custom-select--blue">
+                  <select id="select" name="select">
+                      <option value="json">json</option>
+                  </select>
+                  <div class="arrow"></div>
+              </div>
+          </div>
+          <nav class="side-nav tocify-wrapper active">
+              <section class="side-nav__api-ver">
+                  <span>Api Version</span>
+                  <div>
+                      <a href="https://docs.dwolla.com/">V1</a>
+                      <a class="active" href="https://docsv2.dwolla.com">V2</a>
+                  </div>
+              </section>
+              <section id="toc"></section>
+              <section class="side-nav__options">
+                  <ul>
+                        <li><a href="https://discuss.dwolla.com/c/api-support" target="_blank" class="icon-sidenav-option">Get some help</a></li>
+                        <li><a href='https://developers.dwolla.com/dev/pages/sandbox' target="_blank" class="icon-sidenav-option">Sandbox Environment</a></li>
+                        <li><a href='http://github.com/tripit/slate' target="_blank" class="icon-sidenav-option">Documentation Powered by Slate</a></li>
+                  </ul>
+              </section>
+          </nav>
+        </section>
+        <section class="cnt-two-col__content">
+          
+            <h1 id='introduction'>Introduction</h1><pre class="highlight plaintext"><code>  _          _ _
  | |__   ___| | | ___
  | '_ \ / _ \ | |/ _ \
  | | | |  __/ | | (_) |
@@ -249,7 +277,7 @@ GET https://www.dwolla.com/oauth/rest/transactions?client_id<span class="o">=</s
 
 <p>Other links represent actions which can be done with the resource.  For instance, customers which are eligible to send funds have a <code class="prettyprint">send</code> link which directs you to the <a href="#initiate-transfer">transfer</a> endpoint.</p>
 
-          <h1 id='oauth'>OAuth</h1><pre class="highlight plaintext"><code>  /$$$$$$   /$$$$$$              /$$     /$$      
+            <h1 id='oauth'>OAuth</h1><pre class="highlight plaintext"><code>  /$$$$$$   /$$$$$$              /$$     /$$      
  /$$__  $$ /$$__  $$            | $$    | $$      
 | $$  \ $$| $$  \ $$ /$$   /$$ /$$$$$$  | $$$$$$$ 
 | $$  | $$| $$$$$$$$| $$  | $$|_  $$_/  | $$__  $$
@@ -339,8 +367,11 @@ https://www.dwolla.com/oauth/v2/authenticate?client_id={client_id}&amp;response_
 <td>Require new users opting to register for Dwolla to create a fully-verified Dwolla account instead of a default lightweight Direct account.</td>
 </tr>
 </tbody></table>
-<aside class="notice"><p>Remember to url-encode all querystring parameters!</p>
-</aside><h3 id='oauth-scopes'>OAuth Scopes</h3>
+<ol class="alerts">
+    <li class="information icon-alert-info">Remember to url-encode all querystring parameters!</li>
+</ol>
+
+<h3 id='oauth-scopes'>OAuth Scopes</h3>
 <p>Applications may request the following permission scopes when generating an access token:</p>
 
 <table><thead>
@@ -612,7 +643,7 @@ https://www.dwolla.com/oauth/v2/authenticate?client_id={client_id}&amp;response_
 </tr>
 </tbody></table>
 
-          <h1 id='customers'>Customers</h1><pre class="highlight shell"><code><span class="o">{</span>
+            <h1 id='customers'>Customers</h1><pre class="highlight shell"><code><span class="o">{</span>
   <span class="s2">"_links"</span>: <span class="o">{</span>
     <span class="s2">"self"</span>: <span class="o">{</span>
       <span class="s2">"href"</span>: <span class="s2">"https://api.dwolla.com/customers/730CA23F-06C5-45CC-AA6B-8EC2D6EE109F"</span>
@@ -803,8 +834,11 @@ Location: https://api.dwolla.com/customers/FC451A7A-AE30-4404-AB95-E3553FCD733F
 </span></code></pre>
 
 <p>Create a new Customer.  To create an unverified customer, you only need to provide the customer&rsquo;s full name and email address.  Verified customers require additional information.</p>
-<aside class="reminder"><p>This endpoint <a href="#authentication">requires</a> an OAuth access token with the <code>ManageCustomers</code> <a href="#oauth-scopes">scope</a>.</p>
-</aside><h3 id='http-request'>HTTP Request</h3>
+<ol class="alerts">
+    <li class="alert icon-alert-alert">This endpoint <a href="#authentication">requires</a> an OAuth access token with the `ManageCustomers` <a href="#oauth-scopes">scope</a>.</li>
+</ol>
+
+<h3 id='http-request'>HTTP Request</h3>
 <p><code class="prettyprint">POST https://api.dwolla.com/customers</code></p>
 <h3 id='request-parameters---unverified-customer'>Request Parameters - unverified customer</h3>
 <table><thead>
@@ -1005,8 +1039,11 @@ Location: https://api.dwolla.com/customers/FC451A7A-AE30-4404-AB95-E3553FCD733F
 </span></code></pre>
 
 <p>If the customer has a status of <code class="prettyprint">retry</code>, some information may have been miskeyed. You have one more opportunity to correct any mistakes using this endpoint. This time, you’ll need to provide the customer’s full SSN.</p>
-<aside class="reminder"><p>This endpoint <a href="#authentication">requires</a> an OAuth access token with the <code>ManageCustomers</code> <a href="#oauth-scopes">scope</a>.</p>
-</aside><h3 id='http-request'>HTTP Request</h3>
+<ol class="alerts">
+    <li class="alert icon-alert-alert">This endpoint <a href="#authentication">requires</a> an OAuth access token with the `ManageCustomers` <a href="#oauth-scopes">scope</a>.</li>
+</ol>
+
+<h3 id='http-request'>HTTP Request</h3>
 <p><code class="prettyprint">POST https://api.dwolla.com/customers/{id}</code></p>
 <h3 id='request-parameters---retry-verified-customer'>Request Parameters - retry verified customer</h3>
 <table><thead>
@@ -1145,8 +1182,11 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 </span></code></pre>
 
 <p>Retrieve a list of Customers which belong to the authorized user.</p>
-<aside class="reminder"><p>This endpoint <a href="#authentication">requires</a> an OAuth access token with the <code>ManageCustomers</code> <a href="#oauth-scopes">scope</a>.</p>
-</aside><h3 id='http-request'>HTTP Request</h3>
+<ol class="alerts">
+    <li class="alert icon-alert-alert">This endpoint <a href="#authentication">requires</a> an OAuth access token with the `ManageCustomers` <a href="#oauth-scopes">scope</a>.</li>
+</ol>
+
+<h3 id='http-request'>HTTP Request</h3>
 <p><code class="prettyprint">GET https://api.dwolla.com/customers</code></p>
 <h3 id='request-parameters'>Request Parameters</h3>
 <table><thead>
@@ -1204,8 +1244,11 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 </span></code></pre>
 
 <p>Retrieve a Customer which belongs to the authorized user.</p>
-<aside class="reminder"><p>This endpoint <a href="#authentication">requires</a> an OAuth access token with the <code>ManageCustomers</code> <a href="#oauth-scopes">scope</a>.</p>
-</aside><h3 id='http-request'>HTTP Request</h3>
+<ol class="alerts">
+    <li class="alert icon-alert-alert">This endpoint <a href="#authentication">requires</a> an OAuth access token with the `ManageCustomers` <a href="#oauth-scopes">scope</a>.</li>
+</ol>
+
+<h3 id='http-request'>HTTP Request</h3>
 <p><code class="prettyprint">GET https://api.dwolla.com/customers/{id}</code></p>
 <h3 id='request-parameters'>Request Parameters</h3>
 <table><thead>
@@ -1238,7 +1281,7 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 </tr>
 </tbody></table>
 
-          <h1 id='documents'>Documents</h1><pre class="highlight shell"><code><span class="o">{</span>
+            <h1 id='documents'>Documents</h1><pre class="highlight shell"><code><span class="o">{</span>
   <span class="s2">"_links"</span>: <span class="o">{</span>
     <span class="s2">"self"</span>: <span class="o">{</span>
       <span class="s2">"href"</span>: <span class="s2">"https://api.dwolla.com/documents/56502f7a-fa59-4a2f-8579-0f8bc9d7b9cc"</span>
@@ -1298,8 +1341,11 @@ Location: https://api.dwolla.com/documents/11fe0bab-39bd-42ee-bb39-275afcc050d0
 </code></pre>
 
 <p>Create a document for a customer pending verification by uploading a photo of the document.  This requires a multipart form-data POST request.  Must provide either a <code class="prettyprint">.jpg</code> or <code class="prettyprint">.png</code> file up to 5MB in size.</p>
-<aside class="reminder"><p>This endpoint <a href="#authentication">requires</a> an OAuth access token with the <code>ManageCustomers</code> <a href="#oauth-scopes">scope</a>.</p>
-</aside><h3 id='http-request'>HTTP Request</h3>
+<ol class="alerts">
+    <li class="alert icon-alert-alert">This endpoint <a href="#authentication">requires</a> an OAuth access token with the `ManageCustomers` <a href="#oauth-scopes">scope</a>.</li>
+</ol>
+
+<h3 id='http-request'>HTTP Request</h3>
 <table><thead>
 <tr>
 <th>Form Field</th>
@@ -1372,8 +1418,11 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 </span></code></pre>
 
 <p>Retrieve a list of Documents which belong to a Customer. </p>
-<aside class="reminder"><p>This endpoint <a href="#authentication">requires</a> an OAuth access token with the <code>ManageCustomers</code> <a href="#oauth-scopes">scope</a>.</p>
-</aside><h3 id='http-request'>HTTP Request</h3>
+<ol class="alerts">
+    <li class="alert icon-alert-alert">This endpoint <a href="#authentication">requires</a> an OAuth access token with the `ManageCustomers` <a href="#oauth-scopes">scope</a>.</li>
+</ol>
+
+<h3 id='http-request'>HTTP Request</h3>
 <p><code class="prettyprint">GET https://api.dwolla.com/customers/{id}/documents</code></p>
 <h3 id='errors'>Errors</h3>
 <table><thead>
@@ -1409,8 +1458,11 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 </span></code></pre>
 
 <p>Retrieve a Document.</p>
-<aside class="reminder"><p>This endpoint <a href="#authentication">requires</a> an OAuth access token with the <code>ManageCustomers</code> <a href="#oauth-scopes">scope</a>.</p>
-</aside><h3 id='http-request'>HTTP Request</h3>
+<ol class="alerts">
+    <li class="alert icon-alert-alert">This endpoint <a href="#authentication">requires</a> an OAuth access token with the `ManageCustomers` <a href="#oauth-scopes">scope</a>.</li>
+</ol>
+
+<h3 id='http-request'>HTTP Request</h3>
 <p><code class="prettyprint">GET https://api.dwolla.com/customers/{id}/documents/{id}</code></p>
 <h3 id='errors'>Errors</h3>
 <table><thead>
@@ -1421,7 +1473,7 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 </thead><tbody>
 </tbody></table>
 
-          <h1 id='funding-sources'>Funding Sources</h1><pre class="highlight json"><code><span class="p">{</span><span class="w">
+            <h1 id='funding-sources'>Funding Sources</h1><pre class="highlight json"><code><span class="p">{</span><span class="w">
     </span><span class="nt">"routingNumber"</span><span class="p">:</span><span class="w"> </span><span class="s2">"87654321"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"accountNumber"</span><span class="p">:</span><span class="w"> </span><span class="s2">"12345678"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"checking"</span><span class="p">,</span><span class="w">
@@ -1483,8 +1535,11 @@ Location: https://api.dwolla.com/funding-sources/58d20353-2b4b-4d68-8b89-3e5dab1
 </code></pre>
 
 <p>Create a new Funding Source for a Customer.  Customers can have a maximum of 6 funding sources.</p>
-<aside class="reminder"><p>This endpoint <a href="#authentication">requires</a> an OAuth access token with the <code>ManageCustomers</code> <a href="#oauth-scopes">scope</a>.</p>
-</aside><h3 id='http-request'>HTTP Request</h3>
+<ol class="alerts">
+    <li class="alert icon-alert-alert">This endpoint <a href="#authentication">requires</a> an OAuth access token with the `ManageCustomers` <a href="#oauth-scopes">scope</a>.</li>
+</ol>
+
+<h3 id='http-request'>HTTP Request</h3>
 <p><code class="prettyprint">POST https://api.dwolla.com/customers/{id}/funding-sources</code></p>
 <h3 id='request-parameters'>Request Parameters</h3>
 <table><thead>
@@ -1593,8 +1648,11 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 </span></code></pre>
 
 <p>Retrieve a list of Funding Sources that belong to a Customer.</p>
-<aside class="reminder"><p>This endpoint <a href="#authentication">requires</a> an OAuth access token with the <code>ManageCustomers</code> <a href="#oauth-scopes">scope</a>.</p>
-</aside><h3 id='http-request'>HTTP Request</h3>
+<ol class="alerts">
+    <li class="alert icon-alert-alert">This endpoint <a href="#authentication">requires</a> an OAuth access token with the `ManageCustomers` <a href="#oauth-scopes">scope</a>.</li>
+</ol>
+
+<h3 id='http-request'>HTTP Request</h3>
 <p><code class="prettyprint">
 GET https://api.dwolla.com/customers/{id}/funding-sources
 </code></p>
@@ -1651,11 +1709,17 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 <pre class="highlight shell"><code>HTTP/1.1 201 Created
 Location: https://api.dwolla.com/accounts/99bfb139-eadd-4cdf-b346-7504f0c16c60/funding-sources
 </code></pre>
-<aside class="warning"><p>This endpoint is not yet implemented. The following specification is subject to change.</p>
-</aside>
+<ol class="alerts">
+    <li class="error icon-alert-cross">This endpoint is not yet implemented. The following specification is subject to change.</li>
+</ol>
+
+
 <p>Create a new Funding Source for an Account.</p>
-<aside class="reminder"><p>This endpoint <a href="#authentication">requires</a> an OAuth access token with the <code>Funding</code> <a href="#oauth-scopes">scope</a>.</p>
-</aside><h3 id='http-request'>HTTP Request</h3>
+<ol class="alerts">
+    <li class="alert icon-alert-alert">This endpoint <a href="#authentication">requires</a> an OAuth access token with the `Funding` <a href="#oauth-scopes">scope</a>.</li>
+</ol>
+
+<h3 id='http-request'>HTTP Request</h3>
 <p><code class="prettyprint">POST https://api.dwolla.com/accounts/{id}/funding-sources</code></p>
 <h3 id='request-parameters'>Request Parameters</h3>
 <table><thead>
@@ -1756,8 +1820,11 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 </span></code></pre>
 
 <p>Retrieve a list of Funding Sources that belong to an Account.</p>
-<aside class="reminder"><p>This endpoint <a href="#authentication">requires</a> an OAuth access token with the <code>Funding</code> <a href="#oauth-scopes">scope</a>.</p>
-</aside><h3 id='http-request'>HTTP Request</h3>
+<ol class="alerts">
+    <li class="alert icon-alert-alert">This endpoint <a href="#authentication">requires</a> an OAuth access token with the `Funding` <a href="#oauth-scopes">scope</a>.</li>
+</ol>
+
+<h3 id='http-request'>HTTP Request</h3>
 <p><code class="prettyprint">
 GET https://api.dwolla.com/accounts/{id}/funding-sources
 </code></p>
@@ -1821,8 +1888,11 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 </span></code></pre>
 
 <p>Retrieve a Funding Source by ID.</p>
-<aside class="reminder"><p>This endpoint <a href="#authentication">requires</a> an OAuth access token with the <code>Funding</code> <a href="#oauth-scopes">scope</a>.</p>
-</aside><h3 id='http-request'>HTTP Request</h3>
+<ol class="alerts">
+    <li class="alert icon-alert-alert">This endpoint <a href="#authentication">requires</a> an OAuth access token with the `Funding` <a href="#oauth-scopes">scope</a>.</li>
+</ol>
+
+<h3 id='http-request'>HTTP Request</h3>
 <p><code class="prettyprint">
 GET https://api.dwolla.com/funding-sources/{id}
 </code></p>
@@ -1883,8 +1953,11 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 </span></code></pre>
 
 <p>Remove a Funding Source by ID.</p>
-<aside class="reminder"><p>This endpoint <a href="#authentication">requires</a> an OAuth access token with the <code>Funding</code> <a href="#oauth-scopes">scope</a>.</p>
-</aside><h3 id='http-request'>HTTP Request</h3>
+<ol class="alerts">
+    <li class="alert icon-alert-alert">This endpoint <a href="#authentication">requires</a> an OAuth access token with the `Funding` <a href="#oauth-scopes">scope</a>.</li>
+</ol>
+
+<h3 id='http-request'>HTTP Request</h3>
 <p><code class="prettyprint">
 DELETE https://api.dwolla.com/funding-sources/{id}
 </code></p>
@@ -1915,7 +1988,7 @@ DELETE https://api.dwolla.com/funding-sources/{id}
 </tr>
 </tbody></table>
 
-          <h1 id='transfers'>Transfers</h1><pre class="highlight shell"><code><span class="o">{</span>
+            <h1 id='transfers'>Transfers</h1><pre class="highlight shell"><code><span class="o">{</span>
   <span class="s2">"_links"</span>: <span class="o">{}</span>,
   <span class="s2">"_embedded"</span>: <span class="o">{}</span>,
   <span class="s2">"id"</span>: <span class="s2">"string"</span>,
@@ -2010,8 +2083,11 @@ Location: https://api.dwolla.com/transfers/74c9129b-d14a-e511-80da-0aa34a9b2388
 </code></pre>
 
 <p>Initiate a transfer for either an account or customer resource. </p>
-<aside class="reminder"><p>This endpoint <a href="#authentication">requires</a> an OAuth access token with the <code>Send</code> <a href="#oauth-scopes">scope</a>.</p>
-</aside><h3 id='http-request'>HTTP Request</h3>
+<ol class="alerts">
+    <li class="alert icon-alert-alert">This endpoint <a href="#authentication">requires</a> an OAuth access token with the `Send` <a href="#oauth-scopes">scope</a>.</li>
+</ol>
+
+<h3 id='http-request'>HTTP Request</h3>
 <p><code class="prettyprint">POST https://api.dwolla.com/transfers</code></p>
 <h3 id='request-parameters'>Request Parameters</h3>
 <table><thead>
@@ -2177,8 +2253,11 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 </span></code></pre>
 
 <p>Retrieve a Customer&rsquo;s list of transfers.</p>
-<aside class="reminder"><p>This endpoint <a href="#authentication">requires</a> an OAuth access token with the <code>ManageCustomers</code> <a href="#oauth-scopes">scope</a>.</p>
-</aside><h3 id='http-request'>HTTP Request</h3>
+<ol class="alerts">
+    <li class="alert icon-alert-alert">This endpoint <a href="#authentication">requires</a> an OAuth access token with the `ManageCustomers` <a href="#oauth-scopes">scope</a>.</li>
+</ol>
+
+<h3 id='http-request'>HTTP Request</h3>
 <p><code class="prettyprint">GET https://api.dwolla.com/customers/{id}/transfers</code></p>
 <h3 id='request-parameters'>Request Parameters</h3>
 <table><thead>
@@ -2293,8 +2372,11 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 </span></code></pre>
 
 <p>Retrieve an Account&rsquo;s list of transfers.</p>
-<aside class="reminder"><p>This endpoint <a href="#authentication">requires</a> an OAuth access token with the <code>Transactions</code> <a href="#oauth-scopes">scope</a>.</p>
-</aside><h3 id='http-request'>HTTP Request</h3>
+<ol class="alerts">
+    <li class="alert icon-alert-alert">This endpoint <a href="#authentication">requires</a> an OAuth access token with the `Transactions` <a href="#oauth-scopes">scope</a>.</li>
+</ol>
+
+<h3 id='http-request'>HTTP Request</h3>
 <p><code class="prettyprint">GET https://api.dwolla.com/accounts/{id}/transfers</code></p>
 <h3 id='request-parameters'>Request Parameters</h3>
 <table><thead>
@@ -2361,8 +2443,11 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 </span></code></pre>
 
 <p>Retrieve a Transfer belonging to an Account or Customer by its ID.</p>
-<aside class="reminder"><p>This endpoint <a href="#authentication">requires</a> an OAuth access token with the <code>Transactions</code> <a href="#oauth-scopes">scope</a>.</p>
-</aside><h3 id='http-request'>HTTP Request</h3>
+<ol class="alerts">
+    <li class="alert icon-alert-alert">This endpoint <a href="#authentication">requires</a> an OAuth access token with the `Transactions` <a href="#oauth-scopes">scope</a>.</li>
+</ol>
+
+<h3 id='http-request'>HTTP Request</h3>
 <p><code class="prettyprint">GET https://api.dwolla.com/transfers/{id}</code></p>
 <h3 id='request-parameters'>Request Parameters</h3>
 <table><thead>
@@ -2391,7 +2476,7 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 </tr>
 </tbody></table>
 
-          <h1 id='events'>Events</h1><pre class="highlight json"><code><span class="p">{</span><span class="w">
+            <h1 id='events'>Events</h1><pre class="highlight json"><code><span class="p">{</span><span class="w">
   </span><span class="nt">"_links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="nt">"self"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
       </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.dwolla.com/events/f8e70f48-b7ff-47d0-9d3d-62a099363a76"</span><span class="w">
@@ -2694,8 +2779,11 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 </span></code></pre>
 
 <p>Retrieve a list of events for the authorized user.</p>
-<aside class="reminder"><p>This endpoint <a href="#authentication">requires</a> an OAuth <em>Application</em> access token.</p>
-</aside><h3 id='http-request'>HTTP Request</h3>
+<ol class="alerts">
+    <li class="alert icon-alert-alert">This endpoint <a href="#authentication">requires</a> an OAuth *Application* access token.</li>
+</ol>
+
+<h3 id='http-request'>HTTP Request</h3>
 <p><code class="prettyprint">GET https://api.dwolla.com/events</code></p>
 <h3 id='request-parameters'>Request Parameters</h3>
 <table><thead>
@@ -2763,8 +2851,11 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 </span></code></pre>
 
 <p>Retrieve an event by Id. </p>
-<aside class="reminder"><p>This endpoint <a href="#authentication">requires</a> an OAuth <em>Application</em> access token.</p>
-</aside><h3 id='http-request'>HTTP Request</h3>
+<ol class="alerts">
+    <li class="alert icon-alert-alert">This endpoint <a href="#authentication">requires</a> an OAuth *Application* access token.</li>
+</ol>
+
+<h3 id='http-request'>HTTP Request</h3>
 <p><code class="prettyprint">GET https://api.dwolla.com/events/{id}</code></p>
 <h3 id='request-parameters'>Request Parameters</h3>
 <table><thead>
@@ -2793,7 +2884,7 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 </tr>
 </tbody></table>
 
-          <h1 id='webhook-subscriptions'>Webhook Subscriptions</h1><pre class="highlight json"><code><span class="p">{</span><span class="w">
+            <h1 id='webhook-subscriptions'>Webhook Subscriptions</h1><pre class="highlight json"><code><span class="p">{</span><span class="w">
   </span><span class="nt">"_links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="nt">"self"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
       </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.dwolla.com/webhook-subscriptions/034a0ae2-fc7f-4922-8e4e-6fb9855ed43b"</span><span class="w">
@@ -2960,8 +3051,11 @@ Location: https://api.dwolla.com/webhook-subscriptions/10d4133e-b308-4646-b276-4
 </code></pre>
 
 <p>Create a webhook subscription to deliver <a href="#webhooks">Webhooks</a> to a specified URL. </p>
-<aside class="reminder"><p>This endpoint <a href="#authentication">requires</a> an OAuth <em>Application</em> access token.</p>
-</aside><h3 id='http-request'>HTTP Request</h3>
+<ol class="alerts">
+    <li class="alert icon-alert-alert">This endpoint <a href="#authentication">requires</a> an OAuth *Application* access token.</li>
+</ol>
+
+<h3 id='http-request'>HTTP Request</h3>
 <p><code class="prettyprint">
 POST https://api.dwolla.com/webhook-subscriptions
 </code></p>
@@ -3017,8 +3111,11 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 </span></code></pre>
 
 <p>Delete a Webhook Subscription to stop receiving Webhooks at the URL specified. </p>
-<aside class="reminder"><p>This endpoint <a href="#authentication">requires</a> an OAuth <em>Application</em> access token.</p>
-</aside><h3 id='http-request'>HTTP Request</h3>
+<ol class="alerts">
+    <li class="alert icon-alert-alert">This endpoint <a href="#authentication">requires</a> an OAuth *Application* access token.</li>
+</ol>
+
+<h3 id='http-request'>HTTP Request</h3>
 <p><code class="prettyprint">
 DELETE https://api.dwolla.com/webhook-subscriptions/{id}
 </code></p>
@@ -3086,8 +3183,11 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 </span></code></pre>
 
 <p>Retrieve a list of webhook subscriptions that belong to an application.</p>
-<aside class="reminder"><p>This endpoint <a href="#authentication">requires</a> an OAuth <em>Application</em> access token.</p>
-</aside><h3 id='http-request'>HTTP Request</h3>
+<ol class="alerts">
+    <li class="alert icon-alert-alert">This endpoint <a href="#authentication">requires</a> an OAuth *Application* access token.</li>
+</ol>
+
+<h3 id='http-request'>HTTP Request</h3>
 <p><code class="prettyprint">
 GET https://api.dwolla.com/webhook-subscriptions
 </code></p>
@@ -3127,8 +3227,11 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 </span></code></pre>
 
 <p>Retrieve a webhook subscription by its ID.</p>
-<aside class="reminder"><p>This endpoint <a href="#authentication">requires</a> an OAuth <em>Application</em> access token.</p>
-</aside><h3 id='http-request'>HTTP Request</h3>
+<ol class="alerts">
+    <li class="alert icon-alert-alert">This endpoint <a href="#authentication">requires</a> an OAuth *Application* access token.</li>
+</ol>
+
+<h3 id='http-request'>HTTP Request</h3>
 <p><code class="prettyprint">
 GET https://api.dwolla.com/webhook-subscriptions/{id}
 </code></p>
@@ -3200,8 +3303,11 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 </span></code></pre>
 
 <p>View all fired <a href="#webhooks">Webhooks</a> for a Webhook Subscription.</p>
-<aside class="reminder"><p>This endpoint <a href="#authentication">requires</a> an OAuth <em>Application</em> access token.</p>
-</aside><h3 id='http-request'>HTTP Request</h3>
+<ol class="alerts">
+    <li class="alert icon-alert-alert">This endpoint <a href="#authentication">requires</a> an OAuth *Application* access token.</li>
+</ol>
+
+<h3 id='http-request'>HTTP Request</h3>
 <p><code class="prettyprint">
 GET https://api.dwolla.com/webhook-subscriptions/{id}/webhooks
 </code></p>
@@ -3214,7 +3320,7 @@ GET https://api.dwolla.com/webhook-subscriptions/{id}/webhooks
 </thead><tbody>
 </tbody></table>
 
-          <h1 id='webhooks'>Webhooks</h1><pre class="highlight json"><code><span class="p">{</span><span class="w">
+            <h1 id='webhooks'>Webhooks</h1><pre class="highlight json"><code><span class="p">{</span><span class="w">
   </span><span class="nt">"_links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="nt">"self"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
       </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.dwolla.com/webhooks/3142d495-3653-4470-ba0f-cb8ca8aaa467"</span><span class="w">
@@ -3400,8 +3506,11 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 </span></code></pre>
 
 <p>Retrieve a single webhook.</p>
-<aside class="reminder"><p>This endpoint <a href="#authentication">requires</a> an OAuth <em>Application</em> access token.</p>
-</aside><h3 id='http-request'>HTTP Request</h3>
+<ol class="alerts">
+    <li class="alert icon-alert-alert">This endpoint <a href="#authentication">requires</a> an OAuth *Application* access token.</li>
+</ol>
+
+<h3 id='http-request'>HTTP Request</h3>
 <p><code class="prettyprint">GET https://api.dwolla.com/webhooks/{id}</code></p>
 <h3 id='request-parameters'>Request Parameters</h3>
 <table><thead>
@@ -3446,8 +3555,11 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 </span></code></pre>
 
 <p>Retry a webhook by ID.</p>
-<aside class="reminder"><p>This endpoint <a href="#authentication">requires</a> an OAuth <em>Application</em> access token.</p>
-</aside><h3 id='http-request'>HTTP Request</h3>
+<ol class="alerts">
+    <li class="alert icon-alert-alert">This endpoint <a href="#authentication">requires</a> an OAuth *Application* access token.</li>
+</ol>
+
+<h3 id='http-request'>HTTP Request</h3>
 <p><code class="prettyprint">GET https://api.dwolla.com/webhooks/{id}/retries</code></p>
 <h3 id='request-parameters'>Request Parameters</h3>
 <table><thead>
@@ -3491,8 +3603,11 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 </span></code></pre>
 
 <p>Retrieve webhook retries by ID.</p>
-<aside class="reminder"><p>This endpoint <a href="#authentication">requires</a> an OAuth <em>Application</em> access token.</p>
-</aside><h3 id='http-request'>HTTP Request</h3>
+<ol class="alerts">
+    <li class="alert icon-alert-alert">This endpoint <a href="#authentication">requires</a> an OAuth *Application* access token.</li>
+</ol>
+
+<h3 id='http-request'>HTTP Request</h3>
 <p><code class="prettyprint">GET https://api.dwolla.com/webhooks/{id}/retries</code></p>
 <h3 id='request-parameters'>Request Parameters</h3>
 <table><thead>
@@ -3521,12 +3636,40 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 </tr>
 </tbody></table>
 
-      </div>
-      <div class="dark-box">
-          <div class="lang-selector">
-                <a href="#" data-language-name="json">json</a>
-          </div>
+        </section>
       </div>
     </div>
+    <section class="big-disclaimer">
+      <div class="page-wrap">
+        <h5>Financial institutions play an important role in the Dwolla network.</h5>
+        <p>Dwolla, Inc. is an agent of Veridian Credit Union and all funds associated with your account in the Dwolla network are held in a pooled account at Veridian Credit Union. These funds are not eligible for individual insurance, and may not be eligible for share insurance by the National Credit Union Share Insurance Fund. Dwolla, Inc. is the operator of a software platform that communicates user instructions for funds transfers to Veridian Credit Union.</p>
+      </div>
+    </section>
+    <footer>
+      <div class="page-wrap">
+        <nav>
+          <a href="https://about.dwolla.com">About</a>
+          <a href="https://www.dwolla.com/support">Support</a>
+          <a href="https://www.dwolla.com/security">Security</a>
+          <a href="https://about.dwolla.com/pricing">Pricing</a>
+          <a href="http://press.dwolla.com/">Press</a>
+          <a href="http://blog.dwolla.com/">Blog</a>
+          <a href="https://www.dwolla.com/careers">Careers</a>
+          <a href="https://about.dwolla.com/contact">Contact</a>
+        </nav>
+        <nav class="disclaimer">
+          <span>&copy; 2015 Dwolla, Inc</span>
+          <a href="https://legal.dwolla.com/privacy/">Privacy</a>
+          <a href="https://legal.dwolla.com/tos/">Legal</a>
+          <a href="https://legal.dwolla.com/about-our-financial-institution-partner/">Dwolla, Inc. is an agent of its Financial Institution Partner(s)</a>
+        </nav>
+      </div>
+    </footer>
   </body>
 </html>
+
+<!-- 
+    <div class="lang-selector">
+          <a href="#" data-language-name="json">json</a>
+    </div>
+   -->
