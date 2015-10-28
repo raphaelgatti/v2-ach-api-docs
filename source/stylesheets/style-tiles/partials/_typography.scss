@@ -29,8 +29,8 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 h1 {
-    font-size: rem(32px);
-    line-height: rem(37px);
+    font-size: rem(35px);
+    line-height: rem(40px);
     font-weight: 300;
     color: $color-orange;
     @extend %roboto-slab;
@@ -166,7 +166,7 @@ ol {
 
 code {
     padding: 2px 5px;
-    background: $color-grey-2;
+    background: $color-grey-3;
     border-radius: 3px;
     font-family: Consolas, Monaco, "Andale Mono", "Ubuntu Mono", monospace;
     font-weight: 400;
@@ -189,7 +189,7 @@ table {
     thead {
         th {
             padding: 6px 15px;
-            font-size: rem(13px);
+            font-size: rem(15px);
             font-weight: 700;
             text-align: left;
         }
