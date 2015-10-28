@@ -1,16 +1,13 @@
 $slide-time: 0.5s;
 
 body > header {
-    padding: 25px 0 0;
     position: relative;
     z-index: 5;
-    @include linear-gradient($gradient-tilt, $color-gradient-orange, $color-gradient-red);
     @extend %inverse;
     @extend %clearfix;
 
     .notification {
         height: 44px;
-        margin: -25px 0 25px;
         padding-top: 10px;
         background: $color-black-dark;
         text-align: center;
@@ -102,7 +99,8 @@ body > header {
     }
 
     .header__primary {
-        padding-bottom: 20px;
+        padding: 25px 0;
+        @include linear-gradient($gradient-tilt, $color-gradient-orange, $color-gradient-red);
 
         nav {
             float: right;
@@ -136,7 +134,7 @@ body > header {
 
     .header__secondary {
         padding: 15px 0 15px;
-        background: $color-white;
+        background: rgba($color-white, 0.5);
         border-bottom: 1px solid $color-grey-med;
 
         @extend %clearfix;
@@ -162,7 +160,7 @@ body > header {
                 margin-right: 10px;
                 padding-right: 15px;
 
-                &:nth-last-child(2) {
+                &:last-of-type {
                     margin: 0;
                 }
 
@@ -214,6 +212,26 @@ body > header {
             @include breakpoint($SIZE_TABLET_SMALL){
                 display: none;
             }
+
+            select, option {
+                text-transform: uppercase;
+            }
+        }
+    }
+}
+
+body.home > header .header__secondary {
+    border-bottom: none;
+
+    @include breakpoint($SIZE_TABLET_SMALL){
+        background: $color-white;
+    }
+
+    a {
+        color: $color-white;
+
+        @include breakpoint($SIZE_TABLET_SMALL){
+            color: $color-grey-dark;
         }
     }
 }

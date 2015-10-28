@@ -12,7 +12,8 @@
         color: $color-grey-dark;
     }
 
-    .bullet {
+    ul {
         margin-left: 15px;
+        @extend .bullet;
     }
 }

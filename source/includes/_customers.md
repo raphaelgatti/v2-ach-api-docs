@@ -72,7 +72,7 @@ However, if you need to transfer funds between your customers, at least one of t
 
 ## New Customer
 
-> Request:
+### Request:
 
 ```shell
 POST /customers
@@ -81,7 +81,7 @@ Accept: application/vnd.dwolla.v1.hal+json
 Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 ```
 
-> Unverified customer:
+### Unverified customer:
 
 ```json
 {
@@ -92,7 +92,7 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 }
 ```
 
-> Verified customer:
+### Verified customer:
 
 ```json
 {
@@ -112,14 +112,14 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 }
 ```
 
-> Successful response:
+### Successful response:
 
 ```shell
 HTTP/1.1 201 Created
 Location: https://api.dwolla.com/customers/FC451A7A-AE30-4404-AB95-E3553FCD733F
 ```
 
-> Validation error:
+### Validation error:
 
 ```
 {
@@ -170,7 +170,7 @@ phone | no | Customer's 10 digit phone number.  No hyphens or other separators. 
 
 ## Retry Verification
 
-> Customer must be in the retry state:
+### Customer must be in the retry state:
 
 ```json
 {
@@ -198,7 +198,7 @@ phone | no | Customer's 10 digit phone number.  No hyphens or other separators. 
 }
 ```
 
-> Request:
+### Request:
 
 ```shell
 POST /customers/730CA23F-06C5-45CC-AA6B-8EC2D6EE109F
@@ -225,14 +225,14 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 }
 ```
 
-> Successful response:
+### Successful response:
 
 ```shell
 HTTP/1.1 200 OK
 Location: https://api.dwolla.com/customers/FC451A7A-AE30-4404-AB95-E3553FCD733F
 ```
 
-> Validation error:
+### Validation error:
 
 ```
 {
@@ -241,7 +241,7 @@ Location: https://api.dwolla.com/customers/FC451A7A-AE30-4404-AB95-E3553FCD733F
 }
 ```
 
-> If you try more than once, or customer is not in retry state:
+### If you try more than once, or customer is not in retry state:
 
 ```
 {
@@ -284,7 +284,7 @@ phone | yes | Customer's 10 digit phone number.  No hyphens or other separators.
 
 ## List Customers
 
-> Request:
+### Request:
 
 ```shell
 GET /customers
@@ -292,7 +292,7 @@ Accept: application/vnd.dwolla.v1.hal+json
 Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 ```
 
-> Response:
+### Response:
 
 ```json
 {
@@ -351,7 +351,7 @@ offset | yes | How many results to skip.
 
 ## Get a Customer by ID
 
-> Request:
+### Request:
 
 ```shell
 GET /customers/07D59716-EF22-4FE6-98E8-F3190233DFB8
@@ -359,7 +359,7 @@ Accept: application/vnd.dwolla.v1.hal+json
 Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 ```
 
-> Response:
+### Response:
 
 ```json
 {

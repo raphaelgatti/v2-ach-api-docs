@@ -15,10 +15,12 @@
     a {
         width: 48%;
         margin: 0 4% 30px 0;
-        padding: 130px 46px 68px;
+        padding: 130px 46px 60px;
         display: block;
         border: 1px solid $color-grey-med;
+        border-radius: 6px;
         background-position: 50% 30px;
+        transition: all 0.5s ease 0s;
 
         @include breakpoint($SIZE_DESKTOP_SMALL){
             width: 100%;
@@ -38,6 +40,8 @@
 
         &:hover {
             text-decoration: none;
+            border-color: $color-blue;
+            box-shadow: 0 0 5px rgba(44, 44, 44, 0.25);
         }
 
         p {

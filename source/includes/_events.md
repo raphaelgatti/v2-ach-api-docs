@@ -73,7 +73,7 @@ When a resource's state changes, we create a new event resource to record the ch
 
 ## List Events
 
-> Request:
+### Request:
 
 ```shell
 GET /events
@@ -81,7 +81,7 @@ Accept: application/vnd.dwolla.v1.hal+json
 Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 ```
 
-> Response:
+### Response:
 
 ```json
 {
@@ -201,7 +201,7 @@ offset | yes | How many results to skip.
 
 ## Get Event by ID
 
-> Request:
+### Request:
 
 ```shell
 GET /events/81f6e13c-557c-4449-9331-da5c65e61095
@@ -209,7 +209,7 @@ Accept: application/vnd.dwolla.v1.hal+json
 Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 ```
 
-> Response:
+### Response:
 
 ```json
 {

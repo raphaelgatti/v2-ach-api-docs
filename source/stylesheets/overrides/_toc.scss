@@ -29,13 +29,14 @@
             display: none;
             background: $color-grey-2;
             a {
+                padding-left: 45px;
                 font-size: rem(12px);
             }
 
             .tocify-focus {
                 a {
-                    padding-left: 25px;
-                    border: none;
+                    padding-left: 42px;
+                    border-left: 3px solid $color-blue; 
                 }
             }
         }

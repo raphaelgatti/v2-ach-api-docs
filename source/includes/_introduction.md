@@ -63,7 +63,7 @@ Requests that require an client_id and client_secret are passed in the JSON requ
 
 ## Errors
 
-> Example error.  HTTP 401:
+### Example error.  HTTP 401:
 
 ```shell
 {
