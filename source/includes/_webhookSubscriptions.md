@@ -64,7 +64,7 @@ Dwolla will re-attempt delivery 8 times over the course of 72 hours according th
 
 ## Create a Subscription
 
-> Request:
+### Request:
 
 ```shell
 POST /webhook-subscriptions
@@ -79,7 +79,7 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 }
 ```
 
-> Response:
+### Response:
 
 ```shell
 HTTP/1.1 201 Created
@@ -110,7 +110,7 @@ secret | Your application secret.
 
 ## Delete a Subscription
 
-> Request:
+### Request:
 
 ```shell
 DELETE /webhook-subscriptions/f4d21628-fde2-4d3a-b69a-0a7cb42adc4c
@@ -118,7 +118,7 @@ Accept: application/vnd.dwolla.v1.hal+json
 Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 ```
 
-> Response:
+### Response:
 
 ```json
 {
@@ -161,7 +161,7 @@ id | Webhook unique identifier.
 
 ## List Subscriptions
 
-> Request:
+### Request:
 
 ```shell
 GET /webhook-subscriptions
@@ -169,7 +169,7 @@ Accept: application/vnd.dwolla.v1.hal+json
 Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 ```
 
-> Response:
+### Response:
 
 ```json
 {
@@ -216,7 +216,7 @@ GET https://api.dwolla.com/webhook-subscriptions
 
 ## Get Subscription by ID
 
-> Request:
+### Request:
 
 ```shell
 GET /webhook-subscriptions/f4d21628-fde2-4d3a-b69a-0a7cb42adc4c
@@ -224,7 +224,7 @@ Accept: application/vnd.dwolla.v1.hal+json
 Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 ```
 
-> Response:
+### Response:
 
 ```json
 {
@@ -260,7 +260,7 @@ GET https://api.dwolla.com/webhook-subscriptions/{id}
 
 ## Get a Subscription's Webhooks
 
-> Request:
+### Request:
 
 ```shell
 GET /webhook-subscriptions/10d4133e-b308-4646-b276-40d9d36def1c/webhooks
@@ -268,7 +268,7 @@ Accept: application/vnd.dwolla.v1.hal+json
 Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 ```
 
-> Response:
+### Response:
 
 ```json
 {

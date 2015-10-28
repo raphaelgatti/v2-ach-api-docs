@@ -91,7 +91,7 @@ When a new [Event](#events) is created and there is an active [Webhook Subscript
 
 ## Retrieve Webhook
 
-> Request:
+### Request:
 
 ```shell
 GET /webhooks/76ce47b9-5b3c-4ac8-a743-ce318afbaecd
@@ -99,7 +99,7 @@ Accept: application/vnd.dwolla.v1.hal+json
 Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 ```
 
-> Response:
+### Response:
 
 ```json
 {
@@ -210,7 +210,7 @@ id | no | Id of webhook to get.
 
 ## Retry a Webhook by ID
 
-> Request:
+### Request:
 
 ```shell
 POST /webhooks/10d4133e-b308-4646-b276-40d9d36def1c/retries
@@ -219,7 +219,7 @@ Content-Type: application/vnd.dwolla.v1.hal+json
 Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 ```
 
-> Response:
+### Response:
 
 ```json
 
@@ -247,7 +247,7 @@ id | no | Id of webhook to retry.
 
 ## Get Retries by ID
 
-> Request:
+### Request:
 
 ```shell
 GET /webhooks/10d4133e-b308-4646-b276-40d9d36def1c/retries
@@ -255,7 +255,7 @@ Accept: application/vnd.dwolla.v1.hal+json
 Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 ```
 
-> Response:
+### Response:
 
 ```json
 

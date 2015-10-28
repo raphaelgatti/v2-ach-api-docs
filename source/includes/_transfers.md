@@ -36,7 +36,7 @@ A transfer represents money being transferred from a `source` to a `destination`
 
 ## Initiate Transfer
 
-> Request: (Transfer from Account to Customer)
+### Request: (Transfer from Account to Customer)
 
 ```shell
 POST /transfers
@@ -65,7 +65,7 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 }
 ```
 
-> Response:
+### Response:
 
 ```shell
 HTTP/1.1 201 Created
@@ -110,7 +110,7 @@ Funding source | `https://api.dwolla.com/funding-sources/{id}` | Destination of 
 
 ## Get Transfers (Customer) 
 
-> Request:
+### Request:
 
 ```shell
 GET /customers/01B47CB2-52AC-42A7-926C-6F1F50B1F271/transfers
@@ -118,7 +118,7 @@ Accept: application/vnd.dwolla.v1.hal+json
 Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 ```
 
-> Response:
+### Response:
 
 ```json
 {
@@ -214,7 +214,7 @@ offset | yes | How many results to skip.
 
 ## Get Transfers (Account)
 
-> Request:
+### Request:
 
 ```shell
 GET https://api.dwolla.com/accounts/a84222d5-31d2-4290-9a96-089813ef96b3/transfers
@@ -222,7 +222,7 @@ Accept: application/vnd.dwolla.v1.hal+json
 Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 ```
 
-> Response:
+### Response:
 
 ```json
 {
@@ -307,7 +307,7 @@ id | no | Account unique identifier to get transfers for.
 
 ## Get Transfers by ID 
 
-> Request:
+### Request:
 
 ```shell
 GET /transfers/38242332-374b-e511-80da-0aa34a9b2388
@@ -315,7 +315,7 @@ Accept: application/vnd.dwolla.v1.hal+json
 Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 ```
 
-> Response:
+### Response:
 
 ```json
 {

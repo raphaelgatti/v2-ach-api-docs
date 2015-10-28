@@ -55,7 +55,7 @@ redirect_uri = "https://www.myredirect.com/redirect"
 authUrl = Dwolla::OAuth.get_auth_url(redirect_uri)
 ```
 
-> Example initiation URL (send the user there):
+### Example initiation URL (send the user there):
 
 ```shell
 https://uat.dwolla.com/oauth/v2/authenticate?client_id=PO%2BSzGAsZCE4BTG7Cw4OAL40Tpf1008mDjGBSVo6QLNfM4mD%2Ba&response_type=code&redirect_uri=https://developers.dwolla.com/dev/token/callback?env=sandbox&scope=Balance%7CAccountInfoFull
@@ -106,7 +106,7 @@ ManageCustomers | Includes create customer records, manage their funding sources
 }
 ```
 
-> Successful Response:
+### Successful Response:
 
 ```shell
 {
@@ -153,7 +153,7 @@ scope | Pipe <code>&#124;</code> delimited list of permission scopes granted
 }
 ```
 
-> Successful Response:
+### Successful Response:
 
 ```shell
 {
@@ -166,7 +166,7 @@ scope | Pipe <code>&#124;</code> delimited list of permission scopes granted
 }
 ```
 
-> Invalid or Expired Refresh Token Response:
+### Invalid or Expired Refresh Token Response:
 
 ```shell
 {
@@ -215,7 +215,7 @@ token_type | Always `bearer`.
 }
 ```
 
-> Successful Response
+### Successful Response
 
 ```
 {

@@ -35,3 +35,11 @@
         }
     }
 }
+
+body.home .reach-out {
+    margin-bottom: 90px;
+
+    @include breakpoint($SIZE_TABLET_SMALL){
+        margin-bottom: 30px;
+    }
+}

@@ -6,15 +6,6 @@ body {
     color: $color-black;
     line-height: rem(21px);
     -webkit-font-smoothing: antialiased;
-    
-    %inverse & {
-        color: $color-white;
-    }
-}
-
-%inverse {
-    //for all on dark backgrounds.
-    color: $color-white;
 }
 
 %roboto-slab {
@@ -35,10 +26,6 @@ h1, h2, h3, h4, h5, h6 {
     margin: 0 0 12px 0;
     font-weight: 600;
     color: $color-orange;
-
-    %inverse & {
-        color: $color-white;
-    }
 }
 
 h1 {
@@ -182,6 +169,8 @@ code {
     background: $color-grey-2;
     border-radius: 3px;
     font-family: Consolas, Monaco, "Andale Mono", "Ubuntu Mono", monospace;
+    font-weight: 400;
+    font-style: normal;
 }
 
 pre {
@@ -196,7 +185,7 @@ pre {
 
 table {
     margin-bottom: 30px;
-    
+
     thead {
         th {
             padding: 6px 15px;

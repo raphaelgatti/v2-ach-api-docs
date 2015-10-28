@@ -23,22 +23,7 @@ $rotation-time: 0.35s;
         &:hover {
             text-decoration: none;
             color: $color-blue;
-        }
-
-        &.icon-sidenav-option {
-            display: inline-block;
-            background-position: 100% 10px;
-            border: none;
-
-            @include breakpoint($SIZE_TABLET_SMALL){
-                display: block;
-                border-bottom: 1px solid $color-grey-med;
-                background-position: right 22px top 10px;
-            }
-
-            &:after, &:before {
-                display: none;
-            }
+            background-color: $color-grey-2;
         }
     }
 
@@ -116,6 +101,26 @@ $rotation-time: 0.35s;
             li {
                 font-size: rem(14px);
 
+                &.external-link {
+                    a {
+
+                        &:before, &:after {
+                            border: none;
+                        }
+
+                        span {
+                            padding-right: 25px;
+                            display: inline-block;
+                            background-position: 100% 2px;
+
+                            @include breakpoint($SIZE_TABLET_SMALL){
+                                margin-right: -5px;
+                                display: block;
+                            }
+                        }
+                    }
+                }
+
                 a {
                     @include breakpoint($SIZE_TABLET_SMALL){
                         position :relative;
@@ -171,10 +176,16 @@ $rotation-time: 0.35s;
                             display: block;
                             li {
                                 a {
+                                    padding-left: 45px;
                                     border: none;
                                     background: $color-grey-2;
                                     &:after, &:before {
                                         display: none;
+                                    }
+
+                                    &.active {
+                                        padding-left: 42px;
+                                        border-left: 3px solid $color-blue;
                                     }
                                 }
                             }
@@ -219,18 +230,27 @@ $rotation-time: 0.35s;
 
         & > div {
             float: right;
-            background: $color-white;
-            border: 1px solid $color-blue;
-            border-radius: 5px;
 
             a {
                 padding: 7px 28px;
                 float: left;
-                color: $color-blue;
+                border: 1px solid $color-grey-med;
+                background: $color-white;
+
+                &:first-child {
+                    border-top-left-radius: 5px;
+                    border-bottom-left-radius: 5px;
+                }
+
+                &:last-child {
+                    border-top-right-radius: 5px;
+                    border-bottom-right-radius: 5px;
+                }
 
                 &.active {
                     color: $color-white;
                     background: $color-blue;
+                    border: 1px solid $color-blue;
                 }
             }
         }   
@@ -243,9 +263,18 @@ $rotation-time: 0.35s;
             padding: 0; 
         }
 
+        &.open {
+            .picker {
+                @extend .showing;
+            }
+
+            nav {
+                height: auto;
+            }
+        }
+
         a, button {
             padding: 8px 0 8px 20px;
-            color: $color-blue;
             font-weight: 600;
             outline: none;
         }
@@ -253,10 +282,6 @@ $rotation-time: 0.35s;
         h6 {
             margin-bottom: 12px;
             padding: 0;
-        }
-
-        a:hover {
-            text-decoration: underline;
         }
 
         button  {
@@ -272,20 +297,16 @@ $rotation-time: 0.35s;
             & + .icon-side-nav-collapse-minus {
                 display: none;
             }
-
-            &.showing + .icon-side-nav-collapse-plus {
-                display: none;
-            }
-
-            &.showing + .icon-side-nav-collapse-minus {
-                display: block;
-            }
         }
 
         nav {
             height: 0;
             overflow: hidden;
             transition: height $slide-time;
+
+            a:hover {
+                background: transparent;
+            }
 
             @include breakpoint($SIZE_TABLET_SMALL){
                 height: auto;
@@ -315,6 +336,7 @@ $rotation-time: 0.35s;
 
                     &:hover {
                         text-decoration: none;
+                        background-color: $color-grey-2;
 
                         &:before {
                             @include arrow(6px, $color-blue, "right");
@@ -326,6 +348,11 @@ $rotation-time: 0.35s;
 
         .picker {
             position: relative;
+            cursor: pointer;
+
+            button {
+                color: $color-blue;
+            }
 
             .icon {
                 width: 13px;
@@ -336,6 +363,20 @@ $rotation-time: 0.35s;
 
                 @include breakpoint($SIZE_TABLET_SMALL){
                     display: none;
+                }
+            }
+
+            &.showing {
+                button {
+                    color: $color-blue;
+                }
+
+                .icon-side-nav-collapse-plus {
+                    display: none;
+                }
+
+                .icon-side-nav-collapse-minus {
+                    display: block;
                 }
             }
         }
@@ -353,7 +394,6 @@ $rotation-time: 0.35s;
             padding: 9px 25px;
             font-size: rem(12px);
             position: relative;
-            display: inline-block;
 
             @include breakpoint($SIZE_TABLET_SMALL){
                 padding-left: 20px;

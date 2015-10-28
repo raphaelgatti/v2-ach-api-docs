@@ -23,7 +23,7 @@ created | ISO-8601 timestamp.
 
 ## New Funding Source (Customer)
 
-> Request:
+### Request:
 
 ```shell
 POST /customers/99bfb139-eadd-4cdf-b346-7504f0c16c60/funding-sources
@@ -41,7 +41,7 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 }
 ```
 
-> Response:
+### Response:
 
 ```shell
 HTTP/1.1 201 Created
@@ -73,7 +73,7 @@ name | no | Arbitrary nickname for the funding source.
 
 ## List Funding Sources (Customer)
 
-> Request:
+### Request:
 
 ```shell
 GET /customers/5b29279d-6359-4c87-a318-e09095532733/funding-sources
@@ -81,7 +81,7 @@ Accept: application/vnd.dwolla.v1.hal+json
 Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 ```
 
-> Response:
+### Response:
 
 ```json
 {
@@ -158,7 +158,7 @@ id | no | Customer unique identifier.
 
 ## New Funding Source (Account) [DRAFT]
 
-> Request:
+### Request:
 
 ```shell
 POST /accounts/99bfb139-eadd-4cdf-b346-7504f0c16c60/funding-sources
@@ -176,7 +176,7 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 }
 ```
 
-> Response:
+### Response:
 
 ```shell
 HTTP/1.1 201 Created
@@ -212,7 +212,7 @@ name | Arbitrary nickname for the funding source.
 
 ## List Funding Sources (Account)
 
-> Request:
+### Request:
 
 ```shell
 GET /accounts/ad5f2162-404a-4c4c-994e-6ab6c3a13254/funding-sources
@@ -220,7 +220,7 @@ Accept: application/vnd.dwolla.v1.hal+json
 Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 ```
 
-> Response:
+### Response:
 
 ```json
 {
@@ -293,7 +293,7 @@ id | no | Account unique identifier to get funding sources for.
 
 ## Get a Funding Source by ID
 
-> Request:
+### Request:
 
 ```shell
 GET /funding-sources/ab9cd5de-9435-47af-96fb-8d2fa5db51e8
@@ -301,7 +301,7 @@ Accept: application/vnd.dwolla.v1.hal+json
 Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 ```
 
-> Response:
+### Response:
 
 ```json
 {
@@ -349,7 +349,7 @@ id | no | Funding source ID to get.
 
 ## Remove a Funding Source
 
-> Request:
+### Request:
 
 ```shell
 DELETE /funding-sources/6c8ac833-444a-4eff-979c-c56cef6be26b
@@ -358,7 +358,7 @@ Accept: application/vnd.dwolla.v1.hal+json
 Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 ```
 
-> Response:
+### Response:
 
 ```json
 {

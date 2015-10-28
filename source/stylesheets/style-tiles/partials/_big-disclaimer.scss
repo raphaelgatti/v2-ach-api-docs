@@ -3,6 +3,10 @@
     background: $color-white;
     @extend %inverse;
 
+    @include breakpoint($SIZE_TABLET){
+        padding-top: 30px;
+    }
+
     .page-wrap {
         max-width: 800px;
     }

@@ -2,6 +2,12 @@
     margin-bottom: 35px;
     position: relative;
 
+    &:hover {
+        .btn {
+            opacity: 1;
+        }
+    }
+
     textarea { 
         width:0;
         height:0;
@@ -22,6 +28,8 @@
         right: 5px;
         font-size: rem(12px);
         text-align: center;
+        opacity: 0.1;
+        transition: opacity 0.5s;
 
         &.success {
             padding-right: 15px;
@@ -55,6 +63,7 @@
                 border: none;
                 outline: none;
                 font-size: rem(12px);
+                font-weight: 600;
 
                 @include breakpoint($SIZE_MOBILE_SMALL) {
                     padding: 6px;
@@ -62,9 +71,10 @@
                 }
 
                 &.active {
-                    padding-top: 6px;
-                    border-top: 2px solid $color-blue;
+                    padding-top: 5px;
+                    border-top: 3px solid $color-blue;
                     background-color: #27303d;
+                    color: $color-blue;
                 }
             }
         }

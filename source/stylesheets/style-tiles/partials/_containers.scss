@@ -20,6 +20,61 @@ $slide-time: 0.3s;
     }
 }
 
+.cnt-one-col {
+    padding-top: 30px;
+
+    &__banner {
+        margin-top: -85px;
+        padding-top: 118px;
+        padding-bottom: 136px;
+
+        & + .hover-box {
+            margin-top: -86px;
+        }
+    }
+
+    &__hover-box {
+
+        .code-snippet {
+            nav {
+                text-align: left;
+            }
+        }
+
+        .split-options {
+            margin: 0 -55px;
+            border-top: 1px solid $color-grey-med;
+
+            @include breakpoint($SIZE_TABLET_SMALL){
+                margin: 0 -20px;
+            }
+
+            & > div {
+                &:first-child {
+                    border-right: 1px solid $color-grey-med;
+
+                    @include breakpoint($SIZE_TABLET_SMALL){
+                        border-right: none;
+                        border-bottom: 1px solid $color-grey-med;
+                    }
+                }
+            }
+        }
+    }
+
+    .cnt-two-col__nav {
+        display: none;
+    }
+
+    .reach-out {
+        margin-bottom: 30px;
+
+        @include breakpoint($SIZE_DESKTOP_SMALL){
+            margin-bottom: 30px;
+        }
+    }
+}
+
 .cnt-two-col {
     border-bottom: 1px solid $color-grey-med;
 
@@ -135,6 +190,7 @@ $slide-time: 0.3s;
 
     &__content {
         width: 100%;
+        max-width: $SIZE_MAX_CONTENT_WIDTH;
         margin-left: -300px;
         padding: 35px 40px 30px 335px;
         overflow: hidden;
@@ -143,6 +199,17 @@ $slide-time: 0.3s;
         @include breakpoint($SIZE_TABLET_SMALL){
             margin: 0;
             padding: 30px 20px;
+        }
+
+        img {
+            max-width: 100%;
+            margin: 0 auto;
+            display: block;
+        }
+
+        & > ul:not([class]) {
+            //inverse normal ul usage due to the genericness of mark down.
+            @extend .bullet;
         }
 
         .steps-nav-interior {

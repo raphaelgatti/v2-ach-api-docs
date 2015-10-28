@@ -28,7 +28,7 @@ Customers of type `personal` or `business` and of status `document` require phot
 
 ## Create a Document
 
-> Request:
+### Request:
 
 ```shell
 curl -X POST 
@@ -41,7 +41,7 @@ curl -X POST
 \ 'https://api.dwolla.com/customers/1DE32EC7-FF0B-4C0C-9F09-19629E6788CE/documents'
 ```
 
-> Response:
+### Response:
 
 ```shell
 HTTP/1.1 201 Created
@@ -67,7 +67,7 @@ Create a document for a customer pending verification by uploading a photo of th
 
 ## List Documents
 
-> Request:
+### Request:
 
 ```shell
 GET /customers/6f80efc0-b158-4df1-9b11-da85f0bffdd4/documents
@@ -75,7 +75,7 @@ Accept: application/vnd.dwolla.v1.hal+json
 Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 ```
 
-> Response:
+### Response:
 
 ```json
 {
@@ -129,7 +129,7 @@ Retrieve a list of Documents which belong to a Customer.
 
 ## Retrieve a Document
 
-> Request:
+### Request:
 
 ```shell
 GET /customers/6f80efc0-b158-4df1-9b11-da85f0bffdd4/documents/e6c141d5-0922-4d18-ad00-4789a37f288f
@@ -137,7 +137,7 @@ Accept: application/vnd.dwolla.v1.hal+json
 Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 ```
 
-> Response:
+### Response:
 
 ```json
 {
