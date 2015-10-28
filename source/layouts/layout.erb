@@ -114,9 +114,10 @@ under the License.
               <section id="toc"></section>
               <% if current_page.data.toc_footers %>
               <section class="side-nav__options">
+                  <h6>Options</h6>
                   <ul>
                       <% current_page.data.toc_footers.each do |footer| %>
-                        <li><%= footer %></li>
+                        <li class="external-link"><%= footer %></li>
                       <% end %>
                   </ul>
               </section>
