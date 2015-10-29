@@ -265,17 +265,7 @@ GET https://www.dwolla.com/oauth/rest/transactions?client_id<span class="o">=</s
 
 <p>Other links represent actions which can be done with the resource.  For instance, customers which are eligible to send funds have a <code class="prettyprint">send</code> link which directs you to the <a href="#initiate-transfer">transfer</a> endpoint.</p>
 
-            <h1 id='oauth'>OAuth</h1><pre class="highlight plaintext"><code>  /$$$$$$   /$$$$$$              /$$     /$$      
- /$$__  $$ /$$__  $$            | $$    | $$      
-| $$  \ $$| $$  \ $$ /$$   /$$ /$$$$$$  | $$$$$$$ 
-| $$  | $$| $$$$$$$$| $$  | $$|_  $$_/  | $$__  $$
-| $$  | $$| $$__  $$| $$  | $$  | $$    | $$  \ $$
-| $$  | $$| $$  | $$| $$  | $$  | $$ /$$| $$  | $$
-|  $$$$$$/| $$  | $$|  $$$$$$/  |  $$$$/| $$  | $$
- \______/ |__/  |__/ \______/    \___/  |__/  |__/                                                          
-
-</code></pre>
-
+            <h1 id='oauth'>OAuth</h1>
 <p>Dwolla&rsquo;s API lets you interact with a user&rsquo;s Dwolla account and act on its behalf to send money, request money, and more.  To do so, your application first needs to request authorization from users.  </p>
 
 <p>Dwolla implements the <a href="http://oauth.net/2/">OAuth 2.0 standard</a> to facilitate this authorization. Similar to Facebook and Twitter&rsquo;s authentication flow, the user is first presented with a permission dialog for your application, at which point the user can either approve the permissions requested, or reject them. Once the user approves, an <code class="prettyprint">authorization_code</code> is sent to your application, which will then <a href="#finish-authorization">be exchanged</a> for an <code class="prettyprint">access_token</code> and a <code class="prettyprint">refresh_token</code> pair. </p>
