@@ -1,16 +1,4 @@
 # Introduction
-```
-  _          _ _
- | |__   ___| | | ___
- | '_ \ / _ \ | |/ _ \
- | | | |  __/ | | (_) |
- |_| |_|\___|_|_|\___/     _
- __      _____  _ __| | __| |
- \ \ /\ / / _ \| '__| |/ _` |
-  \ V  V / (_) | |  | | (_| |
-   \_/\_/ \___/|_|  |_|\__,_|
-
-```
 
 Welcome to the Dwolla API V2 documentation, currently in active development. Gradually, the functionality of API V1 will be implemented in API V2.  The two versions will operate in parallel for the foreseeable future.
 
