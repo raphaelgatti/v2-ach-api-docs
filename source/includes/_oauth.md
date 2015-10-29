@@ -1,15 +1,4 @@
 #OAuth
-```always
-  /$$$$$$   /$$$$$$              /$$     /$$      
- /$$__  $$ /$$__  $$            | $$    | $$      
-| $$  \ $$| $$  \ $$ /$$   /$$ /$$$$$$  | $$$$$$$ 
-| $$  | $$| $$$$$$$$| $$  | $$|_  $$_/  | $$__  $$
-| $$  | $$| $$__  $$| $$  | $$  | $$    | $$  \ $$
-| $$  | $$| $$  | $$| $$  | $$  | $$ /$$| $$  | $$
-|  $$$$$$/| $$  | $$|  $$$$$$/  |  $$$$/| $$  | $$
- \______/ |__/  |__/ \______/    \___/  |__/  |__/                                                          
-                             
-```
 
 Dwolla's API lets you interact with a user's Dwolla account and act on its behalf to send money, request money, and more.  To do so, your application first needs to request authorization from users.  
 
