@@ -37,7 +37,7 @@
 
   // Hack to make already open sections to start opened,
   // instead of displaying an ugly animation
-  var HEADER_HEIGHT = 138;
+  var HEADER_HEIGHT = 143;
 
   function animate () {
     setTimeout(function() {
