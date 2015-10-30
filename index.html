@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <title>Dwolla API docs</title>
+    <title>Dwolla API Docs</title>
     <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon" /> 
     <link href="stylesheets/screen.css" rel="stylesheet" type="text/css" media="screen" />
     <link href="stylesheets/print.css" rel="stylesheet" type="text/css" media="print" />
@@ -33,7 +33,7 @@
         <div class="header__primary">
           <div class="page-wrap">
             <div>
-              <a class="logo icon-logo-dwolla-white" href="/">Dwolla</a>
+              <a class="logo icon-logo-dwolla-white" href="https://developers.dwolla.com/">Dwolla</a>
               <img src="images/logo-dwolla-orange.png" alt="Dwolla" class="print-only" />
               <div class="hamburger">
                 <a href="http://dwolla.com/register">Sign Up</a>
@@ -51,10 +51,10 @@
       </div>
       <nav class="header__secondary js-two-col-nav-toggle">
         <div class="page-wrap">
-          <!-- <a href="">Guides</a> -->
-          <!-- <a href="">Reference</a> -->
+          <a class="no-nav js-two-col-no-toggle" href="https://developers.dwolla.com/guides/">Guides</a>
+          <a class="no-nav js-two-col-no-toggle" href="https://developers.dwolla.com/resources/">Resources</a>
           <a class="active">API docs</a>
-          <!-- <a class="no-nav js-two-col-no-toggle" href="">SDKs</a> -->
+          <a class="no-nav js-two-col-no-toggle" href="https://developers.dwolla.com/pages/sdks.html">SDKs</a>
           <div class="custom-select custom-select--blue">
             <select id="language_select" name="select">
               <option value="json">json</option>
@@ -1700,27 +1700,28 @@ GET https://api.dwolla.com/accounts/{id}/funding-sources
 <td>Not authorized to list funding sources.</td>
 </tr>
 </tbody></table>
-<h2 id='get-a-funding-source-by-id'>Get a Funding Source by ID</h2><h3 id='request'>Request:</h3><pre class="highlight shell"><code>GET /funding-sources/692486f8-29f6-4516-a6a5-c69fd2ce854c
+<h2 id='get-a-funding-source-by-id'>Get a Funding Source by ID</h2><h3 id='request'>Request:</h3><pre class="highlight shell"><code>GET /funding-sources/ab9cd5de-9435-47af-96fb-8d2fa5db51e8
 Accept: application/vnd.dwolla.v1.hal+json
 Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 </code></pre>
 <h3 id='response'>Response:</h3><pre class="highlight json"><code><span class="p">{</span><span class="w">
   </span><span class="nt">"_links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="nt">"self"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.dwolla.com/funding-sources/692486f8-29f6-4516-a6a5-c69fd2ce854c"</span><span class="w">
+      </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.dwolla.com/funding-sources/ab9cd5de-9435-47af-96fb-8d2fa5db51e8"</span><span class="w">
     </span><span class="p">},</span><span class="w">
     </span><span class="nt">"customer"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.dwolla.com/customers/36e9dcb2-889b-4873-8e52-0c9404ea002a"</span><span class="w">
-    </span><span class="p">},</span><span class="w">
-    </span><span class="nt">"initiate-micro-deposits"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.dwolla.com/funding-sources/692486f8-29f6-4516-a6a5-c69fd2ce854c/micro-deposits"</span><span class="w">
+      </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.dwolla.com/customers/5b29279d-6359-4c87-a318-e09095532733"</span><span class="w">
     </span><span class="p">}</span><span class="w">
   </span><span class="p">},</span><span class="w">
-  </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"692486f8-29f6-4516-a6a5-c69fd2ce854c"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"unverified"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"bank"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Test checking account"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"created"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-10-23T20:37:57.137Z"</span><span class="w">
+  </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ab9cd5de-9435-47af-96fb-8d2fa5db51e8"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"verified"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"balance"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Balance"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"created"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-10-02T21:00:28.153Z"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"balance"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.00"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"currency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"USD"</span><span class="w">
+  </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 
@@ -1757,164 +1758,6 @@ GET https://api.dwolla.com/funding-sources/{id}
 <tr>
 <td>404</td>
 <td>Funding source not found.</td>
-</tr>
-</tbody></table>
-<h2 id='initiate-or-verify-micro-deposits'>Initiate or Verify Micro-deposits</h2>
-<blockquote>
-<p>Request: (Initiate Micro-deposits)</p>
-</blockquote>
-<pre class="highlight shell"><code>POST /funding-sources/7f057c28-66cc-45f8-8a28-5d76d27579c5/micro-deposits
-Accept: application/vnd.dwolla.v1.hal+json
-Content-Type: application/vnd.dwolla.v1.hal+json
-Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
-</code></pre>
-
-<blockquote>
-<p>Response:</p>
-</blockquote>
-<pre class="highlight shell"><code>HTTP/1.1 201 Created
-https://api.dwolla.com/funding-sources/7f057c28-66cc-45f8-8a28-5d76d27579c5/micro-deposits
-</code></pre>
-
-<blockquote>
-<p>Request: (Verify Micro-deposits)</p>
-</blockquote>
-<pre class="highlight shell"><code>POST /funding-sources/7f057c28-66cc-45f8-8a28-5d76d27579c5/micro-deposits
-Accept: application/vnd.dwolla.v1.hal+json
-Content-Type: application/vnd.dwolla.v1.hal+json
-Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
-</code></pre>
-<pre class="highlight json"><code><span class="p">{</span><span class="w">
-  </span><span class="nt">"amount1"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="nt">"value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.02"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"currency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"USD"</span><span class="w">
-  </span><span class="p">},</span><span class="w">
-  </span><span class="nt">"amount2"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="nt">"value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.06"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"currency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"USD"</span><span class="w">
-  </span><span class="p">}</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre>
-
-<blockquote>
-<p>Response:</p>
-</blockquote>
-<pre class="highlight json"><code><span class="p">{</span><span class="w">
-  </span><span class="nt">"_links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="nt">"self"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.dwolla.com/funding-sources/7f057c28-66cc-45f8-8a28-5d76d27579c5/micro-deposits"</span><span class="w">
-    </span><span class="p">}</span><span class="w">
-  </span><span class="p">}</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre>
-
-<p>Initiate or verify micro deposits for bank verification. </p>
-<ol class="alerts">
-    <li class="alert icon-alert-alert">This endpoint <a href="#authentication">requires</a> an OAuth access token with the `Funding` <a href="#oauth-scopes">scope</a>.</li>
-</ol>
-
-<h3 id='http-request'>HTTP Request</h3>
-<p><code class="prettyprint">
-POST https://api.dwolla.com/funding-sources/{id}/micro-deposits
-</code></p>
-<h3 id='request-parameters'>Request Parameters</h3>
-<table><thead>
-<tr>
-<th>Parameter</th>
-<th>Optional?</th>
-<th>Description</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>amount1</td>
-<td>no</td>
-<td>An amount JSON object of first micro-deposit. Contains <code class="prettyprint">value</code> and <code class="prettyprint">currency</code>.</td>
-</tr>
-<tr>
-<td>amount2</td>
-<td>no</td>
-<td>An amount JSON object of first micro-deposit. Contains <code class="prettyprint">value</code> and <code class="prettyprint">currency</code>.</td>
-</tr>
-</tbody></table>
-<h3 id='errors'>Errors</h3>
-<table><thead>
-<tr>
-<th>HTTP Status</th>
-<th>Message</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>200</td>
-<td>Micro deposits verified.</td>
-</tr>
-<tr>
-<td>201</td>
-<td>Micro deposits initiated.</td>
-</tr>
-<tr>
-<td>400</td>
-<td>Funding source not found.</td>
-</tr>
-<tr>
-<td>404</td>
-<td>Funding source not found.</td>
-</tr>
-</tbody></table>
-<h2 id='verify-pending-micro-deposits-exist'>Verify Pending Micro-deposits Exist</h2>
-<blockquote>
-<p>Request:</p>
-</blockquote>
-<pre class="highlight shell"><code>GET /funding-sources/ab9cd5de-9435-47af-96fb-8d2fa5db51e8
-Accept: application/vnd.dwolla.v1.hal+json
-Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
-</code></pre>
-
-<blockquote>
-<p>Response:</p>
-</blockquote>
-<pre class="highlight json"><code><span class="p">{</span><span class="w">
-  </span><span class="nt">"_links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="nt">"self"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api-uat.dwolla.com/funding-sources/6c7de5af-e73e-45a9-946a-cdadec1ee0bb/micro-deposits"</span><span class="w">
-    </span><span class="p">},</span><span class="w">
-    </span><span class="nt">"verify-micro-deposits"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api-uat.dwolla.com/funding-sources/6c7de5af-e73e-45a9-946a-cdadec1ee0bb/micro-deposits"</span><span class="w">
-    </span><span class="p">}</span><span class="w">
-  </span><span class="p">}</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre>
-
-<p>Check if pending verification for micro-deposits exists.</p>
-<ol class="alerts">
-    <li class="alert icon-alert-alert">This endpoint <a href="#authentication">requires</a> an OAuth access token with the `Funding` <a href="#oauth-scopes">scope</a>.</li>
-</ol>
-
-<h3 id='http-request'>HTTP Request</h3>
-<p><code class="prettyprint">GET https://api.dwolla.com/funding-sources/{id}/micro-deposits</code></p>
-<h3 id='request-parameters'>Request Parameters</h3>
-<table><thead>
-<tr>
-<th>Parameter</th>
-<th>Optional?</th>
-<th>Description</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>id</td>
-<td>no</td>
-<td>Funding source ID to check status of validation deposits.</td>
-</tr>
-</tbody></table>
-<h3 id='errors'>Errors</h3>
-<table><thead>
-<tr>
-<th>HTTP Status</th>
-<th>Message</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>200</td>
-<td>Pending micro-deposits exist.</td>
 </tr>
 </tbody></table>
 <h2 id='remove-a-funding-source'>Remove a Funding Source</h2><h3 id='request'>Request:</h3><pre class="highlight shell"><code>DELETE /funding-sources/6c8ac833-444a-4eff-979c-c56cef6be26b
