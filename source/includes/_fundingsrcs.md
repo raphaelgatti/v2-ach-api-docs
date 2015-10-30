@@ -296,7 +296,7 @@ id | no | Account unique identifier to get funding sources for.
 ### Request:
 
 ```shell
-GET /funding-sources/ab9cd5de-9435-47af-96fb-8d2fa5db51e8
+GET /funding-sources/692486f8-29f6-4516-a6a5-c69fd2ce854c
 Accept: application/vnd.dwolla.v1.hal+json
 Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 ```
@@ -307,21 +307,20 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 {
   "_links": {
     "self": {
-      "href": "https://api.dwolla.com/funding-sources/ab9cd5de-9435-47af-96fb-8d2fa5db51e8"
+      "href": "https://api.dwolla.com/funding-sources/692486f8-29f6-4516-a6a5-c69fd2ce854c"
     },
     "customer": {
-      "href": "https://api.dwolla.com/customers/5b29279d-6359-4c87-a318-e09095532733"
+      "href": "https://api.dwolla.com/customers/36e9dcb2-889b-4873-8e52-0c9404ea002a"
+    },
+    "initiate-micro-deposits": {
+      "href": "https://api.dwolla.com/funding-sources/692486f8-29f6-4516-a6a5-c69fd2ce854c/micro-deposits"
     }
   },
-  "id": "ab9cd5de-9435-47af-96fb-8d2fa5db51e8",
-  "status": "verified",
-  "type": "balance",
-  "name": "Balance",
-  "created": "2015-10-02T21:00:28.153Z",
-  "balance": {
-    "value": "0.00",
-    "currency": "USD"
-  }
+  "id": "692486f8-29f6-4516-a6a5-c69fd2ce854c",
+  "status": "unverified",
+  "type": "bank",
+  "name": "Test checking account",
+  "created": "2015-10-23T20:37:57.137Z"
 }
 ```
 
@@ -346,6 +345,130 @@ id | no | Funding source ID to get.
 | HTTP Status | Message |
 |--------------|-------------|
 | 404 | Funding source not found. |
+
+## Initiate or Verify Micro-deposits
+
+> Request: (Initiate Micro-deposits)
+
+```shell
+POST /funding-sources/7f057c28-66cc-45f8-8a28-5d76d27579c5/micro-deposits
+Accept: application/vnd.dwolla.v1.hal+json
+Content-Type: application/vnd.dwolla.v1.hal+json
+Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
+```
+
+> Response:
+
+```shell
+HTTP/1.1 201 Created
+https://api.dwolla.com/funding-sources/7f057c28-66cc-45f8-8a28-5d76d27579c5/micro-deposits
+```
+
+> Request: (Verify Micro-deposits)
+
+```shell
+POST /funding-sources/7f057c28-66cc-45f8-8a28-5d76d27579c5/micro-deposits
+Accept: application/vnd.dwolla.v1.hal+json
+Content-Type: application/vnd.dwolla.v1.hal+json
+Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
+```
+
+```json
+{
+  "amount1": {
+    "value": "0.02",
+    "currency": "USD"
+  },
+  "amount2": {
+    "value": "0.06",
+    "currency": "USD"
+  }
+}
+```
+
+> Response:
+
+```json
+{
+  "_links": {
+    "self": {
+      "href": "https://api.dwolla.com/funding-sources/7f057c28-66cc-45f8-8a28-5d76d27579c5/micro-deposits"
+    }
+  }
+}
+```
+
+Initiate or verify micro deposits for bank verification. 
+
+<ol class="alerts">
+    <li class="alert icon-alert-alert">This endpoint <a href="#authentication">requires</a> an OAuth access token with the `Funding` <a href="#oauth-scopes">scope</a>.</li>
+</ol>
+
+### HTTP Request
+`
+POST https://api.dwolla.com/funding-sources/{id}/micro-deposits
+`
+
+### Request Parameters
+
+Parameter | Optional? | Description
+----------|------------|-------------
+amount1 | no | An amount JSON object of first micro-deposit. Contains `value` and `currency`.
+amount2 | no | An amount JSON object of first micro-deposit. Contains `value` and `currency`.
+
+
+### Errors
+| HTTP Status | Message |
+|--------------|-------------|
+| 200 | Micro deposits verified.  |
+| 201 | Micro deposits initiated. |
+| 400 | Funding source not found. |
+| 404 | Funding source not found. |
+
+## Verify Pending Micro-deposits Exist
+
+> Request:
+
+```shell
+GET /funding-sources/ab9cd5de-9435-47af-96fb-8d2fa5db51e8
+Accept: application/vnd.dwolla.v1.hal+json
+Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
+```
+
+> Response:
+
+```json
+{
+  "_links": {
+    "self": {
+      "href": "https://api-uat.dwolla.com/funding-sources/6c7de5af-e73e-45a9-946a-cdadec1ee0bb/micro-deposits"
+    },
+    "verify-micro-deposits": {
+      "href": "https://api-uat.dwolla.com/funding-sources/6c7de5af-e73e-45a9-946a-cdadec1ee0bb/micro-deposits"
+    }
+  }
+}
+```
+
+Check if pending verification for micro-deposits exists.
+
+<ol class="alerts">
+    <li class="alert icon-alert-alert">This endpoint <a href="#authentication">requires</a> an OAuth access token with the `Funding` <a href="#oauth-scopes">scope</a>.</li>
+</ol>
+
+### HTTP Request
+`GET https://api.dwolla.com/funding-sources/{id}/micro-deposits`
+
+### Request Parameters
+
+Parameter | Optional? | Description
+----------|------------|-------------
+id | no | Funding source ID to check status of validation deposits.
+
+### Errors
+| HTTP Status | Message |
+|--------------|-------------|
+| 200 | Pending micro-deposits exist. |
 
 ## Remove a Funding Source
 
