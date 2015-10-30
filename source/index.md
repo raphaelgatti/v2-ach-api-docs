@@ -1,5 +1,5 @@
 ---
-title: Dwolla API Docs
+title: Dwolla API docs
 
 language_tabs:
   - json
