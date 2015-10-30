@@ -30,12 +30,7 @@ body > header {
         @extend %clearfix;
 
         & > div {
-            float: left;
             @extend %clearfix;
-
-            @include breakpoint($SIZE_TABLET_SMALL){
-                float: none;
-            }
 
             .logo {
                 width: 135px;
@@ -101,6 +96,16 @@ body > header {
     .header__primary {
         padding: 25px 0;
         @include linear-gradient($gradient-tilt, $color-gradient-orange, $color-gradient-red);
+
+        .page-wrap {
+            & > div {
+                float: left;
+
+                @include breakpoint($SIZE_TABLET_SMALL){
+                    float: none;
+                }
+            }
+        }
 
         nav {
             float: right;
@@ -204,10 +209,10 @@ body > header {
         }
 
         .custom-select {
-            margin-top: -25px;
-            top: 15px;
-            float: none;
             display: inline-block;
+            //a little hacky but fixes alignment issues on iOS
+            position: absolute;
+            top: -5px;
 
             @include breakpoint($SIZE_TABLET_SMALL){
                 display: none;
