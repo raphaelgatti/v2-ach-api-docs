@@ -102,7 +102,7 @@ POST https://api.dwolla.com/webhook-subscriptions
 Parameter | Description
 ----------|------------
 url | Where Dwolla should deliver the webhook notification.
-secret | Your application secret. 
+secret | A random, secret key, only known by your application. This secret key should be securely stored and used later when [validating the authenticity](https://developers.dwolla.com/guides/webhooks/03-validating-webhooks.html) of the webhook request from Dwolla.
 
 ### Errors
 | HTTP Status | Message |

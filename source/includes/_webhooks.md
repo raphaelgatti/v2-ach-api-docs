@@ -4,47 +4,47 @@
 {
   "_links": {
     "self": {
-      "href": "https://api.dwolla.com/webhooks/3142d495-3653-4470-ba0f-cb8ca8aaa467"
+      "href": "https://api.dwolla.com/webhooks/9ece9660-aa34-41eb-80d7-0125d53b45e8"
     },
     "subscription": {
-      "href": "https://api.dwolla.com/webhook-subscriptions/57f49636-82ed-4426-8c6e-65c9beaa28c2"
+      "href": "https://api.dwolla.com/webhook-subscriptions/a0943041-7a5c-4e8f-92de-b55711ef3a83"
     },
     "retry": {
-      "href": "https://api.dwolla.com/webhooks/3142d495-3653-4470-ba0f-cb8ca8aaa467/retries"
+      "href": "https://api.dwolla.com/webhooks/9ece9660-aa34-41eb-80d7-0125d53b45e8/retries"
     },
     "event": {
-      "href": "https://api.dwolla.com/events/00aac4a8-acb9-4a0e-bc69-227afdfd19ac"
+      "href": "https://api.dwolla.com/events/03c7e14c-7f15-44a2-bcf7-83f2f7e95d50"
     }
   },
-  "id": "3142d495-3653-4470-ba0f-cb8ca8aaa467",
-  "topic": "transfer_completed",
-  "accountId": "f04631ce-4447-428c-9a3a-342f167bcae6",
-  "eventId": "00aac4a8-acb9-4a0e-bc69-227afdfd19ac",
-  "subscriptionId": "57f49636-82ed-4426-8c6e-65c9beaa28c2",
+  "id": "9ece9660-aa34-41eb-80d7-0125d53b45e8",
+  "topic": "transfer_created",
+  "accountId": "ad5f2162-404a-4c4c-994e-6ab6c3a13254",
+  "eventId": "03c7e14c-7f15-44a2-bcf7-83f2f7e95d50",
+  "subscriptionId": "a0943041-7a5c-4e8f-92de-b55711ef3a83",
   "attempts": [
     {
-      "id": "bd962253-ceb2-404d-8e76-d28efa09ce0a",
+      "id": "d4d16621-c6b0-40cb-8dc3-0469fa9dc4e8",
       "request": {
-        "timestamp": "2015-10-12T06:12:00.772Z",
-        "url": "https://shpw2hbiq0qw.runscope.net",
+        "timestamp": "2015-10-27T17:07:34.304Z",
+        "url": "https://myapp.runscope.net",
         "headers": [
           {
             "name": "X-Dwolla-Topic",
-            "value": "transfer_completed"
+            "value": "transfer_created"
           },
           {
             "name": "X-Request-Signature",
-            "value": "6cee485f3ac0638d2f8f27abca2e0896c6d1de8e"
+            "value": "bd93780bd7e1ad77ab821094aaa0f9e3dece5ee3"
           }
         ],
-        "body": "{\"id\":\"00aac4a8-acb9-4a0e-bc69-227afdfd19ac\",\"resourceId\":\"2407E724-A870-E511-80DB-0AA34A9B2388\",\"topic\":\"transfer_completed\",\"timestamp\":\"2015-10-12T06:12:00.618Z\",\"accountId\":\"f04631ce-4447-428c-9a3a-342f167bcae6\",\"_links\":{\"self\":\"https://api.dwolla.com/events/00aac4a8-acb9-4a0e-bc69-227afdfd19ac\",\"resource\":\"https://api.dwolla.com/transfers/2407E724-A870-E511-80DB-0AA34A9B2388\"}}"
+        "body": "{\"id\":\"03c7e14c-7f15-44a2-bcf7-83f2f7e95d50\",\"resourceId\":\"81BA6F36-CD7C-E511-80DB-0AA34A9B2388\",\"topic\":\"transfer_created\",\"timestamp\":\"2015-10-27T17:07:34.207Z\",\"_links\":{\"self\":{\"href\":\"https://api.dwolla.com/events/03c7e14c-7f15-44a2-bcf7-83f2f7e95d50\"},\"account\":{\"href\":\"https://api.dwolla.com/accounts/ad5f2162-404a-4c4c-994e-6ab6c3a13254\"},\"resource\":{\"href\":\"https://api.dwolla.com/transfers/81BA6F36-CD7C-E511-80DB-0AA34A9B2388\"}}}"
       },
       "response": {
-        "timestamp": "2015-10-12T06:12:00.826Z",
+        "timestamp": "2015-10-27T17:07:34.308Z",
         "headers": [
           {
             "name": "Date",
-            "value": "Mon, 12 Oct 2015 06:12:00 GMT"
+            "value": "Tue, 27 Oct 2015 17:07:34 GMT"
           },
           {
             "name": "Content-Type",
@@ -52,35 +52,35 @@
           },
           {
             "name": "Content-Length",
-            "value": "1030"
+            "value": "1093"
           },
           {
             "name": "Connection",
             "value": "keep-alive"
           },
           {
-            "name": "Runscope-Message-Id",
-            "value": "de9795ea-62dc-4038-80f8-0cec3c3a7136"
+            "name": "Access-Control-Allow-Credentials",
+            "value": "true"
           },
           {
             "name": "Access-Control-Allow-Methods",
             "value": "GET, PUT, POST, PATCH, DELETE, OPTIONS, HEAD"
           },
           {
-            "name": "Access-Control-Allow-Origin",
-            "value": "*"
-          },
-          {
-            "name": "Access-Control-Allow-Credentials",
-            "value": "true"
-          },
-          {
             "name": "Server",
             "value": "Runscope-Gateway/1.0"
+          },
+          {
+            "name": "Runscope-Message-Id",
+            "value": "97aa5bbd-784f-4007-80cc-8f56919000a0"
+          },
+          {
+            "name": "Access-Control-Allow-Origin",
+            "value": "*"
           }
         ],
         "statusCode": 200,
-        "body": "{\"body\":\"{\"id\":\"00aac4a8-acb9-4a0e-bc69-227afdfd19ac\",\"resourceId\":\"2407E724-A870-E511-80DB-0AA34A9B2388\",\"topic\":\"transfer_completed\",\"timestamp\":\"2015-10-12T06:12:00.618Z\",\"accountId\":\"f04631ce-4447-428c-9a3a-342f167bcae6\",\"_links\":{\"self\":\"https://api.dwolla.com/events/00aac4a8-acb9-4a0e-bc69-227afdfd19ac\",\"resource\":\"https://api.dwolla.com/transfers/2407E724-A870-E511-80DB-0AA34A9B2388\"}}\",\"files\":[],\"form\":{},\"fragment\":\"\",\"headers\":{\"Connection\":[\"close\"],\"Content-Length\":[\"394\"],\"Content-Type\":[\"application/json; charset=UTF-8\"],\"Host\":[\"shpw2hbiq0qw.runscope.net\"],\"User-Agent\":[\"dwolla-webhooks/1.0\"],\"X-Dwolla-Topic\":[\"transfer_completed\"],\"X-Request-Signature\":[\"6cee485f3ac0638d2f8f27abca2e0896c6d1de8e\"]},\"host\":\"shpw2hbiq0qw.runscope.net\",\"method\":\"POST\",\"params\":{},\"path\":\"/\",\"region\":\"us5\",\"runscope_host\":\"prod078.runscope.in\",\"scheme\":\"https\",\"source\":\"capture\",\"source_ip\":\"54.69.106.185\",\"timestamp\":1.444630320824983e+09,\"url\":\"https://shpw2hbiq0qw.runscope.net/\"}"
+        "body": "{\"body\":\"{\"id\":\"03c7e14c-7f15-44a2-bcf7-83f2f7e95d50\",\"resourceId\":\"81BA6F36-CD7C-E511-80DB-0AA34A9B2388\",\"topic\":\"transfer_created\",\"timestamp\":\"2015-10-27T17:07:34.207Z\",\"_links\":{\"self\":{\"href\":\"https://api.dwolla.com/events/03c7e14c-7f15-44a2-bcf7-83f2f7e95d50\"},\"account\":{\"href\":\"https://api.dwolla.com/accounts/ad5f2162-404a-4c4c-994e-6ab6c3a13254\"},\"resource\":{\"href\":\"https://api.dwolla.com/transfers/81BA6F36-CD7C-E511-80DB-0AA34A9B2388\"}}}\",\"files\":[],\"form\":{},\"fragment\":\"\",\"headers\":{\"Connection\":[\"close\"],\"Content-Length\":[\"453\"],\"Content-Type\":[\"application/json; charset=UTF-8\"],\"Host\":[\"myapp.runscope.net\"],\"User-Agent\":[\"dwolla-webhooks/1.0\"],\"X-Dwolla-Topic\":[\"transfer_created\"],\"X-Request-Signature\":[\"bd93780bd7e1ad77ab821094aaa0f9e3dece5ee3\"]},\"host\":\"myapp.runscope.net\",\"method\":\"POST\",\"params\":{},\"path\":\"/\",\"region\":\"us5\",\"runscope_host\":\"prod078.runscope.in\",\"scheme\":\"https\",\"source\":\"capture\",\"source_ip\":\"52.24.10.184\",\"timestamp\":1.4459656543078682e+09,\"url\":\"https://myapp.runscope.net/\"}"
       }
     }
   ]
@@ -94,7 +94,7 @@ When a new [Event](#events) is created and there is an active [Webhook Subscript
 ### Request:
 
 ```shell
-GET /webhooks/76ce47b9-5b3c-4ac8-a743-ce318afbaecd
+GET /webhooks/9ece9660-aa34-41eb-80d7-0125d53b45e8
 Accept: application/vnd.dwolla.v1.hal+json
 Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 ```
@@ -105,47 +105,47 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 {
   "_links": {
     "self": {
-      "href": "https://api.dwolla.com/webhooks/3142d495-3653-4470-ba0f-cb8ca8aaa467"
+      "href": "https://api.dwolla.com/webhooks/9ece9660-aa34-41eb-80d7-0125d53b45e8"
     },
     "subscription": {
-      "href": "https://api.dwolla.com/webhook-subscriptions/57f49636-82ed-4426-8c6e-65c9beaa28c2"
+      "href": "https://api.dwolla.com/webhook-subscriptions/a0943041-7a5c-4e8f-92de-b55711ef3a83"
     },
     "retry": {
-      "href": "https://api.dwolla.com/webhooks/3142d495-3653-4470-ba0f-cb8ca8aaa467/retries"
+      "href": "https://api.dwolla.com/webhooks/9ece9660-aa34-41eb-80d7-0125d53b45e8/retries"
     },
     "event": {
-      "href": "https://api.dwolla.com/events/00aac4a8-acb9-4a0e-bc69-227afdfd19ac"
+      "href": "https://api.dwolla.com/events/03c7e14c-7f15-44a2-bcf7-83f2f7e95d50"
     }
   },
-  "id": "3142d495-3653-4470-ba0f-cb8ca8aaa467",
-  "topic": "transfer_completed",
-  "accountId": "f04631ce-4447-428c-9a3a-342f167bcae6",
-  "eventId": "00aac4a8-acb9-4a0e-bc69-227afdfd19ac",
-  "subscriptionId": "57f49636-82ed-4426-8c6e-65c9beaa28c2",
+  "id": "9ece9660-aa34-41eb-80d7-0125d53b45e8",
+  "topic": "transfer_created",
+  "accountId": "ad5f2162-404a-4c4c-994e-6ab6c3a13254",
+  "eventId": "03c7e14c-7f15-44a2-bcf7-83f2f7e95d50",
+  "subscriptionId": "a0943041-7a5c-4e8f-92de-b55711ef3a83",
   "attempts": [
     {
-      "id": "bd962253-ceb2-404d-8e76-d28efa09ce0a",
+      "id": "d4d16621-c6b0-40cb-8dc3-0469fa9dc4e8",
       "request": {
-        "timestamp": "2015-10-12T06:12:00.772Z",
-        "url": "https://shpw2hbiq0qw.runscope.net",
+        "timestamp": "2015-10-27T17:07:34.304Z",
+        "url": "https://myapp.runscope.net",
         "headers": [
           {
             "name": "X-Dwolla-Topic",
-            "value": "transfer_completed"
+            "value": "transfer_created"
           },
           {
             "name": "X-Request-Signature",
-            "value": "6cee485f3ac0638d2f8f27abca2e0896c6d1de8e"
+            "value": "bd93780bd7e1ad77ab821094aaa0f9e3dece5ee3"
           }
         ],
-        "body": "{\"id\":\"00aac4a8-acb9-4a0e-bc69-227afdfd19ac\",\"resourceId\":\"2407E724-A870-E511-80DB-0AA34A9B2388\",\"topic\":\"transfer_completed\",\"timestamp\":\"2015-10-12T06:12:00.618Z\",\"accountId\":\"f04631ce-4447-428c-9a3a-342f167bcae6\",\"_links\":{\"self\":\"https://api.dwolla.com/events/00aac4a8-acb9-4a0e-bc69-227afdfd19ac\",\"resource\":\"https://api.dwolla.com/transfers/2407E724-A870-E511-80DB-0AA34A9B2388\"}}"
+        "body": "{\"id\":\"03c7e14c-7f15-44a2-bcf7-83f2f7e95d50\",\"resourceId\":\"81BA6F36-CD7C-E511-80DB-0AA34A9B2388\",\"topic\":\"transfer_created\",\"timestamp\":\"2015-10-27T17:07:34.207Z\",\"_links\":{\"self\":{\"href\":\"https://api.dwolla.com/events/03c7e14c-7f15-44a2-bcf7-83f2f7e95d50\"},\"account\":{\"href\":\"https://api.dwolla.com/accounts/ad5f2162-404a-4c4c-994e-6ab6c3a13254\"},\"resource\":{\"href\":\"https://api.dwolla.com/transfers/81BA6F36-CD7C-E511-80DB-0AA34A9B2388\"}}}"
       },
       "response": {
-        "timestamp": "2015-10-12T06:12:00.826Z",
+        "timestamp": "2015-10-27T17:07:34.308Z",
         "headers": [
           {
             "name": "Date",
-            "value": "Mon, 12 Oct 2015 06:12:00 GMT"
+            "value": "Tue, 27 Oct 2015 17:07:34 GMT"
           },
           {
             "name": "Content-Type",
@@ -153,35 +153,35 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
           },
           {
             "name": "Content-Length",
-            "value": "1030"
+            "value": "1093"
           },
           {
             "name": "Connection",
             "value": "keep-alive"
           },
           {
-            "name": "Runscope-Message-Id",
-            "value": "de9795ea-62dc-4038-80f8-0cec3c3a7136"
+            "name": "Access-Control-Allow-Credentials",
+            "value": "true"
           },
           {
             "name": "Access-Control-Allow-Methods",
             "value": "GET, PUT, POST, PATCH, DELETE, OPTIONS, HEAD"
           },
           {
-            "name": "Access-Control-Allow-Origin",
-            "value": "*"
-          },
-          {
-            "name": "Access-Control-Allow-Credentials",
-            "value": "true"
-          },
-          {
             "name": "Server",
             "value": "Runscope-Gateway/1.0"
+          },
+          {
+            "name": "Runscope-Message-Id",
+            "value": "97aa5bbd-784f-4007-80cc-8f56919000a0"
+          },
+          {
+            "name": "Access-Control-Allow-Origin",
+            "value": "*"
           }
         ],
         "statusCode": 200,
-        "body": "{\"body\":\"{\"id\":\"00aac4a8-acb9-4a0e-bc69-227afdfd19ac\",\"resourceId\":\"2407E724-A870-E511-80DB-0AA34A9B2388\",\"topic\":\"transfer_completed\",\"timestamp\":\"2015-10-12T06:12:00.618Z\",\"accountId\":\"f04631ce-4447-428c-9a3a-342f167bcae6\",\"_links\":{\"self\":\"https://api.dwolla.com/events/00aac4a8-acb9-4a0e-bc69-227afdfd19ac\",\"resource\":\"https://api.dwolla.com/transfers/2407E724-A870-E511-80DB-0AA34A9B2388\"}}\",\"files\":[],\"form\":{},\"fragment\":\"\",\"headers\":{\"Connection\":[\"close\"],\"Content-Length\":[\"394\"],\"Content-Type\":[\"application/json; charset=UTF-8\"],\"Host\":[\"shpw2hbiq0qw.runscope.net\"],\"User-Agent\":[\"dwolla-webhooks/1.0\"],\"X-Dwolla-Topic\":[\"transfer_completed\"],\"X-Request-Signature\":[\"6cee485f3ac0638d2f8f27abca2e0896c6d1de8e\"]},\"host\":\"shpw2hbiq0qw.runscope.net\",\"method\":\"POST\",\"params\":{},\"path\":\"/\",\"region\":\"us5\",\"runscope_host\":\"prod078.runscope.in\",\"scheme\":\"https\",\"source\":\"capture\",\"source_ip\":\"54.69.106.185\",\"timestamp\":1.444630320824983e+09,\"url\":\"https://shpw2hbiq0qw.runscope.net/\"}"
+        "body": "{\"body\":\"{\"id\":\"03c7e14c-7f15-44a2-bcf7-83f2f7e95d50\",\"resourceId\":\"81BA6F36-CD7C-E511-80DB-0AA34A9B2388\",\"topic\":\"transfer_created\",\"timestamp\":\"2015-10-27T17:07:34.207Z\",\"_links\":{\"self\":{\"href\":\"https://api.dwolla.com/events/03c7e14c-7f15-44a2-bcf7-83f2f7e95d50\"},\"account\":{\"href\":\"https://api.dwolla.com/accounts/ad5f2162-404a-4c4c-994e-6ab6c3a13254\"},\"resource\":{\"href\":\"https://api.dwolla.com/transfers/81BA6F36-CD7C-E511-80DB-0AA34A9B2388\"}}}\",\"files\":[],\"form\":{},\"fragment\":\"\",\"headers\":{\"Connection\":[\"close\"],\"Content-Length\":[\"453\"],\"Content-Type\":[\"application/json; charset=UTF-8\"],\"Host\":[\"myapp.runscope.net\"],\"User-Agent\":[\"dwolla-webhooks/1.0\"],\"X-Dwolla-Topic\":[\"transfer_created\"],\"X-Request-Signature\":[\"bd93780bd7e1ad77ab821094aaa0f9e3dece5ee3\"]},\"host\":\"myapp.runscope.net\",\"method\":\"POST\",\"params\":{},\"path\":\"/\",\"region\":\"us5\",\"runscope_host\":\"prod078.runscope.in\",\"scheme\":\"https\",\"source\":\"capture\",\"source_ip\":\"52.24.10.184\",\"timestamp\":1.4459656543078682e+09,\"url\":\"https://myapp.runscope.net/\"}"
       }
     }
   ]
@@ -213,7 +213,7 @@ id | no | Id of webhook to get.
 ### Request:
 
 ```shell
-POST /webhooks/10d4133e-b308-4646-b276-40d9d36def1c/retries
+POST /webhooks/9ece9660-aa34-41eb-80d7-0125d53b45e8/retries
 Accept: application/vnd.dwolla.v1.hal+json
 Content-Type: application/vnd.dwolla.v1.hal+json
 Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
@@ -221,8 +221,9 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 
 ### Response:
 
-```json
-
+```shell
+HTTP/1.1 201 Created
+Location: https://api.dwolla.com/webhooks/9ece9660-aa34-41eb-80d7-0125d53b45e8/retries/5aa27a0f-cf99-418d-a3ee-67c0ff99a494
 ```
 
 Retry a webhook by ID.
@@ -232,7 +233,7 @@ Retry a webhook by ID.
 </ol>
 
 ### HTTP Request
-`GET https://api.dwolla.com/webhooks/{id}/retries`
+`POST https://api.dwolla.com/webhooks/{id}/retries`
 
 ### Request Parameters
 
@@ -250,7 +251,7 @@ id | no | Id of webhook to retry.
 ### Request:
 
 ```shell
-GET /webhooks/10d4133e-b308-4646-b276-40d9d36def1c/retries
+GET /webhooks/9ece9660-aa34-41eb-80d7-0125d53b45e8/retries
 Accept: application/vnd.dwolla.v1.hal+json
 Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 ```
@@ -258,7 +259,30 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 ### Response:
 
 ```json
-
+{
+  "_links": {
+    "self": {
+      "href": "https://api.dwolla.com/webhooks/9ece9660-aa34-41eb-80d7-0125d53b45e8/retries"
+    }
+  },
+  "_embedded": {
+    "retries": [
+      {
+        "_links": {
+          "self": {
+            "href": "https://api.dwolla.com/webhooks/9ece9660-aa34-41eb-80d7-0125d53b45e8/retries/5aa27a0f-cf99-418d-a3ee-67c0ff99a494"
+          },
+          "webhook": {
+            "href": "https://api.dwolla.com/webhooks/9ece9660-aa34-41eb-80d7-0125d53b45e8"
+          }
+        },
+        "id": "5aa27a0f-cf99-418d-a3ee-67c0ff99a494",
+        "timestamp": "2015-11-02T17:43:26.000Z"
+      }
+    ]
+  },
+  "total": 1
+}
 ```
 
 Retrieve webhook retries by ID.
