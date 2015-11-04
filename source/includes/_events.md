@@ -70,6 +70,12 @@ When a resource's state changes, we create a new event resource to record the ch
 | bank_transfer_completed | A bank transfer has cleared successfully. |
 | bank_transfer_created | A bank transfer was created. |
 | bank_transfer_failed |  Transaction failed to clear successfully. Usually, this is a result of an ACH failure (insufficient funds, etc.). |
+| customer_microdeposits_added | Micro-deposits have been initiated to the Customer's bank |
+| customer_microdeposits_completed | Micro-deposits have processed to the Customer's bank |
+| customer_microdeposits_failed | Micro-deposits have failed to process to the Customer's bank |
+| microdeposits_added | Micro-deposits have been initiated to the Account's bank |
+| microdeposits_completed | Micro-deposits have processed to the Account's bank |
+| microdeposits_failed | Micro-deposits have failed to process to the Account's bank |
 
 ## List Events
 
