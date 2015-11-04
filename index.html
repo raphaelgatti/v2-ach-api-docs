@@ -2631,6 +2631,30 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 <td>bank_transfer_failed</td>
 <td>Transaction failed to clear successfully. Usually, this is a result of an ACH failure (insufficient funds, etc.).</td>
 </tr>
+<tr>
+<td>customer_microdeposits_added</td>
+<td>Micro-deposits have been initiated to the Customer&rsquo;s bank</td>
+</tr>
+<tr>
+<td>customer_microdeposits_completed</td>
+<td>Micro-deposits have processed to the Customer&rsquo;s bank</td>
+</tr>
+<tr>
+<td>customer_microdeposits_failed</td>
+<td>Micro-deposits have failed to process to the Customer&rsquo;s bank</td>
+</tr>
+<tr>
+<td>microdeposits_added</td>
+<td>Micro-deposits have been initiated to the Account&rsquo;s bank</td>
+</tr>
+<tr>
+<td>microdeposits_completed</td>
+<td>Micro-deposits have processed to the Account&rsquo;s bank</td>
+</tr>
+<tr>
+<td>microdeposits_failed</td>
+<td>Micro-deposits have failed to process to the Account&rsquo;s bank</td>
+</tr>
 </tbody></table>
 <h2 id='list-events'>List Events</h2><h3 id='request'>Request:</h3><pre class="highlight shell"><code>GET /events
 Accept: application/vnd.dwolla.v1.hal+json
