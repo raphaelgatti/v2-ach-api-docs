@@ -37,3 +37,4 @@ configure :build do
   # set :http_prefix, "/Content/images/"
 end
 
+sprockets.append_path File.join "#{root}", "bower_components"

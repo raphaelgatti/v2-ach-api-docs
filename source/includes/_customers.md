@@ -72,7 +72,7 @@ However, if you need to transfer funds between your customers, at least one of t
 
 ## New Customer
 
-### Request:
+### Request and Response:
 
 ```shell
 POST /customers
@@ -86,10 +86,49 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 ```json
 {
   "firstName": "Bob",
-  "lastName": "Dole",
-  "email": "bob@dole.com",
+  "lastName": "Merchant",
+  "email": "bmerchant@nomail.net",
   "ipAddress": "99.99.99.99"
 }
+
+HTTP/1.1 201 Created
+Location: https://api.dwolla.com/customers/FC451A7A-AE30-4404-AB95-E3553FCD733F
+```
+```ruby
+new_customer = DwollaSwagger::CustomersApi.create({:body => {
+  :firstName => 'Bob',
+  :lastName => 'Merchant',
+  :email => 'bmerchant@nomail.net',
+  :ipAddress => '99.99.99.99'
+}})
+
+p new_customer # => https://api-uat.dwolla.com/customers/FC451A7A-AE30-4404-AB95-E3553FCD733F
+```
+```php
+<?php
+$customersApi = new DwollaSwagger\CustomersApi($apiClient);
+
+$new_customer = $customersApi->create([
+  'firstName' => 'Bob',
+  'lastName' => 'Merchant',
+  'email' => 'bmerchant@nomail.net',
+  'ipAddress' => '99.99.99.99'
+]);
+
+print($new_customer); # => https://api-uat.dwolla.com/customers/FC451A7A-AE30-4404-AB95-E3553FCD733F
+?>
+```
+```python
+customers_api = dwollaswagger.CustomersApi(client)
+
+new_customer = customers_api.create(body = {
+  'firstName': 'Bob', 
+  'lastName': 'Merchant',
+  'email': 'bmerchant@nomail.net',
+  'ipAddress': '99.99.99.99'
+})
+
+print(new_customer) # => https://api-uat.dwolla.com/customers/FC451A7A-AE30-4404-AB95-E3553FCD733F
 ```
 
 ### Verified customer:
@@ -115,8 +154,7 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 ### Successful response:
 
 ```shell
-HTTP/1.1 201 Created
-Location: https://api.dwolla.com/customers/FC451A7A-AE30-4404-AB95-E3553FCD733F
+
 ```
 
 ### Validation error:
