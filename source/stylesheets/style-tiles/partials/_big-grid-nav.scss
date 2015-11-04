@@ -1,8 +1,10 @@
 .big-grid-nav {
     margin-bottom: -30px;
     display: flex;
+    display: -webkit-flex;
     display: -ms-flexbox;
     flex-wrap: wrap;
+    -webkit-flex-wrap: wrap;
     -ms-flex-wrap: wrap;
 
     text-align: center;

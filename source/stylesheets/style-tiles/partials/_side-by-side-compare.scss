@@ -2,10 +2,12 @@
     @extend %clearfix;
 
     h1 {
-        margin: 0;
+        margin: 0 0 8px 0;
     }
 
     a {
+        margin-bottom: 6px;
+        display: inline-block;
         font-size: rem(16px);
     }
 
@@ -31,8 +33,7 @@
         color: $color-grey-dark;
         li {
             margin-bottom: 3px;
-            font-size: 14px;
-            font-style: italic;
+            font-size: rem(12px);
 
             &:before {
                 content: "* ";

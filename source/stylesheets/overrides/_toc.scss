@@ -6,7 +6,11 @@
     top: 0;
     left: 0;
     bottom: 0;
+    transition: margin 0.6s;
 
+    &.sticky-nav-active {
+        margin-top: 51px;
+    }
 
     #toc {
         padding-bottom: 30px;

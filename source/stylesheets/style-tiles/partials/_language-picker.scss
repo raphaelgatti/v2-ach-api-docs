@@ -23,6 +23,10 @@
         margin-top: -3px;
         float: right;
 
+        select, option {
+            text-transform: uppercase;
+        }
+
         select {
             width: 100%;
         }

@@ -1,7 +1,12 @@
 .change-log {
+    margin-bottom: 60px;
 
     h1 {
-        margin-bottom: 20px;
+        margin: 70px 0 20px;
+
+        &:first-child {
+            margin-top: 0;
+        }
     }
 
     h3 {

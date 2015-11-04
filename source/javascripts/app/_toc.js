@@ -47,13 +47,21 @@
 
   // Handels gap of header
   function updateTocPos () {
-    var topPos = HEADER_HEIGHT - $(window).scrollTop();
+    var topPos = HEADER_HEIGHT - $(window).scrollTop(),
+      wrapper = $('.tocify-wrapper');
 
     if(topPos < 0) {
-      $('.tocify-wrapper').removeAttr('style');
+      wrapper.removeAttr('style');
     }else {
-      $('.tocify-wrapper').css('height', $(window).height() - topPos);
-      $('.tocify-wrapper').css('top', topPos);
+      wrapper.css('height', $(window).height() - topPos);
+      wrapper.css('top', topPos);
+    }
+
+    //Adjust for sticky 2nd nav
+    if ($('.js-two-col-header-secondary').hasClass('showing')) {
+      wrapper.addClass('sticky-nav-active');
+    } else {
+      wrapper.removeClass('sticky-nav-active');
     }
   }
 

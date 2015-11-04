@@ -4,9 +4,11 @@
     text-align: center;
 
     h1 {
-        max-width: 675px;
+        max-width: 865px;
         margin: 0 auto 35px;
         color: $color-white;
+        font-size: rem(40px);
+        line-height: rem(46px);
 
         &.icon {
             padding-top: 100px;

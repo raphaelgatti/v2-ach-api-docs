@@ -3,7 +3,7 @@
     text-align: center;
     @extend %clearfix;
 
-    div {
+    & > div {
         width: 45%;
         margin-bottom: 30px;
         float: left;
@@ -27,17 +27,33 @@
             position: relative;
 
             &:after {
+                width: 28px;
+                height: 28px;
+                margin: -35px -15px 0 0;
+                padding-top: 2px;
                 content: "OR";
                 position: absolute;
                 right: -10%;
                 top: 50%;
-                margin: -35px -15px 0 0;
-                font-size: rem(20px);
+                font-size: rem(12px);
+                border: 1px solid $color-grey-med;
+                border-radius: 50%;
+                color: $color-grey-dark;
+                background: $color-white;
 
-                @include breakpoint($SIZE_TABLET){
-                    font-size: rem(12px);
-                    margin: -30px -10px 0 0;
+                @include breakpoint($SIZE_TABLET_SMALL){
+                    display: none;
                 }
+            }
+
+            &:before {
+                height: 100px;
+                margin-top: -70px;
+                content: "";
+                position: absolute;
+                right: -10.5%;
+                top: 50%;
+                border-right: 1px solid $color-grey-med;
 
                 @include breakpoint($SIZE_TABLET_SMALL){
                     display: none;
@@ -47,12 +63,27 @@
     }
 
     a {
-        display: block;
         margin-bottom: 15px;
-        padding-top: 68%;
-        background: url("http://placehold.it/405x260") no-repeat;
-        background-size: contain;
+        display: block;
         font-size: rem(20px);
+
+        &:hover {
+            text-decoration: none;
+
+            div {
+                border-color: $color-blue;
+            }
+        }
+
+        div {
+            width: 100%;
+            margin-bottom: 15px;
+            padding-top: 68%;
+            border: 1px solid $color-grey-med;
+            border-radius: 8px;
+            background-size: 65%;
+            background-position: center;
+        }
     }
 
     p {
