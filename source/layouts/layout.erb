@@ -83,8 +83,12 @@ under the License.
           <a class="active">API docs</a>
           <a class="no-nav js-two-col-no-toggle" href="https://developers.dwolla.com/pages/sdks.html">SDKs</a>
           <div class="custom-select custom-select--blue">
-            <select id="language_select" name="select">
-              <option value="json">json</option>
+            <select id="language_select" class="language_select" name="select">
+              <% if language_tabs %>
+                <%- language_tabs.each do |l| %>
+                  <option value="<%= l %>"><%= l %></option>
+                <%- end %>
+              <% end %>
             </select>
             <div class="arrow"></div>
           </div>

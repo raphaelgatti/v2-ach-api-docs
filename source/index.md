@@ -2,7 +2,11 @@
 title: Dwolla API docs
 
 language_tabs:
-  - json
+  - raw
+  - php
+  - ruby
+  - python
+  - javascript
 
 toc_footers:
   - <a href="https://discuss.dwolla.com/c/api-support" target="_blank"><span class="icon-sidenav-option">Get some help</span></a>
