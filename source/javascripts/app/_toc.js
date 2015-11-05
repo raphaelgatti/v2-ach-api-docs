@@ -70,7 +70,11 @@
 
   function addListeners () {
     $(window).on('scroll', updateTocPos);
-    $(window).on('resize', updateTocPos);
+    $(window).on('resize', function(){
+      // setTimeout allows modification after
+      // tocifies resize.
+      setTimeout(updateTocPos, 0);
+    });
   }
 
   $(makeToc);
