@@ -12,6 +12,10 @@
         margin-top: 51px;
     }
 
+    &.no-transition {
+        transition: none;
+    }
+
     #toc {
         padding-bottom: 30px;
 

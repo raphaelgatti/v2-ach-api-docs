@@ -52,9 +52,11 @@
 
     if(topPos < 0) {
       wrapper.removeAttr('style');
+      wrapper.removeClass('no-transition');
     }else {
       wrapper.css('height', $(window).height() - topPos);
       wrapper.css('top', topPos);
+      wrapper.addClass('no-transition');
     }
 
     //Adjust for sticky 2nd nav
