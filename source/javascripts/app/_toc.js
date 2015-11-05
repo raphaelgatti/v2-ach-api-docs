@@ -69,6 +69,7 @@
 
   function addListeners () {
     $(window).on('scroll', updateTocPos);
+    $(window).on('resize', updateTocPos);
   }
 
   $(makeToc);
