@@ -15,6 +15,9 @@ set :markdown, :fenced_code_blocks => true, :smartypants => true, :disable_inden
 # Activate the syntax highlighter
 activate :syntax
 
+# Activate sprockets
+activate :sprockets
+
 # This is needed for Github pages, since they're hosted on a subdomain
 activate :relative_assets
 set :relative_links, true
@@ -37,4 +40,5 @@ configure :build do
   # set :http_prefix, "/Content/images/"
 end
 
-sprockets.append_path File.join "#{root}", "bower_components"
+# Add bower stuff to sprockets path
+sprockets.append_path File.join "#{root}", "_bower_components"
