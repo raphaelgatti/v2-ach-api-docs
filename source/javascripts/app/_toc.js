@@ -38,6 +38,7 @@
   // Hack to make already open sections to start opened,
   // instead of displaying an ugly animation
   var HEADER_HEIGHT = 143;
+  var TOP_POS_DETECT_PADDING = 30;
 
   function animate () {
     setTimeout(function() {
@@ -50,7 +51,7 @@
     var topPos = HEADER_HEIGHT - $(window).scrollTop(),
       wrapper = $('.tocify-wrapper');
 
-    if(topPos < 0) {
+    if((topPos - TOP_POS_DETECT_PADDING) < 0) {
       wrapper.removeAttr('style');
       wrapper.removeClass('no-transition');
     }else {
