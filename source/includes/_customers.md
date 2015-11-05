@@ -1,6 +1,6 @@
 # Customers
 
-```shell
+```noselect
 {
   "_links": {
     "self": {
@@ -72,18 +72,14 @@ However, if you need to transfer funds between your customers, at least one of t
 
 ## New Customer
 
-### Request and Response:
+### Unverified customer:
 
-```shell
+```raw
 POST /customers
 Content-Type: application/vnd.dwolla.v1.hal+json
 Accept: application/vnd.dwolla.v1.hal+json
 Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
-```
 
-### Unverified customer:
-
-```json
 {
   "firstName": "Bob",
   "lastName": "Merchant",
@@ -130,36 +126,116 @@ new_customer = customers_api.create(body = {
 
 print(new_customer) # => https://api-uat.dwolla.com/customers/FC451A7A-AE30-4404-AB95-E3553FCD733F
 ```
+```javascript
+// coming soon
+```
 
 ### Verified customer:
 
-```json
+```raw
+POST /customers
+Content-Type: application/vnd.dwolla.v1.hal+json
+Accept: application/vnd.dwolla.v1.hal+json
+Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
+
 {
-  "firstName": "Gordon",
-  "lastName": "Zheng",
-  "email": "gordon+15@dwolla.com",
+  "firstName": "Bob",
+  "lastName": "Merchant",
+  "email": "bmerchant@nomail.net",
   "ipAddress": "10.10.10.10",
   "type": "personal",
-  "address1": "6680 Forest Ave.",
-  "address2": "Apt 4F",
-  "city": "Ridgewood",
+  "address1": "99-99 33rd St",
+  "city": "Some City",
   "state": "NY",
-  "postalCode": "11385",
-  "dateOfBirth": "1990-07-11",
-  "ssn": "1516",
+  "postalCode": "11101",
+  "dateOfBirth": "1970-01-01",
+  "ssn": "1234",
   "phone": "3478589191"
 }
+
+HTTP/1.1 201 Created
+Location: https://api.dwolla.com/customers/FC451A7A-AE30-4404-AB95-E3553FCD733F
 ```
+```php
+<?php
+$customersApi = new DwollaSwagger\CustomersApi($apiClient);
 
-### Successful response:
+$new_customer = $customersApi->create([
+  'firstName' => 'Bob',
+  'lastName' => 'Merchant',
+  'email' => 'bmerchant@nomail.net',
+  'type' => 'personal',
+  'address1' => '99-99 33rd St',
+  'city' => 'Some City',
+  'state' => 'NY',
+  'postalCode' => '11101',
+  'dateOfBirth' => '1970-01-01',
 
-```shell
+  # For the first attempt, only 
+  # the last 4 digits of SSN required
 
+  # If the entire SSN is provided, 
+  # it will still be accepted
+  'ssn' => '1234',
+  'phone' => '3478589191'
+]);
+
+print($new_customer); # => https://api-uat.dwolla.com/customers/AB443D36-3757-44C1-A1B4-29727FB3111C
+?>
+```
+```ruby
+new_customer = DwollaSwagger::CustomersApi.create({:body => {
+  :firstName => 'Bob',
+  :lastName => 'Merchant',
+  :email => 'bmerchant@nomail.net',
+  :type => 'personal',
+  :address1 => '99-99 33rd St',
+  :city => 'Some City',
+  :state => 'NY',
+  :postalCode => '11101',
+  :dateOfBirth => '1970-01-01',
+
+  # For the first attempt, only 
+  # the last 4 digits of SSN required
+
+  # If the entire SSN is provided, 
+  # it will still be accepted
+
+  :ssn => '1234',
+  :phone => '3478589191'}})
+
+p new_customer # => https://api-uat.dwolla.com/customers/AB443D36-3757-44C1-A1B4-29727FB3111C
+```
+```python
+customers_api = dwollaswagger.CustomersApi(client)
+
+new_customer = customers_api.create(body = {'firstName': 'Bob', 
+                                            'lastName': 'Merchant',
+                                            'email': 'bmerchant@nomail.net',
+                                            'type': 'personal',
+                                            'address1': '99-99 33rd St',
+                                            'city': 'Some City', 
+                                            'state': 'NY',
+                                            'postalCode': '11101',
+                                            'dateOfBirth': '1970-01-01', 
+
+                                            # For the first attempt, only 
+                                            # the last 4 digits of SSN required
+
+                                            # If the entire SSN is provided, 
+                                            # it will still be accepted
+                                            'ssn': '1234',
+                                            'phone': '3478589191'})
+
+print(new_customer) # => https://api-uat.dwolla.com/customers/AB443D36-3757-44C1-A1B4-29727FB3111C
+```
+```javascript
+// coming soon
 ```
 
 ### Validation error:
 
-```
+```noselect
 {
   "code": "ValidationError",
   "description": "Phone invalid."
@@ -210,7 +286,7 @@ phone | no | Customer's 10 digit phone number.  No hyphens or other separators. 
 
 ### Customer must be in the retry state:
 
-```json
+```noselect
 {
   "_links": {
     "self": {
@@ -236,43 +312,105 @@ phone | no | Customer's 10 digit phone number.  No hyphens or other separators. 
 }
 ```
 
-### Request:
+### Request and Response:
 
-```shell
-POST /customers/730CA23F-06C5-45CC-AA6B-8EC2D6EE109F
+```raw
+POST /customers/132681FA-1B4D-4181-8FF2-619CA46235B1
 Content-Type: application/vnd.dwolla.v1.hal+json
 Accept: application/vnd.dwolla.v1.hal+json
 Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
-```
 
-```json
 {
   "firstName": "Gordon",
   "lastName": "Zheng",
   "email": "gordon+15@dwolla.com",
   "ipAddress": "10.10.10.10",
   "type": "personal",
-  "address1": "6680 Forest Ave.",
-  "address2": "Apt 4F",
+  "address1": "221 Corrected Address St..",
+  "address2": "Fl 8",
   "city": "Ridgewood",
   "state": "NY",
   "postalCode": "11385",
   "dateOfBirth": "1990-07-11",
-  "ssn": "200-30-1516",
-  "phone": "3478589191"
+  "tin": "202-99-1516"
 }
-```
 
-### Successful response:
-
-```shell
 HTTP/1.1 200 OK
 Location: https://api.dwolla.com/customers/FC451A7A-AE30-4404-AB95-E3553FCD733F
+```
+```php
+<?php
+$customersApi = DwollaSwagger\CustomersApi($apiClient);
+
+$retryLocation = 'https://api.dwolla.com/customers/FC451A7A-AE30-4404-AB95-E3553FCD733F';
+
+$retryCustomer = $customersApi->updateCustomer($retryLocation, array (
+  'firstName' => 'Gordon',
+  'lastName' => 'Zheng',
+  'email' => 'gordon+15@dwolla.com',
+  'ipAddress' => '10.10.10.10',
+  'type' => 'personal',
+  'address1' => '221 Corrected Address St..',
+  'address2' => 'Fl 8',
+  'city' => 'Ridgewood',
+  'state' => 'NY',
+  'postalCode' => '11385',
+  'dateOfBirth' => '1990-07-11',
+  'tin' => '202-99-1516',
+););
+
+print($retryCustomer); # => https://api.dwolla.com/customers/FC451A7A-AE30-4404-AB95-E3553FCD733F
+?>
+```
+```ruby
+retry_location = 'https://api.dwolla.com/customers/FC451A7A-AE30-4404-AB95-E3553FCD733F'
+
+retry_customer = DwollaSwagger::CustomersApi.update_customer(retry_location, {:body => {
+      "firstName" => "Gordon",
+       "lastName" => "Zheng",
+          "email" => "gordon+15@dwolla.com",
+      "ipAddress" => "10.10.10.10",
+           "type" => "personal",
+       "address1" => "221 Corrected Address St..",
+       "address2" => "Fl 8",
+           "city" => "Ridgewood",
+          "state" => "NY",
+     "postalCode" => "11385",
+    "dateOfBirth" => "1990-07-11",
+            "tin" => "202-99-1516"
+}})
+
+p retry_customer # => https://api.dwolla.com/customers/FC451A7A-AE30-4404-AB95-E3553FCD733F
+```
+```python
+customers_api = dwollaswagger.CustomersApi(client)
+
+retry_location = 'https://api.dwolla.com/customers/FC451A7A-AE30-4404-AB95-E3553FCD733F'
+
+retry_customer = customers_api.update_customer(retry_location, body = {
+  "firstName": "Gordon",
+  "lastName": "Zheng",
+  "email": "gordon+15@dwolla.com",
+  "ipAddress": "10.10.10.10",
+  "type": "personal",
+  "address1": "221 Corrected Address St..",
+  "address2": "Fl 8",
+  "city": "Ridgewood",
+  "state": "NY",
+  "postalCode": "11385",
+  "dateOfBirth": "1990-07-11",
+  "tin": "202-99-1516"
+})
+
+print(retry_customer) # => https://api.dwolla.com/customers/FC451A7A-AE30-4404-AB95-E3553FCD733F
+```
+```javascript
+// coming soon
 ```
 
 ### Validation error:
 
-```
+```noselect
 {
   "code": "ValidationError",
   "description": "Phone invalid."
@@ -281,7 +419,7 @@ Location: https://api.dwolla.com/customers/FC451A7A-AE30-4404-AB95-E3553FCD733F
 
 ### If you try more than once, or customer is not in retry state:
 
-```
+```noselect
 {
   "code": "InvalidResourceState",
   "description": "Resource cannot be modified."
@@ -324,7 +462,7 @@ phone | yes | Customer's 10 digit phone number.  No hyphens or other separators.
 
 ### Request:
 
-```shell
+```raw
 GET /customers
 Accept: application/vnd.dwolla.v1.hal+json
 Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
@@ -391,7 +529,7 @@ offset | yes | How many results to skip.
 
 ### Request:
 
-```shell
+```raw
 GET /customers/07D59716-EF22-4FE6-98E8-F3190233DFB8
 Accept: application/vnd.dwolla.v1.hal+json
 Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
@@ -399,7 +537,7 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 
 ### Response:
 
-```json
+```raw
 {
   "_links": {
     "self": {

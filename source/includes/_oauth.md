@@ -31,22 +31,24 @@ $url = $OAuth->genAuthUrl("https://myredirect.com/redirect");
 # Generate OAuth URL with redirect to requestb.in
 print(oauth.genauthurl("http://requestb.in/122rdhc1"))
 ```
-```js
+```javascript
 // where to send the user after they grant permission:
 var redirect_uri = "https://www.myredirect.com/redirect";  
 
 // generate OAuth initiation URL
 var authUrl = Dwolla.authUrl(redirect_uri);
 ```
-
 ```ruby
 redirect_uri = "https://www.myredirect.com/redirect"
 authUrl = Dwolla::OAuth.get_auth_url(redirect_uri)
 ```
+```raw
+not applicable
+```
 
 ### Example initiation URL (send the user there):
 
-```shell
+```rawnoselect
 https://uat.dwolla.com/oauth/v2/authenticate?client_id=PO%2BSzGAsZCE4BTG7Cw4OAL40Tpf1008mDjGBSVo6QLNfM4mD%2Ba&response_type=code&redirect_uri=https://developers.dwolla.com/dev/token/callback?env=sandbox&scope=Balance%7CAccountInfoFull
 ```
 
