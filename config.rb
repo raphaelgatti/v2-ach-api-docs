@@ -18,6 +18,9 @@ activate :syntax
 # Activate sprockets
 activate :sprockets
 
+# Add bower stuff to sprockets path
+sprockets.append_path File.join "#{root}", "/source/_bower_components"
+
 # This is needed for Github pages, since they're hosted on a subdomain
 activate :relative_assets
 set :relative_links, true
@@ -40,5 +43,3 @@ configure :build do
   # set :http_prefix, "/Content/images/"
 end
 
-# Add bower stuff to sprockets path
-sprockets.append_path File.join "#{root}", "_bower_components"
