@@ -34,13 +34,13 @@ under the License.
       <%= javascript_include_tag  "all_nosearch" %>
     <% end %>
 
-    <% if language_tabs %>
+<!--     <% if language_tabs %>
       <script>
         $(function() {
           setupLanguages(<%= language_tabs.map{ |lang| lang.is_a?(Hash) ? lang.keys.first : lang }.to_json %>);
         });
       </script>
-    <% end %>
+    <% end %> -->
 
     <% if current_page.data.google_analytics_id %>
       <script>
