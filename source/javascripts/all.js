@@ -4,7 +4,6 @@
 //= require ./selector
 
 
-//= require amplify/lib/amplify
 //= require jquery-infield-label/lib/jquery.infieldlabel
 //= require jquery-ui/jquery-ui
 //= require modernizr/modernizr
