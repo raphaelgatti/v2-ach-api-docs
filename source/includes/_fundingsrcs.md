@@ -34,8 +34,8 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 
 ```json
 {
-    "routingNumber": "87654321",
-    "accountNumber": "12345678",
+    "routingNumber": "273976369",
+    "accountNumber": "123456789",
     "type": "checking",
     "name": "My Bank"
 }
