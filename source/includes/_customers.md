@@ -460,17 +460,13 @@ phone | yes | Customer's 10 digit phone number.  No hyphens or other separators.
 
 ## List Customers
 
-### Request:
+### Request and Response:
 
 ```raw
 GET /customers
 Accept: application/vnd.dwolla.v1.hal+json
 Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
-```
 
-### Response:
-
-```json
 {
   "_links": {
     "first": {
@@ -504,8 +500,28 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
   "total": 1
 }
 ```
+```ruby
+my_custies = DwollaSwagger::CustomersApi.list(:limit => 10)
+p my_custies[0].firstName # => "Bob"
+```
+```php
+<?php
+$customersApi = DwollaSwagger\CustomersApi($apiClient);
 
-Retrieve a list of Customers which belong to the authorized user.
+$myCusties = $customersApi->list(10);
+print($myCusties[0]->firstName); # => "Bob"
+?>
+```
+```python
+customers_api = dwollaswagger.CustomersApi(client)
+
+my_custies = customers_api.list(limit=10)
+
+print(my_custies[0].firstName) # => Bob
+```
+```javascript
+// coming soon
+```
 
 <ol class="alerts">
     <li class="alert icon-alert-alert">This endpoint <a href="#authentication">requires</a> an OAuth access token with the `ManageCustomers` <a href="#oauth-scopes">scope</a>.</li>
@@ -527,17 +543,15 @@ offset | yes | How many results to skip.
 
 ## Get a Customer by ID
 
-### Request:
+Each `Customer` ID is a part of its location resource. The developer can pass either an `id` or the entire `location` resource to make this request.
+
+### Request and Response:
 
 ```raw
-GET /customers/07D59716-EF22-4FE6-98E8-F3190233DFB8
+GET https://api-uat.dwolla.com/customers/07D59716-EF22-4FE6-98E8-F3190233DFB8
 Accept: application/vnd.dwolla.v1.hal+json
 Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
-```
 
-### Response:
-
-```raw
 {
   "_links": {
     "self": {
@@ -552,6 +566,33 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
   "status": "unverified",
   "created": "2015-09-03T23:56:10.023Z"
 }
+```
+```ruby
+a_customer = 'https://api-uat.dwolla.com/customers/07D59716-EF22-4FE6-98E8-F3190233DFB8'
+
+retrieved = DwollaSwagger::CustomersApi.get_customer(a_customer)
+p retrieved.firstName # => "Bob"
+```
+```php
+<?php
+$aCustomer = 'https://api-uat.dwolla.com/customers/07D59716-EF22-4FE6-98E8-F3190233DFB8';
+
+$customersApi = DwollaSwagger\CustomersApi($apiClient);
+
+$retrieved = $customersApi->getCustomer($aCustomer);
+print($retrieved->firstName); # => "Bob"
+?>
+```
+```python
+a_customer = 'https://api-uat.dwolla.com/customers/07D59716-EF22-4FE6-98E8-F3190233DFB8'
+
+customers_api = dwollaswagger.CustomersApi(client)
+
+retrieved = customers_api.get_customer(a_customer)
+print(retrieved.firstName) # => Bob
+```
+```javascript
+// coming soon
 ```
 
 Retrieve a Customer which belongs to the authorized user.
