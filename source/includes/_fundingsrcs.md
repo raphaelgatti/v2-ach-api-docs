@@ -1,6 +1,6 @@
 # Funding Sources
 
-```json
+```noselect
 {
     "routingNumber": "87654321",
     "accountNumber": "12345678",
@@ -23,30 +23,61 @@ created | ISO-8601 timestamp.
 
 ## New Funding Source (Customer)
 
-### Request:
+### Request and Response:
 
-```shell
+```raw
 POST /customers/99bfb139-eadd-4cdf-b346-7504f0c16c60/funding-sources
 Content-Type: application/vnd.dwolla.v1.hal+json
 Accept: application/vnd.dwolla.v1.hal+json
 Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
-```
-
-```json
 {
-    "routingNumber": "87654321",
-    "accountNumber": "12345678",
+    "routingNumber": "222222226",
+    "accountNumber": "123456789",
     "type": "checking",
-    "name": "My Bank"
+    "name": "John Doe - Checking"
 }
-```
 
-### Response:
-
-```shell
 HTTP/1.1 201 Created
-Location: https://api.dwolla.com/funding-sources/58d20353-2b4b-4d68-8b89-3e5dab12b15a
+Location: https://api.dwolla.com/funding-sources/AB443D36-3757-44C1-A1B4-29727FB3111C
 ```
+```php
+<?php
+$fundingApi = new DwollaSwagger\FundingsourcesApi($apiClient);
+
+$new_fs = $fundingApi->createCustomerFundingSource(
+       ["routingNumber": "222222226",
+        "accountNumber": "123456789",
+        "type": "checking",
+        "name": "John Doe - Checking"], "https://api-uat.dwolla.com/customers/AB443D36-3757-44C1-A1B4-29727FB3111C");
+
+print($new_fs); # => https://api-uat.dwolla.com/funding-sources/375c6781-2a17-476c-84f7-db7d2f6ffb31
+?>
+```
+```ruby
+new_fs = DwollaSwagger::FundingsourcesApi.create_customer_funding_source \ 
+('https://api-uat.dwolla.com/customers/AB443D36-3757-44C1-A1B4-29727FB3111C', {:body => {
+                                                    :routingNumber => '222222226',
+                                                    :accountNumber => '123456789',
+                                                    :type => 'checking',
+                                                    :name => 'John Doe - Checking'
+                                                 }})
+
+p new_fs # => https://api-uat.dwolla.com/funding-sources/375c6781-2a17-476c-84f7-db7d2f6ffb31
+```
+```python
+funding_api = dwollaswagger.FundingsourcesApi(client)
+
+new_fs = funding_api.create_customer_funding_source('https://api-uat.dwolla.com/customers/AB443D36-3757-44C1-A1B4-29727FB3111C', body = {"routingNumber": "222222226",
+        "accountNumber": "123456789",
+        "type": "checking",
+        "name": "John Doe - Checking"})
+
+p new_fs # => https://api-uat.dwolla.com/funding-sources/375c6781-2a17-476c-84f7-db7d2f6ffb31
+```
+```javascript
+// coming soon
+```
+
 
 Create a new Funding Source for a Customer.  Customers can have a maximum of 6 funding sources.
 
