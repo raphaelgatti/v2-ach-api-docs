@@ -79,7 +79,7 @@ input[type="checkbox"] + label, input[type="radio"] + label {
     //needs to exist in a pos relative parent!
     width: 16px;
     height: 16px;
-    margin: -13px 0 26px 0;
+    margin: 0 0 13px 0;
     position: relative;
     top: 0;
     cursor: pointer;
@@ -300,6 +300,8 @@ input[type="radio"]:disabled:checked + label:after {
 }
 
 .fields-list {
+    overflow: hidden;
+    
     input, textarea, label {
         width: 100%;
         display: block;

@@ -1,10 +1,17 @@
-body > footer {
+body > footer, .cnt-two-col__content footer {
+    
+    //.cnt-two-col__content footer is for api docs that has fixed pos left nav.
+
     padding: 20px 0 50px;
     position: relative;
     z-index: 5;
     background: $color-white;
     color: $color-black; 
     text-align: center;
+
+    .page-wrap {
+        display: block;
+    }
 
     a {
         margin: 0 20px;

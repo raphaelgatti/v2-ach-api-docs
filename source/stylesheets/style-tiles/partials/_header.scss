@@ -138,11 +138,21 @@ body > header {
     }
 
     .header__secondary {
+        height: 51px;
         padding: 15px 0 15px;
-        background: rgba($color-white, 0.5);
-        border-bottom: 1px solid $color-grey-med;
+        position: relative;
 
         @extend %clearfix;
+
+        & > div {
+            height: 51px;
+            width: 100%;
+            padding: 15px 0 15px;
+            border-bottom: 1px solid $color-grey-med;
+            background: $color-white;
+            top: 0;
+            position: absolute;
+        }
 
         a {
             padding-bottom: 13px;
@@ -230,6 +240,10 @@ body.home > header .header__secondary {
 
     @include breakpoint($SIZE_TABLET_SMALL){
         background: $color-white;
+    }
+
+    & > div {
+        background: rgba($color-white, 0.5);
     }
 
     a {
