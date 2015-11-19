@@ -15,6 +15,7 @@ includes:
   - customers
   - documents
   - fundingsrcs
+  - fundingsrcsVerify
   - transfers
   - events
   - webhookSubscriptions
