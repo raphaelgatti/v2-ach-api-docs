@@ -8,4 +8,4 @@
 //= require jquery-ui/jquery-ui
 //= require modernizr/modernizr
 //= require dwolla-core-js/dist/js/core.js
-//= require style-tiles/dist/js/developer.js
+//= require ../_bower_components/style-tiles/dist/js/developer.js
