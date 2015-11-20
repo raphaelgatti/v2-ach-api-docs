@@ -104,17 +104,15 @@ name | no | Arbitrary nickname for the funding source.
 
 ## List Funding Sources (Customer)
 
-### Request:
+### Request and Response
 
-```shell
-GET /customers/5b29279d-6359-4c87-a318-e09095532733/funding-sources
+```raw
+GET https://api.dwolla.com/customers/5b29279d-6359-4c87-a318-e09095532733/funding-sources
 Accept: application/vnd.dwolla.v1.hal+json
 Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
-```
 
-### Response:
+...
 
-```json
 {
   "_links": {
     "self": {
@@ -163,6 +161,33 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
   }
 }
 ```
+```ruby
+customer = 'https://api.dwolla.com/customers/5b29279d-6359-4c87-a318-e09095532733'
+
+acct_fs = DwollaSwagger::FundingsourcesApi.get_customer_transfers(customer)
+p acct_fs[0].name # => "John Doe - Checking account1"
+```
+```php
+<?php
+$customer = 'https://api.dwolla.com/customers/5b29279d-6359-4c87-a318-e09095532733';
+
+$fsApi = DwollaSwagger\FundingsourcesApi($apiClient);
+
+$acctFs = $fsApi->getcustomerTransfers($customer);
+print($acctFs[0]->name); # => "John Doe - Checking account1"
+?>
+```
+```python
+customer = 'https://api.dwolla.com/customers/5b29279d-6359-4c87-a318-e09095532733'
+
+fs_api = dwollaswagger.FundingsourcesApi(client)
+acct_fs = fs_api.get_customer_transfers(customer)
+
+print(acct_fs[0].name) # => John Doe - Checking account1
+```
+```javascript
+// coming soon
+```
 
 Retrieve a list of Funding Sources that belong to a Customer.
 
@@ -189,27 +214,22 @@ id | no | Customer unique identifier.
 
 ## New Funding Source (Account) [DRAFT]
 
-### Request:
+### Request and Response
 
-```shell
+```noselect
 POST /accounts/99bfb139-eadd-4cdf-b346-7504f0c16c60/funding-sources
 Content-Type: application/vnd.dwolla.v1.hal+json
 Accept: application/vnd.dwolla.v1.hal+json
 Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
-```
-
-```json
 {
     "routingNumber": "87654321",
     "accountNumber": "12345678",
     "type": "checking",
     "name": "My Bank"
 }
-```
 
-### Response:
+...
 
-```shell
 HTTP/1.1 201 Created
 Location: https://api.dwolla.com/accounts/99bfb139-eadd-4cdf-b346-7504f0c16c60/funding-sources
 ```
@@ -243,21 +263,19 @@ name | Arbitrary nickname for the funding source.
 
 ## List Funding Sources (Account)
 
-### Request:
+### Request and Response:
 
-```shell
-GET /accounts/ad5f2162-404a-4c4c-994e-6ab6c3a13254/funding-sources
+```raw
+GET https://api-uat.dwolla.com/accounts/4BB512E4-AD4D-4F7E-BFD0-A232007F21A1/funding-sources
 Accept: application/vnd.dwolla.v1.hal+json
-Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
-```
+Authorization: Bearer 0Sn0W6kzNicvoWhDbQcVSKLRUpGjIdlPSEYyrHqrDDoRnQwE7Q
 
-### Response:
+...
 
-```json
 {
   "_links": {
     "self": {
-      "href": "https://api.dwolla.com/accounts/ad5f2162-404a-4c4c-994e-6ab6c3a13254/funding-sources"
+      "href": "https://api-uat.dwolla.com/accounts/4bb512e4-ad4d-4f7e-bfd0-a232007f21a1/funding-sources"
     }
   },
   "_embedded": {
@@ -265,39 +283,61 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
       {
         "_links": {
           "self": {
-            "href": "https://api.dwolla.com/funding-sources/b268f6b9-db3b-4ecc-83a2-8823a53ec8b7"
+            "href": "https://api-uat.dwolla.com/funding-sources/0094b1b4-e171-4dc8-865b-cb121c2377bb"
           },
           "account": {
-            "href": "https://api.dwolla.com/accounts/ad5f2162-404a-4c4c-994e-6ab6c3a13254"
+            "href": "https://api-uat.dwolla.com/accounts/4bb512e4-ad4d-4f7e-bfd0-a232007f21a1"
           },
           "with-available-balance": {
-            "href": "https://api.dwolla.com/funding-sources/b268f6b9-db3b-4ecc-83a2-8823a53ec8b7"
+            "href": "https://api-uat.dwolla.com/funding-sources/0094b1b4-e171-4dc8-865b-cb121c2377bb"
           }
         },
-        "id": "b268f6b9-db3b-4ecc-83a2-8823a53ec8b7",
+        "id": "0094b1b4-e171-4dc8-865b-cb121c2377bb",
         "status": "verified",
         "type": "balance",
         "name": "Balance",
-        "created": "2014-07-09T20:39:32.940Z"
+        "created": "2013-09-07T14:42:52.000Z"
       },
       {
         "_links": {
           "self": {
-            "href": "https://api.dwolla.com/funding-sources/707177c3-bf15-4e7e-b37c-55c3898d9bf4"
+            "href": "https://api-uat.dwolla.com/funding-sources/5cfcdc41-10f6-4a45-b11d-7ac89893d985"
           },
           "account": {
-            "href": "https://api.dwolla.com/accounts/ad5f2162-404a-4c4c-994e-6ab6c3a13254"
+            "href": "https://api-uat.dwolla.com/accounts/4bb512e4-ad4d-4f7e-bfd0-a232007f21a1"
           }
         },
-        "id": "707177c3-bf15-4e7e-b37c-55c3898d9bf4",
+        "id": "5cfcdc41-10f6-4a45-b11d-7ac89893d985",
         "status": "verified",
         "type": "bank",
-        "name": "First Midwestern Bank",
-        "created": "2014-07-09T20:39:37.043Z"
+        "name": "Checking account",
+        "created": "2014-09-04T23:19:19.543Z"
       }
     ]
   }
 }
+```
+```ruby
+funding_sources = DwollaSwagger::FundingsourcesApi.get_account_funding_sources('https://api-uat.dwolla.com/accounts/0270baed-dda5-46d0-b074-e7f3d478896f')
+
+p funding_sources._embedded[0].name # => "Balance"
+```
+```javascript
+// No example for this language yet.
+```
+```python
+funding_api = dwollaswagger.FundingsourcesApi(client)
+funding_sources = funding_api.id('https://api-uat.dwolla.com/accounts/0270baed-dda5-46d0-b074-e7f3d478896f')
+
+print(funding_sources._embedded[0].name) # => "Balance"
+```
+```php
+<?php
+$fundingApi = new DwollaSwagger\FundingsourcesApi($apiClient);
+$fundingSources = $fundingApi->id('https://api-uat.dwolla.com/accounts/0270baed-dda5-46d0-b074-e7f3d478896f')
+
+print($fundingSources->_embedded[0].name) # => "Balance"
+?>
 ```
 
 Retrieve a list of Funding Sources that belong to an Account.
@@ -324,17 +364,15 @@ id | no | Account unique identifier to get funding sources for.
 
 ## Get a Funding Source by ID
 
-### Request:
+### Request and Response:
 
-```shell
-GET /funding-sources/692486f8-29f6-4516-a6a5-c69fd2ce854c
+```raw
+GET https://api.dwolla.com/funding-sources/692486f8-29f6-4516-a6a5-c69fd2ce854c
 Accept: application/vnd.dwolla.v1.hal+json
 Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
-```
 
-### Response:
+...
 
-```json
 {
   "_links": {
     "self": {
@@ -353,6 +391,33 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
   "name": "Test checking account",
   "created": "2015-10-23T20:37:57.137Z"
 }
+```
+```ruby
+fund_source = 'https://api.dwolla.com/funding-sources/692486f8-29f6-4516-a6a5-c69fd2ce854c'
+
+retrieved = DwollaSwagger::FundingsourcesApi.id(fund_source)
+p retrieved.name # => "Test checking account"
+```
+```php
+<?php
+$fund_source = 'https://api.dwolla.com/funding-sources/692486f8-29f6-4516-a6a5-c69fd2ce854c';
+
+$fsApi = DwollaSwagger\FundingsourcesApi($apiClient);
+
+$retrieved = $fsApi->id($fund_source);
+print($retrieved->name); # => "Test checking account"
+?>
+```
+```python
+fund_source = 'https://api.dwolla.com/funding-sources/692486f8-29f6-4516-a6a5-c69fd2ce854c'
+
+fs_api = dwollaswagger.FundingsourcesApi(client)
+retrieved = fs_api.id(fund_source)
+
+print(retrieved.name) # => Test checking account
+```
+```javascript
+// coming soon
 ```
 
 Retrieve a Funding Source by ID.
@@ -379,54 +444,101 @@ id | no | Funding source ID to get.
 
 ## Initiate or Verify Micro-deposits
 
-> Request: (Initiate Micro-deposits)
+> Request and Response (Initiate)
 
-```shell
-POST /funding-sources/7f057c28-66cc-45f8-8a28-5d76d27579c5/micro-deposits
-Accept: application/vnd.dwolla.v1.hal+json
+```raw
+POST /funding-sources/e52006c3-7560-4ff1-99d5-b0f3a6f4f909/micro-deposits
+Authorization: Bearer 8tJjM7iTjujLthkbVPMUcHLqMNw4uv5kG712g9j1RRBHplGpwo
 Content-Type: application/vnd.dwolla.v1.hal+json
-Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
-```
-
-> Response:
-
-```shell
-HTTP/1.1 201 Created
-https://api.dwolla.com/funding-sources/7f057c28-66cc-45f8-8a28-5d76d27579c5/micro-deposits
-```
-
-> Request: (Verify Micro-deposits)
-
-```shell
-POST /funding-sources/7f057c28-66cc-45f8-8a28-5d76d27579c5/micro-deposits
 Accept: application/vnd.dwolla.v1.hal+json
+Cache-Control: no-cache
+
+HTTP 200 OK
+```
+```ruby
+DwollaSwagger::FundingsourcesApi.micro_deposits(new_fs)
+```
+```javascript
+// No example for this language yet.
+```
+```python
+fs_api = dwollaswagger.FundingsourcesApi(client)
+fs_api.micro_deposits(new_fs)
+```
+```php
+<?php
+$fsApi = new DwollaSwagger\FundingsourcesApi($apiClient);
+$fsApi->micro_deposits($new_fs);
+?>
+```
+
+> Request and Response (Verify):
+
+```raw
+POST /funding-sources/e52006c3-7560-4ff1-99d5-b0f3a6f4f909/micro-deposits 
+Authorization: Bearer 8tJjM7iTjujLthkbVPMUcHLqMNw4uv5kG712g9j1RRBHplGpwo
 Content-Type: application/vnd.dwolla.v1.hal+json
-Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
-```
+Accept: application/vnd.dwolla.v1.hal+json
 
-```json
 {
-  "amount1": {
-    "value": "0.02",
-    "currency": "USD"
-  },
-  "amount2": {
-    "value": "0.06",
-    "currency": "USD"
-  }
-}
-```
-
-> Response:
-
-```json
-{
-  "_links": {
-    "self": {
-      "href": "https://api.dwolla.com/funding-sources/7f057c28-66cc-45f8-8a28-5d76d27579c5/micro-deposits"
+    "amount1": {
+        "value": "0.03",
+        "currency": "USD"
+    },
+    "amount2": {
+        "value": "0.09",
+        "currency": "USD"
     }
-  }
 }
+
+HTTP 200 OK
+```
+```ruby
+DwollaSwagger::FundingsourcesApi.verify_micro_deposits_exist(new_fs, {
+    "amount1" => {
+           "value" => "0.03",
+        "currency" => "USD"
+    },
+    "amount2" => {
+           "value" => "0.09",
+        "currency" => "USD"
+    }
+})
+```
+```javascript
+// No example for this language yet.
+```
+```python
+fs_api = dwollaswagger.FundingsourcesApi(client)
+
+fs_api.verify_micro_deposits_exist(new_fs, {
+    "amount1": {
+        "value": "0.03",
+        "currency": "USD"
+    },
+    "amount2": {
+        "value": "0.09",
+        "currency": "USD"
+    }
+})
+```
+```php
+<?php
+$fsApi = new DwollaSwagger\FundingsourcesApi($apiClient);
+
+$fsApi->verify_micro_deposits_exist($new_fs, array (
+  'amount1' => 
+  array (
+    'value' => '0.03',
+    'currency' => 'USD',
+  ),
+  'amount2' => 
+  array (
+    'value' => '0.09',
+    'currency' => 'USD',
+  ),
+));
+?>
 ```
 
 Initiate or verify micro deposits for bank verification. 
@@ -503,33 +615,38 @@ id | no | Funding source ID to check status of validation deposits.
 
 ## Remove a Funding Source
 
-### Request:
+### Request and Response
 
-```shell
+```raw
 DELETE /funding-sources/6c8ac833-444a-4eff-979c-c56cef6be26b
 Content-Type: application/vnd.dwolla.v1.hal+json
 Accept: application/vnd.dwolla.v1.hal+json
 Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
+
+HTTP 200 OK
 ```
+```ruby
+fund_source = 'https://api.dwolla.com/funding-sources/692486f8-29f6-4516-a6a5-c69fd2ce854c'
 
-### Response:
+DwollaSwagger::FundingsourcesApi.delete(fund_source)
+```
+```php
+<?php
+$fund_source = 'https://api.dwolla.com/funding-sources/692486f8-29f6-4516-a6a5-c69fd2ce854c';
 
-```json
-{
-  "_links": {
-    "self": {
-      "href": "https://api.dwolla.com/funding-sources/c2cefde3-b3a9-4a72-b0a4-1c844dae3604"
-    },
-    "customer": {
-      "href": "https://api.dwolla.com/customers/01b47cb2-52ac-42a7-926c-6f1f50b1f271"
-    }
-  },
-  "id": "c2cefde3-b3a9-4a72-b0a4-1c844dae3604",
-  "status": "verified",
-  "type": "bank",
-  "name": "John Doe - Checking account1",
-  "created": "2015-10-02T19:25:50.548Z"
-}
+$fsApi = DwollaSwagger\FundingsourcesApi($apiClient);
+
+$fsApi->delete($fund_source);
+?>
+```
+```python
+fund_source = 'https://api.dwolla.com/funding-sources/692486f8-29f6-4516-a6a5-c69fd2ce854c'
+
+fs_api = dwollaswagger.FundingsourcesApi(client)
+fs_api.delete(fund_source)
+```
+```javascript
+// coming soon
 ```
 
 Remove a Funding Source by ID.
