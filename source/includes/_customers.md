@@ -257,7 +257,7 @@ Parameter | Optional? | Description
 firstName | no | Customer's first name.
 lastName | no | Customer's last name.
 email | no | Customer's email address.
-ipAddress | no | Customer's IP address
+ipAddress | yes | Customer's IP address
 
 ### Request Parameters - verified customer
 Parameter | Optional? | Description
@@ -265,7 +265,7 @@ Parameter | Optional? | Description
 firstName | no | Customer's first name.
 lastName | no | Customer's last name.
 email | no | Customer's email address.
-ipAddress | no | Customer's IP address
+ipAddress | yes | Customer's IP address
 type | no | Must be set to `personal`.  Note: eventually, `business` will be supported.
 address1 | no | First line of the street address of the customer's permanent residence
 address2 | yes | Second line of the street address of the customer's permanent residence
@@ -441,7 +441,7 @@ Parameter | Optional? | Description
 firstName | no | Customer's first name.
 lastName | no | Customer's last name.
 email | no | Customer's email address.
-ipAddress | no | Customer's IP address
+ipAddress | yes | Customer's IP address
 type | no | Must be set to `personal`.  Note: eventually, `business` will be supported.
 address1 | no | First line of the street address of the customer's permanent residence
 address2 | yes | Second line of the street address of the customer's permanent residence

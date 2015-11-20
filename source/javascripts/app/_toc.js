@@ -38,6 +38,7 @@
   // Hack to make already open sections to start opened,
   // instead of displaying an ugly animation
   var HEADER_HEIGHT = 143;
+  var TOP_POS_DETECT_PADDING = 30;
 
   function animate () {
     setTimeout(function() {
@@ -47,18 +48,33 @@
 
   // Handels gap of header
   function updateTocPos () {
-    var topPos = HEADER_HEIGHT - $(window).scrollTop();
+    var topPos = HEADER_HEIGHT - $(window).scrollTop(),
+      wrapper = $('.tocify-wrapper');
 
-    if(topPos < 0) {
-      $('.tocify-wrapper').removeAttr('style');
+    if((topPos - TOP_POS_DETECT_PADDING) < 0) {
+      wrapper.removeAttr('style');
+      wrapper.removeClass('no-transition');
     }else {
-      $('.tocify-wrapper').css('height', $(window).height() - topPos);
-      $('.tocify-wrapper').css('top', topPos);
+      wrapper.css('height', $(window).height() - topPos);
+      wrapper.css('top', topPos);
+      wrapper.addClass('no-transition');
+    }
+
+    //Adjust for sticky 2nd nav
+    if ($('.js-two-col-header-secondary').hasClass('showing')) {
+      wrapper.addClass('sticky-nav-active');
+    } else {
+      wrapper.removeClass('sticky-nav-active');
     }
   }
 
   function addListeners () {
     $(window).on('scroll', updateTocPos);
+    $(window).on('resize', function(){
+      // setTimeout allows modification after
+      // tocifies resize.
+      setTimeout(updateTocPos, 0);
+    });
   }
 
   $(makeToc);
