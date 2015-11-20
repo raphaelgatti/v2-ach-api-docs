@@ -77,20 +77,22 @@ under the License.
           </div>
       </div>
       <nav class="header__secondary js-two-col-nav-toggle">
-        <div class="page-wrap">
-          <a class="no-nav js-two-col-no-toggle" href="https://developers.dwolla.com/guides/">Guides</a>
-          <a class="no-nav js-two-col-no-toggle" href="https://developers.dwolla.com/resources/">Resources</a>
-          <a class="active">API docs</a>
-          <a class="no-nav js-two-col-no-toggle" href="https://developers.dwolla.com/pages/sdks.html">SDKs</a>
-          <div class="custom-select custom-select--blue">
-            <select id="language_select" class="language_select" name="select">
-              <% if language_tabs %>
-                <%- language_tabs.each do |l| %>
-                  <option value="<%= l %>"><%= l %></option>
-                <%- end %>
-              <% end %>
-            </select>
-            <div class="arrow"></div>
+        <div class="js-two-col-header-secondary">
+          <div class="page-wrap">
+            <a class="no-nav js-two-col-no-toggle" href="https://developers.dwolla.com/guides/">Guides</a>
+            <a class="no-nav js-two-col-no-toggle" href="https://developers.dwolla.com/resources/">Resources</a>
+            <a class="active">API docs</a>
+            <a class="no-nav js-two-col-no-toggle" href="https://developers.dwolla.com/pages/sdks.html">SDKs</a>
+            <div class="custom-select custom-select--blue">
+              <select id="language_select" class="language_select" name="select">
+                <% if language_tabs %>
+                  <%- language_tabs.each do |l| %>
+                    <option value="<%= l %>"><%= l %></option>
+                  <%- end %>
+                <% end %>
+              </select>
+              <div class="arrow"></div>
+            </div>
           </div>
         </div>
       </nav>

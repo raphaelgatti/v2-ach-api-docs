@@ -21,3 +21,5 @@ build/
 _yardoc
 doc/
 .idea/
+
+source/_bower_components
