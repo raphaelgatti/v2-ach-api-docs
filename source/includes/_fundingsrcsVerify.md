@@ -86,7 +86,7 @@ Initiate instant account verification for a Customer.
 
 ##### Configure dwolla.js
 
-```javascript
+```noselect
 //Sandbox (UAT)
 dwolla.config.dwollaUrl = 'https://uat.dwolla.com';
 dwolla.config.apiUrl = 'https://api-uat.dwolla.com';
