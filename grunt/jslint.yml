@@ -1,0 +1,29 @@
+src:
+    src: source/javascripts/dwolla/**/*.js
+    directives:
+        browser: true
+        regexp: true
+        unparam: true
+        predef:
+            - dwolla
+            - $
+    options:
+        errorsOnly: true
+
+test:
+    src: source/javascripts/test/**/*.js
+    directives:
+        browser: true
+        predef:
+            - describe
+            - it
+            - assert
+            - afterEach
+            - after
+            - beforeEach
+            - sinon
+
+            - dwolla
+            - $
+    options:
+        errorsOnly: true

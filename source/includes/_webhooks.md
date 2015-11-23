@@ -1,6 +1,6 @@
 # Webhooks
 
-```json
+```noselect
 {
   "_links": {
     "self": {
@@ -91,17 +91,15 @@ When a new [Event](#events) is created and there is an active [Webhook Subscript
 
 ## Retrieve Webhook
 
-### Request:
+### Request and Response 
 
-```shell
-GET /webhooks/9ece9660-aa34-41eb-80d7-0125d53b45e8
+```raw
+GET https://api.dwolla.com/webhooks/9ece9660-aa34-41eb-80d7-0125d53b45e8
 Accept: application/vnd.dwolla.v1.hal+json
 Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
-```
 
-### Response:
+...
 
-```json
 {
   "_links": {
     "self": {
@@ -187,6 +185,33 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
   ]
 }
 ```
+```ruby
+webhook = 'https://api.dwolla.com/webhooks/9ece9660-aa34-41eb-80d7-0125d53b45e8'
+
+retrieved = DwollaSwagger::WebhooksApi.by_id(webhook)
+p retrieved.topic # => "transfer_created"
+```
+```php
+<?php
+$webhook = 'https://api.dwolla.com/webhooks/9ece9660-aa34-41eb-80d7-0125d53b45e8';
+
+$webhooksApi = DwollaSwagger\WebhooksApi($apiClient);
+
+$retrieved = $webhooksApi->byId($webhook);
+print($retrieved->topic); # => "transfer_created"
+?>
+```
+```python
+webhook = 'https://api.dwolla.com/webhooks/9ece9660-aa34-41eb-80d7-0125d53b45e8'
+
+webhooks_api = dwollaswagger.WebhooksApi(client)
+retrieved = webhooks_api.by_id(webhook)
+
+print(retrieved.topic) # => transfer_created
+```
+```javascript
+// coming soon
+```
 
 Retrieve a single webhook.
 
@@ -210,20 +235,45 @@ id | no | Id of webhook to get.
 
 ## Retry a Webhook by ID
 
-### Request:
+### Request and Response
 
-```shell
+```raw
 POST /webhooks/9ece9660-aa34-41eb-80d7-0125d53b45e8/retries
 Accept: application/vnd.dwolla.v1.hal+json
 Content-Type: application/vnd.dwolla.v1.hal+json
 Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
-```
 
-### Response:
+... 
 
-```shell
 HTTP/1.1 201 Created
 Location: https://api.dwolla.com/webhooks/9ece9660-aa34-41eb-80d7-0125d53b45e8/retries/5aa27a0f-cf99-418d-a3ee-67c0ff99a494
+```
+```ruby
+webhook = 'https://api.dwolla.com/webhooks/9ece9660-aa34-41eb-80d7-0125d53b45e8'
+
+retried = DwollaSwagger::WebhooksApi.retry_webhook(webhook)
+p retried # => "https://api.dwolla.com/webhooks/9ece9660-aa34-41eb-80d7-0125d53b45e8/retries/5aa27a0f-cf99-418d-a3ee-67c0ff99a494"
+```
+```php
+<?php
+$webhook = 'https://api.dwolla.com/webhooks/9ece9660-aa34-41eb-80d7-0125d53b45e8';
+
+$webhooksApi = DwollaSwagger\WebhooksApi($apiClient);
+
+$retried = $webhooksApi->retryWebhook($webhook);
+print($retried); # => "https://api.dwolla.com/webhooks/9ece9660-aa34-41eb-80d7-0125d53b45e8/retries/5aa27a0f-cf99-418d-a3ee-67c0ff99a494"
+?>
+```
+```python
+webhook = 'https://api.dwolla.com/webhooks/9ece9660-aa34-41eb-80d7-0125d53b45e8'
+
+webhooks_api = dwollaswagger.WebhooksApi(client)
+retried = webhooks_api.retry_webhook(webhook)
+
+print(retried) # => https://api.dwolla.com/webhooks/9ece9660-aa34-41eb-80d7-0125d53b45e8/retries/5aa27a0f-cf99-418d-a3ee-67c0ff99a494
+```
+```javascript
+// coming soon
 ```
 
 Retry a webhook by ID.
@@ -248,17 +298,15 @@ id | no | Id of webhook to retry.
 
 ## Get Retries by ID
 
-### Request:
+### Request and Response
 
-```shell
+```raw
 GET /webhooks/9ece9660-aa34-41eb-80d7-0125d53b45e8/retries
 Accept: application/vnd.dwolla.v1.hal+json
 Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
-```
 
-### Response:
+...
 
-```json
 {
   "_links": {
     "self": {
@@ -283,6 +331,33 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
   },
   "total": 1
 }
+```
+```ruby
+webhook = 'https://api.dwolla.com/webhooks/9ece9660-aa34-41eb-80d7-0125d53b45e8'
+
+retries = DwollaSwagger::WebhooksApi.retries_by_id(webhook)
+p retries.total # => "1"
+```
+```php
+<?php
+$webhook = 'https://api.dwolla.com/webhooks/9ece9660-aa34-41eb-80d7-0125d53b45e8';
+
+$webhooksApi = DwollaSwagger\WebhooksApi($apiClient);
+
+$retries = $webhooksApi->retriesById($webhook);
+print($retries->total); # => "1"
+?>
+```
+```python
+webhook = 'https://api.dwolla.com/webhooks/9ece9660-aa34-41eb-80d7-0125d53b45e8'
+
+webhooks_api = dwollaswagger.WebhooksApi(client)
+retries = webhooks_api.retries_by_id(webhook)
+
+print(retries.total) # => 1
+```
+```javascript
+// coming soon
 ```
 
 Retrieve webhook retries by ID.

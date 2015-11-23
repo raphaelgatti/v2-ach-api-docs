@@ -1,6 +1,6 @@
 # Events
 
-```json
+```noselect
 {
   "_links": {
     "self": {
@@ -79,17 +79,15 @@ When a resource's state changes, we create a new event resource to record the ch
 
 ## List Events
 
-### Request:
+### Request and Response 
 
-```shell
-GET /events
+```raw
+GET https://api.dwolla.com/events
 Accept: application/vnd.dwolla.v1.hal+json
 Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
-```
 
-### Response:
+...
 
-```json
 {
   "_links": {
     "self": {
@@ -183,6 +181,27 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
   "total": 4
 }
 ```
+```ruby
+events = DwollaSwagger::EventsApi.events
+p events.total # => "4"
+```
+```php
+<?php
+$eventsApi = DwollaSwagger\EventsApi($apiClient);
+
+$events = $eventsApi->events();
+print($events->total); # => "4"
+?>
+```
+```python
+events_api = dwollaswagger.EventsApi(client)
+events = events_api.events()
+
+print(events.total) # => 4
+```
+```javascript
+// coming soon
+```
 
 Retrieve a list of events for the authorized user.
 
@@ -207,17 +226,15 @@ offset | yes | How many results to skip.
 
 ## Get Event by ID
 
-### Request:
+### Request and Response
 
-```shell
+```raw
 GET /events/81f6e13c-557c-4449-9331-da5c65e61095
 Accept: application/vnd.dwolla.v1.hal+json
 Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
-```
 
-### Response:
+...
 
-```json
 {
   "_links": {
     "self": {
@@ -238,6 +255,33 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
   "topic": "customer_transfer_created",
   "resourceId": "09A166BC-1B74-E511-80DB-0AA34A9B2388"
 }
+```
+```ruby
+event = 'https://api.dwolla.com/events/81f6e13c-557c-4449-9331-da5c65e61095'
+
+retries = DwollaSwagger::EventsApi.retries_by_id(event)
+p retries.topic # => "customer_transfer_created"
+```
+```php
+<?php
+$event = 'https://api.dwolla.com/events/81f6e13c-557c-4449-9331-da5c65e61095';
+
+$eventsApi = DwollaSwagger\EventsApi($apiClient);
+
+$retries = $eventsApi->retriesById($event);
+print($retries->topic); # => "customer_transfer_created"
+?>
+```
+```python
+event = 'https://api.dwolla.com/events/81f6e13c-557c-4449-9331-da5c65e61095'
+
+events_api = dwollaswagger.EventsApi(client)
+retries = events_api.retries_by_id(event)
+
+print(retries.topic) # => customer_transfer_created
+```
+```javascript
+// coming soon
 ```
 
 Retrieve an event by Id. 

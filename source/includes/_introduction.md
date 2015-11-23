@@ -10,7 +10,7 @@ It is important to note: White Label is a premium feature that cannot be activat
 
 ## Making Requests
 
-```shell
+```noselect
 POST https://api.dwolla.com/customers
 Content-Type: application/json
 Accept: application/vnd.dwolla.v1.hal+json
@@ -19,10 +19,8 @@ Authorization: Bearer myOAuthAccessToken123
 {
 	"foo": "bar"
 }
-```
 
-```shell
-...
+... or ...
 
 GET https://www.dwolla.com/oauth/rest/transactions?client_id=XYZ&client_secret=JJJ&limit=10
 ```
@@ -53,7 +51,7 @@ Requests that require an client_id and client_secret are passed in the JSON requ
 
 ### Example error.  HTTP 401:
 
-```shell
+```noselect
 {
   "code": "InvalidCredentials",
   "description": "Invalid access token."
@@ -87,7 +85,7 @@ The following errors are common across all API endpoints.
 
 ## Links
 
-```
+```noselect
 {
   "_links": {
     "self": {

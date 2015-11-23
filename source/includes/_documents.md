@@ -1,6 +1,6 @@
 # Documents
 
-```shell
+```noselect
 {
   "_links": {
     "self": {
@@ -14,7 +14,7 @@
 }
 ```
 
-Customers of type `personal` or `business` and of status `document` require photos of identifying documents to be uploaded for manual review in order to be verified.  
+Customers of type `personal` or `business` and of status `document` require photos of identifying documents to be uploaded for manual review in order to be verified. Currently, SDK support only exists for retrieving data with regards to a `Document` resource. To create a document, you must use an external HTTP library.
 
 ### Document Resource
 
@@ -28,9 +28,9 @@ Customers of type `personal` or `business` and of status `document` require phot
 
 ## Create a Document
 
-### Request:
+### Request and Response
 
-```shell
+```noselect
 curl -X POST 
 \ -H "Authorization: Bearer tJlyMNW6e3QVbzHjeJ9JvAPsRglFjwnba4NdfCzsYJm7XbckcR" 
 \ -H "Accept: application/vnd.dwolla.v1.hal+json" 
@@ -39,11 +39,9 @@ curl -X POST
 \ -F "documentType=passport" 
 \ -F "file=@foo.png" 
 \ 'https://api.dwolla.com/customers/1DE32EC7-FF0B-4C0C-9F09-19629E6788CE/documents'
-```
 
-### Response:
+...
 
-```shell
 HTTP/1.1 201 Created
 Location: https://api.dwolla.com/documents/11fe0bab-39bd-42ee-bb39-275afcc050d0
 ```
@@ -67,17 +65,15 @@ Create a document for a customer pending verification by uploading a photo of th
 
 ## List Documents
 
-### Request:
+### Request and Response
 
-```shell
-GET /customers/6f80efc0-b158-4df1-9b11-da85f0bffdd4/documents
+```raw
+GET https://api.dwolla.com/customers/176878b8-ecdb-469b-a82b-43ba5e8704b2/documents
 Accept: application/vnd.dwolla.v1.hal+json
 Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
-```
 
-### Response:
+...
 
-```json
 {
   "_links": {
     "self": {
@@ -113,6 +109,33 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
   "total": 2
 }
 ```
+```ruby
+a_customer = 'https://api.dwolla.com/customers/176878b8-ecdb-469b-a82b-43ba5e8704b2/documents'
+
+retrieved = DwollaSwagger::CustomersApi.get_customer_documents(a_customer)
+p retrieved.firstName # => "Bob"
+```
+```php
+<?php
+$aCustomer = 'https://api.dwolla.com/customers/176878b8-ecdb-469b-a82b-43ba5e8704b2/documents';
+
+$customersApi = DwollaSwagger\CustomersApi($apiClient);
+
+$retrieved = $customersApi->getCustomerDocuments($aCustomer);
+print($retrieved->total); # => "2"
+?>
+```
+```python
+a_customer = 'https://api.dwolla.com/customers/176878b8-ecdb-469b-a82b-43ba5e8704b2/documents'
+
+customers_api = dwollaswagger.CustomersApi(client)
+
+retrieved = customers_api.get_customer_documents(a_customer)
+print(retrieved.total) # => 2
+```
+```javascript
+// coming soon
+```
 
 Retrieve a list of Documents which belong to a Customer. 
 
@@ -129,17 +152,15 @@ Retrieve a list of Documents which belong to a Customer.
 
 ## Retrieve a Document
 
-### Request:
+### Request and Response
 
-```shell
-GET /customers/6f80efc0-b158-4df1-9b11-da85f0bffdd4/documents/e6c141d5-0922-4d18-ad00-4789a37f288f
+```raw
+GET https://api.dwolla.com/documents/56502f7a-fa59-4a2f-8579-0f8bc9d7b9cc
 Accept: application/vnd.dwolla.v1.hal+json
 Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
-```
 
-### Response:
+...
 
-```json
 {
   "_links": {
     "self": {
@@ -151,6 +172,33 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
   "type": "passport",
   "created": "2015-09-29T21:42:16.000Z"
 }
+```
+```ruby
+a_document = 'https://api.dwolla.com/documents/56502f7a-fa59-4a2f-8579-0f8bc9d7b9cc'
+
+retrieved = DwollaSwagger::DocumentsApi.get_customer(a_document)
+p retrieved.type # => "passport"
+```
+```php
+<?php
+$aCustomer = 'https://api.dwolla.com/documents/56502f7a-fa59-4a2f-8579-0f8bc9d7b9cc';
+
+$documentsApi = DwollaSwagger\DocumentsApi($apiClient);
+
+$retrieved = $documentsApi->getCustomer($aCustomer);
+print($retrieved->type); # => "passport"
+?>
+```
+```python
+a_document = 'https://api.dwolla.com/documents/56502f7a-fa59-4a2f-8579-0f8bc9d7b9cc'
+
+documents_api = dwollaswagger.DocumentsApi(client)
+
+retrieved = documents_api.get_customer(a_document)
+print(retrieved.type) # => "passport"
+```
+```javascript
+// coming soon
 ```
 
 Retrieve a Document.

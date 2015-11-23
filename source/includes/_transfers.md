@@ -1,6 +1,6 @@
 # Transfers
 
-```shell
+```noselect
 {
   "_links": {},
   "_embedded": {},
@@ -36,15 +36,12 @@ A transfer represents money being transferred from a `source` to a `destination`
 
 ## Initiate Transfer
 
-### Request: (Transfer from Account to Customer)
+### Request and Response (Transfer from Account to Customer)
 
-```shell
+```raw
 POST /transfers
 Accept: application/vnd.dwolla.v1.hal+json
 Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
-```
-
-```json
 {
     "_links": {
         "destination": {
@@ -63,13 +60,79 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
         "baz": "boo"
     }
 }
-```
 
-### Response:
+...
 
-```shell
 HTTP/1.1 201 Created
 Location: https://api.dwolla.com/transfers/74c9129b-d14a-e511-80da-0aa34a9b2388
+```
+```ruby
+new_xfer = DwollaSwagger::TransfersApi.create({:body => {
+
+"_links" => {
+  "destination" => {"href"=>"https://api.dwolla.com/customers/07D59716-EF22-4FE6-98E8-F3190233DFB8"}, 
+  "source" => {"href"=>"https://api.dwolla.com/funding-sources/707177c3-bf15-4e7e-b37c-55c3898d9bf4"}
+}, 
+"amount" => {"currency"=>"USD", "value"=>"1.00"}, "metadata"=>{"foo"=>"bar", "baz"=>"boo"}}})
+
+p new_xfer # => https://api.dwolla.com/transfers/74c9129b-d14a-e511-80da-0aa34a9b2388
+```
+```php
+<?php
+$transfersApi = new DwollaSwagger\TransfersApi($apiClient);
+
+$new_xfer = $transfersApi->create(array (
+  '_links' => 
+    array (
+      'destination' => 
+      array (
+        'href' => 'https://api.dwolla.com/customers/07D59716-EF22-4FE6-98E8-F3190233DFB8',
+      ),
+      'source' => 
+      array (
+        'href' => 'https://api.dwolla.com/funding-sources/707177c3-bf15-4e7e-b37c-55c3898d9bf4',
+      ),
+    ),
+  'amount' => 
+    array (
+      'currency' => 'USD',
+      'value' => '1.00',
+    ),
+    'metadata' => 
+    array (
+      'foo' => 'bar',
+      'baz' => 'boo',
+    ),
+));
+
+print($new_xfer); # => https://api.dwolla.com/transfers/74c9129b-d14a-e511-80da-0aa34a9b2388
+?>
+```
+```python
+transfers_api = dwollaswagger.TransfersApi(client)
+
+new_xfer = transfers_api.create(body = {
+'_links': {
+    'destination': {
+        'href': 'https://api.dwolla.com/customers/07D59716-EF22-4FE6-98E8-F3190233DFB8'
+    },
+    'source': {
+        'href': 'https://api.dwolla.com/funding-sources/707177c3-bf15-4e7e-b37c-55c3898d9bf4'
+    }
+},
+'amount': {
+    'currency': 'USD',
+    'value': '1.00'
+},
+'metadata': {
+    'foo': 'bar',
+    'baz': 'boo'
+}})
+
+print(new_xfer) # => https://api.dwolla.com/transfers/74c9129b-d14a-e511-80da-0aa34a9b2388
+```
+```javascript
+// coming soon
 ```
 
 Initiate a transfer for either an account or customer resource. 
@@ -89,7 +152,7 @@ _links | no | A _links JSON object describing the desired `source` and `destinat
 amount | no | An amount JSON object. [See above](#amount-json-object)
 metadata | yes | A metadata JSON object with a maximum of 10 key-value pairs (each key and value must be less than 255 characters).
 
-### source and destination types
+### Source and Destination Types
 
 | Source Type | URI | Description
 -------|---------|---------------
@@ -110,17 +173,15 @@ Funding source | `https://api.dwolla.com/funding-sources/{id}` | Destination of 
 
 ## Get Transfers (Customer) 
 
-### Request:
+### Request and Response
 
-```shell
-GET /customers/01B47CB2-52AC-42A7-926C-6F1F50B1F271/transfers
+```raw
+GET http://api.dwolla.com/customers/01B47CB2-52AC-42A7-926C-6F1F50B1F271/transfers
 Accept: application/vnd.dwolla.v1.hal+json
 Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
-```
 
-### Response:
+...
 
-```json
 {
   "_links": {
     "first": {
@@ -188,6 +249,33 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
   "total": 2
 }
 ```
+```ruby
+customer = 'http://api.dwolla.com/customers/01B47CB2-52AC-42A7-926C-6F1F50B1F271'
+
+cust_xfers = DwollaSwagger::TransfersApi.get_customer_transfers(customer)
+p cust_xfers[0].status # => "pending"
+```
+```php
+<?php
+$customer = 'http://api.dwolla.com/customers/01B47CB2-52AC-42A7-926C-6F1F50B1F271';
+
+$TransfersApi = DwollaSwagger\TransfersApi($apiClient);
+
+$custXfers = $TransfersApi->getCustomerTransfers($customer);
+print($custXfers[0]->status); # => "pending"
+?>
+```
+```python
+customer = 'http://api.dwolla.com/customers/01B47CB2-52AC-42A7-926C-6F1F50B1F271'
+
+transfers_api = dwollaswagger.TransfersApi(client)
+cust_xfers = transfers_api.get_customer_transfers(customer)
+
+print(cust_xfers[0].status) # => pending
+```
+```javascript
+// coming soon
+```
 
 Retrieve a Customer's list of transfers.
 
@@ -214,17 +302,15 @@ offset | yes | How many results to skip.
 
 ## Get Transfers (Account)
 
-### Request:
+### Request and Response
 
-```shell
+```raw
 GET https://api.dwolla.com/accounts/a84222d5-31d2-4290-9a96-089813ef96b3/transfers
 Accept: application/vnd.dwolla.v1.hal+json
 Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
-```
 
-### Response:
+...
 
-```json
 {
   "_links": {
     "self": {
@@ -284,6 +370,33 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
   "total": 2
 }
 ```
+```ruby
+account = 'https://api-uat.dwolla.com/accounts/a84222d5-31d2-4290-9a96-089813ef96b3'
+
+acct_xfers = DwollaSwagger::TransfersApi.get_account_transfers(account)
+p acct_xfers[0].status # => "processed"
+```
+```php
+<?php
+$account = 'https://api-uat.dwolla.com/accounts/a84222d5-31d2-4290-9a96-089813ef96b3';
+
+$TransfersApi = DwollaSwagger\TransfersApi($apiClient);
+
+$acctXfers = $TransfersApi->getAccountTransfers($account);
+print($acctXfers[0]->status); # => "processed"
+?>
+```
+```python
+account = 'https://api-uat.dwolla.com/accounts/a84222d5-31d2-4290-9a96-089813ef96b3'
+
+transfers_api = dwollaswagger.TransfersApi(client)
+acct_xfers = transfers_api.get_account_transfers(account)
+
+print(acct_xfers[0].status) # => processed
+```
+```javascript
+// coming soon
+```
 
 Retrieve an Account's list of transfers.
 
@@ -307,17 +420,15 @@ id | no | Account unique identifier to get transfers for.
 
 ## Get Transfers by ID 
 
-### Request:
+### Request and Response
 
-```shell
-GET /transfers/38242332-374b-e511-80da-0aa34a9b2388
+```raw
+GET https://api.dwolla.com/transfers/4C8AD8B8-3D69-E511-80DB-0AA34A9B2388
 Accept: application/vnd.dwolla.v1.hal+json
 Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
-```
 
-### Response:
+...
 
-```json
 {
   "_links": {
     "self": {
@@ -342,6 +453,33 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
     "baz": "foo"
   }
 }
+```
+```ruby
+transfer = 'https://api.dwolla.com/transfers/4C8AD8B8-3D69-E511-80DB-0AA34A9B2388'
+
+retrieved = DwollaSwagger::TransfersApi.by_id(transfer)
+p retrieved.status # => "pending"
+```
+```php
+<?php
+$transfer = 'https://api.dwolla.com/transfers/4C8AD8B8-3D69-E511-80DB-0AA34A9B2388';
+
+$TransfersApi = DwollaSwagger\TransfersApi($apiClient);
+
+$retrieved = $TransfersApi->byId($transfer);
+print($retrieved->status); # => "pending"
+?>
+```
+```python
+transfer = 'https://api.dwolla.com/transfers/4C8AD8B8-3D69-E511-80DB-0AA34A9B2388'
+
+transfers_api = dwollaswagger.TransfersApi(client)
+retrieved = transfers_api.by_id(transfer)
+
+print(retrieved.status) # => pending
+```
+```javascript
+// coming soon
 ```
 
 Retrieve a Transfer belonging to an Account or Customer by its ID.

@@ -1,0 +1,7 @@
+{
+    "validateQuoteMarks": "'",
+    "requireCamelCaseOrUpperCaseIdentifiers": true,
+    "disallowMultipleLineBreaks": true,
+    "maximumLineLength": 120,
+    "requireCapitalizedConstructors": true
+}

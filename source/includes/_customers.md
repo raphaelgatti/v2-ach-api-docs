@@ -1,6 +1,6 @@
 # Customers
 
-```shell
+```noselect
 {
   "_links": {
     "self": {
@@ -72,56 +72,170 @@ However, if you need to transfer funds between your customers, at least one of t
 
 ## New Customer
 
-### Request:
+### Unverified customer:
 
-```shell
+```raw
 POST /customers
 Content-Type: application/vnd.dwolla.v1.hal+json
 Accept: application/vnd.dwolla.v1.hal+json
 Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
-```
 
-### Unverified customer:
-
-```json
 {
   "firstName": "Bob",
-  "lastName": "Dole",
-  "email": "bob@dole.com",
+  "lastName": "Merchant",
+  "email": "bmerchant@nomail.net",
   "ipAddress": "99.99.99.99"
 }
+
+HTTP/1.1 201 Created
+Location: https://api.dwolla.com/customers/FC451A7A-AE30-4404-AB95-E3553FCD733F
+```
+```ruby
+new_customer = DwollaSwagger::CustomersApi.create({:body => {
+  :firstName => 'Bob',
+  :lastName => 'Merchant',
+  :email => 'bmerchant@nomail.net',
+  :ipAddress => '99.99.99.99'
+}})
+
+p new_customer # => https://api-uat.dwolla.com/customers/FC451A7A-AE30-4404-AB95-E3553FCD733F
+```
+```php
+<?php
+$customersApi = new DwollaSwagger\CustomersApi($apiClient);
+
+$new_customer = $customersApi->create([
+  'firstName' => 'Bob',
+  'lastName' => 'Merchant',
+  'email' => 'bmerchant@nomail.net',
+  'ipAddress' => '99.99.99.99'
+]);
+
+print($new_customer); # => https://api-uat.dwolla.com/customers/FC451A7A-AE30-4404-AB95-E3553FCD733F
+?>
+```
+```python
+customers_api = dwollaswagger.CustomersApi(client)
+
+new_customer = customers_api.create(body = {
+  'firstName': 'Bob', 
+  'lastName': 'Merchant',
+  'email': 'bmerchant@nomail.net',
+  'ipAddress': '99.99.99.99'
+})
+
+print(new_customer) # => https://api-uat.dwolla.com/customers/FC451A7A-AE30-4404-AB95-E3553FCD733F
+```
+```javascript
+// coming soon
 ```
 
 ### Verified customer:
 
-```json
+```raw
+POST /customers
+Content-Type: application/vnd.dwolla.v1.hal+json
+Accept: application/vnd.dwolla.v1.hal+json
+Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
+
 {
-  "firstName": "Gordon",
-  "lastName": "Zheng",
-  "email": "gordon+15@dwolla.com",
+  "firstName": "Bob",
+  "lastName": "Merchant",
+  "email": "bmerchant@nomail.net",
   "ipAddress": "10.10.10.10",
   "type": "personal",
-  "address1": "6680 Forest Ave.",
-  "address2": "Apt 4F",
-  "city": "Ridgewood",
+  "address1": "99-99 33rd St",
+  "city": "Some City",
   "state": "NY",
-  "postalCode": "11385",
-  "dateOfBirth": "1990-07-11",
-  "ssn": "1516",
+  "postalCode": "11101",
+  "dateOfBirth": "1970-01-01",
+  "ssn": "1234",
   "phone": "3478589191"
 }
-```
 
-### Successful response:
-
-```shell
 HTTP/1.1 201 Created
 Location: https://api.dwolla.com/customers/FC451A7A-AE30-4404-AB95-E3553FCD733F
+```
+```php
+<?php
+$customersApi = new DwollaSwagger\CustomersApi($apiClient);
+
+$new_customer = $customersApi->create([
+  'firstName' => 'Bob',
+  'lastName' => 'Merchant',
+  'email' => 'bmerchant@nomail.net',
+  'type' => 'personal',
+  'address1' => '99-99 33rd St',
+  'city' => 'Some City',
+  'state' => 'NY',
+  'postalCode' => '11101',
+  'dateOfBirth' => '1970-01-01',
+
+  # For the first attempt, only 
+  # the last 4 digits of SSN required
+
+  # If the entire SSN is provided, 
+  # it will still be accepted
+  'ssn' => '1234',
+  'phone' => '3478589191'
+]);
+
+print($new_customer); # => https://api-uat.dwolla.com/customers/AB443D36-3757-44C1-A1B4-29727FB3111C
+?>
+```
+```ruby
+new_customer = DwollaSwagger::CustomersApi.create({:body => {
+  :firstName => 'Bob',
+  :lastName => 'Merchant',
+  :email => 'bmerchant@nomail.net',
+  :type => 'personal',
+  :address1 => '99-99 33rd St',
+  :city => 'Some City',
+  :state => 'NY',
+  :postalCode => '11101',
+  :dateOfBirth => '1970-01-01',
+
+  # For the first attempt, only 
+  # the last 4 digits of SSN required
+
+  # If the entire SSN is provided, 
+  # it will still be accepted
+
+  :ssn => '1234',
+  :phone => '3478589191'}})
+
+p new_customer # => https://api-uat.dwolla.com/customers/AB443D36-3757-44C1-A1B4-29727FB3111C
+```
+```python
+customers_api = dwollaswagger.CustomersApi(client)
+
+new_customer = customers_api.create(body = {'firstName': 'Bob', 
+                                            'lastName': 'Merchant',
+                                            'email': 'bmerchant@nomail.net',
+                                            'type': 'personal',
+                                            'address1': '99-99 33rd St',
+                                            'city': 'Some City', 
+                                            'state': 'NY',
+                                            'postalCode': '11101',
+                                            'dateOfBirth': '1970-01-01', 
+
+                                            # For the first attempt, only 
+                                            # the last 4 digits of SSN required
+
+                                            # If the entire SSN is provided, 
+                                            # it will still be accepted
+                                            'ssn': '1234',
+                                            'phone': '3478589191'})
+
+print(new_customer) # => https://api-uat.dwolla.com/customers/AB443D36-3757-44C1-A1B4-29727FB3111C
+```
+```javascript
+// coming soon
 ```
 
 ### Validation error:
 
-```
+```noselect
 {
   "code": "ValidationError",
   "description": "Phone invalid."
@@ -172,7 +286,7 @@ phone | no | Customer's 10 digit phone number.  No hyphens or other separators. 
 
 ### Customer must be in the retry state:
 
-```json
+```noselect
 {
   "_links": {
     "self": {
@@ -198,43 +312,105 @@ phone | no | Customer's 10 digit phone number.  No hyphens or other separators. 
 }
 ```
 
-### Request:
+### Request and Response:
 
-```shell
-POST /customers/730CA23F-06C5-45CC-AA6B-8EC2D6EE109F
+```raw
+POST /customers/132681FA-1B4D-4181-8FF2-619CA46235B1
 Content-Type: application/vnd.dwolla.v1.hal+json
 Accept: application/vnd.dwolla.v1.hal+json
 Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
-```
 
-```json
 {
   "firstName": "Gordon",
   "lastName": "Zheng",
   "email": "gordon+15@dwolla.com",
   "ipAddress": "10.10.10.10",
   "type": "personal",
-  "address1": "6680 Forest Ave.",
-  "address2": "Apt 4F",
+  "address1": "221 Corrected Address St..",
+  "address2": "Fl 8",
   "city": "Ridgewood",
   "state": "NY",
   "postalCode": "11385",
   "dateOfBirth": "1990-07-11",
-  "ssn": "200-30-1516",
-  "phone": "3478589191"
+  "tin": "202-99-1516"
 }
-```
 
-### Successful response:
-
-```shell
 HTTP/1.1 200 OK
 Location: https://api.dwolla.com/customers/FC451A7A-AE30-4404-AB95-E3553FCD733F
+```
+```php
+<?php
+$customersApi = DwollaSwagger\CustomersApi($apiClient);
+
+$retryLocation = 'https://api.dwolla.com/customers/FC451A7A-AE30-4404-AB95-E3553FCD733F';
+
+$retryCustomer = $customersApi->updateCustomer($retryLocation, array (
+  'firstName' => 'Gordon',
+  'lastName' => 'Zheng',
+  'email' => 'gordon+15@dwolla.com',
+  'ipAddress' => '10.10.10.10',
+  'type' => 'personal',
+  'address1' => '221 Corrected Address St..',
+  'address2' => 'Fl 8',
+  'city' => 'Ridgewood',
+  'state' => 'NY',
+  'postalCode' => '11385',
+  'dateOfBirth' => '1990-07-11',
+  'tin' => '202-99-1516',
+););
+
+print($retryCustomer); # => https://api.dwolla.com/customers/FC451A7A-AE30-4404-AB95-E3553FCD733F
+?>
+```
+```ruby
+retry_location = 'https://api.dwolla.com/customers/FC451A7A-AE30-4404-AB95-E3553FCD733F'
+
+retry_customer = DwollaSwagger::CustomersApi.update_customer(retry_location, {:body => {
+      "firstName" => "Gordon",
+       "lastName" => "Zheng",
+          "email" => "gordon+15@dwolla.com",
+      "ipAddress" => "10.10.10.10",
+           "type" => "personal",
+       "address1" => "221 Corrected Address St..",
+       "address2" => "Fl 8",
+           "city" => "Ridgewood",
+          "state" => "NY",
+     "postalCode" => "11385",
+    "dateOfBirth" => "1990-07-11",
+            "tin" => "202-99-1516"
+}})
+
+p retry_customer # => https://api.dwolla.com/customers/FC451A7A-AE30-4404-AB95-E3553FCD733F
+```
+```python
+customers_api = dwollaswagger.CustomersApi(client)
+
+retry_location = 'https://api.dwolla.com/customers/FC451A7A-AE30-4404-AB95-E3553FCD733F'
+
+retry_customer = customers_api.update_customer(retry_location, body = {
+  "firstName": "Gordon",
+  "lastName": "Zheng",
+  "email": "gordon+15@dwolla.com",
+  "ipAddress": "10.10.10.10",
+  "type": "personal",
+  "address1": "221 Corrected Address St..",
+  "address2": "Fl 8",
+  "city": "Ridgewood",
+  "state": "NY",
+  "postalCode": "11385",
+  "dateOfBirth": "1990-07-11",
+  "tin": "202-99-1516"
+})
+
+print(retry_customer) # => https://api.dwolla.com/customers/FC451A7A-AE30-4404-AB95-E3553FCD733F
+```
+```javascript
+// coming soon
 ```
 
 ### Validation error:
 
-```
+```noselect
 {
   "code": "ValidationError",
   "description": "Phone invalid."
@@ -243,7 +419,7 @@ Location: https://api.dwolla.com/customers/FC451A7A-AE30-4404-AB95-E3553FCD733F
 
 ### If you try more than once, or customer is not in retry state:
 
-```
+```noselect
 {
   "code": "InvalidResourceState",
   "description": "Resource cannot be modified."
@@ -284,17 +460,13 @@ phone | yes | Customer's 10 digit phone number.  No hyphens or other separators.
 
 ## List Customers
 
-### Request:
+### Request and Response:
 
-```shell
+```raw
 GET /customers
 Accept: application/vnd.dwolla.v1.hal+json
 Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
-```
 
-### Response:
-
-```json
 {
   "_links": {
     "first": {
@@ -328,8 +500,28 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
   "total": 1
 }
 ```
+```ruby
+my_custies = DwollaSwagger::CustomersApi.list(:limit => 10)
+p my_custies[0].firstName # => "Bob"
+```
+```php
+<?php
+$customersApi = DwollaSwagger\CustomersApi($apiClient);
 
-Retrieve a list of Customers which belong to the authorized user.
+$myCusties = $customersApi->list(10);
+print($myCusties[0]->firstName); # => "Bob"
+?>
+```
+```python
+customers_api = dwollaswagger.CustomersApi(client)
+
+my_custies = customers_api.list(limit=10)
+
+print(my_custies[0].firstName) # => Bob
+```
+```javascript
+// coming soon
+```
 
 <ol class="alerts">
     <li class="alert icon-alert-alert">This endpoint <a href="#authentication">requires</a> an OAuth access token with the `ManageCustomers` <a href="#oauth-scopes">scope</a>.</li>
@@ -351,17 +543,15 @@ offset | yes | How many results to skip.
 
 ## Get a Customer by ID
 
-### Request:
+Each `Customer` ID is a part of its location resource. The developer can pass either an `id` or the entire `location` resource to make this request.
 
-```shell
-GET /customers/07D59716-EF22-4FE6-98E8-F3190233DFB8
+### Request and Response:
+
+```raw
+GET https://api-uat.dwolla.com/customers/07D59716-EF22-4FE6-98E8-F3190233DFB8
 Accept: application/vnd.dwolla.v1.hal+json
 Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
-```
 
-### Response:
-
-```json
 {
   "_links": {
     "self": {
@@ -376,6 +566,33 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
   "status": "unverified",
   "created": "2015-09-03T23:56:10.023Z"
 }
+```
+```ruby
+a_customer = 'https://api-uat.dwolla.com/customers/07D59716-EF22-4FE6-98E8-F3190233DFB8'
+
+retrieved = DwollaSwagger::CustomersApi.get_customer(a_customer)
+p retrieved.firstName # => "Bob"
+```
+```php
+<?php
+$aCustomer = 'https://api-uat.dwolla.com/customers/07D59716-EF22-4FE6-98E8-F3190233DFB8';
+
+$customersApi = DwollaSwagger\CustomersApi($apiClient);
+
+$retrieved = $customersApi->getCustomer($aCustomer);
+print($retrieved->firstName); # => "Bob"
+?>
+```
+```python
+a_customer = 'https://api-uat.dwolla.com/customers/07D59716-EF22-4FE6-98E8-F3190233DFB8'
+
+customers_api = dwollaswagger.CustomersApi(client)
+
+retrieved = customers_api.get_customer(a_customer)
+print(retrieved.firstName) # => Bob
+```
+```javascript
+// coming soon
 ```
 
 Retrieve a Customer which belongs to the authorized user.

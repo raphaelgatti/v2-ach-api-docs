@@ -15,6 +15,12 @@ set :markdown, :fenced_code_blocks => true, :smartypants => true, :disable_inden
 # Activate the syntax highlighter
 activate :syntax
 
+# Activate sprockets
+activate :sprockets
+
+# Add bower stuff to sprockets path
+sprockets.append_path File.join "#{root}", "/source/_bower_components"
+
 # This is needed for Github pages, since they're hosted on a subdomain
 activate :relative_assets
 set :relative_links, true

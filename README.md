@@ -120,3 +120,16 @@ Special Thanks
 - [middleman-syntax](https://github.com/middleman/middleman-syntax)
 - [middleman-gh-pages](https://github.com/neo/middleman-gh-pages)
 - [Font Awesome](http://fortawesome.github.io/Font-Awesome/)
+
+## JS unit testing Requirements
+* Node >= 5.0.0
+* Grunt-CLI >= 0.1.13
+
+## JS unit testing Setup
+First thing you want to do is install all node packages run:
+
+    npm install
+
+To run the test run
+
+    npm test

@@ -1,6 +1,6 @@
 # Webhook Subscriptions
 
-```json
+```noselect
 {
   "_links": {
     "self": {
@@ -64,26 +64,48 @@ Dwolla will re-attempt delivery 8 times over the course of 72 hours according th
 
 ## Create a Subscription
 
-### Request:
+### Request and Response
 
-```shell
-POST /webhook-subscriptions
+```raw
+POST https://api-uat.dwolla.com/webhook-subscriptions
 Accept: application/vnd.dwolla.v1.hal+json
-Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
-```
-
-```json
+Content-Type: application/vnd.dwolla.v1.hal+json
+Authorization: Bearer 0Sn0W6kzNicvoWhDbQcVSKLRUpGjIdlPSEYyrHqrDDoRnQwE7Q
 {
-  "url": "https://deliver.webhooks/here",
-  "secret": "shush!"
+    "url": "http://myapplication.com/webhooks",
+    "secret": "sshhhhhh"
 }
 ```
+```ruby
+subscription = DwollaSwagger::WebhooksubscriptionsApi.create({:body => {
+  :url => "http://myawesomeapplication.com/destination",
+  :secret => "your webhook secret"
+}})
 
-### Response:
+p subscription # => https://api-uat.dwolla.com/webhook-subscriptions/5af4c10a-f6de-4ac8-840d-42cb65454216
+```
+```javascript
+// No example for this language yet.
+```
+```python
+webhook_api = dwollaswagger.WebhooksubscriptionsApi(client)
+subscription = webhook_api.create({
+    "url": "http://myapplication.com/webhooks",
+    "secret": "sshhhhhh"
+})
 
-```shell
-HTTP/1.1 201 Created
-Location: https://api.dwolla.com/webhook-subscriptions/10d4133e-b308-4646-b276-40d9d36def1c
+print(subscription) # => https://api-uat.dwolla.com/webhook-subscriptions/5af4c10a-f6de-4ac8-840d-42cb65454216
+```
+```php
+<?php
+$webhookApi = new DwollaSwagger\WebhooksubscriptionsApi($apiClient);
+$subscription = $webhookApi->create(array (
+  'url' => 'http://myapplication.com/webhooks',
+  'secret' => 'sshhhhhh',
+));
+
+print($subscription); # => https://api-uat.dwolla.com/webhook-subscriptions/5af4c10a-f6de-4ac8-840d-42cb65454216
+?>
 ```
 
 Create a webhook subscription to deliver [Webhooks](#webhooks) to a specified URL. 
@@ -110,33 +132,31 @@ secret | A random, secret key, only known by your application. This secret key s
 
 ## Delete a Subscription
 
-### Request:
+### Request and Response
 
-```shell
-DELETE /webhook-subscriptions/f4d21628-fde2-4d3a-b69a-0a7cb42adc4c
+```raw
+DELETE https://api-uat.dwolla.com/webhook-subscriptions/5af4c10a-f6de-4ac8-840d-42cb65454216
 Accept: application/vnd.dwolla.v1.hal+json
 Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 ```
-
-### Response:
-
-```json
-{
-  "_links": {
-    "self": {
-      "href": "https://api.dwolla.com/webhook-subscriptions/f4d21628-fde2-4d3a-b69a-0a7cb42adc4c"
-    },
-    "webhooks": {
-      "href": "https://api.dwolla.com/webhook-subscriptions/f4d21628-fde2-4d3a-b69a-0a7cb42adc4c/webhooks"
-    }
-  },
-  "id": "f4d21628-fde2-4d3a-b69a-0a7cb42adc4c",
-  "url": "https://destination.url",
-  "created": "2015-08-19T21:43:49.000Z"
-}
+```ruby
+deleted = DwollaSwagger::WebhooksubscriptionApi.id('https://api-uat.dwolla.com/webhook-subscriptions/5af4c10a-f6de-4ac8-840d-42cb65454216')
+```
+```javascript
+No example for this language yet.
+```
+```python
+webhook_api = dwollaswagger.WebhooksubscriptionsApi(client)
+deleted = webhook_api.id('https://api-uat.dwolla.com/webhook-subscriptions/5af4c10a-f6de-4ac8-840d-42cb65454216')
+```
+```php
+<?php
+$webhookApi = new DwollaSwagger\WebhooksubscriptionsApi($apiClient);
+$deleted = $webhookApi->id('https://api-uat.dwolla.com/webhook-subscriptions/5af4c10a-f6de-4ac8-840d-42cb65454216');
+?>
 ```
 
-Delete a Webhook Subscription to stop receiving Webhooks at the URL specified. 
+Delete a Webhook Subscription to stop receiving Webhooks at the URL specified. If using an SDK, the request was successful unless an exception was thrown stating otherwise. 
 
 <ol class="alerts">
     <li class="alert icon-alert-alert">This endpoint <a href="#authentication">requires</a> an OAuth *Application* access token.</li>
@@ -161,17 +181,15 @@ id | Webhook unique identifier.
 
 ## List Subscriptions
 
-### Request:
+### Request and Response
 
-```shell
-GET /webhook-subscriptions
+```raw
+GET https://api.dwolla.com/webhook-subscriptions
 Accept: application/vnd.dwolla.v1.hal+json
 Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
-```
 
-### Response:
+...
 
-```json
 {
   "_links": {
     "self": {
@@ -198,6 +216,28 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
   "total": 1
 }
 ```
+```ruby
+retrieved = DwollaSwagger::WebhooksubscriptionApi.list
+
+p retrieved.total # => 1
+```
+```javascript
+No example for this language yet.
+```
+```python
+webhook_api = dwollaswagger.WebhooksubscriptionsApi(client)
+retrieved = webhook_api.list()
+
+print(retrieved.total) # => 1
+```
+```php
+<?php
+$webhookApi = new DwollaSwagger\WebhooksubscriptionsApi($apiClient);
+$retrieved = $webhookApi->_list();
+
+print($retrieved->total); # => 1
+?>
+```
 
 Retrieve a list of webhook subscriptions that belong to an application.
 
@@ -216,30 +256,50 @@ GET https://api.dwolla.com/webhook-subscriptions
 
 ## Get Subscription by ID
 
-### Request:
+### Request and Response:
 
-```shell
-GET /webhook-subscriptions/f4d21628-fde2-4d3a-b69a-0a7cb42adc4c
+```raw
+GET https://api-uat.dwolla.com/webhook-subscriptions/5af4c10a-f6de-4ac8-840d-42cb65454216
 Accept: application/vnd.dwolla.v1.hal+json
 Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
-```
 
-### Response:
+...
 
-```json
 {
   "_links": {
     "self": {
-      "href": "https://api.dwolla.com/webhook-subscriptions/f4d21628-fde2-4d3a-b69a-0a7cb42adc4c"
+      "href": "https://api-uat.dwolla.com/webhook-subscriptions/077dfffb-4852-412f-96b6-0fe668066589"
     },
     "webhooks": {
-      "href": "https://api.dwolla.com/webhook-subscriptions/f4d21628-fde2-4d3a-b69a-0a7cb42adc4c/webhooks"
+      "href": "https://api-uat.dwolla.com/webhook-subscriptions/077dfffb-4852-412f-96b6-0fe668066589/webhooks"
     }
   },
-  "id": "f4d21628-fde2-4d3a-b69a-0a7cb42adc4c",
-  "url": "https://destination.url",
-  "created": "2015-08-19T21:43:49.000Z"
+  "id": "077dfffb-4852-412f-96b6-0fe668066589",
+  "url": "http://myapplication.com/webhooks",
+  "created": "2015-10-28T16:20:47+00:00"
 }
+```
+```ruby
+retrieved = DwollaSwagger::WebhooksubscriptionApi.id('https://api-uat.dwolla.com/webhook-subscriptions/5af4c10a-f6de-4ac8-840d-42cb65454216')
+
+p retrieved.created # => 2015-10-28T16:20:47+00:00
+```
+```javascript
+No example for this language yet.
+```
+```python
+webhook_api = dwollaswagger.WebhooksubscriptionsApi(client)
+retrieved = webhook_api.id('https://api-uat.dwolla.com/webhook-subscriptions/5af4c10a-f6de-4ac8-840d-42cb65454216')
+
+print(retrieved.created) # => 2015-10-28T16:20:47+00:00
+```
+```php
+<?php
+$webhookApi = new DwollaSwagger\WebhooksubscriptionsApi($apiClient);
+$retrieved = $webhookApi->id('https://api-uat.dwolla.com/webhook-subscriptions/5af4c10a-f6de-4ac8-840d-42cb65454216');
+
+print($retrieved); # => 2015-10-28T16:20:47+00:00
+?>
 ```
 
 Retrieve a webhook subscription by its ID.
@@ -260,17 +320,15 @@ GET https://api.dwolla.com/webhook-subscriptions/{id}
 
 ## Get a Subscription's Webhooks
 
-### Request:
+### Request and Response
 
-```shell
+```raw
 GET /webhook-subscriptions/10d4133e-b308-4646-b276-40d9d36def1c/webhooks
 Accept: application/vnd.dwolla.v1.hal+json
 Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
-```
 
-### Response:
+...
 
-```json
 {
   "_links": {},
   "total": 0,
@@ -312,6 +370,28 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
     }
   ]
 }
+```
+```ruby
+retrieved = DwollaSwagger::WebhooksApi.hooks_by_id('https://api-uat.dwolla.com/webhook-subscriptions/5af4c10a-f6de-4ac8-840d-42cb65454216')
+
+p retrieved.total # => 5
+```
+```javascript
+No example for this language yet.
+```
+```python
+webhook_api = dwollaswagger.WebhooksApi(client)
+retrieved = webhook_api.hooks_by_id('https://api-uat.dwolla.com/webhook-subscriptions/5af4c10a-f6de-4ac8-840d-42cb65454216')
+
+print(retrieved.total) # => 5
+```
+```php
+<?php
+$webhookApi = new DwollaSwagger\WebhooksApi($apiClient);
+$retrieved = $webhookApi->hooksById('https://api-uat.dwolla.com/webhook-subscriptions/5af4c10a-f6de-4ac8-840d-42cb65454216');
+
+print($retrieved->total); # => 5
+?>
 ```
 
 View all fired [Webhooks](#webhooks) for a Webhook Subscription.

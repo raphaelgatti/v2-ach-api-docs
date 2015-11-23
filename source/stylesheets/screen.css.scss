@@ -2,20 +2,21 @@
 @import url(//fonts.googleapis.com/css?family=Roboto+Slab:300|Open+Sans:400,600,700);
 
 //style-tiles
-@import "style-tiles/lib/reset";
-@import "style-tiles/globals/base";
-@import "style-tiles/partials/colors";
-@import "style-tiles/partials/big-disclaimer";
-@import "style-tiles/partials/footer";
-@import "style-tiles/partials/typography";
-@import "style-tiles/partials/alerts";
-@import "style-tiles/partials/buttons";
-@import "style-tiles/partials/forms";
-@import "style-tiles/partials/header";
-@import "style-tiles/partials/containers";
-@import "style-tiles/partials/side-nav";
-@import "style-tiles/partials/language-picker";
-@import "style-tiles/partials/toggle-buttons";
+@import "../_bower_components/style-tiles/sass/developer/lib/reset";
+@import "../_bower_components/style-tiles/sass/developer/globals/base";
+@import "../_bower_components/style-tiles/sass/developer/partials/big-disclaimer";
+@import "../_bower_components/style-tiles/sass/developer/partials/footer";
+@import "../_bower_components/style-tiles/sass/developer/partials/typography";
+@import "../_bower_components/style-tiles/sass/developer/partials/alerts";
+@import "../_bower_components/style-tiles/sass/developer/partials/buttons";
+@import "../_bower_components/style-tiles/sass/developer/partials/forms";
+@import "../_bower_components/style-tiles/sass/developer/partials/header";
+@import "../_bower_components/style-tiles/sass/developer/partials/containers";
+@import "../_bower_components/style-tiles/sass/developer/partials/side-nav";
+@import "../_bower_components/style-tiles/sass/developer/partials/language-picker";
+@import "../_bower_components/style-tiles/sass/developer/partials/toggle-buttons";
+@import "../_bower_components/style-tiles/sass/developer/partials/code-snippet";
+
 
 //icons
 @import "icons/base/icons.data.svg";
@@ -24,6 +25,8 @@
 @import 'overrides/toc';
 
 @import 'partials/vars';
+
+@import 'partials/code-snippet';
 @import 'partials/containers';
 @import 'partials/big-disclaimer';
 @import 'partials/footer';

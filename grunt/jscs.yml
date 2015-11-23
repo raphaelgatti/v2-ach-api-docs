@@ -1,0 +1,11 @@
+src:
+    src: source/javascripts/dwolla/**/*.js
+    options:
+        config: true
+        reporter: console
+
+test:
+    src: source/javascripts/test/**/*.js
+    options:
+        config: true
+        reporter: console

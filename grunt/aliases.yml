@@ -1,0 +1,12 @@
+test:
+    - karma:test
+
+lint:
+    - jscs
+    - jslint
+
+verify:
+    - lint
+    - test
+
+default: verify
