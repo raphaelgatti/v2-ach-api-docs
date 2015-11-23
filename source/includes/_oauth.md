@@ -87,7 +87,7 @@ ManageCustomers | Includes create customer records, manage their funding sources
 
 ## Finish User Authorization
 
-```json
+```noselect
 {
   "client_id": "JCGQXLrlfuOqdUYdTcLz3rBiCZQDRvdWIUPkw++GMuGhkem9Bo",
   "client_secret": "g7QLwvO37aN2HoKx1amekWi8a2g7AIuPbD5C/JSLqXIcDOxfTr",
@@ -99,7 +99,7 @@ ManageCustomers | Includes create customer records, manage their funding sources
 
 ### Successful Response:
 
-```shell
+```noselect
 {
   "access_token": "4Qu79qhO5GkPwo4fsbuc9ve4mJKN/XnxcT34F812y6SBIyGrnP",
   "expires_in": 3600,
@@ -146,7 +146,7 @@ scope | Pipe <code>&#124;</code> delimited list of permission scopes granted
 
 ### Successful Response:
 
-```shell
+```noselect
 {
   "access_token": "4Qu79qhO5GkPwo4fsbuc9ve4mJKN/XnxcT34F812y6SBIyGrnP",
   "expires_in": 3600,
@@ -159,7 +159,7 @@ scope | Pipe <code>&#124;</code> delimited list of permission scopes granted
 
 ### Invalid or Expired Refresh Token Response:
 
-```shell
+```noselect
 {
   "error": "access_denied",
   "error_description": "Invalid refresh token."
@@ -198,7 +198,7 @@ token_type | Always `bearer`.
 
 ## Client Access Token
 
-```
+```noselect
 {
   "client_id": "JCGQXLrlfuOqdUYdTcLz3rBiCZQDRvdWIUPkw++GMuGhkem9Bo",
   "client_secret": "g7QLwvO37aN2HoKx1amekWi8a2g7AIuPbD5C/JSLqXIcDOxfTr",
@@ -208,7 +208,7 @@ token_type | Always `bearer`.
 
 ### Successful Response
 
-```
+```noselect
 {
   "access_token": "SF8Vxx6H644lekdVKAAHFnqRCFy8WGqltzitpii6w2MVaZp1Nw",
   "token_type": "bearer",
