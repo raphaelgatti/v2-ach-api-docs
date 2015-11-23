@@ -4,7 +4,7 @@
     <li class="alert icon-alert-info">Instant account verification (IAV) is a premium feature available only for white label integrations. <a href="https://www.dwolla.com/contact?b=apidocs">Contact sales</a> for information about pricing.</li>
 </ol>
 
-```html
+```noselect
 <script src="https://cdn.dwolla.com/dwolla.js"></script>
 <script type="text/javascript">
   dwolla.config.dwollaUrl = 'https://uat.dwolla.com';
@@ -28,7 +28,7 @@ Get a single-use IAV token for a Customer.
 
 ### Request:
 
-```shell
+```noselect
 POST /customers/99bfb139-eadd-4cdf-b346-7504f0c16c60/iav-verification
 Content-Type: application/vnd.dwolla.v1.hal+json
 Accept: application/vnd.dwolla.v1.hal+json
@@ -37,7 +37,7 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 
 ### Response:
 
-```shell
+```noselect
 HTTP/1.1 200 OK
 
 {
@@ -97,7 +97,7 @@ dwolla.config.apiUrl = 'https://api.dwolla.com';
 ```
 ##### Example
 
-```html
+```noselect
 <head>
 <script src="https://cdn.dwolla.com/dwolla.js"></script>
 <!-- jQuery is used for example purposes -->
@@ -122,7 +122,7 @@ $('#start').click(function() {
 
 ### Response:
 
-```json
+```noselect
 {
   "_links": {
     "funding-source": {
