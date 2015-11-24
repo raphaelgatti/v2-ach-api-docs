@@ -2,7 +2,7 @@
 
 Welcome to the Dwolla API V2 documentation, currently in active development. Gradually, the functionality of API V1 will be implemented in API V2.  The two versions will operate in parallel for the foreseeable future.
 
-The initial focus of API Version 2 centers around a premium feature: [White Label](https://www.dwolla.com/white-label), and will not provide the same functionality as Version 1 does.  Over time, we will add the same functionality currently currently available in V1 to V2.
+The initial focus of API Version 2 centers around a premium feature: [White Label](https://www.dwolla.com/white-label), and will not provide the same functionality as Version 1 does.  Over time, we will add the same functionality currently available in V1 to V2.
 
 Official SDKs for Java, Node.JS, PHP, Ruby, and Python are being actively developed.
 
@@ -17,7 +17,7 @@ Accept: application/vnd.dwolla.v1.hal+json
 Authorization: Bearer myOAuthAccessToken123
 
 {
-	"foo": "bar"
+  "foo": "bar"
 }
 
 ... or ...
@@ -49,18 +49,17 @@ Requests that require an client_id and client_secret are passed in the JSON requ
 
 ## Errors
 
-### Example error.  HTTP 401:
+Error responses use HTTP status codes to indicate the type of error. The JSON response body will contain a top-level error code and a message which is a detailed description of the error. Errors will contain their own media type and will closely align with [this spec](https://github.com/blongden/vnd.error).
+
+### Example HTTP 401 error
 
 ```noselect
 {
-  "code": "InvalidCredentials",
-  "description": "Invalid access token."
+  "code": "InvalidAccessToken",
+  "description": "Invalid access token.",
+  "message": "Invalid access token."
 }
 ```
-
-
-Error responses use HTTP status codes to indicate the type of error.  The JSON response body will contain an error code and a description of the error.
-
 
 ### Common Errors
 The following errors are common across all API endpoints.
@@ -68,7 +67,7 @@ The following errors are common across all API endpoints.
 | HTTP Status | Error Code | Description
 |-------------|------|-------------
 | 400 | BadRequest | The request body contains bad syntax or is incomplete. |
-| 400 | ValidationError | (varies) |
+| 400 | ValidationError | Validation error(s) present. See embedded errors list for more details. ([See below](#validation-errors)) |
 | 401 | InvalidCredentials | Missing or invalid Authorization header. |
 | 401 | InvalidAccessToken | Invalid access token. |
 | 401 | ExpiredAccessToken | Generate a new access token using a valid refresh token. |
@@ -82,6 +81,47 @@ The following errors are common across all API endpoints.
 | 406 | InvalidVersion | Missing or invalid API version. |
 | 500 | ServerError | A server error occurred. Error ID: 63e92a2a-fb48-4a23-ab4c-24a6764f1593. |
 | 500 | RequestTimeout | The request timed out. |
+
+### Validation Errors
+Responses with a top-level error code of `ValidationError` are returned when you can correct a specific problem with your request. Included within the response will be a message/description of: "Validation error(s) present. See embedded errors list for more details." At least one, but possibly more, detailed errors will be present in the list of embedded errors. Multiple errors are represented in a collection of embedded error objects.
+
+#### _embedded JSON Object
+
+| Parameter | Description
+|-----------|------------|
+|errors | An array of JSON object(s) that contain a `code`, `message`, and `path`.
+
+The `path` field is a json pointer to the specific field in the request that has a problem. The `message` is a human readable description of the problem. The `code` fields is a detailed error code that can have one of the following values:
+
+- Required
+- Invalid - not a valid value for this field
+- InvalidFormat - chars in an amount field, for instance
+- Duplicate - "A customer with the specified email already exists."
+- ReadOnly - this field is not allowed to be modified
+- NotAllowed - value, while valid/exists, is not allowed to be used
+- Restricted - account or customer restricted from this activity
+- InsufficientFunds - used on source or destination fields of transfer endpoint
+- RequiresFundingSource - used on destination field of transfer endpoint to indicate customer needs a bank
+- FileTooLarge - used on document upload
+
+#### Example HTTP 400 ValidationError
+
+```json
+{
+    "code": "ValidationError",
+    "description": "Validation error(s) present. See embedded errors list for more details.",
+    "message": "Validation error(s) present. See embedded errors list for more details.",
+    "_embedded": {
+        "errors": [
+            {
+                "code": "Required",
+                "message": "FirstName is required.",
+                "path": "/firstName",
+            }
+        ]
+    }
+}
+```
 
 ## Links
 
