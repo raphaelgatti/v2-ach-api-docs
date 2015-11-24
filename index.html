@@ -119,18 +119,18 @@
             <h1 id='introduction'>Introduction</h1>
 <p>Welcome to the Dwolla API V2 documentation, currently in active development. Gradually, the functionality of API V1 will be implemented in API V2.  The two versions will operate in parallel for the foreseeable future.</p>
 
-<p>The initial focus of API Version 2 centers around a premium feature: <a href="https://www.dwolla.com/white-label">White Label</a>, and will not provide the same functionality as Version 1 does.  Over time, we will add the same functionality currently currently available in V1 to V2.</p>
+<p>The initial focus of API Version 2 centers around a premium feature: <a href="https://www.dwolla.com/white-label">White Label</a>, and will not provide the same functionality as Version 1 does.  Over time, we will add the same functionality currently available in V1 to V2.</p>
 
 <p>Official SDKs for Java, Node.JS, PHP, Ruby, and Python are being actively developed.</p>
 
 <p>It is important to note: White Label is a premium feature that cannot be activated in our production environment until you’ve received our approval to use it and have entered into an agreement with us. Feel free to <a href="https://www.dwolla.com/contact?b=apidocs">contact a sales representative</a> to find the package that best suits your needs.</p>
-<h2 id='making-requests'>Making Requests</h2><div class="code-snippet language-nohide"><button class="btn alternative">copy</button><div class="code-snippet__cnt highlight"><pre><code class="language-nohide" data-lang="nohide">POST https://api.dwolla.com/customers
+<h2 id='making-requests'>Making Requests</h2><div class="code-snippet js-code-snippet language-nohide"><button class="btn alternative">copy</button><div class="code-snippet__cnt highlight"><pre><code class="language-nohide" data-lang="nohide">POST https://api.dwolla.com/customers
 Content-Type: application/json
 Accept: application/vnd.dwolla.v1.hal+json
 Authorization: Bearer myOAuthAccessToken123
 
 {
-    "foo": "bar"
+  "foo": "bar"
 }
 
 ... or ...
@@ -154,13 +154,14 @@ GET https://www.dwolla.com/oauth/rest/transactions?client_id=XYZ&amp;client_secr
 <p><strong>Production:</strong> https://api.dwolla.com</p>
 
 <p><strong>Sandbox:</strong> https://api-uat.dwolla.com</p>
-<h2 id='errors'>Errors</h2><h3 id='example-error--http-401'>Example error.  HTTP 401:</h3><div class="code-snippet language-nohide"><button class="btn alternative">copy</button><div class="code-snippet__cnt highlight"><pre><code class="language-nohide" data-lang="nohide"><span class="p">{</span><span class="w">
-  </span><span class="nt">"code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"InvalidCredentials"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Invalid access token."</span><span class="w">
+<h2 id='errors'>Errors</h2>
+<p>Error responses use HTTP status codes to indicate the type of error. The JSON response body will contain a top-level error code and a message which is a detailed description of the error. Errors will contain their own media type and will closely align with <a href="https://github.com/blongden/vnd.error">this spec</a>.</p>
+<h3 id='example-http-401-error'>Example HTTP 401 error</h3><div class="code-snippet js-code-snippet language-nohide"><button class="btn alternative">copy</button><div class="code-snippet__cnt highlight"><pre><code class="language-nohide" data-lang="nohide"><span class="p">{</span><span class="w">
+  </span><span class="nt">"code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"InvalidAccessToken"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Invalid access token."</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Invalid access token."</span><span class="w">
 </span><span class="p">}</span><span class="w">
-</span></code></pre></div></div>
-<p>Error responses use HTTP status codes to indicate the type of error.  The JSON response body will contain an error code and a description of the error.</p>
-<h3 id='common-errors'>Common Errors</h3>
+</span></code></pre></div></div><h3 id='common-errors'>Common Errors</h3>
 <p>The following errors are common across all API endpoints.</p>
 
 <table><thead>
@@ -178,7 +179,7 @@ GET https://www.dwolla.com/oauth/rest/transactions?client_id=XYZ&amp;client_secr
 <tr>
 <td>400</td>
 <td>ValidationError</td>
-<td>(varies)</td>
+<td>Validation error(s) present. See embedded errors list for more details. (<a href="#validation-errors">See below</a>)</td>
 </tr>
 <tr>
 <td>401</td>
@@ -246,7 +247,58 @@ GET https://www.dwolla.com/oauth/rest/transactions?client_id=XYZ&amp;client_secr
 <td>The request timed out.</td>
 </tr>
 </tbody></table>
-<h2 id='links'>Links</h2><div class="code-snippet language-nohide"><button class="btn alternative">copy</button><div class="code-snippet__cnt highlight"><pre><code class="language-nohide" data-lang="nohide"><span class="p">{</span><span class="w">
+<h3 id='validation-errors'>Validation Errors</h3>
+<p>Responses with a top-level error code of <code class="prettyprint">ValidationError</code> are returned when you can correct a specific problem with your request. Included within the response will be a message/description of: &ldquo;Validation error(s) present. See embedded errors list for more details.&rdquo; At least one, but possibly more, detailed errors will be present in the list of embedded errors. Multiple errors are represented in a collection of embedded error objects.</p>
+<h4 id='_embedded-json-object'>_embedded JSON Object</h4>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>errors</td>
+<td>An array of JSON object(s) that contain a <code class="prettyprint">code</code>, <code class="prettyprint">message</code>, and <code class="prettyprint">path</code>.</td>
+</tr>
+</tbody></table>
+
+<p>The <code class="prettyprint">path</code> field is a json pointer to the specific field in the request that has a problem. The <code class="prettyprint">message</code> is a human readable description of the problem. The <code class="prettyprint">code</code> fields is a detailed error code that can have one of the following values:</p>
+
+<ul>
+<li>Required</li>
+<li>Invalid - not a valid value for this field</li>
+<li>InvalidFormat - chars in an amount field, for instance</li>
+<li>Duplicate - &ldquo;A customer with the specified email already exists.&rdquo;</li>
+<li>ReadOnly - this field is not allowed to be modified</li>
+<li>NotAllowed - value, while valid/exists, is not allowed to be used</li>
+<li>Restricted - account or customer restricted from this activity</li>
+<li>InsufficientFunds - used on source or destination fields of transfer endpoint</li>
+<li>RequiresFundingSource - used on destination field of transfer endpoint to indicate customer needs a bank</li>
+<li>FileTooLarge - used on document upload</li>
+</ul>
+<h4 id='example-http-400-validationerror'>Example HTTP 400 ValidationError</h4><div class="code-snippet js-code-snippet language-json"><button class="btn alternative">copy</button><div class="code-snippet__selector">
+          <nav>
+              <button class="selector_switch" id="raw">raw</button>
+              <button class="selector_switch" id="php">php</button>
+              <button class="selector_switch" id="ruby">ruby</button>
+              <button class="selector_switch" id="python">python</button>
+              <button class="selector_switch" id="javascript">javascript</button>
+          </nav>
+        </div><div class="code-snippet__cnt highlight"><pre><code class="language-json" data-lang="json"><span class="p">{</span><span class="w">
+    </span><span class="nt">"code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ValidationError"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Validation error(s) present. See embedded errors list for more details."</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Validation error(s) present. See embedded errors list for more details."</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"_embedded"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"errors"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+            </span><span class="p">{</span><span class="w">
+                </span><span class="nt">"code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Required"</span><span class="p">,</span><span class="w">
+                </span><span class="nt">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"FirstName is required."</span><span class="p">,</span><span class="w">
+                </span><span class="nt">"path"</span><span class="p">:</span><span class="w"> </span><span class="s2">"/firstName"</span><span class="p">,</span><span class="w">
+            </span><span class="err">}</span><span class="w">
+        </span><span class="p">]</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div></div><h2 id='links'>Links</h2><div class="code-snippet js-code-snippet language-nohide"><button class="btn alternative">copy</button><div class="code-snippet__cnt highlight"><pre><code class="language-nohide" data-lang="nohide"><span class="p">{</span><span class="w">
   </span><span class="nt">"_links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="nt">"self"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
       </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.dwolla.com/customers/132681FA-1B4D-4181-8FF2-619CA46235B1"</span><span class="w">
@@ -290,7 +342,7 @@ GET https://www.dwolla.com/oauth/rest/transactions?client_id=XYZ&amp;client_secr
 <p><strong>Refresh tokens</strong> are <em>long lived</em>: 60 days.</p>
 
 <p>A refresh token can be used within 60 days to generate a new access_token and refresh_token pair.  So long as you <a href="#refresh-authorization">refresh your authorization</a> at least every 60 days, your application can maintain authorization indefinitely without requiring the user to re-authorize.</p>
-<h2 id='request-user-authorization'>Request User Authorization</h2><div class="code-snippet language-php"><button class="btn alternative">copy</button><div class="code-snippet__selector">
+<h2 id='request-user-authorization'>Request User Authorization</h2><div class="code-snippet js-code-snippet language-php"><button class="btn alternative">copy</button><div class="code-snippet__selector">
           <nav>
               <button class="selector_switch" id="raw">raw</button>
               <button class="selector_switch" id="php">php</button>
@@ -307,7 +359,7 @@ GET https://www.dwolla.com/oauth/rest/transactions?client_id=XYZ&amp;client_secr
 <span class="nv">$url</span> <span class="o">=</span> <span class="nv">$OAuth</span><span class="o">-&gt;</span><span class="na">genAuthUrl</span><span class="p">(</span><span class="s2">"https://myredirect.com/redirect"</span><span class="p">);</span>
 
 <span class="cp">?&gt;</span>
-</code></pre></div></div><div class="code-snippet language-python"><button class="btn alternative">copy</button><div class="code-snippet__selector">
+</code></pre></div></div><div class="code-snippet js-code-snippet language-python"><button class="btn alternative">copy</button><div class="code-snippet__selector">
           <nav>
               <button class="selector_switch" id="raw">raw</button>
               <button class="selector_switch" id="php">php</button>
@@ -317,7 +369,7 @@ GET https://www.dwolla.com/oauth/rest/transactions?client_id=XYZ&amp;client_secr
           </nav>
         </div><div class="code-snippet__cnt highlight"><pre><code class="language-python" data-lang="python"><span class="c"># Generate OAuth URL with redirect to requestb.in</span>
 <span class="k">print</span><span class="p">(</span><span class="n">oauth</span><span class="o">.</span><span class="n">genauthurl</span><span class="p">(</span><span class="s">"http://requestb.in/122rdhc1"</span><span class="p">))</span>
-</code></pre></div></div><div class="code-snippet language-javascript"><button class="btn alternative">copy</button><div class="code-snippet__selector">
+</code></pre></div></div><div class="code-snippet js-code-snippet language-javascript"><button class="btn alternative">copy</button><div class="code-snippet__selector">
           <nav>
               <button class="selector_switch" id="raw">raw</button>
               <button class="selector_switch" id="php">php</button>
@@ -330,7 +382,7 @@ GET https://www.dwolla.com/oauth/rest/transactions?client_id=XYZ&amp;client_secr
 
 <span class="c1">// generate OAuth initiation URL</span>
 <span class="kd">var</span> <span class="nx">authUrl</span> <span class="o">=</span> <span class="nx">Dwolla</span><span class="p">.</span><span class="nx">authUrl</span><span class="p">(</span><span class="nx">redirect_uri</span><span class="p">);</span>
-</code></pre></div></div><div class="code-snippet language-ruby"><button class="btn alternative">copy</button><div class="code-snippet__selector">
+</code></pre></div></div><div class="code-snippet js-code-snippet language-ruby"><button class="btn alternative">copy</button><div class="code-snippet__selector">
           <nav>
               <button class="selector_switch" id="raw">raw</button>
               <button class="selector_switch" id="php">php</button>
@@ -340,7 +392,7 @@ GET https://www.dwolla.com/oauth/rest/transactions?client_id=XYZ&amp;client_secr
           </nav>
         </div><div class="code-snippet__cnt highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="n">redirect_uri</span> <span class="o">=</span> <span class="s2">"https://www.myredirect.com/redirect"</span>
 <span class="n">authUrl</span> <span class="o">=</span> <span class="no">Dwolla</span><span class="o">::</span><span class="no">OAuth</span><span class="p">.</span><span class="nf">get_auth_url</span><span class="p">(</span><span class="n">redirect_uri</span><span class="p">)</span>
-</code></pre></div></div><div class="code-snippet language-raw"><button class="btn alternative">copy</button><div class="code-snippet__selector">
+</code></pre></div></div><div class="code-snippet js-code-snippet language-raw"><button class="btn alternative">copy</button><div class="code-snippet__selector">
           <nav>
               <button class="selector_switch" id="raw">raw</button>
               <button class="selector_switch" id="php">php</button>
@@ -349,7 +401,7 @@ GET https://www.dwolla.com/oauth/rest/transactions?client_id=XYZ&amp;client_secr
               <button class="selector_switch" id="javascript">javascript</button>
           </nav>
         </div><div class="code-snippet__cnt highlight"><pre><code class="language-raw" data-lang="raw">not applicable
-</code></pre></div></div><h3 id='example-initiation-url-send-the-user-there'>Example initiation URL (send the user there):</h3><div class="code-snippet language-rawnohide"><button class="btn alternative">copy</button><div class="code-snippet__cnt highlight"><pre><code class="language-rawnohide" data-lang="rawnohide">https://uat.dwolla.com/oauth/v2/authenticate?client_id=PO%2BSzGAsZCE4BTG7Cw4OAL40Tpf1008mDjGBSVo6QLNfM4mD%2Ba&amp;response_type=code&amp;redirect_uri=https://developers.dwolla.com/dev/token/callback?env=sandbox&amp;scope=Balance%7CAccountInfoFull
+</code></pre></div></div><h3 id='example-initiation-url-send-the-user-there'>Example initiation URL (send the user there):</h3><div class="code-snippet js-code-snippet language-rawnohide"><button class="btn alternative">copy</button><div class="code-snippet__cnt highlight"><pre><code class="language-rawnohide" data-lang="rawnohide">https://uat.dwolla.com/oauth/v2/authenticate?client_id=PO%2BSzGAsZCE4BTG7Cw4OAL40Tpf1008mDjGBSVo6QLNfM4mD%2Ba&amp;response_type=code&amp;redirect_uri=https://developers.dwolla.com/dev/token/callback?env=sandbox&amp;scope=Balance%7CAccountInfoFull
 </code></pre></div></div>
 <p>To start the OAuth process, construct the initiation URL which the user will visit in order to grant permission to your application.  It describes the permissions your application requires (<code class="prettyprint">scope</code>), who the client application is (<code class="prettyprint">client_id</code>), and where the user should be redirected to after they grant or deny permissions to your application (<code class="prettyprint">redirect_uri</code>).</p>
 <h3 id='url-format'>URL Format:</h3>
@@ -417,14 +469,14 @@ https://www.dwolla.com/oauth/v2/authenticate?client_id={client_id}&amp;response_
 <td>Includes create customer records, manage their funding sources, and allow related money movement</td>
 </tr>
 </tbody></table>
-<h2 id='finish-user-authorization'>Finish User Authorization</h2><div class="code-snippet language-nohide"><button class="btn alternative">copy</button><div class="code-snippet__cnt highlight"><pre><code class="language-nohide" data-lang="nohide"><span class="p">{</span><span class="w">
+<h2 id='finish-user-authorization'>Finish User Authorization</h2><div class="code-snippet js-code-snippet language-nohide"><button class="btn alternative">copy</button><div class="code-snippet__cnt highlight"><pre><code class="language-nohide" data-lang="nohide"><span class="p">{</span><span class="w">
   </span><span class="nt">"client_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"JCGQXLrlfuOqdUYdTcLz3rBiCZQDRvdWIUPkw++GMuGhkem9Bo"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"client_secret"</span><span class="p">:</span><span class="w"> </span><span class="s2">"g7QLwvO37aN2HoKx1amekWi8a2g7AIuPbD5C/JSLqXIcDOxfTr"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"h6TvQZH+5BsV//O43uOJ0uRkBLk="</span><span class="p">,</span><span class="w">
   </span><span class="nt">"grant_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"authorization_code"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"redirect_uri"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://www.myredirect.com/redirect"</span><span class="w">
 </span><span class="p">}</span><span class="w">
-</span></code></pre></div></div><h3 id='successful-response'>Successful Response:</h3><div class="code-snippet language-nohide"><button class="btn alternative">copy</button><div class="code-snippet__cnt highlight"><pre><code class="language-nohide" data-lang="nohide"><span class="p">{</span><span class="w">
+</span></code></pre></div></div><h3 id='successful-response'>Successful Response:</h3><div class="code-snippet js-code-snippet language-nohide"><button class="btn alternative">copy</button><div class="code-snippet__cnt highlight"><pre><code class="language-nohide" data-lang="nohide"><span class="p">{</span><span class="w">
   </span><span class="nt">"access_token"</span><span class="p">:</span><span class="w"> </span><span class="s2">"4Qu79qhO5GkPwo4fsbuc9ve4mJKN/XnxcT34F812y6SBIyGrnP"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"expires_in"</span><span class="p">:</span><span class="w"> </span><span class="mi">3600</span><span class="p">,</span><span class="w">
   </span><span class="nt">"refresh_token"</span><span class="p">:</span><span class="w"> </span><span class="s2">"mRRYs+CXrwe67kIDa1XFIiZJsEzUEbMerrU3zlmFSqo51obG3d"</span><span class="p">,</span><span class="w">
@@ -496,7 +548,7 @@ https://www.dwolla.com/oauth/v2/authenticate?client_id={client_id}&amp;response_
 <td>Pipe <code>&#124;</code> delimited list of permission scopes granted</td>
 </tr>
 </tbody></table>
-<h2 id='refresh-authorization'>Refresh Authorization</h2><div class="code-snippet language-json"><button class="btn alternative">copy</button><div class="code-snippet__selector">
+<h2 id='refresh-authorization'>Refresh Authorization</h2><div class="code-snippet js-code-snippet language-json"><button class="btn alternative">copy</button><div class="code-snippet__selector">
           <nav>
               <button class="selector_switch" id="raw">raw</button>
               <button class="selector_switch" id="php">php</button>
@@ -510,7 +562,7 @@ https://www.dwolla.com/oauth/v2/authenticate?client_id={client_id}&amp;response_
   </span><span class="nt">"refresh_token"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Pgk+l9okjwTCfsvIvEDPrsomE1er1txeyoaAkTIBAuXza8WvZY"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"grant_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"refresh_token"</span><span class="w">
 </span><span class="p">}</span><span class="w">
-</span></code></pre></div></div><h3 id='successful-response'>Successful Response:</h3><div class="code-snippet language-nohide"><button class="btn alternative">copy</button><div class="code-snippet__cnt highlight"><pre><code class="language-nohide" data-lang="nohide"><span class="p">{</span><span class="w">
+</span></code></pre></div></div><h3 id='successful-response'>Successful Response:</h3><div class="code-snippet js-code-snippet language-nohide"><button class="btn alternative">copy</button><div class="code-snippet__cnt highlight"><pre><code class="language-nohide" data-lang="nohide"><span class="p">{</span><span class="w">
   </span><span class="nt">"access_token"</span><span class="p">:</span><span class="w"> </span><span class="s2">"4Qu79qhO5GkPwo4fsbuc9ve4mJKN/XnxcT34F812y6SBIyGrnP"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"expires_in"</span><span class="p">:</span><span class="w"> </span><span class="mi">3600</span><span class="p">,</span><span class="w">
   </span><span class="nt">"refresh_token"</span><span class="p">:</span><span class="w"> </span><span class="s2">"mRRYs+CXrwe67kIDa1XFIiZJsEzUEbMerrU3zlmFSqo51obG3d"</span><span class="p">,</span><span class="w">
@@ -518,7 +570,7 @@ https://www.dwolla.com/oauth/v2/authenticate?client_id={client_id}&amp;response_
   </span><span class="nt">"token_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"bearer"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"scope"</span><span class="p">:</span><span class="w"> </span><span class="s2">"balance|accountinfofull|send|request|transactions|contacts|funding|manageaccount|scheduled|managecustomers"</span><span class="w">
 </span><span class="p">}</span><span class="w">
-</span></code></pre></div></div><h3 id='invalid-or-expired-refresh-token-response'>Invalid or Expired Refresh Token Response:</h3><div class="code-snippet language-nohide"><button class="btn alternative">copy</button><div class="code-snippet__cnt highlight"><pre><code class="language-nohide" data-lang="nohide"><span class="p">{</span><span class="w">
+</span></code></pre></div></div><h3 id='invalid-or-expired-refresh-token-response'>Invalid or Expired Refresh Token Response:</h3><div class="code-snippet js-code-snippet language-nohide"><button class="btn alternative">copy</button><div class="code-snippet__cnt highlight"><pre><code class="language-nohide" data-lang="nohide"><span class="p">{</span><span class="w">
   </span><span class="nt">"error"</span><span class="p">:</span><span class="w"> </span><span class="s2">"access_denied"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"error_description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Invalid refresh token."</span><span class="w">
 </span><span class="p">}</span><span class="w">
@@ -588,12 +640,12 @@ https://www.dwolla.com/oauth/v2/authenticate?client_id={client_id}&amp;response_
 <td>Always <code class="prettyprint">bearer</code>.</td>
 </tr>
 </tbody></table>
-<h2 id='client-access-token'>Client Access Token</h2><div class="code-snippet language-nohide"><button class="btn alternative">copy</button><div class="code-snippet__cnt highlight"><pre><code class="language-nohide" data-lang="nohide"><span class="p">{</span><span class="w">
+<h2 id='client-access-token'>Client Access Token</h2><div class="code-snippet js-code-snippet language-nohide"><button class="btn alternative">copy</button><div class="code-snippet__cnt highlight"><pre><code class="language-nohide" data-lang="nohide"><span class="p">{</span><span class="w">
   </span><span class="nt">"client_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"JCGQXLrlfuOqdUYdTcLz3rBiCZQDRvdWIUPkw++GMuGhkem9Bo"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"client_secret"</span><span class="p">:</span><span class="w"> </span><span class="s2">"g7QLwvO37aN2HoKx1amekWi8a2g7AIuPbD5C/JSLqXIcDOxfTr"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"grant_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"client_credentials"</span><span class="w">
 </span><span class="p">}</span><span class="w">
-</span></code></pre></div></div><h3 id='successful-response'>Successful Response</h3><div class="code-snippet language-nohide"><button class="btn alternative">copy</button><div class="code-snippet__cnt highlight"><pre><code class="language-nohide" data-lang="nohide"><span class="p">{</span><span class="w">
+</span></code></pre></div></div><h3 id='successful-response'>Successful Response</h3><div class="code-snippet js-code-snippet language-nohide"><button class="btn alternative">copy</button><div class="code-snippet__cnt highlight"><pre><code class="language-nohide" data-lang="nohide"><span class="p">{</span><span class="w">
   </span><span class="nt">"access_token"</span><span class="p">:</span><span class="w"> </span><span class="s2">"SF8Vxx6H644lekdVKAAHFnqRCFy8WGqltzitpii6w2MVaZp1Nw"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"token_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"bearer"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"expires_in"</span><span class="p">:</span><span class="w"> </span><span class="mi">3600</span><span class="p">,</span><span class="w">
@@ -648,7 +700,7 @@ https://www.dwolla.com/oauth/v2/authenticate?client_id={client_id}&amp;response_
 </tr>
 </tbody></table>
 
-            <h1 id='customers'>Customers</h1><div class="code-snippet language-nohide"><button class="btn alternative">copy</button><div class="code-snippet__cnt highlight"><pre><code class="language-nohide" data-lang="nohide"><span class="p">{</span><span class="w">
+            <h1 id='customers'>Customers</h1><div class="code-snippet js-code-snippet language-nohide"><button class="btn alternative">copy</button><div class="code-snippet__cnt highlight"><pre><code class="language-nohide" data-lang="nohide"><span class="p">{</span><span class="w">
   </span><span class="nt">"_links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="nt">"self"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
       </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.dwolla.com/customers/730CA23F-06C5-45CC-AA6B-8EC2D6EE109F"</span><span class="w">
@@ -780,7 +832,7 @@ https://www.dwolla.com/oauth/v2/authenticate?client_id={client_id}&amp;response_
 <td>The customer is suspended, and may neither send nor receive funds.</td>
 </tr>
 </tbody></table>
-<h2 id='new-customer'>New Customer</h2><h3 id='unverified-customer'>Unverified customer:</h3><div class="code-snippet language-raw"><button class="btn alternative">copy</button><div class="code-snippet__selector">
+<h2 id='new-customer'>New Customer</h2><h3 id='unverified-customer'>Unverified customer:</h3><div class="code-snippet js-code-snippet language-raw"><button class="btn alternative">copy</button><div class="code-snippet__selector">
           <nav>
               <button class="selector_switch" id="raw">raw</button>
               <button class="selector_switch" id="php">php</button>
@@ -802,7 +854,7 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 
 HTTP/1.1 201 Created
 Location: https://api.dwolla.com/customers/FC451A7A-AE30-4404-AB95-E3553FCD733F
-</code></pre></div></div><div class="code-snippet language-ruby"><button class="btn alternative">copy</button><div class="code-snippet__selector">
+</code></pre></div></div><div class="code-snippet js-code-snippet language-ruby"><button class="btn alternative">copy</button><div class="code-snippet__selector">
           <nav>
               <button class="selector_switch" id="raw">raw</button>
               <button class="selector_switch" id="php">php</button>
@@ -818,7 +870,7 @@ Location: https://api.dwolla.com/customers/FC451A7A-AE30-4404-AB95-E3553FCD733F
 <span class="p">}})</span>
 
 <span class="nb">p</span> <span class="n">new_customer</span> <span class="c1"># =&gt; https://api-uat.dwolla.com/customers/FC451A7A-AE30-4404-AB95-E3553FCD733F</span>
-</code></pre></div></div><div class="code-snippet language-php"><button class="btn alternative">copy</button><div class="code-snippet__selector">
+</code></pre></div></div><div class="code-snippet js-code-snippet language-php"><button class="btn alternative">copy</button><div class="code-snippet__selector">
           <nav>
               <button class="selector_switch" id="raw">raw</button>
               <button class="selector_switch" id="php">php</button>
@@ -838,7 +890,7 @@ Location: https://api.dwolla.com/customers/FC451A7A-AE30-4404-AB95-E3553FCD733F
 
 <span class="k">print</span><span class="p">(</span><span class="nv">$new_customer</span><span class="p">);</span> <span class="c1"># =&gt; https://api-uat.dwolla.com/customers/FC451A7A-AE30-4404-AB95-E3553FCD733F
 </span><span class="cp">?&gt;</span>
-</code></pre></div></div><div class="code-snippet language-python"><button class="btn alternative">copy</button><div class="code-snippet__selector">
+</code></pre></div></div><div class="code-snippet js-code-snippet language-python"><button class="btn alternative">copy</button><div class="code-snippet__selector">
           <nav>
               <button class="selector_switch" id="raw">raw</button>
               <button class="selector_switch" id="php">php</button>
@@ -856,7 +908,7 @@ Location: https://api.dwolla.com/customers/FC451A7A-AE30-4404-AB95-E3553FCD733F
 <span class="p">})</span>
 
 <span class="k">print</span><span class="p">(</span><span class="n">new_customer</span><span class="p">)</span> <span class="c"># =&gt; https://api-uat.dwolla.com/customers/FC451A7A-AE30-4404-AB95-E3553FCD733F</span>
-</code></pre></div></div><div class="code-snippet language-javascript"><button class="btn alternative">copy</button><div class="code-snippet__selector">
+</code></pre></div></div><div class="code-snippet js-code-snippet language-javascript"><button class="btn alternative">copy</button><div class="code-snippet__selector">
           <nav>
               <button class="selector_switch" id="raw">raw</button>
               <button class="selector_switch" id="php">php</button>
@@ -865,7 +917,7 @@ Location: https://api.dwolla.com/customers/FC451A7A-AE30-4404-AB95-E3553FCD733F
               <button class="selector_switch" id="javascript">javascript</button>
           </nav>
         </div><div class="code-snippet__cnt highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="c1">// coming soon</span>
-</code></pre></div></div><h3 id='verified-customer'>Verified customer:</h3><div class="code-snippet language-raw"><button class="btn alternative">copy</button><div class="code-snippet__selector">
+</code></pre></div></div><h3 id='verified-customer'>Verified customer:</h3><div class="code-snippet js-code-snippet language-raw"><button class="btn alternative">copy</button><div class="code-snippet__selector">
           <nav>
               <button class="selector_switch" id="raw">raw</button>
               <button class="selector_switch" id="php">php</button>
@@ -895,7 +947,7 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 
 HTTP/1.1 201 Created
 Location: https://api.dwolla.com/customers/FC451A7A-AE30-4404-AB95-E3553FCD733F
-</code></pre></div></div><div class="code-snippet language-php"><button class="btn alternative">copy</button><div class="code-snippet__selector">
+</code></pre></div></div><div class="code-snippet js-code-snippet language-php"><button class="btn alternative">copy</button><div class="code-snippet__selector">
           <nav>
               <button class="selector_switch" id="raw">raw</button>
               <button class="selector_switch" id="php">php</button>
@@ -928,7 +980,7 @@ Location: https://api.dwolla.com/customers/FC451A7A-AE30-4404-AB95-E3553FCD733F
 
 <span class="k">print</span><span class="p">(</span><span class="nv">$new_customer</span><span class="p">);</span> <span class="c1"># =&gt; https://api-uat.dwolla.com/customers/AB443D36-3757-44C1-A1B4-29727FB3111C
 </span><span class="cp">?&gt;</span>
-</code></pre></div></div><div class="code-snippet language-ruby"><button class="btn alternative">copy</button><div class="code-snippet__selector">
+</code></pre></div></div><div class="code-snippet js-code-snippet language-ruby"><button class="btn alternative">copy</button><div class="code-snippet__selector">
           <nav>
               <button class="selector_switch" id="raw">raw</button>
               <button class="selector_switch" id="php">php</button>
@@ -957,7 +1009,7 @@ Location: https://api.dwolla.com/customers/FC451A7A-AE30-4404-AB95-E3553FCD733F
   <span class="ss">:phone</span> <span class="o">=&gt;</span> <span class="s1">'3478589191'</span><span class="p">}})</span>
 
 <span class="nb">p</span> <span class="n">new_customer</span> <span class="c1"># =&gt; https://api-uat.dwolla.com/customers/AB443D36-3757-44C1-A1B4-29727FB3111C</span>
-</code></pre></div></div><div class="code-snippet language-python"><button class="btn alternative">copy</button><div class="code-snippet__selector">
+</code></pre></div></div><div class="code-snippet js-code-snippet language-python"><button class="btn alternative">copy</button><div class="code-snippet__selector">
           <nav>
               <button class="selector_switch" id="raw">raw</button>
               <button class="selector_switch" id="php">php</button>
@@ -986,7 +1038,7 @@ Location: https://api.dwolla.com/customers/FC451A7A-AE30-4404-AB95-E3553FCD733F
                                             <span class="s">'phone'</span><span class="p">:</span> <span class="s">'3478589191'</span><span class="p">})</span>
 
 <span class="k">print</span><span class="p">(</span><span class="n">new_customer</span><span class="p">)</span> <span class="c"># =&gt; https://api-uat.dwolla.com/customers/AB443D36-3757-44C1-A1B4-29727FB3111C</span>
-</code></pre></div></div><div class="code-snippet language-javascript"><button class="btn alternative">copy</button><div class="code-snippet__selector">
+</code></pre></div></div><div class="code-snippet js-code-snippet language-javascript"><button class="btn alternative">copy</button><div class="code-snippet__selector">
           <nav>
               <button class="selector_switch" id="raw">raw</button>
               <button class="selector_switch" id="php">php</button>
@@ -995,7 +1047,7 @@ Location: https://api.dwolla.com/customers/FC451A7A-AE30-4404-AB95-E3553FCD733F
               <button class="selector_switch" id="javascript">javascript</button>
           </nav>
         </div><div class="code-snippet__cnt highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="c1">// coming soon</span>
-</code></pre></div></div><h3 id='validation-error'>Validation error:</h3><div class="code-snippet language-nohide"><button class="btn alternative">copy</button><div class="code-snippet__cnt highlight"><pre><code class="language-nohide" data-lang="nohide"><span class="p">{</span><span class="w">
+</code></pre></div></div><h3 id='validation-error'>Validation error:</h3><div class="code-snippet js-code-snippet language-nohide"><button class="btn alternative">copy</button><div class="code-snippet__cnt highlight"><pre><code class="language-nohide" data-lang="nohide"><span class="p">{</span><span class="w">
   </span><span class="nt">"code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ValidationError"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Phone invalid."</span><span class="w">
 </span><span class="p">}</span><span class="w">
@@ -1123,7 +1175,7 @@ Location: https://api.dwolla.com/customers/FC451A7A-AE30-4404-AB95-E3553FCD733F
 <td>Not authorized to create customers.</td>
 </tr>
 </tbody></table>
-<h2 id='retry-verification'>Retry Verification</h2><h3 id='customer-must-be-in-the-retry-state'>Customer must be in the retry state:</h3><div class="code-snippet language-nohide"><button class="btn alternative">copy</button><div class="code-snippet__cnt highlight"><pre><code class="language-nohide" data-lang="nohide"><span class="p">{</span><span class="w">
+<h2 id='retry-verification'>Retry Verification</h2><h3 id='customer-must-be-in-the-retry-state'>Customer must be in the retry state:</h3><div class="code-snippet js-code-snippet language-nohide"><button class="btn alternative">copy</button><div class="code-snippet__cnt highlight"><pre><code class="language-nohide" data-lang="nohide"><span class="p">{</span><span class="w">
   </span><span class="nt">"_links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="nt">"self"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
       </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.dwolla.com/customers/730CA23F-06C5-45CC-AA6B-8EC2D6EE109F"</span><span class="w">
@@ -1146,7 +1198,7 @@ Location: https://api.dwolla.com/customers/FC451A7A-AE30-4404-AB95-E3553FCD733F
   </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"retry"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"created"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-10-06T01:18:26.923Z"</span><span class="w">
 </span><span class="p">}</span><span class="w">
-</span></code></pre></div></div><h3 id='request-and-response'>Request and Response:</h3><div class="code-snippet language-raw"><button class="btn alternative">copy</button><div class="code-snippet__selector">
+</span></code></pre></div></div><h3 id='request-and-response'>Request and Response:</h3><div class="code-snippet js-code-snippet language-raw"><button class="btn alternative">copy</button><div class="code-snippet__selector">
           <nav>
               <button class="selector_switch" id="raw">raw</button>
               <button class="selector_switch" id="php">php</button>
@@ -1176,7 +1228,7 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 
 HTTP/1.1 200 OK
 Location: https://api.dwolla.com/customers/FC451A7A-AE30-4404-AB95-E3553FCD733F
-</code></pre></div></div><div class="code-snippet language-php"><button class="btn alternative">copy</button><div class="code-snippet__selector">
+</code></pre></div></div><div class="code-snippet js-code-snippet language-php"><button class="btn alternative">copy</button><div class="code-snippet__selector">
           <nav>
               <button class="selector_switch" id="raw">raw</button>
               <button class="selector_switch" id="php">php</button>
@@ -1206,7 +1258,7 @@ Location: https://api.dwolla.com/customers/FC451A7A-AE30-4404-AB95-E3553FCD733F
 
 <span class="k">print</span><span class="p">(</span><span class="nv">$retryCustomer</span><span class="p">);</span> <span class="c1"># =&gt; https://api.dwolla.com/customers/FC451A7A-AE30-4404-AB95-E3553FCD733F
 </span><span class="cp">?&gt;</span>
-</code></pre></div></div><div class="code-snippet language-ruby"><button class="btn alternative">copy</button><div class="code-snippet__selector">
+</code></pre></div></div><div class="code-snippet js-code-snippet language-ruby"><button class="btn alternative">copy</button><div class="code-snippet__selector">
           <nav>
               <button class="selector_switch" id="raw">raw</button>
               <button class="selector_switch" id="php">php</button>
@@ -1232,7 +1284,7 @@ Location: https://api.dwolla.com/customers/FC451A7A-AE30-4404-AB95-E3553FCD733F
 <span class="p">}})</span>
 
 <span class="nb">p</span> <span class="n">retry_customer</span> <span class="c1"># =&gt; https://api.dwolla.com/customers/FC451A7A-AE30-4404-AB95-E3553FCD733F</span>
-</code></pre></div></div><div class="code-snippet language-python"><button class="btn alternative">copy</button><div class="code-snippet__selector">
+</code></pre></div></div><div class="code-snippet js-code-snippet language-python"><button class="btn alternative">copy</button><div class="code-snippet__selector">
           <nav>
               <button class="selector_switch" id="raw">raw</button>
               <button class="selector_switch" id="php">php</button>
@@ -1260,7 +1312,7 @@ Location: https://api.dwolla.com/customers/FC451A7A-AE30-4404-AB95-E3553FCD733F
 <span class="p">})</span>
 
 <span class="k">print</span><span class="p">(</span><span class="n">retry_customer</span><span class="p">)</span> <span class="c"># =&gt; https://api.dwolla.com/customers/FC451A7A-AE30-4404-AB95-E3553FCD733F</span>
-</code></pre></div></div><div class="code-snippet language-javascript"><button class="btn alternative">copy</button><div class="code-snippet__selector">
+</code></pre></div></div><div class="code-snippet js-code-snippet language-javascript"><button class="btn alternative">copy</button><div class="code-snippet__selector">
           <nav>
               <button class="selector_switch" id="raw">raw</button>
               <button class="selector_switch" id="php">php</button>
@@ -1269,11 +1321,11 @@ Location: https://api.dwolla.com/customers/FC451A7A-AE30-4404-AB95-E3553FCD733F
               <button class="selector_switch" id="javascript">javascript</button>
           </nav>
         </div><div class="code-snippet__cnt highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="c1">// coming soon</span>
-</code></pre></div></div><h3 id='validation-error'>Validation error:</h3><div class="code-snippet language-nohide"><button class="btn alternative">copy</button><div class="code-snippet__cnt highlight"><pre><code class="language-nohide" data-lang="nohide"><span class="p">{</span><span class="w">
+</code></pre></div></div><h3 id='validation-error'>Validation error:</h3><div class="code-snippet js-code-snippet language-nohide"><button class="btn alternative">copy</button><div class="code-snippet__cnt highlight"><pre><code class="language-nohide" data-lang="nohide"><span class="p">{</span><span class="w">
   </span><span class="nt">"code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ValidationError"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Phone invalid."</span><span class="w">
 </span><span class="p">}</span><span class="w">
-</span></code></pre></div></div><h3 id='if-you-try-more-than-once-or-customer-is-not-in-retry-state'>If you try more than once, or customer is not in retry state:</h3><div class="code-snippet language-nohide"><button class="btn alternative">copy</button><div class="code-snippet__cnt highlight"><pre><code class="language-nohide" data-lang="nohide"><span class="p">{</span><span class="w">
+</span></code></pre></div></div><h3 id='if-you-try-more-than-once-or-customer-is-not-in-retry-state'>If you try more than once, or customer is not in retry state:</h3><div class="code-snippet js-code-snippet language-nohide"><button class="btn alternative">copy</button><div class="code-snippet__cnt highlight"><pre><code class="language-nohide" data-lang="nohide"><span class="p">{</span><span class="w">
   </span><span class="nt">"code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"InvalidResourceState"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Resource cannot be modified."</span><span class="w">
 </span><span class="p">}</span><span class="w">
@@ -1372,7 +1424,7 @@ Location: https://api.dwolla.com/customers/FC451A7A-AE30-4404-AB95-E3553FCD733F
 <td>Not authorized to create customers.</td>
 </tr>
 </tbody></table>
-<h2 id='list-customers'>List Customers</h2><h3 id='request-and-response'>Request and Response:</h3><div class="code-snippet language-raw"><button class="btn alternative">copy</button><div class="code-snippet__selector">
+<h2 id='list-customers'>List Customers</h2><h3 id='request-and-response'>Request and Response:</h3><div class="code-snippet js-code-snippet language-raw"><button class="btn alternative">copy</button><div class="code-snippet__selector">
           <nav>
               <button class="selector_switch" id="raw">raw</button>
               <button class="selector_switch" id="php">php</button>
@@ -1416,7 +1468,7 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
   },
   "total": 1
 }
-</code></pre></div></div><div class="code-snippet language-ruby"><button class="btn alternative">copy</button><div class="code-snippet__selector">
+</code></pre></div></div><div class="code-snippet js-code-snippet language-ruby"><button class="btn alternative">copy</button><div class="code-snippet__selector">
           <nav>
               <button class="selector_switch" id="raw">raw</button>
               <button class="selector_switch" id="php">php</button>
@@ -1426,7 +1478,7 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
           </nav>
         </div><div class="code-snippet__cnt highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="n">my_custies</span> <span class="o">=</span> <span class="no">DwollaSwagger</span><span class="o">::</span><span class="no">CustomersApi</span><span class="p">.</span><span class="nf">list</span><span class="p">(</span><span class="ss">:limit</span> <span class="o">=&gt;</span> <span class="mi">10</span><span class="p">)</span>
 <span class="nb">p</span> <span class="n">my_custies</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="nf">firstName</span> <span class="c1"># =&gt; "Bob"</span>
-</code></pre></div></div><div class="code-snippet language-php"><button class="btn alternative">copy</button><div class="code-snippet__selector">
+</code></pre></div></div><div class="code-snippet js-code-snippet language-php"><button class="btn alternative">copy</button><div class="code-snippet__selector">
           <nav>
               <button class="selector_switch" id="raw">raw</button>
               <button class="selector_switch" id="php">php</button>
@@ -1440,7 +1492,7 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 <span class="nv">$myCusties</span> <span class="o">=</span> <span class="nv">$customersApi</span><span class="o">-&gt;</span><span class="na">list</span><span class="p">(</span><span class="mi">10</span><span class="p">);</span>
 <span class="k">print</span><span class="p">(</span><span class="nv">$myCusties</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">-&gt;</span><span class="na">firstName</span><span class="p">);</span> <span class="c1"># =&gt; "Bob"
 </span><span class="cp">?&gt;</span>
-</code></pre></div></div><div class="code-snippet language-python"><button class="btn alternative">copy</button><div class="code-snippet__selector">
+</code></pre></div></div><div class="code-snippet js-code-snippet language-python"><button class="btn alternative">copy</button><div class="code-snippet__selector">
           <nav>
               <button class="selector_switch" id="raw">raw</button>
               <button class="selector_switch" id="php">php</button>
@@ -1453,7 +1505,7 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 <span class="n">my_custies</span> <span class="o">=</span> <span class="n">customers_api</span><span class="o">.</span><span class="nb">list</span><span class="p">(</span><span class="n">limit</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
 
 <span class="k">print</span><span class="p">(</span><span class="n">my_custies</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">firstName</span><span class="p">)</span> <span class="c"># =&gt; Bob</span>
-</code></pre></div></div><div class="code-snippet language-javascript"><button class="btn alternative">copy</button><div class="code-snippet__selector">
+</code></pre></div></div><div class="code-snippet js-code-snippet language-javascript"><button class="btn alternative">copy</button><div class="code-snippet__selector">
           <nav>
               <button class="selector_switch" id="raw">raw</button>
               <button class="selector_switch" id="php">php</button>
@@ -1494,7 +1546,7 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 </tbody></table>
 <h2 id='get-a-customer-by-id'>Get a Customer by ID</h2>
 <p>Each <code class="prettyprint">Customer</code> ID is a part of its location resource. The developer can pass either an <code class="prettyprint">id</code> or the entire <code class="prettyprint">location</code> resource to make this request.</p>
-<h3 id='request-and-response'>Request and Response:</h3><div class="code-snippet language-raw"><button class="btn alternative">copy</button><div class="code-snippet__selector">
+<h3 id='request-and-response'>Request and Response:</h3><div class="code-snippet js-code-snippet language-raw"><button class="btn alternative">copy</button><div class="code-snippet__selector">
           <nav>
               <button class="selector_switch" id="raw">raw</button>
               <button class="selector_switch" id="php">php</button>
@@ -1520,7 +1572,7 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
   "status": "unverified",
   "created": "2015-09-03T23:56:10.023Z"
 }
-</code></pre></div></div><div class="code-snippet language-ruby"><button class="btn alternative">copy</button><div class="code-snippet__selector">
+</code></pre></div></div><div class="code-snippet js-code-snippet language-ruby"><button class="btn alternative">copy</button><div class="code-snippet__selector">
           <nav>
               <button class="selector_switch" id="raw">raw</button>
               <button class="selector_switch" id="php">php</button>
@@ -1532,7 +1584,7 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 
 <span class="n">retrieved</span> <span class="o">=</span> <span class="no">DwollaSwagger</span><span class="o">::</span><span class="no">CustomersApi</span><span class="p">.</span><span class="nf">get_customer</span><span class="p">(</span><span class="n">a_customer</span><span class="p">)</span>
 <span class="nb">p</span> <span class="n">retrieved</span><span class="p">.</span><span class="nf">firstName</span> <span class="c1"># =&gt; "Bob"</span>
-</code></pre></div></div><div class="code-snippet language-php"><button class="btn alternative">copy</button><div class="code-snippet__selector">
+</code></pre></div></div><div class="code-snippet js-code-snippet language-php"><button class="btn alternative">copy</button><div class="code-snippet__selector">
           <nav>
               <button class="selector_switch" id="raw">raw</button>
               <button class="selector_switch" id="php">php</button>
@@ -1548,7 +1600,7 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 <span class="nv">$retrieved</span> <span class="o">=</span> <span class="nv">$customersApi</span><span class="o">-&gt;</span><span class="na">getCustomer</span><span class="p">(</span><span class="nv">$aCustomer</span><span class="p">);</span>
 <span class="k">print</span><span class="p">(</span><span class="nv">$retrieved</span><span class="o">-&gt;</span><span class="na">firstName</span><span class="p">);</span> <span class="c1"># =&gt; "Bob"
 </span><span class="cp">?&gt;</span>
-</code></pre></div></div><div class="code-snippet language-python"><button class="btn alternative">copy</button><div class="code-snippet__selector">
+</code></pre></div></div><div class="code-snippet js-code-snippet language-python"><button class="btn alternative">copy</button><div class="code-snippet__selector">
           <nav>
               <button class="selector_switch" id="raw">raw</button>
               <button class="selector_switch" id="php">php</button>
@@ -1562,7 +1614,7 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 
 <span class="n">retrieved</span> <span class="o">=</span> <span class="n">customers_api</span><span class="o">.</span><span class="n">get_customer</span><span class="p">(</span><span class="n">a_customer</span><span class="p">)</span>
 <span class="k">print</span><span class="p">(</span><span class="n">retrieved</span><span class="o">.</span><span class="n">firstName</span><span class="p">)</span> <span class="c"># =&gt; Bob</span>
-</code></pre></div></div><div class="code-snippet language-javascript"><button class="btn alternative">copy</button><div class="code-snippet__selector">
+</code></pre></div></div><div class="code-snippet js-code-snippet language-javascript"><button class="btn alternative">copy</button><div class="code-snippet__selector">
           <nav>
               <button class="selector_switch" id="raw">raw</button>
               <button class="selector_switch" id="php">php</button>
@@ -1607,7 +1659,7 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 </tr>
 </tbody></table>
 
-            <h1 id='documents'>Documents</h1><div class="code-snippet language-nohide"><button class="btn alternative">copy</button><div class="code-snippet__cnt highlight"><pre><code class="language-nohide" data-lang="nohide"><span class="p">{</span><span class="w">
+            <h1 id='documents'>Documents</h1><div class="code-snippet js-code-snippet language-nohide"><button class="btn alternative">copy</button><div class="code-snippet__cnt highlight"><pre><code class="language-nohide" data-lang="nohide"><span class="p">{</span><span class="w">
   </span><span class="nt">"_links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="nt">"self"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
       </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.dwolla.com/documents/56502f7a-fa59-4a2f-8579-0f8bc9d7b9cc"</span><span class="w">
@@ -1644,7 +1696,7 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 <td>ISO 8601 Timestamp of document upload time and date</td>
 </tr>
 </tbody></table>
-<h2 id='create-a-document'>Create a Document</h2><h3 id='request-and-response'>Request and Response</h3><div class="code-snippet language-nohide"><button class="btn alternative">copy</button><div class="code-snippet__cnt highlight"><pre><code class="language-nohide" data-lang="nohide">curl -X POST 
+<h2 id='create-a-document'>Create a Document</h2><h3 id='request-and-response'>Request and Response</h3><div class="code-snippet js-code-snippet language-nohide"><button class="btn alternative">copy</button><div class="code-snippet__cnt highlight"><pre><code class="language-nohide" data-lang="nohide">curl -X POST 
 \ -H "Authorization: Bearer tJlyMNW6e3QVbzHjeJ9JvAPsRglFjwnba4NdfCzsYJm7XbckcR" 
 \ -H "Accept: application/vnd.dwolla.v1.hal+json" 
 \ -H "Cache-Control: no-cache" 
@@ -1684,7 +1736,7 @@ Location: https://api.dwolla.com/documents/11fe0bab-39bd-42ee-bb39-275afcc050d0
 </tr>
 </thead><tbody>
 </tbody></table>
-<h2 id='list-documents'>List Documents</h2><h3 id='request-and-response'>Request and Response</h3><div class="code-snippet language-raw"><button class="btn alternative">copy</button><div class="code-snippet__selector">
+<h2 id='list-documents'>List Documents</h2><h3 id='request-and-response'>Request and Response</h3><div class="code-snippet js-code-snippet language-raw"><button class="btn alternative">copy</button><div class="code-snippet__selector">
           <nav>
               <button class="selector_switch" id="raw">raw</button>
               <button class="selector_switch" id="php">php</button>
@@ -1732,7 +1784,7 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
   },
   "total": 2
 }
-</code></pre></div></div><div class="code-snippet language-ruby"><button class="btn alternative">copy</button><div class="code-snippet__selector">
+</code></pre></div></div><div class="code-snippet js-code-snippet language-ruby"><button class="btn alternative">copy</button><div class="code-snippet__selector">
           <nav>
               <button class="selector_switch" id="raw">raw</button>
               <button class="selector_switch" id="php">php</button>
@@ -1744,7 +1796,7 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 
 <span class="n">retrieved</span> <span class="o">=</span> <span class="no">DwollaSwagger</span><span class="o">::</span><span class="no">CustomersApi</span><span class="p">.</span><span class="nf">get_customer_documents</span><span class="p">(</span><span class="n">a_customer</span><span class="p">)</span>
 <span class="nb">p</span> <span class="n">retrieved</span><span class="p">.</span><span class="nf">firstName</span> <span class="c1"># =&gt; "Bob"</span>
-</code></pre></div></div><div class="code-snippet language-php"><button class="btn alternative">copy</button><div class="code-snippet__selector">
+</code></pre></div></div><div class="code-snippet js-code-snippet language-php"><button class="btn alternative">copy</button><div class="code-snippet__selector">
           <nav>
               <button class="selector_switch" id="raw">raw</button>
               <button class="selector_switch" id="php">php</button>
@@ -1760,7 +1812,7 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 <span class="nv">$retrieved</span> <span class="o">=</span> <span class="nv">$customersApi</span><span class="o">-&gt;</span><span class="na">getCustomerDocuments</span><span class="p">(</span><span class="nv">$aCustomer</span><span class="p">);</span>
 <span class="k">print</span><span class="p">(</span><span class="nv">$retrieved</span><span class="o">-&gt;</span><span class="na">total</span><span class="p">);</span> <span class="c1"># =&gt; "2"
 </span><span class="cp">?&gt;</span>
-</code></pre></div></div><div class="code-snippet language-python"><button class="btn alternative">copy</button><div class="code-snippet__selector">
+</code></pre></div></div><div class="code-snippet js-code-snippet language-python"><button class="btn alternative">copy</button><div class="code-snippet__selector">
           <nav>
               <button class="selector_switch" id="raw">raw</button>
               <button class="selector_switch" id="php">php</button>
@@ -1774,7 +1826,7 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 
 <span class="n">retrieved</span> <span class="o">=</span> <span class="n">customers_api</span><span class="o">.</span><span class="n">get_customer_documents</span><span class="p">(</span><span class="n">a_customer</span><span class="p">)</span>
 <span class="k">print</span><span class="p">(</span><span class="n">retrieved</span><span class="o">.</span><span class="n">total</span><span class="p">)</span> <span class="c"># =&gt; 2</span>
-</code></pre></div></div><div class="code-snippet language-javascript"><button class="btn alternative">copy</button><div class="code-snippet__selector">
+</code></pre></div></div><div class="code-snippet js-code-snippet language-javascript"><button class="btn alternative">copy</button><div class="code-snippet__selector">
           <nav>
               <button class="selector_switch" id="raw">raw</button>
               <button class="selector_switch" id="php">php</button>
@@ -1796,7 +1848,7 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 </tr>
 </thead><tbody>
 </tbody></table>
-<h2 id='retrieve-a-document'>Retrieve a Document</h2><h3 id='request-and-response'>Request and Response</h3><div class="code-snippet language-raw"><button class="btn alternative">copy</button><div class="code-snippet__selector">
+<h2 id='retrieve-a-document'>Retrieve a Document</h2><h3 id='request-and-response'>Request and Response</h3><div class="code-snippet js-code-snippet language-raw"><button class="btn alternative">copy</button><div class="code-snippet__selector">
           <nav>
               <button class="selector_switch" id="raw">raw</button>
               <button class="selector_switch" id="php">php</button>
@@ -1821,7 +1873,7 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
   "type": "passport",
   "created": "2015-09-29T21:42:16.000Z"
 }
-</code></pre></div></div><div class="code-snippet language-ruby"><button class="btn alternative">copy</button><div class="code-snippet__selector">
+</code></pre></div></div><div class="code-snippet js-code-snippet language-ruby"><button class="btn alternative">copy</button><div class="code-snippet__selector">
           <nav>
               <button class="selector_switch" id="raw">raw</button>
               <button class="selector_switch" id="php">php</button>
@@ -1833,7 +1885,7 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 
 <span class="n">retrieved</span> <span class="o">=</span> <span class="no">DwollaSwagger</span><span class="o">::</span><span class="no">DocumentsApi</span><span class="p">.</span><span class="nf">get_customer</span><span class="p">(</span><span class="n">a_document</span><span class="p">)</span>
 <span class="nb">p</span> <span class="n">retrieved</span><span class="p">.</span><span class="nf">type</span> <span class="c1"># =&gt; "passport"</span>
-</code></pre></div></div><div class="code-snippet language-php"><button class="btn alternative">copy</button><div class="code-snippet__selector">
+</code></pre></div></div><div class="code-snippet js-code-snippet language-php"><button class="btn alternative">copy</button><div class="code-snippet__selector">
           <nav>
               <button class="selector_switch" id="raw">raw</button>
               <button class="selector_switch" id="php">php</button>
@@ -1849,7 +1901,7 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 <span class="nv">$retrieved</span> <span class="o">=</span> <span class="nv">$documentsApi</span><span class="o">-&gt;</span><span class="na">getCustomer</span><span class="p">(</span><span class="nv">$aCustomer</span><span class="p">);</span>
 <span class="k">print</span><span class="p">(</span><span class="nv">$retrieved</span><span class="o">-&gt;</span><span class="na">type</span><span class="p">);</span> <span class="c1"># =&gt; "passport"
 </span><span class="cp">?&gt;</span>
-</code></pre></div></div><div class="code-snippet language-python"><button class="btn alternative">copy</button><div class="code-snippet__selector">
+</code></pre></div></div><div class="code-snippet js-code-snippet language-python"><button class="btn alternative">copy</button><div class="code-snippet__selector">
           <nav>
               <button class="selector_switch" id="raw">raw</button>
               <button class="selector_switch" id="php">php</button>
@@ -1863,7 +1915,7 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 
 <span class="n">retrieved</span> <span class="o">=</span> <span class="n">documents_api</span><span class="o">.</span><span class="n">get_customer</span><span class="p">(</span><span class="n">a_document</span><span class="p">)</span>
 <span class="k">print</span><span class="p">(</span><span class="n">retrieved</span><span class="o">.</span><span class="nb">type</span><span class="p">)</span> <span class="c"># =&gt; "passport"</span>
-</code></pre></div></div><div class="code-snippet language-javascript"><button class="btn alternative">copy</button><div class="code-snippet__selector">
+</code></pre></div></div><div class="code-snippet js-code-snippet language-javascript"><button class="btn alternative">copy</button><div class="code-snippet__selector">
           <nav>
               <button class="selector_switch" id="raw">raw</button>
               <button class="selector_switch" id="php">php</button>
@@ -1886,7 +1938,7 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 </thead><tbody>
 </tbody></table>
 
-            <h1 id='funding-sources'>Funding Sources</h1><div class="code-snippet language-nohide"><button class="btn alternative">copy</button><div class="code-snippet__cnt highlight"><pre><code class="language-nohide" data-lang="nohide"><span class="p">{</span><span class="w">
+            <h1 id='funding-sources'>Funding Sources</h1><div class="code-snippet js-code-snippet language-nohide"><button class="btn alternative">copy</button><div class="code-snippet__cnt highlight"><pre><code class="language-nohide" data-lang="nohide"><span class="p">{</span><span class="w">
     </span><span class="nt">"routingNumber"</span><span class="p">:</span><span class="w"> </span><span class="s2">"87654321"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"accountNumber"</span><span class="p">:</span><span class="w"> </span><span class="s2">"12345678"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"checking"</span><span class="p">,</span><span class="w">
@@ -1922,7 +1974,7 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 <td>ISO-8601 timestamp.</td>
 </tr>
 </tbody></table>
-<h2 id='new-funding-source-customer'>New Funding Source (Customer)</h2><h3 id='request-and-response'>Request and Response:</h3><div class="code-snippet language-raw"><button class="btn alternative">copy</button><div class="code-snippet__selector">
+<h2 id='new-funding-source-customer'>New Funding Source (Customer)</h2><h3 id='request-and-response'>Request and Response:</h3><div class="code-snippet js-code-snippet language-raw"><button class="btn alternative">copy</button><div class="code-snippet__selector">
           <nav>
               <button class="selector_switch" id="raw">raw</button>
               <button class="selector_switch" id="php">php</button>
@@ -1943,7 +1995,7 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 
 HTTP/1.1 201 Created
 Location: https://api.dwolla.com/funding-sources/AB443D36-3757-44C1-A1B4-29727FB3111C
-</code></pre></div></div><div class="code-snippet language-php"><button class="btn alternative">copy</button><div class="code-snippet__selector">
+</code></pre></div></div><div class="code-snippet js-code-snippet language-php"><button class="btn alternative">copy</button><div class="code-snippet__selector">
           <nav>
               <button class="selector_switch" id="raw">raw</button>
               <button class="selector_switch" id="php">php</button>
@@ -1962,7 +2014,7 @@ Location: https://api.dwolla.com/funding-sources/AB443D36-3757-44C1-A1B4-29727FB
 
 <span class="k">print</span><span class="p">(</span><span class="nv">$new_fs</span><span class="p">);</span> <span class="c1"># =&gt; https://api-uat.dwolla.com/funding-sources/375c6781-2a17-476c-84f7-db7d2f6ffb31
 </span><span class="cp">?&gt;</span>
-</code></pre></div></div><div class="code-snippet language-ruby"><button class="btn alternative">copy</button><div class="code-snippet__selector">
+</code></pre></div></div><div class="code-snippet js-code-snippet language-ruby"><button class="btn alternative">copy</button><div class="code-snippet__selector">
           <nav>
               <button class="selector_switch" id="raw">raw</button>
               <button class="selector_switch" id="php">php</button>
@@ -1979,7 +2031,7 @@ Location: https://api.dwolla.com/funding-sources/AB443D36-3757-44C1-A1B4-29727FB
                                                  <span class="p">}})</span>
 
 <span class="nb">p</span> <span class="n">new_fs</span> <span class="c1"># =&gt; https://api-uat.dwolla.com/funding-sources/375c6781-2a17-476c-84f7-db7d2f6ffb31</span>
-</code></pre></div></div><div class="code-snippet language-python"><button class="btn alternative">copy</button><div class="code-snippet__selector">
+</code></pre></div></div><div class="code-snippet js-code-snippet language-python"><button class="btn alternative">copy</button><div class="code-snippet__selector">
           <nav>
               <button class="selector_switch" id="raw">raw</button>
               <button class="selector_switch" id="php">php</button>
@@ -1995,7 +2047,7 @@ Location: https://api.dwolla.com/funding-sources/AB443D36-3757-44C1-A1B4-29727FB
         <span class="s">"name"</span><span class="p">:</span> <span class="s">"John Doe - Checking"</span><span class="p">})</span>
 
 <span class="n">p</span> <span class="n">new_fs</span> <span class="c"># =&gt; https://api-uat.dwolla.com/funding-sources/375c6781-2a17-476c-84f7-db7d2f6ffb31</span>
-</code></pre></div></div><div class="code-snippet language-javascript"><button class="btn alternative">copy</button><div class="code-snippet__selector">
+</code></pre></div></div><div class="code-snippet js-code-snippet language-javascript"><button class="btn alternative">copy</button><div class="code-snippet__selector">
           <nav>
               <button class="selector_switch" id="raw">raw</button>
               <button class="selector_switch" id="php">php</button>
@@ -2054,7 +2106,7 @@ Location: https://api.dwolla.com/funding-sources/AB443D36-3757-44C1-A1B4-29727FB
 <td>Not authorized to create funding source.</td>
 </tr>
 </tbody></table>
-<h2 id='list-funding-sources-customer'>List Funding Sources (Customer)</h2><h3 id='request-and-response'>Request and Response</h3><div class="code-snippet language-raw"><button class="btn alternative">copy</button><div class="code-snippet__selector">
+<h2 id='list-funding-sources-customer'>List Funding Sources (Customer)</h2><h3 id='request-and-response'>Request and Response</h3><div class="code-snippet js-code-snippet language-raw"><button class="btn alternative">copy</button><div class="code-snippet__selector">
           <nav>
               <button class="selector_switch" id="raw">raw</button>
               <button class="selector_switch" id="php">php</button>
@@ -2115,7 +2167,7 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
     ]
   }
 }
-</code></pre></div></div><div class="code-snippet language-ruby"><button class="btn alternative">copy</button><div class="code-snippet__selector">
+</code></pre></div></div><div class="code-snippet js-code-snippet language-ruby"><button class="btn alternative">copy</button><div class="code-snippet__selector">
           <nav>
               <button class="selector_switch" id="raw">raw</button>
               <button class="selector_switch" id="php">php</button>
@@ -2127,7 +2179,7 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 
 <span class="n">acct_fs</span> <span class="o">=</span> <span class="no">DwollaSwagger</span><span class="o">::</span><span class="no">FundingsourcesApi</span><span class="p">.</span><span class="nf">get_customer_transfers</span><span class="p">(</span><span class="n">customer</span><span class="p">)</span>
 <span class="nb">p</span> <span class="n">acct_fs</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="nf">name</span> <span class="c1"># =&gt; "John Doe - Checking account1"</span>
-</code></pre></div></div><div class="code-snippet language-php"><button class="btn alternative">copy</button><div class="code-snippet__selector">
+</code></pre></div></div><div class="code-snippet js-code-snippet language-php"><button class="btn alternative">copy</button><div class="code-snippet__selector">
           <nav>
               <button class="selector_switch" id="raw">raw</button>
               <button class="selector_switch" id="php">php</button>
@@ -2143,7 +2195,7 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 <span class="nv">$acctFs</span> <span class="o">=</span> <span class="nv">$fsApi</span><span class="o">-&gt;</span><span class="na">getcustomerTransfers</span><span class="p">(</span><span class="nv">$customer</span><span class="p">);</span>
 <span class="k">print</span><span class="p">(</span><span class="nv">$acctFs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">-&gt;</span><span class="na">name</span><span class="p">);</span> <span class="c1"># =&gt; "John Doe - Checking account1"
 </span><span class="cp">?&gt;</span>
-</code></pre></div></div><div class="code-snippet language-python"><button class="btn alternative">copy</button><div class="code-snippet__selector">
+</code></pre></div></div><div class="code-snippet js-code-snippet language-python"><button class="btn alternative">copy</button><div class="code-snippet__selector">
           <nav>
               <button class="selector_switch" id="raw">raw</button>
               <button class="selector_switch" id="php">php</button>
@@ -2157,7 +2209,7 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 <span class="n">acct_fs</span> <span class="o">=</span> <span class="n">fs_api</span><span class="o">.</span><span class="n">get_customer_transfers</span><span class="p">(</span><span class="n">customer</span><span class="p">)</span>
 
 <span class="k">print</span><span class="p">(</span><span class="n">acct_fs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">name</span><span class="p">)</span> <span class="c"># =&gt; John Doe - Checking account1</span>
-</code></pre></div></div><div class="code-snippet language-javascript"><button class="btn alternative">copy</button><div class="code-snippet__selector">
+</code></pre></div></div><div class="code-snippet js-code-snippet language-javascript"><button class="btn alternative">copy</button><div class="code-snippet__selector">
           <nav>
               <button class="selector_switch" id="raw">raw</button>
               <button class="selector_switch" id="php">php</button>
@@ -2203,7 +2255,7 @@ GET https://api.dwolla.com/customers/{id}/funding-sources
 <td>Customer not found.</td>
 </tr>
 </tbody></table>
-<h2 id='new-funding-source-account-draft'>New Funding Source (Account) [DRAFT]</h2><h3 id='request-and-response'>Request and Response</h3><div class="code-snippet language-nohide"><button class="btn alternative">copy</button><div class="code-snippet__cnt highlight"><pre><code class="language-nohide" data-lang="nohide">POST /accounts/99bfb139-eadd-4cdf-b346-7504f0c16c60/funding-sources
+<h2 id='new-funding-source-account-draft'>New Funding Source (Account) [DRAFT]</h2><h3 id='request-and-response'>Request and Response</h3><div class="code-snippet js-code-snippet language-nohide"><button class="btn alternative">copy</button><div class="code-snippet__cnt highlight"><pre><code class="language-nohide" data-lang="nohide">POST /accounts/99bfb139-eadd-4cdf-b346-7504f0c16c60/funding-sources
 Content-Type: application/vnd.dwolla.v1.hal+json
 Accept: application/vnd.dwolla.v1.hal+json
 Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
@@ -2264,7 +2316,7 @@ Location: https://api.dwolla.com/accounts/99bfb139-eadd-4cdf-b346-7504f0c16c60/f
 <td>Not authorized to create funding source.</td>
 </tr>
 </tbody></table>
-<h2 id='list-funding-sources-account'>List Funding Sources (Account)</h2><h3 id='request-and-response'>Request and Response:</h3><div class="code-snippet language-raw"><button class="btn alternative">copy</button><div class="code-snippet__selector">
+<h2 id='list-funding-sources-account'>List Funding Sources (Account)</h2><h3 id='request-and-response'>Request and Response:</h3><div class="code-snippet js-code-snippet language-raw"><button class="btn alternative">copy</button><div class="code-snippet__selector">
           <nav>
               <button class="selector_switch" id="raw">raw</button>
               <button class="selector_switch" id="php">php</button>
@@ -2322,7 +2374,7 @@ Authorization: Bearer 0Sn0W6kzNicvoWhDbQcVSKLRUpGjIdlPSEYyrHqrDDoRnQwE7Q
     ]
   }
 }
-</code></pre></div></div><div class="code-snippet language-ruby"><button class="btn alternative">copy</button><div class="code-snippet__selector">
+</code></pre></div></div><div class="code-snippet js-code-snippet language-ruby"><button class="btn alternative">copy</button><div class="code-snippet__selector">
           <nav>
               <button class="selector_switch" id="raw">raw</button>
               <button class="selector_switch" id="php">php</button>
@@ -2333,7 +2385,7 @@ Authorization: Bearer 0Sn0W6kzNicvoWhDbQcVSKLRUpGjIdlPSEYyrHqrDDoRnQwE7Q
         </div><div class="code-snippet__cnt highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="n">funding_sources</span> <span class="o">=</span> <span class="no">DwollaSwagger</span><span class="o">::</span><span class="no">FundingsourcesApi</span><span class="p">.</span><span class="nf">get_account_funding_sources</span><span class="p">(</span><span class="s1">'https://api-uat.dwolla.com/accounts/0270baed-dda5-46d0-b074-e7f3d478896f'</span><span class="p">)</span>
 
 <span class="nb">p</span> <span class="n">funding_sources</span><span class="p">.</span><span class="nf">_embedded</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="nf">name</span> <span class="c1"># =&gt; "Balance"</span>
-</code></pre></div></div><div class="code-snippet language-javascript"><button class="btn alternative">copy</button><div class="code-snippet__selector">
+</code></pre></div></div><div class="code-snippet js-code-snippet language-javascript"><button class="btn alternative">copy</button><div class="code-snippet__selector">
           <nav>
               <button class="selector_switch" id="raw">raw</button>
               <button class="selector_switch" id="php">php</button>
@@ -2342,7 +2394,7 @@ Authorization: Bearer 0Sn0W6kzNicvoWhDbQcVSKLRUpGjIdlPSEYyrHqrDDoRnQwE7Q
               <button class="selector_switch" id="javascript">javascript</button>
           </nav>
         </div><div class="code-snippet__cnt highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="c1">// No example for this language yet.</span>
-</code></pre></div></div><div class="code-snippet language-python"><button class="btn alternative">copy</button><div class="code-snippet__selector">
+</code></pre></div></div><div class="code-snippet js-code-snippet language-python"><button class="btn alternative">copy</button><div class="code-snippet__selector">
           <nav>
               <button class="selector_switch" id="raw">raw</button>
               <button class="selector_switch" id="php">php</button>
@@ -2354,7 +2406,7 @@ Authorization: Bearer 0Sn0W6kzNicvoWhDbQcVSKLRUpGjIdlPSEYyrHqrDDoRnQwE7Q
 <span class="n">funding_sources</span> <span class="o">=</span> <span class="n">funding_api</span><span class="o">.</span><span class="nb">id</span><span class="p">(</span><span class="s">'https://api-uat.dwolla.com/accounts/0270baed-dda5-46d0-b074-e7f3d478896f'</span><span class="p">)</span>
 
 <span class="k">print</span><span class="p">(</span><span class="n">funding_sources</span><span class="o">.</span><span class="n">_embedded</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">name</span><span class="p">)</span> <span class="c"># =&gt; "Balance"</span>
-</code></pre></div></div><div class="code-snippet language-php"><button class="btn alternative">copy</button><div class="code-snippet__selector">
+</code></pre></div></div><div class="code-snippet js-code-snippet language-php"><button class="btn alternative">copy</button><div class="code-snippet__selector">
           <nav>
               <button class="selector_switch" id="raw">raw</button>
               <button class="selector_switch" id="php">php</button>
@@ -2401,7 +2453,7 @@ GET https://api.dwolla.com/accounts/{id}/funding-sources
 <td>Not authorized to list funding sources.</td>
 </tr>
 </tbody></table>
-<h2 id='get-a-funding-source-by-id'>Get a Funding Source by ID</h2><h3 id='request-and-response'>Request and Response:</h3><div class="code-snippet language-raw"><button class="btn alternative">copy</button><div class="code-snippet__selector">
+<h2 id='get-a-funding-source-by-id'>Get a Funding Source by ID</h2><h3 id='request-and-response'>Request and Response:</h3><div class="code-snippet js-code-snippet language-raw"><button class="btn alternative">copy</button><div class="code-snippet__selector">
           <nav>
               <button class="selector_switch" id="raw">raw</button>
               <button class="selector_switch" id="php">php</button>
@@ -2433,7 +2485,7 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
   "name": "Test checking account",
   "created": "2015-10-23T20:37:57.137Z"
 }
-</code></pre></div></div><div class="code-snippet language-ruby"><button class="btn alternative">copy</button><div class="code-snippet__selector">
+</code></pre></div></div><div class="code-snippet js-code-snippet language-ruby"><button class="btn alternative">copy</button><div class="code-snippet__selector">
           <nav>
               <button class="selector_switch" id="raw">raw</button>
               <button class="selector_switch" id="php">php</button>
@@ -2445,7 +2497,7 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 
 <span class="n">retrieved</span> <span class="o">=</span> <span class="no">DwollaSwagger</span><span class="o">::</span><span class="no">FundingsourcesApi</span><span class="p">.</span><span class="nf">id</span><span class="p">(</span><span class="n">fund_source</span><span class="p">)</span>
 <span class="nb">p</span> <span class="n">retrieved</span><span class="p">.</span><span class="nf">name</span> <span class="c1"># =&gt; "Test checking account"</span>
-</code></pre></div></div><div class="code-snippet language-php"><button class="btn alternative">copy</button><div class="code-snippet__selector">
+</code></pre></div></div><div class="code-snippet js-code-snippet language-php"><button class="btn alternative">copy</button><div class="code-snippet__selector">
           <nav>
               <button class="selector_switch" id="raw">raw</button>
               <button class="selector_switch" id="php">php</button>
@@ -2461,7 +2513,7 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 <span class="nv">$retrieved</span> <span class="o">=</span> <span class="nv">$fsApi</span><span class="o">-&gt;</span><span class="na">id</span><span class="p">(</span><span class="nv">$fund_source</span><span class="p">);</span>
 <span class="k">print</span><span class="p">(</span><span class="nv">$retrieved</span><span class="o">-&gt;</span><span class="na">name</span><span class="p">);</span> <span class="c1"># =&gt; "Test checking account"
 </span><span class="cp">?&gt;</span>
-</code></pre></div></div><div class="code-snippet language-python"><button class="btn alternative">copy</button><div class="code-snippet__selector">
+</code></pre></div></div><div class="code-snippet js-code-snippet language-python"><button class="btn alternative">copy</button><div class="code-snippet__selector">
           <nav>
               <button class="selector_switch" id="raw">raw</button>
               <button class="selector_switch" id="php">php</button>
@@ -2475,7 +2527,7 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 <span class="n">retrieved</span> <span class="o">=</span> <span class="n">fs_api</span><span class="o">.</span><span class="nb">id</span><span class="p">(</span><span class="n">fund_source</span><span class="p">)</span>
 
 <span class="k">print</span><span class="p">(</span><span class="n">retrieved</span><span class="o">.</span><span class="n">name</span><span class="p">)</span> <span class="c"># =&gt; Test checking account</span>
-</code></pre></div></div><div class="code-snippet language-javascript"><button class="btn alternative">copy</button><div class="code-snippet__selector">
+</code></pre></div></div><div class="code-snippet js-code-snippet language-javascript"><button class="btn alternative">copy</button><div class="code-snippet__selector">
           <nav>
               <button class="selector_switch" id="raw">raw</button>
               <button class="selector_switch" id="php">php</button>
@@ -2521,7 +2573,7 @@ GET https://api.dwolla.com/funding-sources/{id}
 <blockquote>
 <p>Request and Response (Initiate)</p>
 </blockquote>
-<div class="code-snippet language-raw"><button class="btn alternative">copy</button><div class="code-snippet__selector">
+<div class="code-snippet js-code-snippet language-raw"><button class="btn alternative">copy</button><div class="code-snippet__selector">
           <nav>
               <button class="selector_switch" id="raw">raw</button>
               <button class="selector_switch" id="php">php</button>
@@ -2536,7 +2588,7 @@ Accept: application/vnd.dwolla.v1.hal+json
 Cache-Control: no-cache
 
 HTTP 200 OK
-</code></pre></div></div><div class="code-snippet language-ruby"><button class="btn alternative">copy</button><div class="code-snippet__selector">
+</code></pre></div></div><div class="code-snippet js-code-snippet language-ruby"><button class="btn alternative">copy</button><div class="code-snippet__selector">
           <nav>
               <button class="selector_switch" id="raw">raw</button>
               <button class="selector_switch" id="php">php</button>
@@ -2545,7 +2597,7 @@ HTTP 200 OK
               <button class="selector_switch" id="javascript">javascript</button>
           </nav>
         </div><div class="code-snippet__cnt highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="no">DwollaSwagger</span><span class="o">::</span><span class="no">FundingsourcesApi</span><span class="p">.</span><span class="nf">micro_deposits</span><span class="p">(</span><span class="n">new_fs</span><span class="p">)</span>
-</code></pre></div></div><div class="code-snippet language-javascript"><button class="btn alternative">copy</button><div class="code-snippet__selector">
+</code></pre></div></div><div class="code-snippet js-code-snippet language-javascript"><button class="btn alternative">copy</button><div class="code-snippet__selector">
           <nav>
               <button class="selector_switch" id="raw">raw</button>
               <button class="selector_switch" id="php">php</button>
@@ -2554,7 +2606,7 @@ HTTP 200 OK
               <button class="selector_switch" id="javascript">javascript</button>
           </nav>
         </div><div class="code-snippet__cnt highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="c1">// No example for this language yet.</span>
-</code></pre></div></div><div class="code-snippet language-python"><button class="btn alternative">copy</button><div class="code-snippet__selector">
+</code></pre></div></div><div class="code-snippet js-code-snippet language-python"><button class="btn alternative">copy</button><div class="code-snippet__selector">
           <nav>
               <button class="selector_switch" id="raw">raw</button>
               <button class="selector_switch" id="php">php</button>
@@ -2564,7 +2616,7 @@ HTTP 200 OK
           </nav>
         </div><div class="code-snippet__cnt highlight"><pre><code class="language-python" data-lang="python"><span class="n">fs_api</span> <span class="o">=</span> <span class="n">dwollaswagger</span><span class="o">.</span><span class="n">FundingsourcesApi</span><span class="p">(</span><span class="n">client</span><span class="p">)</span>
 <span class="n">fs_api</span><span class="o">.</span><span class="n">micro_deposits</span><span class="p">(</span><span class="n">new_fs</span><span class="p">)</span>
-</code></pre></div></div><div class="code-snippet language-php"><button class="btn alternative">copy</button><div class="code-snippet__selector">
+</code></pre></div></div><div class="code-snippet js-code-snippet language-php"><button class="btn alternative">copy</button><div class="code-snippet__selector">
           <nav>
               <button class="selector_switch" id="raw">raw</button>
               <button class="selector_switch" id="php">php</button>
@@ -2580,7 +2632,7 @@ HTTP 200 OK
 <blockquote>
 <p>Request and Response (Verify):</p>
 </blockquote>
-<div class="code-snippet language-raw"><button class="btn alternative">copy</button><div class="code-snippet__selector">
+<div class="code-snippet js-code-snippet language-raw"><button class="btn alternative">copy</button><div class="code-snippet__selector">
           <nav>
               <button class="selector_switch" id="raw">raw</button>
               <button class="selector_switch" id="php">php</button>
@@ -2605,7 +2657,7 @@ Accept: application/vnd.dwolla.v1.hal+json
 }
 
 HTTP 200 OK
-</code></pre></div></div><div class="code-snippet language-ruby"><button class="btn alternative">copy</button><div class="code-snippet__selector">
+</code></pre></div></div><div class="code-snippet js-code-snippet language-ruby"><button class="btn alternative">copy</button><div class="code-snippet__selector">
           <nav>
               <button class="selector_switch" id="raw">raw</button>
               <button class="selector_switch" id="php">php</button>
@@ -2623,7 +2675,7 @@ HTTP 200 OK
         <span class="s2">"currency"</span> <span class="o">=&gt;</span> <span class="s2">"USD"</span>
     <span class="p">}</span>
 <span class="p">})</span>
-</code></pre></div></div><div class="code-snippet language-javascript"><button class="btn alternative">copy</button><div class="code-snippet__selector">
+</code></pre></div></div><div class="code-snippet js-code-snippet language-javascript"><button class="btn alternative">copy</button><div class="code-snippet__selector">
           <nav>
               <button class="selector_switch" id="raw">raw</button>
               <button class="selector_switch" id="php">php</button>
@@ -2632,7 +2684,7 @@ HTTP 200 OK
               <button class="selector_switch" id="javascript">javascript</button>
           </nav>
         </div><div class="code-snippet__cnt highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="c1">// No example for this language yet.</span>
-</code></pre></div></div><div class="code-snippet language-python"><button class="btn alternative">copy</button><div class="code-snippet__selector">
+</code></pre></div></div><div class="code-snippet js-code-snippet language-python"><button class="btn alternative">copy</button><div class="code-snippet__selector">
           <nav>
               <button class="selector_switch" id="raw">raw</button>
               <button class="selector_switch" id="php">php</button>
@@ -2652,7 +2704,7 @@ HTTP 200 OK
         <span class="s">"currency"</span><span class="p">:</span> <span class="s">"USD"</span>
     <span class="p">}</span>
 <span class="p">})</span>
-</code></pre></div></div><div class="code-snippet language-php"><button class="btn alternative">copy</button><div class="code-snippet__selector">
+</code></pre></div></div><div class="code-snippet js-code-snippet language-php"><button class="btn alternative">copy</button><div class="code-snippet__selector">
           <nav>
               <button class="selector_switch" id="raw">raw</button>
               <button class="selector_switch" id="php">php</button>
@@ -2730,7 +2782,7 @@ POST https://api.dwolla.com/funding-sources/{id}/micro-deposits
 <blockquote>
 <p>Request:</p>
 </blockquote>
-<div class="code-snippet language-shell"><button class="btn alternative">copy</button><div class="code-snippet__selector">
+<div class="code-snippet js-code-snippet language-shell"><button class="btn alternative">copy</button><div class="code-snippet__selector">
           <nav>
               <button class="selector_switch" id="raw">raw</button>
               <button class="selector_switch" id="php">php</button>
@@ -2745,7 +2797,7 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 <blockquote>
 <p>Response:</p>
 </blockquote>
-<div class="code-snippet language-json"><button class="btn alternative">copy</button><div class="code-snippet__selector">
+<div class="code-snippet js-code-snippet language-json"><button class="btn alternative">copy</button><div class="code-snippet__selector">
           <nav>
               <button class="selector_switch" id="raw">raw</button>
               <button class="selector_switch" id="php">php</button>
@@ -2794,7 +2846,7 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 <td>Pending micro-deposits exist.</td>
 </tr>
 </tbody></table>
-<h2 id='remove-a-funding-source'>Remove a Funding Source</h2><h3 id='request-and-response'>Request and Response</h3><div class="code-snippet language-raw"><button class="btn alternative">copy</button><div class="code-snippet__selector">
+<h2 id='remove-a-funding-source'>Remove a Funding Source</h2><h3 id='request-and-response'>Request and Response</h3><div class="code-snippet js-code-snippet language-raw"><button class="btn alternative">copy</button><div class="code-snippet__selector">
           <nav>
               <button class="selector_switch" id="raw">raw</button>
               <button class="selector_switch" id="php">php</button>
@@ -2808,7 +2860,7 @@ Accept: application/vnd.dwolla.v1.hal+json
 Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 
 HTTP 200 OK
-</code></pre></div></div><div class="code-snippet language-ruby"><button class="btn alternative">copy</button><div class="code-snippet__selector">
+</code></pre></div></div><div class="code-snippet js-code-snippet language-ruby"><button class="btn alternative">copy</button><div class="code-snippet__selector">
           <nav>
               <button class="selector_switch" id="raw">raw</button>
               <button class="selector_switch" id="php">php</button>
@@ -2819,7 +2871,7 @@ HTTP 200 OK
         </div><div class="code-snippet__cnt highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="n">fund_source</span> <span class="o">=</span> <span class="s1">'https://api.dwolla.com/funding-sources/692486f8-29f6-4516-a6a5-c69fd2ce854c'</span>
 
 <span class="no">DwollaSwagger</span><span class="o">::</span><span class="no">FundingsourcesApi</span><span class="p">.</span><span class="nf">delete</span><span class="p">(</span><span class="n">fund_source</span><span class="p">)</span>
-</code></pre></div></div><div class="code-snippet language-php"><button class="btn alternative">copy</button><div class="code-snippet__selector">
+</code></pre></div></div><div class="code-snippet js-code-snippet language-php"><button class="btn alternative">copy</button><div class="code-snippet__selector">
           <nav>
               <button class="selector_switch" id="raw">raw</button>
               <button class="selector_switch" id="php">php</button>
@@ -2834,7 +2886,7 @@ HTTP 200 OK
 
 <span class="nv">$fsApi</span><span class="o">-&gt;</span><span class="na">delete</span><span class="p">(</span><span class="nv">$fund_source</span><span class="p">);</span>
 <span class="cp">?&gt;</span>
-</code></pre></div></div><div class="code-snippet language-python"><button class="btn alternative">copy</button><div class="code-snippet__selector">
+</code></pre></div></div><div class="code-snippet js-code-snippet language-python"><button class="btn alternative">copy</button><div class="code-snippet__selector">
           <nav>
               <button class="selector_switch" id="raw">raw</button>
               <button class="selector_switch" id="php">php</button>
@@ -2846,7 +2898,7 @@ HTTP 200 OK
 
 <span class="n">fs_api</span> <span class="o">=</span> <span class="n">dwollaswagger</span><span class="o">.</span><span class="n">FundingsourcesApi</span><span class="p">(</span><span class="n">client</span><span class="p">)</span>
 <span class="n">fs_api</span><span class="o">.</span><span class="n">delete</span><span class="p">(</span><span class="n">fund_source</span><span class="p">)</span>
-</code></pre></div></div><div class="code-snippet language-javascript"><button class="btn alternative">copy</button><div class="code-snippet__selector">
+</code></pre></div></div><div class="code-snippet js-code-snippet language-javascript"><button class="btn alternative">copy</button><div class="code-snippet__selector">
           <nav>
               <button class="selector_switch" id="raw">raw</button>
               <button class="selector_switch" id="php">php</button>
@@ -2890,7 +2942,7 @@ DELETE https://api.dwolla.com/funding-sources/{id}
 </tbody></table>
 
             <h1 id='funding-sources---verify'>Funding Sources - Verify</h1><ol class="alerts"><li class="alert icon-alert-alert"><p>Instant account verification (IAV) is a premium feature available only for white label integrations. Contact sales for information about pricing.</p>
-</li></ol><div class="code-snippet language-nohide"><button class="btn alternative">copy</button><div class="code-snippet__cnt highlight"><pre><code class="language-nohide" data-lang="nohide">&lt;script src="https://cdn.dwolla.com/dwolla.js"&gt;&lt;/script&gt;
+</li></ol><div class="code-snippet js-code-snippet language-nohide"><button class="btn alternative">copy</button><div class="code-snippet__cnt highlight"><pre><code class="language-nohide" data-lang="nohide">&lt;script src="https://cdn.dwolla.com/dwolla.js"&gt;&lt;/script&gt;
 &lt;script type="text/javascript"&gt;
   dwolla.config.dwollaUrl = 'https://uat.dwolla.com';
   dwolla.iav.start('container', token.value, function(err, res) {
@@ -2904,11 +2956,11 @@ DELETE https://api.dwolla.com/funding-sources/{id}
 <h2 id='generate-an-iav-token-customer'>Generate an IAV token (Customer)</h2>
 <p>Get a single-use IAV token for a Customer.</p>
 <ol class="alerts"><li class="alert icon-alert-alert"><p>This endpoint requires an OAuth access token with the ManageCustomers scope.</p>
-</li></ol><h3 id='request'>Request:</h3><div class="code-snippet language-nohide"><button class="btn alternative">copy</button><div class="code-snippet__cnt highlight"><pre><code class="language-nohide" data-lang="nohide">POST /customers/99bfb139-eadd-4cdf-b346-7504f0c16c60/iav-verification
+</li></ol><h3 id='request'>Request:</h3><div class="code-snippet js-code-snippet language-nohide"><button class="btn alternative">copy</button><div class="code-snippet__cnt highlight"><pre><code class="language-nohide" data-lang="nohide">POST /customers/99bfb139-eadd-4cdf-b346-7504f0c16c60/iav-verification
 Content-Type: application/vnd.dwolla.v1.hal+json
 Accept: application/vnd.dwolla.v1.hal+json
 Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
-</code></pre></div></div><h3 id='response'>Response:</h3><div class="code-snippet language-nohide"><button class="btn alternative">copy</button><div class="code-snippet__cnt highlight"><pre><code class="language-nohide" data-lang="nohide">HTTP/1.1 200 OK
+</code></pre></div></div><h3 id='response'>Response:</h3><div class="code-snippet js-code-snippet language-nohide"><button class="btn alternative">copy</button><div class="code-snippet__cnt highlight"><pre><code class="language-nohide" data-lang="nohide">HTTP/1.1 200 OK
 
 {
   "_links": {
@@ -2957,14 +3009,14 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 
 <p><strong>Production (minified) version:</strong> 
 <code class="prettyprint">&lt;script src=&quot;https://cdn.dwolla.com/1/dwolla.min.js&quot;&gt;&lt;/script&gt;</code></p>
-<h5 id='configure-dwolla-js'>Configure dwolla.js</h5><div class="code-snippet language-nohide"><button class="btn alternative">copy</button><div class="code-snippet__cnt highlight"><pre><code class="language-nohide" data-lang="nohide">//Sandbox (UAT)
+<h5 id='configure-dwolla-js'>Configure dwolla.js</h5><div class="code-snippet js-code-snippet language-nohide"><button class="btn alternative">copy</button><div class="code-snippet__cnt highlight"><pre><code class="language-nohide" data-lang="nohide">//Sandbox (UAT)
 dwolla.config.dwollaUrl = 'https://uat.dwolla.com';
 dwolla.config.apiUrl = 'https://api-uat.dwolla.com';
 
 //Production
 dwolla.config.dwollaUrl = 'https://www.dwolla.com';
 dwolla.config.apiUrl = 'https://api.dwolla.com';
-</code></pre></div></div><h5 id='example'>Example</h5><div class="code-snippet language-nohide"><button class="btn alternative">copy</button><div class="code-snippet__cnt highlight"><pre><code class="language-nohide" data-lang="nohide">&lt;head&gt;
+</code></pre></div></div><h5 id='example'>Example</h5><div class="code-snippet js-code-snippet language-nohide"><button class="btn alternative">copy</button><div class="code-snippet__cnt highlight"><pre><code class="language-nohide" data-lang="nohide">&lt;head&gt;
 &lt;script src="https://cdn.dwolla.com/dwolla.js"&gt;&lt;/script&gt;
 &lt;!-- jQuery is used for example purposes --&gt;
 &lt;script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"&gt;&lt;/script&gt;
@@ -2984,7 +3036,7 @@ $('#start').click(function() {
   });
 });
 &lt;/script&gt;
-</code></pre></div></div><h3 id='response'>Response:</h3><div class="code-snippet language-nohide"><button class="btn alternative">copy</button><div class="code-snippet__cnt highlight"><pre><code class="language-nohide" data-lang="nohide"><span class="p">{</span><span class="w">
+</code></pre></div></div><h3 id='response'>Response:</h3><div class="code-snippet js-code-snippet language-nohide"><button class="btn alternative">copy</button><div class="code-snippet__cnt highlight"><pre><code class="language-nohide" data-lang="nohide"><span class="p">{</span><span class="w">
   </span><span class="nt">"_links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="nt">"funding-source"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
       </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.dwolla.com/funding-sources/3daf2382-e0e4-444a-863e-544239a261e3"</span><span class="w">
@@ -3008,7 +3060,7 @@ $('#start').click(function() {
 </tr>
 </tbody></table>
 
-            <h1 id='transfers'>Transfers</h1><div class="code-snippet language-nohide"><button class="btn alternative">copy</button><div class="code-snippet__cnt highlight"><pre><code class="language-nohide" data-lang="nohide"><span class="p">{</span><span class="w">
+            <h1 id='transfers'>Transfers</h1><div class="code-snippet js-code-snippet language-nohide"><button class="btn alternative">copy</button><div class="code-snippet__cnt highlight"><pre><code class="language-nohide" data-lang="nohide"><span class="p">{</span><span class="w">
   </span><span class="nt">"_links"</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span><span class="w">
   </span><span class="nt">"_embedded"</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span><span class="w">
   </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
@@ -3066,7 +3118,7 @@ $('#start').click(function() {
 <td>String, <code class="prettyprint">USD</code></td>
 </tr>
 </tbody></table>
-<h2 id='initiate-transfer'>Initiate Transfer</h2><h3 id='request-and-response-transfer-from-account-to-customer'>Request and Response (Transfer from Account to Customer)</h3><div class="code-snippet language-raw"><button class="btn alternative">copy</button><div class="code-snippet__selector">
+<h2 id='initiate-transfer'>Initiate Transfer</h2><h3 id='request-and-response-transfer-from-account-to-customer'>Request and Response (Transfer from Account to Customer)</h3><div class="code-snippet js-code-snippet language-raw"><button class="btn alternative">copy</button><div class="code-snippet__selector">
           <nav>
               <button class="selector_switch" id="raw">raw</button>
               <button class="selector_switch" id="php">php</button>
@@ -3100,7 +3152,7 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 
 HTTP/1.1 201 Created
 Location: https://api.dwolla.com/transfers/74c9129b-d14a-e511-80da-0aa34a9b2388
-</code></pre></div></div><div class="code-snippet language-ruby"><button class="btn alternative">copy</button><div class="code-snippet__selector">
+</code></pre></div></div><div class="code-snippet js-code-snippet language-ruby"><button class="btn alternative">copy</button><div class="code-snippet__selector">
           <nav>
               <button class="selector_switch" id="raw">raw</button>
               <button class="selector_switch" id="php">php</button>
@@ -3117,7 +3169,7 @@ Location: https://api.dwolla.com/transfers/74c9129b-d14a-e511-80da-0aa34a9b2388
 <span class="s2">"amount"</span> <span class="o">=&gt;</span> <span class="p">{</span><span class="s2">"currency"</span><span class="o">=&gt;</span><span class="s2">"USD"</span><span class="p">,</span> <span class="s2">"value"</span><span class="o">=&gt;</span><span class="s2">"1.00"</span><span class="p">},</span> <span class="s2">"metadata"</span><span class="o">=&gt;</span><span class="p">{</span><span class="s2">"foo"</span><span class="o">=&gt;</span><span class="s2">"bar"</span><span class="p">,</span> <span class="s2">"baz"</span><span class="o">=&gt;</span><span class="s2">"boo"</span><span class="p">}}})</span>
 
 <span class="nb">p</span> <span class="n">new_xfer</span> <span class="c1"># =&gt; https://api.dwolla.com/transfers/74c9129b-d14a-e511-80da-0aa34a9b2388</span>
-</code></pre></div></div><div class="code-snippet language-php"><button class="btn alternative">copy</button><div class="code-snippet__selector">
+</code></pre></div></div><div class="code-snippet js-code-snippet language-php"><button class="btn alternative">copy</button><div class="code-snippet__selector">
           <nav>
               <button class="selector_switch" id="raw">raw</button>
               <button class="selector_switch" id="php">php</button>
@@ -3154,7 +3206,7 @@ Location: https://api.dwolla.com/transfers/74c9129b-d14a-e511-80da-0aa34a9b2388
 
 <span class="k">print</span><span class="p">(</span><span class="nv">$new_xfer</span><span class="p">);</span> <span class="c1"># =&gt; https://api.dwolla.com/transfers/74c9129b-d14a-e511-80da-0aa34a9b2388
 </span><span class="cp">?&gt;</span>
-</code></pre></div></div><div class="code-snippet language-python"><button class="btn alternative">copy</button><div class="code-snippet__selector">
+</code></pre></div></div><div class="code-snippet js-code-snippet language-python"><button class="btn alternative">copy</button><div class="code-snippet__selector">
           <nav>
               <button class="selector_switch" id="raw">raw</button>
               <button class="selector_switch" id="php">php</button>
@@ -3183,7 +3235,7 @@ Location: https://api.dwolla.com/transfers/74c9129b-d14a-e511-80da-0aa34a9b2388
 <span class="p">}})</span>
 
 <span class="k">print</span><span class="p">(</span><span class="n">new_xfer</span><span class="p">)</span> <span class="c"># =&gt; https://api.dwolla.com/transfers/74c9129b-d14a-e511-80da-0aa34a9b2388</span>
-</code></pre></div></div><div class="code-snippet language-javascript"><button class="btn alternative">copy</button><div class="code-snippet__selector">
+</code></pre></div></div><div class="code-snippet js-code-snippet language-javascript"><button class="btn alternative">copy</button><div class="code-snippet__selector">
           <nav>
               <button class="selector_switch" id="raw">raw</button>
               <button class="selector_switch" id="php">php</button>
@@ -3280,7 +3332,7 @@ Location: https://api.dwolla.com/transfers/74c9129b-d14a-e511-80da-0aa34a9b2388
 <td>OAuth token does not have Send scope.</td>
 </tr>
 </tbody></table>
-<h2 id='get-transfers-customer'>Get Transfers (Customer)</h2><h3 id='request-and-response'>Request and Response</h3><div class="code-snippet language-raw"><button class="btn alternative">copy</button><div class="code-snippet__selector">
+<h2 id='get-transfers-customer'>Get Transfers (Customer)</h2><h3 id='request-and-response'>Request and Response</h3><div class="code-snippet js-code-snippet language-raw"><button class="btn alternative">copy</button><div class="code-snippet__selector">
           <nav>
               <button class="selector_switch" id="raw">raw</button>
               <button class="selector_switch" id="php">php</button>
@@ -3360,7 +3412,7 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
   },
   "total": 2
 }
-</code></pre></div></div><div class="code-snippet language-ruby"><button class="btn alternative">copy</button><div class="code-snippet__selector">
+</code></pre></div></div><div class="code-snippet js-code-snippet language-ruby"><button class="btn alternative">copy</button><div class="code-snippet__selector">
           <nav>
               <button class="selector_switch" id="raw">raw</button>
               <button class="selector_switch" id="php">php</button>
@@ -3372,7 +3424,7 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 
 <span class="n">cust_xfers</span> <span class="o">=</span> <span class="no">DwollaSwagger</span><span class="o">::</span><span class="no">TransfersApi</span><span class="p">.</span><span class="nf">get_customer_transfers</span><span class="p">(</span><span class="n">customer</span><span class="p">)</span>
 <span class="nb">p</span> <span class="n">cust_xfers</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="nf">status</span> <span class="c1"># =&gt; "pending"</span>
-</code></pre></div></div><div class="code-snippet language-php"><button class="btn alternative">copy</button><div class="code-snippet__selector">
+</code></pre></div></div><div class="code-snippet js-code-snippet language-php"><button class="btn alternative">copy</button><div class="code-snippet__selector">
           <nav>
               <button class="selector_switch" id="raw">raw</button>
               <button class="selector_switch" id="php">php</button>
@@ -3388,7 +3440,7 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 <span class="nv">$custXfers</span> <span class="o">=</span> <span class="nv">$TransfersApi</span><span class="o">-&gt;</span><span class="na">getCustomerTransfers</span><span class="p">(</span><span class="nv">$customer</span><span class="p">);</span>
 <span class="k">print</span><span class="p">(</span><span class="nv">$custXfers</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">-&gt;</span><span class="na">status</span><span class="p">);</span> <span class="c1"># =&gt; "pending"
 </span><span class="cp">?&gt;</span>
-</code></pre></div></div><div class="code-snippet language-python"><button class="btn alternative">copy</button><div class="code-snippet__selector">
+</code></pre></div></div><div class="code-snippet js-code-snippet language-python"><button class="btn alternative">copy</button><div class="code-snippet__selector">
           <nav>
               <button class="selector_switch" id="raw">raw</button>
               <button class="selector_switch" id="php">php</button>
@@ -3402,7 +3454,7 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 <span class="n">cust_xfers</span> <span class="o">=</span> <span class="n">transfers_api</span><span class="o">.</span><span class="n">get_customer_transfers</span><span class="p">(</span><span class="n">customer</span><span class="p">)</span>
 
 <span class="k">print</span><span class="p">(</span><span class="n">cust_xfers</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">status</span><span class="p">)</span> <span class="c"># =&gt; pending</span>
-</code></pre></div></div><div class="code-snippet language-javascript"><button class="btn alternative">copy</button><div class="code-snippet__selector">
+</code></pre></div></div><div class="code-snippet js-code-snippet language-javascript"><button class="btn alternative">copy</button><div class="code-snippet__selector">
           <nav>
               <button class="selector_switch" id="raw">raw</button>
               <button class="selector_switch" id="php">php</button>
@@ -3456,7 +3508,7 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 <td>Customer not found.</td>
 </tr>
 </tbody></table>
-<h2 id='get-transfers-account'>Get Transfers (Account)</h2><h3 id='request-and-response'>Request and Response</h3><div class="code-snippet language-raw"><button class="btn alternative">copy</button><div class="code-snippet__selector">
+<h2 id='get-transfers-account'>Get Transfers (Account)</h2><h3 id='request-and-response'>Request and Response</h3><div class="code-snippet js-code-snippet language-raw"><button class="btn alternative">copy</button><div class="code-snippet__selector">
           <nav>
               <button class="selector_switch" id="raw">raw</button>
               <button class="selector_switch" id="php">php</button>
@@ -3528,7 +3580,7 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
   },
   "total": 2
 }
-</code></pre></div></div><div class="code-snippet language-ruby"><button class="btn alternative">copy</button><div class="code-snippet__selector">
+</code></pre></div></div><div class="code-snippet js-code-snippet language-ruby"><button class="btn alternative">copy</button><div class="code-snippet__selector">
           <nav>
               <button class="selector_switch" id="raw">raw</button>
               <button class="selector_switch" id="php">php</button>
@@ -3540,7 +3592,7 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 
 <span class="n">acct_xfers</span> <span class="o">=</span> <span class="no">DwollaSwagger</span><span class="o">::</span><span class="no">TransfersApi</span><span class="p">.</span><span class="nf">get_account_transfers</span><span class="p">(</span><span class="n">account</span><span class="p">)</span>
 <span class="nb">p</span> <span class="n">acct_xfers</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="nf">status</span> <span class="c1"># =&gt; "processed"</span>
-</code></pre></div></div><div class="code-snippet language-php"><button class="btn alternative">copy</button><div class="code-snippet__selector">
+</code></pre></div></div><div class="code-snippet js-code-snippet language-php"><button class="btn alternative">copy</button><div class="code-snippet__selector">
           <nav>
               <button class="selector_switch" id="raw">raw</button>
               <button class="selector_switch" id="php">php</button>
@@ -3556,7 +3608,7 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 <span class="nv">$acctXfers</span> <span class="o">=</span> <span class="nv">$TransfersApi</span><span class="o">-&gt;</span><span class="na">getAccountTransfers</span><span class="p">(</span><span class="nv">$account</span><span class="p">);</span>
 <span class="k">print</span><span class="p">(</span><span class="nv">$acctXfers</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">-&gt;</span><span class="na">status</span><span class="p">);</span> <span class="c1"># =&gt; "processed"
 </span><span class="cp">?&gt;</span>
-</code></pre></div></div><div class="code-snippet language-python"><button class="btn alternative">copy</button><div class="code-snippet__selector">
+</code></pre></div></div><div class="code-snippet js-code-snippet language-python"><button class="btn alternative">copy</button><div class="code-snippet__selector">
           <nav>
               <button class="selector_switch" id="raw">raw</button>
               <button class="selector_switch" id="php">php</button>
@@ -3570,7 +3622,7 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 <span class="n">acct_xfers</span> <span class="o">=</span> <span class="n">transfers_api</span><span class="o">.</span><span class="n">get_account_transfers</span><span class="p">(</span><span class="n">account</span><span class="p">)</span>
 
 <span class="k">print</span><span class="p">(</span><span class="n">acct_xfers</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">status</span><span class="p">)</span> <span class="c"># =&gt; processed</span>
-</code></pre></div></div><div class="code-snippet language-javascript"><button class="btn alternative">copy</button><div class="code-snippet__selector">
+</code></pre></div></div><div class="code-snippet js-code-snippet language-javascript"><button class="btn alternative">copy</button><div class="code-snippet__selector">
           <nav>
               <button class="selector_switch" id="raw">raw</button>
               <button class="selector_switch" id="php">php</button>
@@ -3610,7 +3662,7 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 <td>Account not found.</td>
 </tr>
 </tbody></table>
-<h2 id='get-transfers-by-id'>Get Transfers by ID</h2><h3 id='request-and-response'>Request and Response</h3><div class="code-snippet language-raw"><button class="btn alternative">copy</button><div class="code-snippet__selector">
+<h2 id='get-transfers-by-id'>Get Transfers by ID</h2><h3 id='request-and-response'>Request and Response</h3><div class="code-snippet js-code-snippet language-raw"><button class="btn alternative">copy</button><div class="code-snippet__selector">
           <nav>
               <button class="selector_switch" id="raw">raw</button>
               <button class="selector_switch" id="php">php</button>
@@ -3648,7 +3700,7 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
     "baz": "foo"
   }
 }
-</code></pre></div></div><div class="code-snippet language-ruby"><button class="btn alternative">copy</button><div class="code-snippet__selector">
+</code></pre></div></div><div class="code-snippet js-code-snippet language-ruby"><button class="btn alternative">copy</button><div class="code-snippet__selector">
           <nav>
               <button class="selector_switch" id="raw">raw</button>
               <button class="selector_switch" id="php">php</button>
@@ -3660,7 +3712,7 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 
 <span class="n">retrieved</span> <span class="o">=</span> <span class="no">DwollaSwagger</span><span class="o">::</span><span class="no">TransfersApi</span><span class="p">.</span><span class="nf">by_id</span><span class="p">(</span><span class="n">transfer</span><span class="p">)</span>
 <span class="nb">p</span> <span class="n">retrieved</span><span class="p">.</span><span class="nf">status</span> <span class="c1"># =&gt; "pending"</span>
-</code></pre></div></div><div class="code-snippet language-php"><button class="btn alternative">copy</button><div class="code-snippet__selector">
+</code></pre></div></div><div class="code-snippet js-code-snippet language-php"><button class="btn alternative">copy</button><div class="code-snippet__selector">
           <nav>
               <button class="selector_switch" id="raw">raw</button>
               <button class="selector_switch" id="php">php</button>
@@ -3676,7 +3728,7 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 <span class="nv">$retrieved</span> <span class="o">=</span> <span class="nv">$TransfersApi</span><span class="o">-&gt;</span><span class="na">byId</span><span class="p">(</span><span class="nv">$transfer</span><span class="p">);</span>
 <span class="k">print</span><span class="p">(</span><span class="nv">$retrieved</span><span class="o">-&gt;</span><span class="na">status</span><span class="p">);</span> <span class="c1"># =&gt; "pending"
 </span><span class="cp">?&gt;</span>
-</code></pre></div></div><div class="code-snippet language-python"><button class="btn alternative">copy</button><div class="code-snippet__selector">
+</code></pre></div></div><div class="code-snippet js-code-snippet language-python"><button class="btn alternative">copy</button><div class="code-snippet__selector">
           <nav>
               <button class="selector_switch" id="raw">raw</button>
               <button class="selector_switch" id="php">php</button>
@@ -3690,7 +3742,7 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 <span class="n">retrieved</span> <span class="o">=</span> <span class="n">transfers_api</span><span class="o">.</span><span class="n">by_id</span><span class="p">(</span><span class="n">transfer</span><span class="p">)</span>
 
 <span class="k">print</span><span class="p">(</span><span class="n">retrieved</span><span class="o">.</span><span class="n">status</span><span class="p">)</span> <span class="c"># =&gt; pending</span>
-</code></pre></div></div><div class="code-snippet language-javascript"><button class="btn alternative">copy</button><div class="code-snippet__selector">
+</code></pre></div></div><div class="code-snippet js-code-snippet language-javascript"><button class="btn alternative">copy</button><div class="code-snippet__selector">
           <nav>
               <button class="selector_switch" id="raw">raw</button>
               <button class="selector_switch" id="php">php</button>
@@ -3731,7 +3783,7 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 </tr>
 </tbody></table>
 
-            <h1 id='events'>Events</h1><div class="code-snippet language-nohide"><button class="btn alternative">copy</button><div class="code-snippet__cnt highlight"><pre><code class="language-nohide" data-lang="nohide"><span class="p">{</span><span class="w">
+            <h1 id='events'>Events</h1><div class="code-snippet js-code-snippet language-nohide"><button class="btn alternative">copy</button><div class="code-snippet__cnt highlight"><pre><code class="language-nohide" data-lang="nohide"><span class="p">{</span><span class="w">
   </span><span class="nt">"_links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="nt">"self"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
       </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.dwolla.com/events/f8e70f48-b7ff-47d0-9d3d-62a099363a76"</span><span class="w">
@@ -3950,7 +4002,7 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 <td>Micro-deposits have failed to process to the Account&rsquo;s bank</td>
 </tr>
 </tbody></table>
-<h2 id='list-events'>List Events</h2><h3 id='request-and-response'>Request and Response</h3><div class="code-snippet language-raw"><button class="btn alternative">copy</button><div class="code-snippet__selector">
+<h2 id='list-events'>List Events</h2><h3 id='request-and-response'>Request and Response</h3><div class="code-snippet js-code-snippet language-raw"><button class="btn alternative">copy</button><div class="code-snippet__selector">
           <nav>
               <button class="selector_switch" id="raw">raw</button>
               <button class="selector_switch" id="php">php</button>
@@ -4056,7 +4108,7 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
   },
   "total": 4
 }
-</code></pre></div></div><div class="code-snippet language-ruby"><button class="btn alternative">copy</button><div class="code-snippet__selector">
+</code></pre></div></div><div class="code-snippet js-code-snippet language-ruby"><button class="btn alternative">copy</button><div class="code-snippet__selector">
           <nav>
               <button class="selector_switch" id="raw">raw</button>
               <button class="selector_switch" id="php">php</button>
@@ -4066,7 +4118,7 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
           </nav>
         </div><div class="code-snippet__cnt highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="n">events</span> <span class="o">=</span> <span class="no">DwollaSwagger</span><span class="o">::</span><span class="no">EventsApi</span><span class="p">.</span><span class="nf">events</span>
 <span class="nb">p</span> <span class="n">events</span><span class="p">.</span><span class="nf">total</span> <span class="c1"># =&gt; "4"</span>
-</code></pre></div></div><div class="code-snippet language-php"><button class="btn alternative">copy</button><div class="code-snippet__selector">
+</code></pre></div></div><div class="code-snippet js-code-snippet language-php"><button class="btn alternative">copy</button><div class="code-snippet__selector">
           <nav>
               <button class="selector_switch" id="raw">raw</button>
               <button class="selector_switch" id="php">php</button>
@@ -4080,7 +4132,7 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 <span class="nv">$events</span> <span class="o">=</span> <span class="nv">$eventsApi</span><span class="o">-&gt;</span><span class="na">events</span><span class="p">();</span>
 <span class="k">print</span><span class="p">(</span><span class="nv">$events</span><span class="o">-&gt;</span><span class="na">total</span><span class="p">);</span> <span class="c1"># =&gt; "4"
 </span><span class="cp">?&gt;</span>
-</code></pre></div></div><div class="code-snippet language-python"><button class="btn alternative">copy</button><div class="code-snippet__selector">
+</code></pre></div></div><div class="code-snippet js-code-snippet language-python"><button class="btn alternative">copy</button><div class="code-snippet__selector">
           <nav>
               <button class="selector_switch" id="raw">raw</button>
               <button class="selector_switch" id="php">php</button>
@@ -4092,7 +4144,7 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 <span class="n">events</span> <span class="o">=</span> <span class="n">events_api</span><span class="o">.</span><span class="n">events</span><span class="p">()</span>
 
 <span class="k">print</span><span class="p">(</span><span class="n">events</span><span class="o">.</span><span class="n">total</span><span class="p">)</span> <span class="c"># =&gt; 4</span>
-</code></pre></div></div><div class="code-snippet language-javascript"><button class="btn alternative">copy</button><div class="code-snippet__selector">
+</code></pre></div></div><div class="code-snippet js-code-snippet language-javascript"><button class="btn alternative">copy</button><div class="code-snippet__selector">
           <nav>
               <button class="selector_switch" id="raw">raw</button>
               <button class="selector_switch" id="php">php</button>
@@ -4137,7 +4189,7 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 <td>Resource not found.</td>
 </tr>
 </tbody></table>
-<h2 id='get-event-by-id'>Get Event by ID</h2><h3 id='request-and-response'>Request and Response</h3><div class="code-snippet language-raw"><button class="btn alternative">copy</button><div class="code-snippet__selector">
+<h2 id='get-event-by-id'>Get Event by ID</h2><h3 id='request-and-response'>Request and Response</h3><div class="code-snippet js-code-snippet language-raw"><button class="btn alternative">copy</button><div class="code-snippet__selector">
           <nav>
               <button class="selector_switch" id="raw">raw</button>
               <button class="selector_switch" id="php">php</button>
@@ -4171,7 +4223,7 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
   "topic": "customer_transfer_created",
   "resourceId": "09A166BC-1B74-E511-80DB-0AA34A9B2388"
 }
-</code></pre></div></div><div class="code-snippet language-ruby"><button class="btn alternative">copy</button><div class="code-snippet__selector">
+</code></pre></div></div><div class="code-snippet js-code-snippet language-ruby"><button class="btn alternative">copy</button><div class="code-snippet__selector">
           <nav>
               <button class="selector_switch" id="raw">raw</button>
               <button class="selector_switch" id="php">php</button>
@@ -4183,7 +4235,7 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 
 <span class="n">retries</span> <span class="o">=</span> <span class="no">DwollaSwagger</span><span class="o">::</span><span class="no">EventsApi</span><span class="p">.</span><span class="nf">retries_by_id</span><span class="p">(</span><span class="n">event</span><span class="p">)</span>
 <span class="nb">p</span> <span class="n">retries</span><span class="p">.</span><span class="nf">topic</span> <span class="c1"># =&gt; "customer_transfer_created"</span>
-</code></pre></div></div><div class="code-snippet language-php"><button class="btn alternative">copy</button><div class="code-snippet__selector">
+</code></pre></div></div><div class="code-snippet js-code-snippet language-php"><button class="btn alternative">copy</button><div class="code-snippet__selector">
           <nav>
               <button class="selector_switch" id="raw">raw</button>
               <button class="selector_switch" id="php">php</button>
@@ -4199,7 +4251,7 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 <span class="nv">$retries</span> <span class="o">=</span> <span class="nv">$eventsApi</span><span class="o">-&gt;</span><span class="na">retriesById</span><span class="p">(</span><span class="nv">$event</span><span class="p">);</span>
 <span class="k">print</span><span class="p">(</span><span class="nv">$retries</span><span class="o">-&gt;</span><span class="na">topic</span><span class="p">);</span> <span class="c1"># =&gt; "customer_transfer_created"
 </span><span class="cp">?&gt;</span>
-</code></pre></div></div><div class="code-snippet language-python"><button class="btn alternative">copy</button><div class="code-snippet__selector">
+</code></pre></div></div><div class="code-snippet js-code-snippet language-python"><button class="btn alternative">copy</button><div class="code-snippet__selector">
           <nav>
               <button class="selector_switch" id="raw">raw</button>
               <button class="selector_switch" id="php">php</button>
@@ -4213,7 +4265,7 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 <span class="n">retries</span> <span class="o">=</span> <span class="n">events_api</span><span class="o">.</span><span class="n">retries_by_id</span><span class="p">(</span><span class="n">event</span><span class="p">)</span>
 
 <span class="k">print</span><span class="p">(</span><span class="n">retries</span><span class="o">.</span><span class="n">topic</span><span class="p">)</span> <span class="c"># =&gt; customer_transfer_created</span>
-</code></pre></div></div><div class="code-snippet language-javascript"><button class="btn alternative">copy</button><div class="code-snippet__selector">
+</code></pre></div></div><div class="code-snippet js-code-snippet language-javascript"><button class="btn alternative">copy</button><div class="code-snippet__selector">
           <nav>
               <button class="selector_switch" id="raw">raw</button>
               <button class="selector_switch" id="php">php</button>
@@ -4254,7 +4306,7 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 </tr>
 </tbody></table>
 
-            <h1 id='webhook-subscriptions'>Webhook Subscriptions</h1><div class="code-snippet language-nohide"><button class="btn alternative">copy</button><div class="code-snippet__cnt highlight"><pre><code class="language-nohide" data-lang="nohide"><span class="p">{</span><span class="w">
+            <h1 id='webhook-subscriptions'>Webhook Subscriptions</h1><div class="code-snippet js-code-snippet language-nohide"><button class="btn alternative">copy</button><div class="code-snippet__cnt highlight"><pre><code class="language-nohide" data-lang="nohide"><span class="p">{</span><span class="w">
   </span><span class="nt">"_links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="nt">"self"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
       </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.dwolla.com/webhook-subscriptions/034a0ae2-fc7f-4922-8e4e-6fb9855ed43b"</span><span class="w">
@@ -4398,7 +4450,7 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 <td>Event ID for this webhook.</td>
 </tr>
 </tbody></table>
-<h2 id='create-a-subscription'>Create a Subscription</h2><h3 id='request-and-response'>Request and Response</h3><div class="code-snippet language-raw"><button class="btn alternative">copy</button><div class="code-snippet__selector">
+<h2 id='create-a-subscription'>Create a Subscription</h2><h3 id='request-and-response'>Request and Response</h3><div class="code-snippet js-code-snippet language-raw"><button class="btn alternative">copy</button><div class="code-snippet__selector">
           <nav>
               <button class="selector_switch" id="raw">raw</button>
               <button class="selector_switch" id="php">php</button>
@@ -4414,7 +4466,7 @@ Authorization: Bearer 0Sn0W6kzNicvoWhDbQcVSKLRUpGjIdlPSEYyrHqrDDoRnQwE7Q
     "url": "http://myapplication.com/webhooks",
     "secret": "sshhhhhh"
 }
-</code></pre></div></div><div class="code-snippet language-ruby"><button class="btn alternative">copy</button><div class="code-snippet__selector">
+</code></pre></div></div><div class="code-snippet js-code-snippet language-ruby"><button class="btn alternative">copy</button><div class="code-snippet__selector">
           <nav>
               <button class="selector_switch" id="raw">raw</button>
               <button class="selector_switch" id="php">php</button>
@@ -4428,7 +4480,7 @@ Authorization: Bearer 0Sn0W6kzNicvoWhDbQcVSKLRUpGjIdlPSEYyrHqrDDoRnQwE7Q
 <span class="p">}})</span>
 
 <span class="nb">p</span> <span class="n">subscription</span> <span class="c1"># =&gt; https://api-uat.dwolla.com/webhook-subscriptions/5af4c10a-f6de-4ac8-840d-42cb65454216</span>
-</code></pre></div></div><div class="code-snippet language-javascript"><button class="btn alternative">copy</button><div class="code-snippet__selector">
+</code></pre></div></div><div class="code-snippet js-code-snippet language-javascript"><button class="btn alternative">copy</button><div class="code-snippet__selector">
           <nav>
               <button class="selector_switch" id="raw">raw</button>
               <button class="selector_switch" id="php">php</button>
@@ -4437,7 +4489,7 @@ Authorization: Bearer 0Sn0W6kzNicvoWhDbQcVSKLRUpGjIdlPSEYyrHqrDDoRnQwE7Q
               <button class="selector_switch" id="javascript">javascript</button>
           </nav>
         </div><div class="code-snippet__cnt highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="c1">// No example for this language yet.</span>
-</code></pre></div></div><div class="code-snippet language-python"><button class="btn alternative">copy</button><div class="code-snippet__selector">
+</code></pre></div></div><div class="code-snippet js-code-snippet language-python"><button class="btn alternative">copy</button><div class="code-snippet__selector">
           <nav>
               <button class="selector_switch" id="raw">raw</button>
               <button class="selector_switch" id="php">php</button>
@@ -4452,7 +4504,7 @@ Authorization: Bearer 0Sn0W6kzNicvoWhDbQcVSKLRUpGjIdlPSEYyrHqrDDoRnQwE7Q
 <span class="p">})</span>
 
 <span class="k">print</span><span class="p">(</span><span class="n">subscription</span><span class="p">)</span> <span class="c"># =&gt; https://api-uat.dwolla.com/webhook-subscriptions/5af4c10a-f6de-4ac8-840d-42cb65454216</span>
-</code></pre></div></div><div class="code-snippet language-php"><button class="btn alternative">copy</button><div class="code-snippet__selector">
+</code></pre></div></div><div class="code-snippet js-code-snippet language-php"><button class="btn alternative">copy</button><div class="code-snippet__selector">
           <nav>
               <button class="selector_switch" id="raw">raw</button>
               <button class="selector_switch" id="php">php</button>
@@ -4500,7 +4552,7 @@ POST https://api.dwolla.com/webhook-subscriptions
 </tr>
 </thead><tbody>
 </tbody></table>
-<h2 id='delete-a-subscription'>Delete a Subscription</h2><h3 id='request-and-response'>Request and Response</h3><div class="code-snippet language-raw"><button class="btn alternative">copy</button><div class="code-snippet__selector">
+<h2 id='delete-a-subscription'>Delete a Subscription</h2><h3 id='request-and-response'>Request and Response</h3><div class="code-snippet js-code-snippet language-raw"><button class="btn alternative">copy</button><div class="code-snippet__selector">
           <nav>
               <button class="selector_switch" id="raw">raw</button>
               <button class="selector_switch" id="php">php</button>
@@ -4511,7 +4563,7 @@ POST https://api.dwolla.com/webhook-subscriptions
         </div><div class="code-snippet__cnt highlight"><pre><code class="language-raw" data-lang="raw">DELETE https://api-uat.dwolla.com/webhook-subscriptions/5af4c10a-f6de-4ac8-840d-42cb65454216
 Accept: application/vnd.dwolla.v1.hal+json
 Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
-</code></pre></div></div><div class="code-snippet language-ruby"><button class="btn alternative">copy</button><div class="code-snippet__selector">
+</code></pre></div></div><div class="code-snippet js-code-snippet language-ruby"><button class="btn alternative">copy</button><div class="code-snippet__selector">
           <nav>
               <button class="selector_switch" id="raw">raw</button>
               <button class="selector_switch" id="php">php</button>
@@ -4520,7 +4572,7 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
               <button class="selector_switch" id="javascript">javascript</button>
           </nav>
         </div><div class="code-snippet__cnt highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="n">deleted</span> <span class="o">=</span> <span class="no">DwollaSwagger</span><span class="o">::</span><span class="no">WebhooksubscriptionApi</span><span class="p">.</span><span class="nf">id</span><span class="p">(</span><span class="s1">'https://api-uat.dwolla.com/webhook-subscriptions/5af4c10a-f6de-4ac8-840d-42cb65454216'</span><span class="p">)</span>
-</code></pre></div></div><div class="code-snippet language-javascript"><button class="btn alternative">copy</button><div class="code-snippet__selector">
+</code></pre></div></div><div class="code-snippet js-code-snippet language-javascript"><button class="btn alternative">copy</button><div class="code-snippet__selector">
           <nav>
               <button class="selector_switch" id="raw">raw</button>
               <button class="selector_switch" id="php">php</button>
@@ -4529,7 +4581,7 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
               <button class="selector_switch" id="javascript">javascript</button>
           </nav>
         </div><div class="code-snippet__cnt highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="nx">No</span> <span class="nx">example</span> <span class="k">for</span> <span class="k">this</span> <span class="nx">language</span> <span class="nx">yet</span><span class="p">.</span>
-</code></pre></div></div><div class="code-snippet language-python"><button class="btn alternative">copy</button><div class="code-snippet__selector">
+</code></pre></div></div><div class="code-snippet js-code-snippet language-python"><button class="btn alternative">copy</button><div class="code-snippet__selector">
           <nav>
               <button class="selector_switch" id="raw">raw</button>
               <button class="selector_switch" id="php">php</button>
@@ -4539,7 +4591,7 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
           </nav>
         </div><div class="code-snippet__cnt highlight"><pre><code class="language-python" data-lang="python"><span class="n">webhook_api</span> <span class="o">=</span> <span class="n">dwollaswagger</span><span class="o">.</span><span class="n">WebhooksubscriptionsApi</span><span class="p">(</span><span class="n">client</span><span class="p">)</span>
 <span class="n">deleted</span> <span class="o">=</span> <span class="n">webhook_api</span><span class="o">.</span><span class="nb">id</span><span class="p">(</span><span class="s">'https://api-uat.dwolla.com/webhook-subscriptions/5af4c10a-f6de-4ac8-840d-42cb65454216'</span><span class="p">)</span>
-</code></pre></div></div><div class="code-snippet language-php"><button class="btn alternative">copy</button><div class="code-snippet__selector">
+</code></pre></div></div><div class="code-snippet js-code-snippet language-php"><button class="btn alternative">copy</button><div class="code-snippet__selector">
           <nav>
               <button class="selector_switch" id="raw">raw</button>
               <button class="selector_switch" id="php">php</button>
@@ -4582,7 +4634,7 @@ DELETE https://api.dwolla.com/webhook-subscriptions/{id}
 <td>Webhook subscription not found.</td>
 </tr>
 </tbody></table>
-<h2 id='list-subscriptions'>List Subscriptions</h2><h3 id='request-and-response'>Request and Response</h3><div class="code-snippet language-raw"><button class="btn alternative">copy</button><div class="code-snippet__selector">
+<h2 id='list-subscriptions'>List Subscriptions</h2><h3 id='request-and-response'>Request and Response</h3><div class="code-snippet js-code-snippet language-raw"><button class="btn alternative">copy</button><div class="code-snippet__selector">
           <nav>
               <button class="selector_switch" id="raw">raw</button>
               <button class="selector_switch" id="php">php</button>
@@ -4621,7 +4673,7 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
   },
   "total": 1
 }
-</code></pre></div></div><div class="code-snippet language-ruby"><button class="btn alternative">copy</button><div class="code-snippet__selector">
+</code></pre></div></div><div class="code-snippet js-code-snippet language-ruby"><button class="btn alternative">copy</button><div class="code-snippet__selector">
           <nav>
               <button class="selector_switch" id="raw">raw</button>
               <button class="selector_switch" id="php">php</button>
@@ -4632,7 +4684,7 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
         </div><div class="code-snippet__cnt highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="n">retrieved</span> <span class="o">=</span> <span class="no">DwollaSwagger</span><span class="o">::</span><span class="no">WebhooksubscriptionApi</span><span class="p">.</span><span class="nf">list</span>
 
 <span class="nb">p</span> <span class="n">retrieved</span><span class="p">.</span><span class="nf">total</span> <span class="c1"># =&gt; 1</span>
-</code></pre></div></div><div class="code-snippet language-javascript"><button class="btn alternative">copy</button><div class="code-snippet__selector">
+</code></pre></div></div><div class="code-snippet js-code-snippet language-javascript"><button class="btn alternative">copy</button><div class="code-snippet__selector">
           <nav>
               <button class="selector_switch" id="raw">raw</button>
               <button class="selector_switch" id="php">php</button>
@@ -4641,7 +4693,7 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
               <button class="selector_switch" id="javascript">javascript</button>
           </nav>
         </div><div class="code-snippet__cnt highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="nx">No</span> <span class="nx">example</span> <span class="k">for</span> <span class="k">this</span> <span class="nx">language</span> <span class="nx">yet</span><span class="p">.</span>
-</code></pre></div></div><div class="code-snippet language-python"><button class="btn alternative">copy</button><div class="code-snippet__selector">
+</code></pre></div></div><div class="code-snippet js-code-snippet language-python"><button class="btn alternative">copy</button><div class="code-snippet__selector">
           <nav>
               <button class="selector_switch" id="raw">raw</button>
               <button class="selector_switch" id="php">php</button>
@@ -4653,7 +4705,7 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 <span class="n">retrieved</span> <span class="o">=</span> <span class="n">webhook_api</span><span class="o">.</span><span class="nb">list</span><span class="p">()</span>
 
 <span class="k">print</span><span class="p">(</span><span class="n">retrieved</span><span class="o">.</span><span class="n">total</span><span class="p">)</span> <span class="c"># =&gt; 1</span>
-</code></pre></div></div><div class="code-snippet language-php"><button class="btn alternative">copy</button><div class="code-snippet__selector">
+</code></pre></div></div><div class="code-snippet js-code-snippet language-php"><button class="btn alternative">copy</button><div class="code-snippet__selector">
           <nav>
               <button class="selector_switch" id="raw">raw</button>
               <button class="selector_switch" id="php">php</button>
@@ -4682,7 +4734,7 @@ GET https://api.dwolla.com/webhook-subscriptions
 </tr>
 </thead><tbody>
 </tbody></table>
-<h2 id='get-subscription-by-id'>Get Subscription by ID</h2><h3 id='request-and-response'>Request and Response:</h3><div class="code-snippet language-raw"><button class="btn alternative">copy</button><div class="code-snippet__selector">
+<h2 id='get-subscription-by-id'>Get Subscription by ID</h2><h3 id='request-and-response'>Request and Response:</h3><div class="code-snippet js-code-snippet language-raw"><button class="btn alternative">copy</button><div class="code-snippet__selector">
           <nav>
               <button class="selector_switch" id="raw">raw</button>
               <button class="selector_switch" id="php">php</button>
@@ -4709,7 +4761,7 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
   "url": "http://myapplication.com/webhooks",
   "created": "2015-10-28T16:20:47+00:00"
 }
-</code></pre></div></div><div class="code-snippet language-ruby"><button class="btn alternative">copy</button><div class="code-snippet__selector">
+</code></pre></div></div><div class="code-snippet js-code-snippet language-ruby"><button class="btn alternative">copy</button><div class="code-snippet__selector">
           <nav>
               <button class="selector_switch" id="raw">raw</button>
               <button class="selector_switch" id="php">php</button>
@@ -4720,7 +4772,7 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
         </div><div class="code-snippet__cnt highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="n">retrieved</span> <span class="o">=</span> <span class="no">DwollaSwagger</span><span class="o">::</span><span class="no">WebhooksubscriptionApi</span><span class="p">.</span><span class="nf">id</span><span class="p">(</span><span class="s1">'https://api-uat.dwolla.com/webhook-subscriptions/5af4c10a-f6de-4ac8-840d-42cb65454216'</span><span class="p">)</span>
 
 <span class="nb">p</span> <span class="n">retrieved</span><span class="p">.</span><span class="nf">created</span> <span class="c1"># =&gt; 2015-10-28T16:20:47+00:00</span>
-</code></pre></div></div><div class="code-snippet language-javascript"><button class="btn alternative">copy</button><div class="code-snippet__selector">
+</code></pre></div></div><div class="code-snippet js-code-snippet language-javascript"><button class="btn alternative">copy</button><div class="code-snippet__selector">
           <nav>
               <button class="selector_switch" id="raw">raw</button>
               <button class="selector_switch" id="php">php</button>
@@ -4729,7 +4781,7 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
               <button class="selector_switch" id="javascript">javascript</button>
           </nav>
         </div><div class="code-snippet__cnt highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="nx">No</span> <span class="nx">example</span> <span class="k">for</span> <span class="k">this</span> <span class="nx">language</span> <span class="nx">yet</span><span class="p">.</span>
-</code></pre></div></div><div class="code-snippet language-python"><button class="btn alternative">copy</button><div class="code-snippet__selector">
+</code></pre></div></div><div class="code-snippet js-code-snippet language-python"><button class="btn alternative">copy</button><div class="code-snippet__selector">
           <nav>
               <button class="selector_switch" id="raw">raw</button>
               <button class="selector_switch" id="php">php</button>
@@ -4741,7 +4793,7 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 <span class="n">retrieved</span> <span class="o">=</span> <span class="n">webhook_api</span><span class="o">.</span><span class="nb">id</span><span class="p">(</span><span class="s">'https://api-uat.dwolla.com/webhook-subscriptions/5af4c10a-f6de-4ac8-840d-42cb65454216'</span><span class="p">)</span>
 
 <span class="k">print</span><span class="p">(</span><span class="n">retrieved</span><span class="o">.</span><span class="n">created</span><span class="p">)</span> <span class="c"># =&gt; 2015-10-28T16:20:47+00:00</span>
-</code></pre></div></div><div class="code-snippet language-php"><button class="btn alternative">copy</button><div class="code-snippet__selector">
+</code></pre></div></div><div class="code-snippet js-code-snippet language-php"><button class="btn alternative">copy</button><div class="code-snippet__selector">
           <nav>
               <button class="selector_switch" id="raw">raw</button>
               <button class="selector_switch" id="php">php</button>
@@ -4774,7 +4826,7 @@ GET https://api.dwolla.com/webhook-subscriptions/{id}
 <td>Webhook subscription not found.</td>
 </tr>
 </tbody></table>
-<h2 id='get-a-subscription39s-webhooks'>Get a Subscription&rsquo;s Webhooks</h2><h3 id='request-and-response'>Request and Response</h3><div class="code-snippet language-raw"><button class="btn alternative">copy</button><div class="code-snippet__selector">
+<h2 id='get-a-subscription39s-webhooks'>Get a Subscription&rsquo;s Webhooks</h2><h3 id='request-and-response'>Request and Response</h3><div class="code-snippet js-code-snippet language-raw"><button class="btn alternative">copy</button><div class="code-snippet__selector">
           <nav>
               <button class="selector_switch" id="raw">raw</button>
               <button class="selector_switch" id="php">php</button>
@@ -4829,7 +4881,7 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
     }
   ]
 }
-</code></pre></div></div><div class="code-snippet language-ruby"><button class="btn alternative">copy</button><div class="code-snippet__selector">
+</code></pre></div></div><div class="code-snippet js-code-snippet language-ruby"><button class="btn alternative">copy</button><div class="code-snippet__selector">
           <nav>
               <button class="selector_switch" id="raw">raw</button>
               <button class="selector_switch" id="php">php</button>
@@ -4840,7 +4892,7 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
         </div><div class="code-snippet__cnt highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="n">retrieved</span> <span class="o">=</span> <span class="no">DwollaSwagger</span><span class="o">::</span><span class="no">WebhooksApi</span><span class="p">.</span><span class="nf">hooks_by_id</span><span class="p">(</span><span class="s1">'https://api-uat.dwolla.com/webhook-subscriptions/5af4c10a-f6de-4ac8-840d-42cb65454216'</span><span class="p">)</span>
 
 <span class="nb">p</span> <span class="n">retrieved</span><span class="p">.</span><span class="nf">total</span> <span class="c1"># =&gt; 5</span>
-</code></pre></div></div><div class="code-snippet language-javascript"><button class="btn alternative">copy</button><div class="code-snippet__selector">
+</code></pre></div></div><div class="code-snippet js-code-snippet language-javascript"><button class="btn alternative">copy</button><div class="code-snippet__selector">
           <nav>
               <button class="selector_switch" id="raw">raw</button>
               <button class="selector_switch" id="php">php</button>
@@ -4849,7 +4901,7 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
               <button class="selector_switch" id="javascript">javascript</button>
           </nav>
         </div><div class="code-snippet__cnt highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="nx">No</span> <span class="nx">example</span> <span class="k">for</span> <span class="k">this</span> <span class="nx">language</span> <span class="nx">yet</span><span class="p">.</span>
-</code></pre></div></div><div class="code-snippet language-python"><button class="btn alternative">copy</button><div class="code-snippet__selector">
+</code></pre></div></div><div class="code-snippet js-code-snippet language-python"><button class="btn alternative">copy</button><div class="code-snippet__selector">
           <nav>
               <button class="selector_switch" id="raw">raw</button>
               <button class="selector_switch" id="php">php</button>
@@ -4861,7 +4913,7 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 <span class="n">retrieved</span> <span class="o">=</span> <span class="n">webhook_api</span><span class="o">.</span><span class="n">hooks_by_id</span><span class="p">(</span><span class="s">'https://api-uat.dwolla.com/webhook-subscriptions/5af4c10a-f6de-4ac8-840d-42cb65454216'</span><span class="p">)</span>
 
 <span class="k">print</span><span class="p">(</span><span class="n">retrieved</span><span class="o">.</span><span class="n">total</span><span class="p">)</span> <span class="c"># =&gt; 5</span>
-</code></pre></div></div><div class="code-snippet language-php"><button class="btn alternative">copy</button><div class="code-snippet__selector">
+</code></pre></div></div><div class="code-snippet js-code-snippet language-php"><button class="btn alternative">copy</button><div class="code-snippet__selector">
           <nav>
               <button class="selector_switch" id="raw">raw</button>
               <button class="selector_switch" id="php">php</button>
@@ -4891,7 +4943,7 @@ GET https://api.dwolla.com/webhook-subscriptions/{id}/webhooks
 </thead><tbody>
 </tbody></table>
 
-            <h1 id='webhooks'>Webhooks</h1><div class="code-snippet language-nohide"><button class="btn alternative">copy</button><div class="code-snippet__cnt highlight"><pre><code class="language-nohide" data-lang="nohide"><span class="p">{</span><span class="w">
+            <h1 id='webhooks'>Webhooks</h1><div class="code-snippet js-code-snippet language-nohide"><button class="btn alternative">copy</button><div class="code-snippet__cnt highlight"><pre><code class="language-nohide" data-lang="nohide"><span class="p">{</span><span class="w">
   </span><span class="nt">"_links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="nt">"self"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
       </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.dwolla.com/webhooks/9ece9660-aa34-41eb-80d7-0125d53b45e8"</span><span class="w">
@@ -4977,7 +5029,7 @@ GET https://api.dwolla.com/webhook-subscriptions/{id}/webhooks
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div></div>
 <p>When a new <a href="#events">Event</a> is created and there is an active <a href="#webhook-subscriptions">Webhook Subscription</a>, a new Webhook is created in order to deliver that Event.  Attempted deliveries are recorded under the Webhook&rsquo;s <code class="prettyprint">attempts</code> property.  Each attempt incldues the recorded request and response of the delivery attempt.</p>
-<h2 id='retrieve-webhook'>Retrieve Webhook</h2><h3 id='request-and-response'>Request and Response</h3><div class="code-snippet language-raw"><button class="btn alternative">copy</button><div class="code-snippet__selector">
+<h2 id='retrieve-webhook'>Retrieve Webhook</h2><h3 id='request-and-response'>Request and Response</h3><div class="code-snippet js-code-snippet language-raw"><button class="btn alternative">copy</button><div class="code-snippet__selector">
           <nav>
               <button class="selector_switch" id="raw">raw</button>
               <button class="selector_switch" id="php">php</button>
@@ -5075,7 +5127,7 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
     }
   ]
 }
-</code></pre></div></div><div class="code-snippet language-ruby"><button class="btn alternative">copy</button><div class="code-snippet__selector">
+</code></pre></div></div><div class="code-snippet js-code-snippet language-ruby"><button class="btn alternative">copy</button><div class="code-snippet__selector">
           <nav>
               <button class="selector_switch" id="raw">raw</button>
               <button class="selector_switch" id="php">php</button>
@@ -5087,7 +5139,7 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 
 <span class="n">retrieved</span> <span class="o">=</span> <span class="no">DwollaSwagger</span><span class="o">::</span><span class="no">WebhooksApi</span><span class="p">.</span><span class="nf">by_id</span><span class="p">(</span><span class="n">webhook</span><span class="p">)</span>
 <span class="nb">p</span> <span class="n">retrieved</span><span class="p">.</span><span class="nf">topic</span> <span class="c1"># =&gt; "transfer_created"</span>
-</code></pre></div></div><div class="code-snippet language-php"><button class="btn alternative">copy</button><div class="code-snippet__selector">
+</code></pre></div></div><div class="code-snippet js-code-snippet language-php"><button class="btn alternative">copy</button><div class="code-snippet__selector">
           <nav>
               <button class="selector_switch" id="raw">raw</button>
               <button class="selector_switch" id="php">php</button>
@@ -5103,7 +5155,7 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 <span class="nv">$retrieved</span> <span class="o">=</span> <span class="nv">$webhooksApi</span><span class="o">-&gt;</span><span class="na">byId</span><span class="p">(</span><span class="nv">$webhook</span><span class="p">);</span>
 <span class="k">print</span><span class="p">(</span><span class="nv">$retrieved</span><span class="o">-&gt;</span><span class="na">topic</span><span class="p">);</span> <span class="c1"># =&gt; "transfer_created"
 </span><span class="cp">?&gt;</span>
-</code></pre></div></div><div class="code-snippet language-python"><button class="btn alternative">copy</button><div class="code-snippet__selector">
+</code></pre></div></div><div class="code-snippet js-code-snippet language-python"><button class="btn alternative">copy</button><div class="code-snippet__selector">
           <nav>
               <button class="selector_switch" id="raw">raw</button>
               <button class="selector_switch" id="php">php</button>
@@ -5117,7 +5169,7 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 <span class="n">retrieved</span> <span class="o">=</span> <span class="n">webhooks_api</span><span class="o">.</span><span class="n">by_id</span><span class="p">(</span><span class="n">webhook</span><span class="p">)</span>
 
 <span class="k">print</span><span class="p">(</span><span class="n">retrieved</span><span class="o">.</span><span class="n">topic</span><span class="p">)</span> <span class="c"># =&gt; transfer_created</span>
-</code></pre></div></div><div class="code-snippet language-javascript"><button class="btn alternative">copy</button><div class="code-snippet__selector">
+</code></pre></div></div><div class="code-snippet js-code-snippet language-javascript"><button class="btn alternative">copy</button><div class="code-snippet__selector">
           <nav>
               <button class="selector_switch" id="raw">raw</button>
               <button class="selector_switch" id="php">php</button>
@@ -5157,7 +5209,7 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 <td>Webhook not found.</td>
 </tr>
 </tbody></table>
-<h2 id='retry-a-webhook-by-id'>Retry a Webhook by ID</h2><h3 id='request-and-response'>Request and Response</h3><div class="code-snippet language-raw"><button class="btn alternative">copy</button><div class="code-snippet__selector">
+<h2 id='retry-a-webhook-by-id'>Retry a Webhook by ID</h2><h3 id='request-and-response'>Request and Response</h3><div class="code-snippet js-code-snippet language-raw"><button class="btn alternative">copy</button><div class="code-snippet__selector">
           <nav>
               <button class="selector_switch" id="raw">raw</button>
               <button class="selector_switch" id="php">php</button>
@@ -5174,7 +5226,7 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 
 HTTP/1.1 201 Created
 Location: https://api.dwolla.com/webhooks/9ece9660-aa34-41eb-80d7-0125d53b45e8/retries/5aa27a0f-cf99-418d-a3ee-67c0ff99a494
-</code></pre></div></div><div class="code-snippet language-ruby"><button class="btn alternative">copy</button><div class="code-snippet__selector">
+</code></pre></div></div><div class="code-snippet js-code-snippet language-ruby"><button class="btn alternative">copy</button><div class="code-snippet__selector">
           <nav>
               <button class="selector_switch" id="raw">raw</button>
               <button class="selector_switch" id="php">php</button>
@@ -5186,7 +5238,7 @@ Location: https://api.dwolla.com/webhooks/9ece9660-aa34-41eb-80d7-0125d53b45e8/r
 
 <span class="n">retried</span> <span class="o">=</span> <span class="no">DwollaSwagger</span><span class="o">::</span><span class="no">WebhooksApi</span><span class="p">.</span><span class="nf">retry_webhook</span><span class="p">(</span><span class="n">webhook</span><span class="p">)</span>
 <span class="nb">p</span> <span class="n">retried</span> <span class="c1"># =&gt; "https://api.dwolla.com/webhooks/9ece9660-aa34-41eb-80d7-0125d53b45e8/retries/5aa27a0f-cf99-418d-a3ee-67c0ff99a494"</span>
-</code></pre></div></div><div class="code-snippet language-php"><button class="btn alternative">copy</button><div class="code-snippet__selector">
+</code></pre></div></div><div class="code-snippet js-code-snippet language-php"><button class="btn alternative">copy</button><div class="code-snippet__selector">
           <nav>
               <button class="selector_switch" id="raw">raw</button>
               <button class="selector_switch" id="php">php</button>
@@ -5202,7 +5254,7 @@ Location: https://api.dwolla.com/webhooks/9ece9660-aa34-41eb-80d7-0125d53b45e8/r
 <span class="nv">$retried</span> <span class="o">=</span> <span class="nv">$webhooksApi</span><span class="o">-&gt;</span><span class="na">retryWebhook</span><span class="p">(</span><span class="nv">$webhook</span><span class="p">);</span>
 <span class="k">print</span><span class="p">(</span><span class="nv">$retried</span><span class="p">);</span> <span class="c1"># =&gt; "https://api.dwolla.com/webhooks/9ece9660-aa34-41eb-80d7-0125d53b45e8/retries/5aa27a0f-cf99-418d-a3ee-67c0ff99a494"
 </span><span class="cp">?&gt;</span>
-</code></pre></div></div><div class="code-snippet language-python"><button class="btn alternative">copy</button><div class="code-snippet__selector">
+</code></pre></div></div><div class="code-snippet js-code-snippet language-python"><button class="btn alternative">copy</button><div class="code-snippet__selector">
           <nav>
               <button class="selector_switch" id="raw">raw</button>
               <button class="selector_switch" id="php">php</button>
@@ -5216,7 +5268,7 @@ Location: https://api.dwolla.com/webhooks/9ece9660-aa34-41eb-80d7-0125d53b45e8/r
 <span class="n">retried</span> <span class="o">=</span> <span class="n">webhooks_api</span><span class="o">.</span><span class="n">retry_webhook</span><span class="p">(</span><span class="n">webhook</span><span class="p">)</span>
 
 <span class="k">print</span><span class="p">(</span><span class="n">retried</span><span class="p">)</span> <span class="c"># =&gt; https://api.dwolla.com/webhooks/9ece9660-aa34-41eb-80d7-0125d53b45e8/retries/5aa27a0f-cf99-418d-a3ee-67c0ff99a494</span>
-</code></pre></div></div><div class="code-snippet language-javascript"><button class="btn alternative">copy</button><div class="code-snippet__selector">
+</code></pre></div></div><div class="code-snippet js-code-snippet language-javascript"><button class="btn alternative">copy</button><div class="code-snippet__selector">
           <nav>
               <button class="selector_switch" id="raw">raw</button>
               <button class="selector_switch" id="php">php</button>
@@ -5256,7 +5308,7 @@ Location: https://api.dwolla.com/webhooks/9ece9660-aa34-41eb-80d7-0125d53b45e8/r
 <td>Webhook not found.</td>
 </tr>
 </tbody></table>
-<h2 id='get-retries-by-id'>Get Retries by ID</h2><h3 id='request-and-response'>Request and Response</h3><div class="code-snippet language-raw"><button class="btn alternative">copy</button><div class="code-snippet__selector">
+<h2 id='get-retries-by-id'>Get Retries by ID</h2><h3 id='request-and-response'>Request and Response</h3><div class="code-snippet js-code-snippet language-raw"><button class="btn alternative">copy</button><div class="code-snippet__selector">
           <nav>
               <button class="selector_switch" id="raw">raw</button>
               <button class="selector_switch" id="php">php</button>
@@ -5294,7 +5346,7 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
   },
   "total": 1
 }
-</code></pre></div></div><div class="code-snippet language-ruby"><button class="btn alternative">copy</button><div class="code-snippet__selector">
+</code></pre></div></div><div class="code-snippet js-code-snippet language-ruby"><button class="btn alternative">copy</button><div class="code-snippet__selector">
           <nav>
               <button class="selector_switch" id="raw">raw</button>
               <button class="selector_switch" id="php">php</button>
@@ -5306,7 +5358,7 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 
 <span class="n">retries</span> <span class="o">=</span> <span class="no">DwollaSwagger</span><span class="o">::</span><span class="no">WebhooksApi</span><span class="p">.</span><span class="nf">retries_by_id</span><span class="p">(</span><span class="n">webhook</span><span class="p">)</span>
 <span class="nb">p</span> <span class="n">retries</span><span class="p">.</span><span class="nf">total</span> <span class="c1"># =&gt; "1"</span>
-</code></pre></div></div><div class="code-snippet language-php"><button class="btn alternative">copy</button><div class="code-snippet__selector">
+</code></pre></div></div><div class="code-snippet js-code-snippet language-php"><button class="btn alternative">copy</button><div class="code-snippet__selector">
           <nav>
               <button class="selector_switch" id="raw">raw</button>
               <button class="selector_switch" id="php">php</button>
@@ -5322,7 +5374,7 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 <span class="nv">$retries</span> <span class="o">=</span> <span class="nv">$webhooksApi</span><span class="o">-&gt;</span><span class="na">retriesById</span><span class="p">(</span><span class="nv">$webhook</span><span class="p">);</span>
 <span class="k">print</span><span class="p">(</span><span class="nv">$retries</span><span class="o">-&gt;</span><span class="na">total</span><span class="p">);</span> <span class="c1"># =&gt; "1"
 </span><span class="cp">?&gt;</span>
-</code></pre></div></div><div class="code-snippet language-python"><button class="btn alternative">copy</button><div class="code-snippet__selector">
+</code></pre></div></div><div class="code-snippet js-code-snippet language-python"><button class="btn alternative">copy</button><div class="code-snippet__selector">
           <nav>
               <button class="selector_switch" id="raw">raw</button>
               <button class="selector_switch" id="php">php</button>
@@ -5336,7 +5388,7 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 <span class="n">retries</span> <span class="o">=</span> <span class="n">webhooks_api</span><span class="o">.</span><span class="n">retries_by_id</span><span class="p">(</span><span class="n">webhook</span><span class="p">)</span>
 
 <span class="k">print</span><span class="p">(</span><span class="n">retries</span><span class="o">.</span><span class="n">total</span><span class="p">)</span> <span class="c"># =&gt; 1</span>
-</code></pre></div></div><div class="code-snippet language-javascript"><button class="btn alternative">copy</button><div class="code-snippet__selector">
+</code></pre></div></div><div class="code-snippet js-code-snippet language-javascript"><button class="btn alternative">copy</button><div class="code-snippet__selector">
           <nav>
               <button class="selector_switch" id="raw">raw</button>
               <button class="selector_switch" id="php">php</button>
