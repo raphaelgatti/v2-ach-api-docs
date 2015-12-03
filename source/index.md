@@ -16,6 +16,7 @@ toc_footers:
 includes:
   - introduction
   - oauth
+  - sdks
   - customers
   - documents
   - fundingsrcs
