@@ -75,9 +75,17 @@ new_fs = funding_api.create_customer_funding_source('https://api-uat.dwolla.com/
 p new_fs # => https://api-uat.dwolla.com/funding-sources/375c6781-2a17-476c-84f7-db7d2f6ffb31
 ```
 ```javascript
-// coming soon
+dwolla.then(function(dwolla) {
+    dwolla['funding-sources'].createFundingSource({
+      "routingNumber": "222222226",
+      "accountNumber": "123456789",
+      "type": "checking",
+      "name": "John Doe - Checking"
+    }).then(function(data) {
+       console.log(data); // https://api-uat.dwolla.com/funding-sources/375c6781-2a17-476c-84f7-db7d2f6ffb31
+    });
+});
 ```
-
 
 Create a new Funding Source for a Customer.  Customers can have a maximum of 6 funding sources.
 
@@ -186,7 +194,12 @@ acct_fs = fs_api.get_customer_transfers(customer)
 print(acct_fs[0].name) # => John Doe - Checking account1
 ```
 ```javascript
-// coming soon
+dwolla.then(function(dwolla) {
+    dwolla['funding-sources'].getCustomerFundingSources()
+    .then(function(data) {
+       console.log(data.obj._embedded[0].name); // John Doe - Checking account1
+    });
+});
 ```
 
 Retrieve a list of Funding Sources that belong to a Customer.
@@ -323,7 +336,12 @@ funding_sources = DwollaSwagger::FundingsourcesApi.get_account_funding_sources('
 p funding_sources._embedded[0].name # => "Balance"
 ```
 ```javascript
-// No example for this language yet.
+dwolla.then(function(dwolla) {
+    dwolla['funding-sources'].getAccountFundingSources()
+    .then(function(data) {
+       console.log(data.obj._embedded[0].name); // Balance
+    });
+});
 ```
 ```python
 funding_api = dwollaswagger.FundingsourcesApi(client)
@@ -417,7 +435,12 @@ retrieved = fs_api.id(fund_source)
 print(retrieved.name) # => Test checking account
 ```
 ```javascript
-// coming soon
+dwolla.then(function(dwolla) {
+    dwolla['funding-sources'].id({id: '692486f8-29f6-4516-a6a5-c69fd2ce854c'})
+    .then(function(data) {
+       console.log(data.obj._embedded.name); // Test checking account
+    });
+});
 ```
 
 Retrieve a Funding Source by ID.
@@ -459,7 +482,12 @@ HTTP 200 OK
 DwollaSwagger::FundingsourcesApi.micro_deposits(new_fs)
 ```
 ```javascript
-// No example for this language yet.
+dwolla.then(function(dwolla) {
+    dwolla['funding-sources'].microDeposits()
+    .then(function(data) {
+       console.log(data.status); // 200
+    });
+});
 ```
 ```python
 fs_api = dwollaswagger.FundingsourcesApi(client)
@@ -506,7 +534,21 @@ DwollaSwagger::FundingsourcesApi.verify_micro_deposits_exist(new_fs, {
 })
 ```
 ```javascript
-// No example for this language yet.
+dwolla.then(function(dwolla) {
+    dwolla['funding-sources'].verifyMicroDepositsExist({id: 'e52006c3-7560-4ff1-99d5-b0f3a6f4f909', body: {
+        "amount1": {
+            "value": "0.03",
+            "currency": "USD"
+        },
+        "amount2": {
+            "value": "0.09",
+            "currency": "USD"
+        }
+    }})
+    .then(function(data) {
+       console.log(data.status); // 200
+    });
+});
 ```
 ```python
 fs_api = dwollaswagger.FundingsourcesApi(client)
@@ -646,7 +688,12 @@ fs_api = dwollaswagger.FundingsourcesApi(client)
 fs_api.delete(fund_source)
 ```
 ```javascript
-// coming soon
+dwolla.then(function(dwolla) {
+    dwolla['funding-sources'].delete({id: '692486f8-29f6-4516-a6a5-c69fd2ce854c'})
+    .then(function(data) {
+       console.log(data.status); // 200
+    });
+});
 ```
 
 Remove a Funding Source by ID.

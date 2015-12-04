@@ -649,7 +649,7 @@ print(retrieved.firstName) # => Bob
 ```javascript
 dwolla.then(function(dwolla) {
     dwolla.customers.getCustomer({id:'07D59716-EF22-4FE6-98E8-F3190233DFB8'}).then(function(data) {
-        console.log(data);
+        console.log(data.obj._embedded.firstName); // Bob
     })
 })
 ```
