@@ -29,7 +29,7 @@ Get a single-use IAV token for a Customer.
 ### Request:
 
 ```noselect
-POST /customers/99bfb139-eadd-4cdf-b346-7504f0c16c60/iav-verification
+POST /customers/99bfb139-eadd-4cdf-b346-7504f0c16c60/iav-token
 Content-Type: application/vnd.dwolla.v1.hal+json
 Accept: application/vnd.dwolla.v1.hal+json
 Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
@@ -51,7 +51,7 @@ HTTP/1.1 200 OK
 ```
 
 ### HTTP Request
-`POST https://api.dwolla.com/customers/{id}/iav-verification`
+`POST https://api.dwolla.com/customers/{id}/iav-token`
 
 ### Request Parameters
 Parameter | Optional? | Description
