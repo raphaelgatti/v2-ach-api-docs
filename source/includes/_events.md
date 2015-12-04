@@ -200,7 +200,11 @@ events = events_api.events()
 print(events.total) # => 4
 ```
 ```javascript
-// coming soon
+dwolla.then(function(dwolla) {
+    dwolla.events.events().then(function(data) {
+        console.log(data.total); // 4
+    })
+})
 ```
 
 Retrieve a list of events for the authorized user.
@@ -281,7 +285,11 @@ retries = events_api.retries_by_id(event)
 print(retries.topic) # => customer_transfer_created
 ```
 ```javascript
-// coming soon
+dwolla.then(function(dwolla) {
+    dwolla.events.id({id: '81f6e13c-557c-4449-9331-da5c65e61095'}).then(function(data) {
+        console.log(data.topic); // customer_transfer_created
+    })
+})
 ```
 
 Retrieve an event by Id. 

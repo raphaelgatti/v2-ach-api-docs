@@ -150,3 +150,20 @@ dwolla.then(function(dwolla) {
     })
 })
 ```
+
+Since this library sets up all operations on demand (i.e this isn't a Dwolla-specific package), you can query `.help()` to help you retrieve more information as such:
+
+```javascriptnoselect
+dwolla.then(function(dwolla) {
+    dwolla.events.help();
+});
+// operations for the 'events' tag
+//   * events: List events.
+//   * id: Get an event by id.
+
+dwolla.then(function(dwolla) {
+    dwolla.events.id.help();
+});
+// id: Get an event by id.
+//   * id (string): ID of application event to get.
+```
