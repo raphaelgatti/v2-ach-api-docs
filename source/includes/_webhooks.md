@@ -210,7 +210,13 @@ retrieved = webhooks_api.by_id(webhook)
 print(retrieved.topic) # => transfer_created
 ```
 ```javascript
-// coming soon
+dwolla.then(function(dwolla) {
+    dwolla.webhooks.id({
+        id: '9ece9660-aa34-41eb-80d7-0125d53b45e8'
+    }).then(function(data) {
+        console.log(data.obj.topic); // transfer_created
+    });
+});
 ```
 
 Retrieve a single webhook.
@@ -273,7 +279,13 @@ retried = webhooks_api.retry_webhook(webhook)
 print(retried) # => https://api.dwolla.com/webhooks/9ece9660-aa34-41eb-80d7-0125d53b45e8/retries/5aa27a0f-cf99-418d-a3ee-67c0ff99a494
 ```
 ```javascript
-// coming soon
+dwolla.then(function(dwolla) {
+    dwolla.webhooks.retryWebhook({
+        id: '9ece9660-aa34-41eb-80d7-0125d53b45e8'
+    }).then(function(data) {
+        console.log(data.obj.status); // 200
+    });
+});
 ```
 
 Retry a webhook by ID.
@@ -357,7 +369,13 @@ retries = webhooks_api.retries_by_id(webhook)
 print(retries.total) # => 1
 ```
 ```javascript
-// coming soon
+dwolla.then(function(dwolla) {
+    dwolla.webhooks.retriesById({
+        id: '9ece9660-aa34-41eb-80d7-0125d53b45e8'
+    }).then(function(data) {
+        console.log(data.obj.total); // 1
+    });
+});
 ```
 
 Retrieve webhook retries by ID.

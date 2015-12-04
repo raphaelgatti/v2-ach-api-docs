@@ -132,7 +132,28 @@ new_xfer = transfers_api.create(body = {
 print(new_xfer) # => https://api.dwolla.com/transfers/74c9129b-d14a-e511-80da-0aa34a9b2388
 ```
 ```javascript
-// coming soon
+dwolla.then(function(dwolla) {
+    dwolla.transfers.create({
+      "_links": {
+          "destination": {
+              "href": "https://api.dwolla.com/customers/07D59716-EF22-4FE6-98E8-F3190233DFB8"
+          },
+          "source": {
+              "href": "https://api.dwolla.com/funding-sources/707177c3-bf15-4e7e-b37c-55c3898d9bf4"
+          }
+      },
+      "amount": {
+          "currency": "USD",
+          "value": "1.00"
+      },
+      "metadata": {
+          "foo": "bar",
+          "baz": "boo"
+      }
+      }).then(function(data) {
+          console.log(data.obj); // https://api.dwolla.com/transfers/74c9129b-d14a-e511-80da-0aa34a9b2388
+      })
+})
 ```
 
 Initiate a transfer for either an account or customer resource. 
@@ -274,7 +295,11 @@ cust_xfers = transfers_api.get_customer_transfers(customer)
 print(cust_xfers[0].status) # => pending
 ```
 ```javascript
-// coming soon
+dwolla.then(function(dwolla) {
+    dwolla.customers.getCustomerTransfers().then(function(data) {
+        console.log(data.obj._embedded[0].status); // pending
+    })
+})
 ```
 
 Retrieve a Customer's list of transfers.
@@ -395,7 +420,11 @@ acct_xfers = transfers_api.get_account_transfers(account)
 print(acct_xfers[0].status) # => processed
 ```
 ```javascript
-// coming soon
+dwolla.then(function(dwolla) {
+    dwolla.customers.getAccountTransfers().then(function(data) {
+        console.log(data.obj._embedded[0].status); // processed
+    })
+})
 ```
 
 Retrieve an Account's list of transfers.
@@ -479,7 +508,12 @@ retrieved = transfers_api.by_id(transfer)
 print(retrieved.status) # => pending
 ```
 ```javascript
-// coming soon
+dwolla.then(function(dwolla) {
+    dwolla.customers.byId({id: '4C8AD8B8-3D69-E511-80DB-0AA34A9B2388'})
+    .then(function(data) {
+        console.log(data.obj._embedded[0].status); // pending
+    })
+})
 ```
 
 Retrieve a Transfer belonging to an Account or Customer by its ID.
