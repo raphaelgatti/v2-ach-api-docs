@@ -127,7 +127,16 @@ new_customer = customers_api.create(body = {
 print(new_customer) # => https://api-uat.dwolla.com/customers/FC451A7A-AE30-4404-AB95-E3553FCD733F
 ```
 ```javascript
-// coming soon
+dwolla.then(function(dwolla) {
+    dwolla.customers.create({
+      "firstName": "Bob",
+      "lastName": "Merchant",
+      "email": "bmerchant@nomail.net",
+      "ipAddress": "99.99.99.99"})
+      .then(function(data) {
+          console.log(data); // https://api-uat.dwolla.com/customers/FC451A7A-AE30-4404-AB95-E3553FCD733F
+      });
+});
 ```
 
 ### Verified customer:
@@ -230,7 +239,31 @@ new_customer = customers_api.create(body = {'firstName': 'Bob',
 print(new_customer) # => https://api-uat.dwolla.com/customers/AB443D36-3757-44C1-A1B4-29727FB3111C
 ```
 ```javascript
-// coming soon
+dwolla.then(function(dwolla) {
+    dwolla.customers.create({
+        "firstName": "Bob",
+        "lastName": "Merchant",
+        "email": "bmerchant@nomail.net",
+        "ipAddress": "10.10.10.10",
+        "type": "personal",
+        "address1": "99-99 33rd St",
+        "city": "Some City",
+        "state": "NY",
+        "postalCode": "11101",
+        "dateOfBirth": "1970-01-01",
+
+        // For the first attempt, only 
+        // the last 4 digits of SSN required
+
+        // If the entire SSN is provided, 
+        // it will still be accepted
+        "ssn": "1234",
+        "phone": "3478589191"
+      })
+      .then(function(data) {
+          console.log(data); // https://api-uat.dwolla.com/customers/FC451A7A-AE30-4404-AB95-E3553FCD733F
+      });
+});
 ```
 
 ### Validation error:
@@ -405,7 +438,25 @@ retry_customer = customers_api.update_customer(retry_location, body = {
 print(retry_customer) # => https://api.dwolla.com/customers/FC451A7A-AE30-4404-AB95-E3553FCD733F
 ```
 ```javascript
-// coming soon
+dwolla.then(function(dwolla) {
+    dwolla.customers.updateCustomer({
+        "firstName": "Gordon",
+        "lastName": "Zheng",
+        "email": "gordon+15@dwolla.com",
+        "ipAddress": "10.10.10.10",
+        "type": "personal",
+        "address1": "221 Corrected Address St..",
+        "address2": "Fl 8",
+        "city": "Ridgewood",
+        "state": "NY",
+        "postalCode": "11385",
+        "dateOfBirth": "1990-07-11",
+        "tin": "202-99-1516"
+      })
+      .then(function(data) {
+          console.log(data); // https://api-uat.dwolla.com/customers/FC451A7A-AE30-4404-AB95-E3553FCD733F
+      });
+});
 ```
 
 ### Validation error:
@@ -520,7 +571,11 @@ my_custies = customers_api.list(limit=10)
 print(my_custies[0].firstName) # => Bob
 ```
 ```javascript
-// coming soon
+dwolla.then(function(dwolla) {
+    dwolla.customers.list({limit:10}).then(function(data) {
+        console.log(data[0].name); // Bob
+    })
+})
 ```
 
 <ol class="alerts">
@@ -592,7 +647,11 @@ retrieved = customers_api.get_customer(a_customer)
 print(retrieved.firstName) # => Bob
 ```
 ```javascript
-// coming soon
+dwolla.then(function(dwolla) {
+    dwolla.customers.getCustomer({id:'07D59716-EF22-4FE6-98E8-F3190233DFB8'}).then(function(data) {
+        console.log(data);
+    })
+})
 ```
 
 Retrieve a Customer which belongs to the authorized user.
