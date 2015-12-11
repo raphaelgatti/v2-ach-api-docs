@@ -2039,7 +2039,7 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 </tr>
 <tr>
 <td>type</td>
-<td>Either <code class="prettyprint">passport</code>, <code class="prettyprint">driversLicense</code>, or <code class="prettyprint">idCard</code>.</td>
+<td>Either <code class="prettyprint">passport</code>, <code class="prettyprint">driversLicense</code>, <code class="prettyprint">idCard</code>, or <code class="prettyprint">other</code>.</td>
 </tr>
 <tr>
 <td>status</td>
@@ -2075,7 +2075,7 @@ Location: https://api.dwolla.com/documents/11fe0bab-39bd-42ee-bb39-275afcc050d0
 </thead><tbody>
 <tr>
 <td>documentType</td>
-<td>One of <code class="prettyprint">passport</code>, <code class="prettyprint">driversLicense</code>, or <code class="prettyprint">idCard</code></td>
+<td>One of <code class="prettyprint">passport</code>, <code class="prettyprint">driversLicense</code>, <code class="prettyprint">idCard</code>, or <code class="prettyprint">other</code></td>
 </tr>
 <tr>
 <td>file</td>
@@ -2292,13 +2292,7 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 </thead><tbody>
 </tbody></table>
 
-            <h1 id='funding-sources'>Funding Sources</h1><div class="code-snippet js-code-snippet language-nohide"><button class="btn alternative">copy</button><div class="code-snippet__cnt highlight"><pre><code class="language-nohide" data-lang="nohide"><span class="p">{</span><span class="w">
-    </span><span class="nt">"routingNumber"</span><span class="p">:</span><span class="w"> </span><span class="s2">"87654321"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"accountNumber"</span><span class="p">:</span><span class="w"> </span><span class="s2">"12345678"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"checking"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"My Bank"</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre></div></div>
+            <h1 id='funding-sources'>Funding Sources</h1>
 <p>Add and retrieve ACH bank accounts via Funding Sources, which are available to the <code class="prettyprint">Customers</code> and <code class="prettyprint">Accounts</code> resources.  Customers can have a maximum of 6 funding sources.</p>
 <h3 id='funding-source-resource'>Funding Source Resource</h3>
 <table><thead>
@@ -2328,7 +2322,63 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 <td>ISO-8601 timestamp.</td>
 </tr>
 </tbody></table>
-<h2 id='new-funding-source-customer'>New Funding Source (Customer)</h2><h3 id='request-and-response'>Request and Response:</h3><div class="code-snippet js-code-snippet language-raw"><button class="btn alternative">copy</button><div class="code-snippet__selector">
+<div class="code-snippet js-code-snippet language-nohide"><button class="btn alternative">copy</button><div class="code-snippet__cnt highlight"><pre><code class="language-nohide" data-lang="nohide"><span class="p">{</span><span class="w">
+    </span><span class="nt">"routingNumber"</span><span class="p">:</span><span class="w"> </span><span class="s2">"87654321"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"accountNumber"</span><span class="p">:</span><span class="w"> </span><span class="s2">"12345678"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"checking"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"My Bank"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div></div><h2 id='new-funding-source-customer'>New Funding Source (Customer)</h2>
+<p>Create a new Funding Source for a Customer.  Customers can have a maximum of 6 funding sources.</p>
+<ol class="alerts"><li class="alert icon-alert-alert"><p>This endpoint requires an OAuth access token with the <code>ManageCustomers</code> scope.</p>
+</li></ol><h3 id='http-request'>HTTP Request</h3>
+<p><code class="prettyprint">POST https://api.dwolla.com/customers/{id}/funding-sources</code></p>
+<h3 id='request-parameters'>Request Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Optional?</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>routingNumber</td>
+<td>no</td>
+<td>The bank account&rsquo;s routing number.</td>
+</tr>
+<tr>
+<td>accountNumber</td>
+<td>no</td>
+<td>The bank account number.</td>
+</tr>
+<tr>
+<td>type</td>
+<td>no</td>
+<td>Type of bank account: <code class="prettyprint">checking</code> or <code class="prettyprint">savings</code>.</td>
+</tr>
+<tr>
+<td>name</td>
+<td>no</td>
+<td>Arbitrary nickname for the funding source.</td>
+</tr>
+</tbody></table>
+<h3 id='errors'>Errors</h3>
+<table><thead>
+<tr>
+<th>HTTP Status</th>
+<th>Message</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>400</td>
+<td>Duplicate funding source or validation error.</td>
+</tr>
+<tr>
+<td>403</td>
+<td>Not authorized to create funding source.</td>
+</tr>
+</tbody></table>
+<h3 id='request-and-response'>Request and Response:</h3><div class="code-snippet js-code-snippet language-raw"><button class="btn alternative">copy</button><div class="code-snippet__selector">
           <nav>
               <button class="selector_switch" id="raw">raw</button>
               <button class="selector_switch" id="php">php</button>
@@ -2410,11 +2460,13 @@ Location: https://api.dwolla.com/funding-sources/AB443D36-3757-44C1-A1B4-29727FB
               <button class="selector_switch" id="javascript">javascript</button>
           </nav>
         </div><div class="code-snippet__cnt highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="c1">// coming soon</span>
-</code></pre></div></div>
-<p>Create a new Funding Source for a Customer.  Customers can have a maximum of 6 funding sources.</p>
+</code></pre></div></div><h2 id='list-funding-sources-customer'>List Funding Sources (Customer)</h2>
+<p>Retrieve a list of Funding Sources that belong to a Customer.</p>
 <ol class="alerts"><li class="alert icon-alert-alert"><p>This endpoint requires an OAuth access token with the <code>ManageCustomers</code> scope.</p>
 </li></ol><h3 id='http-request'>HTTP Request</h3>
-<p><code class="prettyprint">POST https://api.dwolla.com/customers/{id}/funding-sources</code></p>
+<p><code class="prettyprint">
+GET https://api.dwolla.com/customers/{id}/funding-sources
+</code></p>
 <h3 id='request-parameters'>Request Parameters</h3>
 <table><thead>
 <tr>
@@ -2424,24 +2476,9 @@ Location: https://api.dwolla.com/funding-sources/AB443D36-3757-44C1-A1B4-29727FB
 </tr>
 </thead><tbody>
 <tr>
-<td>routingNumber</td>
+<td>id</td>
 <td>no</td>
-<td>The bank account&rsquo;s routing number.</td>
-</tr>
-<tr>
-<td>accountNumber</td>
-<td>no</td>
-<td>The bank account number.</td>
-</tr>
-<tr>
-<td>type</td>
-<td>no</td>
-<td>Type of bank account: <code class="prettyprint">checking</code> or <code class="prettyprint">savings</code>.</td>
-</tr>
-<tr>
-<td>name</td>
-<td>no</td>
-<td>Arbitrary nickname for the funding source.</td>
+<td>Customer unique identifier.</td>
 </tr>
 </tbody></table>
 <h3 id='errors'>Errors</h3>
@@ -2452,15 +2489,15 @@ Location: https://api.dwolla.com/funding-sources/AB443D36-3757-44C1-A1B4-29727FB
 </tr>
 </thead><tbody>
 <tr>
-<td>400</td>
-<td>Duplicate funding source or validation error.</td>
+<td>403</td>
+<td>Not authorized to list funding sources.</td>
 </tr>
 <tr>
-<td>403</td>
-<td>Not authorized to create funding source.</td>
+<td>404</td>
+<td>Customer not found.</td>
 </tr>
 </tbody></table>
-<h2 id='list-funding-sources-customer'>List Funding Sources (Customer)</h2><h3 id='request-and-response'>Request and Response</h3><div class="code-snippet js-code-snippet language-raw"><button class="btn alternative">copy</button><div class="code-snippet__selector">
+<h3 id='request-and-response'>Request and Response</h3><div class="code-snippet js-code-snippet language-raw"><button class="btn alternative">copy</button><div class="code-snippet__selector">
           <nav>
               <button class="selector_switch" id="raw">raw</button>
               <button class="selector_switch" id="php">php</button>
@@ -2572,64 +2609,11 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
               <button class="selector_switch" id="javascript">javascript</button>
           </nav>
         </div><div class="code-snippet__cnt highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="c1">// coming soon</span>
-</code></pre></div></div>
-<p>Retrieve a list of Funding Sources that belong to a Customer.</p>
-<ol class="alerts"><li class="alert icon-alert-alert"><p>This endpoint requires an OAuth access token with the <code>ManageCustomers</code> scope.</p>
-</li></ol><h3 id='http-request'>HTTP Request</h3>
-<p><code class="prettyprint">
-GET https://api.dwolla.com/customers/{id}/funding-sources
-</code></p>
-<h3 id='request-parameters'>Request Parameters</h3>
-<table><thead>
-<tr>
-<th>Parameter</th>
-<th>Optional?</th>
-<th>Description</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>id</td>
-<td>no</td>
-<td>Customer unique identifier.</td>
-</tr>
-</tbody></table>
-<h3 id='errors'>Errors</h3>
-<table><thead>
-<tr>
-<th>HTTP Status</th>
-<th>Message</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>403</td>
-<td>Not authorized to list funding sources.</td>
-</tr>
-<tr>
-<td>404</td>
-<td>Customer not found.</td>
-</tr>
-</tbody></table>
-<h2 id='new-funding-source-account-draft'>New Funding Source (Account) [DRAFT]</h2><h3 id='request-and-response'>Request and Response</h3><div class="code-snippet js-code-snippet language-nohide"><button class="btn alternative">copy</button><div class="code-snippet__cnt highlight"><pre><code class="language-nohide" data-lang="nohide">POST /accounts/99bfb139-eadd-4cdf-b346-7504f0c16c60/funding-sources
-Content-Type: application/vnd.dwolla.v1.hal+json
-Accept: application/vnd.dwolla.v1.hal+json
-Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
-{
-    "routingNumber": "87654321",
-    "accountNumber": "12345678",
-    "type": "checking",
-    "name": "My Bank"
-}
-
-...
-
-HTTP/1.1 201 Created
-Location: https://api.dwolla.com/accounts/99bfb139-eadd-4cdf-b346-7504f0c16c60/funding-sources
-</code></pre></div></div><ol class="alerts"><li class="alert icon-alert-alert"><p>This endpoint is not yet implemented. The following specification is subject to change.</p>
-</li></ol>
+</code></pre></div></div><h2 id='new-funding-source-account'>New Funding Source (Account)</h2>
 <p>Create a new Funding Source for an Account.</p>
 <ol class="alerts"><li class="alert icon-alert-alert"><p>This endpoint requires an OAuth access token with the <code>Funding</code> scope.</p>
 </li></ol><h3 id='http-request'>HTTP Request</h3>
-<p><code class="prettyprint">POST https://api.dwolla.com/accounts/{id}/funding-sources</code></p>
+<p><code class="prettyprint">POST https://api.dwolla.com/funding-sources</code></p>
 <h3 id='request-parameters'>Request Parameters</h3>
 <table><thead>
 <tr>
@@ -2670,7 +2654,55 @@ Location: https://api.dwolla.com/accounts/99bfb139-eadd-4cdf-b346-7504f0c16c60/f
 <td>Not authorized to create funding source.</td>
 </tr>
 </tbody></table>
-<h2 id='list-funding-sources-account'>List Funding Sources (Account)</h2><h3 id='request-and-response'>Request and Response:</h3><div class="code-snippet js-code-snippet language-raw"><button class="btn alternative">copy</button><div class="code-snippet__selector">
+<h3 id='request-and-response'>Request and Response</h3><div class="code-snippet js-code-snippet language-nohide"><button class="btn alternative">copy</button><div class="code-snippet__cnt highlight"><pre><code class="language-nohide" data-lang="nohide">POST /funding-sources
+Content-Type: application/vnd.dwolla.v1.hal+json
+Accept: application/vnd.dwolla.v1.hal+json
+Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
+{
+    "routingNumber": "87654321",
+    "accountNumber": "12345678",
+    "type": "checking",
+    "name": "My Bank"
+}
+
+...
+
+HTTP/1.1 201 Created
+Location: https://api-uat.dwolla.com/funding-sources/04173e17-6398-4d36-a167-9d98c4b1f1c3
+</code></pre></div></div><h2 id='list-funding-sources-account'>List Funding Sources (Account)</h2>
+<p>Retrieve a list of Funding Sources that belong to an Account.</p>
+<ol class="alerts"><li class="alert icon-alert-alert"><p>This endpoint requires an OAuth access token with the <code>Funding</code> scope.</p>
+</li></ol><h3 id='http-request'>HTTP Request</h3>
+<p><code class="prettyprint">
+GET https://api.dwolla.com/accounts/{id}/funding-sources
+</code></p>
+<h3 id='request-parameters'>Request Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Optional?</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>id</td>
+<td>no</td>
+<td>Account unique identifier to get funding sources for.</td>
+</tr>
+</tbody></table>
+<h3 id='errors'>Errors</h3>
+<table><thead>
+<tr>
+<th>HTTP Status</th>
+<th>Message</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>403</td>
+<td>Not authorized to list funding sources.</td>
+</tr>
+</tbody></table>
+<h3 id='request-and-response'>Request and Response:</h3><div class="code-snippet js-code-snippet language-raw"><button class="btn alternative">copy</button><div class="code-snippet__selector">
           <nav>
               <button class="selector_switch" id="raw">raw</button>
               <button class="selector_switch" id="php">php</button>
@@ -2774,12 +2806,12 @@ Authorization: Bearer 0Sn0W6kzNicvoWhDbQcVSKLRUpGjIdlPSEYyrHqrDDoRnQwE7Q
 
 <span class="k">print</span><span class="p">(</span><span class="nv">$fundingSources</span><span class="o">-&gt;</span><span class="na">_embedded</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="nx">name</span><span class="p">)</span> <span class="c1"># =&gt; "Balance"
 </span><span class="cp">?&gt;</span>
-</code></pre></div></div>
-<p>Retrieve a list of Funding Sources that belong to an Account.</p>
+</code></pre></div></div><h2 id='get-a-funding-source-by-id'>Get a Funding Source by ID</h2>
+<p>Retrieve a Funding Source by ID.</p>
 <ol class="alerts"><li class="alert icon-alert-alert"><p>This endpoint requires an OAuth access token with the <code>Funding</code> scope.</p>
 </li></ol><h3 id='http-request'>HTTP Request</h3>
 <p><code class="prettyprint">
-GET https://api.dwolla.com/accounts/{id}/funding-sources
+GET https://api.dwolla.com/funding-sources/{id}
 </code></p>
 <h3 id='request-parameters'>Request Parameters</h3>
 <table><thead>
@@ -2792,7 +2824,7 @@ GET https://api.dwolla.com/accounts/{id}/funding-sources
 <tr>
 <td>id</td>
 <td>no</td>
-<td>Account unique identifier to get funding sources for.</td>
+<td>Funding source ID to get.</td>
 </tr>
 </tbody></table>
 <h3 id='errors'>Errors</h3>
@@ -2803,11 +2835,11 @@ GET https://api.dwolla.com/accounts/{id}/funding-sources
 </tr>
 </thead><tbody>
 <tr>
-<td>403</td>
-<td>Not authorized to list funding sources.</td>
+<td>404</td>
+<td>Funding source not found.</td>
 </tr>
 </tbody></table>
-<h2 id='get-a-funding-source-by-id'>Get a Funding Source by ID</h2><h3 id='request-and-response'>Request and Response:</h3><div class="code-snippet js-code-snippet language-raw"><button class="btn alternative">copy</button><div class="code-snippet__selector">
+<h3 id='request-and-response'>Request and Response:</h3><div class="code-snippet js-code-snippet language-raw"><button class="btn alternative">copy</button><div class="code-snippet__selector">
           <nav>
               <button class="selector_switch" id="raw">raw</button>
               <button class="selector_switch" id="php">php</button>
@@ -2890,12 +2922,12 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
               <button class="selector_switch" id="javascript">javascript</button>
           </nav>
         </div><div class="code-snippet__cnt highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="c1">// coming soon</span>
-</code></pre></div></div>
-<p>Retrieve a Funding Source by ID.</p>
+</code></pre></div></div><h2 id='initiate-or-verify-micro-deposits'>Initiate or Verify Micro-deposits</h2>
+<p>Initiate or verify micro-deposits for bank account verification. Reference the <a href="https://developers.dwolla.com/resources/funding-source-verification.html">funding source verification</a> resource article for more information on the micro-deposit method of bank account verification.</p>
 <ol class="alerts"><li class="alert icon-alert-alert"><p>This endpoint requires an OAuth access token with the <code>Funding</code> scope.</p>
 </li></ol><h3 id='http-request'>HTTP Request</h3>
 <p><code class="prettyprint">
-GET https://api.dwolla.com/funding-sources/{id}
+POST https://api.dwolla.com/funding-sources/{id}/micro-deposits
 </code></p>
 <h3 id='request-parameters'>Request Parameters</h3>
 <table><thead>
@@ -2906,9 +2938,14 @@ GET https://api.dwolla.com/funding-sources/{id}
 </tr>
 </thead><tbody>
 <tr>
-<td>id</td>
+<td>amount1</td>
 <td>no</td>
-<td>Funding source ID to get.</td>
+<td>An amount JSON object of first micro-deposit. Contains <code class="prettyprint">value</code> and <code class="prettyprint">currency</code>.</td>
+</tr>
+<tr>
+<td>amount2</td>
+<td>no</td>
+<td>An amount JSON object of first micro-deposit. Contains <code class="prettyprint">value</code> and <code class="prettyprint">currency</code>.</td>
 </tr>
 </tbody></table>
 <h3 id='errors'>Errors</h3>
@@ -2919,11 +2956,23 @@ GET https://api.dwolla.com/funding-sources/{id}
 </tr>
 </thead><tbody>
 <tr>
+<td>200</td>
+<td>Micro deposits verified.</td>
+</tr>
+<tr>
+<td>201</td>
+<td>Micro deposits initiated.</td>
+</tr>
+<tr>
+<td>400</td>
+<td>Funding source not found.</td>
+</tr>
+<tr>
 <td>404</td>
 <td>Funding source not found.</td>
 </tr>
 </tbody></table>
-<h2 id='initiate-or-verify-micro-deposits'>Initiate or Verify Micro-deposits</h2>
+
 <blockquote>
 <p>Request and Response (Initiate)</p>
 </blockquote>
@@ -3082,13 +3131,11 @@ HTTP 200 OK
   <span class="p">),</span>
 <span class="p">));</span>
 <span class="cp">?&gt;</span>
-</code></pre></div></div>
-<p>Initiate or verify micro deposits for bank verification. </p>
+</code></pre></div></div><h2 id='verify-pending-micro-deposits-exist'>Verify Pending Micro-deposits Exist</h2>
+<p>Check if pending verification for micro-deposits exists.</p>
 <ol class="alerts"><li class="alert icon-alert-alert"><p>This endpoint requires an OAuth access token with the <code>Funding</code> scope.</p>
 </li></ol><h3 id='http-request'>HTTP Request</h3>
-<p><code class="prettyprint">
-POST https://api.dwolla.com/funding-sources/{id}/micro-deposits
-</code></p>
+<p><code class="prettyprint">GET https://api.dwolla.com/funding-sources/{id}/micro-deposits</code></p>
 <h3 id='request-parameters'>Request Parameters</h3>
 <table><thead>
 <tr>
@@ -3098,14 +3145,9 @@ POST https://api.dwolla.com/funding-sources/{id}/micro-deposits
 </tr>
 </thead><tbody>
 <tr>
-<td>amount1</td>
+<td>id</td>
 <td>no</td>
-<td>An amount JSON object of first micro-deposit. Contains <code class="prettyprint">value</code> and <code class="prettyprint">currency</code>.</td>
-</tr>
-<tr>
-<td>amount2</td>
-<td>no</td>
-<td>An amount JSON object of first micro-deposit. Contains <code class="prettyprint">value</code> and <code class="prettyprint">currency</code>.</td>
+<td>Funding source ID to check status of validation deposits.</td>
 </tr>
 </tbody></table>
 <h3 id='errors'>Errors</h3>
@@ -3117,22 +3159,10 @@ POST https://api.dwolla.com/funding-sources/{id}/micro-deposits
 </thead><tbody>
 <tr>
 <td>200</td>
-<td>Micro deposits verified.</td>
-</tr>
-<tr>
-<td>201</td>
-<td>Micro deposits initiated.</td>
-</tr>
-<tr>
-<td>400</td>
-<td>Funding source not found.</td>
-</tr>
-<tr>
-<td>404</td>
-<td>Funding source not found.</td>
+<td>Pending micro-deposits exist.</td>
 </tr>
 </tbody></table>
-<h2 id='verify-pending-micro-deposits-exist'>Verify Pending Micro-deposits Exist</h2>
+
 <blockquote>
 <p>Request:</p>
 </blockquote>
@@ -3169,11 +3199,13 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
     </span><span class="p">}</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
-</span></code></pre></div></div>
-<p>Check if pending verification for micro-deposits exists.</p>
+</span></code></pre></div></div><h2 id='remove-a-funding-source'>Remove a Funding Source</h2>
+<p>Remove a Funding Source by ID.</p>
 <ol class="alerts"><li class="alert icon-alert-alert"><p>This endpoint requires an OAuth access token with the <code>Funding</code> scope.</p>
 </li></ol><h3 id='http-request'>HTTP Request</h3>
-<p><code class="prettyprint">GET https://api.dwolla.com/funding-sources/{id}/micro-deposits</code></p>
+<p><code class="prettyprint">
+DELETE https://api.dwolla.com/funding-sources/{id}
+</code></p>
 <h3 id='request-parameters'>Request Parameters</h3>
 <table><thead>
 <tr>
@@ -3185,7 +3217,7 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 <tr>
 <td>id</td>
 <td>no</td>
-<td>Funding source ID to check status of validation deposits.</td>
+<td>Funding source ID to delete.</td>
 </tr>
 </tbody></table>
 <h3 id='errors'>Errors</h3>
@@ -3196,11 +3228,11 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 </tr>
 </thead><tbody>
 <tr>
-<td>200</td>
-<td>Pending micro-deposits exist.</td>
+<td>404</td>
+<td>Funding source not found.</td>
 </tr>
 </tbody></table>
-<h2 id='remove-a-funding-source'>Remove a Funding Source</h2><h3 id='request-and-response'>Request and Response</h3><div class="code-snippet js-code-snippet language-raw"><button class="btn alternative">copy</button><div class="code-snippet__selector">
+<h3 id='request-and-response'>Request and Response</h3><div class="code-snippet js-code-snippet language-raw"><button class="btn alternative">copy</button><div class="code-snippet__selector">
           <nav>
               <button class="selector_switch" id="raw">raw</button>
               <button class="selector_switch" id="php">php</button>
@@ -3262,39 +3294,6 @@ HTTP 200 OK
           </nav>
         </div><div class="code-snippet__cnt highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="c1">// coming soon</span>
 </code></pre></div></div>
-<p>Remove a Funding Source by ID.</p>
-<ol class="alerts"><li class="alert icon-alert-alert"><p>This endpoint requires an OAuth access token with the <code>Funding</code> scope.</p>
-</li></ol><h3 id='http-request'>HTTP Request</h3>
-<p><code class="prettyprint">
-DELETE https://api.dwolla.com/funding-sources/{id}
-</code></p>
-<h3 id='request-parameters'>Request Parameters</h3>
-<table><thead>
-<tr>
-<th>Parameter</th>
-<th>Optional?</th>
-<th>Description</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>id</td>
-<td>no</td>
-<td>Funding source ID to delete.</td>
-</tr>
-</tbody></table>
-<h3 id='errors'>Errors</h3>
-<table><thead>
-<tr>
-<th>HTTP Status</th>
-<th>Message</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>404</td>
-<td>Funding source not found.</td>
-</tr>
-</tbody></table>
-
             <h1 id='funding-sources---verify'>Funding Sources - Verify</h1><ol class="alerts"><li class="alert icon-alert-alert"><p>Instant account verification (IAV) is a premium feature available only for white label integrations. Contact sales for information about pricing.</p>
 </li></ol><div class="code-snippet js-code-snippet language-nohide"><button class="btn alternative">copy</button><div class="code-snippet__cnt highlight"><pre><code class="language-nohide" data-lang="nohide">&lt;script src="https://cdn.dwolla.com/dwolla.js"&gt;&lt;/script&gt;
 &lt;script type="text/javascript"&gt;
