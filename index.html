@@ -797,34 +797,8 @@ mvn install package
     <span class="p">})</span>
 <span class="p">})</span>
 </code></pre></div></div>
-            <h1 id='customers'>Customers</h1><div class="code-snippet js-code-snippet language-nohide"><button class="btn alternative">copy</button><div class="code-snippet__cnt highlight"><pre><code class="language-nohide" data-lang="nohide"><span class="p">{</span><span class="w">
-  </span><span class="nt">"_links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="nt">"self"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.dwolla.com/customers/730CA23F-06C5-45CC-AA6B-8EC2D6EE109F"</span><span class="w">
-    </span><span class="p">},</span><span class="w">
-    </span><span class="nt">"receive"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.dwolla.com/transfers"</span><span class="w">
-    </span><span class="p">},</span><span class="w">
-    </span><span class="nt">"funding-sources"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.dwolla.com/customers/730CA23F-06C5-45CC-AA6B-8EC2D6EE109F/funding-sources"</span><span class="w">
-    </span><span class="p">},</span><span class="w">
-    </span><span class="nt">"transfers"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.dwolla.com/customers/730CA23F-06C5-45CC-AA6B-8EC2D6EE109F/transfers"</span><span class="w">
-    </span><span class="p">},</span><span class="w">
-    </span><span class="nt">"send"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.dwolla.com/transfers"</span><span class="w">
-    </span><span class="p">}</span><span class="w">
-  </span><span class="p">},</span><span class="w">
-  </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"730CA23F-06C5-45CC-AA6B-8EC2D6EE109F"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"firstName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Charlotte"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"lastName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Gillman"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"yellowwallpaper@nomail.com"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"personal"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"verified"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"created"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-10-06T01:18:26.923Z"</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre></div></div>
-<p>A customer represents an individual or business with whom you intend to transact with. In order to manage an account&rsquo;s Customers, the <code class="prettyprint">ManageCustomers</code> OAuth scope is required.</p>
+            <h1 id='customers'>Customers</h1>
+<p>A Customer represents an individual or business with whom you intend to transact with. In order to manage an account&rsquo;s Customers, the <code class="prettyprint">ManageCustomers</code> OAuth scope is required.</p>
 <h3 id='verified-and-unverified-customers'>Verified and unverified customers</h3>
 <p>With a transfer of money, at least one party must complete the identity verification process, either the sender or the receiver. It’s your decision about which party completes this process, based on your business model, and you may want to have both parties complete the identity verification process. In cases where a Customer is sending funds to or receiving funds from your account, the Customer can remain unverified because your account is already verified. However, if you need to transfer funds between your Customers, at least one of them will need to be verified.</p>
 <h3 id='customer-links'>Customer links</h3>
@@ -927,7 +901,196 @@ mvn install package
 <td>The Customer is suspended and may neither send nor receive funds.</td>
 </tr>
 </tbody></table>
-<h2 id='new-customer'>New Customer</h2><h3 id='unverified-customer'>Unverified Customer:</h3><div class="code-snippet js-code-snippet language-nohide"><button class="btn alternative">copy</button><div class="code-snippet__cnt highlight"><pre><code class="language-nohide" data-lang="nohide">POST /customers
+<div class="code-snippet js-code-snippet language-nohide"><button class="btn alternative">copy</button><div class="code-snippet__cnt highlight"><pre><code class="language-nohide" data-lang="nohide"><span class="p">{</span><span class="w">
+  </span><span class="nt">"_links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"self"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.dwolla.com/customers/730CA23F-06C5-45CC-AA6B-8EC2D6EE109F"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nt">"receive"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.dwolla.com/transfers"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nt">"funding-sources"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.dwolla.com/customers/730CA23F-06C5-45CC-AA6B-8EC2D6EE109F/funding-sources"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nt">"transfers"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.dwolla.com/customers/730CA23F-06C5-45CC-AA6B-8EC2D6EE109F/transfers"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nt">"send"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.dwolla.com/transfers"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"730CA23F-06C5-45CC-AA6B-8EC2D6EE109F"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"firstName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Charlotte"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"lastName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Gillman"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"yellowwallpaper@nomail.com"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"personal"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"verified"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"created"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-10-06T01:18:26.923Z"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div></div><h2 id='new-customer'>New Customer</h2>
+<p>This section details how to create a new Customer.  To create an unverified Customer, you need to provide only the customer&rsquo;s full name and email address.  Verified Customers require additional information that will give Dwolla the ability to confirm the identity of the individual or business. Verified Customers can include type <code class="prettyprint">business</code> or <code class="prettyprint">personal</code>. For businesses, Dwolla will need to verify information about both the business and the “authorized representative” for that business.</p>
+<ol class="alerts"><li class="alert icon-alert-alert"><p>This endpoint requires an OAuth access token with the <code>ManageCustomers</code> scope.</p>
+</li></ol><h3 id='http-request'>HTTP Request</h3>
+<p><code class="prettyprint">POST https://api.dwolla.com/customers</code></p>
+<h3 id='request-parameters---unverified-customer'>Request parameters - unverified Customer</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Optional?</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>firstName</td>
+<td>no</td>
+<td>Customer&rsquo;s first name.</td>
+</tr>
+<tr>
+<td>lastName</td>
+<td>no</td>
+<td>Customer&rsquo;s last name.</td>
+</tr>
+<tr>
+<td>email</td>
+<td>no</td>
+<td>Customer&rsquo;s email address.</td>
+</tr>
+<tr>
+<td>ipAddress</td>
+<td>yes</td>
+<td>Customer&rsquo;s IP address</td>
+</tr>
+</tbody></table>
+<h3 id='request-parameters---verified-customer'>Request parameters - verified Customer</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Optional?</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>firstName</td>
+<td>no</td>
+<td>Customer&rsquo;s first name.</td>
+</tr>
+<tr>
+<td>lastName</td>
+<td>no</td>
+<td>Customer&rsquo;s last name.</td>
+</tr>
+<tr>
+<td>email</td>
+<td>no</td>
+<td>Customer&rsquo;s email address.</td>
+</tr>
+<tr>
+<td>ipAddress</td>
+<td>yes</td>
+<td>Customer&rsquo;s IP address</td>
+</tr>
+<tr>
+<td>type</td>
+<td>no</td>
+<td>Either <code class="prettyprint">personal</code> or <code class="prettyprint">business</code>. If business, <a href="#additional-request-parameters-for-verified-customer-with-typebusiness">see below</a> for additional required information.</td>
+</tr>
+<tr>
+<td>address1</td>
+<td>no</td>
+<td>First line of the street address of the Customer&rsquo;s permanent residence</td>
+</tr>
+<tr>
+<td>address2</td>
+<td>yes</td>
+<td>Second line of the street address of the Customer&rsquo;s permanent residence</td>
+</tr>
+<tr>
+<td>city</td>
+<td>no</td>
+<td>City of Customer&rsquo;s permanent residence</td>
+</tr>
+<tr>
+<td>state</td>
+<td>no</td>
+<td>Two letter abbreviation of the state in which the Customer resides, e.g. <code class="prettyprint">CA</code></td>
+</tr>
+<tr>
+<td>postalCode</td>
+<td>no</td>
+<td>Postal code of Customer&rsquo;s permanent residence</td>
+</tr>
+<tr>
+<td>dateOfBirth</td>
+<td>no</td>
+<td>Customer&rsquo;s date of birth in <code class="prettyprint">YYYY-MM-DD</code> format.</td>
+</tr>
+<tr>
+<td>ssn</td>
+<td>no</td>
+<td>Last four digits of the Customer&rsquo;s Social Security Number.</td>
+</tr>
+<tr>
+<td>phone</td>
+<td>no</td>
+<td>Customer&rsquo;s 10 digit phone number.  No hyphens or other separators, e.g. <code class="prettyprint">3334447777</code></td>
+</tr>
+</tbody></table>
+<h3 id='additional-request-parameters-for-verified-customer-with-typebusiness'>Additional request parameters for verified Customer with type=business</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Optional?</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>businessClassification</td>
+<td>no</td>
+<td>The <a href="#list-business-classifications">industry classification</a> id that corresponds to Customer’s business</td>
+</tr>
+<tr>
+<td>businessType</td>
+<td>no</td>
+<td>Business structure. Possible values are <code class="prettyprint">corporation</code>, <code class="prettyprint">llc</code>, <code class="prettyprint">partnership</code>, and <code class="prettyprint">soleproprietorship</code></td>
+</tr>
+<tr>
+<td>businessName</td>
+<td>no</td>
+<td>A business name that is different from the officially registered name of Customer’s LLC or corporation.</td>
+</tr>
+<tr>
+<td>ein</td>
+<td>no</td>
+<td>Employer Identification Number</td>
+</tr>
+<tr>
+<td>doingBusinessAs</td>
+<td>yes</td>
+<td>Name that Customer is doing business as</td>
+</tr>
+<tr>
+<td>website</td>
+<td>yes</td>
+<td>www.domain.com</td>
+</tr>
+</tbody></table>
+<h3 id='errors'>Errors</h3>
+<table><thead>
+<tr>
+<th>HTTP Status</th>
+<th>Message</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>400</td>
+<td>Duplicate customer or validation error.</td>
+</tr>
+<tr>
+<td>403</td>
+<td>Not authorized to create customers.</td>
+</tr>
+</tbody></table>
+<h3 id='unverified-customer'>Unverified Customer:</h3><div class="code-snippet js-code-snippet language-nohide"><button class="btn alternative">copy</button><div class="code-snippet__cnt highlight"><pre><code class="language-nohide" data-lang="nohide">POST /customers
 Content-Type: application/vnd.dwolla.v1.hal+json
 Accept: application/vnd.dwolla.v1.hal+json
 Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
@@ -1126,12 +1289,14 @@ Location: https://api.dwolla.com/customers/FC451A7A-AE30-4404-AB95-E3553FCD733F
               <button class="selector_switch" id="javascript">javascript</button>
           </nav>
         </div><div class="code-snippet__cnt highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="c1">// coming soon</span>
-</code></pre></div></div>
-<p>This section details how to create a new Customer.  To create an unverified Customer, you need to provide only the customer&rsquo;s full name and email address.  Verified Customers require additional information that will give Dwolla the ability to confirm the identity of the individual or business. Verified Customers can include type <code class="prettyprint">business</code> or <code class="prettyprint">personal</code>. For businesses, Dwolla will need to verify information about both the business and the “authorized representative” for that business.</p>
+</code></pre></div></div><h2 id='update-customer'>Update Customer</h2>
+<p>This endpoint can be used to facilitate the following use cases: Update Customer information, upgrade an <code class="prettyprint">unverified</code> Customer to a <code class="prettyprint">verified</code> Customer, and update a verified Customer&rsquo;s information to <code class="prettyprint">retry</code> verification.</p>
 <ol class="alerts"><li class="alert icon-alert-alert"><p>This endpoint requires an OAuth access token with the <code>ManageCustomers</code> scope.</p>
-</li></ol><h3 id='http-request'>HTTP Request</h3>
-<p><code class="prettyprint">POST https://api.dwolla.com/customers</code></p>
-<h3 id='request-parameters---unverified-customer'>Request parameters - unverified Customer</h3>
+</li></ol><h3 id='http-request'>HTTP request</h3>
+<p><code class="prettyprint">POST https://api.dwolla.com/customers/{id}</code></p>
+<h3 id='update-a-customer39s-information'>Update a Customer&rsquo;s information</h3>
+<p>A limited set of information can be updated on an existing created Customer. <strong>Note:</strong> A Customer&rsquo;s information cannot be updated when in a <a href="#customer-statuses">status</a> of <code class="prettyprint">document</code> or <code class="prettyprint">suspended</code>.</p>
+<h5 id='request-parameters---unverified-customer'>Request parameters -  unverified Customer</h5>
 <table><thead>
 <tr>
 <th>Parameter</th>
@@ -1140,27 +1305,12 @@ Location: https://api.dwolla.com/customers/FC451A7A-AE30-4404-AB95-E3553FCD733F
 </tr>
 </thead><tbody>
 <tr>
-<td>firstName</td>
-<td>no</td>
-<td>Customer&rsquo;s first name.</td>
-</tr>
-<tr>
-<td>lastName</td>
-<td>no</td>
-<td>Customer&rsquo;s last name.</td>
-</tr>
-<tr>
 <td>email</td>
 <td>no</td>
 <td>Customer&rsquo;s email address.</td>
-</tr>
-<tr>
-<td>ipAddress</td>
-<td>yes</td>
-<td>Customer&rsquo;s IP address</td>
 </tr>
 </tbody></table>
-<h3 id='request-parameters---verified-customer'>Request parameters - verified Customer</h3>
+<h5 id='request-parameters---verified-customer'>Request parameters -  verified Customer</h5>
 <table><thead>
 <tr>
 <th>Parameter</th>
@@ -1168,16 +1318,6 @@ Location: https://api.dwolla.com/customers/FC451A7A-AE30-4404-AB95-E3553FCD733F
 <th>Description</th>
 </tr>
 </thead><tbody>
-<tr>
-<td>firstName</td>
-<td>no</td>
-<td>Customer&rsquo;s first name.</td>
-</tr>
-<tr>
-<td>lastName</td>
-<td>no</td>
-<td>Customer&rsquo;s last name.</td>
-</tr>
 <tr>
 <td>email</td>
 <td>no</td>
@@ -1187,54 +1327,41 @@ Location: https://api.dwolla.com/customers/FC451A7A-AE30-4404-AB95-E3553FCD733F
 <td>ipAddress</td>
 <td>yes</td>
 <td>Customer&rsquo;s IP address</td>
-</tr>
-<tr>
-<td>type</td>
-<td>no</td>
-<td>Either <code class="prettyprint">personal</code> or <code class="prettyprint">business</code>. If business, <a href="#additional-request-parameters-for-verified-customer-with-typebusiness">see below</a> for additional required information.</td>
 </tr>
 <tr>
 <td>address1</td>
 <td>no</td>
-<td>First line of the street address of the Customer&rsquo;s permanent residence</td>
+<td>First line of the street address of the customer&rsquo;s permanent residence</td>
 </tr>
 <tr>
 <td>address2</td>
 <td>yes</td>
-<td>Second line of the street address of the Customer&rsquo;s permanent residence</td>
+<td>Second line of the street address of the customer&rsquo;s permanent residence</td>
 </tr>
 <tr>
 <td>city</td>
 <td>no</td>
-<td>City of Customer&rsquo;s permanent residence</td>
+<td>City of customer&rsquo;s peramanent residence</td>
 </tr>
 <tr>
 <td>state</td>
 <td>no</td>
-<td>Two letter abbreviation of the state in which the Customer resides, e.g. <code class="prettyprint">CA</code></td>
+<td>Two letter abbreviation of the state in which the customer resides.  e.g. <code class="prettyprint">NY</code></td>
 </tr>
 <tr>
 <td>postalCode</td>
 <td>no</td>
-<td>Postal code of Customer&rsquo;s permanent residence</td>
-</tr>
-<tr>
-<td>dateOfBirth</td>
-<td>no</td>
-<td>Customer&rsquo;s date of birth in <code class="prettyprint">YYYY-MM-DD</code> format.</td>
-</tr>
-<tr>
-<td>ssn</td>
-<td>no</td>
-<td>Last four digits of the Customer&rsquo;s Social Security Number.</td>
+<td>Postal code of customer&rsquo;s peramanent residence</td>
 </tr>
 <tr>
 <td>phone</td>
 <td>no</td>
-<td>Customer&rsquo;s 10 digit phone number.  No hyphens or other separators, e.g. <code class="prettyprint">3334447777</code></td>
+<td>Customer&rsquo;s 10 digit phone number.  No hyphens or other separators.  e.g. <code class="prettyprint">3334447777</code></td>
 </tr>
 </tbody></table>
-<h3 id='additional-request-parameters-for-verified-customer-with-typebusiness'>Additional request parameters for verified Customer with type=business</h3>
+<h5 id='request-parameters---verified-customer-with-typebusiness'>Request parameters - verified Customer with type=business</h5>
+<p>In addition to the table above, business verified Customers can update the following fields.</p>
+
 <table><thead>
 <tr>
 <th>Parameter</th>
@@ -1242,26 +1369,6 @@ Location: https://api.dwolla.com/customers/FC451A7A-AE30-4404-AB95-E3553FCD733F
 <th>Description</th>
 </tr>
 </thead><tbody>
-<tr>
-<td>businessClassification</td>
-<td>no</td>
-<td>The <a href="#list-business-classifications">industry classification</a> id that corresponds to Customer’s business</td>
-</tr>
-<tr>
-<td>businessType</td>
-<td>no</td>
-<td>Business structure. Possible values are <code class="prettyprint">corporation</code>, <code class="prettyprint">llc</code>, <code class="prettyprint">partnership</code>, and <code class="prettyprint">soleproprietorship</code></td>
-</tr>
-<tr>
-<td>businessName</td>
-<td>no</td>
-<td>A business name that is different from the officially registered name of Customer’s LLC or corporation.</td>
-</tr>
-<tr>
-<td>ein</td>
-<td>no</td>
-<td>Employer Identification Number</td>
-</tr>
 <tr>
 <td>doingBusinessAs</td>
 <td>yes</td>
@@ -1273,23 +1380,11 @@ Location: https://api.dwolla.com/customers/FC451A7A-AE30-4404-AB95-E3553FCD733F
 <td>www.domain.com</td>
 </tr>
 </tbody></table>
-<h3 id='errors'>Errors</h3>
-<table><thead>
-<tr>
-<th>HTTP Status</th>
-<th>Message</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>400</td>
-<td>Duplicate customer or validation error.</td>
-</tr>
-<tr>
-<td>403</td>
-<td>Not authorized to create customers.</td>
-</tr>
-</tbody></table>
-<h2 id='retry-verification'>Retry Verification</h2><h3 id='customer-must-be-in-the-retry-state'>Customer must be in the retry state:</h3><div class="code-snippet js-code-snippet language-nohide"><button class="btn alternative">copy</button><div class="code-snippet__cnt highlight"><pre><code class="language-nohide" data-lang="nohide"><span class="p">{</span><span class="w">
+<h3 id='upgrade-an-unverified-customer-to-verified-customer'>Upgrade an unverified Customer to verified Customer</h3>
+<p>An unverified Customer can be upgraded to a verified Customer by supplying the necessary information required to create a verified Customer. See <a href="#request-parameters-verified-customer">this table</a> for required information.</p>
+<h3 id='retry-verification'>Retry verification</h3>
+<p>If the verified Customer has a status of <code class="prettyprint">retry</code>, some information may have been miskeyed. You have one more opportunity to correct any mistakes using this endpoint. This time, you’ll need to provide the Customer’s full SSN. If the additional attempt fails, the resulting status will be either <code class="prettyprint">document</code> or <code class="prettyprint">suspended</code>. </p>
+<h3 id='customer-must-be-in-the-retry-state'>Customer must be in the retry state:</h3><div class="code-snippet js-code-snippet language-nohide"><button class="btn alternative">copy</button><div class="code-snippet__cnt highlight"><pre><code class="language-nohide" data-lang="nohide"><span class="p">{</span><span class="w">
   </span><span class="nt">"_links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="nt">"self"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
       </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.dwolla.com/customers/730CA23F-06C5-45CC-AA6B-8EC2D6EE109F"</span><span class="w">
@@ -1427,16 +1522,11 @@ Location: https://api.dwolla.com/customers/FC451A7A-AE30-4404-AB95-E3553FCD733F
               <button class="selector_switch" id="javascript">javascript</button>
           </nav>
         </div><div class="code-snippet__cnt highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="c1">// coming soon</span>
-</code></pre></div></div><h3 id='if-you-try-more-than-once-or-customer-is-not-in-retry-state'>If you try more than once, or customer is not in retry state:</h3><div class="code-snippet js-code-snippet language-nohide"><button class="btn alternative">copy</button><div class="code-snippet__cnt highlight"><pre><code class="language-nohide" data-lang="nohide"><span class="p">{</span><span class="w">
+</code></pre></div></div><h3 id='if-you-try-more-than-once-or-customer-is-not-in-retry-state'>If you try more than once, or Customer is not in retry state:</h3><div class="code-snippet js-code-snippet language-nohide"><button class="btn alternative">copy</button><div class="code-snippet__cnt highlight"><pre><code class="language-nohide" data-lang="nohide"><span class="p">{</span><span class="w">
   </span><span class="nt">"code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"InvalidResourceState"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Resource cannot be modified."</span><span class="w">
 </span><span class="p">}</span><span class="w">
-</span></code></pre></div></div>
-<p>If the Customer has a status of <code class="prettyprint">retry</code>, some information may have been miskeyed. You have one more opportunity to correct any mistakes using this endpoint. This time, you’ll need to provide the Customer’s full SSN. If the additional attempt fails, the resulting status will be either <code class="prettyprint">document</code> or <code class="prettyprint">suspended</code>. </p>
-<ol class="alerts"><li class="alert icon-alert-alert"><p>This endpoint requires an OAuth access token with the <code>ManageCustomers</code> scope.</p>
-</li></ol><h3 id='http-request'>HTTP Request</h3>
-<p><code class="prettyprint">POST https://api.dwolla.com/customers/{id}</code></p>
-<h3 id='request-parameters---retry-verified-customer'>Request parameters - retry verified Customer</h3>
+</span></code></pre></div></div><h3 id='request-parameters---retry-verified-customer'>Request parameters - retry verified Customer</h3>
 <table><thead>
 <tr>
 <th>Parameter</th>
@@ -1526,7 +1616,29 @@ Location: https://api.dwolla.com/customers/FC451A7A-AE30-4404-AB95-E3553FCD733F
 <td>Not authorized to create customers.</td>
 </tr>
 </tbody></table>
-<h2 id='list-customers'>List Customers</h2><h3 id='request-and-response'>Request and response:</h3><div class="code-snippet js-code-snippet language-nohide"><button class="btn alternative">copy</button><div class="code-snippet__cnt highlight"><pre><code class="language-nohide" data-lang="nohide">GET /customers
+<h2 id='list-customers'>List Customers</h2><ol class="alerts"><li class="alert icon-alert-alert"><p>This endpoint requires an OAuth access token with the <code>ManageCustomers</code> scope.</p>
+</li></ol><h3 id='http-request'>HTTP request</h3>
+<p><code class="prettyprint">GET https://api.dwolla.com/customers</code></p>
+<h3 id='request-parameters'>Request Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Optional?</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>limit</td>
+<td>yes</td>
+<td>How many results to return</td>
+</tr>
+<tr>
+<td>offset</td>
+<td>yes</td>
+<td>How many results to skip</td>
+</tr>
+</tbody></table>
+<h3 id='request-and-response'>Request and response:</h3><div class="code-snippet js-code-snippet language-nohide"><button class="btn alternative">copy</button><div class="code-snippet__cnt highlight"><pre><code class="language-nohide" data-lang="nohide">GET /customers
 Accept: application/vnd.dwolla.v1.hal+json
 Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 
@@ -1608,10 +1720,12 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
               <button class="selector_switch" id="javascript">javascript</button>
           </nav>
         </div><div class="code-snippet__cnt highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="c1">// coming soon</span>
-</code></pre></div></div><ol class="alerts"><li class="alert icon-alert-alert"><p>This endpoint requires an OAuth access token with the <code>ManageCustomers</code> scope.</p>
+</code></pre></div></div><h2 id='get-a-customer-by-id'>Get a Customer by id</h2>
+<p>This section shows you how to retrieve a Customer belonging to the authorized user. Each <code class="prettyprint">Customer</code> id is a part of its location resource. The developer can pass either an <code class="prettyprint">id</code> or the entire <code class="prettyprint">location</code> resource to make this request.</p>
+<ol class="alerts"><li class="alert icon-alert-alert"><p>This endpoint requires an OAuth access token with the <code>ManageCustomers</code> scope.</p>
 </li></ol><h3 id='http-request'>HTTP request</h3>
-<p><code class="prettyprint">GET https://api.dwolla.com/customers</code></p>
-<h3 id='request-parameters'>Request Parameters</h3>
+<p><code class="prettyprint">GET https://api.dwolla.com/customers/{id}</code></p>
+<h3 id='request-parameters'>Request parameters</h3>
 <table><thead>
 <tr>
 <th>Parameter</th>
@@ -1620,18 +1734,27 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 </tr>
 </thead><tbody>
 <tr>
-<td>limit</td>
-<td>yes</td>
-<td>How many results to return</td>
-</tr>
-<tr>
-<td>offset</td>
-<td>yes</td>
-<td>How many results to skip</td>
+<td>id</td>
+<td>no</td>
+<td>Customer unique identifier.</td>
 </tr>
 </tbody></table>
-<h2 id='get-a-customer-by-id'>Get a Customer by id</h2>
-<p>Each <code class="prettyprint">Customer</code> id is a part of its location resource. The developer can pass either an <code class="prettyprint">id</code> or the entire <code class="prettyprint">location</code> resource to make this request.</p>
+<h3 id='errors'>Errors</h3>
+<table><thead>
+<tr>
+<th>HTTP Status</th>
+<th>Message</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>403</td>
+<td>Not authorized to get a customer by id.</td>
+</tr>
+<tr>
+<td>404</td>
+<td>Customer not found.</td>
+</tr>
+</tbody></table>
 <h3 id='request-and-response'>Request and response:</h3><div class="code-snippet js-code-snippet language-nohide"><button class="btn alternative">copy</button><div class="code-snippet__cnt highlight"><pre><code class="language-nohide" data-lang="nohide">GET https://api-uat.dwolla.com/customers/07D59716-EF22-4FE6-98E8-F3190233DFB8
 Accept: application/vnd.dwolla.v1.hal+json
 Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
@@ -1701,43 +1824,11 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
               <button class="selector_switch" id="javascript">javascript</button>
           </nav>
         </div><div class="code-snippet__cnt highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="c1">// coming soon</span>
-</code></pre></div></div>
-<p>This section shows you how to retrieve a Customer belonging to the authorized user.</p>
+</code></pre></div></div><h2 id='list-business-classifications'>List business classifications</h2>
+<p>Retrieve a list of industry classifications to identify the Customer’s business. An industry classification is required by Dwolla when verifying a <code class="prettyprint">business</code> in order to better analyze the nature of a business.</p>
 <ol class="alerts"><li class="alert icon-alert-alert"><p>This endpoint requires an OAuth access token with the <code>ManageCustomers</code> scope.</p>
 </li></ol><h3 id='http-request'>HTTP request</h3>
-<p><code class="prettyprint">GET https://api.dwolla.com/customers/{id}</code></p>
-<h3 id='request-parameters'>Request parameters</h3>
-<table><thead>
-<tr>
-<th>Parameter</th>
-<th>Optional?</th>
-<th>Description</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>id</td>
-<td>no</td>
-<td>Customer unique identifier.</td>
-</tr>
-</tbody></table>
-<h3 id='errors'>Errors</h3>
-<table><thead>
-<tr>
-<th>HTTP Status</th>
-<th>Message</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>403</td>
-<td>Not authorized to get a customer by id.</td>
-</tr>
-<tr>
-<td>404</td>
-<td>Customer not found.</td>
-</tr>
-</tbody></table>
-<h2 id='list-business-classifications'>List business classifications</h2>
-<p>Retrieve a list of industry classifications to identify the Customer’s business. An industry classification is required by Dwolla when verifying a <code class="prettyprint">business</code> in order to better analyze the nature of a business.</p>
+<p><code class="prettyprint">GET https://api.dwolla.com/business-classifications/{id}</code></p>
 <h3 id='request-and-response'>Request and response:</h3><div class="code-snippet js-code-snippet language-nohide"><button class="btn alternative">copy</button><div class="code-snippet__cnt highlight"><pre><code class="language-nohide" data-lang="nohide">GET https://api-uat.dwolla.com/business-classifications
 Accept: application/vnd.dwolla.v1.hal+json
 Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
@@ -1816,11 +1907,26 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
   },
   "total": 27
 }
-</code></pre></div></div><ol class="alerts"><li class="alert icon-alert-alert"><p>This endpoint requires an OAuth access token with the <code>ManageCustomers</code> scope.</p>
-</li></ol><h3 id='http-request'>HTTP request</h3>
-<p><code class="prettyprint">GET https://api.dwolla.com/business-classifications/{id}</code></p>
-<h2 id='get-business-classification-by-id'>Get business classification by id</h2>
+</code></pre></div></div><h2 id='get-business-classification-by-id'>Get business classification by id</h2>
 <p>This section shows you how to retrieve a business classification from a list of industry classifications. An industry classification id is needed in order to verify a <code class="prettyprint">business</code> Customer. </p>
+<ol class="alerts"><li class="alert icon-alert-alert"><p>This endpoint requires an OAuth access token with the <code>ManageCustomers</code> scope.</p>
+</li></ol><h3 id='http-request'>HTTP request</h3>
+<p><code class="prettyprint">GET https://api.dwolla.com/business-classifications/{id}
+</code></p>
+<h3 id='request-parameters'>Request parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Optional?</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>id</td>
+<td>no</td>
+<td>Business classification unique identifier.</td>
+</tr>
+</tbody></table>
 <h3 id='request-and-response'>Request and response:</h3><div class="code-snippet js-code-snippet language-nohide"><button class="btn alternative">copy</button><div class="code-snippet__cnt highlight"><pre><code class="language-nohide" data-lang="nohide">GET https://api-uat.dwolla.com/business-classifications/9ed3a866-7d6f-11e3-a0ce-5404a6144203
 Accept: application/vnd.dwolla.v1.hal+json
 Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
@@ -1906,25 +2012,7 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
   "id": "9ed3a866-7d6f-11e3-a0ce-5404a6144203",
   "name": "Entertainment and media"
 }
-</code></pre></div></div><ol class="alerts"><li class="alert icon-alert-alert"><p>This endpoint requires an OAuth access token with the <code>ManageCustomers</code> scope.</p>
-</li></ol><h3 id='http-request'>HTTP request</h3>
-<p><code class="prettyprint">GET https://api.dwolla.com/business-classifications/{id}
-</code></p>
-<h3 id='request-parameters'>Request parameters</h3>
-<table><thead>
-<tr>
-<th>Parameter</th>
-<th>Optional?</th>
-<th>Description</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>id</td>
-<td>no</td>
-<td>Business classification unique identifier.</td>
-</tr>
-</tbody></table>
-
+</code></pre></div></div>
             <h1 id='documents'>Documents</h1><div class="code-snippet js-code-snippet language-nohide"><button class="btn alternative">copy</button><div class="code-snippet__cnt highlight"><pre><code class="language-nohide" data-lang="nohide"><span class="p">{</span><span class="w">
   </span><span class="nt">"_links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="nt">"self"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
