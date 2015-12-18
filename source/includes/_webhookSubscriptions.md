@@ -85,7 +85,14 @@ subscription = DwollaSwagger::WebhooksubscriptionsApi.create({:body => {
 p subscription # => https://api-uat.dwolla.com/webhook-subscriptions/5af4c10a-f6de-4ac8-840d-42cb65454216
 ```
 ```javascript
-// No example for this language yet.
+dwolla.then(function(dwolla) {
+    dwolla['webhook-subscriptions'].list({
+        "url": "http://myapplication.com/webhooks",
+        "secret": "sshhhhhh"
+    }).then(function(data) {
+        console.log(data.obj); // https://api-uat.dwolla.com/webhook-subscriptions/5af4c10a-f6de-4ac8-840d-42cb65454216
+    });
+});
 ```
 ```python
 webhook_api = dwollaswagger.WebhooksubscriptionsApi(client)
@@ -143,7 +150,13 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 deleted = DwollaSwagger::WebhooksubscriptionApi.id('https://api-uat.dwolla.com/webhook-subscriptions/5af4c10a-f6de-4ac8-840d-42cb65454216')
 ```
 ```javascript
-No example for this language yet.
+dwolla.then(function(dwolla) {
+    dwolla['webhook-subscriptions'].deleteById({
+      id: '5af4c10a-f6de-4ac8-840d-42cb65454216'
+    }).then(function(data) {
+        console.log(data.status); // 200
+    });
+});
 ```
 ```python
 webhook_api = dwollaswagger.WebhooksubscriptionsApi(client)
@@ -222,7 +235,12 @@ retrieved = DwollaSwagger::WebhooksubscriptionApi.list
 p retrieved.total # => 1
 ```
 ```javascript
-No example for this language yet.
+dwolla.then(function(dwolla) {
+    dwolla['webhook-subscriptions'].list()
+    .then(function(data) {
+        console.log(data.obj.total); // 1
+    });
+});
 ```
 ```python
 webhook_api = dwollaswagger.WebhooksubscriptionsApi(client)
@@ -285,7 +303,13 @@ retrieved = DwollaSwagger::WebhooksubscriptionApi.id('https://api-uat.dwolla.com
 p retrieved.created # => 2015-10-28T16:20:47+00:00
 ```
 ```javascript
-No example for this language yet.
+dwolla.then(function(dwolla) {
+    dwolla['webhook-subscriptions'].id({
+      id: '5af4c10a-f6de-4ac8-840d-42cb65454216'
+    }).then(function(data) {
+        console.log(data.obj.created); // 2015-10-28T16:20:47+00:00
+    });
+});
 ```
 ```python
 webhook_api = dwollaswagger.WebhooksubscriptionsApi(client)
@@ -377,7 +401,13 @@ retrieved = DwollaSwagger::WebhooksApi.hooks_by_id('https://api-uat.dwolla.com/w
 p retrieved.total # => 5
 ```
 ```javascript
-No example for this language yet.
+dwolla.then(function(dwolla) {
+    dwolla.webhooks.hooksById({
+      id: '5af4c10a-f6de-4ac8-840d-42cb65454216'
+    }).then(function(data) {
+        console.log(data.obj.total); // 5
+    });
+});
 ```
 ```python
 webhook_api = dwollaswagger.WebhooksApi(client)
