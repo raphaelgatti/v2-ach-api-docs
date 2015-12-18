@@ -86,7 +86,7 @@ p subscription # => https://api-uat.dwolla.com/webhook-subscriptions/5af4c10a-f6
 ```
 ```javascript
 dwolla.then(function(dwolla) {
-    dwolla['webhook-subscriptions].list({
+    dwolla['webhook-subscriptions'].list({
         "url": "http://myapplication.com/webhooks",
         "secret": "sshhhhhh"
     }).then(function(data) {
@@ -151,7 +151,7 @@ deleted = DwollaSwagger::WebhooksubscriptionApi.id('https://api-uat.dwolla.com/w
 ```
 ```javascript
 dwolla.then(function(dwolla) {
-    dwolla['webhook-subscriptions].deleteById({
+    dwolla['webhook-subscriptions'].deleteById({
       id: '5af4c10a-f6de-4ac8-840d-42cb65454216'
     }).then(function(data) {
         console.log(data.status); // 200
@@ -236,7 +236,7 @@ p retrieved.total # => 1
 ```
 ```javascript
 dwolla.then(function(dwolla) {
-    dwolla['webhook-subscriptions].list()
+    dwolla['webhook-subscriptions'].list()
     .then(function(data) {
         console.log(data.obj.total); // 1
     });
@@ -304,7 +304,7 @@ p retrieved.created # => 2015-10-28T16:20:47+00:00
 ```
 ```javascript
 dwolla.then(function(dwolla) {
-    dwolla['webhook-subscriptions].id({
+    dwolla['webhook-subscriptions'].id({
       id: '5af4c10a-f6de-4ac8-840d-42cb65454216'
     }).then(function(data) {
         console.log(data.obj.created); // 2015-10-28T16:20:47+00:00
