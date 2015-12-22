@@ -56,7 +56,7 @@ Create a document for a customer pending verification by uploading a photo of th
 
 |Form Field| Description|
 |----------|-------------|
-| documentType | One of `passport`, `driversLicense`, `idCard`, or `other` |
+| documentType | One of `passport`, `license`, `idCard`, or `other` |
 | file | File contents.
 
 ### Errors
