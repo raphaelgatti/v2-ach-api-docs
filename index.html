@@ -797,6 +797,20 @@ mvn install package
     <span class="p">})</span>
 <span class="p">})</span>
 </code></pre></div></div>
+<p>Since this library sets up all operations on demand (i.e this isn&rsquo;t a Dwolla-specific package), you can query <code class="prettyprint">.help()</code> to help you retrieve more information as such:</p>
+<div class="code-snippet js-code-snippet language-javascriptnohide"><button class="btn alternative">copy</button><div class="code-snippet__cnt highlight"><pre><code class="language-javascriptnohide" data-lang="javascriptnohide"><span class="nx">dwolla</span><span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">dwolla</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">dwolla</span><span class="p">.</span><span class="nx">events</span><span class="p">.</span><span class="nx">help</span><span class="p">();</span>
+<span class="p">});</span>
+<span class="c1">// operations for the 'events' tag</span>
+<span class="c1">//   * events: List events.</span>
+<span class="c1">//   * id: Get an event by id.</span>
+
+<span class="nx">dwolla</span><span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">dwolla</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">dwolla</span><span class="p">.</span><span class="nx">events</span><span class="p">.</span><span class="nx">id</span><span class="p">.</span><span class="nx">help</span><span class="p">();</span>
+<span class="p">});</span>
+<span class="c1">// id: Get an event by id.</span>
+<span class="c1">//   * id (string): ID of application event to get.</span>
+</code></pre></div></div>
             <h1 id='customers'>Customers</h1>
 <p>A Customer represents an individual or business with whom you intend to transact with. In order to manage an account&rsquo;s Customers, the <code class="prettyprint">ManageCustomers</code> OAuth scope is required.</p>
 <h3 id='verified-and-unverified-customers'>Verified and unverified customers</h3>
@@ -1166,7 +1180,16 @@ Location: https://api.dwolla.com/customers/FC451A7A-AE30-4404-AB95-E3553FCD733F
               <button class="selector_switch" id="python">python</button>
               <button class="selector_switch" id="javascript">javascript</button>
           </nav>
-        </div><div class="code-snippet__cnt highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="c1">// coming soon</span>
+        </div><div class="code-snippet__cnt highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="nx">dwolla</span><span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">dwolla</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">dwolla</span><span class="p">.</span><span class="nx">customers</span><span class="p">.</span><span class="nx">create</span><span class="p">({</span>
+      <span class="s2">"firstName"</span><span class="p">:</span> <span class="s2">"Bob"</span><span class="p">,</span>
+      <span class="s2">"lastName"</span><span class="p">:</span> <span class="s2">"Merchant"</span><span class="p">,</span>
+      <span class="s2">"email"</span><span class="p">:</span> <span class="s2">"bmerchant@nomail.net"</span><span class="p">,</span>
+      <span class="s2">"ipAddress"</span><span class="p">:</span> <span class="s2">"99.99.99.99"</span><span class="p">})</span>
+      <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">data</span><span class="p">)</span> <span class="p">{</span>
+          <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">data</span><span class="p">);</span> <span class="c1">// https://api-uat.dwolla.com/customers/FC451A7A-AE30-4404-AB95-E3553FCD733F</span>
+      <span class="p">});</span>
+<span class="p">});</span>
 </code></pre></div></div><h3 id='verified-customer'>Verified Customer:</h3><div class="code-snippet js-code-snippet language-nohide"><button class="btn alternative">copy</button><div class="code-snippet__cnt highlight"><pre><code class="language-nohide" data-lang="nohide">POST /customers
 Content-Type: application/vnd.dwolla.v1.hal+json
 Accept: application/vnd.dwolla.v1.hal+json
@@ -1288,7 +1311,31 @@ Location: https://api.dwolla.com/customers/FC451A7A-AE30-4404-AB95-E3553FCD733F
               <button class="selector_switch" id="python">python</button>
               <button class="selector_switch" id="javascript">javascript</button>
           </nav>
-        </div><div class="code-snippet__cnt highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="c1">// coming soon</span>
+        </div><div class="code-snippet__cnt highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="nx">dwolla</span><span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">dwolla</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">dwolla</span><span class="p">.</span><span class="nx">customers</span><span class="p">.</span><span class="nx">create</span><span class="p">({</span>
+        <span class="s2">"firstName"</span><span class="p">:</span> <span class="s2">"Bob"</span><span class="p">,</span>
+        <span class="s2">"lastName"</span><span class="p">:</span> <span class="s2">"Merchant"</span><span class="p">,</span>
+        <span class="s2">"email"</span><span class="p">:</span> <span class="s2">"bmerchant@nomail.net"</span><span class="p">,</span>
+        <span class="s2">"ipAddress"</span><span class="p">:</span> <span class="s2">"10.10.10.10"</span><span class="p">,</span>
+        <span class="s2">"type"</span><span class="p">:</span> <span class="s2">"personal"</span><span class="p">,</span>
+        <span class="s2">"address1"</span><span class="p">:</span> <span class="s2">"99-99 33rd St"</span><span class="p">,</span>
+        <span class="s2">"city"</span><span class="p">:</span> <span class="s2">"Some City"</span><span class="p">,</span>
+        <span class="s2">"state"</span><span class="p">:</span> <span class="s2">"NY"</span><span class="p">,</span>
+        <span class="s2">"postalCode"</span><span class="p">:</span> <span class="s2">"11101"</span><span class="p">,</span>
+        <span class="s2">"dateOfBirth"</span><span class="p">:</span> <span class="s2">"1970-01-01"</span><span class="p">,</span>
+
+        <span class="c1">// For the first attempt, only </span>
+        <span class="c1">// the last 4 digits of SSN required</span>
+
+        <span class="c1">// If the entire SSN is provided, </span>
+        <span class="c1">// it will still be accepted</span>
+        <span class="s2">"ssn"</span><span class="p">:</span> <span class="s2">"1234"</span><span class="p">,</span>
+        <span class="s2">"phone"</span><span class="p">:</span> <span class="s2">"3478589191"</span>
+      <span class="p">})</span>
+      <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">data</span><span class="p">)</span> <span class="p">{</span>
+          <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">data</span><span class="p">);</span> <span class="c1">// https://api-uat.dwolla.com/customers/FC451A7A-AE30-4404-AB95-E3553FCD733F</span>
+      <span class="p">});</span>
+<span class="p">});</span>
 </code></pre></div></div><h2 id='update-customer'>Update Customer</h2>
 <p>This endpoint can be used to facilitate the following use cases: Update Customer information, upgrade an <code class="prettyprint">unverified</code> Customer to a <code class="prettyprint">verified</code> Customer, and update a verified Customer&rsquo;s information to <code class="prettyprint">retry</code> verification.</p>
 <ol class="alerts"><li class="alert icon-alert-alert"><p>This endpoint requires an OAuth access token with the <code>ManageCustomers</code> scope.</p>
@@ -1521,7 +1568,25 @@ Location: https://api.dwolla.com/customers/FC451A7A-AE30-4404-AB95-E3553FCD733F
               <button class="selector_switch" id="python">python</button>
               <button class="selector_switch" id="javascript">javascript</button>
           </nav>
-        </div><div class="code-snippet__cnt highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="c1">// coming soon</span>
+        </div><div class="code-snippet__cnt highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="nx">dwolla</span><span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">dwolla</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">dwolla</span><span class="p">.</span><span class="nx">customers</span><span class="p">.</span><span class="nx">updateCustomer</span><span class="p">({</span>
+        <span class="s2">"firstName"</span><span class="p">:</span> <span class="s2">"Gordon"</span><span class="p">,</span>
+        <span class="s2">"lastName"</span><span class="p">:</span> <span class="s2">"Zheng"</span><span class="p">,</span>
+        <span class="s2">"email"</span><span class="p">:</span> <span class="s2">"gordon+15@dwolla.com"</span><span class="p">,</span>
+        <span class="s2">"ipAddress"</span><span class="p">:</span> <span class="s2">"10.10.10.10"</span><span class="p">,</span>
+        <span class="s2">"type"</span><span class="p">:</span> <span class="s2">"personal"</span><span class="p">,</span>
+        <span class="s2">"address1"</span><span class="p">:</span> <span class="s2">"221 Corrected Address St.."</span><span class="p">,</span>
+        <span class="s2">"address2"</span><span class="p">:</span> <span class="s2">"Fl 8"</span><span class="p">,</span>
+        <span class="s2">"city"</span><span class="p">:</span> <span class="s2">"Ridgewood"</span><span class="p">,</span>
+        <span class="s2">"state"</span><span class="p">:</span> <span class="s2">"NY"</span><span class="p">,</span>
+        <span class="s2">"postalCode"</span><span class="p">:</span> <span class="s2">"11385"</span><span class="p">,</span>
+        <span class="s2">"dateOfBirth"</span><span class="p">:</span> <span class="s2">"1990-07-11"</span><span class="p">,</span>
+        <span class="s2">"tin"</span><span class="p">:</span> <span class="s2">"202-99-1516"</span>
+      <span class="p">})</span>
+      <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">data</span><span class="p">)</span> <span class="p">{</span>
+          <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">data</span><span class="p">);</span> <span class="c1">// https://api-uat.dwolla.com/customers/FC451A7A-AE30-4404-AB95-E3553FCD733F</span>
+      <span class="p">});</span>
+<span class="p">});</span>
 </code></pre></div></div><h3 id='if-you-try-more-than-once-or-customer-is-not-in-retry-state'>If you try more than once, or Customer is not in retry state:</h3><div class="code-snippet js-code-snippet language-nohide"><button class="btn alternative">copy</button><div class="code-snippet__cnt highlight"><pre><code class="language-nohide" data-lang="nohide"><span class="p">{</span><span class="w">
   </span><span class="nt">"code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"InvalidResourceState"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Resource cannot be modified."</span><span class="w">
@@ -1719,7 +1784,11 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
               <button class="selector_switch" id="python">python</button>
               <button class="selector_switch" id="javascript">javascript</button>
           </nav>
-        </div><div class="code-snippet__cnt highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="c1">// coming soon</span>
+        </div><div class="code-snippet__cnt highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="nx">dwolla</span><span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">dwolla</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">dwolla</span><span class="p">.</span><span class="nx">customers</span><span class="p">.</span><span class="nx">list</span><span class="p">({</span><span class="na">limit</span><span class="p">:</span><span class="mi">10</span><span class="p">}).</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">data</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">data</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="nx">name</span><span class="p">);</span> <span class="c1">// Bob</span>
+    <span class="p">})</span>
+<span class="p">})</span>
 </code></pre></div></div><h2 id='get-a-customer-by-id'>Get a Customer by id</h2>
 <p>This section shows you how to retrieve a Customer belonging to the authorized user. Each <code class="prettyprint">Customer</code> id is a part of its location resource. The developer can pass either an <code class="prettyprint">id</code> or the entire <code class="prettyprint">location</code> resource to make this request.</p>
 <ol class="alerts"><li class="alert icon-alert-alert"><p>This endpoint requires an OAuth access token with the <code>ManageCustomers</code> scope.</p>
@@ -1823,7 +1892,11 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
               <button class="selector_switch" id="python">python</button>
               <button class="selector_switch" id="javascript">javascript</button>
           </nav>
-        </div><div class="code-snippet__cnt highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="c1">// coming soon</span>
+        </div><div class="code-snippet__cnt highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="nx">dwolla</span><span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">dwolla</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">dwolla</span><span class="p">.</span><span class="nx">customers</span><span class="p">.</span><span class="nx">getCustomer</span><span class="p">({</span><span class="na">id</span><span class="p">:</span><span class="s1">'07D59716-EF22-4FE6-98E8-F3190233DFB8'</span><span class="p">}).</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">data</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">data</span><span class="p">.</span><span class="nx">obj</span><span class="p">.</span><span class="nx">_embedded</span><span class="p">.</span><span class="nx">firstName</span><span class="p">);</span> <span class="c1">// Bob</span>
+    <span class="p">})</span>
+<span class="p">})</span>
 </code></pre></div></div><h2 id='list-business-classifications'>List business classifications</h2>
 <p>Retrieve a list of industry classifications to identify the Customer’s business. An industry classification is required by Dwolla when verifying a <code class="prettyprint">business</code> in order to better analyze the nature of a business.</p>
 <ol class="alerts"><li class="alert icon-alert-alert"><p>This endpoint requires an OAuth access token with the <code>ManageCustomers</code> scope.</p>
@@ -2075,7 +2148,7 @@ Location: https://api.dwolla.com/documents/11fe0bab-39bd-42ee-bb39-275afcc050d0
 </thead><tbody>
 <tr>
 <td>documentType</td>
-<td>One of <code class="prettyprint">passport</code>, <code class="prettyprint">driversLicense</code>, <code class="prettyprint">idCard</code>, or <code class="prettyprint">other</code></td>
+<td>One of <code class="prettyprint">passport</code>, <code class="prettyprint">license</code>, <code class="prettyprint">idCard</code>, or <code class="prettyprint">other</code></td>
 </tr>
 <tr>
 <td>file</td>
@@ -2459,7 +2532,16 @@ Location: https://api.dwolla.com/funding-sources/AB443D36-3757-44C1-A1B4-29727FB
               <button class="selector_switch" id="python">python</button>
               <button class="selector_switch" id="javascript">javascript</button>
           </nav>
-        </div><div class="code-snippet__cnt highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="c1">// coming soon</span>
+        </div><div class="code-snippet__cnt highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="nx">dwolla</span><span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">dwolla</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">dwolla</span><span class="p">[</span><span class="s1">'funding-sources'</span><span class="p">].</span><span class="nx">createFundingSource</span><span class="p">({</span>
+      <span class="s2">"routingNumber"</span><span class="p">:</span> <span class="s2">"222222226"</span><span class="p">,</span>
+      <span class="s2">"accountNumber"</span><span class="p">:</span> <span class="s2">"123456789"</span><span class="p">,</span>
+      <span class="s2">"type"</span><span class="p">:</span> <span class="s2">"checking"</span><span class="p">,</span>
+      <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"John Doe - Checking"</span>
+    <span class="p">}).</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">data</span><span class="p">)</span> <span class="p">{</span>
+       <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">data</span><span class="p">);</span> <span class="c1">// https://api-uat.dwolla.com/funding-sources/375c6781-2a17-476c-84f7-db7d2f6ffb31</span>
+    <span class="p">});</span>
+<span class="p">});</span>
 </code></pre></div></div><h2 id='list-funding-sources-customer'>List Funding Sources (Customer)</h2>
 <p>Retrieve a list of Funding Sources that belong to a Customer.</p>
 <ol class="alerts"><li class="alert icon-alert-alert"><p>This endpoint requires an OAuth access token with the <code>ManageCustomers</code> scope.</p>
@@ -2608,7 +2690,12 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
               <button class="selector_switch" id="python">python</button>
               <button class="selector_switch" id="javascript">javascript</button>
           </nav>
-        </div><div class="code-snippet__cnt highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="c1">// coming soon</span>
+        </div><div class="code-snippet__cnt highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="nx">dwolla</span><span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">dwolla</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">dwolla</span><span class="p">[</span><span class="s1">'funding-sources'</span><span class="p">].</span><span class="nx">getCustomerFundingSources</span><span class="p">()</span>
+    <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">data</span><span class="p">)</span> <span class="p">{</span>
+       <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">data</span><span class="p">.</span><span class="nx">obj</span><span class="p">.</span><span class="nx">_embedded</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="nx">name</span><span class="p">);</span> <span class="c1">// John Doe - Checking account1</span>
+    <span class="p">});</span>
+<span class="p">});</span>
 </code></pre></div></div><h2 id='new-funding-source-account'>New Funding Source (Account)</h2>
 <p>Create a new Funding Source for an Account.</p>
 <ol class="alerts"><li class="alert icon-alert-alert"><p>This endpoint requires an OAuth access token with the <code>Funding</code> scope.</p>
@@ -2779,7 +2866,12 @@ Authorization: Bearer 0Sn0W6kzNicvoWhDbQcVSKLRUpGjIdlPSEYyrHqrDDoRnQwE7Q
               <button class="selector_switch" id="python">python</button>
               <button class="selector_switch" id="javascript">javascript</button>
           </nav>
-        </div><div class="code-snippet__cnt highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="c1">// No example for this language yet.</span>
+        </div><div class="code-snippet__cnt highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="nx">dwolla</span><span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">dwolla</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">dwolla</span><span class="p">[</span><span class="s1">'funding-sources'</span><span class="p">].</span><span class="nx">getAccountFundingSources</span><span class="p">()</span>
+    <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">data</span><span class="p">)</span> <span class="p">{</span>
+       <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">data</span><span class="p">.</span><span class="nx">obj</span><span class="p">.</span><span class="nx">_embedded</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="nx">name</span><span class="p">);</span> <span class="c1">// Balance</span>
+    <span class="p">});</span>
+<span class="p">});</span>
 </code></pre></div></div><div class="code-snippet js-code-snippet language-python"><button class="btn alternative">copy</button><div class="code-snippet__selector">
           <nav>
               <button class="selector_switch" id="raw">raw</button>
@@ -2921,7 +3013,12 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
               <button class="selector_switch" id="python">python</button>
               <button class="selector_switch" id="javascript">javascript</button>
           </nav>
-        </div><div class="code-snippet__cnt highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="c1">// coming soon</span>
+        </div><div class="code-snippet__cnt highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="nx">dwolla</span><span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">dwolla</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">dwolla</span><span class="p">[</span><span class="s1">'funding-sources'</span><span class="p">].</span><span class="nx">id</span><span class="p">({</span><span class="na">id</span><span class="p">:</span> <span class="s1">'692486f8-29f6-4516-a6a5-c69fd2ce854c'</span><span class="p">})</span>
+    <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">data</span><span class="p">)</span> <span class="p">{</span>
+       <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">data</span><span class="p">.</span><span class="nx">obj</span><span class="p">.</span><span class="nx">_embedded</span><span class="p">.</span><span class="nx">name</span><span class="p">);</span> <span class="c1">// Test checking account</span>
+    <span class="p">});</span>
+<span class="p">});</span>
 </code></pre></div></div><h2 id='initiate-or-verify-micro-deposits'>Initiate or Verify Micro-deposits</h2>
 <p>Initiate or verify micro-deposits for bank account verification. Reference the <a href="https://developers.dwolla.com/resources/funding-source-verification.html">funding source verification</a> resource article for more information on the micro-deposit method of bank account verification.</p>
 <ol class="alerts"><li class="alert icon-alert-alert"><p>This endpoint requires an OAuth access token with the <code>Funding</code> scope.</p>
@@ -3008,7 +3105,12 @@ HTTP 200 OK
               <button class="selector_switch" id="python">python</button>
               <button class="selector_switch" id="javascript">javascript</button>
           </nav>
-        </div><div class="code-snippet__cnt highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="c1">// No example for this language yet.</span>
+        </div><div class="code-snippet__cnt highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="nx">dwolla</span><span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">dwolla</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">dwolla</span><span class="p">[</span><span class="s1">'funding-sources'</span><span class="p">].</span><span class="nx">microDeposits</span><span class="p">()</span>
+    <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">data</span><span class="p">)</span> <span class="p">{</span>
+       <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">data</span><span class="p">.</span><span class="nx">status</span><span class="p">);</span> <span class="c1">// 200</span>
+    <span class="p">});</span>
+<span class="p">});</span>
 </code></pre></div></div><div class="code-snippet js-code-snippet language-python"><button class="btn alternative">copy</button><div class="code-snippet__selector">
           <nav>
               <button class="selector_switch" id="raw">raw</button>
@@ -3086,7 +3188,21 @@ HTTP 200 OK
               <button class="selector_switch" id="python">python</button>
               <button class="selector_switch" id="javascript">javascript</button>
           </nav>
-        </div><div class="code-snippet__cnt highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="c1">// No example for this language yet.</span>
+        </div><div class="code-snippet__cnt highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="nx">dwolla</span><span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">dwolla</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">dwolla</span><span class="p">[</span><span class="s1">'funding-sources'</span><span class="p">].</span><span class="nx">verifyMicroDepositsExist</span><span class="p">({</span><span class="na">id</span><span class="p">:</span> <span class="s1">'e52006c3-7560-4ff1-99d5-b0f3a6f4f909'</span><span class="p">,</span> <span class="na">body</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">"amount1"</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">"value"</span><span class="p">:</span> <span class="s2">"0.03"</span><span class="p">,</span>
+            <span class="s2">"currency"</span><span class="p">:</span> <span class="s2">"USD"</span>
+        <span class="p">},</span>
+        <span class="s2">"amount2"</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">"value"</span><span class="p">:</span> <span class="s2">"0.09"</span><span class="p">,</span>
+            <span class="s2">"currency"</span><span class="p">:</span> <span class="s2">"USD"</span>
+        <span class="p">}</span>
+    <span class="p">}})</span>
+    <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">data</span><span class="p">)</span> <span class="p">{</span>
+       <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">data</span><span class="p">.</span><span class="nx">status</span><span class="p">);</span> <span class="c1">// 200</span>
+    <span class="p">});</span>
+<span class="p">});</span>
 </code></pre></div></div><div class="code-snippet js-code-snippet language-python"><button class="btn alternative">copy</button><div class="code-snippet__selector">
           <nav>
               <button class="selector_switch" id="raw">raw</button>
@@ -3292,7 +3408,12 @@ HTTP 200 OK
               <button class="selector_switch" id="python">python</button>
               <button class="selector_switch" id="javascript">javascript</button>
           </nav>
-        </div><div class="code-snippet__cnt highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="c1">// coming soon</span>
+        </div><div class="code-snippet__cnt highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="nx">dwolla</span><span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">dwolla</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">dwolla</span><span class="p">[</span><span class="s1">'funding-sources'</span><span class="p">].</span><span class="k">delete</span><span class="p">({</span><span class="na">id</span><span class="p">:</span> <span class="s1">'692486f8-29f6-4516-a6a5-c69fd2ce854c'</span><span class="p">})</span>
+    <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">data</span><span class="p">)</span> <span class="p">{</span>
+       <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">data</span><span class="p">.</span><span class="nx">status</span><span class="p">);</span> <span class="c1">// 200</span>
+    <span class="p">});</span>
+<span class="p">});</span>
 </code></pre></div></div>
             <h1 id='funding-sources---verify'>Funding Sources - Verify</h1><ol class="alerts"><li class="alert icon-alert-alert"><p>Instant account verification (IAV) is a premium feature available only for white label integrations. Contact sales for information about pricing.</p>
 </li></ol><div class="code-snippet js-code-snippet language-nohide"><button class="btn alternative">copy</button><div class="code-snippet__cnt highlight"><pre><code class="language-nohide" data-lang="nohide">&lt;script src="https://cdn.dwolla.com/dwolla.js"&gt;&lt;/script&gt;
@@ -3596,7 +3717,28 @@ Location: https://api.dwolla.com/transfers/74c9129b-d14a-e511-80da-0aa34a9b2388
               <button class="selector_switch" id="python">python</button>
               <button class="selector_switch" id="javascript">javascript</button>
           </nav>
-        </div><div class="code-snippet__cnt highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="c1">// coming soon</span>
+        </div><div class="code-snippet__cnt highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="nx">dwolla</span><span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">dwolla</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">dwolla</span><span class="p">.</span><span class="nx">transfers</span><span class="p">.</span><span class="nx">create</span><span class="p">({</span>
+      <span class="s2">"_links"</span><span class="p">:</span> <span class="p">{</span>
+          <span class="s2">"destination"</span><span class="p">:</span> <span class="p">{</span>
+              <span class="s2">"href"</span><span class="p">:</span> <span class="s2">"https://api.dwolla.com/customers/07D59716-EF22-4FE6-98E8-F3190233DFB8"</span>
+          <span class="p">},</span>
+          <span class="s2">"source"</span><span class="err">:</span> <span class="p">{</span>
+              <span class="s2">"href"</span><span class="err">:</span> <span class="s2">"https://api.dwolla.com/funding-sources/707177c3-bf15-4e7e-b37c-55c3898d9bf4"</span>
+          <span class="p">}</span>
+      <span class="p">},</span>
+      <span class="s2">"amount"</span><span class="err">:</span> <span class="p">{</span>
+          <span class="s2">"currency"</span><span class="err">:</span> <span class="s2">"USD"</span><span class="p">,</span>
+          <span class="s2">"value"</span><span class="err">:</span> <span class="s2">"1.00"</span>
+      <span class="p">},</span>
+      <span class="s2">"metadata"</span><span class="err">:</span> <span class="p">{</span>
+          <span class="s2">"foo"</span><span class="err">:</span> <span class="s2">"bar"</span><span class="p">,</span>
+          <span class="s2">"baz"</span><span class="err">:</span> <span class="s2">"boo"</span>
+      <span class="p">}</span>
+      <span class="p">}).</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">data</span><span class="p">)</span> <span class="p">{</span>
+          <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">data</span><span class="p">.</span><span class="nx">obj</span><span class="p">);</span> <span class="c1">// https://api.dwolla.com/transfers/74c9129b-d14a-e511-80da-0aa34a9b2388</span>
+      <span class="p">})</span>
+<span class="p">})</span>
 </code></pre></div></div>
 <p>Initiate a transfer for either an account or customer resource. </p>
 <ol class="alerts"><li class="alert icon-alert-alert"><p>This endpoint requires an OAuth access token with the <code>Send</code> scope.</p>
@@ -3815,7 +3957,11 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
               <button class="selector_switch" id="python">python</button>
               <button class="selector_switch" id="javascript">javascript</button>
           </nav>
-        </div><div class="code-snippet__cnt highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="c1">// coming soon</span>
+        </div><div class="code-snippet__cnt highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="nx">dwolla</span><span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">dwolla</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">dwolla</span><span class="p">.</span><span class="nx">customers</span><span class="p">.</span><span class="nx">getCustomerTransfers</span><span class="p">().</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">data</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">data</span><span class="p">.</span><span class="nx">obj</span><span class="p">.</span><span class="nx">_embedded</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="nx">status</span><span class="p">);</span> <span class="c1">// pending</span>
+    <span class="p">})</span>
+<span class="p">})</span>
 </code></pre></div></div>
 <p>Retrieve a Customer&rsquo;s list of transfers.</p>
 <ol class="alerts"><li class="alert icon-alert-alert"><p>This endpoint requires an OAuth access token with the <code>ManageCustomers</code> scope.</p>
@@ -3983,7 +4129,11 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
               <button class="selector_switch" id="python">python</button>
               <button class="selector_switch" id="javascript">javascript</button>
           </nav>
-        </div><div class="code-snippet__cnt highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="c1">// coming soon</span>
+        </div><div class="code-snippet__cnt highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="nx">dwolla</span><span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">dwolla</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">dwolla</span><span class="p">.</span><span class="nx">customers</span><span class="p">.</span><span class="nx">getAccountTransfers</span><span class="p">().</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">data</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">data</span><span class="p">.</span><span class="nx">obj</span><span class="p">.</span><span class="nx">_embedded</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="nx">status</span><span class="p">);</span> <span class="c1">// processed</span>
+    <span class="p">})</span>
+<span class="p">})</span>
 </code></pre></div></div>
 <p>Retrieve an Account&rsquo;s list of transfers.</p>
 <ol class="alerts"><li class="alert icon-alert-alert"><p>This endpoint requires an OAuth access token with the <code>Transactions</code> scope.</p>
@@ -4103,7 +4253,12 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
               <button class="selector_switch" id="python">python</button>
               <button class="selector_switch" id="javascript">javascript</button>
           </nav>
-        </div><div class="code-snippet__cnt highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="c1">// coming soon</span>
+        </div><div class="code-snippet__cnt highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="nx">dwolla</span><span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">dwolla</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">dwolla</span><span class="p">.</span><span class="nx">customers</span><span class="p">.</span><span class="nx">byId</span><span class="p">({</span><span class="na">id</span><span class="p">:</span> <span class="s1">'4C8AD8B8-3D69-E511-80DB-0AA34A9B2388'</span><span class="p">})</span>
+    <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">data</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">data</span><span class="p">.</span><span class="nx">obj</span><span class="p">.</span><span class="nx">_embedded</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="nx">status</span><span class="p">);</span> <span class="c1">// pending</span>
+    <span class="p">})</span>
+<span class="p">})</span>
 </code></pre></div></div>
 <p>Retrieve a Transfer belonging to an Account or Customer by its ID.</p>
 <ol class="alerts"><li class="alert icon-alert-alert"><p>This endpoint requires an OAuth access token with the <code>Transactions</code> scope.</p>
@@ -4505,7 +4660,11 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
               <button class="selector_switch" id="python">python</button>
               <button class="selector_switch" id="javascript">javascript</button>
           </nav>
-        </div><div class="code-snippet__cnt highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="c1">// coming soon</span>
+        </div><div class="code-snippet__cnt highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="nx">dwolla</span><span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">dwolla</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">dwolla</span><span class="p">.</span><span class="nx">events</span><span class="p">.</span><span class="nx">events</span><span class="p">().</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">data</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">data</span><span class="p">.</span><span class="nx">obj</span><span class="p">.</span><span class="nx">total</span><span class="p">);</span> <span class="c1">// 4</span>
+    <span class="p">})</span>
+<span class="p">})</span>
 </code></pre></div></div>
 <p>Retrieve a list of events for the authorized user.</p>
 <ol class="alerts"><li class="alert icon-alert-alert"><p>This endpoint requires an OAuth <em>Application</em> access token.</p>
@@ -4626,7 +4785,11 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
               <button class="selector_switch" id="python">python</button>
               <button class="selector_switch" id="javascript">javascript</button>
           </nav>
-        </div><div class="code-snippet__cnt highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="c1">// coming soon</span>
+        </div><div class="code-snippet__cnt highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="nx">dwolla</span><span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">dwolla</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">dwolla</span><span class="p">.</span><span class="nx">events</span><span class="p">.</span><span class="nx">id</span><span class="p">({</span><span class="na">id</span><span class="p">:</span> <span class="s1">'81f6e13c-557c-4449-9331-da5c65e61095'</span><span class="p">}).</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">data</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">data</span><span class="p">.</span><span class="nx">obj</span><span class="p">.</span><span class="nx">topic</span><span class="p">);</span> <span class="c1">// customer_transfer_created</span>
+    <span class="p">})</span>
+<span class="p">})</span>
 </code></pre></div></div>
 <p>Retrieve an event by Id. </p>
 <ol class="alerts"><li class="alert icon-alert-alert"><p>This endpoint requires an OAuth <em>Application</em> access token.</p>
@@ -4841,7 +5004,14 @@ Authorization: Bearer 0Sn0W6kzNicvoWhDbQcVSKLRUpGjIdlPSEYyrHqrDDoRnQwE7Q
               <button class="selector_switch" id="python">python</button>
               <button class="selector_switch" id="javascript">javascript</button>
           </nav>
-        </div><div class="code-snippet__cnt highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="c1">// No example for this language yet.</span>
+        </div><div class="code-snippet__cnt highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="nx">dwolla</span><span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">dwolla</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">dwolla</span><span class="p">[</span><span class="s1">'webhook-subscriptions'</span><span class="p">].</span><span class="nx">list</span><span class="p">({</span>
+        <span class="s2">"url"</span><span class="p">:</span> <span class="s2">"http://myapplication.com/webhooks"</span><span class="p">,</span>
+        <span class="s2">"secret"</span><span class="p">:</span> <span class="s2">"sshhhhhh"</span>
+    <span class="p">}).</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">data</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">data</span><span class="p">.</span><span class="nx">obj</span><span class="p">);</span> <span class="c1">// https://api-uat.dwolla.com/webhook-subscriptions/5af4c10a-f6de-4ac8-840d-42cb65454216</span>
+    <span class="p">});</span>
+<span class="p">});</span>
 </code></pre></div></div><div class="code-snippet js-code-snippet language-python"><button class="btn alternative">copy</button><div class="code-snippet__selector">
           <nav>
               <button class="selector_switch" id="raw">raw</button>
@@ -4933,7 +5103,13 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
               <button class="selector_switch" id="python">python</button>
               <button class="selector_switch" id="javascript">javascript</button>
           </nav>
-        </div><div class="code-snippet__cnt highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="nx">No</span> <span class="nx">example</span> <span class="k">for</span> <span class="k">this</span> <span class="nx">language</span> <span class="nx">yet</span><span class="p">.</span>
+        </div><div class="code-snippet__cnt highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="nx">dwolla</span><span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">dwolla</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">dwolla</span><span class="p">[</span><span class="s1">'webhook-subscriptions'</span><span class="p">].</span><span class="nx">deleteById</span><span class="p">({</span>
+      <span class="na">id</span><span class="p">:</span> <span class="s1">'5af4c10a-f6de-4ac8-840d-42cb65454216'</span>
+    <span class="p">}).</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">data</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">data</span><span class="p">.</span><span class="nx">status</span><span class="p">);</span> <span class="c1">// 200</span>
+    <span class="p">});</span>
+<span class="p">});</span>
 </code></pre></div></div><div class="code-snippet js-code-snippet language-python"><button class="btn alternative">copy</button><div class="code-snippet__selector">
           <nav>
               <button class="selector_switch" id="raw">raw</button>
@@ -5045,7 +5221,12 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
               <button class="selector_switch" id="python">python</button>
               <button class="selector_switch" id="javascript">javascript</button>
           </nav>
-        </div><div class="code-snippet__cnt highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="nx">No</span> <span class="nx">example</span> <span class="k">for</span> <span class="k">this</span> <span class="nx">language</span> <span class="nx">yet</span><span class="p">.</span>
+        </div><div class="code-snippet__cnt highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="nx">dwolla</span><span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">dwolla</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">dwolla</span><span class="p">[</span><span class="s1">'webhook-subscriptions'</span><span class="p">].</span><span class="nx">list</span><span class="p">()</span>
+    <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">data</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">data</span><span class="p">.</span><span class="nx">obj</span><span class="p">.</span><span class="nx">total</span><span class="p">);</span> <span class="c1">// 1</span>
+    <span class="p">});</span>
+<span class="p">});</span>
 </code></pre></div></div><div class="code-snippet js-code-snippet language-python"><button class="btn alternative">copy</button><div class="code-snippet__selector">
           <nav>
               <button class="selector_switch" id="raw">raw</button>
@@ -5133,7 +5314,13 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
               <button class="selector_switch" id="python">python</button>
               <button class="selector_switch" id="javascript">javascript</button>
           </nav>
-        </div><div class="code-snippet__cnt highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="nx">No</span> <span class="nx">example</span> <span class="k">for</span> <span class="k">this</span> <span class="nx">language</span> <span class="nx">yet</span><span class="p">.</span>
+        </div><div class="code-snippet__cnt highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="nx">dwolla</span><span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">dwolla</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">dwolla</span><span class="p">[</span><span class="s1">'webhook-subscriptions'</span><span class="p">].</span><span class="nx">id</span><span class="p">({</span>
+      <span class="na">id</span><span class="p">:</span> <span class="s1">'5af4c10a-f6de-4ac8-840d-42cb65454216'</span>
+    <span class="p">}).</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">data</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">data</span><span class="p">.</span><span class="nx">obj</span><span class="p">.</span><span class="nx">created</span><span class="p">);</span> <span class="c1">// 2015-10-28T16:20:47+00:00</span>
+    <span class="p">});</span>
+<span class="p">});</span>
 </code></pre></div></div><div class="code-snippet js-code-snippet language-python"><button class="btn alternative">copy</button><div class="code-snippet__selector">
           <nav>
               <button class="selector_switch" id="raw">raw</button>
@@ -5253,7 +5440,13 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
               <button class="selector_switch" id="python">python</button>
               <button class="selector_switch" id="javascript">javascript</button>
           </nav>
-        </div><div class="code-snippet__cnt highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="nx">No</span> <span class="nx">example</span> <span class="k">for</span> <span class="k">this</span> <span class="nx">language</span> <span class="nx">yet</span><span class="p">.</span>
+        </div><div class="code-snippet__cnt highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="nx">dwolla</span><span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">dwolla</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">dwolla</span><span class="p">.</span><span class="nx">webhooks</span><span class="p">.</span><span class="nx">hooksById</span><span class="p">({</span>
+      <span class="na">id</span><span class="p">:</span> <span class="s1">'5af4c10a-f6de-4ac8-840d-42cb65454216'</span>
+    <span class="p">}).</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">data</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">data</span><span class="p">.</span><span class="nx">obj</span><span class="p">.</span><span class="nx">total</span><span class="p">);</span> <span class="c1">// 5</span>
+    <span class="p">});</span>
+<span class="p">});</span>
 </code></pre></div></div><div class="code-snippet js-code-snippet language-python"><button class="btn alternative">copy</button><div class="code-snippet__selector">
           <nav>
               <button class="selector_switch" id="raw">raw</button>
@@ -5530,7 +5723,13 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
               <button class="selector_switch" id="python">python</button>
               <button class="selector_switch" id="javascript">javascript</button>
           </nav>
-        </div><div class="code-snippet__cnt highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="c1">// coming soon</span>
+        </div><div class="code-snippet__cnt highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="nx">dwolla</span><span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">dwolla</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">dwolla</span><span class="p">.</span><span class="nx">webhooks</span><span class="p">.</span><span class="nx">id</span><span class="p">({</span>
+        <span class="na">id</span><span class="p">:</span> <span class="s1">'9ece9660-aa34-41eb-80d7-0125d53b45e8'</span>
+    <span class="p">}).</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">data</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">data</span><span class="p">.</span><span class="nx">obj</span><span class="p">.</span><span class="nx">topic</span><span class="p">);</span> <span class="c1">// transfer_created</span>
+    <span class="p">});</span>
+<span class="p">});</span>
 </code></pre></div></div>
 <p>Retrieve a single webhook.</p>
 <ol class="alerts"><li class="alert icon-alert-alert"><p>This endpoint requires an OAuth <em>Application</em> access token.</p>
@@ -5629,7 +5828,13 @@ Location: https://api.dwolla.com/webhooks/9ece9660-aa34-41eb-80d7-0125d53b45e8/r
               <button class="selector_switch" id="python">python</button>
               <button class="selector_switch" id="javascript">javascript</button>
           </nav>
-        </div><div class="code-snippet__cnt highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="c1">// coming soon</span>
+        </div><div class="code-snippet__cnt highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="nx">dwolla</span><span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">dwolla</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">dwolla</span><span class="p">.</span><span class="nx">webhooks</span><span class="p">.</span><span class="nx">retryWebhook</span><span class="p">({</span>
+        <span class="na">id</span><span class="p">:</span> <span class="s1">'9ece9660-aa34-41eb-80d7-0125d53b45e8'</span>
+    <span class="p">}).</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">data</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">data</span><span class="p">.</span><span class="nx">obj</span><span class="p">.</span><span class="nx">status</span><span class="p">);</span> <span class="c1">// 200</span>
+    <span class="p">});</span>
+<span class="p">});</span>
 </code></pre></div></div>
 <p>Retry a webhook by ID.</p>
 <ol class="alerts"><li class="alert icon-alert-alert"><p>This endpoint requires an OAuth <em>Application</em> access token.</p>
@@ -5749,7 +5954,13 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
               <button class="selector_switch" id="python">python</button>
               <button class="selector_switch" id="javascript">javascript</button>
           </nav>
-        </div><div class="code-snippet__cnt highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="c1">// coming soon</span>
+        </div><div class="code-snippet__cnt highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="nx">dwolla</span><span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">dwolla</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">dwolla</span><span class="p">.</span><span class="nx">webhooks</span><span class="p">.</span><span class="nx">retriesById</span><span class="p">({</span>
+        <span class="na">id</span><span class="p">:</span> <span class="s1">'9ece9660-aa34-41eb-80d7-0125d53b45e8'</span>
+    <span class="p">}).</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">data</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">data</span><span class="p">.</span><span class="nx">obj</span><span class="p">.</span><span class="nx">total</span><span class="p">);</span> <span class="c1">// 1</span>
+    <span class="p">});</span>
+<span class="p">});</span>
 </code></pre></div></div>
 <p>Retrieve webhook retries by ID.</p>
 <ol class="alerts"><li class="alert icon-alert-alert"><p>This endpoint requires an OAuth <em>Application</em> access token.</p>
