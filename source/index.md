@@ -28,5 +28,5 @@ includes:
 
 search: true
 
-google_analytics_id: UA-55964336-1
+google_analytics_id: UA-30404064-1
 ---
