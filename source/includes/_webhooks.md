@@ -1,5 +1,7 @@
 # Webhooks
 
+When a new [event](#events) is created and there is an active [webhook subscription](#webhook-subscriptions), a new webhook is created in order to deliver that event.  Attempted deliveries are recorded under the webhook's `attempts` property.  Each attempt includes the recorded request and response of the delivery attempt.
+
 ```noselect
 {
   "_links": {
@@ -87,11 +89,28 @@
 }
 ```
 
-When a new [Event](#events) is created and there is an active [Webhook Subscription](#webhook-subscriptions), a new Webhook is created in order to deliver that Event.  Attempted deliveries are recorded under the Webhook's `attempts` property.  Each attempt incldues the recorded request and response of the delivery attempt.
+## Retrieve webhook
 
-## Retrieve Webhook
+This section covers how to retrieve a single webhook.
 
-### Request and Response 
+<ol class="alerts">
+    <li class="alert icon-alert-alert">This endpoint <a href="#authentication">requires</a> an OAuth *Application* access token.</li>
+</ol>
+
+### HTTP request
+`GET https://api.dwolla.com/webhooks/{id}`
+
+### Request parameters
+Parameter | Optional? | Description
+----------|------------|-------------
+id | no | Id of webhook to get.
+
+### Errors
+| HTTP Status | Message |
+|--------------|-------------|
+| 404 | Webhook not found. |
+
+### Request and response 
 
 ```raw
 GET https://api.dwolla.com/webhooks/9ece9660-aa34-41eb-80d7-0125d53b45e8
@@ -219,29 +238,28 @@ dwolla.then(function(dwolla) {
 });
 ```
 
-Retrieve a single webhook.
+## Retry a webhook by id
+
+This section details how to retry a webhook by id.
 
 <ol class="alerts">
     <li class="alert icon-alert-alert">This endpoint <a href="#authentication">requires</a> an OAuth *Application* access token.</li>
 </ol>
 
 ### HTTP Request
-`GET https://api.dwolla.com/webhooks/{id}`
+`POST https://api.dwolla.com/webhooks/{id}/retries`
 
-### Request Parameters
-
+### Request parameters
 Parameter | Optional? | Description
 ----------|------------|-------------
-id | no | Id of webhook to get.
+id | no | Id of webhook to retry.
 
 ### Errors
 | HTTP Status | Message |
 |--------------|-------------|
 | 404 | Webhook not found. |
 
-## Retry a Webhook by ID
-
-### Request and Response
+### Request and response
 
 ```raw
 POST /webhooks/9ece9660-aa34-41eb-80d7-0125d53b45e8/retries
@@ -288,29 +306,29 @@ dwolla.then(function(dwolla) {
 });
 ```
 
-Retry a webhook by ID.
+## Get webhook retries by id
+
+This section covers how to retrieve webhook retries by id.
 
 <ol class="alerts">
     <li class="alert icon-alert-alert">This endpoint <a href="#authentication">requires</a> an OAuth *Application* access token.</li>
 </ol>
 
 ### HTTP Request
-`POST https://api.dwolla.com/webhooks/{id}/retries`
+`GET https://api.dwolla.com/webhooks/{id}/retries`
 
-### Request Parameters
+### Request parameters
 
 Parameter | Optional? | Description
 ----------|------------|-------------
-id | no | Id of webhook to retry.
+id | no | Id of webhook to get retries for.
 
 ### Errors
 | HTTP Status | Message |
 |--------------|-------------|
 | 404 | Webhook not found. |
 
-## Get Retries by ID
-
-### Request and Response
+### Request and response
 
 ```raw
 GET /webhooks/9ece9660-aa34-41eb-80d7-0125d53b45e8/retries
@@ -377,23 +395,3 @@ dwolla.then(function(dwolla) {
     });
 });
 ```
-
-Retrieve webhook retries by ID.
-
-<ol class="alerts">
-    <li class="alert icon-alert-alert">This endpoint <a href="#authentication">requires</a> an OAuth *Application* access token.</li>
-</ol>
-
-### HTTP Request
-`GET https://api.dwolla.com/webhooks/{id}/retries`
-
-### Request Parameters
-
-Parameter | Optional? | Description
-----------|------------|-------------
-id | no | Id of webhook to get retries for.
-
-### Errors
-| HTTP Status | Message |
-|--------------|-------------|
-| 404 | Webhook not found. |

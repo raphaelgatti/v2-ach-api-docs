@@ -1,5 +1,17 @@
 # Events
 
+When the state of a resource changes, we create a new event resource to record the change.  For instance, if a Customer's status changes to `verified`, a `customer_verified` event will be created.  When an Event is created, a [Webhook](#webhooks) will be created to deliver the Event to any URLs specified by your active [Webhook Subscriptions](#webhook-subscriptions).
+
+### Events resource 
+
+| Parameter | Description
+|-----------|------------|
+|_links | Contains links to the event, associated resource, the Account associated with the event, and the Customer associated with the event (if any).
+|id | Event id
+|created | ISO-8601 timestamp when event was created
+|topic | Type of event
+|resourceId | id of the resource associated with the event.
+
 ```noselect
 {
   "_links": {
@@ -20,66 +32,75 @@
 }
 ```
 
-When a resource's state changes, we create a new event resource to record the change.  For instance, if a customer's status changes to `verified`, a `customer_verified` event will be created.  When an Event is created, a [Webhook](#webhooks) will be created to deliver the Event to any URLs specified by your active [Webhook Subscriptions](#webhook-subscriptions).
-
-### Events Resource 
-
-| Parameter | Description
-|-----------|------------|
-|_links | Contains links to the event, associated resource, the account associated with the event, and the customer associated with the event (if any).
-|id | Event ID
-|created | ISO-8601 timestamp when event was created
-|topic | Type of event
-|resourceId | ID of the resource associated with the event.
-
 ### Event topics
 | Topic          | Description                                                                                                       |
-|--------------------|-------------------------------------------------------------------------------------------------------------------|
-| customer_created   | A Customer was created.                                                                                    |
-| transfer_created   | Transfer was created.                                                                                             |
-| transfer_cancelled | A pending transfer has been cancelled, and will not process further.                                              |
-| transfer_failed    | Transaction failed to clear successfully. Usually, this is a result of an ACH failure (insufficient funds, etc.). |
-| transfer_completed | Transfer has cleared successfully.                                                                                |
-| transfer_reclaimed | The transfer was returned to the sender after being unclaimed by the recipient for a period of time.              |
-| funding_source_added | A funding source was added            |
-| funding_source_removed |  A funding source was removed         |
-| funding_source_verified | A funding source was marked as `verified`         |
-| funding_source_unverified | A funding source was marked as `unverified`           |
-| customer_funding_source_added |  A funding source was added for a Customer         |
-| customer_funding_source_removed | A funding source was removed for a Customer     |
-| customer_funding_source_verified | A Customer's funding source was marked as verified      |
-| customer_funding_source_unverified | A Customer's funding source was marked as unverified         |
-| customer_transfer_created   | Transfer was created.                                                                           |
-| customer_transfer_cancelled | A pending transfer has been cancelled, and will not process further.                                     |
-| customer_transfer_failed | Transaction failed to clear successfully. Usually, this is a result of an ACH failure (insufficient funds, etc.). |
-| customer_transfer_completed | Transfer has cleared successfully.                                                                   |
-| customer_transfer_reclaimed | The transfer was returned to the sender after being unclaimed by the recipient for a period of time. |
+|------------------|---------------------------------------------------------------------------------------------------------------|
+| funding_source_added | A funding source was added to a Dwolla account. |
+| funding_source_removed |  A funding source was removed from a Dwolla account. |
+| funding_source_unverified | A funding source was marked as `unverified`. |
+| funding_source_verified | A funding source was marked as `verified`. |
+| microdeposits_added | Two <=10¢ transfers to a Dwolla account’s linked bank account were initiated. |
+| microdeposits_failed | The two <=10¢ transfers to a Dwolla account’s linked bank account failed to clear successfully. |
+| microdeposits_completed | The two <=10¢ transfers to a Dwolla account’s linked bank account have cleared successfully. |
+| bank_transfer_created | A bank transfer was created. |
+| bank_transfer_cancelled | A pending bank transfer has been cancelled, and will not process further. |
+| bank_transfer_failed | A transfer failed to clear successfully. Usually, this is a result of an ACH failure (insufficient funds, etc.). |
+| bank_transfer_completed | A bank transfer has cleared successfully. |
+| transfer_created | A transfer was created. |
+| transfer_cancelled | A pending transfer has been cancelled, and will not process further. |
+| transfer_failed | A transfer failed to clear successfully. |
+| transfer_reclaimed | The transfer was returned to the sender after remaining unclaimed by the intended recipient for a period of time. |
+| transfer_completed | A transfer has cleared successfully. |
+| account_suspended | An account was suspended. |
+| account_activated | A Dwolla account moves from deactive or suspended to active state of verification. |
+| customer_created | A Customer was created. |
+| customer_verification_document_needed | Additional documentation is needed to verify a Customer. |
 | customer_verification_document_uploaded | A verification document was uploaded for a Customer. |
-| customer_verification_document_approved | A verification document was approved for a Customer. |
 | customer_verification_document_failed | A verification document has been rejected for a Customer. |
+| customer_verification_document_approved | A verification document was approved for a Customer. |
+| customer_reverification_needed | Incomplete information was received for a Customer; updated information is needed to verify the Customer. |
 | customer_verified | A Customer was verified. |
 | customer_suspended | A Customer was suspended. |
-| customer_verification_document_needed | Verification documentation is needed for a Customer. |
-| customer_reverification_needed | Incomplete information received for a Customer.  Updated information is needed to verify the Customer. |
+| customer_activated | A Customer moves from deactive or suspended to active state of verification. |
+| customer_funding_source_added | A funding source was added to a Customer. |
+| customer_funding_source_removed | A funding source was removed from a Customer. |
+| customer_funding_source_unverified | A Customer’s funding source was marked as unverified. |
+| customer_funding_source_verified | A Customer’s funding source was marked as verified. |
+| customer_microdeposits_added | Two <=10¢ transfers to a Customer’s linked bank account were initiated. |
+| customer_microdeposits_failed | The two <=10¢ transfers to a Customer’s linked bank account failed to clear successfully. |
+| customer_microdeposits_completed | The two <=10¢ transfers to a Customer’s linked bank account have cleared successfully. |
 | customer_bank_transfer_created | A bank transfer was created for a Customer. |
-| customer_bank_transfer_completed | A bank transfer has cleared successfully for a Customer. |
-| customer_bank_transfer_cancelled |  A pending Customer bank transfer has been cancelled, and will not process further. |
-| customer_bank_transfer_failed |  Transaction failed to clear successfully. Usually, this is a result of an ACH failure (insufficient funds, etc.). |
-| account_suspended | An account was suspended. |
-| bank_transfer_cancelled |  A pending bank transfer has been cancelled, and will not process further. |
-| bank_transfer_completed | A bank transfer has cleared successfully. |
-| bank_transfer_created | A bank transfer was created. |
-| bank_transfer_failed |  Transaction failed to clear successfully. Usually, this is a result of an ACH failure (insufficient funds, etc.). |
-| customer_microdeposits_added | Micro-deposits have been initiated to the Customer's bank |
-| customer_microdeposits_completed | Micro-deposits have processed to the Customer's bank |
-| customer_microdeposits_failed | Micro-deposits have failed to process to the Customer's bank |
-| microdeposits_added | Micro-deposits have been initiated to the Account's bank |
-| microdeposits_completed | Micro-deposits have processed to the Account's bank |
-| microdeposits_failed | Micro-deposits have failed to process to the Account's bank |
+| customer_bank_transfer_cancelled | A pending Customer bank transfer has been cancelled, and will not process further. |
+| customer_bank_transfer_failed | A Customer bank transfer failed to clear successfully. Usually, this is a result of an ACH failure (insufficient funds, etc.). |
+| customer_bank_transfer_completed | A bank transfer that was created for a Customer has cleared successfully. |
+| customer_transfer_created | A transfer was created for a Customer. |
+| customer_transfer_cancelled | A pending transfer has been cancelled, and will not process further. |
+| customer_transfer_failed | A Customer transfer failed to clear successfully. |
+| customer_transfer_completed | A Customer transfer has cleared successfully. |
 
-## List Events
+## List events
 
-### Request and Response 
+Retrieve a list of events for the authorized user.
+
+<ol class="alerts">
+    <li class="alert icon-alert-alert">This endpoint <a href="#authentication">requires</a> an OAuth *Application* access token.</li>
+</ol>
+
+### HTTP request
+`GET https://api.dwolla.com/events`
+
+### Request parameters
+Parameter | Optional? | Description
+----------|------------|-------------
+limit | yes | How many results to return.
+offset | yes | How many results to skip.
+
+### Errors
+| HTTP Status | Message |
+|--------------|-------------|
+| 404 | Resource not found. |
+
+### Request and response 
 
 ```raw
 GET https://api.dwolla.com/events
@@ -207,30 +228,28 @@ dwolla.then(function(dwolla) {
 })
 ```
 
-Retrieve a list of events for the authorized user.
+## Get event by id
+
+This section covers how to retrieve an event by id. 
 
 <ol class="alerts">
     <li class="alert icon-alert-alert">This endpoint <a href="#authentication">requires</a> an OAuth *Application* access token.</li>
 </ol>
 
 ### HTTP Request
-`GET https://api.dwolla.com/events`
+`GET https://api.dwolla.com/events/{id}`
 
-### Request Parameters
-
+### Request parameters
 Parameter | Optional? | Description
 ----------|------------|-------------
-limit | yes | How many results to return.
-offset | yes | How many results to skip.
+id | no | ID of application event to get.
 
 ### Errors
 | HTTP Status | Message |
 |--------------|-------------|
-| 404 | Resource not found. |
+| 404 | Application event not found. |
 
-## Get Event by ID
-
-### Request and Response
+### Request and response
 
 ```raw
 GET /events/81f6e13c-557c-4449-9331-da5c65e61095
@@ -291,23 +310,3 @@ dwolla.then(function(dwolla) {
     })
 })
 ```
-
-Retrieve an event by Id. 
-
-<ol class="alerts">
-    <li class="alert icon-alert-alert">This endpoint <a href="#authentication">requires</a> an OAuth *Application* access token.</li>
-</ol>
-
-### HTTP Request
-`GET https://api.dwolla.com/events/{id}`
-
-### Request Parameters
-
-Parameter | Optional? | Description
-----------|------------|-------------
-id | no | ID of application event to get.
-
-### Errors
-| HTTP Status | Message |
-|--------------|-------------|
-| 404 | Application event not found. |

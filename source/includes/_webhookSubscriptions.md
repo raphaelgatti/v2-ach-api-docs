@@ -1,4 +1,6 @@
-# Webhook Subscriptions
+# Webhook subscriptions
+
+Create a webhook subscription to receive `POST` requests from Dwolla (called webhooks) when events associated with your application occur.  [Webhooks](#webhooks) are sent to a URL which you provide when creating a webhook subscription. If you are a white label partner, you will use these events to notify your customers via email as described in the white label terms of service. Refer to the [events](#available-events) section for the list of events that trigger webhooks.
 
 ```noselect
 {
@@ -16,10 +18,8 @@
 }
 ```
 
-Create a Webhook Subscription to receive `POST` requests from Dwolla (called Webhooks) when Events associated with your application occur.  [Webhooks](#webhooks) are sent to a URL which you provide when creating a Webhook Subscription. If you are a White Label partner, you will use these events to notify your customers via email based on the White Label TOS. Refer to the [events](#available-events) section for the list of events that trigger webhooks.
-
 ### Acknowledgement and retries
-When your application receives a [Webhook](#webhooks), it should respond with a HTTP 2xx status code to indicate successful receipt. If Dwolla receives a status code greater than a HTTP 400, or your application fails to respond within 20 seconds of the attempt, another attempt will be made.
+When your application receives a [webhook](#webhooks), it should respond with a HTTP 2xx status code to indicate successful receipt. If Dwolla receives a status code greater than a HTTP 400, or your application fails to respond within 20 seconds of the attempt, another attempt will be made.
 
 Dwolla will re-attempt delivery 8 times over the course of 72 hours according the backoff schedule below. If a webhook was successfully received but you would like the information again, you can call [retrieve webhook by ID](#get-webhook-by-id).
 
@@ -34,37 +34,52 @@ Dwolla will re-attempt delivery 8 times over the course of 72 hours according th
 |       7      |              24 h                 |                  48 h                   |
 |       8      |              24 h                 |                  72 h                   |
 
-### Webhook Resource
+### Webhook resource
 
 | Parameter      | Description                                       |
 |----------------|---------------------------------------------------|
-| id             | Webhook unique identifier.                        |
-| topic          | Type of webhook subscription.                     |
-| accountId      | Account associated with the webhook notification. |
-| eventId        | Event ID for this webhook.                        |
-| subscriptionId | Webhook subscription ID for this event.           |
-| attempts       | Array of Attempt JSON object.                     |
+| id             | Webhook unique identifier                         |
+| topic          | Type of webhook subscription                      |
+| accountId      | Account associated with the webhook notification  |
+| eventId        | Event id for this webhook                         |
+| subscriptionId | Webhook subscription id for this event            |
+| attempts       | Array of attempt JSON object                      |
 
-### Attempt JSON Object
+### Attempt JSON object
 
 | Parameter      | Description                             |
 |----------------|-----------------------------------------|
-| id             | Unique ID of webhook delivery attempt.  |
+| id             | Unique id of webhook delivery attempt.  |
 | request        | Request JSON object                     |
 | response       | Response JSON object                    |
 
-### Request/Response JSON Object
+### Request/response JSON object
 
 | Parameter      | Description                                                                   |
 |----------------|-------------------------------------------------------------------------------|
-| created        | ISO-8601 timestamp.                                                           |
-| url            | URL where data was sent to/received from.                                     |
-| headers        | Array of objects with keys `name` and `value` representative of HTTP headers. |
-| body           | Event ID for this webhook.                                                    |
+| created        | ISO-8601 timestamp                                                            |
+| url            | URL where data was sent to/received from                                      |
+| headers        | Array of objects with keys `name` and `value` representative of HTTP headers  |
+| body           | Event id for this webhook                                                     |
 
-## Create a Subscription
+## Create a webhook subscription
 
-### Request and Response
+This section details how to create a webhook subscription to deliver [webhooks](#webhooks) to a specified URL.
+
+<ol class="alerts">
+    <li class="alert icon-alert-alert">This endpoint <a href="#authentication">requires</a> an OAuth *Application* access token.</li>
+</ol>
+
+### HTTP Request
+`POST https://api.dwolla.com/webhook-subscriptions`
+
+### Request parameters
+| Parameter | Description |
+|----------|--------------|
+| url | Where Dwolla should deliver the webhook notification. |
+| secret | A random, secret key, only known by your application. This secret key should be securely stored and used later when [validating the authenticity](https://developers.dwolla.com/guides/webhooks/03-validating-webhooks.html) of the webhook request from Dwolla. |
+
+### Request and response
 
 ```raw
 POST https://api-uat.dwolla.com/webhook-subscriptions
@@ -115,31 +130,28 @@ print($subscription); # => https://api-uat.dwolla.com/webhook-subscriptions/5af4
 ?>
 ```
 
-Create a webhook subscription to deliver [Webhooks](#webhooks) to a specified URL. 
+## Delete a subscription
+
+Delete a Webhook Subscription to stop receiving Webhooks at the URL specified. If using an SDK, the request was successful unless an exception was thrown stating otherwise.
 
 <ol class="alerts">
     <li class="alert icon-alert-alert">This endpoint <a href="#authentication">requires</a> an OAuth *Application* access token.</li>
 </ol>
 
-### HTTP Request
-`
-POST https://api.dwolla.com/webhook-subscriptions
-`
+### HTTP request
+`DELETE https://api.dwolla.com/webhook-subscriptions/{id}`
 
-### Request Parameters
-
-Parameter | Description
-----------|------------
-url | Where Dwolla should deliver the webhook notification.
-secret | A random, secret key, only known by your application. This secret key should be securely stored and used later when [validating the authenticity](https://developers.dwolla.com/guides/webhooks/03-validating-webhooks.html) of the webhook request from Dwolla.
+### Request parameters
+| Parameter | Description |
+|----------|--------------|
+| id | Webhook unique identifier. |
 
 ### Errors
 | HTTP Status | Message |
 |--------------|-------------|
+| 404 | Webhook subscription not found. |
 
-## Delete a Subscription
-
-### Request and Response
+### Request and response
 
 ```raw
 DELETE https://api-uat.dwolla.com/webhook-subscriptions/5af4c10a-f6de-4ac8-840d-42cb65454216
@@ -169,32 +181,18 @@ $deleted = $webhookApi->id('https://api-uat.dwolla.com/webhook-subscriptions/5af
 ?>
 ```
 
-Delete a Webhook Subscription to stop receiving Webhooks at the URL specified. If using an SDK, the request was successful unless an exception was thrown stating otherwise. 
+## List subscriptions
+
+This section covers how to retrieve a list of webhook subscriptions that belong to an application.
 
 <ol class="alerts">
     <li class="alert icon-alert-alert">This endpoint <a href="#authentication">requires</a> an OAuth *Application* access token.</li>
 </ol>
 
-### HTTP Request
-`
-DELETE https://api.dwolla.com/webhook-subscriptions/{id}
-`
+### HTTP request
+`GET https://api.dwolla.com/webhook-subscriptions`
 
-### Request Parameters
-
-Parameter | Description
-----------|------------
-id | Webhook unique identifier.
-
-
-### Errors
-| HTTP Status | Message |
-|--------------|-------------|
-| 404 | Webhook subscription not found. |
-
-## List Subscriptions
-
-### Request and Response
+### Request and response
 
 ```raw
 GET https://api.dwolla.com/webhook-subscriptions
@@ -257,24 +255,23 @@ print($retrieved->total); # => 1
 ?>
 ```
 
-Retrieve a list of webhook subscriptions that belong to an application.
+## Get subscription by id
+
+This section details how to retrieve a webhook subscription by its id.
 
 <ol class="alerts">
     <li class="alert icon-alert-alert">This endpoint <a href="#authentication">requires</a> an OAuth *Application* access token.</li>
 </ol>
 
-### HTTP Request
-`
-GET https://api.dwolla.com/webhook-subscriptions
-`
+### HTTP request
+`GET https://api.dwolla.com/webhook-subscriptions/{id}`
 
 ### Errors
 | HTTP Status | Message |
 |--------------|-------------|
+| 404 | Webhook subscription not found. |
 
-## Get Subscription by ID
-
-### Request and Response:
+### Request and response:
 
 ```raw
 GET https://api-uat.dwolla.com/webhook-subscriptions/5af4c10a-f6de-4ac8-840d-42cb65454216
@@ -326,25 +323,18 @@ print($retrieved); # => 2015-10-28T16:20:47+00:00
 ?>
 ```
 
-Retrieve a webhook subscription by its ID.
+## Get a subscription's webhooks
+
+This section covers how to view all fired [webhooks](#webhooks) for a webhook subscription.
 
 <ol class="alerts">
     <li class="alert icon-alert-alert">This endpoint <a href="#authentication">requires</a> an OAuth *Application* access token.</li>
 </ol>
 
-### HTTP Request
-`
-GET https://api.dwolla.com/webhook-subscriptions/{id}
-`
+### HTTP request
+`GET https://api.dwolla.com/webhook-subscriptions/{id}/webhooks`
 
-### Errors
-| HTTP Status | Message |
-|--------------|-------------|
-| 404 | Webhook subscription not found. |
-
-## Get a Subscription's Webhooks
-
-### Request and Response
+### Request and response
 
 ```raw
 GET /webhook-subscriptions/10d4133e-b308-4646-b276-40d9d36def1c/webhooks
@@ -423,18 +413,3 @@ $retrieved = $webhookApi->hooksById('https://api-uat.dwolla.com/webhook-subscrip
 print($retrieved->total); # => 5
 ?>
 ```
-
-View all fired [Webhooks](#webhooks) for a Webhook Subscription.
-
-<ol class="alerts">
-    <li class="alert icon-alert-alert">This endpoint <a href="#authentication">requires</a> an OAuth *Application* access token.</li>
-</ol>
-
-### HTTP Request
-`
-GET https://api.dwolla.com/webhook-subscriptions/{id}/webhooks
-`
-
-### Errors
-| HTTP Status | Message |
-|--------------|-------------|

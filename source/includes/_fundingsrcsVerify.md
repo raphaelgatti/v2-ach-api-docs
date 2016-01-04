@@ -1,10 +1,14 @@
-# Funding Sources - Verify
+# Funding sources - verify
+
+There are two ways to verify the ownership of a [Customer's](#customers) bank or credit union account. You can [initiate micro-deposits](#initiate-or-verify-micro-deposits) to an unverified bank account which may take the Customer a few days to verify, or you can send the Customer through the Instant Account Verification (IAV) flow which will verify a bank account within seconds. IAV allows Dwolla to quickly verify a Customer's bank account by having them authenticate using their online banking credentials, which are not stored by Dwolla. Once the bank or credit union account is verified, the Customer will be eligible to transfer money.
+
+IAV is a simple and secure process which requires both server-side and client-side interaction. Your server requests a [single-use token](#generate-an-iav-token) which is used to represent the Customer that is adding or verifying their bank. The client-side implementation includes the dwolla.js library on the page that is used to render the IAV flow.
 
 <ol class="alerts">
-    <li class="alert icon-alert-info">Instant account verification (IAV) is a premium feature available only for white label integrations. <a href="https://www.dwolla.com/contact?b=apidocs">Contact sales</a> for information about pricing.</li>
+    <li class="alert icon-alert-info">Instant account verification (IAV) as it functions with [dwolla.js](https://developers.dwolla.com/resources/dwolla.js.html) is a premium feature available only for white label integrations. <a href="https://www.dwolla.com/contact?b=apidocs">Contact sales</a> for information about pricing.</li>
 </ol>
 
-```noselect
+```noselectjavascript
 <script src="https://cdn.dwolla.com/dwolla.js"></script>
 <script type="text/javascript">
   dwolla.config.dwollaUrl = 'https://uat.dwolla.com';
@@ -14,10 +18,6 @@
 </script>
 ```
 
-There are two ways to verify the ownership of a [Customer's](#customers) bank or credit union account. You can [initiate micro-deposits](#initiate-or-verify-micro-deposits) to an unverified bank account which may take the Customer 1-2 business days to verify, or you can send a Customer through the Instant Account Verification (IAV) flow which will verify a bank account in a matter of seconds. IAV allows Dwolla to quickly verify a Customer's bank account by having them authenticate using their online banking credentials, which are not stored by Dwolla. Once the bank or credit union account is verified, the Customer will be eligible to transfer money.
-
-IAV is a simple and secure process which requires both server-side and client-side interaction. Your server requests a [single-use token](#generate-an-iav-token) which is used to represent the Customer that is adding/verifying their bank. The client-side implementation includes the dwolla.js library on the page that is used to render the IAV flow.
-
 ## Generate an IAV token (Customer)
 
 Get a single-use IAV token for a Customer.
@@ -25,30 +25,6 @@ Get a single-use IAV token for a Customer.
 <ol class="alerts">
     <li class="alert icon-alert-alert">This endpoint <a href="#authentication">requires</a> an OAuth access token with the <code>ManageCustomers</code> <a href="#oauth-scopes">scope</a>.</li>
 </ol>
-
-### Request:
-
-```noselect
-POST /customers/99bfb139-eadd-4cdf-b346-7504f0c16c60/iav-token
-Content-Type: application/vnd.dwolla.v1.hal+json
-Accept: application/vnd.dwolla.v1.hal+json
-Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
-```
-
-### Response:
-
-```noselect
-HTTP/1.1 200 OK
-
-{
-  "_links": {
-    "self": {
-      "href": "https://api-uat.dwolla.com/customers/5b29279d-6359-4c87-a318-e09095532733/iav-token"
-    }
-  },
-  "token": "4adF858jPeQ9RnojMHdqSD2KwsvmhO7Ti7cI5woOiBGCpH5krY"
-}
-```
 
 ### HTTP Request
 `POST https://api.dwolla.com/customers/{id}/iav-token`
@@ -63,6 +39,26 @@ id | no | Customer unique identifier.
 |--------------|-------------|
 | 404 | Customer not found. |
 
+### Request and response
+
+```noselect
+POST /customers/99bfb139-eadd-4cdf-b346-7504f0c16c60/iav-token
+Content-Type: application/vnd.dwolla.v1.hal+json
+Accept: application/vnd.dwolla.v1.hal+json
+Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
+
+HTTP/1.1 200 OK
+
+{
+  "_links": {
+    "self": {
+      "href": "https://api-uat.dwolla.com/customers/5b29279d-6359-4c87-a318-e09095532733/iav-token"
+    }
+  },
+  "token": "4adF858jPeQ9RnojMHdqSD2KwsvmhO7Ti7cI5woOiBGCpH5krY"
+}
+```
+
 ## Instant Account Verification (Customer)
 
 Initiate instant account verification for a Customer.
@@ -72,7 +68,7 @@ Initiate instant account verification for a Customer.
 </ol>
 
 ### dwolla.js
-`dwolla.js` is a Javascript library that gives you the ability to render the IAV flow within a specified container. You call the function `dwolla.iav.start()` and pass the following arguments: the container where you want IAV to render, the Customer's single-use [IAV token](#generate-an-iav-token-customer), and a callback to handle the `response` or `error`. This will initiate an HTTP request asking Dwolla to load IAV in the specified container. Once the Customer successfully completes the IAV flow, Dwolla sends a response that includes either an error or a link to the newly created and verified funding source resource.
+`dwolla.js` is a JavaScript library that gives you the ability to render the IAV flow within a specified container. Call the function `dwolla.iav.start()` and pass the following arguments: the container where you want IAV to render, the Customer's single-use [IAV token](#generate-an-iav-token-customer), and a callback to handle the `response` or `error`. This will initiate an HTTP request asking Dwolla to load IAV in the specified container. Once the Customer successfully completes the IAV flow, Dwolla sends a response that includes either an error or a link to the newly created and verified funding source resource.
 
 #### Usage and configuration
 
