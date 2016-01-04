@@ -76,7 +76,7 @@ This section details how to create a new Customer.  To create an unverified Cust
     <li class="alert icon-alert-alert">This endpoint <a href="#authentication">requires</a> an OAuth access token with the `ManageCustomers` <a href="#oauth-scopes">scope</a>.</li>
 </ol>
 
-### HTTP Request
+### HTTP request
 `POST https://api.dwolla.com/customers`
 
 ### Request parameters - unverified Customer
@@ -120,9 +120,9 @@ website | yes | www.domain.com |
 | 400 | Duplicate customer or validation error.
 | 403 | Not authorized to create customers.
 
-### Unverified Customer:
+### Unverified Customer
 
-```noselect
+```raw
 POST /customers
 Content-Type: application/vnd.dwolla.v1.hal+json
 Accept: application/vnd.dwolla.v1.hal+json
@@ -187,9 +187,9 @@ dwolla.then(function(dwolla) {
 });
 ```
 
-### Verified Customer:
+### Verified Customer
 
-```noselect
+```raw
 POST /customers
 Content-Type: application/vnd.dwolla.v1.hal+json
 Accept: application/vnd.dwolla.v1.hal+json
@@ -342,7 +342,7 @@ address1 | no | First line of the street address of the customer's permanent res
 address2 | yes | Second line of the street address of the customer's permanent residence
 city | no | City of customer's peramanent residence
 state | no | Two letter abbreviation of the state in which the customer resides.  e.g. `NY`
-postalCode | no | Postal code of customer's peramanent residence
+postalCode | no | Postal code of customer's permanent residence
 phone | no | Customer's 10 digit phone number.  No hyphens or other separators.  e.g. `3334447777`
 
 ##### Request parameters - verified Customer with type=business
@@ -387,9 +387,9 @@ If the verified Customer has a status of `retry`, some information may have been
 }
 ```
 
-### Request and Response:
+### Request and response
 
-```noselect
+```raw
 POST /customers/132681FA-1B4D-4181-8FF2-619CA46235B1
 Content-Type: application/vnd.dwolla.v1.hal+json
 Accept: application/vnd.dwolla.v1.hal+json
@@ -510,7 +510,6 @@ dwolla.then(function(dwolla) {
 }
 ```
 
-
 ### Request parameters - retry verified Customer
 Parameter | Optional? | Description
 ----------|----------|-------------
@@ -543,16 +542,16 @@ phone | yes | Customer's 10 digit phone number.  No hyphens or other separators,
 ### HTTP request
 `GET https://api.dwolla.com/customers`
 
-### Request Parameters
+### Request parameters
 
 Parameter | Optional? | Description
 ----------|------------|-------------
 limit | yes | How many results to return
 offset | yes | How many results to skip
 
-### Request and response:
+### Request and response
 
-```noselect
+```raw
 GET /customers
 Accept: application/vnd.dwolla.v1.hal+json
 Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
@@ -640,9 +639,9 @@ id | no | Customer unique identifier.
 | 403 | Not authorized to get a customer by id. |
 | 404 | Customer not found. |
 
-### Request and response:
+### Request and response
 
-```noselect
+```raw
 GET https://api-uat.dwolla.com/customers/07D59716-EF22-4FE6-98E8-F3190233DFB8
 Accept: application/vnd.dwolla.v1.hal+json
 Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
@@ -806,7 +805,7 @@ Parameter | Optional? | Description
 ----------|------------|-------------
 id | no | Business classification unique identifier.
 
-### Request and response:
+### Request and response
 
 ```noselect
 GET https://api-uat.dwolla.com/business-classifications/9ed3a866-7d6f-11e3-a0ce-5404a6144203

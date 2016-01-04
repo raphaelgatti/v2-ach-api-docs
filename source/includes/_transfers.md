@@ -1,5 +1,24 @@
 # Transfers
 
+A transfer represents money being transferred from a `source` to a `destination`. Transfers are available for the `Customer` and `Account` resources.
+
+### Transfer resource 
+
+| Parameter | Description
+|-----------|------------|
+|id | Transfer unique identifier
+|status | Either `processed`, `pending`, `cancelled`, `failed`, or `reclaimed`
+|amount| An amount JSON object. See below 
+|created | ISO-8601 timestamp
+|metadata | A metadata JSON object
+
+### Amount JSON object
+
+| Parameter | Description
+|-----------|------------|
+|value | Amount of money
+|currency | String, `USD`
+
 ```noselect
 {
   "_links": {},
@@ -15,28 +34,45 @@
 }
 ```
 
-A transfer represents money being transferred from a `source` to a `destination`. Transfers are available to the `Customer` and `Account` resources. 
+## Initiate transfer
 
-### Transfer Resource 
+This section covers how to initiate a transfer for either an Account or Customer resource.
 
-| Parameter | Description
-|-----------|------------|
-|id | Transfer unique identifier.
-|status | Either `processed`, `pending`, `cancelled`, `failed`, or `reclaimed`
-|amount| An amount JSON object. See below. 
-|created | ISO-8601 timestamp.
-|metadata | A metadata JSON object.
+<ol class="alerts">
+    <li class="alert icon-alert-alert">This endpoint <a href="#authentication">requires</a> an OAuth access token with the `Send` <a href="#oauth-scopes">scope</a>.</li>
+</ol>
 
-### Amount JSON Object
+### HTTP request
+`POST https://api.dwolla.com/transfers`
 
-| Parameter | Description
-|-----------|------------|
-|value | Amount of money. 
-|currency | String, `USD`
+### Request parameters
 
-## Initiate Transfer
+Parameter | Optional? | Description
+----------|------------|-------------
+_links | no | A _links JSON object describing the desired `source` and `destination` of a transfer. [See below](#source-and-destination-types) for possible values for `source` and `destination`.
+amount | no | An amount JSON object. [See above](#amount-json-object)
+metadata | yes | A metadata JSON object with a maximum of 10 key-value pairs (each key and value must be less than 255 characters).
 
-### Request and Response (Transfer from Account to Customer)
+### Source and destination types
+
+| Source Type | URI | Description
+-------|---------|---------------
+Funding source | `https://api.dwolla.com/funding-sources/{id}` | A bank or balance funding source.
+
+| Destination Type | URI | Description
+-------|---------|---------------
+Account | `https://api.dwolla.com/accounts/{id}` | Destination Account of a transfer.
+Customer | `https://api.dwolla.com/customers/{id}` | Destination Customer of a transfer.
+Email | `mailto:johndoe@email.com` | Email address of existing Dwolla Account or recipient (recipient will create a Dwolla Account to claim funds)
+Funding source | `https://api.dwolla.com/funding-sources/{id}` | Destination of an Account or verified Customer's own bank or balance funding source. **OR** A Customer's bank funding source.
+
+### Errors
+| HTTP Status | Message |
+|--------------|-------------|
+| 400 | Transfer failed. |
+| 403 | OAuth token does not have Send scope. |
+
+### Request and response (transfer from Account to Customer)
 
 ```raw
 POST /transfers
@@ -156,45 +192,32 @@ dwolla.then(function(dwolla) {
 })
 ```
 
-Initiate a transfer for either an account or customer resource. 
+## Get transfers (Customer)
+
+This section details how to retrieve a Customer's list of transfers.
 
 <ol class="alerts">
-    <li class="alert icon-alert-alert">This endpoint <a href="#authentication">requires</a> an OAuth access token with the `Send` <a href="#oauth-scopes">scope</a>.</li>
+    <li class="alert icon-alert-alert">This endpoint <a href="#authentication">requires</a> an OAuth access token with the `ManageCustomers` <a href="#oauth-scopes">scope</a>.</li>
 </ol>
 
-### HTTP Request
-`POST https://api.dwolla.com/transfers`
+### HTTP request
+`GET https://api.dwolla.com/customers/{id}/transfers`
 
-### Request Parameters
+### Request parameters
 
 Parameter | Optional? | Description
 ----------|------------|-------------
-_links | no | A _links JSON object describing the desired `source` and `destination` of a transfer. [See below](#source-and-destination-types) for possible values for `source` and `destination`.
-amount | no | An amount JSON object. [See above](#amount-json-object)
-metadata | yes | A metadata JSON object with a maximum of 10 key-value pairs (each key and value must be less than 255 characters).
-
-### Source and Destination Types
-
-| Source Type | URI | Description
--------|---------|---------------
-Funding source | `https://api.dwolla.com/funding-sources/{id}` | A bank or balance funding source.
-
-| Destination Type | URI | Description
--------|---------|---------------
-Account | `https://api.dwolla.com/accounts/{id}` | Destination Account of a transfer.
-Customer | `https://api.dwolla.com/customers/{id}` | Destination Customer of a transfer.
-Email | `mailto:johndoe@email.com` | Email address of existing Dwolla Account or recipient (recipient will create a Dwolla account to claim funds)
-Funding source | `https://api.dwolla.com/funding-sources/{id}` | Destination of an Account or verified Customer's own bank or balance funding source. **OR** A Customer's bank funding source.
+id | no | Customer unique identifier to get transfers for.
+limit | yes | How many results to return.
+offset | yes | How many results to skip.
 
 ### Errors
 | HTTP Status | Message |
 |--------------|-------------|
-| 400 | Transfer failed. |
-| 403 | OAuth token does not have Send scope. |
+| 403 | Not authorized to list transfers. |
+| 404 | Customer not found. |
 
-## Get Transfers (Customer) 
-
-### Request and Response
+### Request and response
 
 ```raw
 GET http://api.dwolla.com/customers/01B47CB2-52AC-42A7-926C-6F1F50B1F271/transfers
@@ -302,32 +325,29 @@ dwolla.then(function(dwolla) {
 })
 ```
 
-Retrieve a Customer's list of transfers.
+## Get transfers (Account)
+
+This section covers how to retrieve an Account's list of transfers.
 
 <ol class="alerts">
-    <li class="alert icon-alert-alert">This endpoint <a href="#authentication">requires</a> an OAuth access token with the `ManageCustomers` <a href="#oauth-scopes">scope</a>.</li>
+    <li class="alert icon-alert-alert">This endpoint <a href="#authentication">requires</a> an OAuth access token with the `Transactions` <a href="#oauth-scopes">scope</a>.</li>
 </ol>
 
-### HTTP Request
-`GET https://api.dwolla.com/customers/{id}/transfers`
+### HTTP request
+`GET https://api.dwolla.com/accounts/{id}/transfers`
 
-### Request Parameters
+### Request parameters
 
 Parameter | Optional? | Description
 ----------|------------|-------------
-id | no | Customer unique identifier to get transfers for.
-limit | yes | How many results to return.
-offset | yes | How many results to skip.
+id | no | Account unique identifier to get transfers for.
 
 ### Errors
 | HTTP Status | Message |
 |--------------|-------------|
-| 403 | Not authorized to list transfers. |
-| 404 | Customer not found. |
+| 404 | Account not found. |
 
-## Get Transfers (Account)
-
-### Request and Response
+### Request and response
 
 ```raw
 GET https://api.dwolla.com/accounts/a84222d5-31d2-4290-9a96-089813ef96b3/transfers
@@ -427,29 +447,29 @@ dwolla.then(function(dwolla) {
 })
 ```
 
-Retrieve an Account's list of transfers.
+## Get transfers by id
+
+This section covers how to retrieve a transfer belonging to an Account or Customer by its id.
 
 <ol class="alerts">
     <li class="alert icon-alert-alert">This endpoint <a href="#authentication">requires</a> an OAuth access token with the `Transactions` <a href="#oauth-scopes">scope</a>.</li>
 </ol>
 
-### HTTP Request
-`GET https://api.dwolla.com/accounts/{id}/transfers`
+### HTTP request
+`GET https://api.dwolla.com/transfers/{id}`
 
-### Request Parameters
+### Request parameters
 
 Parameter | Optional? | Description
 ----------|------------|-------------
-id | no | Account unique identifier to get transfers for.
+id | no | id of Account or Customer to get transfers for.
 
 ### Errors
 | HTTP Status | Message |
 |--------------|-------------|
-| 404 | Account not found. |
+| 404 | Transfer not found. |
 
-## Get Transfers by ID 
-
-### Request and Response
+### Request and response
 
 ```raw
 GET https://api.dwolla.com/transfers/4C8AD8B8-3D69-E511-80DB-0AA34A9B2388
@@ -515,23 +535,3 @@ dwolla.then(function(dwolla) {
     })
 })
 ```
-
-Retrieve a Transfer belonging to an Account or Customer by its ID.
-
-<ol class="alerts">
-    <li class="alert icon-alert-alert">This endpoint <a href="#authentication">requires</a> an OAuth access token with the `Transactions` <a href="#oauth-scopes">scope</a>.</li>
-</ol>
-
-### HTTP Request
-`GET https://api.dwolla.com/transfers/{id}`
-
-### Request Parameters
-
-Parameter | Optional? | Description
-----------|------------|-------------
-id | no | Account or Customer unique identifier to get transfers for.
-
-### Errors
-| HTTP Status | Message |
-|--------------|-------------|
-| 404 | Transfer not found. |

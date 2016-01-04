@@ -1,14 +1,18 @@
 # Introduction
 
-Welcome to the Dwolla API V2 documentation, currently in active development. Gradually, the functionality of API V1 will be implemented in API V2.  The two versions will operate in parallel for the foreseeable future.
+Welcome to the Dwolla API V2 documentation, with ongoing updates as functionality is released to the API. We plan to implement API V1 functionality in API V2, but in the meantime, the two versions will operate in parallel.
 
-The initial focus of API Version 2 centers around a premium feature: [White Label](https://www.dwolla.com/white-label), and will not provide the same functionality as Version 1 does.  Over time, we will add the same functionality currently available in V1 to V2.
+The initial focus of API Version 2 centers around a premium product: [white label](https://www.dwolla.com/white-label), and provides different functionality from API Version 1. Over time, we are adding the same functionality currently available in V1 to V2.
 
 Official SDKs for Java, Node.JS, PHP, Ruby, and Python are being actively developed.
 
-It is important to note: White Label is a premium feature that cannot be activated in our production environment until you’ve received our approval to use it and have entered into an agreement with us. Feel free to [contact a sales representative](https://www.dwolla.com/contact?b=apidocs) to find the package that best suits your needs.
+Please note: white label is a premium product that cannot be activated in our production environment until you’ve received our approval to use it and have entered into an agreement with us. Please [contact a sales representative](https://www.dwolla.com/contact?b=apidocs) to find a package that best meets your needs.
 
-## Making Requests
+## Making requests
+
+All requests should supply the `Accept: application/vnd.dwolla.v1.hal+json` header. `POST` requests must have a JSON encoded body and the `Content-Type: application/vnd.dwolla.v1.hal+json` header.
+
+Requests must be made over HTTPS.  Any non-secure requests are met with a redirect (HTTP 302) to the HTTPS equivalent URI.
 
 ```noselect
 POST https://api.dwolla.com/customers
@@ -22,12 +26,8 @@ Authorization: Bearer myOAuthAccessToken123
 
 ... or ...
 
-GET https://www.dwolla.com/oauth/rest/transactions?client_id=XYZ&client_secret=JJJ&limit=10
+GET https://api.dwolla.com/accounts/a84222d5-31d2-4290-9a96-089813ef96b3/transfers
 ```
-
-All requests should supply the `Accept: application/vnd.dwolla.v1.hal+json` header. `POST` requests must have a JSON encoded body and the `Content-Type: application/vnd.dwolla.v1.hal+json` header.
-
-Requests must be made over HTTPS.  Any non-secure requests are met with a redirect (HTTP 302) to the HTTPS equivalent URI.
 
 ### Authorization
 
@@ -49,7 +49,7 @@ Requests that require an client_id and client_secret are passed in the JSON requ
 
 ## Errors
 
-Error responses use HTTP status codes to indicate the type of error. The JSON response body will contain a top-level error code and a message which is a detailed description of the error. Errors will contain their own media type and will closely align with [this spec](https://github.com/blongden/vnd.error).
+Error responses use HTTP status codes to indicate the type of error. The JSON response body will contain a top-level error code and a message with a detailed description of the error. Errors will contain their own media type and will closely align with [this spec](https://github.com/blongden/vnd.error).
 
 ### Example HTTP 401 error
 
@@ -61,7 +61,7 @@ Error responses use HTTP status codes to indicate the type of error. The JSON re
 }
 ```
 
-### Common Errors
+### Common errors
 The following errors are common across all API endpoints.
 
 | HTTP Status | Error Code | Description
@@ -82,16 +82,16 @@ The following errors are common across all API endpoints.
 | 500 | ServerError | A server error occurred. Error ID: 63e92a2a-fb48-4a23-ab4c-24a6764f1593. |
 | 500 | RequestTimeout | The request timed out. |
 
-### Validation Errors
-Responses with a top-level error code of `ValidationError` are returned when you can correct a specific problem with your request. Included within the response will be a message/description of: "Validation error(s) present. See embedded errors list for more details." At least one, but possibly more, detailed errors will be present in the list of embedded errors. Multiple errors are represented in a collection of embedded error objects.
+### Validation errors
+Responses with a top-level error code of `ValidationError` are returned when it’s possible to correct a specific problem with your request. The response will include a message: "Validation error(s) present. See embedded errors list for more details." At least one, but possibly more, detailed error will be present in the list of embedded errors. Multiple errors are represented in a collection of embedded error objects.
 
-#### _embedded JSON Object
+#### _embedded JSON object
 
 | Parameter | Description
 |-----------|------------|
 |errors | An array of JSON object(s) that contain a `code`, `message`, and `path`.
 
-The `path` field is a json pointer to the specific field in the request that has a problem. The `message` is a human readable description of the problem. The `code` fields is a detailed error code that can have one of the following values:
+The `path` field is a JSON pointer to the specific field in the request that has a problem. The `message` is a human readable description of the problem. The `code` is a detailed error code that can have one of the following values:
 
 - Required
 - Invalid - not a valid value for this field
@@ -104,9 +104,9 @@ The `path` field is a json pointer to the specific field in the request that has
 - RequiresFundingSource - used on destination field of transfer endpoint to indicate customer needs a bank
 - FileTooLarge - used on document upload
 
-#### Example HTTP 400 ValidationError
+#### Example HTTP 400 validation error
 
-```json
+```noselect
 {
     "code": "ValidationError",
     "description": "Validation error(s) present. See embedded errors list for more details.",
@@ -125,6 +125,12 @@ The `path` field is a json pointer to the specific field in the request that has
 
 ## Links
 
+Relationships and available actions for a resource are represented with links.  All resources have a `_links` attribute.  At a minimum, all resources will have a `self` link which indicates the URL of the resource itself.
+
+Some links, such as `funding-sources`, give you a URL which you can follow to access related resources.  For example, the customer resource has a `funding-sources` link which, when followed, will list the customer's available funding sources.
+
+Responses which contain a collection of resources have pagination links, `first`, `next`, `last`, and `prev`.
+
 ```noselect
 {
   "_links": {
@@ -142,19 +148,11 @@ The `path` field is a json pointer to the specific field in the request that has
     }
   },
   "id": "132681FA-1B4D-4181-8FF2-619CA46235B1",
-  "firstName": "Gordon",
-  "lastName": "Zheng",
-  "email": "gordon+15@dwolla.com",
+  "firstName": "Jane",
+  "lastName": "Jones",
+  "email": "jjones@nomail.com",
   "type": "personal",
   "status": "retry",
   "created": "2015-09-29T19:47:28.920Z"
 }
 ```
-
-Relationships and available actions for a resource are represented with links.  All resources have a `_links` attribute.  At a minimum, all resources will have a `self` link which indicates the URL of the resource itself.
-
-Some links, such as `funding-sources`, give you a URL which you can follow to access related resources.  For example, the customer resource has a `funding-sources` link which, when followed, will list the customer's available funding sources.
-
-Responses which contain a collection of resources have pagination links, `first`, `next`, `last`, and `prev`.
-
-Other links represent actions which can be done with the resource.  For instance, customers which are eligible to send funds have a `send` link which directs you to the [transfer](#initiate-transfer) endpoint.

@@ -1,27 +1,27 @@
-# Funding Sources
+# Funding sources
 
-Add and retrieve ACH bank accounts via Funding Sources, which are available to the `Customers` and `Accounts` resources.  Customers can have a maximum of 6 funding sources.
+Add and retrieve ACH bank account information via funding sources, which are available to the `Customers` and `Accounts` resources.  Customers can have a maximum of 6 funding sources.
 
-### Funding Source Resource
+### Funding source resource
 
 Parameter | Description
 ----------|------------
-id | The funding source unique identifier.
+id | The funding source unique identifier
 status | Is the funding source verified?
-type | Type of funding source.
-name | Arbitrary nickname for the funding source.
-created | ISO-8601 timestamp.
+type | Type of funding source
+name | Customer’s arbitrary nickname for the funding source
+created | ISO-8601 timestamp
 
 ```noselect
 {
-    "routingNumber": "87654321",
-    "accountNumber": "12345678",
+    "routingNumber": "222222226",
+    "accountNumber": "123456789",
     "type": "checking",
     "name": "My Bank"
 }
 ```
 
-## New Funding Source (Customer)
+## New funding source (Customer)
 
 Create a new Funding Source for a Customer.  Customers can have a maximum of 6 funding sources.
 
@@ -29,10 +29,10 @@ Create a new Funding Source for a Customer.  Customers can have a maximum of 6 f
     <li class="alert icon-alert-alert">This endpoint <a href="#authentication">requires</a> an OAuth access token with the `ManageCustomers` <a href="#oauth-scopes">scope</a>.</li>
 </ol>
 
-### HTTP Request
+### HTTP request
 `POST https://api.dwolla.com/customers/{id}/funding-sources`
 
-### Request Parameters
+### Request parameters
 Parameter | Optional? | Description
 ----------|------------|------------
 routingNumber | no | The bank account's routing number.
@@ -46,7 +46,7 @@ name | no | Arbitrary nickname for the funding source.
 | 400 | Duplicate funding source or validation error.
 | 403 | Not authorized to create funding source.
 
-### Request and Response:
+### Request and response
 
 ```raw
 POST /customers/99bfb139-eadd-4cdf-b346-7504f0c16c60/funding-sources
@@ -57,7 +57,7 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
     "routingNumber": "222222226",
     "accountNumber": "123456789",
     "type": "checking",
-    "name": "John Doe - Checking"
+    "name": "Vera Brittain’s Checking"
 }
 
 HTTP/1.1 201 Created
@@ -71,7 +71,7 @@ $new_fs = $fundingApi->createCustomerFundingSource(
        ["routingNumber": "222222226",
         "accountNumber": "123456789",
         "type": "checking",
-        "name": "John Doe - Checking"], "https://api-uat.dwolla.com/customers/AB443D36-3757-44C1-A1B4-29727FB3111C");
+        "name": "Vera Brittain’s Checking"], "https://api-uat.dwolla.com/customers/AB443D36-3757-44C1-A1B4-29727FB3111C");
 
 print($new_fs); # => https://api-uat.dwolla.com/funding-sources/375c6781-2a17-476c-84f7-db7d2f6ffb31
 ?>
@@ -82,7 +82,7 @@ new_fs = DwollaSwagger::FundingsourcesApi.create_customer_funding_source \
                                                     :routingNumber => '222222226',
                                                     :accountNumber => '123456789',
                                                     :type => 'checking',
-                                                    :name => 'John Doe - Checking'
+                                                    :name => 'Vera Brittain’s Checking'
                                                  }})
 
 p new_fs # => https://api-uat.dwolla.com/funding-sources/375c6781-2a17-476c-84f7-db7d2f6ffb31
@@ -93,7 +93,7 @@ funding_api = dwollaswagger.FundingsourcesApi(client)
 new_fs = funding_api.create_customer_funding_source('https://api-uat.dwolla.com/customers/AB443D36-3757-44C1-A1B4-29727FB3111C', body = {"routingNumber": "222222226",
         "accountNumber": "123456789",
         "type": "checking",
-        "name": "John Doe - Checking"})
+        "name": "Vera Brittain’s Checking"})
 
 p new_fs # => https://api-uat.dwolla.com/funding-sources/375c6781-2a17-476c-84f7-db7d2f6ffb31
 ```
@@ -103,31 +103,29 @@ dwolla.then(function(dwolla) {
       "routingNumber": "222222226",
       "accountNumber": "123456789",
       "type": "checking",
-      "name": "John Doe - Checking"
+      "name": "Vera Brittain’s Checking"
     }).then(function(data) {
        console.log(data); // https://api-uat.dwolla.com/funding-sources/375c6781-2a17-476c-84f7-db7d2f6ffb31
     });
 });
 ```
 
-## List Funding Sources (Customer)
+## List funding sources (Customer)
 
-Retrieve a list of Funding Sources that belong to a Customer.
+Retrieve a list of funding sources that belong to a Customer.
 
 <ol class="alerts">
     <li class="alert icon-alert-alert">This endpoint <a href="#authentication">requires</a> an OAuth access token with the `ManageCustomers` <a href="#oauth-scopes">scope</a>.</li>
 </ol>
 
-### HTTP Request
-`
-GET https://api.dwolla.com/customers/{id}/funding-sources
-`
+### HTTP request
+`GET https://api.dwolla.com/customers/{id}/funding-sources`
 
-### Request Parameters
+### Request parameters
 
 Parameter | Optional? | Description
 ----------|------------|-------------
-id | no | Customer unique identifier.
+id | no | Customer's unique identifier.
 
 ### Errors
 | HTTP Status | Message |
@@ -135,7 +133,7 @@ id | no | Customer unique identifier.
 | 403 | Not authorized to list funding sources.
 | 404 | Customer not found. |
 
-### Request and Response
+### Request and response
 
 ```raw
 GET https://api.dwolla.com/customers/5b29279d-6359-4c87-a318-e09095532733/funding-sources
@@ -185,7 +183,7 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
         "id": "98c209d3-02d6-4bee-bc0f-61e18acf0e33",
         "status": "verified",
         "type": "bank",
-        "name": "John Doe - Checking account1",
+        "name": "Vera Brittain’s Checking",
         "created": "2015-10-02T22:03:45.537Z"
       }
     ]
@@ -196,7 +194,7 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 customer = 'https://api.dwolla.com/customers/5b29279d-6359-4c87-a318-e09095532733'
 
 acct_fs = DwollaSwagger::FundingsourcesApi.get_customer_transfers(customer)
-p acct_fs[0].name # => "John Doe - Checking account1"
+p acct_fs[0].name # => "Vera Brittain’s Checking"
 ```
 ```php
 <?php
@@ -205,7 +203,7 @@ $customer = 'https://api.dwolla.com/customers/5b29279d-6359-4c87-a318-e090955327
 $fsApi = DwollaSwagger\FundingsourcesApi($apiClient);
 
 $acctFs = $fsApi->getcustomerTransfers($customer);
-print($acctFs[0]->name); # => "John Doe - Checking account1"
+print($acctFs[0]->name); # => "Vera Brittain’s Checking"
 ?>
 ```
 ```python
@@ -214,29 +212,29 @@ customer = 'https://api.dwolla.com/customers/5b29279d-6359-4c87-a318-e0909553273
 fs_api = dwollaswagger.FundingsourcesApi(client)
 acct_fs = fs_api.get_customer_transfers(customer)
 
-print(acct_fs[0].name) # => John Doe - Checking account1
+print(acct_fs[0].name) # => Vera Brittain’s Checking
 ```
 ```javascript
 dwolla.then(function(dwolla) {
     dwolla['funding-sources'].getCustomerFundingSources()
     .then(function(data) {
-       console.log(data.obj._embedded[0].name); // John Doe - Checking account1
+       console.log(data.obj._embedded[0].name); // Vera Brittain’s Checking
     });
 });
 ```
 
-## New Funding Source (Account)
+## New funding source (Account)
 
-Create a new Funding Source for an Account.
+Create a new funding source for an Account.
 
 <ol class="alerts">
     <li class="alert icon-alert-alert">This endpoint <a href="#authentication">requires</a> an OAuth access token with the `Funding` <a href="#oauth-scopes">scope</a>.</li>
 </ol>
 
-### HTTP Request
+### HTTP request
 `POST https://api.dwolla.com/funding-sources`
 
-### Request Parameters
+### Request parameters
 Parameter | Description
 ----------|------------
 accountNumber | The bank account number.
@@ -251,7 +249,7 @@ name | Arbitrary nickname for the funding source.
 | 403 | Not authorized to create funding source.
 
 
-### Request and Response
+### Request and response
 
 ```noselect
 POST /funding-sources
@@ -271,31 +269,29 @@ HTTP/1.1 201 Created
 Location: https://api-uat.dwolla.com/funding-sources/04173e17-6398-4d36-a167-9d98c4b1f1c3
 ```
 
-## List Funding Sources (Account)
+## List funding sources (Account)
 
-Retrieve a list of Funding Sources that belong to an Account.
+Retrieve a list of funding sources that belong to an account.
 
 <ol class="alerts">
     <li class="alert icon-alert-alert">This endpoint <a href="#authentication">requires</a> an OAuth access token with the `Funding` <a href="#oauth-scopes">scope</a>.</li>
 </ol>
 
-### HTTP Request
-`
-GET https://api.dwolla.com/accounts/{id}/funding-sources
-`
+### HTTP request
+`GET https://api.dwolla.com/accounts/{id}/funding-sources`
 
-### Request Parameters
+### Request parameters
 
 Parameter | Optional? | Description
 ----------|------------|-------------
-id | no | Account unique identifier to get funding sources for.
+id | no | Account’s unique identifier to get funding sources for.
 
 ### Errors
 | HTTP Status | Message |
 |--------------|-------------|
 | 403 | Not authorized to list funding sources.
 
-### Request and Response:
+### Request and response
 
 ```raw
 GET https://api-uat.dwolla.com/accounts/4BB512E4-AD4D-4F7E-BFD0-A232007F21A1/funding-sources
@@ -342,7 +338,7 @@ Authorization: Bearer 0Sn0W6kzNicvoWhDbQcVSKLRUpGjIdlPSEYyrHqrDDoRnQwE7Q
         "id": "5cfcdc41-10f6-4a45-b11d-7ac89893d985",
         "status": "verified",
         "type": "bank",
-        "name": "Checking account",
+        "name": "Test checking account",
         "created": "2014-09-04T23:19:19.543Z"
       }
     ]
@@ -377,31 +373,29 @@ print($fundingSources->_embedded[0].name) # => "Balance"
 ?>
 ```
 
-## Get a Funding Source by ID
+## Get a funding source by id
 
-Retrieve a Funding Source by ID.
+This section covers how to retrieve a funding source by id.
 
 <ol class="alerts">
     <li class="alert icon-alert-alert">This endpoint <a href="#authentication">requires</a> an OAuth access token with the `Funding` <a href="#oauth-scopes">scope</a>.</li>
 </ol>
 
-### HTTP Request
-`
-GET https://api.dwolla.com/funding-sources/{id}
-`
+### HTTP request
+`GET https://api.dwolla.com/funding-sources/{id}`
 
-### Request Parameters
+### Request parameters
 
 Parameter | Optional? | Description
 ----------|------------|-------------
-id | no | Funding source ID to get.
+id | no | id of funding source to retrieve.
 
 ### Errors
 | HTTP Status | Message |
 |--------------|-------------|
 | 404 | Funding source not found. |
 
-### Request and Response:
+### Request and response
 
 ```raw
 GET https://api.dwolla.com/funding-sources/692486f8-29f6-4516-a6a5-c69fd2ce854c
@@ -462,20 +456,18 @@ dwolla.then(function(dwolla) {
 });
 ```
 
-## Initiate or Verify Micro-deposits
+## Initiate or verify micro-deposits
 
-Initiate or verify micro-deposits for bank account verification. Reference the [funding source verification](https://developers.dwolla.com/resources/funding-source-verification.html) resource article for more information on the micro-deposit method of bank account verification.
+This section covers how to initiate and verify micro-deposits for bank verification. Reference the [funding source verification](https://developers.dwolla.com/resources/funding-source-verification.html) resource article for more information on the micro-deposit method of bank account verification.
 
 <ol class="alerts">
     <li class="alert icon-alert-alert">This endpoint <a href="#authentication">requires</a> an OAuth access token with the `Funding` <a href="#oauth-scopes">scope</a>.</li>
 </ol>
 
-### HTTP Request
-`
-POST https://api.dwolla.com/funding-sources/{id}/micro-deposits
-`
+### HTTP request
+`POST https://api.dwolla.com/funding-sources/{id}/micro-deposits`
 
-### Request Parameters
+### Request parameters
 
 Parameter | Optional? | Description
 ----------|------------|-------------
@@ -491,7 +483,7 @@ amount2 | no | An amount JSON object of first micro-deposit. Contains `value` an
 | 400 | Funding source not found. |
 | 404 | Funding source not found. |
 
-> Request and Response (Initiate)
+#### Request and response (Initiate)
 
 ```raw
 POST /funding-sources/e52006c3-7560-4ff1-99d5-b0f3a6f4f909/micro-deposits
@@ -524,7 +516,7 @@ $fsApi->micro_deposits($new_fs);
 ?>
 ```
 
-> Request and Response (Verify):
+#### Request and response (Verify)
 
 ```raw
 POST /funding-sources/e52006c3-7560-4ff1-99d5-b0f3a6f4f909/micro-deposits 
@@ -546,7 +538,7 @@ Accept: application/vnd.dwolla.v1.hal+json
 HTTP 200 OK
 ```
 ```ruby
-DwollaSwagger::FundingsourcesApi.verify_micro_deposits_exist(new_fs, {
+DwollaSwagger::FundingsourcesApi.micro_deposits(new_fs, {
     "amount1" => {
            "value" => "0.03",
         "currency" => "USD"
@@ -559,7 +551,7 @@ DwollaSwagger::FundingsourcesApi.verify_micro_deposits_exist(new_fs, {
 ```
 ```javascript
 dwolla.then(function(dwolla) {
-    dwolla['funding-sources'].verifyMicroDepositsExist({id: 'e52006c3-7560-4ff1-99d5-b0f3a6f4f909', body: {
+    dwolla['funding-sources'].microDeposits({id: 'e52006c3-7560-4ff1-99d5-b0f3a6f4f909', body: {
         "amount1": {
             "value": "0.03",
             "currency": "USD"
@@ -577,7 +569,7 @@ dwolla.then(function(dwolla) {
 ```python
 fs_api = dwollaswagger.FundingsourcesApi(client)
 
-fs_api.verify_micro_deposits_exist(new_fs, {
+fs_api.micro_deposits(new_fs, {
     "amount1": {
         "value": "0.03",
         "currency": "USD"
@@ -592,7 +584,7 @@ fs_api.verify_micro_deposits_exist(new_fs, {
 <?php
 $fsApi = new DwollaSwagger\FundingsourcesApi($apiClient);
 
-$fsApi->verify_micro_deposits_exist($new_fs, array (
+$fsApi->micro_deposits($new_fs, array (
   'amount1' => 
   array (
     'value' => '0.03',
@@ -607,39 +599,35 @@ $fsApi->verify_micro_deposits_exist($new_fs, array (
 ?>
 ```
 
-## Verify Pending Micro-deposits Exist
+## Verify pending micro-deposits exist
 
-Check if pending verification for micro-deposits exists.
+This section shows how to check if pending verification for micro-deposits exists.
 
 <ol class="alerts">
     <li class="alert icon-alert-alert">This endpoint <a href="#authentication">requires</a> an OAuth access token with the `Funding` <a href="#oauth-scopes">scope</a>.</li>
 </ol>
 
-### HTTP Request
+### HTTP request
 `GET https://api.dwolla.com/funding-sources/{id}/micro-deposits`
 
-### Request Parameters
+### Request parameters
 
 Parameter | Optional? | Description
 ----------|------------|-------------
-id | no | Funding source ID to check status of validation deposits.
+id | no | id of funding source to check status of validation deposits.
 
 ### Errors
 | HTTP Status | Message |
 |--------------|-------------|
 | 200 | Pending micro-deposits exist. |
 
-> Request:
+### Request and response
 
-```shell
+```noselect
 GET /funding-sources/ab9cd5de-9435-47af-96fb-8d2fa5db51e8
 Accept: application/vnd.dwolla.v1.hal+json
 Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
-```
 
-> Response:
-
-```json
 {
   "_links": {
     "self": {
@@ -652,31 +640,29 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 }
 ```
 
-## Remove a Funding Source
+## Remove a funding source
 
-Remove a Funding Source by ID.
+Remove a funding source by id.
 
 <ol class="alerts">
     <li class="alert icon-alert-alert">This endpoint <a href="#authentication">requires</a> an OAuth access token with the `Funding` <a href="#oauth-scopes">scope</a>.</li>
 </ol>
 
-### HTTP Request
-`
-DELETE https://api.dwolla.com/funding-sources/{id}
-`
+### HTTP request
+`DELETE https://api.dwolla.com/funding-sources/{id}`
 
-### Request Parameters
+### Request parameters
 
 Parameter | Optional? | Description
 ----------|------------|-------------
-id | no | Funding source ID to delete.
+id | no | id of funding source to delete.
 
 ### Errors
 | HTTP Status | Message |
 |--------------|-------------|
 | 404 | Funding source not found. |
 
-### Request and Response
+### Request and response
 
 ```raw
 DELETE /funding-sources/6c8ac833-444a-4eff-979c-c56cef6be26b
