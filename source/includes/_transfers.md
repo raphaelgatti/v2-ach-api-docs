@@ -463,7 +463,7 @@ This section covers how to retrieve a transfer belonging to an Account or Custom
 
 Parameter | Optional? | Description
 ----------|------------|-------------
-id | no | id of transfer to retrieve.
+id | no | The id of the transfer to be retrieved.
 
 ### Errors
 | HTTP Status | Message |

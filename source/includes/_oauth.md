@@ -95,7 +95,9 @@ https://uat.dwolla.com/oauth/v2/authenticate?client_id=PO%2BSzGAsZCE4BTG7Cw4OAL4
 Once the user returns to your application via the `redirect_uri` you specified, there will be a `code` querystring parameter appended to that URL.  Exchange the authorization `code` for an `access_token` and `refresh_token` pair.
 
 ### HTTP request
-`POST https://www.dwolla.com/oauth/v2/token`
+**Production:** `POST https://www.dwolla.com/oauth/v2/token`
+
+**UAT:** `POST https://uat.dwolla.com/oauth/v2/token`
 
 Parameter | Description
 ----------|------------
@@ -154,7 +156,10 @@ Use a valid `refresh_token` to generate a new `access_token` and `refresh_token`
 **NOTE:** The `refresh_token` you receive will *change* every time you exchange either an `authorization_code` or `refresh_token` for a new token pair. However, If you exchange your last valid `refresh_token` within a short timespan of being issued a new token pair, Dwolla will return most recently issued token pair for a short duration of time.
 
 ### HTTP request
-`POST https://www.dwolla.com/oauth/v2/token`
+
+**Production:** `POST https://www.dwolla.com/oauth/v2/token`
+
+**UAT:** `POST https://uat.dwolla.com/oauth/v2/token`
 
 Parameter | Description
 ----------|------------
@@ -223,7 +228,9 @@ Some endpoints require a *client access token*, which is different from a user a
 
 ### HTTP request
 
-`POST https://www.dwolla.com/oauth/v2/token`
+**Production:** `POST https://www.dwolla.com/oauth/v2/token`
+
+**UAT:** `POST https://uat.dwolla.com/oauth/v2/token`
 
 ### Request parameters
 
