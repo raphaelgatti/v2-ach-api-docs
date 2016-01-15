@@ -3685,6 +3685,7 @@ $('#start').click(function() {
           </nav>
         </div><div class="code-snippet__cnt highlight"><pre><code class="language-raw" data-lang="raw">POST /transfers
 Accept: application/vnd.dwolla.v1.hal+json
+Content-Type: application/vnd.dwolla.v1.hal+json
 Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 {
     "_links": {
@@ -4176,7 +4177,7 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 <tr>
 <td>id</td>
 <td>no</td>
-<td>id of Account or Customer to get transfers for.</td>
+<td>id of transfer to retrieve.</td>
 </tr>
 </tbody></table>
 <h3 id='errors'>Errors</h3>
