@@ -471,7 +471,9 @@ https://uat.dwolla.com/oauth/v2/authenticate?client_id={client_id}&amp;response_
 </code></pre></div></div><h2 id='finish-user-authorization'>Finish user authorization</h2>
 <p>Once the user returns to your application via the <code class="prettyprint">redirect_uri</code> you specified, there will be a <code class="prettyprint">code</code> querystring parameter appended to that URL.  Exchange the authorization <code class="prettyprint">code</code> for an <code class="prettyprint">access_token</code> and <code class="prettyprint">refresh_token</code> pair.</p>
 <h3 id='http-request'>HTTP request</h3>
-<p><code class="prettyprint">POST https://www.dwolla.com/oauth/v2/token</code></p>
+<p><strong>Production:</strong> <code class="prettyprint">POST https://www.dwolla.com/oauth/v2/token</code></p>
+
+<p><strong>UAT:</strong> <code class="prettyprint">POST https://uat.dwolla.com/oauth/v2/token</code></p>
 
 <table><thead>
 <tr>
@@ -566,7 +568,9 @@ https://uat.dwolla.com/oauth/v2/authenticate?client_id={client_id}&amp;response_
 
 <p><strong>NOTE:</strong> The <code class="prettyprint">refresh_token</code> you receive will <em>change</em> every time you exchange either an <code class="prettyprint">authorization_code</code> or <code class="prettyprint">refresh_token</code> for a new token pair. However, If you exchange your last valid <code class="prettyprint">refresh_token</code> within a short timespan of being issued a new token pair, Dwolla will return most recently issued token pair for a short duration of time.</p>
 <h3 id='http-request'>HTTP request</h3>
-<p><code class="prettyprint">POST https://www.dwolla.com/oauth/v2/token</code></p>
+<p><strong>Production:</strong> <code class="prettyprint">POST https://www.dwolla.com/oauth/v2/token</code></p>
+
+<p><strong>UAT:</strong> <code class="prettyprint">POST https://uat.dwolla.com/oauth/v2/token</code></p>
 
 <table><thead>
 <tr>
@@ -662,7 +666,9 @@ https://uat.dwolla.com/oauth/v2/authenticate?client_id={client_id}&amp;response_
 </span></code></pre></div></div><h2 id='client-access-token'>Client access token</h2>
 <p>Some endpoints require a <em>client access token</em>, which is different from a user access token.  Client access tokens don&rsquo;t require any particular user&rsquo;s authorization, since they grant your application access to resources which belong to the application itself (i.e. events, webhooks, and webhook-subscriptions), rather than an account. Provide your client credentials to receive a client access token.</p>
 <h3 id='http-request'>HTTP request</h3>
-<p><code class="prettyprint">POST https://www.dwolla.com/oauth/v2/token</code></p>
+<p><strong>Production:</strong> <code class="prettyprint">POST https://www.dwolla.com/oauth/v2/token</code></p>
+
+<p><strong>UAT:</strong> <code class="prettyprint">POST https://uat.dwolla.com/oauth/v2/token</code></p>
 <h3 id='request-parameters'>Request parameters</h3>
 <table><thead>
 <tr>
@@ -4177,7 +4183,7 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 <tr>
 <td>id</td>
 <td>no</td>
-<td>id of transfer to retrieve.</td>
+<td>The id of the transfer to be retrieved.</td>
 </tr>
 </tbody></table>
 <h3 id='errors'>Errors</h3>
