@@ -77,6 +77,7 @@ Funding source | `https://api.dwolla.com/funding-sources/{id}` | Destination of 
 ```raw
 POST /transfers
 Accept: application/vnd.dwolla.v1.hal+json
+Content-Type: application/vnd.dwolla.v1.hal+json
 Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 {
     "_links": {
@@ -462,7 +463,7 @@ This section covers how to retrieve a transfer belonging to an Account or Custom
 
 Parameter | Optional? | Description
 ----------|------------|-------------
-id | no | id of Account or Customer to get transfers for.
+id | no | id of transfer to retrieve.
 
 ### Errors
 | HTTP Status | Message |
