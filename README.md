@@ -1,3 +1,26 @@
+About Dwolla
+========
+
+Dwolla is a software platform that makes it easy to move money between banks. When using Dwolla APIs your software platform can move money between any 2 bank accounts, or network members, with no transaction fees.
+
+Our software platform is compatible with all banks in the United States. The developer documents are designed to support our development partners who are building on top of Dwolla’s branded platform (v1) or our white labeled infrastructure (v2).
+
+The Dwolla API developer portal lives here: https://developers.dwolla.com/
+
+Our API portal is available on GitHub here: https://github.com/Dwolla/open-source-developer-portal
+
+About the v2 Developer Docs
+------------------------------
+
+The v2 API docs are built on Slate. Our modifications are also available to the community.
+
+About the v2 API
+------------------------------
+
+The initial focus of API Version 2 centers around a premium product: white label, and provides different functionality from API Version 1. Over time, we are adding the same functionality currently available in V1 to V2.
+
+Official SDKs for Java, Node.JS, PHP, Ruby, and Python are being actively developed.
+
 Documentation for Dwolla's v2 API built on Slate
 ========
 
@@ -49,3 +72,25 @@ First thing you want to do is install all node packages run:
 To run the test run
 
     npm test
+
+## License
+
+Copyright (c) 2016 Dwolla
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in
+all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+THE SOFTWARE.
