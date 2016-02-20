@@ -255,7 +255,7 @@ print($retrieved->total); # => 1
 ?>
 ```
 
-## Get subscription by id
+## Get a subscription by id
 
 This section details how to retrieve a webhook subscription by its id.
 
