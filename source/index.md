@@ -17,10 +17,10 @@ includes:
   - introduction
   - oauth
   - sdks
+  - accounts
   - customers
   - documents
   - fundingsrcs
-  - fundingsrcsVerify
   - transfers
   - events
   - webhookSubscriptions
