@@ -130,6 +130,7 @@ Parameter | Optional? | Description
 ----------|----------|-------------
 firstName | no | User's first name.
 lastName | no | User's last name.
+email | no | User's email address.
 type | no | Value of `receive-only`.
 businessName | no | User's registered business name. (Optional if not a business entity)
 ipAddress | yes | User's IP address.
@@ -328,6 +329,82 @@ dwolla.then(function(dwolla) {
         "ssn": "1234",
         "phone": "3478589191"
       })
+      .then(function(data) {
+          console.log(data); // https://api-uat.dwolla.com/customers/FC451A7A-AE30-4404-AB95-E3553FCD733F
+      });
+});
+```
+### Receive-only user
+
+```raw
+POST /customers
+Content-Type: application/vnd.dwolla.v1.hal+json
+Accept: application/vnd.dwolla.v1.hal+json
+Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
+
+{
+  "firstName": "Jane",
+  "lastName": "Merchant",
+  "email": "jmerchant@nomail.net",
+  "type": "receive-only",
+  "businessName": "Jane Corp llc",
+  "ipAddress": "99.99.99.99"
+}
+
+HTTP/1.1 201 Created
+Location: https://api.dwolla.com/customers/FC451A7A-AE30-4404-AB95-E3553FCD733F
+```
+```ruby
+new_customer = DwollaSwagger::CustomersApi.create({:body => {
+  :firstName => Jane,
+  :lastName => 'Merchant',
+  :email => 'jmerchant@nomail.net',
+  :type => 'receive-only',
+  :businessName => 'Jane Corp llc',
+  :ipAddress => '99.99.99.99'
+}})
+
+p new_customer # => https://api-uat.dwolla.com/customers/FC451A7A-AE30-4404-AB95-E3553FCD733F
+```
+```php
+<?php
+$customersApi = new DwollaSwagger\CustomersApi($apiClient);
+
+$new_customer = $customersApi->create([
+  'firstName' => 'Jane',
+  'lastName' => 'Merchant',
+  'email' => 'jmerchant@nomail.net',
+  'type' => 'receive-only',
+  'businessName' => 'Jane Corp llc',
+  'ipAddress' => '99.99.99.99'
+]);
+
+print($new_customer); # => https://api-uat.dwolla.com/customers/FC451A7A-AE30-4404-AB95-E3553FCD733F
+?>
+```
+```python
+customers_api = dwollaswagger.CustomersApi(client)
+
+new_customer = customers_api.create(body = {
+  'firstName': 'Jane', 
+  'lastName': 'Merchant',
+  'email': 'jmerchant@nomail.net',
+  'type': 'receive-only,
+  'businessName': 'Jane Corp llc',
+  'ipAddress': '99.99.99.99'
+})
+
+print(new_customer) # => https://api-uat.dwolla.com/customers/FC451A7A-AE30-4404-AB95-E3553FCD733F
+```
+```javascript
+dwolla.then(function(dwolla) {
+    dwolla.customers.create({
+      "firstName": "Jane",
+      "lastName": "Merchant",
+      "email": "jmerchant@nomail.net",
+      "type": "receive-only",
+      "businessName": "Jane Corp llc",
+      "ipAddress": "99.99.99.99"})
       .then(function(data) {
           console.log(data); // https://api-uat.dwolla.com/customers/FC451A7A-AE30-4404-AB95-E3553FCD733F
       });
