@@ -121,8 +121,8 @@ Parameter | Optional? | Description |
 businessClassification | no | The [industry classification](#list-business-classifications) id that corresponds to Customer’s business  |
 businessType | no | Business structure. Possible values are `corporation`, `llc`, `partnership`, and `soleproprietorship` |
 businessName | no | Customer’s registered business name. |
-ein | no | Employer Identification Number |
-doingBusinessAs | yes | Name that Customer is doing business as |
+ein | no | Employer Identification Number. |
+doingBusinessAs | yes | Name that is different from the officially registered name of Customer’s business. |
 website | yes | www.domain.com |
 
 ### Request parameters - receive-only
@@ -649,7 +649,7 @@ In addition to the table above, business verified Customers can update the follo
 
 Parameter | Optional? | Description
 ----------|----------|-------------
-doingBusinessAs | yes | Name that Customer is doing business as |
+doingBusinessAs | yes | Name that is different from the officially registered name of Customer’s business. |
 website | yes | www.domain.com |
 
 ### Upgrade an unverified Customer to verified Customer
