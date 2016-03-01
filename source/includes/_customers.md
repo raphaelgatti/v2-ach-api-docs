@@ -13,7 +13,7 @@ With a transfer of money, at least one party must complete the identity verifica
 For more information on white label account types, reference the [account types](https://developers.dwolla.com/resources/account-types/white-label-accounts.html) resource article.
 
 ### Receive-only
-Receive-only users are restricted to a "payouts only" business model. A receive-only user maintains limited functionality in the API and is only eligible to receive transfers to an attached bank account from the Dwolla `Account` that created it.
+Receive-only customers are restricted to a "payouts only" business model. A receive-only customer maintains limited functionality in the API and is only eligible to receive transfers to an attached bank account from the Dwolla `Account` that created it.
 
 ### Customer links
 | Link | Description|
@@ -79,7 +79,7 @@ Receive-only users are restricted to a "payouts only" business model. A receive-
 
 ## Create a Customer
 
-This section details how to create a new Customer.  To create an unverified Customer, you need to provide only the customer's full name and email address.  Verified Customers require additional information that will give Dwolla the ability to confirm the identity of the individual or business. Verified Customers can include type `business` or `personal`. For businesses, Dwolla will need to verify information about both the business and the “authorized representative” for that business. For receive-only users, you'll provide the user's full name, `type` with the value of `receive-only`, and `businessName` if applicable.
+This section details how to create a new Customer.  To create an unverified Customer, you need to provide only the customer's full name and email address.  Verified Customers require additional information that will give Dwolla the ability to confirm the identity of the individual or business. Verified Customers can include type `business` or `personal`. For businesses, Dwolla will need to verify information about both the business and the “authorized representative” for that business. For receive-only customers, you'll provide the customer's full name, `type` with the value of `receive-only`, and `businessName` if applicable.
 
 For more information on verified Customers, reference our [Customer verification](https://developers.dwolla.com/resources/customer-verification.html) resource article.
 
@@ -104,7 +104,7 @@ Parameter | Optional? | Description
 firstName | no | Customer's first name.
 lastName | no | Customer's last name.
 email | no | Customer's email address.
-ipAddress | yes | Customer's IP address
+ipAddress | yes | Customer's IP address.
 type | no | Either `personal` or `business`. If business, [see below](#additional-request-parameters-for-verified-customer-with-typebusiness) for additional required information.
 address1 | no | First line of the street address of the Customer's permanent residence
 address2 | yes | Second line of the street address of the Customer's permanent residence
@@ -120,20 +120,20 @@ Parameter | Optional? | Description |
 ----------|----------|-------------|
 businessClassification | no | The [industry classification](#list-business-classifications) id that corresponds to Customer’s business  |
 businessType | no | Business structure. Possible values are `corporation`, `llc`, `partnership`, and `soleproprietorship` |
-businessName | no | A business name that is different from the officially registered name of Customer’s LLC or corporation. |
-ein | no | Employer Identification Number |
-doingBusinessAs | yes | Name that Customer is doing business as |
+businessName | no | Customer’s registered business name. |
+ein | no | Employer Identification Number. |
+doingBusinessAs | yes | Name that is different from the officially registered name of Customer’s business. |
 website | yes | www.domain.com |
 
 ### Request parameters - receive-only
 Parameter | Optional? | Description
 ----------|----------|-------------
-firstName | no | User's first name.
-lastName | no | User's last name.
-email | no | User's email address.
+firstName | no | Customer's first name.
+lastName | no | Customer's last name.
+email | no | Customer's email address.
 type | no | Value of `receive-only`.
-businessName | no | User's registered business name. (Optional if not a business entity)
-ipAddress | yes | User's IP address.
+businessName | no | Customer's registered business name. (Optional if not a business entity)
+ipAddress | yes | Customer's IP address.
 
 ### Errors
 | HTTP Status | Message |
@@ -334,7 +334,7 @@ dwolla.then(function(dwolla) {
       });
 });
 ```
-### Receive-only user
+### Receive-only customer
 
 ```raw
 POST /customers
@@ -649,7 +649,7 @@ In addition to the table above, business verified Customers can update the follo
 
 Parameter | Optional? | Description
 ----------|----------|-------------
-doingBusinessAs | yes | Name that Customer is doing business as |
+doingBusinessAs | yes | Name that is different from the officially registered name of Customer’s business. |
 website | yes | www.domain.com |
 
 ### Upgrade an unverified Customer to verified Customer
