@@ -7,7 +7,7 @@ Customers of type `personal` or `business` and of status `document` require phot
 | Parameter | Description
 |-----------|------------|
 |id | Document unique identifier 
-|type | Either `passport`, `driversLicense`, `idCard`, or `other`.
+|type | Either `passport`, `license`, `idCard`, or `other`.
 |status| Either `pending` or `reviewed`.  When a document has been manually reviewed by Dwolla, its status will be `reviewed`.  A reviewed document does not necessarily indicate that the customer has completed the identity verification process.
 | created | ISO 8601 Timestamp of document upload time and date
 
