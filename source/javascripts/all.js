@@ -1,7 +1,7 @@
 //= require jquery-infield-label/lib/jquery.infieldlabel
-//= require jquery-ui/jquery-ui
+//= require jquery/dist/jquery
 //= require modernizr/modernizr
-//= require dwolla-core-js/dist/js/core.js
+
 //= require style-tiles/dist/js/developer.js
 
 //= require dwolla/groupCodeSnippets.js
