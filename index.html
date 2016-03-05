@@ -837,7 +837,7 @@ mvn install package
 <span class="c1">//   * id (string): ID of application event to get.</span>
 </code></pre></div></div>
             <h1 id='accounts'>Accounts</h1>
-<p>An <code class="prettyprint">Account</code> represents a Dwolla account that was either established on dwolla.com, or created inline with the capture of the user account&rsquo;s permssion via Dwolla&rsquo;s OAuth flow. A user account grants authorization to an application via <a href="#oauth">OAuth</a>, which gives the application permission to interact with the API on their behalf.</p>
+<p>An <code class="prettyprint">Account</code> represents a Dwolla account that was either established on dwolla.com, or created inline with the capture of the user account&rsquo;s permissions via Dwolla&rsquo;s OAuth flow. A user account grants authorization to an application via <a href="#oauth">OAuth</a>, which gives the application permission to interact with the API on their behalf.</p>
 <h3 id='verified-and-unverified-accounts'>Verified and unverified Accounts</h3>
 <p>With a transfer of money, at least one party must complete the identity verification process through creation of a Traditional CIP Verified Dwolla account, either the sender or the receiver. It’s your decision about which party completes this process, based on your business model, and you may want to have both parties complete the identity verification process. In cases where a Dwolla user <code class="prettyprint">Account</code> is sending funds to or receiving funds from your <code class="prettyprint">Account</code>, the <code class="prettyprint">Account</code> can remain unverified because your account is already verified. However, if you need to transfer funds between your users, at least one of them will need to have a Traditional CIP Verified Dwolla account.</p>
 
@@ -1402,7 +1402,7 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 
 <p>For more information on white label account types, reference the <a href="https://developers.dwolla.com/resources/account-types/white-label-accounts.html">account types</a> resource article.</p>
 <h3 id='receive-only'>Receive-only</h3>
-<p>Receive-only users are restricted to a &ldquo;payouts only&rdquo; business model. A receive-only user maintains limited functionality in the API and is only eligible to receive transfers to an attached bank account from the Dwolla <code class="prettyprint">Account</code> that created it.</p>
+<p>Receive-only customers are restricted to a &ldquo;payouts only&rdquo; business model. A receive-only customer maintains limited functionality in the API and is only eligible to receive transfers to an attached bank account from the Dwolla <code class="prettyprint">Account</code> that created it.</p>
 <h3 id='customer-links'>Customer links</h3>
 <table><thead>
 <tr>
@@ -1530,7 +1530,7 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
   </span><span class="nt">"created"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-10-06T01:18:26.923Z"</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div></div><h2 id='create-a-customer'>Create a Customer</h2>
-<p>This section details how to create a new Customer.  To create an unverified Customer, you need to provide only the customer&rsquo;s full name and email address.  Verified Customers require additional information that will give Dwolla the ability to confirm the identity of the individual or business. Verified Customers can include type <code class="prettyprint">business</code> or <code class="prettyprint">personal</code>. For businesses, Dwolla will need to verify information about both the business and the “authorized representative” for that business. For receive-only users, you&rsquo;ll provide the user&rsquo;s full name, <code class="prettyprint">type</code> with the value of <code class="prettyprint">receive-only</code>, and <code class="prettyprint">businessName</code> if applicable.</p>
+<p>This section details how to create a new Customer.  To create an unverified Customer, you need to provide only the customer&rsquo;s full name and email address.  Verified Customers require additional information that will give Dwolla the ability to confirm the identity of the individual or business. Verified Customers can include type <code class="prettyprint">business</code> or <code class="prettyprint">personal</code>. For businesses, Dwolla will need to verify information about both the business and the “authorized representative” for that business. For receive-only customers, you&rsquo;ll provide the customer&rsquo;s full name, <code class="prettyprint">type</code> with the value of <code class="prettyprint">receive-only</code>, and <code class="prettyprint">businessName</code> if applicable.</p>
 
 <p>For more information on verified Customers, reference our <a href="https://developers.dwolla.com/resources/customer-verification.html">Customer verification</a> resource article.</p>
 <ol class="alerts"><li class="alert icon-alert-alert"><p>This endpoint requires an OAuth access token with the <code>ManageCustomers</code> scope.</p>
@@ -1591,7 +1591,7 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 <tr>
 <td>ipAddress</td>
 <td>yes</td>
-<td>Customer&rsquo;s IP address</td>
+<td>Customer&rsquo;s IP address.</td>
 </tr>
 <tr>
 <td>type</td>
@@ -1660,17 +1660,17 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 <tr>
 <td>businessName</td>
 <td>no</td>
-<td>A business name that is different from the officially registered name of Customer’s LLC or corporation.</td>
+<td>Customer’s registered business name.</td>
 </tr>
 <tr>
 <td>ein</td>
 <td>no</td>
-<td>Employer Identification Number</td>
+<td>Employer Identification Number.</td>
 </tr>
 <tr>
 <td>doingBusinessAs</td>
 <td>yes</td>
-<td>Name that Customer is doing business as</td>
+<td>Name that is different from the officially registered name of Customer’s business.</td>
 </tr>
 <tr>
 <td>website</td>
@@ -1689,17 +1689,17 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 <tr>
 <td>firstName</td>
 <td>no</td>
-<td>User&rsquo;s first name.</td>
+<td>Customer&rsquo;s first name.</td>
 </tr>
 <tr>
 <td>lastName</td>
 <td>no</td>
-<td>User&rsquo;s last name.</td>
+<td>Customer&rsquo;s last name.</td>
 </tr>
 <tr>
 <td>email</td>
 <td>no</td>
-<td>User&rsquo;s email address.</td>
+<td>Customer&rsquo;s email address.</td>
 </tr>
 <tr>
 <td>type</td>
@@ -1709,12 +1709,12 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 <tr>
 <td>businessName</td>
 <td>no</td>
-<td>User&rsquo;s registered business name. (Optional if not a business entity)</td>
+<td>Customer&rsquo;s registered business name. (Optional if not a business entity)</td>
 </tr>
 <tr>
 <td>ipAddress</td>
 <td>yes</td>
-<td>User&rsquo;s IP address.</td>
+<td>Customer&rsquo;s IP address.</td>
 </tr>
 </tbody></table>
 <h3 id='errors'>Errors</h3>
@@ -1981,7 +1981,7 @@ Location: https://api.dwolla.com/customers/FC451A7A-AE30-4404-AB95-E3553FCD733F
           <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">data</span><span class="p">);</span> <span class="c1">// https://api-uat.dwolla.com/customers/FC451A7A-AE30-4404-AB95-E3553FCD733F</span>
       <span class="p">});</span>
 <span class="p">});</span>
-</code></pre></div></div><h3 id='receive-only-user'>Receive-only user</h3><div class="code-snippet js-code-snippet language-raw"><button class="btn alternative">copy</button><div class="code-snippet__selector">
+</code></pre></div></div><h3 id='receive-only-customer'>Receive-only customer</h3><div class="code-snippet js-code-snippet language-raw"><button class="btn alternative">copy</button><div class="code-snippet__selector">
           <nav>
               <button class="selector_switch" id="raw">raw</button>
               <button class="selector_switch" id="php">php</button>
@@ -2356,7 +2356,7 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 <tr>
 <td>doingBusinessAs</td>
 <td>yes</td>
-<td>Name that Customer is doing business as</td>
+<td>Name that is different from the officially registered name of Customer’s business.</td>
 </tr>
 <tr>
 <td>website</td>
@@ -3528,7 +3528,7 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 </tr>
 <tr>
 <td>type</td>
-<td>Either <code class="prettyprint">passport</code>, <code class="prettyprint">driversLicense</code>, <code class="prettyprint">idCard</code>, or <code class="prettyprint">other</code>.</td>
+<td>Either <code class="prettyprint">passport</code>, <code class="prettyprint">license</code>, <code class="prettyprint">idCard</code>, or <code class="prettyprint">other</code>.</td>
 </tr>
 <tr>
 <td>status</td>
