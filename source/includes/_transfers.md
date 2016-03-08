@@ -12,13 +12,6 @@ A transfer represents money being transferred from a `source` to a `destination`
 |created | ISO-8601 timestamp
 |metadata | A metadata JSON object
 
-### Amount JSON object
-
-| Parameter | Description
-|-----------|------------|
-|value | Amount of money
-|currency | String, `USD`
-
 ```noselect
 {
   "_links": {},
@@ -33,6 +26,13 @@ A transfer represents money being transferred from a `source` to a `destination`
   "metadata": {}
 }
 ```
+
+### Amount JSON object
+
+| Parameter | Description
+|-----------|------------|
+|value | Amount of money
+|currency | String, `USD`
 
 ## Initiate transfer
 
@@ -52,6 +52,7 @@ Parameter | Optional? | Description
 _links | no | A _links JSON object describing the desired `source` and `destination` of a transfer. [See below](#source-and-destination-types) for possible values for `source` and `destination`.
 amount | no | An amount JSON object. [See above](#amount-json-object)
 metadata | yes | A metadata JSON object with a maximum of 10 key-value pairs (each key and value must be less than 255 characters).
+fees | yes | an array of fee JSON objects that contain unique fee transfers. [See below](#a-fee-json-object)
 
 ### Source and destination types
 
@@ -66,7 +67,34 @@ Customer | `https://api.dwolla.com/customers/{id}` | Destination Customer of a t
 Email | `mailto:johndoe@email.com` | Email address of existing Dwolla Account or recipient (recipient will create a Dwolla Account to claim funds)
 Funding source | `https://api.dwolla.com/funding-sources/{id}` | Destination of an Account or verified Customer's own bank or balance funding source. **OR** A Customer's bank funding source.
 
-### Errors
+### Facilitator fee
+The facilitator fee is a feature allowing for a flat rate amount to be removed from a payment as a fee, and sent to the creator of the Dwolla application. The fee does not affect the original payment amount, and exists as a separate [Transfer resource](#transfer-resource) with a unique transfer ID. Within a transfer request you can specify an optional `fees` request parameter, which is an array of [fee objects](#a-fee-json-object) that can represent many unique fee transfers.
+
+For more information on collecting fees on payments, reference the [facilitator fees](https://developers.dwolla.com/resources/funding-source-verification.html) resource article.
+
+#### A fee JSON object
+
+| Parameter | Description
+|-----------|------------|
+|_links | Contains a `charge-to` JSON object with a link to the associated source or destination `Customer` or `Account` resource.
+|amount | Amount of fee to charge. An amount JSON object. [See above](#amount-json-object)
+
+#### Fee object example:
+```noselect
+{  
+   "_links":{  
+      "charge-to":{  
+         "href":"https://api-uat.dwolla.com/customers/d795f696-2cac-4662-8f16-95f1db9bddd8"
+      }
+   },
+   "amount":{  
+      "value":"4.00",
+      "currency":"USD"
+   }
+}
+```
+
+### HTTP Status and Error Codes
 | HTTP Status | Message |
 |--------------|-------------|
 | 400 | Transfer failed. |
@@ -90,12 +118,25 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
     },
     "amount": {
         "currency": "USD",
-        "value": "1.00"
+        "value": "10.00"
     },
     "metadata": {
         "foo": "bar",
         "baz": "boo"
-    }
+    },
+   "fees":[  
+      {  
+         "_links":{  
+            "charge-to":{  
+               "href":"http://api-uat.dwolla.com/customers/07D59716-EF22-4FE6-98E8-F3190233DFB8"
+            }
+         },
+         "amount":{  
+            "value":"1.00",
+            "currency":"USD"
+         }
+      }
+   ]
 }
 
 ...
@@ -280,6 +321,105 @@ dwolla.then(function(dwolla) {
         console.log(data.obj._embedded[0].status); // pending
     })
 })
+```
+## Get a transfer's fees
+
+This section outlines how to retrieve fees charged on a created transfer. Fees are visible to the `Customer` or `Account` that is charged the fee, as well as the Dwolla `Account` that is involved in receiving the fee.
+
+<ol class="alerts">
+    <li class="alert icon-alert-alert">This endpoint <a href="#authentication">requires</a> an OAuth access token with the `Transactions` <a href="#oauth-scopes">scope</a>.</li>
+</ol>
+
+### HTTP request
+`GET https://api.dwolla.com/transfers/{id}/fees`
+
+### Request parameters
+
+Parameter | Optional? | Description
+----------|------------|-------------
+id | no | The id of the transfer to retrieve fees for.
+
+### Errors
+| HTTP Status | Message |
+|--------------|-------------|
+| 404 | Transfer not found. |
+
+### Request and response
+
+```raw
+GET https://api-uat.dwolla.com/transfers/83eb4b5e-a5d9-e511-80de-0aa34a9b2388/fees
+Accept: application/vnd.dwolla.v1.hal+json
+Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
+
+...
+
+{
+  "transactions": [
+    {
+      "_links": {
+        "self": {
+          "href": "https://api-uat.dwolla.com/transfers/416a2857-c887-4cca-bd02-8c3f75c4bb0e"
+        },
+        "source": {
+          "href": "https://api-uat.dwolla.com/customers/b442c936-1f87-465d-a4e2-a982164b26bd"
+        },
+        "destination": {
+          "href": "https://api-uat.dwolla.com/accounts/ca32853c-48fa-40be-ae75-77b37504581b"
+        },
+        "created-from-transfer": {
+          "href": "https://api-uat.dwolla.com/transfers/83eb4b5e-a5d9-e511-80de-0aa34a9b2388"
+        }
+      },
+      "id": "416a2857-c887-4cca-bd02-8c3f75c4bb0e",
+      "status": "pending",
+      "amount": {
+        "value": "2.00",
+        "currency": "usd"
+      },
+      "created": "2016-02-22T20:46:38.777Z"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api-uat.dwolla.com/transfers/e58ae1f1-7007-47d3-a308-7e9aa6266d53"
+        },
+        "source": {
+          "href": "https://api-uat.dwolla.com/customers/b442c936-1f87-465d-a4e2-a982164b26bd"
+        },
+        "destination": {
+          "href": "https://api-uat.dwolla.com/accounts/ca32853c-48fa-40be-ae75-77b37504581b"
+        },
+        "created-from-transfer": {
+          "href": "https://api-uat.dwolla.com/transfers/83eb4b5e-a5d9-e511-80de-0aa34a9b2388"
+        }
+      },
+      "id": "e58ae1f1-7007-47d3-a308-7e9aa6266d53",
+      "status": "pending",
+      "amount": {
+        "value": "1.00",
+        "currency": "usd"
+      },
+      "created": "2016-02-22T20:46:38.860Z"
+    }
+  ],
+  "total": 2
+}
+```
+```ruby
+# No example for this language yet.
+```
+```php
+/**
+ *  No example for this language yet.
+ **/
+```
+```python
+# No example for this language yet.
+```
+```javascript
+/**
+ *  No example for this language yet.
+ **/
 ```
 
 ## Get transfer failure reason
