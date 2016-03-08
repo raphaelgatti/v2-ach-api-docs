@@ -70,7 +70,7 @@ Funding source | `https://api.dwolla.com/funding-sources/{id}` | Destination of 
 ### Facilitator fee
 The facilitator fee is a feature allowing for a flat rate amount to be removed from a payment as a fee, and sent to the creator of the Dwolla application. The fee does not affect the original payment amount, and exists as a separate [Transfer resource](#transfer-resource) with a unique transfer ID. Within a transfer request you can specify an optional `fees` request parameter, which is an array of [fee objects](#a-fee-json-object) that can represent many unique fee transfers.
 
-For more information on collecting fees on payments, reference the [facilitator fees](https://developers.dwolla.com/resources/funding-source-verification.html) resource article.
+For more information on collecting fees on payments, reference the [facilitator fee](https://developers.dwolla.com/resources/facilitator-fee.html) resource article.
 
 #### A fee JSON object
 
