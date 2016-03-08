@@ -4374,7 +4374,19 @@ HTTP 200 OK
 <td>A metadata JSON object</td>
 </tr>
 </tbody></table>
-<h3 id='amount-json-object'>Amount JSON object</h3>
+<div class="code-snippet js-code-snippet language-nohide"><button class="btn alternative">copy</button><div class="code-snippet__cnt highlight"><pre><code class="language-nohide" data-lang="nohide"><span class="p">{</span><span class="w">
+  </span><span class="nt">"_links"</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span><span class="w">
+  </span><span class="nt">"_embedded"</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span><span class="w">
+  </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"amount"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"currency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="nt">"created"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-10-02T19:48:40.485Z"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"metadata"</span><span class="p">:</span><span class="w"> </span><span class="p">{}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div></div><h3 id='amount-json-object'>Amount JSON object</h3>
 <table><thead>
 <tr>
 <th>Parameter</th>
@@ -4390,19 +4402,7 @@ HTTP 200 OK
 <td>String, <code class="prettyprint">USD</code></td>
 </tr>
 </tbody></table>
-<div class="code-snippet js-code-snippet language-nohide"><button class="btn alternative">copy</button><div class="code-snippet__cnt highlight"><pre><code class="language-nohide" data-lang="nohide"><span class="p">{</span><span class="w">
-  </span><span class="nt">"_links"</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span><span class="w">
-  </span><span class="nt">"_embedded"</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span><span class="w">
-  </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"amount"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="nt">"value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"currency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="w">
-  </span><span class="p">},</span><span class="w">
-  </span><span class="nt">"created"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-10-02T19:48:40.485Z"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"metadata"</span><span class="p">:</span><span class="w"> </span><span class="p">{}</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre></div></div><h2 id='initiate-transfer'>Initiate transfer</h2>
+<h2 id='initiate-transfer'>Initiate transfer</h2>
 <p>This section covers how to initiate a transfer for either an <a href="#accounts">Account</a> or <a href="#customers">Customer</a> resource.</p>
 <ol class="alerts"><li class="alert icon-alert-alert"><p>This endpoint requires an OAuth access token with the <code>Send</code> scope.</p>
 </li></ol><h3 id='http-request'>HTTP request</h3>
@@ -4429,6 +4429,11 @@ HTTP 200 OK
 <td>metadata</td>
 <td>yes</td>
 <td>A metadata JSON object with a maximum of 10 key-value pairs (each key and value must be less than 255 characters).</td>
+</tr>
+<tr>
+<td>fees</td>
+<td>yes</td>
+<td>an array of fee JSON objects that contain unique fee transfers. <a href="#a-fee-json-object">See below</a></td>
 </tr>
 </tbody></table>
 <h3 id='source-and-destination-types'>Source and destination types</h3>
@@ -4474,7 +4479,38 @@ HTTP 200 OK
 <td>Destination of an Account or verified Customer&rsquo;s own bank or balance funding source. <strong>OR</strong> A Customer&rsquo;s bank funding source.</td>
 </tr>
 </tbody></table>
-<h3 id='errors'>Errors</h3>
+<h3 id='facilitator-fee'>Facilitator fee</h3>
+<p>The facilitator fee is a feature allowing for a flat rate amount to be removed from a payment as a fee, and sent to the creator of the Dwolla application. The fee does not affect the original payment amount, and exists as a separate <a href="#transfer-resource">Transfer resource</a> with a unique transfer ID. Within a transfer request you can specify an optional <code class="prettyprint">fees</code> request parameter, which is an array of <a href="#a-fee-json-object">fee objects</a> that can represent many unique fee transfers.</p>
+
+<p>For more information on collecting fees on payments, reference the <a href="https://developers.dwolla.com/resources/funding-source-verification.html">facilitator fees</a> resource article.</p>
+<h4 id='a-fee-json-object'>A fee JSON object</h4>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>_links</td>
+<td>Contains a <code class="prettyprint">charge-to</code> JSON object with a link to the associated source or destination <code class="prettyprint">Customer</code> or <code class="prettyprint">Account</code> resource.</td>
+</tr>
+<tr>
+<td>amount</td>
+<td>Amount of fee to charge. An amount JSON object. <a href="#amount-json-object">See above</a></td>
+</tr>
+</tbody></table>
+<h4 id='fee-object-example'>Fee object example:</h4><div class="code-snippet js-code-snippet language-nohide"><button class="btn alternative">copy</button><div class="code-snippet__cnt highlight"><pre><code class="language-nohide" data-lang="nohide"><span class="p">{</span><span class="w">  
+   </span><span class="nt">"_links"</span><span class="p">:{</span><span class="w">  
+      </span><span class="nt">"charge-to"</span><span class="p">:{</span><span class="w">  
+         </span><span class="nt">"href"</span><span class="p">:</span><span class="s2">"https://api-uat.dwolla.com/customers/d795f696-2cac-4662-8f16-95f1db9bddd8"</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+   </span><span class="p">},</span><span class="w">
+   </span><span class="nt">"amount"</span><span class="p">:{</span><span class="w">  
+      </span><span class="nt">"value"</span><span class="p">:</span><span class="s2">"4.00"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"currency"</span><span class="p">:</span><span class="s2">"USD"</span><span class="w">
+   </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div></div><h3 id='http-status-and-error-codes'>HTTP Status and Error Codes</h3>
 <table><thead>
 <tr>
 <th>HTTP Status</th>
@@ -4513,12 +4549,25 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
     },
     "amount": {
         "currency": "USD",
-        "value": "1.00"
+        "value": "10.00"
     },
     "metadata": {
         "foo": "bar",
         "baz": "boo"
-    }
+    },
+   "fees":[  
+      {  
+         "_links":{  
+            "charge-to":{  
+               "href":"http://api-uat.dwolla.com/customers/07D59716-EF22-4FE6-98E8-F3190233DFB8"
+            }
+         },
+         "amount":{  
+            "value":"1.00",
+            "currency":"USD"
+         }
+      }
+   ]
 }
 
 ...
@@ -4763,6 +4812,142 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
         <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">data</span><span class="p">.</span><span class="nx">obj</span><span class="p">.</span><span class="nx">_embedded</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="nx">status</span><span class="p">);</span> <span class="c1">// pending</span>
     <span class="p">})</span>
 <span class="p">})</span>
+</code></pre></div></div><h2 id='get-a-transfer39s-fees'>Get a transfer&rsquo;s fees</h2>
+<p>This section outlines how to retrieve fees charged on a created transfer. Fees are visible to the <code class="prettyprint">Customer</code> or <code class="prettyprint">Account</code> that is charged the fee, as well as the Dwolla <code class="prettyprint">Account</code> that is involved in receiving the fee.</p>
+<ol class="alerts"><li class="alert icon-alert-alert"><p>This endpoint requires an OAuth access token with the <code>Transactions</code> scope.</p>
+</li></ol><h3 id='http-request'>HTTP request</h3>
+<p><code class="prettyprint">GET https://api.dwolla.com/transfers/{id}/fees</code></p>
+<h3 id='request-parameters'>Request parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Optional?</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>id</td>
+<td>no</td>
+<td>The id of the transfer to retrieve fees for.</td>
+</tr>
+</tbody></table>
+<h3 id='errors'>Errors</h3>
+<table><thead>
+<tr>
+<th>HTTP Status</th>
+<th>Message</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>404</td>
+<td>Transfer not found.</td>
+</tr>
+</tbody></table>
+<h3 id='request-and-response'>Request and response</h3><div class="code-snippet js-code-snippet language-raw"><button class="btn alternative">copy</button><div class="code-snippet__selector">
+          <nav>
+              <button class="selector_switch" id="raw">raw</button>
+              <button class="selector_switch" id="php">php</button>
+              <button class="selector_switch" id="ruby">ruby</button>
+              <button class="selector_switch" id="python">python</button>
+              <button class="selector_switch" id="javascript">javascript</button>
+          </nav>
+        </div><div class="code-snippet__cnt highlight"><pre><code class="language-raw" data-lang="raw">GET https://api-uat.dwolla.com/transfers/83eb4b5e-a5d9-e511-80de-0aa34a9b2388/fees
+Accept: application/vnd.dwolla.v1.hal+json
+Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
+
+...
+
+{
+  "transactions": [
+    {
+      "_links": {
+        "self": {
+          "href": "https://api-uat.dwolla.com/transfers/416a2857-c887-4cca-bd02-8c3f75c4bb0e"
+        },
+        "source": {
+          "href": "https://api-uat.dwolla.com/customers/b442c936-1f87-465d-a4e2-a982164b26bd"
+        },
+        "destination": {
+          "href": "https://api-uat.dwolla.com/accounts/ca32853c-48fa-40be-ae75-77b37504581b"
+        },
+        "created-from-transfer": {
+          "href": "https://api-uat.dwolla.com/transfers/83eb4b5e-a5d9-e511-80de-0aa34a9b2388"
+        }
+      },
+      "id": "416a2857-c887-4cca-bd02-8c3f75c4bb0e",
+      "status": "pending",
+      "amount": {
+        "value": "2.00",
+        "currency": "usd"
+      },
+      "created": "2016-02-22T20:46:38.777Z"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api-uat.dwolla.com/transfers/e58ae1f1-7007-47d3-a308-7e9aa6266d53"
+        },
+        "source": {
+          "href": "https://api-uat.dwolla.com/customers/b442c936-1f87-465d-a4e2-a982164b26bd"
+        },
+        "destination": {
+          "href": "https://api-uat.dwolla.com/accounts/ca32853c-48fa-40be-ae75-77b37504581b"
+        },
+        "created-from-transfer": {
+          "href": "https://api-uat.dwolla.com/transfers/83eb4b5e-a5d9-e511-80de-0aa34a9b2388"
+        }
+      },
+      "id": "e58ae1f1-7007-47d3-a308-7e9aa6266d53",
+      "status": "pending",
+      "amount": {
+        "value": "1.00",
+        "currency": "usd"
+      },
+      "created": "2016-02-22T20:46:38.860Z"
+    }
+  ],
+  "total": 2
+}
+</code></pre></div></div><div class="code-snippet js-code-snippet language-ruby"><button class="btn alternative">copy</button><div class="code-snippet__selector">
+          <nav>
+              <button class="selector_switch" id="raw">raw</button>
+              <button class="selector_switch" id="php">php</button>
+              <button class="selector_switch" id="ruby">ruby</button>
+              <button class="selector_switch" id="python">python</button>
+              <button class="selector_switch" id="javascript">javascript</button>
+          </nav>
+        </div><div class="code-snippet__cnt highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="c1"># No example for this language yet.</span>
+</code></pre></div></div><div class="code-snippet js-code-snippet language-php"><button class="btn alternative">copy</button><div class="code-snippet__selector">
+          <nav>
+              <button class="selector_switch" id="raw">raw</button>
+              <button class="selector_switch" id="php">php</button>
+              <button class="selector_switch" id="ruby">ruby</button>
+              <button class="selector_switch" id="python">python</button>
+              <button class="selector_switch" id="javascript">javascript</button>
+          </nav>
+        </div><div class="code-snippet__cnt highlight"><pre><code class="language-php" data-lang="php">/**
+ *  No example for this language yet.
+ **/
+</code></pre></div></div><div class="code-snippet js-code-snippet language-python"><button class="btn alternative">copy</button><div class="code-snippet__selector">
+          <nav>
+              <button class="selector_switch" id="raw">raw</button>
+              <button class="selector_switch" id="php">php</button>
+              <button class="selector_switch" id="ruby">ruby</button>
+              <button class="selector_switch" id="python">python</button>
+              <button class="selector_switch" id="javascript">javascript</button>
+          </nav>
+        </div><div class="code-snippet__cnt highlight"><pre><code class="language-python" data-lang="python"><span class="c"># No example for this language yet.</span>
+</code></pre></div></div><div class="code-snippet js-code-snippet language-javascript"><button class="btn alternative">copy</button><div class="code-snippet__selector">
+          <nav>
+              <button class="selector_switch" id="raw">raw</button>
+              <button class="selector_switch" id="php">php</button>
+              <button class="selector_switch" id="ruby">ruby</button>
+              <button class="selector_switch" id="python">python</button>
+              <button class="selector_switch" id="javascript">javascript</button>
+          </nav>
+        </div><div class="code-snippet__cnt highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="cm">/**
+ *  No example for this language yet.
+ **/</span>
 </code></pre></div></div><h2 id='get-transfer-failure-reason'>Get transfer failure reason</h2>
 <p>When a bank transfer fails for an Account or Customer, Dwolla returns a <code class="prettyprint">failure</code> link when <a href="#get-a-transfer-by-id">getting the transfer by Id</a>. This failure link is used to retrieve the return code and description. For reference, the list of possible failure codes and descriptions are shown in the <a href="https://developers.dwolla.com/resources/bank-transfer-workflow/transfer-failures.html">Transfer failures</a> resource article.</p>
 <ol class="alerts"><li class="alert icon-alert-alert"><p>This endpoint requires an OAuth access token with the <code>Transactions</code> scope.</p>
