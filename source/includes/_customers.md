@@ -187,7 +187,7 @@ print($new_customer); # => https://api-uat.dwolla.com/customers/FC451A7A-AE30-44
 customers_api = dwollaswagger.CustomersApi(client)
 
 new_customer = customers_api.create(body = {
-  'firstName': 'Jane', 
+  'firstName': 'Jane',
   'lastName': 'Merchant',
   'email': 'jmerchant@nomail.net',
   'ipAddress': '99.99.99.99'
@@ -252,7 +252,7 @@ $new_customer = $customersApi->create([
   # For the first attempt, only the
   # last 4 digits of SSN required
 
-  # If the entire SSN is provided, 
+  # If the entire SSN is provided,
   # it will still be accepted
   'ssn' => '1234',
   'phone' => '3478589191'
@@ -276,7 +276,7 @@ new_customer = DwollaSwagger::CustomersApi.create({:body => {
   # For the first attempt, only the
   # last 4 digits of SSN required
 
-  # If the entire SSN is provided, 
+  # If the entire SSN is provided,
   # it will still be accepted
 
   :ssn => '1234',
@@ -287,20 +287,20 @@ p new_customer # => https://api-uat.dwolla.com/customers/AB443D36-3757-44C1-A1B4
 ```python
 customers_api = dwollaswagger.CustomersApi(client)
 
-new_customer = customers_api.create(body = {'firstName': 'Bill', 
+new_customer = customers_api.create(body = {'firstName': 'Bill',
                                             'lastName': 'Bibbit',
                                             'email': 'bbibbit@nomail.net',
                                             'type': 'personal',
                                             'address1': '99-99 33rd St',
-                                            'city': 'Some City', 
+                                            'city': 'Some City',
                                             'state': 'NY',
                                             'postalCode': '11101',
-                                            'dateOfBirth': '1970-01-01', 
+                                            'dateOfBirth': '1970-01-01',
 
                                             # For the first attempt, only the
                                             # last 4 digits of SSN required
 
-                                            # If the entire SSN is provided, 
+                                            # If the entire SSN is provided,
                                             # it will still be accepted
                                             'ssn': '1234',
                                             'phone': '3478589191'})
@@ -321,10 +321,10 @@ dwolla.then(function(dwolla) {
         "postalCode": "11101",
         "dateOfBirth": "1970-01-01",
 
-        // For the first attempt, only 
+        // For the first attempt, only
         // the last 4 digits of SSN required
 
-        // If the entire SSN is provided, 
+        // If the entire SSN is provided,
         // it will still be accepted
         "ssn": "1234",
         "phone": "3478589191"
@@ -386,7 +386,7 @@ print($new_customer); # => https://api-uat.dwolla.com/customers/FC451A7A-AE30-44
 customers_api = dwollaswagger.CustomersApi(client)
 
 new_customer = customers_api.create(body = {
-  'firstName': 'Jane', 
+  'firstName': 'Jane',
   'lastName': 'Merchant',
   'email': 'jmerchant@nomail.net',
   'type': 'receive-only,
@@ -507,7 +507,7 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 
 ## Get business classification by id
 
-This section shows you how to retrieve a business classification from a list of industry classifications. An industry classification id is needed in order to verify a `business` Customer. 
+This section shows you how to retrieve a business classification from a list of industry classifications. An industry classification id is needed in order to verify a `business` Customer.
 
 <ol class="alerts">
     <li class="alert icon-alert-alert">This endpoint <a href="#authentication">requires</a> an OAuth access token with the `ManageCustomers` <a href="#oauth-scopes">scope</a>.</li>
@@ -656,7 +656,7 @@ website | yes | www.domain.com |
 An unverified Customer can be upgraded to a verified Customer by supplying the necessary information required to create a verified Customer. See [this table](#request-parameters-verified-customer) for required information.
 
 ### Retry verification
-If the verified Customer has a status of `retry`, some information may have been miskeyed. You have one more opportunity to correct any mistakes using this endpoint. This time, you’ll need to provide the Customer’s full SSN. If the additional attempt fails, the resulting status will be either `document` or `suspended`. 
+If the verified Customer has a status of `retry`, some information may have been miskeyed. You have one more opportunity to correct any mistakes using this endpoint. This time, you’ll need to provide the Customer’s full SSN. If the additional attempt fails, the resulting status will be either `document` or `suspended`.
 
 ### Customer must be in the retry state:
 
@@ -1054,7 +1054,7 @@ print($new_fs); # => https://api-uat.dwolla.com/funding-sources/375c6781-2a17-47
 ?>
 ```
 ```ruby
-new_fs = DwollaSwagger::FundingsourcesApi.create_customer_funding_source \ 
+new_fs = DwollaSwagger::FundingsourcesApi.create_customer_funding_source \
 ('https://api-uat.dwolla.com/customers/AB443D36-3757-44C1-A1B4-29727FB3111C', {:body => {
                                                     :routingNumber => '222222226',
                                                     :accountNumber => '123456789',
@@ -1158,7 +1158,7 @@ Initiate instant account verification for a Customer.
 **Development version:**
 `<script src="https://cdn.dwolla.com/1/dwolla.js"></script>`
 
-**Production (minified) version:** 
+**Production (minified) version:**
 `<script src="https://cdn.dwolla.com/1/dwolla.min.js"></script>`
 
 ##### Configure dwolla.js
@@ -1215,6 +1215,7 @@ $('#start').click(function() {
 |--------------|-------------|
 | UnexpectedPage |IAV navigated to an unexpected page and was cancelled. |
 | InvalidIavToken |Invalid IAV token. |
+| UnsupportedBank |The customer's bank is not supported by the IAV flow. |
 
 ## List a Customer's funding sources
 
