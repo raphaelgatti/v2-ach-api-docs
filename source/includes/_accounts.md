@@ -410,3 +410,92 @@ dwolla.then(function(dwolla) {
     })
 })
 ```
+
+## List an Account's mass payments
+
+This section covers how to retrieve an Account's list of previously created mass payments. Mass payments are returned ordered by date created, with most recent mass payments appearing first.
+
+<ol class="alerts">
+    <li class="alert icon-alert-alert">This endpoint <a href="#authentication">requires</a> an OAuth access token with the `Transactions` <a href="#oauth-scopes">scope</a>.</li>
+</ol>
+
+### HTTP request
+`GET https://api.dwolla.com/accounts/{id}/mass-payments`
+
+### Request parameters
+
+| Parameter | Optional? | Description |
+| ----------|------------|-------------|
+| id | no | Account unique identifier to get mass payments for. |
+| limit | yes | How many results to return. Defaults to 25. |
+| offset | yes | How many results to skip. |
+
+### HTTP Status and Error Codes
+| HTTP Status | Code | Description |
+|--------------|-------------|------------------------|
+| 403 | NotAuthorized | Not authorized to list mass payments. |
+| 404 | NotFound | Account not found. |
+
+### Request and response
+
+```raw
+GET https://api-uat.dwolla.com/accounts/ca32853c-48fa-40be-ae75-77b37504581b/mass-payments
+Accept: application/vnd.dwolla.v1.hal+json
+Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
+
+....
+
+{
+  "_links": {
+    "self": {
+      "href": "https://api-uat.dwolla.com/accounts/ca32853c-48fa-40be-ae75-77b37504581b/mass-payments"
+    },
+    "first": {
+      "href": "https://api-uat.dwolla.com/accounts/ca32853c-48fa-40be-ae75-77b37504581b/mass-payments?limit=25&offset=0"
+    },
+    "last": {
+      "href": "https://api-uat.dwolla.com/accounts/ca32853c-48fa-40be-ae75-77b37504581b/mass-payments?limit=25&offset=0"
+    }
+  },
+  "_embedded": {
+    "mass-payments": [
+      {
+        "_links": {
+          "self": {
+            "href": "https://api-uat.dwolla.com/mass-payments/b4b5a699-5278-4727-9f81-a50800ea9abc"
+          },
+          "source": {
+            "href": "https://api-uat.dwolla.com/funding-sources/84c77e52-d1df-4a33-a444-51911a9623e9"
+          },
+          "items": {
+            "href": "https://api-uat.dwolla.com/mass-payments/b4b5a699-5278-4727-9f81-a50800ea9abc/items"
+          }
+        },
+        "id": "b4b5a699-5278-4727-9f81-a50800ea9abc",
+        "status": "complete",
+        "created": "2015-09-03T14:14:10.000Z",
+        "metadata": {
+          "UserJobId": "some ID"
+        }
+      }
+    ]
+  },
+  "total": 1
+}
+```
+```ruby
+# No example for this language yet. Coming soon.
+```
+```php
+/**
+ *  No example for this language yet. Coming soon.
+ **/
+```
+```python
+# No example for this language yet. Coming soon.
+```
+```javascript
+/**
+ *  No example for this language yet. Coming soon.
+ **/
+```
