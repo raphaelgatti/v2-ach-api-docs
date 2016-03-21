@@ -1,4 +1,4 @@
-body > footer {
+.disclaimer {
     padding-left: 335px;
     background: transparent;
 
@@ -8,13 +8,6 @@ body > footer {
 
         @include breakpoint($SIZE_TABLET_SMALL){
             padding: 0 15px;
-        }
-
-        & > nav {
-            @include breakpoint($SIZE_TABLET){
-                width: 100%;
-                text-align: center;
-            }
         }
     }
 
