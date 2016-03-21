@@ -1462,6 +1462,95 @@ dwolla.then(function(dwolla) {
 })
 ```
 
+## List a Customer's mass payments
+
+This section covers how to retrieve a [verified Customer's](#customers) list of previously created mass payments. Mass payments are returned ordered by date created, with most recent mass payments appearing first.
+
+<ol class="alerts">
+    <li class="alert icon-alert-alert">This endpoint <a href="#authentication">requires</a> an OAuth access token with the `Transactions` <a href="#oauth-scopes">scope</a>.</li>
+</ol>
+
+### HTTP request
+`GET https://api.dwolla.com/customers/{id}/mass-payments`
+
+### Request parameters
+
+| Parameter | Optional? | Description |
+| ----------|------------|-------------|
+| id | no | Customer unique identifier to get mass payments for. |
+| limit | yes | How many results to return. Defaults to 25. |
+| offset | yes | How many results to skip. |
+
+### HTTP Status and Error Codes
+| HTTP Status | Code | Description |
+|--------------|-------------|------------------------|
+| 403 | NotAuthorized | Not authorized to list mass payments. |
+| 404 | NotFound | Customer not found. |
+
+### Request and response
+
+```raw
+GET https://api-uat.dwolla.com/customers/39e21228-5958-4c4f-96fe-48a4bf11332d/mass-payments
+Accept: application/vnd.dwolla.v1.hal+json
+Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
+
+....
+
+{
+  "_links": {
+    "self": {
+      "href": "https://api-uat.dwolla.com/customers/39e21228-5958-4c4f-96fe-48a4bf11332d/mass-payments"
+    },
+    "first": {
+      "href": "https://api-uat.dwolla.com/customers/39e21228-5958-4c4f-96fe-48a4bf11332d/mass-payments?limit=25&offset=0"
+    },
+    "last": {
+      "href": "https://api-uat.dwolla.com/customers/39e21228-5958-4c4f-96fe-48a4bf11332d/mass-payments?limit=25&offset=0"
+    }
+  },
+  "_embedded": {
+    "mass-payments": [
+      {
+        "_links": {
+          "self": {
+            "href": "https://api-uat.dwolla.com/mass-payments/89ca72d2-63bf-4a8f-92ef-a5d00140aefa"
+          },
+          "source": {
+            "href": "https://api-uat.dwolla.com/funding-sources/e1c972d4-d8d9-4c30-861a-9081dcbaf4ab"
+          },
+          "items": {
+            "href": "https://api-uat.dwolla.com/mass-payments/89ca72d2-63bf-4a8f-92ef-a5d00140aefa/items"
+          }
+        },
+        "id": "89ca72d2-63bf-4a8f-92ef-a5d00140aefa",
+        "status": "complete",
+        "created": "2016-03-21T19:27:34.000Z",
+        "metadata": {
+          "masspay1": "masspay1"
+        }
+      }
+    ]
+  },
+  "total": 1
+}
+```
+```ruby
+# No example for this language yet. Coming soon.
+```
+```php
+/**
+ *  No example for this language yet. Coming soon.
+ **/
+```
+```python
+# No example for this language yet. Coming soon.
+```
+```javascript
+/**
+ *  No example for this language yet. Coming soon.
+ **/
+```
+
 ## Cancel a Customer's transfer by id
 
 When a Customer's bank transfer is eligible for cancellation, Dwolla returns a `cancel` link  when [getting the transfer by Id](#get-a-transfer-by-id). This cancel link is used to trigger the cancellation, preventing the bank transfer from processing further. A bank transfer is cancellable up until 4pm CT on that same business day if initiated prior to 4PM CT. If a transfer was initiated after 4pm CT, it can be cancelled anytime before 4pm CT on the following business day.
