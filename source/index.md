@@ -22,6 +22,7 @@ includes:
   - documents
   - fundingsrcs
   - transfers
+  - masspay
   - events
   - webhookSubscriptions
   - webhooks

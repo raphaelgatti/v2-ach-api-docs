@@ -51,6 +51,8 @@ When the state of a resource changes, we create a new event resource to record t
 | transfer_failed | A transfer failed to clear successfully. |
 | transfer_reclaimed | The transfer was returned to the sender after remaining unclaimed by the intended recipient for a period of time. |
 | transfer_completed | A transfer has cleared successfully. |
+| masspay_created | A mass payment was created. |
+| masspay_completed | A mass payment completed. |
 | account_suspended | An account was suspended. |
 | account_activated | A Dwolla account moves from deactive or suspended to active state of verification. |
 | customer_created | A Customer was created. |
