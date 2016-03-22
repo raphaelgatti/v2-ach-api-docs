@@ -2,7 +2,7 @@
 //= require jquery/dist/jquery
 //= require modernizr/modernizr
 
-//= require style-tiles/dist/js/developer.js
+//= require ./lib/style-tiles/dist/js/developer.js
 
 //= require dwolla/groupCodeSnippets.js
 

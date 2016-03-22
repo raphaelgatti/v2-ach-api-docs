@@ -2,18 +2,19 @@
 @import url(//fonts.googleapis.com/css?family=Roboto+Slab:300|Open+Sans:400,600,700);
 
 //style-tiles
-@import "../_bower_components/style-tiles/sass/developer/lib/reset";
-@import "../_bower_components/style-tiles/sass/developer/globals/base";
-@import "../_bower_components/style-tiles/sass/developer/partials/big-disclaimer";
-@import "../_bower_components/style-tiles/sass/developer/partials/footer";
-@import "../_bower_components/style-tiles/sass/developer/partials/typography";
-@import "../_bower_components/style-tiles/sass/developer/partials/alerts";
-@import "../_bower_components/style-tiles/sass/developer/partials/buttons";
-@import "../_bower_components/style-tiles/sass/developer/partials/forms";
-@import "../_bower_components/style-tiles/sass/developer/partials/header";
-@import "../_bower_components/style-tiles/sass/developer/partials/containers";
-@import "../_bower_components/style-tiles/sass/developer/partials/side-nav";
-@import "../_bower_components/style-tiles/sass/developer/partials/code-snippet";
+@import "./lib/style-tiles/sass/developer/lib/reset";
+@import "./lib/style-tiles/sass/developer/globals/base";
+@import "./lib/style-tiles/sass/developer/partials/copyright";
+@import "./lib/style-tiles/sass/developer/partials/disclaimer";
+@import "./lib/style-tiles/sass/developer/partials/footer";
+@import "./lib/style-tiles/sass/developer/partials/typography";
+@import "./lib/style-tiles/sass/developer/partials/alerts";
+@import "./lib/style-tiles/sass/developer/partials/buttons";
+@import "./lib/style-tiles/sass/developer/partials/forms";
+@import "./lib/style-tiles/sass/developer/partials/header";
+@import "./lib/style-tiles/sass/developer/partials/containers";
+@import "./lib/style-tiles/sass/developer/partials/side-nav";
+@import "./lib/style-tiles/sass/developer/partials/code-snippet";
 
 //icons
 @import "icons/base/icons.data.svg";

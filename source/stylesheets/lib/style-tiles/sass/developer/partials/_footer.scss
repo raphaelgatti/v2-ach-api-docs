@@ -1,0 +1,63 @@
+body > footer, .cnt-two-col__content > footer {
+    padding-top: 50px;
+    position: relative;
+    z-index: 5;
+    background: $color-white;
+
+    h6 {
+        font-size: rem(14px);
+        font-weight: 400;
+        color: $color-grey-med-3;
+    }
+
+    .page-wrap {
+        @include flexbox();
+        @include flex-wrap(wrap);
+
+        @include breakpoint($SIZE_MOBILE){
+            padding: 0 30px;
+        }
+
+        @include breakpoint($SIZE_MOBILE_SMALL){
+            padding: 0;
+        }
+
+        & > nav {
+            margin-bottom: 55px;
+            @include flex-grow(1);
+
+            @include breakpoint($SIZE_MOBILE){
+                width: 50%;
+            }
+
+            @include breakpoint($SIZE_MOBILE_SMALL){
+                width: 100%;
+                text-align: center;
+            }
+
+            a {
+                margin-bottom: 6px;
+                display: block;
+            }
+        }
+    }
+}
+
+.cnt-two-col__content > footer {
+    padding-top: 15px;
+
+    .page-wrap {
+        padding: 0;
+
+        & > nav {
+            @include breakpoint($SIZE_COL_MOBILE_FOOTER_BREAK){
+                width: 50%;
+            }
+
+            @include breakpoint($SIZE_MOBILE_SMALL){
+                width: 100%;
+                text-align: center;
+            }
+        }
+    }
+}
