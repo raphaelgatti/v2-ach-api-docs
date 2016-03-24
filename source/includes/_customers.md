@@ -1216,6 +1216,7 @@ $('#start').click(function() {
 | UnexpectedPage |IAV navigated to an unexpected page and was cancelled. |
 | InvalidIavToken |Invalid IAV token. |
 | UnsupportedBank |The customer's bank is not supported by the IAV flow. |
+| RateLimitReached |The customer exceeded the max # of IAV attempts. |
 
 ## List a Customer's funding sources
 
