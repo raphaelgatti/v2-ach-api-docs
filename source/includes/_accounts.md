@@ -171,8 +171,8 @@ Content-Type: application/vnd.dwolla.v1.hal+json
 Accept: application/vnd.dwolla.v1.hal+json
 Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 {
-    "routingNumber": "87654321",
-    "accountNumber": "12345678",
+    "routingNumber": "222222226",
+    "accountNumber": "123456789",
     "type": "checking",
     "name": "My Bank"
 }

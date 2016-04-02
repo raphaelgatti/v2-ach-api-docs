@@ -56,7 +56,6 @@ Error responses use HTTP status codes to indicate the type of error. The JSON re
 ```noselect
 {
   "code": "InvalidAccessToken",
-  "description": "Invalid access token.",
   "message": "Invalid access token."
 }
 ```
@@ -109,7 +108,6 @@ The `path` field is a JSON pointer to the specific field in the request that has
 ```noselect
 {
     "code": "ValidationError",
-    "description": "Validation error(s) present. See embedded errors list for more details.",
     "message": "Validation error(s) present. See embedded errors list for more details.",
     "_embedded": {
         "errors": [
