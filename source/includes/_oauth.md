@@ -222,9 +222,9 @@ account_id | A unique user account ID for the associated user account
 }
 ```
 
-## Client access token
+## Application access token
 
-Some endpoints require a *client access token*, which is different from a user access token.  Client access tokens don't require any particular user's authorization, since they grant your application access to resources which belong to the application itself (i.e. events, webhooks, and webhook-subscriptions), rather than an account. Provide your client credentials to receive a client access token.
+Some endpoints require an *application access token*, which is different from a user access token.  Application access tokens don't require any particular user's authorization, since they grant your application access to resources which belong to the application itself (i.e. events, webhooks, and webhook-subscriptions), rather than an account. Provide your client credentials to receive an application access token.
 
 ### HTTP request
 
