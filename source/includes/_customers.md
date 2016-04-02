@@ -615,7 +615,7 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 
 ## Update a Customer
 
-This endpoint can be used to facilitate the following use cases: Update Customer information, upgrade an `unverified` Customer to a `verified` Customer, and update a verified Customer's information to `retry` verification.
+This endpoint can be used to facilitate the following use cases: Update Customer information, upgrade an `unverified` Customer to a `verified` Customer, `suspend` a Customer, and update a verified Customer's information to `retry` verification.
 
 <ol class="alerts">
     <li class="alert icon-alert-alert">This endpoint <a href="#authentication">requires</a> an OAuth access token with the `ManageCustomers` <a href="#oauth-scopes">scope</a>.</li>
@@ -654,6 +654,14 @@ website | yes | www.domain.com |
 
 ### Upgrade an unverified Customer to verified Customer
 An unverified Customer can be upgraded to a verified Customer by supplying the necessary information required to create a verified Customer. See [this table](#request-parameters-verified-customer) for required information.
+
+### Suspend a Customer
+An unverified and verified Customer can be suspended by supplying the status of `suspend`. You'll need to contact Dwolla to unsuspend a Customer.
+
+##### Request parameters -  unverified Customer
+Parameter | Optional? | Description
+----------|----------|-------------
+status | no | Value of `suspend`.
 
 ### Retry verification
 If the verified Customer has a status of `retry`, some information may have been miskeyed. You have one more opportunity to correct any mistakes using this endpoint. This time, you’ll need to provide the Customer’s full SSN. If the additional attempt fails, the resulting status will be either `document` or `suspended`.
@@ -805,7 +813,7 @@ dwolla.then(function(dwolla) {
 ```noselect
 {
   "code": "InvalidResourceState",
-  "description": "Resource cannot be modified."
+  "message": "Resource cannot be modified."
 }
 ```
 
