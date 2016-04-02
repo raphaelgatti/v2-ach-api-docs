@@ -15,6 +15,9 @@ For more information on white label account types, reference the [account types]
 ### Receive-only
 Receive-only customers are restricted to a "payouts only" business model. A receive-only customer maintains limited functionality in the API and is only eligible to receive transfers to an attached bank account from the Dwolla `Account` that created it.
 
+### Migrating Dwolla user Accounts to White Label Customers
+Dwolla offers a seamless process for migrating existing user [Accounts](#accounts) managed via OAuth on your platform to White Label [Customers](#customers). The user Account will maintain existing functionality on dwolla.com and will act as a separate White Label Customer upon completion of the migration. To learn more about upgrading to White Label, please [contact Sales](https://www.dwolla.com/contact?b=apidocs).
+
 ### Customer links
 | Link | Description|
 |------|------------|
@@ -101,19 +104,19 @@ ipAddress | yes | Customer's IP address.
 ### Request parameters - verified Customer
 Parameter | Optional? | Description
 ----------|----------|-------------
-firstName | no | Customer's first name.
-lastName | no | Customer's last name.
-email | no | Customer's email address.
+firstName | no | Customer's first name. 
+lastName | no | Customer's last name. 
+email | no | Customer's email address. 
 ipAddress | yes | Customer's IP address.
 type | no | Either `personal` or `business`. If business, [see below](#additional-request-parameters-for-verified-customer-with-typebusiness) for additional required information.
-address1 | no | First line of the street address of the Customer's permanent residence
-address2 | yes | Second line of the street address of the Customer's permanent residence
-city | no | City of Customer's permanent residence
-state | no | Two letter abbreviation of the state in which the Customer resides, e.g. `CA`
-postalCode | no | Postal code of Customer's permanent residence
+address1 | no | First line of the street address of the Customer's permanent residence.
+address2 | yes | Second line of the street address of the Customer's permanent residence.
+city | no | City of Customer's permanent residence.
+state | no | Two letter abbreviation of the state in which the Customer resides, e.g. `CA`.
+postalCode | no | Postal code of Customer's permanent residence.
 dateOfBirth | no | Customer's date of birth in `YYYY-MM-DD` format.
 ssn | no | Last four digits of the Customer's Social Security Number.
-phone | no | Customer's 10 digit phone number.  No hyphens or other separators, e.g. `3334447777`
+phone | no | Customer's 10 digit phone number.  No hyphens or other separators, e.g. `3334447777`.
 
 ### Additional request parameters for verified Customer with type=business
 Parameter | Optional? | Description |
@@ -994,6 +997,57 @@ dwolla.then(function(dwolla) {
 })
 ```
 
+## Create on-demand transfer authorization
+This section outlines how to create an on-demand bank transfer authorization for your Customer. On-demand authorization allows Customers to authorize Dwolla to transfer variable amounts from their bank account using ACH at a later point in time for products or services delivered. This on-demand authorization is supplied along with the Customer's bank details when creating a [new Customer funding source](#new-customer-funding-source). 
+
+When on-demand authorization is enabled for your application the Customer is presented with text on a “add bank account” screen in your user interface(UI) giving authorization to Dwolla for future variable payments. **Note:** On-demand payments come as part of our White Label product and requires additional approval before getting started. Please [contact Sales](https://www.dwolla.com/contact?b=apidocs) for more information on enabling.
+
+<ol class="alerts">
+    <li class="alert icon-alert-alert">This endpoint <a href="#authentication">requires</a> an OAuth access token with the `ManageCustomers` <a href="#oauth-scopes">scope</a>.</li>
+</ol>
+
+### HTTP request
+`POST https://api.dwolla.com/on-demand-authorizations`
+
+### HTTP Status and Error Codes
+| HTTP Status | Code | Description |
+|--------------|-------------|---------------|
+| 403 | Forbidden | The supplied credentials are not authorized for this resource. |
+
+### Request and response
+
+```raw
+POST https://api-uat.dwolla.com/on-demand-authorizations
+Accept: application/vnd.dwolla.v1.hal+json
+Content-Type: application/vnd.dwolla.v1.hal+json
+Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
+
+{
+  "_links": {
+    "self": {
+      "href": "https://api-uat.dwolla.com/on-demand-authorizations/30e7c028-0bdf-e511-80de-0aa34a9b2388"
+    }
+  },
+  "bodyText": "I agree that future payments to Company ABC inc. will be processed by the Dwolla payment system from the selected account above. In order to cancel this authorization, I will change my payment settings within my Company ABC inc. account.",
+  "buttonText": "Agree & Continue"
+}
+```
+```ruby
+# No example for this language yet.
+```
+```php
+/**
+ * No example for this language yet.
+ **/
+```
+```python
+# No example for this language yet.
+```
+```javascript
+/**
+ * No example for this language yet.
+ **/
+
 ## Create a Customer funding source
 There are two methods available for adding a bank or credit union account to a Customer. You can either collect the Customer's bank account information and pass it to Dwolla via the [new Customer funding source](new-customer-funding-source) endpoint, or you can send the Customer through the the [Instant Account Verification](#instant-account-verification-iav) (IAV) flow which will add and verify a bank account within seconds.
 
@@ -1012,16 +1066,17 @@ Create a new Funding Source for a Customer.  Customers can have a maximum of 6 f
 ### Request parameters
 Parameter | Optional? | Description
 ----------|------------|------------
+_links | yes | A `_links" JSON object containing an `on-demand-authorization` link relation. See example raw request and response.
 routingNumber | no | The bank account's routing number.
 accountNumber | no | The bank account number.
 type | no | Type of bank account: `checking` or `savings`.
 name | no | Arbitrary nickname for the funding source.
 
-### Errors
-| HTTP Status | Message |
-|--------------|-------------|
-| 400 | Duplicate funding source or validation error.
-| 403 | Not authorized to create funding source.
+### HTTP Status and Error Codes
+| HTTP Status | Code | Description |
+|--------------|-------------|-------------------|
+| 400 | ValidationError | Can be: Duplicate funding source or validation error. Authorization already associated to a funding source. |
+| 403 | Forbidden | Not authorized to create funding source. |
 
 ### Request and response
 
@@ -1031,6 +1086,11 @@ Content-Type: application/vnd.dwolla.v1.hal+json
 Accept: application/vnd.dwolla.v1.hal+json
 Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 {
+    "_links": {
+      "on-demand-authorization": {
+        "href": "https://api-uat.dwolla.com/on-demand-authorizations/30e7c028-0bdf-e511-80de-0aa34a9b2388"
+      }
+    },
     "routingNumber": "222222226",
     "accountNumber": "123456789",
     "type": "checking",

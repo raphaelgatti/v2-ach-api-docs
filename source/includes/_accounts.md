@@ -8,6 +8,9 @@ With a transfer of money, at least one party must complete the identity verifica
 
 For more information on Traditional Dwolla accounts, both Tradtional CIP Verified and Dwolla Direct, reference the [account types](https://developers.dwolla.com/resources/account-types/traditional-accounts.html) resource article.
 
+### Migrating Dwolla user Accounts to White Label Customers
+Dwolla offers a seamless process for migrating existing user [Accounts](#accounts) managed via OAuth on your platform to White Label [Customers](#customers). The user Account will maintain existing functionality on dwolla.com and will act as a separate White Label Customer upon completion of the migration. To learn more about upgrading to White Label, please [contact Sales](https://www.dwolla.com/contact?b=apidocs).
+
 ### Account links
 | Link | Description|
 |------|------------|
