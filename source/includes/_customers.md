@@ -423,7 +423,7 @@ Retrieve a list of industry classifications to identify the Customer’s busines
 </ol>
 
 ### HTTP request
-`GET https://api.dwolla.com/business-classifications/{id}`
+`GET https://api.dwolla.com/business-classifications`
 
 ### Request and response:
 
@@ -1006,6 +1006,7 @@ dwolla.then(function(dwolla) {
 ```
 
 ## Create on-demand transfer authorization
+
 This section outlines how to create an on-demand bank transfer authorization for your Customer. On-demand authorization allows Customers to authorize Dwolla to transfer variable amounts from their bank account using ACH at a later point in time for products or services delivered. This on-demand authorization is supplied along with the Customer's bank details when creating a [new Customer funding source](#new-customer-funding-source). 
 
 When on-demand authorization is enabled for your application the Customer is presented with text on a “add bank account” screen in your user interface(UI) giving authorization to Dwolla for future variable payments. **Note:** On-demand payments come as part of our White Label product and requires additional approval before getting started. Please [contact Sales](https://www.dwolla.com/contact?b=apidocs) for more information on enabling.
@@ -1055,6 +1056,7 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 /**
  * No example for this language yet.
  **/
+ ```
 
 ## Create a Customer funding source
 There are two methods available for adding a bank or credit union account to a Customer. You can either collect the Customer's bank account information and pass it to Dwolla via the [new Customer funding source](new-customer-funding-source) endpoint, or you can send the Customer through the the [Instant Account Verification](#instant-account-verification-iav) (IAV) flow which will add and verify a bank account within seconds.
@@ -1074,7 +1076,7 @@ Create a new Funding Source for a Customer.  Customers can have a maximum of 6 f
 ### Request parameters
 Parameter | Optional? | Description
 ----------|------------|------------
-_links | yes | A `_links" JSON object containing an `on-demand-authorization` link relation. See example raw request and response.
+_links | yes | A `_links' JSON object containing an `on-demand-authorization` link relation. See example raw request and response.
 routingNumber | no | The bank account's routing number.
 accountNumber | no | The bank account number.
 type | no | Type of bank account: `checking` or `savings`.
