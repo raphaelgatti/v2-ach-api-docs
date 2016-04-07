@@ -2230,7 +2230,7 @@ Location: https://api.dwolla.com/customers/FC451A7A-AE30-4404-AB95-E3553FCD733F
 <p>Retrieve a list of industry classifications to identify the Customer’s business. An industry classification is required by Dwolla when verifying a <code class="prettyprint">business</code> in order to better analyze the nature of a business.</p>
 <ol class="alerts"><li class="alert icon-alert-alert"><p>This endpoint requires an OAuth access token with the <code>ManageCustomers</code> scope.</p>
 </li></ol><h3 id='http-request'>HTTP request</h3>
-<p><code class="prettyprint">GET https://api.dwolla.com/business-classifications/{id}</code></p>
+<p><code class="prettyprint">GET https://api.dwolla.com/business-classifications</code></p>
 <h3 id='request-and-response'>Request and response:</h3><div class="code-snippet js-code-snippet language-nohide"><button class="btn alternative">copy</button><div class="code-snippet__cnt highlight"><pre><code class="language-nohide" data-lang="nohide">GET https://api-uat.dwolla.com/business-classifications
 Accept: application/vnd.dwolla.v1.hal+json
 Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
@@ -3100,58 +3100,94 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
         </div><div class="code-snippet__cnt highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="cm">/**
  * No example for this language yet.
  **/</span>
+</code></pre></div></div><h2 id='create-a-customer-funding-source'>Create a Customer funding source</h2>
+<p>There are two methods available for adding a bank or credit union account to a Customer. You can either collect the Customer&rsquo;s bank account information and pass it to Dwolla via the <a href="new-customer-funding-source">new Customer funding source</a> endpoint, or you can send the Customer through the the <a href="#instant-account-verification-iav">Instant Account Verification</a> (IAV) flow which will add and verify a bank account within seconds.</p>
 
-<span class="err">##</span> <span class="nx">Create</span> <span class="nx">a</span> <span class="nx">Customer</span> <span class="nx">funding</span> <span class="nx">source</span>
-<span class="nx">There</span> <span class="nx">are</span> <span class="nx">two</span> <span class="nx">methods</span> <span class="nx">available</span> <span class="k">for</span> <span class="nx">adding</span> <span class="nx">a</span> <span class="nx">bank</span> <span class="nx">or</span> <span class="nx">credit</span> <span class="nx">union</span> <span class="nx">account</span> <span class="nx">to</span> <span class="nx">a</span> <span class="nx">Customer</span><span class="p">.</span> <span class="nx">You</span> <span class="nx">can</span> <span class="nx">either</span> <span class="nx">collect</span> <span class="nx">the</span> <span class="nx">Customer</span><span class="s1">'s bank account information and pass it to Dwolla via the [new Customer funding source](new-customer-funding-source) endpoint, or you can send the Customer through the the [Instant Account Verification](#instant-account-verification-iav) (IAV) flow which will add and verify a bank account within seconds.
+<p>Before a Dwolla account or white label Customer is eligible to transfer money from their bank or credit union account they need to verify ownership of the account, either via Instant Account Verification (IAV) or micro-deposits. For more information on bank account verification, reference this <a href="https://developers.dwolla.com/resources/funding-source-verification.html">funding source verification</a> resource article.</p>
+<h3 id='new-customer-funding-source'>New Customer funding source</h3>
+<p>Create a new Funding Source for a Customer.  Customers can have a maximum of 6 funding sources.</p>
+<ol class="alerts"><li class="alert icon-alert-alert"><p>This endpoint requires an OAuth access token with the <code>ManageCustomers</code> scope.</p>
+</li></ol><h3 id='http-request'>HTTP request</h3>
+<p><code class="prettyprint">POST https://api.dwolla.com/customers/{id}/funding-sources</code></p>
+<h3 id='request-parameters'>Request parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Optional?</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>_links</td>
+<td>yes</td>
+<td>A <code class="prettyprint">_links&#39; JSON object containing an</code>on-demand-authorization` link relation. See example raw request and response.</td>
+</tr>
+<tr>
+<td>routingNumber</td>
+<td>no</td>
+<td>The bank account&rsquo;s routing number.</td>
+</tr>
+<tr>
+<td>accountNumber</td>
+<td>no</td>
+<td>The bank account number.</td>
+</tr>
+<tr>
+<td>type</td>
+<td>no</td>
+<td>Type of bank account: <code class="prettyprint">checking</code> or <code class="prettyprint">savings</code>.</td>
+</tr>
+<tr>
+<td>name</td>
+<td>no</td>
+<td>Arbitrary nickname for the funding source.</td>
+</tr>
+</tbody></table>
+<h3 id='http-status-and-error-codes'>HTTP Status and Error Codes</h3>
+<table><thead>
+<tr>
+<th>HTTP Status</th>
+<th>Code</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>400</td>
+<td>ValidationError</td>
+<td>Can be: Duplicate funding source or validation error. Authorization already associated to a funding source.</td>
+</tr>
+<tr>
+<td>403</td>
+<td>Forbidden</td>
+<td>Not authorized to create funding source.</td>
+</tr>
+</tbody></table>
+<h3 id='request-and-response'>Request and response</h3><div class="code-snippet js-code-snippet language-raw"><button class="btn alternative">copy</button><div class="code-snippet__selector">
+          <nav>
+              <button class="selector_switch" id="raw">raw</button>
+              <button class="selector_switch" id="php">php</button>
+              <button class="selector_switch" id="ruby">ruby</button>
+              <button class="selector_switch" id="python">python</button>
+              <button class="selector_switch" id="javascript">javascript</button>
+          </nav>
+        </div><div class="code-snippet__cnt highlight"><pre><code class="language-raw" data-lang="raw">POST /customers/99bfb139-eadd-4cdf-b346-7504f0c16c60/funding-sources
+Content-Type: application/vnd.dwolla.v1.hal+json
+Accept: application/vnd.dwolla.v1.hal+json
+Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
+{
+    "_links": {
+      "on-demand-authorization": {
+        "href": "https://api-uat.dwolla.com/on-demand-authorizations/30e7c028-0bdf-e511-80de-0aa34a9b2388"
+      }
+    },
+    "routingNumber": "222222226",
+    "accountNumber": "123456789",
+    "type": "checking",
+    "name": "Vera Brittain’s Checking"
+}
 
-Before a Dwolla account or white label Customer is eligible to transfer money from their bank or credit union account they need to verify ownership of the account, either via Instant Account Verification (IAV) or micro-deposits. For more information on bank account verification, reference this [funding source verification](https://developers.dwolla.com/resources/funding-source-verification.html) resource article.
-
-### New Customer funding source
-Create a new Funding Source for a Customer.  Customers can have a maximum of 6 funding sources.
-
-&lt;ol class="alerts"&gt;
-    &lt;li class="alert icon-alert-alert"&gt;This endpoint &lt;a href="#authentication"&gt;requires&lt;/a&gt; an OAuth access token with the `ManageCustomers` &lt;a href="#oauth-scopes"&gt;scope&lt;/a&gt;.&lt;/li&gt;
-&lt;/ol&gt;
-
-### HTTP request
-`POST https://api.dwolla.com/customers/{id}/funding-sources`
-
-### Request parameters
-Parameter | Optional? | Description
-----------|------------|------------
-_links | yes | A `_links" JSON object containing an `on-demand-authorization` link relation. See example raw request and response.
-routingNumber | no | The bank account'</span><span class="nx">s</span> <span class="nx">routing</span> <span class="nx">number</span><span class="p">.</span>
-<span class="nx">accountNumber</span> <span class="o">|</span> <span class="nx">no</span> <span class="o">|</span> <span class="nx">The</span> <span class="nx">bank</span> <span class="nx">account</span> <span class="nx">number</span><span class="p">.</span>
-<span class="nx">type</span> <span class="o">|</span> <span class="nx">no</span> <span class="o">|</span> <span class="nx">Type</span> <span class="nx">of</span> <span class="nx">bank</span> <span class="nx">account</span><span class="err">:</span> <span class="err">`</span><span class="nx">checking</span><span class="err">`</span> <span class="nx">or</span> <span class="err">`</span><span class="nx">savings</span><span class="err">`</span><span class="p">.</span>
-<span class="nx">name</span> <span class="o">|</span> <span class="nx">no</span> <span class="o">|</span> <span class="nx">Arbitrary</span> <span class="nx">nickname</span> <span class="k">for</span> <span class="nx">the</span> <span class="nx">funding</span> <span class="nx">source</span><span class="p">.</span>
-
-<span class="err">###</span> <span class="nx">HTTP</span> <span class="nx">Status</span> <span class="nx">and</span> <span class="nb">Error</span> <span class="nx">Codes</span>
-<span class="o">|</span> <span class="nx">HTTP</span> <span class="nx">Status</span> <span class="o">|</span> <span class="nx">Code</span> <span class="o">|</span> <span class="nx">Description</span> <span class="o">|</span>
-<span class="o">|--------------|-------------|-------------------|</span>
-<span class="o">|</span> <span class="mi">400</span> <span class="o">|</span> <span class="nx">ValidationError</span> <span class="o">|</span> <span class="nx">Can</span> <span class="nx">be</span><span class="err">:</span> <span class="nx">Duplicate</span> <span class="nx">funding</span> <span class="nx">source</span> <span class="nx">or</span> <span class="nx">validation</span> <span class="nx">error</span><span class="p">.</span> <span class="nx">Authorization</span> <span class="nx">already</span> <span class="nx">associated</span> <span class="nx">to</span> <span class="nx">a</span> <span class="nx">funding</span> <span class="nx">source</span><span class="p">.</span> <span class="o">|</span>
-<span class="o">|</span> <span class="mi">403</span> <span class="o">|</span> <span class="nx">Forbidden</span> <span class="o">|</span> <span class="nx">Not</span> <span class="nx">authorized</span> <span class="nx">to</span> <span class="nx">create</span> <span class="nx">funding</span> <span class="nx">source</span><span class="p">.</span> <span class="o">|</span>
-
-<span class="err">###</span> <span class="nx">Request</span> <span class="nx">and</span> <span class="nx">response</span>
-
-<span class="err">```</span><span class="nx">raw</span>
-<span class="nx">POST</span> <span class="o">/</span><span class="nx">customers</span><span class="o">/</span><span class="mi">99</span><span class="nx">bfb139</span><span class="o">-</span><span class="nx">eadd</span><span class="o">-</span><span class="mi">4</span><span class="nx">cdf</span><span class="o">-</span><span class="nx">b346</span><span class="o">-</span><span class="mi">7504</span><span class="nx">f0c16c60</span><span class="o">/</span><span class="nx">funding</span><span class="o">-</span><span class="nx">sources</span>
-<span class="nx">Content</span><span class="o">-</span><span class="nx">Type</span><span class="err">:</span> <span class="nx">application</span><span class="o">/</span><span class="nx">vnd</span><span class="p">.</span><span class="nx">dwolla</span><span class="p">.</span><span class="nx">v1</span><span class="p">.</span><span class="nx">hal</span><span class="o">+</span><span class="nx">json</span>
-<span class="nl">Accept</span><span class="p">:</span> <span class="nx">application</span><span class="o">/</span><span class="nx">vnd</span><span class="p">.</span><span class="nx">dwolla</span><span class="p">.</span><span class="nx">v1</span><span class="p">.</span><span class="nx">hal</span><span class="o">+</span><span class="nx">json</span>
-<span class="nl">Authorization</span><span class="p">:</span> <span class="nx">Bearer</span> <span class="nx">pBA9fVDBEyYZCEsLf</span><span class="o">/</span><span class="nx">wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY</span>
-<span class="p">{</span>
-    <span class="s2">"_links"</span><span class="err">:</span> <span class="p">{</span>
-      <span class="s2">"on-demand-authorization"</span><span class="err">:</span> <span class="p">{</span>
-        <span class="s2">"href"</span><span class="err">:</span> <span class="s2">"https://api-uat.dwolla.com/on-demand-authorizations/30e7c028-0bdf-e511-80de-0aa34a9b2388"</span>
-      <span class="p">}</span>
-    <span class="p">},</span>
-    <span class="s2">"routingNumber"</span><span class="err">:</span> <span class="s2">"222222226"</span><span class="p">,</span>
-    <span class="s2">"accountNumber"</span><span class="err">:</span> <span class="s2">"123456789"</span><span class="p">,</span>
-    <span class="s2">"type"</span><span class="err">:</span> <span class="s2">"checking"</span><span class="p">,</span>
-    <span class="s2">"name"</span><span class="err">:</span> <span class="s2">"Vera Brittain’s Checking"</span>
-<span class="p">}</span>
-
-<span class="nx">HTTP</span><span class="o">/</span><span class="mf">1.1</span> <span class="mi">201</span> <span class="nx">Created</span>
-<span class="nl">Location</span><span class="p">:</span> <span class="nl">https</span><span class="p">:</span><span class="c1">//api.dwolla.com/funding-sources/AB443D36-3757-44C1-A1B4-29727FB3111C</span>
+HTTP/1.1 201 Created
+Location: https://api.dwolla.com/funding-sources/AB443D36-3757-44C1-A1B4-29727FB3111C
 </code></pre></div></div><div class="code-snippet js-code-snippet language-php"><button class="btn alternative">copy</button><div class="code-snippet__selector">
           <nav>
               <button class="selector_switch" id="raw">raw</button>
@@ -6207,35 +6243,35 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 </tr>
 <tr>
 <td>customer_bank_transfer_created</td>
-<td>A bank transfer was created for a Customer.</td>
+<td>A bank transfer was created for a Customer. Represents funds moving either from a verified Customer&rsquo;s bank to the Dwolla network or from the Dwolla network to a verified Customer&rsquo;s bank.</td>
 </tr>
 <tr>
 <td>customer_bank_transfer_cancelled</td>
-<td>A pending Customer bank transfer has been cancelled, and will not process further.</td>
+<td>A pending Customer bank transfer has been cancelled, and will not process further. Represents a cancellation of funds either transferring from a verified Customer&rsquo;s bank to the Dwolla network or from the Dwolla network to a verified Customer&rsquo;s bank.</td>
 </tr>
 <tr>
 <td>customer_bank_transfer_failed</td>
-<td>A Customer bank transfer failed to clear successfully. Usually, this is a result of an ACH failure (insufficient funds, etc.).</td>
+<td>A Customer bank transfer failed to clear successfully. Usually, this is a result of an ACH failure (insufficient funds, etc.). Represents funds failing to clear either from a verified Customer&rsquo;s bank to the Dwolla network or from the Dwolla network to a verified Customer&rsquo;s bank.</td>
 </tr>
 <tr>
 <td>customer_bank_transfer_completed</td>
-<td>A bank transfer that was created for a Customer has cleared successfully.</td>
+<td>A bank transfer that was created for a Customer has cleared successfully. Represents funds clearing either from a verified Customer&rsquo;s bank to the Dwolla network or from the Dwolla network to a verified Customer&rsquo;s bank.</td>
 </tr>
 <tr>
 <td>customer_transfer_created</td>
-<td>A transfer was created for a Customer.</td>
+<td>A transfer was created for a Customer. Represents funds transferring from a verified Customer&rsquo;s balance or unverified Customer&rsquo;s bank</td>
 </tr>
 <tr>
 <td>customer_transfer_cancelled</td>
-<td>A pending transfer has been cancelled, and will not process further.</td>
+<td>A pending transfer has been cancelled, and will not process further. Represents a cancellation of funds transferring either to an unverified Customer&rsquo;s bank or to a verified Customer&rsquo;s balance.</td>
 </tr>
 <tr>
 <td>customer_transfer_failed</td>
-<td>A Customer transfer failed to clear successfully.</td>
+<td>A Customer transfer failed to clear successfully. Represents funds failing to clear either to an unverified Customer&rsquo;s bank or to a verified Customer&rsquo;s balance.</td>
 </tr>
 <tr>
 <td>customer_transfer_completed</td>
-<td>A Customer transfer has cleared successfully.</td>
+<td>A Customer transfer has cleared successfully. Represents funds clearing either to an unverified Customer&rsquo;s bank or to a verified Customer&rsquo;s balance.</td>
 </tr>
 </tbody></table>
 <h2 id='list-events'>List events</h2>
