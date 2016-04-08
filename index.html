@@ -2806,6 +2806,11 @@ Location: https://api.dwolla.com/customers/FC451A7A-AE30-4404-AB95-E3553FCD733F
 <td>yes</td>
 <td>How many results to skip</td>
 </tr>
+<tr>
+<td>search</td>
+<td>yes</td>
+<td>Searches on <code class="prettyprint">firstName</code>, <code class="prettyprint">lastName</code>, and <code class="prettyprint">email</code> fields. (<code class="prettyprint">/customers?search=Smith</code>)</td>
+</tr>
 </tbody></table>
 <h3 id='request-and-response'>Request and response</h3><div class="code-snippet js-code-snippet language-raw"><button class="btn alternative">copy</button><div class="code-snippet__selector">
           <nav>
@@ -3120,7 +3125,7 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 <tr>
 <td>_links</td>
 <td>yes</td>
-<td>A <code class="prettyprint">_links&#39; JSON object containing an</code>on-demand-authorization` link relation. See example raw request and response.</td>
+<td>A <code>_links</code> JSON object containing an <code class="prettyprint">on-demand-authorization</code> link relation. See example raw request and response below.</td>
 </tr>
 <tr>
 <td>routingNumber</td>
