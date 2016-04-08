@@ -860,6 +860,7 @@ Parameter | Optional? | Description
 ----------|------------|-------------
 limit | yes | How many results to return
 offset | yes | How many results to skip
+search | yes | Searches on `firstName`, `lastName`, and `email` fields. (`/customers?search=Smith`)
 
 ### Request and response
 
@@ -1076,7 +1077,7 @@ Create a new Funding Source for a Customer.  Customers can have a maximum of 6 f
 ### Request parameters
 Parameter | Optional? | Description
 ----------|------------|------------
-_links | yes | A `_links' JSON object containing an `on-demand-authorization` link relation. See example raw request and response.
+_links | yes | A <code>_links</code> JSON object containing an `on-demand-authorization` link relation. See example raw request and response below.
 routingNumber | no | The bank account's routing number.
 accountNumber | no | The bank account number.
 type | no | Type of bank account: `checking` or `savings`.
