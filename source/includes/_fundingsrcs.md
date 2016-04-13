@@ -23,7 +23,7 @@ created | ISO-8601 timestamp
 
 ## Create a funding source
 
-Create a new funding source for an `Account` or `Customer`.
+Create a new funding source for an [Account](#accounts).
 
 <ol class="alerts">
     <li class="alert icon-alert-alert">This endpoint <a href="#authentication">requires</a> an OAuth access token with the `Funding` <a href="#oauth-scopes">scope</a>.</li>
@@ -32,13 +32,12 @@ Create a new funding source for an `Account` or `Customer`.
 ### HTTP request
 `POST https://api.dwolla.com/funding-sources`
 
-### Request parameters
-Parameter | Description
-----------|------------
-accountNumber | The bank account number.
-routingNumber | The bank account's routing number.
-type | Type of bank account: `checking` or `savings`.
-name | Arbitrary nickname for the funding source.
+Parameter | Optional? | Description
+----------|------------|-------------
+accountNumber | no | The bank account number.
+routingNumber | no | The bank account's routing number.
+type | no | Type of bank account: `checking` or `savings`.
+name | no | Arbitrary nickname for the funding source.
 
 ### Errors
 | HTTP Status | Message |
@@ -169,13 +168,20 @@ amount1 | no | An amount JSON object of first micro-deposit. Contains `value` an
 amount2 | no | An amount JSON object of first micro-deposit. Contains `value` and `currency`.
 
 
-### Errors
-| HTTP Status | Message |
-|--------------|-------------|
-| 200 | Micro deposits verified.  |
-| 201 | Micro deposits initiated. |
-| 400 | Funding source not found. |
-| 404 | Funding source not found. |
+### HTTP Status and Error Codes
+| HTTP Status | Code | Description |
+|--------------|-------------|-------------------|
+| 200 | OK | Micro deposits verified  |
+| 201 | Created | Micro deposits initiated |
+| 202 | TryAgainLater | "Invalid wait time." | 
+| 400 | NotFound | Funding source not found. |
+| 400 | ValidationError | InvalidAmount |
+| 400 | ValidationError | "Wrong amount(s)." |
+| 403 | InvalidResourceState | "Too many attempts." |
+| 403 | InvalidResourceState | "Bank already verified." |
+| 404 | NotFound | Micro deposits not initiated |
+| 404 | NotFound | Funding source not found |
+| 500 | Unknown | "Verify microdeposits returned an unknown error." |
 
 #### Request and response (Initiate)
 
