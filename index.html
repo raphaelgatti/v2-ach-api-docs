@@ -318,6 +318,117 @@ GET https://api.dwolla.com/accounts/a84222d5-31d2-4290-9a96-089813ef96b3/transfe
   </span><span class="nt">"created"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-09-29T19:47:28.920Z"</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div></div>
+            <h1 id='sdk-support'>SDK Support</h1>
+<p>The Dwolla API V2 has officially maintained software packages to make it easier for developers to get started with making requests against the API. This section is here to provide basic instructions on how to install these packages and get up and running with them. We recommend you use a POSIX-standardized shell on your development machine, and assume that you are already familiar and set-up with any tools required for your specific technical ecosystem.</p>
+
+<p>Each SDK is automatically versioned with the <a href="https://api-uat.dwolla.com/swagger.json">Dwolla API Schema</a>; all libraries (with the exception of JavaScript) are organized in a similar manner. Each endpoint grouping is assigned a class and then an operation which you can use to make a request. You can choose which environment to target (e.g production vs sandbox) by providing the SDK a different API host value.</p>
+<h4 id='api-hosts'>API Hosts</h4>
+<table><thead>
+<tr>
+<th>Production</th>
+<th>Sandbox</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>api.dwolla.com</td>
+<td>api-uat.dwolla.com</td>
+</tr>
+</tbody></table>
+<h2 id='ruby'>Ruby</h2>
+<p><code class="prettyprint">dwolla-swagger-ruby</code> is available on <a href="https://rubygems.org/gems/dwolla_swagger">RubyGems</a> with <a href="https://github.com/Dwolla/dwolla-swagger-ruby">source code</a> available on our GitHub page. More information is available on the project&rsquo;s README.</p>
+<h3 id='installation'>Installation</h3><div class="code-snippet js-code-snippet language-bashnohide"><button class="btn alternative">copy</button><div class="code-snippet__cnt highlight"><pre><code class="language-bashnohide" data-lang="bashnohide">gem install dwolla_swagger
+</code></pre></div></div><h3 id='quickstart'>Quickstart</h3>
+<p>Let&rsquo;s list some <code class="prettyprint">Customer</code> objects:</p>
+<div class="code-snippet js-code-snippet language-rubynohide"><button class="btn alternative">copy</button><div class="code-snippet__cnt highlight"><pre><code class="language-rubynohide" data-lang="rubynohide"><span class="nb">require</span> <span class="s1">'dwolla_swagger'</span>
+
+<span class="no">DwollaSwagger</span><span class="o">::</span><span class="no">Swagger</span><span class="p">.</span><span class="nf">configure</span> <span class="k">do</span> <span class="o">|</span><span class="n">config</span><span class="o">|</span>
+    <span class="n">config</span><span class="p">.</span><span class="nf">access_token</span> <span class="o">=</span> <span class="s1">'a token'</span>
+    <span class="n">config</span><span class="p">.</span><span class="nf">host</span> <span class="o">=</span> <span class="s1">'api-uat.dwolla.com'</span>
+    <span class="n">config</span><span class="p">.</span><span class="nf">base_path</span> <span class="o">=</span> <span class="s1">'/'</span>
+<span class="k">end</span>
+
+<span class="n">my_custies</span> <span class="o">=</span> <span class="no">DwollaSwagger</span><span class="o">::</span><span class="no">CustomersApi</span><span class="p">.</span><span class="nf">list</span><span class="p">(</span><span class="ss">:limit</span> <span class="o">=&gt;</span> <span class="mi">10</span><span class="p">)</span>
+</code></pre></div></div><h2 id='python'>Python</h2>
+<p><code class="prettyprint">dwolla-swagger-python</code> is available on <a href="https://pypi.python.org/pypi/dwollaswagger">PyPi</a> with <a href="https://github.com/Dwolla/dwolla-swagger-python">source code</a> available on our GitHub page. More information is available on the project&rsquo;s README.</p>
+<h3 id='installation'>Installation</h3><div class="code-snippet js-code-snippet language-bashnohide"><button class="btn alternative">copy</button><div class="code-snippet__cnt highlight"><pre><code class="language-bashnohide" data-lang="bashnohide">pip install dwollaswagger
+</code></pre></div></div><h3 id='quickstart'>Quickstart</h3>
+<p>Let&rsquo;s list some <code class="prettyprint">Customer</code> objects:</p>
+<div class="code-snippet js-code-snippet language-pythonnohide"><button class="btn alternative">copy</button><div class="code-snippet__cnt highlight"><pre><code class="language-pythonnohide" data-lang="pythonnohide"><span class="n">dwollaswagger</span><span class="o">.</span><span class="n">configuration</span><span class="o">.</span><span class="n">access_token</span> <span class="o">=</span> <span class="s">'token'</span>
+<span class="n">client</span> <span class="o">=</span> <span class="n">dwollaswagger</span><span class="o">.</span><span class="n">ApiClient</span><span class="p">(</span><span class="s">'https://api-uat.dwolla.com'</span><span class="p">)</span>
+
+<span class="n">customers_api</span> <span class="o">=</span> <span class="n">dwollaswagger</span><span class="o">.</span><span class="n">CustomersApi</span><span class="p">(</span><span class="n">client</span><span class="p">)</span>
+<span class="n">my_custies</span> <span class="o">=</span>  <span class="n">customers_api</span><span class="o">.</span><span class="nb">list</span><span class="p">(</span><span class="n">limit</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+</code></pre></div></div><h2 id='php'>PHP</h2>
+<p><code class="prettyprint">dwolla-swagger-php</code> is available on <a href="https://packagist.org/packages/dwolla/dwollaswagger">Packagist</a> with <a href="https://github.com/Dwolla/dwolla-swagger-php">source code</a> available on our GitHub page. More information is available on the project&rsquo;s README.</p>
+<h3 id='installation'>Installation</h3><div class="code-snippet js-code-snippet language-bashnohide"><button class="btn alternative">copy</button><div class="code-snippet__cnt highlight"><pre><code class="language-bashnohide" data-lang="bashnohide">composer require dwolla/dwollaswagger
+composer install
+</code></pre></div></div><h3 id='quickstart'>Quickstart</h3>
+<p>Let&rsquo;s list some <code class="prettyprint">Customer</code> objects:</p>
+<div class="code-snippet js-code-snippet language-phpnohide"><button class="btn alternative">copy</button><div class="code-snippet__cnt highlight"><pre><code class="language-phpnohide" data-lang="phpnohide"><span class="cp">&lt;?php</span>
+<span class="k">require</span><span class="p">(</span><span class="s1">'../path/to/vendor/autoload.php'</span><span class="p">);</span>
+
+<span class="nx">DwollaSwagger\Configuration</span><span class="o">::</span><span class="nv">$access_token</span> <span class="o">=</span> <span class="s1">'a token'</span><span class="p">;</span>
+<span class="nv">$apiClient</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">DwollaSwagger\ApiClient</span><span class="p">(</span><span class="s2">"https://api-uat.dwolla.com/"</span><span class="p">);</span>
+
+<span class="nv">$customersApi</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">DwollaSwagger\CustomersApi</span><span class="p">(</span><span class="nv">$apiClient</span><span class="p">);</span>
+<span class="nv">$myCusties</span> <span class="o">=</span> <span class="nv">$customersApi</span><span class="o">-&gt;</span><span class="na">_list</span><span class="p">(</span><span class="mi">10</span><span class="p">);</span>
+
+<span class="cp">?&gt;</span>
+</code></pre></div></div><h2 id='java'>Java</h2>
+<p><code class="prettyprint">dwolla-swagger-java</code> will soon be available on Maven Central with <a href="https://github.com/Dwolla/dwolla-swagger-java">source code</a> available on our GitHub page. More information is available on the project&rsquo;s README.</p>
+<h3 id='installation'>Installation</h3>
+<p>You will be required to install from source, please have <code class="prettyprint">Git</code> and <code class="prettyprint">mvn</code> installed and in your path, then:</p>
+<div class="code-snippet js-code-snippet language-bashnohide"><button class="btn alternative">copy</button><div class="code-snippet__cnt highlight"><pre><code class="language-bashnohide" data-lang="bashnohide">git clone https://github.com/Dwolla/dwolla-swagger-java
+<span class="nb">cd </span>dwolla-swagger-java
+mvn install package
+</code></pre></div></div><h3 id='quickstart'>Quickstart</h3>
+<p>Let&rsquo;s list some <code class="prettyprint">Customer</code> objects:</p>
+<div class="code-snippet js-code-snippet language-javanohide"><button class="btn alternative">copy</button><div class="code-snippet__cnt highlight"><pre><code class="language-javanohide" data-lang="javanohide"><span class="kn">import</span> <span class="nn">io.swagger.client.ApiClient</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">io.swagger.client.api.*</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">io.swagger.client.model.*</span><span class="o">;</span>
+
+<span class="n">ApiClient</span> <span class="n">a</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ApiClient</span><span class="o">();</span>
+<span class="n">a</span><span class="o">.</span><span class="na">setBasePath</span><span class="o">(</span><span class="s">"https://api-uat.dwolla.com"</span><span class="o">);</span>
+<span class="n">a</span><span class="o">.</span><span class="na">setAccessToken</span><span class="o">(</span><span class="s">"a token"</span><span class="o">);</span>
+
+<span class="n">CustomersApi</span> <span class="n">c</span> <span class="o">=</span> <span class="k">new</span> <span class="n">CustomersApi</span><span class="o">(</span><span class="n">a</span><span class="o">);</span>
+<span class="n">CustomerListResponse</span> <span class="n">custies</span> <span class="o">=</span> <span class="n">c</span><span class="o">.</span><span class="na">list</span><span class="o">(</span><span class="mi">10</span><span class="o">);</span>
+</code></pre></div></div><h2 id='javascript'>JavaScript</h2>
+<p>Dwolla does not maintain a JavaScript package &ndash; developers are encouraged to use the <code class="prettyprint">swagger-js</code> project, available on <a href="https://www.npmjs.com/package/swagger-client">npm</a> with <a href="https://github.com/swagger-api/swagger-js">source code</a> on the swagger-api project GitHub page. </p>
+<h3 id='installation'>Installation</h3><div class="code-snippet js-code-snippet language-bashnohide"><button class="btn alternative">copy</button><div class="code-snippet__cnt highlight"><pre><code class="language-bashnohide" data-lang="bashnohide">npm install swagger-client
+</code></pre></div></div><h3 id='quickstart'>Quickstart</h3>
+<p>Let&rsquo;s list some <code class="prettyprint">Customer</code> objects:</p>
+<div class="code-snippet js-code-snippet language-javascriptnohide"><button class="btn alternative">copy</button><div class="code-snippet__cnt highlight"><pre><code class="language-javascriptnohide" data-lang="javascriptnohide"><span class="kd">var</span> <span class="nx">client</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'swagger-client'</span><span class="p">);</span>
+
+<span class="kd">var</span> <span class="nx">dwolla</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">client</span><span class="p">({</span>
+    <span class="na">url</span><span class="p">:</span> <span class="s1">'https://api-uat.dwolla.com/swagger.json'</span><span class="p">,</span>
+    <span class="na">authorizations</span><span class="p">:</span> <span class="p">{</span>
+        <span class="na">dwollaHeaderAuth</span><span class="p">:</span> <span class="k">new</span> <span class="nx">client</span><span class="p">.</span><span class="nx">ApiKeyAuthorization</span><span class="p">(</span><span class="s1">'Authorization'</span><span class="p">,</span> <span class="s1">'Bearer your_token'</span><span class="p">,</span> <span class="s1">'header'</span><span class="p">)</span>
+    <span class="p">},</span>
+    <span class="na">usePromise</span><span class="p">:</span> <span class="kc">true</span>
+<span class="p">});</span>
+
+
+<span class="nx">dwolla</span><span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">dwolla</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">dwolla</span><span class="p">.</span><span class="nx">customers</span><span class="p">.</span><span class="nx">list</span><span class="p">({</span><span class="na">limit</span><span class="p">:</span><span class="mi">10</span><span class="p">}).</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">data</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">data</span><span class="p">);</span>
+    <span class="p">})</span>
+<span class="p">})</span>
+</code></pre></div></div>
+<p>Since this library sets up all operations on demand (i.e this isn&rsquo;t a Dwolla-specific package), you can query <code class="prettyprint">.help()</code> to help you retrieve more information as such:</p>
+<div class="code-snippet js-code-snippet language-javascriptnohide"><button class="btn alternative">copy</button><div class="code-snippet__cnt highlight"><pre><code class="language-javascriptnohide" data-lang="javascriptnohide"><span class="nx">dwolla</span><span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">dwolla</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">dwolla</span><span class="p">.</span><span class="nx">events</span><span class="p">.</span><span class="nx">help</span><span class="p">();</span>
+<span class="p">});</span>
+<span class="c1">// operations for the 'events' tag</span>
+<span class="c1">//   * events: List events.</span>
+<span class="c1">//   * id: Get an event by id.</span>
+
+<span class="nx">dwolla</span><span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">dwolla</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">dwolla</span><span class="p">.</span><span class="nx">events</span><span class="p">.</span><span class="nx">id</span><span class="p">.</span><span class="nx">help</span><span class="p">();</span>
+<span class="p">});</span>
+<span class="c1">// id: Get an event by id.</span>
+<span class="c1">//   * id (string): ID of application event to get.</span>
+</code></pre></div></div>
             <h1 id='oauth'>OAuth</h1>
 <p>Dwolla&rsquo;s API lets you interact with a user&rsquo;s Dwolla account and act on its behalf to transfer money, add funding sources, and more.  To do so, your application first needs to request authorization from users.  </p>
 
@@ -723,116 +834,77 @@ https://uat.dwolla.com/oauth/v2/authenticate?client_id={client_id}&amp;response_
   </span><span class="nt">"scope"</span><span class="p">:</span><span class="w"> </span><span class="s2">"AccountInfoFull|ManageAccount|Contacts|Transactions|Balance|Send|Request|Funding"</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div></div>
-            <h1 id='sdk-support'>SDK Support</h1>
-<p>The Dwolla API V2 has officially maintained software packages to make it easier for developers to get started with making requests against the API. This section is here to provide basic instructions on how to install these packages and get up and running with them. We recommend you use a POSIX-standardized shell on your development machine, and assume that you are already familiar and set-up with any tools required for your specific technical ecosystem.</p>
+            <h1 id='root'>Root</h1>
+<p>The &ldquo;root&rdquo; serves as an entry point to the API, providing your application with the ability to fetch and discover resources available based on the OAuth <code class="prettyprint">access_token</code> provided in the request. If a user <a href="#request-user-authorization">account access token</a> is provided in the request, the API will return links to resources that belong to a Dwolla account of that user (i.e. &ldquo;accounts&rdquo; and &ldquo;customers&rdquo;). Alternatively, if an <a href="#application-access-token">application access token</a> is provided in the request, the API will return links to resources that belong to the Dwolla application (i.e. &ldquo;events&rdquo; and &ldquo;webhook-subscriptions&rdquo;).</p>
+<ol class="alerts"><li class="alert icon-alert-alert"><p>This endpoint requires an OAuth account access token but does not require a particular scope.</p>
+</li></ol><h3 id='http-request'>HTTP request</h3>
+<p><code class="prettyprint">GET https://api.dwolla.com/</code></p>
+<h3 id='request-and-response'>Request and response</h3><div class="code-snippet js-code-snippet language-raw"><button class="btn alternative">copy</button><div class="code-snippet__selector">
+          <nav>
+              <button class="selector_switch" id="raw">raw</button>
+              <button class="selector_switch" id="php">php</button>
+              <button class="selector_switch" id="ruby">ruby</button>
+              <button class="selector_switch" id="python">python</button>
+              <button class="selector_switch" id="javascript">javascript</button>
+          </nav>
+        </div><div class="code-snippet__cnt highlight"><pre><code class="language-raw" data-lang="raw">GET https://api.dwolla.com/
+Accept: application/vnd.dwolla.v1.hal+json
+Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 
-<p>Each SDK is automatically versioned with the <a href="https://api-uat.dwolla.com/swagger.json">Dwolla API Schema</a>; all libraries (with the exception of JavaScript) are organized in a similar manner. Each endpoint grouping is assigned a class and then an operation which you can use to make a request. You can choose which environment to target (e.g production vs sandbox) by providing the SDK a different API host value.</p>
-<h4 id='api-hosts'>API Hosts</h4>
-<table><thead>
-<tr>
-<th>Production</th>
-<th>Sandbox</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>api.dwolla.com</td>
-<td>api-uat.dwolla.com</td>
-</tr>
-</tbody></table>
-<h2 id='ruby'>Ruby</h2>
-<p><code class="prettyprint">dwolla-swagger-ruby</code> is available on <a href="https://rubygems.org/gems/dwolla_swagger">RubyGems</a> with <a href="https://github.com/Dwolla/dwolla-swagger-ruby">source code</a> available on our GitHub page. More information is available on the project&rsquo;s README.</p>
-<h3 id='installation'>Installation</h3><div class="code-snippet js-code-snippet language-bashnohide"><button class="btn alternative">copy</button><div class="code-snippet__cnt highlight"><pre><code class="language-bashnohide" data-lang="bashnohide">gem install dwolla_swagger
-</code></pre></div></div><h3 id='quickstart'>Quickstart</h3>
-<p>Let&rsquo;s list some <code class="prettyprint">Customer</code> objects:</p>
-<div class="code-snippet js-code-snippet language-rubynohide"><button class="btn alternative">copy</button><div class="code-snippet__cnt highlight"><pre><code class="language-rubynohide" data-lang="rubynohide"><span class="nb">require</span> <span class="s1">'dwolla_swagger'</span>
+...
 
-<span class="no">DwollaSwagger</span><span class="o">::</span><span class="no">Swagger</span><span class="p">.</span><span class="nf">configure</span> <span class="k">do</span> <span class="o">|</span><span class="n">config</span><span class="o">|</span>
-    <span class="n">config</span><span class="p">.</span><span class="nf">access_token</span> <span class="o">=</span> <span class="s1">'a token'</span>
-    <span class="n">config</span><span class="p">.</span><span class="nf">host</span> <span class="o">=</span> <span class="s1">'api-uat.dwolla.com'</span>
-    <span class="n">config</span><span class="p">.</span><span class="nf">base_path</span> <span class="o">=</span> <span class="s1">'/'</span>
-<span class="k">end</span>
-
-<span class="n">my_custies</span> <span class="o">=</span> <span class="no">DwollaSwagger</span><span class="o">::</span><span class="no">CustomersApi</span><span class="p">.</span><span class="nf">list</span><span class="p">(</span><span class="ss">:limit</span> <span class="o">=&gt;</span> <span class="mi">10</span><span class="p">)</span>
-</code></pre></div></div><h2 id='python'>Python</h2>
-<p><code class="prettyprint">dwolla-swagger-python</code> is available on <a href="https://pypi.python.org/pypi/dwollaswagger">PyPi</a> with <a href="https://github.com/Dwolla/dwolla-swagger-python">source code</a> available on our GitHub page. More information is available on the project&rsquo;s README.</p>
-<h3 id='installation'>Installation</h3><div class="code-snippet js-code-snippet language-bashnohide"><button class="btn alternative">copy</button><div class="code-snippet__cnt highlight"><pre><code class="language-bashnohide" data-lang="bashnohide">pip install dwollaswagger
-</code></pre></div></div><h3 id='quickstart'>Quickstart</h3>
-<p>Let&rsquo;s list some <code class="prettyprint">Customer</code> objects:</p>
-<div class="code-snippet js-code-snippet language-pythonnohide"><button class="btn alternative">copy</button><div class="code-snippet__cnt highlight"><pre><code class="language-pythonnohide" data-lang="pythonnohide"><span class="n">dwollaswagger</span><span class="o">.</span><span class="n">configuration</span><span class="o">.</span><span class="n">access_token</span> <span class="o">=</span> <span class="s">'token'</span>
-<span class="n">client</span> <span class="o">=</span> <span class="n">dwollaswagger</span><span class="o">.</span><span class="n">ApiClient</span><span class="p">(</span><span class="s">'https://api-uat.dwolla.com'</span><span class="p">)</span>
-
-<span class="n">customers_api</span> <span class="o">=</span> <span class="n">dwollaswagger</span><span class="o">.</span><span class="n">CustomersApi</span><span class="p">(</span><span class="n">client</span><span class="p">)</span>
-<span class="n">my_custies</span> <span class="o">=</span>  <span class="n">customers_api</span><span class="o">.</span><span class="nb">list</span><span class="p">(</span><span class="n">limit</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
-</code></pre></div></div><h2 id='php'>PHP</h2>
-<p><code class="prettyprint">dwolla-swagger-php</code> is available on <a href="https://packagist.org/packages/dwolla/dwollaswagger">Packagist</a> with <a href="https://github.com/Dwolla/dwolla-swagger-php">source code</a> available on our GitHub page. More information is available on the project&rsquo;s README.</p>
-<h3 id='installation'>Installation</h3><div class="code-snippet js-code-snippet language-bashnohide"><button class="btn alternative">copy</button><div class="code-snippet__cnt highlight"><pre><code class="language-bashnohide" data-lang="bashnohide">composer require dwolla/dwollaswagger
-composer install
-</code></pre></div></div><h3 id='quickstart'>Quickstart</h3>
-<p>Let&rsquo;s list some <code class="prettyprint">Customer</code> objects:</p>
-<div class="code-snippet js-code-snippet language-phpnohide"><button class="btn alternative">copy</button><div class="code-snippet__cnt highlight"><pre><code class="language-phpnohide" data-lang="phpnohide"><span class="cp">&lt;?php</span>
-<span class="k">require</span><span class="p">(</span><span class="s1">'../path/to/vendor/autoload.php'</span><span class="p">);</span>
-
-<span class="nx">DwollaSwagger\Configuration</span><span class="o">::</span><span class="nv">$access_token</span> <span class="o">=</span> <span class="s1">'a token'</span><span class="p">;</span>
-<span class="nv">$apiClient</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">DwollaSwagger\ApiClient</span><span class="p">(</span><span class="s2">"https://api-uat.dwolla.com/"</span><span class="p">);</span>
-
-<span class="nv">$customersApi</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">DwollaSwagger\CustomersApi</span><span class="p">(</span><span class="nv">$apiClient</span><span class="p">);</span>
-<span class="nv">$myCusties</span> <span class="o">=</span> <span class="nv">$customersApi</span><span class="o">-&gt;</span><span class="na">_list</span><span class="p">(</span><span class="mi">10</span><span class="p">);</span>
-
-<span class="cp">?&gt;</span>
-</code></pre></div></div><h2 id='java'>Java</h2>
-<p><code class="prettyprint">dwolla-swagger-java</code> will soon be available on Maven Central with <a href="https://github.com/Dwolla/dwolla-swagger-java">source code</a> available on our GitHub page. More information is available on the project&rsquo;s README.</p>
-<h3 id='installation'>Installation</h3>
-<p>You will be required to install from source, please have <code class="prettyprint">Git</code> and <code class="prettyprint">mvn</code> installed and in your path, then:</p>
-<div class="code-snippet js-code-snippet language-bashnohide"><button class="btn alternative">copy</button><div class="code-snippet__cnt highlight"><pre><code class="language-bashnohide" data-lang="bashnohide">git clone https://github.com/Dwolla/dwolla-swagger-java
-<span class="nb">cd </span>dwolla-swagger-java
-mvn install package
-</code></pre></div></div><h3 id='quickstart'>Quickstart</h3>
-<p>Let&rsquo;s list some <code class="prettyprint">Customer</code> objects:</p>
-<div class="code-snippet js-code-snippet language-javanohide"><button class="btn alternative">copy</button><div class="code-snippet__cnt highlight"><pre><code class="language-javanohide" data-lang="javanohide"><span class="kn">import</span> <span class="nn">io.swagger.client.ApiClient</span><span class="o">;</span>
-<span class="kn">import</span> <span class="nn">io.swagger.client.api.*</span><span class="o">;</span>
-<span class="kn">import</span> <span class="nn">io.swagger.client.model.*</span><span class="o">;</span>
-
-<span class="n">ApiClient</span> <span class="n">a</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ApiClient</span><span class="o">();</span>
-<span class="n">a</span><span class="o">.</span><span class="na">setBasePath</span><span class="o">(</span><span class="s">"https://api-uat.dwolla.com"</span><span class="o">);</span>
-<span class="n">a</span><span class="o">.</span><span class="na">setAccessToken</span><span class="o">(</span><span class="s">"a token"</span><span class="o">);</span>
-
-<span class="n">CustomersApi</span> <span class="n">c</span> <span class="o">=</span> <span class="k">new</span> <span class="n">CustomersApi</span><span class="o">(</span><span class="n">a</span><span class="o">);</span>
-<span class="n">CustomerListResponse</span> <span class="n">custies</span> <span class="o">=</span> <span class="n">c</span><span class="o">.</span><span class="na">list</span><span class="o">(</span><span class="mi">10</span><span class="o">);</span>
-</code></pre></div></div><h2 id='javascript'>JavaScript</h2>
-<p>Dwolla does not maintain a JavaScript package &ndash; developers are encouraged to use the <code class="prettyprint">swagger-js</code> project, available on <a href="https://www.npmjs.com/package/swagger-client">npm</a> with <a href="https://github.com/swagger-api/swagger-js">source code</a> on the swagger-api project GitHub page. </p>
-<h3 id='installation'>Installation</h3><div class="code-snippet js-code-snippet language-bashnohide"><button class="btn alternative">copy</button><div class="code-snippet__cnt highlight"><pre><code class="language-bashnohide" data-lang="bashnohide">npm install swagger-client
-</code></pre></div></div><h3 id='quickstart'>Quickstart</h3>
-<p>Let&rsquo;s list some <code class="prettyprint">Customer</code> objects:</p>
-<div class="code-snippet js-code-snippet language-javascriptnohide"><button class="btn alternative">copy</button><div class="code-snippet__cnt highlight"><pre><code class="language-javascriptnohide" data-lang="javascriptnohide"><span class="kd">var</span> <span class="nx">client</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'swagger-client'</span><span class="p">);</span>
-
-<span class="kd">var</span> <span class="nx">dwolla</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">client</span><span class="p">({</span>
-    <span class="na">url</span><span class="p">:</span> <span class="s1">'https://api-uat.dwolla.com/swagger.json'</span><span class="p">,</span>
-    <span class="na">authorizations</span><span class="p">:</span> <span class="p">{</span>
-        <span class="na">dwollaHeaderAuth</span><span class="p">:</span> <span class="k">new</span> <span class="nx">client</span><span class="p">.</span><span class="nx">ApiKeyAuthorization</span><span class="p">(</span><span class="s1">'Authorization'</span><span class="p">,</span> <span class="s1">'Bearer your_token'</span><span class="p">,</span> <span class="s1">'header'</span><span class="p">)</span>
-    <span class="p">},</span>
-    <span class="na">usePromise</span><span class="p">:</span> <span class="kc">true</span>
-<span class="p">});</span>
-
-
-<span class="nx">dwolla</span><span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">dwolla</span><span class="p">)</span> <span class="p">{</span>
-    <span class="nx">dwolla</span><span class="p">.</span><span class="nx">customers</span><span class="p">.</span><span class="nx">list</span><span class="p">({</span><span class="na">limit</span><span class="p">:</span><span class="mi">10</span><span class="p">}).</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">data</span><span class="p">)</span> <span class="p">{</span>
-        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">data</span><span class="p">);</span>
-    <span class="p">})</span>
-<span class="p">})</span>
-</code></pre></div></div>
-<p>Since this library sets up all operations on demand (i.e this isn&rsquo;t a Dwolla-specific package), you can query <code class="prettyprint">.help()</code> to help you retrieve more information as such:</p>
-<div class="code-snippet js-code-snippet language-javascriptnohide"><button class="btn alternative">copy</button><div class="code-snippet__cnt highlight"><pre><code class="language-javascriptnohide" data-lang="javascriptnohide"><span class="nx">dwolla</span><span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">dwolla</span><span class="p">)</span> <span class="p">{</span>
-    <span class="nx">dwolla</span><span class="p">.</span><span class="nx">events</span><span class="p">.</span><span class="nx">help</span><span class="p">();</span>
-<span class="p">});</span>
-<span class="c1">// operations for the 'events' tag</span>
-<span class="c1">//   * events: List events.</span>
-<span class="c1">//   * id: Get an event by id.</span>
-
-<span class="nx">dwolla</span><span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">dwolla</span><span class="p">)</span> <span class="p">{</span>
-    <span class="nx">dwolla</span><span class="p">.</span><span class="nx">events</span><span class="p">.</span><span class="nx">id</span><span class="p">.</span><span class="nx">help</span><span class="p">();</span>
-<span class="p">});</span>
-<span class="c1">// id: Get an event by id.</span>
-<span class="c1">//   * id (string): ID of application event to get.</span>
+{
+  "_links": {
+    "account": {
+      "href": "https://api-uat.dwolla.com/accounts/ad5f2162-404a-4c4c-994e-6ab6c3a13254"
+    },
+    "customers": {
+      "href": "https://api-uat.dwolla.com/customers"
+    }
+  }
+}
+</code></pre></div></div><div class="code-snippet js-code-snippet language-ruby"><button class="btn alternative">copy</button><div class="code-snippet__selector">
+          <nav>
+              <button class="selector_switch" id="raw">raw</button>
+              <button class="selector_switch" id="php">php</button>
+              <button class="selector_switch" id="ruby">ruby</button>
+              <button class="selector_switch" id="python">python</button>
+              <button class="selector_switch" id="javascript">javascript</button>
+          </nav>
+        </div><div class="code-snippet__cnt highlight"><pre><code class="language-ruby" data-lang="ruby"> <span class="c1"># No example for this language yet.</span>
+</code></pre></div></div><div class="code-snippet js-code-snippet language-php"><button class="btn alternative">copy</button><div class="code-snippet__selector">
+          <nav>
+              <button class="selector_switch" id="raw">raw</button>
+              <button class="selector_switch" id="php">php</button>
+              <button class="selector_switch" id="ruby">ruby</button>
+              <button class="selector_switch" id="python">python</button>
+              <button class="selector_switch" id="javascript">javascript</button>
+          </nav>
+        </div><div class="code-snippet__cnt highlight"><pre><code class="language-php" data-lang="php">/**
+ *  No example for this language yet. Coming soon.
+ **/
+</code></pre></div></div><div class="code-snippet js-code-snippet language-python"><button class="btn alternative">copy</button><div class="code-snippet__selector">
+          <nav>
+              <button class="selector_switch" id="raw">raw</button>
+              <button class="selector_switch" id="php">php</button>
+              <button class="selector_switch" id="ruby">ruby</button>
+              <button class="selector_switch" id="python">python</button>
+              <button class="selector_switch" id="javascript">javascript</button>
+          </nav>
+        </div><div class="code-snippet__cnt highlight"><pre><code class="language-python" data-lang="python"><span class="n">root_api</span> <span class="o">=</span> <span class="n">dwollaswagger</span><span class="o">.</span><span class="n">RootApi</span><span class="p">(</span><span class="n">client</span><span class="p">)</span>
+<span class="n">an_account</span> <span class="o">=</span> <span class="n">root_api</span><span class="o">.</span><span class="n">root</span><span class="p">()</span>
+<span class="k">print</span><span class="p">(</span><span class="n">an_account</span><span class="o">.</span><span class="n">_links</span><span class="p">[</span><span class="s">'account'</span><span class="p">][</span><span class="s">'href'</span><span class="p">])</span> <span class="c"># =&gt; https://api-uat.dwolla.com/accounts/ad5f2162-404a-4c4c-994e-6ab6c3a13254</span>
+</code></pre></div></div><div class="code-snippet js-code-snippet language-javascript"><button class="btn alternative">copy</button><div class="code-snippet__selector">
+          <nav>
+              <button class="selector_switch" id="raw">raw</button>
+              <button class="selector_switch" id="php">php</button>
+              <button class="selector_switch" id="ruby">ruby</button>
+              <button class="selector_switch" id="python">python</button>
+              <button class="selector_switch" id="javascript">javascript</button>
+          </nav>
+        </div><div class="code-snippet__cnt highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="cm">/**
+ *  No example for this language yet. Coming soon.
+ **/</span>
 </code></pre></div></div>
             <h1 id='accounts'>Accounts</h1>
 <p>An <code class="prettyprint">Account</code> represents a Dwolla account that was either established on dwolla.com, or created inline with the capture of the user account&rsquo;s permissions via Dwolla&rsquo;s OAuth flow. A user account grants authorization to an application via <a href="#oauth">OAuth</a>, which gives the application permission to interact with the API on their behalf.</p>
@@ -4210,31 +4282,36 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
     </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"My Bank"</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div></div><h2 id='create-a-funding-source'>Create a funding source</h2>
-<p>Create a new funding source for an <code class="prettyprint">Account</code> or <code class="prettyprint">Customer</code>.</p>
+<p>Create a new funding source for an <a href="#accounts">Account</a>.</p>
 <ol class="alerts"><li class="alert icon-alert-alert"><p>This endpoint requires an OAuth access token with the <code>Funding</code> scope.</p>
 </li></ol><h3 id='http-request'>HTTP request</h3>
 <p><code class="prettyprint">POST https://api.dwolla.com/funding-sources</code></p>
-<h3 id='request-parameters'>Request parameters</h3>
+
 <table><thead>
 <tr>
 <th>Parameter</th>
+<th>Optional?</th>
 <th>Description</th>
 </tr>
 </thead><tbody>
 <tr>
 <td>accountNumber</td>
+<td>no</td>
 <td>The bank account number.</td>
 </tr>
 <tr>
 <td>routingNumber</td>
+<td>no</td>
 <td>The bank account&rsquo;s routing number.</td>
 </tr>
 <tr>
 <td>type</td>
+<td>no</td>
 <td>Type of bank account: <code class="prettyprint">checking</code> or <code class="prettyprint">savings</code>.</td>
 </tr>
 <tr>
 <td>name</td>
+<td>no</td>
 <td>Arbitrary nickname for the funding source.</td>
 </tr>
 </tbody></table>
@@ -4412,28 +4489,68 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 <td>An amount JSON object of first micro-deposit. Contains <code class="prettyprint">value</code> and <code class="prettyprint">currency</code>.</td>
 </tr>
 </tbody></table>
-<h3 id='errors'>Errors</h3>
+<h3 id='http-status-and-error-codes'>HTTP Status and Error Codes</h3>
 <table><thead>
 <tr>
 <th>HTTP Status</th>
-<th>Message</th>
+<th>Code</th>
+<th>Description</th>
 </tr>
 </thead><tbody>
 <tr>
 <td>200</td>
-<td>Micro deposits verified.</td>
+<td>OK</td>
+<td>Micro deposits verified</td>
 </tr>
 <tr>
 <td>201</td>
-<td>Micro deposits initiated.</td>
+<td>Created</td>
+<td>Micro deposits initiated</td>
+</tr>
+<tr>
+<td>202</td>
+<td>TryAgainLater</td>
+<td>&ldquo;Invalid wait time.&rdquo;</td>
 </tr>
 <tr>
 <td>400</td>
+<td>NotFound</td>
 <td>Funding source not found.</td>
 </tr>
 <tr>
+<td>400</td>
+<td>ValidationError</td>
+<td>InvalidAmount</td>
+</tr>
+<tr>
+<td>400</td>
+<td>ValidationError</td>
+<td>&ldquo;Wrong amount(s).&rdquo;</td>
+</tr>
+<tr>
+<td>403</td>
+<td>InvalidResourceState</td>
+<td>&ldquo;Too many attempts.&rdquo;</td>
+</tr>
+<tr>
+<td>403</td>
+<td>InvalidResourceState</td>
+<td>&ldquo;Bank already verified.&rdquo;</td>
+</tr>
+<tr>
 <td>404</td>
-<td>Funding source not found.</td>
+<td>NotFound</td>
+<td>Micro deposits not initiated</td>
+</tr>
+<tr>
+<td>404</td>
+<td>NotFound</td>
+<td>Funding source not found</td>
+</tr>
+<tr>
+<td>500</td>
+<td>Unknown</td>
+<td>&ldquo;Verify microdeposits returned an unknown error.&rdquo;</td>
 </tr>
 </tbody></table>
 <h4 id='request-and-response-initiate'>Request and response (Initiate)</h4><div class="code-snippet js-code-snippet language-raw"><button class="btn alternative">copy</button><div class="code-snippet__selector">
