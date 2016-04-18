@@ -104,9 +104,9 @@ ipAddress | yes | Customer's IP address.
 ### Request parameters - verified Customer
 Parameter | Optional? | Description
 ----------|----------|-------------
-firstName | no | Customer's first name. 
-lastName | no | Customer's last name. 
-email | no | Customer's email address. 
+firstName | no | Customer's first name.
+lastName | no | Customer's last name.
+email | no | Customer's email address.
 ipAddress | yes | Customer's IP address.
 type | no | Either `personal` or `business`. If business, [see below](#additional-request-parameters-for-verified-customer-with-typebusiness) for additional required information.
 address1 | no | First line of the street address of the Customer's permanent residence.
@@ -163,14 +163,23 @@ HTTP/1.1 201 Created
 Location: https://api.dwolla.com/customers/FC451A7A-AE30-4404-AB95-E3553FCD733F
 ```
 ```ruby
+# DwollaSwagger - https://github.com/Dwolla/dwolla-swagger-ruby
 new_customer = DwollaSwagger::CustomersApi.create({:body => {
   :firstName => Jane,
   :lastName => 'Merchant',
   :email => 'jmerchant@nomail.net',
   :ipAddress => '99.99.99.99'
 }})
-
 p new_customer # => https://api-uat.dwolla.com/customers/FC451A7A-AE30-4404-AB95-E3553FCD733F
+
+# DwollaV2 - https://github.com/Dwolla/dwolla-v2-ruby
+new_customer = account_token.post {
+  :firstName => Jane,
+  :lastName => 'Merchant',
+  :email => 'jmerchant@nomail.net',
+  :ipAddress => '99.99.99.99'
+}
+p new_customer.headers[:location] # => https://api-uat.dwolla.com/customers/FC451A7A-AE30-4404-AB95-E3553FCD733F
 ```
 ```php
 <?php
@@ -265,7 +274,7 @@ print($new_customer); # => https://api-uat.dwolla.com/customers/AB443D36-3757-44
 ?>
 ```
 ```ruby
-new_customer = DwollaSwagger::CustomersApi.create({:body => {
+request_body = {
   :firstName => 'Bill',
   :lastName => 'Bibbit',
   :email => 'bbibbit@nomail.net',
@@ -283,9 +292,16 @@ new_customer = DwollaSwagger::CustomersApi.create({:body => {
   # it will still be accepted
 
   :ssn => '1234',
-  :phone => '3478589191'}})
+  :phone => '3478589191'
+}
 
-p new_customer # => https://api-uat.dwolla.com/customers/AB443D36-3757-44C1-A1B4-29727FB3111C
+# DwollaSwagger - https://github.com/Dwolla/dwolla-swagger-ruby
+new_customer = DwollaSwagger::CustomersApi.create(:body => request_body)
+p new_customer # => "https://api-uat.dwolla.com/customers/AB443D36-3757-44C1-A1B4-29727FB3111C"
+
+# DwollaV2 - https://github.com/Dwolla/dwolla-v2-ruby
+new_customer = account_token.post "customers", request_body
+p new_customer.headers[:location] # => "https://api-uat.dwolla.com/customers/AB443D36-3757-44C1-A1B4-29727FB3111C"
 ```
 ```python
 customers_api = dwollaswagger.CustomersApi(client)
@@ -358,16 +374,22 @@ HTTP/1.1 201 Created
 Location: https://api.dwolla.com/customers/FC451A7A-AE30-4404-AB95-E3553FCD733F
 ```
 ```ruby
-new_customer = DwollaSwagger::CustomersApi.create({:body => {
-  :firstName => Jane,
+request_body = {
+  :firstName => 'Jane',
   :lastName => 'Merchant',
   :email => 'jmerchant@nomail.net',
   :type => 'receive-only',
   :businessName => 'Jane Corp llc',
   :ipAddress => '99.99.99.99'
-}})
+}
 
-p new_customer # => https://api-uat.dwolla.com/customers/FC451A7A-AE30-4404-AB95-E3553FCD733F
+# DwollaSwagger - https://github.com/Dwolla/dwolla-swagger-ruby
+new_customer = DwollaSwagger::CustomersApi.create(:body => request_body)
+p new_customer # => "https://api-uat.dwolla.com/customers/FC451A7A-AE30-4404-AB95-E3553FCD733F"
+
+# DwollaV2 - https://github.com/Dwolla/dwolla-v2-ruby
+new_customer = account_token.post "customers", request_body
+p new_customer.headers[:location] # => "https://api-uat.dwolla.com/customers/FC451A7A-AE30-4404-AB95-E3553FCD733F"
 ```
 ```php
 <?php
@@ -517,8 +539,7 @@ This section shows you how to retrieve a business classification from a list of 
 </ol>
 
 ### HTTP request
-`GET https://api.dwolla.com/business-classifications/{id}
-`
+`GET https://api.dwolla.com/business-classifications/{id}`
 
 ### Request parameters
 
@@ -725,7 +746,7 @@ Location: https://api.dwolla.com/customers/FC451A7A-AE30-4404-AB95-E3553FCD733F
 ```
 ```php
 <?php
-$customersApi = DwollaSwagger\CustomersApi($apiClient);
+$customersApi = new DwollaSwagger\CustomersApi($apiClient);
 
 $retryLocation = 'https://api.dwolla.com/customers/FC451A7A-AE30-4404-AB95-E3553FCD733F';
 
@@ -742,15 +763,14 @@ $retryCustomer = $customersApi->updateCustomer($retryLocation, array (
   'postalCode' => '94104',
   'dateOfBirth' => '1970-07-11',
   'ssn' => '123-45-6789',
-););
+));
 
 print($retryCustomer); # => https://api.dwolla.com/customers/FC451A7A-AE30-4404-AB95-E3553FCD733F
 ?>
 ```
 ```ruby
 retry_location = 'https://api.dwolla.com/customers/FC451A7A-AE30-4404-AB95-E3553FCD733F'
-
-retry_customer = DwollaSwagger::CustomersApi.update_customer(retry_location, {:body => {
+request_body = {
       "firstName" => "Missy",
        "lastName" => "Elliott",
           "email" => "missey@nomail.com",
@@ -763,9 +783,15 @@ retry_customer = DwollaSwagger::CustomersApi.update_customer(retry_location, {:b
      "postalCode" => "94104",
     "dateOfBirth" => "1970-07-11",
             "ssn" => "123-45-6789"
-}})
+}
 
-p retry_customer # => https://api.dwolla.com/customers/FC451A7A-AE30-4404-AB95-E3553FCD733F
+# DwollaSwagger - https://github.com/Dwolla/dwolla-swagger-ruby
+retry_customer = DwollaSwagger::CustomersApi.update_customer(retry_location, :body => request_body)
+p retry_customer # => "https://api.dwolla.com/customers/FC451A7A-AE30-4404-AB95-E3553FCD733F"
+
+# DwollaV2 - https://github.com/Dwolla/dwolla-v2-ruby
+retry_customer = account_token.post retry_location, request_body
+p retry_customer.headers[:location] # => "https://api.dwolla.com/customers/FC451A7A-AE30-4404-AB95-E3553FCD733F"
 ```
 ```python
 customers_api = dwollaswagger.CustomersApi(client)
@@ -903,23 +929,28 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 }
 ```
 ```ruby
-my_custies = DwollaSwagger::CustomersApi.list(:limit => 10)
-p my_custies[0].firstName # => "Elizabeth"
+# DwollaSwagger - https://github.com/Dwolla/dwolla-swagger-ruby
+customers = DwollaSwagger::CustomersApi.list(:limit => 10)
+p customers._embedded[:customers][0][:firstName] # => "Elizabeth"
+
+# DwollaV2 - https://github.com/Dwolla/dwolla-v2-ruby
+customers = account_token.get "customers", limit: 10
+p customers._embedded.customers[0].firstName # => "Elizabeth"
 ```
 ```php
 <?php
-$customersApi = DwollaSwagger\CustomersApi($apiClient);
+$customersApi = new DwollaSwagger\CustomersApi($apiClient);
 
-$myCusties = $customersApi->list(10);
-print($myCusties[0]->firstName); # => "Elizabeth"
+$customers = $customersApi->_list(10, 0);
+print($customers->_embedded->customers[0]->firstName); # => "Elizabeth"
 ?>
 ```
 ```python
 customers_api = dwollaswagger.CustomersApi(client)
 
-my_custies = customers_api.list(limit=10)
+customers = customers_api.list(limit = 10)
 
-print(my_custies[0].firstName) # => Elizabeth
+print(customers._embedded['customers'][0]['firstName']) # => Elizabeth
 ```
 ```javascript
 dwolla.then(function(dwolla) {
@@ -977,7 +1008,12 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 ```ruby
 a_customer = 'https://api-uat.dwolla.com/customers/07D59716-EF22-4FE6-98E8-F3190233DFB8'
 
+# DwollaSwagger - https://github.com/Dwolla/dwolla-swagger-ruby
 retrieved = DwollaSwagger::CustomersApi.get_customer(a_customer)
+p retrieved.firstName # => "Elizabeth"
+
+# DwollaV2 - https://github.com/Dwolla/dwolla-v2-ruby
+retrieved = account_token.get a_customer
 p retrieved.firstName # => "Elizabeth"
 ```
 ```php
@@ -1008,7 +1044,7 @@ dwolla.then(function(dwolla) {
 
 ## Create on-demand transfer authorization
 
-This section outlines how to create an on-demand bank transfer authorization for your Customer. On-demand authorization allows Customers to authorize Dwolla to transfer variable amounts from their bank account using ACH at a later point in time for products or services delivered. This on-demand authorization is supplied along with the Customer's bank details when creating a [new Customer funding source](#new-customer-funding-source). 
+This section outlines how to create an on-demand bank transfer authorization for your Customer. On-demand authorization allows Customers to authorize Dwolla to transfer variable amounts from their bank account using ACH at a later point in time for products or services delivered. This on-demand authorization is supplied along with the Customer's bank details when creating a [new Customer funding source](#new-customer-funding-source).
 
 When on-demand authorization is enabled for your application the Customer is presented with text on a “add bank account” screen in your user interface(UI) giving authorization to Dwolla for future variable payments. **Note:** On-demand payments come as part of our White Label product and requires additional approval before getting started. Please [contact Sales](https://www.dwolla.com/contact?b=apidocs) for more information on enabling.
 
@@ -1125,15 +1161,15 @@ print($new_fs); # => https://api-uat.dwolla.com/funding-sources/375c6781-2a17-47
 ?>
 ```
 ```ruby
-new_fs = DwollaSwagger::FundingsourcesApi.create_customer_funding_source \
-('https://api-uat.dwolla.com/customers/AB443D36-3757-44C1-A1B4-29727FB3111C', {:body => {
-                                                    :routingNumber => '222222226',
-                                                    :accountNumber => '123456789',
-                                                    :type => 'checking',
-                                                    :name => 'Vera Brittain’s Checking'
-                                                 }})
+customer_url = 'https://api-uat.dwolla.com/customers/AB443D36-3757-44C1-A1B4-29727FB3111C'
 
-p new_fs # => https://api-uat.dwolla.com/funding-sources/375c6781-2a17-476c-84f7-db7d2f6ffb31
+# DwollaSwagger - https://github.com/Dwolla/dwolla-swagger-ruby
+new_fs = DwollaSwagger::FundingsourcesApi.create_customer_funding_source(customer_url, :body => request_body)
+p new_fs # => "https://api-uat.dwolla.com/funding-sources/375c6781-2a17-476c-84f7-db7d2f6ffb31"
+
+# DwollaV2 - https://github.com/Dwolla/dwolla-v2-ruby
+new_fs = account_token.post "#{customer_url}/funding-sources", request_body
+p new_fs.headers[:location] # => "https://api-uat.dwolla.com/funding-sources/375c6781-2a17-476c-84f7-db7d2f6ffb31"
 ```
 ```python
 funding_api = dwollaswagger.FundingsourcesApi(client)
@@ -1370,10 +1406,15 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 }
 ```
 ```ruby
-customer = 'https://api.dwolla.com/customers/5b29279d-6359-4c87-a318-e09095532733'
+customer_url = 'https://api.dwolla.com/customers/5b29279d-6359-4c87-a318-e09095532733'
 
-acct_fs = DwollaSwagger::FundingsourcesApi.get_customer_funding_sources(customer)
-p acct_fs[0].name # => "Vera Brittain’s Checking"
+# DwollaSwagger - https://github.com/Dwolla/dwolla-swagger-ruby
+acct_fs = DwollaSwagger::FundingsourcesApi.get_customer_funding_sources(customer_url)
+p acct_fs._embedded[:'funding-sources'][0][:name] # => "Vera Brittain’s Checking"
+
+# DwollaV2 - https://github.com/Dwolla/dwolla-v2-ruby
+acct_fs = account_token.get "#{customer}/funding-sources"
+p acct_fs._embedded['funding-sources'][0].name # => "Vera Brittain’s Checking"
 ```
 ```php
 <?php
@@ -1504,10 +1545,15 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 }
 ```
 ```ruby
-customer = 'http://api.dwolla.com/customers/01B47CB2-52AC-42A7-926C-6F1F50B1F271'
+customer_url = 'http://api.dwolla.com/customers/01B47CB2-52AC-42A7-926C-6F1F50B1F271'
 
-cust_xfers = DwollaSwagger::TransfersApi.get_customer_transfers(customer)
-p cust_xfers[0].status # => "pending"
+# DwollaSwagger - https://github.com/Dwolla/dwolla-swagger-ruby
+cust_xfers = DwollaSwagger::TransfersApi.get_customer_transfers(customer_url)
+p cust_xfers._embedded[:transfers][0][:status] # => "pending"
+
+# DwollaV2 - https://github.com/Dwolla/dwolla-v2-ruby
+cust_xfers = account_token.get "#{customer_url}/transfers"
+p cust_xfers._embedded.transfers[0].status # => "pending"
 ```
 ```php
 <?php

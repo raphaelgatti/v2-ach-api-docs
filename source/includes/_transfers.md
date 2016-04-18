@@ -2,13 +2,13 @@
 
 A transfer represents money being transferred from a `source` to a `destination`. Transfers are available for the `Customer` and `Account` resources.
 
-### Transfer resource 
+### Transfer resource
 
 | Parameter | Description
 |-----------|------------|
 |id | Transfer unique identifier
 |status | Either `processed`, `pending`, `cancelled`, `failed`, or `reclaimed`
-|amount| An amount JSON object. See below 
+|amount| An amount JSON object. See below
 |created | ISO-8601 timestamp
 |metadata | A metadata JSON object
 
@@ -145,38 +145,55 @@ HTTP/1.1 201 Created
 Location: https://api.dwolla.com/transfers/74c9129b-d14a-e511-80da-0aa34a9b2388
 ```
 ```ruby
-new_xfer = DwollaSwagger::TransfersApi.create({:body => {
+request_body = {
+  :_links => {
+    :destination => {
+      :href => "https://api.dwolla.com/customers/07D59716-EF22-4FE6-98E8-F3190233DFB8"
+    },
+    :source => {
+      :href => "https://api.dwolla.com/funding-sources/707177c3-bf15-4e7e-b37c-55c3898d9bf4"
+    }
+  },
+  :amount => {
+    :currency => "USD",
+    :value => "1.00"
+  },
+  :metadata => {
+    :foo => "bar",
+    :baz => "boo"
+  }
+}
 
-"_links" => {
-  "destination" => {"href"=>"https://api.dwolla.com/customers/07D59716-EF22-4FE6-98E8-F3190233DFB8"}, 
-  "source" => {"href"=>"https://api.dwolla.com/funding-sources/707177c3-bf15-4e7e-b37c-55c3898d9bf4"}
-}, 
-"amount" => {"currency"=>"USD", "value"=>"1.00"}, "metadata"=>{"foo"=>"bar", "baz"=>"boo"}}})
+# DwollaSwagger - https://github.com/Dwolla/dwolla-swagger-ruby
+transfer = DwollaSwagger::TransfersApi.create(:body => request_body)
+# => https://api.dwolla.com/transfers/74c9129b-d14a-e511-80da-0aa34a9b2388
 
-p new_xfer # => https://api.dwolla.com/transfers/74c9129b-d14a-e511-80da-0aa34a9b2388
+# DwollaV2 - https://github.com/Dwolla/dwolla-v2-ruby
+transfers = account_token.post "transfers", request_body
+# => #<DwollaV2::Response status=201 headers={"server"=>"cloudflare-nginx", "date"=>"Mon, 18 Apr 2016 15:26:09 GMT", "content-length"=>"0", "connection"=>"close", "set-cookie"=>"__cfduid=d7fcf9434cbbf1692f1b7519129cf7c3e1460993168; expires=Tue, 18-Apr-17 15:26:08 GMT; path=/; domain=.dwolla.com; HttpOnly", "location"=>"https://api.dwolla.com/transfers/54f73fa3-e52c-45ec-9926-0704b193ef7d", "x-request-id"=>"e1ca2395-d685-481d-9624-5217ac57f72a", "cf-ray"=>"29592229ad624225-MSP"} "">
 ```
 ```php
 <?php
 $transfersApi = new DwollaSwagger\TransfersApi($apiClient);
 
 $new_xfer = $transfersApi->create(array (
-  '_links' => 
+  '_links' =>
     array (
-      'destination' => 
+      'destination' =>
       array (
         'href' => 'https://api.dwolla.com/customers/07D59716-EF22-4FE6-98E8-F3190233DFB8',
       ),
-      'source' => 
+      'source' =>
       array (
         'href' => 'https://api.dwolla.com/funding-sources/707177c3-bf15-4e7e-b37c-55c3898d9bf4',
       ),
     ),
-  'amount' => 
+  'amount' =>
     array (
       'currency' => 'USD',
       'value' => '1.00',
     ),
-    'metadata' => 
+    'metadata' =>
     array (
       'foo' => 'bar',
       'baz' => 'boo',
@@ -291,10 +308,15 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 }
 ```
 ```ruby
-transfer = 'https://api.dwolla.com/transfers/4C8AD8B8-3D69-E511-80DB-0AA34A9B2388'
+transfer_url = 'https://api.dwolla.com/transfers/4C8AD8B8-3D69-E511-80DB-0AA34A9B2388'
 
-retrieved = DwollaSwagger::TransfersApi.by_id(transfer)
-p retrieved.status # => "pending"
+# DwollaSwagger - https://github.com/Dwolla/dwolla-swagger-ruby
+transfer = DwollaSwagger::TransfersApi.by_id(transfer_url)
+p transfer.status # => "pending"
+
+# DwollaV2 - https://github.com/Dwolla/dwolla-v2-ruby
+transfer = account_token.get transfer_url
+p transfer.status # => "pending"
 ```
 ```php
 <?php

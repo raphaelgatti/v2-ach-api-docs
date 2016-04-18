@@ -6,7 +6,7 @@ Customers of type `personal` or `business` and of status `document` require phot
 
 | Parameter | Description
 |-----------|------------|
-|id | Document unique identifier 
+|id | Document unique identifier
 |type | Either `passport`, `license`, `idCard`, or `other`.
 |status| Either `pending` or `reviewed`.  When a document has been manually reviewed by Dwolla, its status will be `reviewed`.  A reviewed document does not necessarily indicate that the customer has completed the identity verification process.
 | created | ISO 8601 Timestamp of document upload time and date
@@ -43,13 +43,13 @@ Create a document for a Customer pending verification by uploading a photo of th
 ### Request and response
 
 ```noselect
-curl -X POST 
-\ -H "Authorization: Bearer tJlyMNW6e3QVbzHjeJ9JvAPsRglFjwnba4NdfCzsYJm7XbckcR" 
-\ -H "Accept: application/vnd.dwolla.v1.hal+json" 
-\ -H "Cache-Control: no-cache" 
-\ -H "Content-Type: multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW" 
-\ -F "documentType=passport" 
-\ -F "file=@foo.png" 
+curl -X POST
+\ -H "Authorization: Bearer tJlyMNW6e3QVbzHjeJ9JvAPsRglFjwnba4NdfCzsYJm7XbckcR"
+\ -H "Accept: application/vnd.dwolla.v1.hal+json"
+\ -H "Cache-Control: no-cache"
+\ -H "Content-Type: multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW"
+\ -F "documentType=passport"
+\ -F "file=@foo.png"
 \ 'https://api.dwolla.com/customers/1DE32EC7-FF0B-4C0C-9F09-19629E6788CE/documents'
 
 ...
@@ -114,10 +114,15 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 }
 ```
 ```ruby
-a_customer = 'https://api.dwolla.com/customers/176878b8-ecdb-469b-a82b-43ba5e8704b2/documents'
+customer_url = 'https://api.dwolla.com/customers/176878b8-ecdb-469b-a82b-43ba5e8704b2/documents'
 
-retrieved = DwollaSwagger::CustomersApi.get_customer_documents(a_customer)
-p retrieved.firstName # => "Bob"
+# DwollaSwagger - https://github.com/Dwolla/dwolla-swagger-ruby
+documents = DwollaSwagger::CustomersApi.get_customer_documents(customer_url)
+p documents._embedded[:documents][0][:id] # => "56502f7a-fa59-4a2f-8579-0f8bc9d7b9cc"
+
+# DwollaV2 - https://github.com/Dwolla/dwolla-v2-ruby
+documents = token.get "#{customer_url}/documents"
+p documents._embedded.documents[0].id # => "56502f7a-fa59-4a2f-8579-0f8bc9d7b9cc"
 ```
 ```php
 <?php
@@ -174,28 +179,33 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 }
 ```
 ```ruby
-a_document = 'https://api.dwolla.com/documents/56502f7a-fa59-4a2f-8579-0f8bc9d7b9cc'
+document_url = 'https://api.dwolla.com/documents/56502f7a-fa59-4a2f-8579-0f8bc9d7b9cc'
 
-retrieved = DwollaSwagger::DocumentsApi.get_customer(a_document)
+# DwollaSwagger - https://github.com/Dwolla/dwolla-swagger-ruby
+document = DwollaSwagger::DocumentsApi.get_document(document_url)
+p document.type # => "passport"
+
+# DwollaV2 - https://github.com/Dwolla/dwolla-v2-ruby
+document = account_token.get document_url
 p retrieved.type # => "passport"
 ```
 ```php
 <?php
-$aCustomer = 'https://api.dwolla.com/documents/56502f7a-fa59-4a2f-8579-0f8bc9d7b9cc';
+$documentUrl = 'https://api.dwolla.com/documents/56502f7a-fa59-4a2f-8579-0f8bc9d7b9cc';
 
 $documentsApi = DwollaSwagger\DocumentsApi($apiClient);
 
-$retrieved = $documentsApi->getCustomer($aCustomer);
-print($retrieved->type); # => "passport"
+$document = $documentsApi->getDocument($documentUrl);
+print($document->type); # => "passport"
 ?>
 ```
 ```python
-a_document = 'https://api.dwolla.com/documents/56502f7a-fa59-4a2f-8579-0f8bc9d7b9cc'
+document_url = 'https://api.dwolla.com/documents/56502f7a-fa59-4a2f-8579-0f8bc9d7b9cc'
 
 documents_api = dwollaswagger.DocumentsApi(client)
 
-retrieved = documents_api.get_customer(a_document)
-print(retrieved.type) # => "passport"
+document = documents_api.get_customer(document_url)
+print(document.type) # => "passport"
 ```
 ```javascript
 // coming soon

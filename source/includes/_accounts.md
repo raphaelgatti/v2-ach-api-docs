@@ -106,7 +106,12 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 ```ruby
 an_account = 'https://api-uat.dwolla.com/accounts/ca32853c-48fa-40be-ae75-77b37504581b'
 
+# DwollaSwagger - https://github.com/Dwolla/dwolla-swagger-ruby
 retrieved = DwollaSwagger::AccountsApi.id(an_account)
+p retrieved.name # => "Charlotte Gillman"
+
+# DwollaV2 - https://github.com/Dwolla/dwolla-v2-ruby
+retrieved = account_token.get an_account
 p retrieved.name # => "Charlotte Gillman"
 ```
 ```php
@@ -262,8 +267,13 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 ```ruby
 account = 'https://api.dwolla.com/accounts/ca32853c-48fa-40be-ae75-77b37504581b'
 
+# DwollaSwagger - https://github.com/Dwolla/dwolla-swagger-ruby
 acct_fs = DwollaSwagger::FundingsourcesApi.get_account_funding_sources(account)
-p acct_fs[0].name # => "Vera Brittain’s Checking"
+p acct_fs._embedded[:'funding-sources'][0][:name] # => "Vera Brittain’s Checking"
+
+# DwollaV2 - https://github.com/Dwolla/dwolla-v2-ruby
+acct_fs = account_token.get "#{account}/funding-sources"
+p acct_fs._embedded['funding-sources'][0].name # => "Vera Brittain’s Checking"
 ```
 ```php
 <?php
@@ -385,8 +395,13 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 ```ruby
 account = 'https://api-uat.dwolla.com/accounts/a84222d5-31d2-4290-9a96-089813ef96b3'
 
+# DwollaSwagger - https://github.com/Dwolla/dwolla-swagger-ruby
 acct_xfers = DwollaSwagger::TransfersApi.get_account_transfers(account)
-p acct_xfers[0].status # => "processed"
+p acct_xfers._embedded[:transfers][0][:status] # => "processed"
+
+# DwollaV2 - https://github.com/Dwolla/dwolla-v2-ruby
+acct_xfers = account_token.get "#{account}/transfers"
+p acct_xfers_embedded.transfers[0].status # => "processed"
 ```
 ```php
 <?php

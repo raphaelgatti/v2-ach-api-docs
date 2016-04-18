@@ -2,7 +2,7 @@
 
 When the state of a resource changes, we create a new event resource to record the change.  For instance, if a Customer's status changes to `verified`, a `customer_verified` event will be created.  When an Event is created, a [Webhook](#webhooks) will be created to deliver the Event to any URLs specified by your active [Webhook Subscriptions](#webhook-subscriptions).
 
-### Events resource 
+### Events resource
 
 | Parameter | Description
 |-----------|------------|
@@ -102,7 +102,7 @@ offset | yes | How many results to skip.
 |--------------|-------------|
 | 404 | Resource not found. |
 
-### Request and response 
+### Request and response
 
 ```raw
 GET https://api.dwolla.com/events
@@ -205,15 +205,20 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 }
 ```
 ```ruby
+# DwollaSwagger - https://github.com/Dwolla/dwolla-swagger-ruby
 events = DwollaSwagger::EventsApi.events
-p events.total # => "4"
+p events.total # => 4
+
+# DwollaV2 - https://github.com/Dwolla/dwolla-v2-ruby
+events = application_token.get "events"
+p events.total # => 4
 ```
 ```php
 <?php
 $eventsApi = DwollaSwagger\EventsApi($apiClient);
 
 $events = $eventsApi->events();
-print($events->total); # => "4"
+print($events->total); # => 4
 ?>
 ```
 ```python
@@ -232,7 +237,7 @@ dwolla.then(function(dwolla) {
 
 ## Get event by id
 
-This section covers how to retrieve an event by id. 
+This section covers how to retrieve an event by id.
 
 <ol class="alerts">
     <li class="alert icon-alert-alert">This endpoint <a href="#authentication">requires</a> an OAuth *Application* access token.</li>
@@ -282,28 +287,33 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 }
 ```
 ```ruby
-event = 'https://api.dwolla.com/events/81f6e13c-557c-4449-9331-da5c65e61095'
+event_url = 'https://api.dwolla.com/events/81f6e13c-557c-4449-9331-da5c65e61095'
 
-retries = DwollaSwagger::EventsApi.retries_by_id(event)
-p retries.topic # => "customer_transfer_created"
+# DwollaSwagger - https://github.com/Dwolla/dwolla-swagger-ruby
+event = DwollaSwagger::EventsApi.id(event_url)
+p event.topic # => "customer_transfer_created"
+
+# DwollaV2 - https://github.com/Dwolla/dwolla-v2-ruby
+event = application_token.get event_url
+p event.topic # => "customer_transfer_created"
 ```
 ```php
 <?php
-$event = 'https://api.dwolla.com/events/81f6e13c-557c-4449-9331-da5c65e61095';
+$eventUrl = 'https://api.dwolla.com/events/81f6e13c-557c-4449-9331-da5c65e61095';
 
 $eventsApi = DwollaSwagger\EventsApi($apiClient);
 
-$retries = $eventsApi->retriesById($event);
-print($retries->topic); # => "customer_transfer_created"
+$event = $eventsApi->id($eventUrl);
+print($event->topic); # => "customer_transfer_created"
 ?>
 ```
 ```python
-event = 'https://api.dwolla.com/events/81f6e13c-557c-4449-9331-da5c65e61095'
+event_url = 'https://api.dwolla.com/events/81f6e13c-557c-4449-9331-da5c65e61095'
 
 events_api = dwollaswagger.EventsApi(client)
-retries = events_api.retries_by_id(event)
+event = events_api.id(event_url)
 
-print(retries.topic) # => customer_transfer_created
+print(event.topic) # => customer_transfer_created
 ```
 ```javascript
 dwolla.then(function(dwolla) {
