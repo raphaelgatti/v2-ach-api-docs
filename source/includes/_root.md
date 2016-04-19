@@ -3,7 +3,7 @@
 The "root" serves as an entry point to the API, providing your application with the ability to fetch and discover resources available based on the OAuth `access_token` provided in the request. If a user [account access token](#request-user-authorization) is provided in the request, the API will return links to resources that belong to a Dwolla account of that user (i.e. "accounts" and "customers"). Alternatively, if an [application access token](#application-access-token) is provided in the request, the API will return links to resources that belong to the Dwolla application (i.e. "events" and "webhook-subscriptions").
 
 <ol class="alerts">
-    <li class="alert icon-alert-alert">This endpoint <a href="#authentication">requires</a> an OAuth account access token but does not require a particular <a href="#oauth-scopes">scope</a>.</li>
+    <li class="alert icon-alert-alert">This endpoint <a href="#authentication">requires</a> an OAuth account access token or an *Application* access token but does not require a particular <a href="#oauth-scopes">scope</a>.</li>
 </ol>
 
 ### HTTP request
