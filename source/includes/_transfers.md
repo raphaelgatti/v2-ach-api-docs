@@ -164,67 +164,61 @@ request_body = {
   }
 }
 
-# DwollaSwagger - https://github.com/Dwolla/dwolla-swagger-ruby
-transfer = DwollaSwagger::TransfersApi.create(:body => request_body)
-# => https://api.dwolla.com/transfers/74c9129b-d14a-e511-80da-0aa34a9b2388
+# Using DwollaV2 - https://github.com/Dwolla/dwolla-v2-ruby (Recommended)
+transfer = account_token.post "transfers", request_body
+transfer.headers[:location] # => "https://api.dwolla.com/transfers/74c9129b-d14a-e511-80da-0aa34a9b2388"
 
-# DwollaV2 - https://github.com/Dwolla/dwolla-v2-ruby
-transfers = account_token.post "transfers", request_body
-# => #<DwollaV2::Response status=201 headers={"server"=>"cloudflare-nginx", "date"=>"Mon, 18 Apr 2016 15:26:09 GMT", "content-length"=>"0", "connection"=>"close", "set-cookie"=>"__cfduid=d7fcf9434cbbf1692f1b7519129cf7c3e1460993168; expires=Tue, 18-Apr-17 15:26:08 GMT; path=/; domain=.dwolla.com; HttpOnly", "location"=>"https://api.dwolla.com/transfers/54f73fa3-e52c-45ec-9926-0704b193ef7d", "x-request-id"=>"e1ca2395-d685-481d-9624-5217ac57f72a", "cf-ray"=>"29592229ad624225-MSP"} "">
+# Using DwollaSwagger - https://github.com/Dwolla/dwolla-swagger-ruby
+transfer = DwollaSwagger::TransfersApi.create(:body => request_body)
+transfer # => "https://api.dwolla.com/transfers/74c9129b-d14a-e511-80da-0aa34a9b2388"
 ```
 ```php
 <?php
 $transfersApi = new DwollaSwagger\TransfersApi($apiClient);
 
-$new_xfer = $transfersApi->create(array (
-  '_links' =>
-    array (
-      'destination' =>
-      array (
-        'href' => 'https://api.dwolla.com/customers/07D59716-EF22-4FE6-98E8-F3190233DFB8',
-      ),
-      'source' =>
-      array (
-        'href' => 'https://api.dwolla.com/funding-sources/707177c3-bf15-4e7e-b37c-55c3898d9bf4',
-      ),
-    ),
-  'amount' =>
-    array (
-      'currency' => 'USD',
-      'value' => '1.00',
-    ),
-    'metadata' =>
-    array (
-      'foo' => 'bar',
-      'baz' => 'boo',
-    ),
-));
-
-print($new_xfer); # => https://api.dwolla.com/transfers/74c9129b-d14a-e511-80da-0aa34a9b2388
+$transfer = $transfersApi->create([
+  '_links' => [
+    'destination' => [
+      'href' => 'https://api.dwolla.com/customers/07D59716-EF22-4FE6-98E8-F3190233DFB8'
+    ],
+    'source' => [
+      'href' => 'https://api.dwolla.com/funding-sources/707177c3-bf15-4e7e-b37c-55c3898d9bf4',
+    ],
+  ],
+  'amount' => [
+    'currency' => 'USD',
+    'value' => '1.00'
+  ],
+  'metadata' => [
+    'foo' => 'bar',
+    'baz' => 'boo',
+  ]
+]);
+$transfer; # => "https://api.dwolla.com/transfers/74c9129b-d14a-e511-80da-0aa34a9b2388"
 ?>
 ```
 ```python
 transfers_api = dwollaswagger.TransfersApi(client)
 
-new_xfer = transfers_api.create(body = {
-'_links': {
+transfer = transfers_api.create(body = {
+  '_links': {
     'destination': {
-        'href': 'https://api.dwolla.com/customers/07D59716-EF22-4FE6-98E8-F3190233DFB8'
+      'href': 'https://api.dwolla.com/customers/07D59716-EF22-4FE6-98E8-F3190233DFB8'
     },
     'source': {
-        'href': 'https://api.dwolla.com/funding-sources/707177c3-bf15-4e7e-b37c-55c3898d9bf4'
+      'href': 'https://api.dwolla.com/funding-sources/707177c3-bf15-4e7e-b37c-55c3898d9bf4'
     }
-},
-'amount': {
+  },
+  'amount': {
     'currency': 'USD',
     'value': '1.00'
-},
-'metadata': {
+  },
+  'metadata': {
     'foo': 'bar',
     'baz': 'boo'
-}})
-
-print(new_xfer) # => https://api.dwolla.com/transfers/74c9129b-d14a-e511-80da-0aa34a9b2388
+  }
+})
+transfer # => 'https://api.dwolla.com/transfers/74c9129b-d14a-e511-80da-0aa34a9b2388'
 ```
 ```javascript
 dwolla.then(function(dwolla) {
@@ -310,31 +304,31 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 ```ruby
 transfer_url = 'https://api.dwolla.com/transfers/4C8AD8B8-3D69-E511-80DB-0AA34A9B2388'
 
-# DwollaSwagger - https://github.com/Dwolla/dwolla-swagger-ruby
-transfer = DwollaSwagger::TransfersApi.by_id(transfer_url)
-p transfer.status # => "pending"
-
-# DwollaV2 - https://github.com/Dwolla/dwolla-v2-ruby
+# Using DwollaV2 - https://github.com/Dwolla/dwolla-v2-ruby (Recommended)
 transfer = account_token.get transfer_url
-p transfer.status # => "pending"
+transfer.status # => "pending"
+
+# Using DwollaSwagger - https://github.com/Dwolla/dwolla-swagger-ruby
+transfer = DwollaSwagger::TransfersApi.by_id(transfer_url)
+transfer.status # => "pending"
 ```
 ```php
 <?php
-$transfer = 'https://api.dwolla.com/transfers/4C8AD8B8-3D69-E511-80DB-0AA34A9B2388';
+$transferUrl = 'https://api.dwolla.com/transfers/4C8AD8B8-3D69-E511-80DB-0AA34A9B2388';
 
-$TransfersApi = DwollaSwagger\TransfersApi($apiClient);
+$transfersApi = new DwollaSwagger\TransfersApi($apiClient);
 
-$retrieved = $TransfersApi->byId($transfer);
-print($retrieved->status); # => "pending"
+$transfer = $transfersApi->byId($transferUrl);
+$transfer->status; # => "pending"
 ?>
 ```
 ```python
-transfer = 'https://api.dwolla.com/transfers/4C8AD8B8-3D69-E511-80DB-0AA34A9B2388'
+transfer_url = 'https://api.dwolla.com/transfers/4C8AD8B8-3D69-E511-80DB-0AA34A9B2388'
 
 transfers_api = dwollaswagger.TransfersApi(client)
-retrieved = transfers_api.by_id(transfer)
+transfer = transfers_api.by_id(transfer_url)
 
-print(retrieved.status) # => pending
+transfer.status # => 'pending'
 ```
 ```javascript
 dwolla.then(function(dwolla) {
@@ -428,7 +422,11 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 }
 ```
 ```ruby
-# No example for this language yet.
+transfer_url = 'https://api-uat.dwolla.com/transfers/83eb4b5e-a5d9-e511-80de-0aa34a9b2388'
+
+# Using DwollaV2 - https://github.com/Dwolla/dwolla-v2-ruby
+fees = account_token.get "#{transfer_url}/fees"
+fees.total # => 2
 ```
 ```php
 /**
@@ -463,7 +461,7 @@ id | no | Transfer unique identifier
 
 ### Request and Response
 
-```noselect
+```raw
 GET https://api-uat.dwolla.com/transfers/e6d9a950-ac9e-e511-80dc-0aa34a9b2388/failure
 Accept: application/vnd.dwolla.v1.hal+json
 Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
@@ -477,4 +475,24 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
   "code": "R1",
   "description": "Insufficient Funds"
 }
+```
+```ruby
+transfer_url = 'https://api-uat.dwolla.com/transfers/83eb4b5e-a5d9-e511-80de-0aa34a9b2388'
+
+# Using DwollaV2 - https://github.com/Dwolla/dwolla-v2-ruby
+failure = account_token.get "#{transfer_url}/failure"
+failure.code # => "R1"
+```
+```php
+/**
+ *  No example for this language yet.
+ **/
+```
+```python
+# No example for this language yet.
+```
+```javascript
+/**
+ *  No example for this language yet.
+ **/
 ```

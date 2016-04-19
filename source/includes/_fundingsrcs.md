@@ -119,13 +119,13 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 ```ruby
 funding_source_url = 'https://api.dwolla.com/funding-sources/692486f8-29f6-4516-a6a5-c69fd2ce854c'
 
-# DwollaSwagger - https://github.com/Dwolla/dwolla-swagger-ruby
-funding_source = DwollaSwagger::FundingsourcesApi.id(funding_source_url)
-p funding_source.name # => "Test checking account"
-
-# DwollaV2 - https://github.com/Dwolla/dwolla-v2-ruby
+# Using DwollaV2 - https://github.com/Dwolla/dwolla-v2-ruby (Recommended)
 funding_source = account_token.get funding_source_url
-p funding_source.name # => "Test checking account"
+funding_source.name # => "Test checking account"
+
+# Using DwollaSwagger - https://github.com/Dwolla/dwolla-swagger-ruby
+funding_source = DwollaSwagger::FundingsourcesApi.id(funding_source_url)
+funding_source.name # => "Test checking account"
 ```
 ```php
 <?php
@@ -134,7 +134,7 @@ $fundingSourceUrl = 'https://api.dwolla.com/funding-sources/692486f8-29f6-4516-a
 $fsApi = DwollaSwagger\FundingsourcesApi($apiClient);
 
 $fundingSource = $fsApi->id($fundingSourceUrl);
-print($fundingSource->name); # => "Test checking account"
+$fundingSource->name; # => "Test checking account"
 ?>
 ```
 ```python
@@ -143,7 +143,7 @@ funding_source_url = 'https://api.dwolla.com/funding-sources/692486f8-29f6-4516-
 fs_api = dwollaswagger.FundingsourcesApi(client)
 funding_source = fs_api.id(funding_source_url)
 
-print(funding_source.name) # => Test checking account
+funding_source.name # => 'Test checking account'
 ```
 ```javascript
 dwolla.then(function(dwolla) {
@@ -200,13 +200,13 @@ Cache-Control: no-cache
 HTTP 200 OK
 ```
 ```ruby
-new_fs = 'https://api-uat.dwolla.com/funding-sources/e52006c3-7560-4ff1-99d5-b0f3a6f4f909'
+funding_source_url = 'https://api-uat.dwolla.com/funding-sources/e52006c3-7560-4ff1-99d5-b0f3a6f4f909'
 
-# DwollaSwagger - https://github.com/Dwolla/dwolla-swagger-ruby
-DwollaSwagger::FundingsourcesApi.micro_deposits(new_fs)
+# Using DwollaV2 - https://github.com/Dwolla/dwolla-v2-ruby (Recommended)
+account_token.post "#{funding_source_url}/micro-deposits"
 
-# DwollaV2 - https://github.com/Dwolla/dwolla-v2-ruby
-account_token.post "#{new_fs}/micro-deposits"
+# Using DwollaSwagger - https://github.com/Dwolla/dwolla-swagger-ruby
+DwollaSwagger::FundingsourcesApi.micro_deposits(funding_source_url)
 ```
 ```javascript
 dwolla.then(function(dwolla) {
@@ -217,13 +217,19 @@ dwolla.then(function(dwolla) {
 });
 ```
 ```python
+funding_source_url = 'https://api-uat.dwolla.com/funding-sources/e52006c3-7560-4ff1-99d5-b0f3a6f4f909'
+
 fs_api = dwollaswagger.FundingsourcesApi(client)
-fs_api.micro_deposits(new_fs)
+
+fs_api.micro_deposits(funding_source_url)
 ```
 ```php
 <?php
+$fundingSourceUrl = 'https://api-uat.dwolla.com/funding-sources/e52006c3-7560-4ff1-99d5-b0f3a6f4f909';
+
 $fsApi = new DwollaSwagger\FundingsourcesApi($apiClient);
-$fsApi->micro_deposits($new_fs);
+
+$fsApi->micro_deposits($fundingSourceUrl);
 ?>
 ```
 
@@ -249,7 +255,7 @@ Accept: application/vnd.dwolla.v1.hal+json
 HTTP 200 OK
 ```
 ```ruby
-new_fs = 'https://api-uat.dwolla.com/funding-sources/e52006c3-7560-4ff1-99d5-b0f3a6f4f909'
+funding_source_url = 'https://api-uat.dwolla.com/funding-sources/e52006c3-7560-4ff1-99d5-b0f3a6f4f909'
 request_body = {
   :amount1 => {
     :value => "0.03",
@@ -261,11 +267,11 @@ request_body = {
   }
 }
 
-# DwollaSwagger - https://github.com/Dwolla/dwolla-swagger-ruby
-DwollaSwagger::FundingsourcesApi.micro_deposits(new_fs, body: request_body)
+# Using DwollaV2 - https://github.com/Dwolla/dwolla-v2-ruby (Recommended)
+account_token.post "#{funding_source_url}/micro-deposits", request_body
 
-# DwollaV2 - https://github.com/Dwolla/dwolla-v2-ruby
-account_token.post "#{new_fs}/micro-deposits", request_body
+# Using DwollaSwagger - https://github.com/Dwolla/dwolla-swagger-ruby
+DwollaSwagger::FundingsourcesApi.micro_deposits(funding_source_url, body: request_body)
 ```
 ```javascript
 dwolla.then(function(dwolla) {
@@ -300,20 +306,20 @@ fs_api.micro_deposits(new_fs, body = {
 ```
 ```php
 <?php
+$fundingSourceUrl = 'https://api-uat.dwolla.com/funding-sources/e52006c3-7560-4ff1-99d5-b0f3a6f4f909';
+
 $fsApi = new DwollaSwagger\FundingsourcesApi($apiClient);
 
-$fsApi->micro_deposits($new_fs, array (
-  'amount1' =>
-  array (
+$fsApi->micro_deposits($fundingSourceUrl, [
+  'amount1' => [
     'value' => '0.03',
-    'currency' => 'USD',
-  ),
-  'amount2' =>
-  array (
+    'currency' => 'USD'
+  ],
+  'amount2' => [
     'value' => '0.09',
-    'currency' => 'USD',
-  ),
-));
+    'currency' => 'USD'
+  ]
+]);
 ?>
 ```
 
@@ -393,26 +399,26 @@ HTTP 200 OK
 ```ruby
 funding_source_url = 'https://api.dwolla.com/funding-sources/692486f8-29f6-4516-a6a5-c69fd2ce854c'
 
-# DwollaSwagger - https://github.com/Dwolla/dwolla-swagger-ruby
-DwollaSwagger::FundingsourcesApi.delete(funding_source_url)
-
-# DwollaV2 - https://github.com/Dwolla/dwolla-v2-ruby
+# Using DwollaV2 - https://github.com/Dwolla/dwolla-v2-ruby (Recommended)
 account_token.delete funding_source_url
+
+# Using DwollaSwagger - https://github.com/Dwolla/dwolla-swagger-ruby
+DwollaSwagger::FundingsourcesApi.delete(funding_source_url)
 ```
 ```php
 <?php
-$fund_source = 'https://api.dwolla.com/funding-sources/692486f8-29f6-4516-a6a5-c69fd2ce854c';
+$fundingSourceUrl = 'https://api.dwolla.com/funding-sources/692486f8-29f6-4516-a6a5-c69fd2ce854c';
 
-$fsApi = DwollaSwagger\FundingsourcesApi($apiClient);
+$fsApi = new DwollaSwagger\FundingsourcesApi($apiClient);
 
-$fsApi->delete($fund_source);
+$fsApi->delete($fundingSourceUrl);
 ?>
 ```
 ```python
-fund_source = 'https://api.dwolla.com/funding-sources/692486f8-29f6-4516-a6a5-c69fd2ce854c'
+funding_source_url = 'https://api.dwolla.com/funding-sources/692486f8-29f6-4516-a6a5-c69fd2ce854c'
 
 fs_api = dwollaswagger.FundingsourcesApi(client)
-fs_api.delete(fund_source)
+fs_api.delete(funding_source_url)
 ```
 ```javascript
 dwolla.then(function(dwolla) {

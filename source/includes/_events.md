@@ -205,27 +205,27 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 }
 ```
 ```ruby
-# DwollaSwagger - https://github.com/Dwolla/dwolla-swagger-ruby
-events = DwollaSwagger::EventsApi.events
-p events.total # => 4
-
-# DwollaV2 - https://github.com/Dwolla/dwolla-v2-ruby
+# Using DwollaV2 - https://github.com/Dwolla/dwolla-v2-ruby (Recommended)
 events = application_token.get "events"
-p events.total # => 4
+events.total # => 4
+
+# Using DwollaSwagger - https://github.com/Dwolla/dwolla-swagger-ruby
+events = DwollaSwagger::EventsApi.events
+events.total # => 4
 ```
 ```php
 <?php
 $eventsApi = DwollaSwagger\EventsApi($apiClient);
 
 $events = $eventsApi->events();
-print($events->total); # => 4
+$events->total; # => 4
 ?>
 ```
 ```python
 events_api = dwollaswagger.EventsApi(client)
 events = events_api.events()
 
-print(events.total) # => 4
+events.total # => 4
 ```
 ```javascript
 dwolla.then(function(dwolla) {
@@ -289,13 +289,13 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 ```ruby
 event_url = 'https://api.dwolla.com/events/81f6e13c-557c-4449-9331-da5c65e61095'
 
-# DwollaSwagger - https://github.com/Dwolla/dwolla-swagger-ruby
-event = DwollaSwagger::EventsApi.id(event_url)
-p event.topic # => "customer_transfer_created"
-
-# DwollaV2 - https://github.com/Dwolla/dwolla-v2-ruby
+# Using DwollaV2 - https://github.com/Dwolla/dwolla-v2-ruby (Recommended)
 event = application_token.get event_url
-p event.topic # => "customer_transfer_created"
+event.topic # => "customer_transfer_created"
+
+# Using DwollaSwagger - https://github.com/Dwolla/dwolla-swagger-ruby
+event = DwollaSwagger::EventsApi.id(event_url)
+event.topic # => "customer_transfer_created"
 ```
 ```php
 <?php
@@ -304,7 +304,7 @@ $eventUrl = 'https://api.dwolla.com/events/81f6e13c-557c-4449-9331-da5c65e61095'
 $eventsApi = DwollaSwagger\EventsApi($apiClient);
 
 $event = $eventsApi->id($eventUrl);
-print($event->topic); # => "customer_transfer_created"
+$event->topic; # => "customer_transfer_created"
 ?>
 ```
 ```python
@@ -313,7 +313,7 @@ event_url = 'https://api.dwolla.com/events/81f6e13c-557c-4449-9331-da5c65e61095'
 events_api = dwollaswagger.EventsApi(client)
 event = events_api.id(event_url)
 
-print(event.topic) # => customer_transfer_created
+event.topic # => 'customer_transfer_created'
 ```
 ```javascript
 dwolla.then(function(dwolla) {

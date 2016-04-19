@@ -42,7 +42,7 @@ Create a document for a Customer pending verification by uploading a photo of th
 
 ### Request and response
 
-```noselect
+```raw
 curl -X POST
 \ -H "Authorization: Bearer tJlyMNW6e3QVbzHjeJ9JvAPsRglFjwnba4NdfCzsYJm7XbckcR"
 \ -H "Accept: application/vnd.dwolla.v1.hal+json"
@@ -56,6 +56,13 @@ curl -X POST
 
 HTTP/1.1 201 Created
 Location: https://api.dwolla.com/documents/11fe0bab-39bd-42ee-bb39-275afcc050d0
+```
+```ruby
+customer_url = 'https://api.dwolla.com/customers/1DE32EC7-FF0B-4C0C-9F09-19629E6788CE'
+
+file = Faraday::UploadIO.new('mclovin.jpg', 'image/jpeg')
+document = account_token.post "#{customer_url}/documents", file: file, documentType: 'license'
+document.headers[:location] # => "https://api.dwolla.com/documents/fb919e0b-ffbe-4268-b1e2-947b44328a16"
 ```
 
 ## List documents
@@ -116,31 +123,31 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 ```ruby
 customer_url = 'https://api.dwolla.com/customers/176878b8-ecdb-469b-a82b-43ba5e8704b2/documents'
 
-# DwollaSwagger - https://github.com/Dwolla/dwolla-swagger-ruby
-documents = DwollaSwagger::CustomersApi.get_customer_documents(customer_url)
-p documents._embedded[:documents][0][:id] # => "56502f7a-fa59-4a2f-8579-0f8bc9d7b9cc"
-
-# DwollaV2 - https://github.com/Dwolla/dwolla-v2-ruby
+# Using DwollaV2 - https://github.com/Dwolla/dwolla-v2-ruby (Recommended)
 documents = token.get "#{customer_url}/documents"
-p documents._embedded.documents[0].id # => "56502f7a-fa59-4a2f-8579-0f8bc9d7b9cc"
+documents._embedded.documents[0].id # => "56502f7a-fa59-4a2f-8579-0f8bc9d7b9cc"
+
+# Using DwollaSwagger - https://github.com/Dwolla/dwolla-swagger-ruby
+documents = DwollaSwagger::CustomersApi.get_customer_documents(customer_url)
+documents._embedded[:documents][0][:id] # => "56502f7a-fa59-4a2f-8579-0f8bc9d7b9cc"
 ```
 ```php
 <?php
-$aCustomer = 'https://api.dwolla.com/customers/176878b8-ecdb-469b-a82b-43ba5e8704b2/documents';
+$customerUrl = 'https://api.dwolla.com/customers/176878b8-ecdb-469b-a82b-43ba5e8704b2/documents';
 
 $customersApi = DwollaSwagger\CustomersApi($apiClient);
 
-$retrieved = $customersApi->getCustomerDocuments($aCustomer);
-print($retrieved->total); # => "2"
+$customer = $customersApi->getCustomerDocuments($customerUrl);
+$customer->total; # => 2
 ?>
 ```
 ```python
-a_customer = 'https://api.dwolla.com/customers/176878b8-ecdb-469b-a82b-43ba5e8704b2/documents'
+customer_url = 'https://api.dwolla.com/customers/176878b8-ecdb-469b-a82b-43ba5e8704b2/documents'
 
 customers_api = dwollaswagger.CustomersApi(client)
 
-retrieved = customers_api.get_customer_documents(a_customer)
-print(retrieved.total) # => 2
+documents = customers_api.get_customer_documents(customer_url)
+documents.total # => 2
 ```
 ```javascript
 // coming soon
@@ -181,22 +188,22 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 ```ruby
 document_url = 'https://api.dwolla.com/documents/56502f7a-fa59-4a2f-8579-0f8bc9d7b9cc'
 
-# DwollaSwagger - https://github.com/Dwolla/dwolla-swagger-ruby
-document = DwollaSwagger::DocumentsApi.get_document(document_url)
-p document.type # => "passport"
-
-# DwollaV2 - https://github.com/Dwolla/dwolla-v2-ruby
+# Using DwollaV2 - https://github.com/Dwolla/dwolla-v2-ruby (Recommended)
 document = account_token.get document_url
-p retrieved.type # => "passport"
+document.type # => "passport"
+
+# Using DwollaSwagger - https://github.com/Dwolla/dwolla-swagger-ruby
+document = DwollaSwagger::DocumentsApi.get_document(document_url)
+document.type # => "passport"
 ```
 ```php
 <?php
 $documentUrl = 'https://api.dwolla.com/documents/56502f7a-fa59-4a2f-8579-0f8bc9d7b9cc';
 
-$documentsApi = DwollaSwagger\DocumentsApi($apiClient);
+$documentsApi = new DwollaSwagger\DocumentsApi($apiClient);
 
 $document = $documentsApi->getDocument($documentUrl);
-print($document->type); # => "passport"
+$document->type; # => "passport"
 ?>
 ```
 ```python
@@ -205,7 +212,7 @@ document_url = 'https://api.dwolla.com/documents/56502f7a-fa59-4a2f-8579-0f8bc9d
 documents_api = dwollaswagger.DocumentsApi(client)
 
 document = documents_api.get_customer(document_url)
-print(document.type) # => "passport"
+document.type # => "passport"
 ```
 ```javascript
 // coming soon
