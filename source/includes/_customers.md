@@ -757,7 +757,7 @@ $customer = $customersApi->updateCustomer($customerUrl, array (
   'dateOfBirth' => '1970-07-11',
   'ssn' => '123-45-6789',
 ));
-$customer; # => "https://api.dwolla.com/customers/FC451A7A-AE30-4404-AB95-E3553FCD733F"
+$customer->id; # => "FC451A7A-AE30-4404-AB95-E3553FCD733F"
 ?>
 ```
 ```ruby
@@ -779,11 +779,11 @@ request_body = {
 
 # Using DwollaV2 - https://github.com/Dwolla/dwolla-v2-ruby (Recommended)
 customer = account_token.post customer_url, request_body
-customer.headers[:location] # => "https://api.dwolla.com/customers/FC451A7A-AE30-4404-AB95-E3553FCD733F"
+customer.id # => "FC451A7A-AE30-4404-AB95-E3553FCD733F"
 
 # Using DwollaSwagger - https://github.com/Dwolla/dwolla-swagger-ruby
 customer = DwollaSwagger::CustomersApi.update_customer(customer_url, :body => request_body)
-customer # => "https://api.dwolla.com/customers/FC451A7A-AE30-4404-AB95-E3553FCD733F"
+customer.id # => "FC451A7A-AE30-4404-AB95-E3553FCD733F"
 ```
 ```python
 customers_api = dwollaswagger.CustomersApi(client)
@@ -803,7 +803,7 @@ customer = customers_api.update_customer(customer_url, body = {
   "dateOfBirth": "1970-07-11",
   "ssn": "123-45-6789"
 })
-customer # => 'https://api.dwolla.com/customers/FC451A7A-AE30-4404-AB95-E3553FCD733F'
+customer.id # => 'FC451A7A-AE30-4404-AB95-E3553FCD733F'
 ```
 ```javascript
 dwolla.then(function(dwolla) {
