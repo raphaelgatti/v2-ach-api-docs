@@ -104,19 +104,19 @@ ipAddress | yes | Customer's IP address.
 ### Request parameters - verified Customer
 Parameter | Optional? | Description
 ----------|----------|-------------
-firstName | no | Customer's first name. 
-lastName | no | Customer's last name. 
+firstName | no | Customer or if business, authorized representative’s first name. 
+lastName | no | Customer or if business, authorized representative’s last name. 
 email | no | Customer's email address. 
 ipAddress | yes | Customer's IP address.
 type | no | Either `personal` or `business`. If business, [see below](#additional-request-parameters-for-verified-customer-with-typebusiness) for additional required information.
-address1 | no | First line of the street address of the Customer's permanent residence.
-address2 | yes | Second line of the street address of the Customer's permanent residence.
+address1 | no | First line of the street address of the Customer's permanent residence. Must be 50 characters or less.
+address2 | yes | Second line of the street address of the Customer's permanent residence. Must be 50 characters or less.
 city | no | City of Customer's permanent residence.
 state | no | Two letter abbreviation of the state in which the Customer resides, e.g. `CA`.
 postalCode | no | Postal code of Customer's permanent residence.
-dateOfBirth | no | Customer's date of birth in `YYYY-MM-DD` format.
+dateOfBirth | no | Customer or if business, authorized representative’s date of birth in `YYYY-MM-DD` format.
 ssn | no | Last four digits of the Customer's Social Security Number.
-phone | no | Customer's 10 digit phone number.  No hyphens or other separators, e.g. `3334447777`.
+phone | no | Customer or if business, authorized representative’s 10 digit phone number.  No hyphens or other separators, e.g. `3334447777`.
 
 ### Additional request parameters for verified Customer with type=business
 Parameter | Optional? | Description |
