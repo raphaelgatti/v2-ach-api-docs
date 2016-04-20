@@ -1789,12 +1789,12 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 <tr>
 <td>firstName</td>
 <td>no</td>
-<td>Customer&rsquo;s first name.</td>
+<td>Customer or if business, authorized representative’s first name.</td>
 </tr>
 <tr>
 <td>lastName</td>
 <td>no</td>
-<td>Customer&rsquo;s last name.</td>
+<td>Customer or if business, authorized representative’s last name.</td>
 </tr>
 <tr>
 <td>email</td>
@@ -1814,12 +1814,12 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 <tr>
 <td>address1</td>
 <td>no</td>
-<td>First line of the street address of the Customer&rsquo;s permanent residence.</td>
+<td>First line of the street address of the Customer&rsquo;s permanent residence. Must be 50 characters or less.</td>
 </tr>
 <tr>
 <td>address2</td>
 <td>yes</td>
-<td>Second line of the street address of the Customer&rsquo;s permanent residence.</td>
+<td>Second line of the street address of the Customer&rsquo;s permanent residence. Must be 50 characters or less.</td>
 </tr>
 <tr>
 <td>city</td>
@@ -1839,7 +1839,7 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 <tr>
 <td>dateOfBirth</td>
 <td>no</td>
-<td>Customer&rsquo;s date of birth in <code class="prettyprint">YYYY-MM-DD</code> format.</td>
+<td>Customer or if business, authorized representative’s date of birth in <code class="prettyprint">YYYY-MM-DD</code> format.</td>
 </tr>
 <tr>
 <td>ssn</td>
@@ -1849,7 +1849,7 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 <tr>
 <td>phone</td>
 <td>no</td>
-<td>Customer&rsquo;s 10 digit phone number.  No hyphens or other separators, e.g. <code class="prettyprint">3334447777</code>.</td>
+<td>Customer or if business, authorized representative’s 10 digit phone number.  No hyphens or other separators, e.g. <code class="prettyprint">3334447777</code>.</td>
 </tr>
 </tbody></table>
 <h3 id='additional-request-parameters-for-verified-customer-with-typebusiness'>Additional request parameters for verified Customer with type=business</h3>
