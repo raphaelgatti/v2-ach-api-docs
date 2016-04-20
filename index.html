@@ -3375,6 +3375,12 @@ Location: https://api.dwolla.com/funding-sources/AB443D36-3757-44C1-A1B4-29727FB
               <button class="selector_switch" id="javascript">javascript</button>
           </nav>
         </div><div class="code-snippet__cnt highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="n">customer_url</span> <span class="o">=</span> <span class="s1">'https://api-uat.dwolla.com/customers/AB443D36-3757-44C1-A1B4-29727FB3111C'</span>
+<span class="n">request_body</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="ss">routingNumber: </span><span class="s1">'222222226'</span><span class="p">,</span>
+  <span class="ss">accountNumber: </span><span class="s1">'123456789'</span><span class="p">,</span>
+  <span class="ss">type: </span><span class="s1">'checking'</span><span class="p">,</span>
+  <span class="ss">name: </span><span class="s1">'Vera Brittain’s Checking'</span>
+<span class="p">}</span>
 
 <span class="c1"># Using DwollaV2 - https://github.com/Dwolla/dwolla-v2-ruby (Recommended)</span>
 <span class="n">funding_source</span> <span class="o">=</span> <span class="n">account_token</span><span class="p">.</span><span class="nf">post</span> <span class="s2">"</span><span class="si">#{</span><span class="n">customer_url</span><span class="si">}</span><span class="s2">/funding-sources"</span><span class="p">,</span> <span class="n">request_body</span>
