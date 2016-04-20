@@ -11,7 +11,7 @@ Each SDK is automatically versioned with the [Dwolla API Schema](https://api-uat
 |api.dwolla.com|api-uat.dwolla.com|
 
 
-## Ruby
+## DwollaSwagger Ruby
 
 `dwolla-swagger-ruby` is available on [RubyGems](https://rubygems.org/gems/dwolla_swagger) with [source code](https://github.com/Dwolla/dwolla-swagger-ruby) available on our GitHub page. More information is available on the project's README.
 
@@ -35,6 +35,32 @@ DwollaSwagger::Swagger.configure do |config|
 end
 
 my_custies = DwollaSwagger::CustomersApi.list(:limit => 10)
+```
+
+## DwollaV2 Ruby
+
+`dwolla_v2` is available on [RubyGems](https://rubygems.org/gems/dwolla_v2) with [source code](https://github.com/Dwolla/dwolla-v2-ruby) available on our GitHub page. More information is available on the project's README.
+
+### Installation
+
+```bashnoselect
+gem install dwolla_v2
+```
+
+### Quickstart
+
+Let's fetch a page of customers:
+
+```rubynoselect
+require 'dwolla_v2'
+
+# see dwolla.com/applications for your client id and secret
+$dwolla = DwollaV2::Client.new(id: "...", secret: "...")
+
+# generate a token on dwolla.com/applications
+account_token = $dwolla.tokens.new access_token: "..."
+
+customers = account_token.get "customers", limit: 10
 ```
 
 ## Python
@@ -120,50 +146,30 @@ CustomerListResponse custies = c.list(10);
 
 ## JavaScript
 
-Dwolla does not maintain a JavaScript package -- developers are encouraged to use the `swagger-js` project, available on [npm](https://www.npmjs.com/package/swagger-client) with [source code](https://github.com/swagger-api/swagger-js) on the swagger-api project GitHub page. 
+`dwolla-v2` is available on [NPM](https://www.npmjs.com/package/dwolla-v2) with [source code](https://github.com/Dwolla/dwolla-v2-node) available on our GitHub page. More information is available on the project's README.
 
 ### Installation
 
 ```bashnoselect
-npm install swagger-client
+npm install dwolla-v2
 ```
 
 ### Quickstart
 
-Let's list some `Customer` objects:
+Let's fetch a page of customers:
 
-```javascriptnoselect
-var client = require('swagger-client');
+```rubynoselect
+var dwolla = require('dwolla-v2');
 
-var dwolla = new client({
-    url: 'https://api-uat.dwolla.com/swagger.json',
-    authorizations: {
-        dwollaHeaderAuth: new client.ApiKeyAuthorization('Authorization', 'Bearer your_token', 'header')
-    },
-    usePromise: true
-});
+# see dwolla.com/applications for your client id and secret
+var client = new dwolla.Client(id: "...", secret: "...");
 
+# generate a token on dwolla.com/applications
+var accountToken = new client.Token(access_token: "...");
 
-dwolla.then(function(dwolla) {
-    dwolla.customers.list({limit:10}).then(function(data) {
-        console.log(data);
-    })
-})
-```
-
-Since this library sets up all operations on demand (i.e this isn't a Dwolla-specific package), you can query `.help()` to help you retrieve more information as such:
-
-```javascriptnoselect
-dwolla.then(function(dwolla) {
-    dwolla.events.help();
-});
-// operations for the 'events' tag
-//   * events: List events.
-//   * id: Get an event by id.
-
-dwolla.then(function(dwolla) {
-    dwolla.events.id.help();
-});
-// id: Get an event by id.
-//   * id (string): ID of application event to get.
+accountToken
+  .get('customers', { limit: 10 })
+  .then(function(res) {
+    console.log(res.body);
+  });
 ```
