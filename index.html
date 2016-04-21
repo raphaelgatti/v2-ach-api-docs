@@ -890,7 +890,8 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
               <button class="selector_switch" id="python">python</button>
               <button class="selector_switch" id="javascript">javascript</button>
           </nav>
-        </div><div class="code-snippet__cnt highlight"><pre><code class="language-ruby" data-lang="ruby"> <span class="c1"># No example for this language yet.</span>
+        </div><div class="code-snippet__cnt highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="n">root</span> <span class="o">=</span> <span class="n">account_token</span><span class="p">.</span><span class="nf">get</span> <span class="s2">"/"</span>
+<span class="n">root</span><span class="p">.</span><span class="nf">_links</span><span class="p">.</span><span class="nf">account</span><span class="p">.</span><span class="nf">href</span> <span class="c1"># =&gt; "https://api-uat.dwolla.com/accounts/ad5f2162-404a-4c4c-994e-6ab6c3a13254"</span>
 </code></pre></div></div><div class="code-snippet js-code-snippet language-php"><button class="btn alternative">copy</button><div class="code-snippet__selector">
           <nav>
               <button class="selector_switch" id="raw">raw</button>
@@ -921,9 +922,11 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
               <button class="selector_switch" id="python">python</button>
               <button class="selector_switch" id="javascript">javascript</button>
           </nav>
-        </div><div class="code-snippet__cnt highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="cm">/**
- *  No example for this language yet. Coming soon.
- **/</span>
+        </div><div class="code-snippet__cnt highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="nx">accountToken</span>
+  <span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">'/'</span><span class="p">)</span>
+  <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">res</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">res</span><span class="p">.</span><span class="nx">body</span><span class="p">.</span><span class="nx">_links</span><span class="p">.</span><span class="nx">account</span><span class="p">.</span><span class="nx">href</span><span class="p">;</span> <span class="c1">// =&gt; 'https://api-uat.dwolla.com/accounts/ad5f2162-404a-4c4c-994e-6ab6c3a13254'</span>
+  <span class="p">});</span>
 </code></pre></div></div>
             <h1 id='accounts'>Accounts</h1>
 <p>An <code class="prettyprint">Account</code> represents a Dwolla account that was either established on dwolla.com, or created inline with the capture of the user account&rsquo;s permissions via Dwolla&rsquo;s OAuth flow. A user account grants authorization to an application via <a href="#oauth">OAuth</a>, which gives the application permission to interact with the API on their behalf.</p>
@@ -1088,7 +1091,7 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
         </div><div class="code-snippet__cnt highlight"><pre><code class="language-php" data-lang="php"><span class="cp">&lt;?php</span>
 <span class="nv">$accountUrl</span> <span class="o">=</span> <span class="s1">'https://api-uat.dwolla.com/accounts/ca32853c-48fa-40be-ae75-77b37504581b'</span><span class="p">;</span>
 
-<span class="nv">$accountsApi</span> <span class="o">=</span> <span class="nx">DwollaSwagger\AccountsApi</span><span class="p">(</span><span class="nv">$apiClient</span><span class="p">);</span>
+<span class="nv">$accountsApi</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">DwollaSwagger\AccountsApi</span><span class="p">(</span><span class="nv">$apiClient</span><span class="p">);</span>
 
 <span class="nv">$account</span> <span class="o">=</span> <span class="nv">$accountsApi</span><span class="o">-&gt;</span><span class="na">id</span><span class="p">(</span><span class="nv">$accountUrl</span><span class="p">);</span>
 <span class="k">print</span><span class="p">(</span><span class="nv">$account</span><span class="o">-&gt;</span><span class="na">name</span><span class="p">);</span> <span class="c1"># =&gt; "Charlotte Gillman"
@@ -1305,7 +1308,7 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
         </div><div class="code-snippet__cnt highlight"><pre><code class="language-php" data-lang="php"><span class="cp">&lt;?php</span>
 <span class="nv">$accountUrl</span> <span class="o">=</span> <span class="s1">'https://api.dwolla.com/accounts/ca32853c-48fa-40be-ae75-77b37504581b'</span><span class="p">;</span>
 
-<span class="nv">$fsApi</span> <span class="o">=</span> <span class="nx">DwollaSwagger\FundingsourcesApi</span><span class="p">(</span><span class="nv">$apiClient</span><span class="p">);</span>
+<span class="nv">$fsApi</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">DwollaSwagger\FundingsourcesApi</span><span class="p">(</span><span class="nv">$apiClient</span><span class="p">);</span>
 
 <span class="nv">$fundingSources</span> <span class="o">=</span> <span class="nv">$fsApi</span><span class="o">-&gt;</span><span class="na">getAccountFundingSources</span><span class="p">(</span><span class="nv">$accountUrl</span><span class="p">);</span>
 <span class="nv">$fundingSources</span><span class="o">-&gt;</span><span class="na">_embedded</span><span class="o">-&gt;</span><span class="p">{</span><span class="s1">'funding-sources'</span><span class="p">}[</span><span class="mi">0</span><span class="p">]</span><span class="o">-&gt;</span><span class="na">name</span><span class="p">);</span> <span class="c1"># =&gt; "Vera Brittain’s Checking"
@@ -1470,7 +1473,7 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
         </div><div class="code-snippet__cnt highlight"><pre><code class="language-php" data-lang="php"><span class="cp">&lt;?php</span>
 <span class="nv">$accountUrl</span> <span class="o">=</span> <span class="s1">'https://api-uat.dwolla.com/accounts/a84222d5-31d2-4290-9a96-089813ef96b3'</span><span class="p">;</span>
 
-<span class="nv">$transfersApi</span> <span class="o">=</span> <span class="nx">DwollaSwagger\TransfersApi</span><span class="p">(</span><span class="nv">$apiClient</span><span class="p">);</span>
+<span class="nv">$transfersApi</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">DwollaSwagger\TransfersApi</span><span class="p">(</span><span class="nv">$apiClient</span><span class="p">);</span>
 
 <span class="nv">$transfers</span> <span class="o">=</span> <span class="nv">$transfersApi</span><span class="o">-&gt;</span><span class="na">getAccountTransfers</span><span class="p">(</span><span class="nv">$accountUrl</span><span class="p">);</span>
 <span class="nv">$transfers</span><span class="o">-&gt;</span><span class="na">_embedded</span><span class="o">-&gt;</span><span class="na">transfers</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">-&gt;</span><span class="na">status</span><span class="p">;</span> <span class="c1"># =&gt; "processed"
@@ -2031,7 +2034,7 @@ Location: https://api.dwolla.com/customers/FC451A7A-AE30-4404-AB95-E3553FCD733F
 <span class="p">}</span>
 
 <span class="c1"># Using DwollaV2 - https://github.com/Dwolla/dwolla-v2-ruby (Recommended)</span>
-<span class="n">customer</span> <span class="o">=</span> <span class="n">account_token</span><span class="p">.</span><span class="nf">post</span> <span class="n">request_body</span>
+<span class="n">customer</span> <span class="o">=</span> <span class="n">account_token</span><span class="p">.</span><span class="nf">post</span> <span class="s2">"customers"</span><span class="p">,</span> <span class="n">request_body</span>
 <span class="n">customer</span><span class="p">.</span><span class="nf">headers</span><span class="p">[</span><span class="ss">:location</span><span class="p">]</span> <span class="c1"># =&gt; "https://api-uat.dwolla.com/customers/FC451A7A-AE30-4404-AB95-E3553FCD733F"</span>
 
 <span class="c1"># Using DwollaSwagger - https://github.com/Dwolla/dwolla-swagger-ruby</span>
@@ -3139,7 +3142,7 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
         </div><div class="code-snippet__cnt highlight"><pre><code class="language-php" data-lang="php"><span class="cp">&lt;?php</span>
 <span class="nv">$customerUrl</span> <span class="o">=</span> <span class="s1">'https://api-uat.dwolla.com/customers/07D59716-EF22-4FE6-98E8-F3190233DFB8'</span><span class="p">;</span>
 
-<span class="nv">$customersApi</span> <span class="o">=</span> <span class="nx">DwollaSwagger\CustomersApi</span><span class="p">(</span><span class="nv">$apiClient</span><span class="p">);</span>
+<span class="nv">$customersApi</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">DwollaSwagger\CustomersApi</span><span class="p">(</span><span class="nv">$apiClient</span><span class="p">);</span>
 
 <span class="nv">$customer</span> <span class="o">=</span> <span class="nv">$customersApi</span><span class="o">-&gt;</span><span class="na">getCustomer</span><span class="p">(</span><span class="nv">$customerUrl</span><span class="p">);</span>
 <span class="nv">$customer</span><span class="o">-&gt;</span><span class="na">firstName</span><span class="p">;</span> <span class="c1"># =&gt; "Elizabeth"
@@ -3862,7 +3865,7 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
         </div><div class="code-snippet__cnt highlight"><pre><code class="language-php" data-lang="php"><span class="cp">&lt;?php</span>
 <span class="nv">$customerUrl</span> <span class="o">=</span> <span class="s1">'http://api.dwolla.com/customers/01B47CB2-52AC-42A7-926C-6F1F50B1F271'</span><span class="p">;</span>
 
-<span class="nv">$TransfersApi</span> <span class="o">=</span> <span class="nx">DwollaSwagger\TransfersApi</span><span class="p">(</span><span class="nv">$apiClient</span><span class="p">);</span>
+<span class="nv">$TransfersApi</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">DwollaSwagger\TransfersApi</span><span class="p">(</span><span class="nv">$apiClient</span><span class="p">);</span>
 
 <span class="nv">$transfers</span> <span class="o">=</span> <span class="nv">$TransfersApi</span><span class="o">-&gt;</span><span class="na">getCustomerTransfers</span><span class="p">(</span><span class="nv">$customerUrl</span><span class="p">);</span>
 <span class="nv">$transfers</span><span class="o">-&gt;</span><span class="na">_embedded</span><span class="o">-&gt;</span><span class="na">transfers</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">-&gt;</span><span class="na">status</span><span class="p">;</span> <span class="c1"># =&gt; "pending"
@@ -3880,7 +3883,7 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 <span class="n">transfers_api</span> <span class="o">=</span> <span class="n">dwollaswagger</span><span class="o">.</span><span class="n">TransfersApi</span><span class="p">(</span><span class="n">client</span><span class="p">)</span>
 
 <span class="n">transfers</span> <span class="o">=</span> <span class="n">transfers_api</span><span class="o">.</span><span class="n">get_customer_transfers</span><span class="p">(</span><span class="n">customer_url</span><span class="p">)</span>
-<span class="n">transfers</span><span class="o">-&gt;</span><span class="n">_embedded</span><span class="o">-&gt;</span><span class="n">transfers</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">-&gt;</span><span class="n">status</span> <span class="c"># =&gt; "pending"</span>
+<span class="n">transfers</span><span class="o">.</span><span class="n">_embedded</span><span class="p">[</span><span class="s">'transfers'</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="s">'status'</span><span class="p">]</span> <span class="c"># =&gt; "pending"</span>
 </code></pre></div></div><div class="code-snippet js-code-snippet language-javascript"><button class="btn alternative">copy</button><div class="code-snippet__selector">
           <nav>
               <button class="selector_switch" id="raw">raw</button>
@@ -4293,7 +4296,7 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
         </div><div class="code-snippet__cnt highlight"><pre><code class="language-php" data-lang="php"><span class="cp">&lt;?php</span>
 <span class="nv">$customerUrl</span> <span class="o">=</span> <span class="s1">'https://api.dwolla.com/customers/176878b8-ecdb-469b-a82b-43ba5e8704b2'</span><span class="p">;</span>
 
-<span class="nv">$customersApi</span> <span class="o">=</span> <span class="nx">DwollaSwagger\CustomersApi</span><span class="p">(</span><span class="nv">$apiClient</span><span class="p">);</span>
+<span class="nv">$customersApi</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">DwollaSwagger\CustomersApi</span><span class="p">(</span><span class="nv">$apiClient</span><span class="p">);</span>
 
 <span class="nv">$customer</span> <span class="o">=</span> <span class="nv">$customersApi</span><span class="o">-&gt;</span><span class="na">getCustomerDocuments</span><span class="p">(</span><span class="nv">$customerUrl</span><span class="p">);</span>
 <span class="nv">$customer</span><span class="o">-&gt;</span><span class="na">total</span><span class="p">;</span> <span class="c1"># =&gt; 2
@@ -4612,7 +4615,7 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
         </div><div class="code-snippet__cnt highlight"><pre><code class="language-php" data-lang="php"><span class="cp">&lt;?php</span>
 <span class="nv">$fundingSourceUrl</span> <span class="o">=</span> <span class="s1">'https://api.dwolla.com/funding-sources/692486f8-29f6-4516-a6a5-c69fd2ce854c'</span><span class="p">;</span>
 
-<span class="nv">$fsApi</span> <span class="o">=</span> <span class="nx">DwollaSwagger\FundingsourcesApi</span><span class="p">(</span><span class="nv">$apiClient</span><span class="p">);</span>
+<span class="nv">$fsApi</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">DwollaSwagger\FundingsourcesApi</span><span class="p">(</span><span class="nv">$apiClient</span><span class="p">);</span>
 
 <span class="nv">$fundingSource</span> <span class="o">=</span> <span class="nv">$fsApi</span><span class="o">-&gt;</span><span class="na">id</span><span class="p">(</span><span class="nv">$fundingSourceUrl</span><span class="p">);</span>
 <span class="nv">$fundingSource</span><span class="o">-&gt;</span><span class="na">name</span><span class="p">;</span> <span class="c1"># =&gt; "Test checking account"
@@ -6968,7 +6971,7 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
               <button class="selector_switch" id="javascript">javascript</button>
           </nav>
         </div><div class="code-snippet__cnt highlight"><pre><code class="language-php" data-lang="php"><span class="cp">&lt;?php</span>
-<span class="nv">$eventsApi</span> <span class="o">=</span> <span class="nx">DwollaSwagger\EventsApi</span><span class="p">(</span><span class="nv">$apiClient</span><span class="p">);</span>
+<span class="nv">$eventsApi</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">DwollaSwagger\EventsApi</span><span class="p">(</span><span class="nv">$apiClient</span><span class="p">);</span>
 
 <span class="nv">$events</span> <span class="o">=</span> <span class="nv">$eventsApi</span><span class="o">-&gt;</span><span class="na">events</span><span class="p">();</span>
 <span class="nv">$events</span><span class="o">-&gt;</span><span class="na">total</span><span class="p">;</span> <span class="c1"># =&gt; 4
@@ -7091,7 +7094,7 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
         </div><div class="code-snippet__cnt highlight"><pre><code class="language-php" data-lang="php"><span class="cp">&lt;?php</span>
 <span class="nv">$eventUrl</span> <span class="o">=</span> <span class="s1">'https://api.dwolla.com/events/81f6e13c-557c-4449-9331-da5c65e61095'</span><span class="p">;</span>
 
-<span class="nv">$eventsApi</span> <span class="o">=</span> <span class="nx">DwollaSwagger\EventsApi</span><span class="p">(</span><span class="nv">$apiClient</span><span class="p">);</span>
+<span class="nv">$eventsApi</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">DwollaSwagger\EventsApi</span><span class="p">(</span><span class="nv">$apiClient</span><span class="p">);</span>
 
 <span class="nv">$event</span> <span class="o">=</span> <span class="nv">$eventsApi</span><span class="o">-&gt;</span><span class="na">id</span><span class="p">(</span><span class="nv">$eventUrl</span><span class="p">);</span>
 <span class="nv">$event</span><span class="o">-&gt;</span><span class="na">topic</span><span class="p">;</span> <span class="c1"># =&gt; "customer_transfer_created"
@@ -7356,8 +7359,8 @@ Authorization: Bearer 0Sn0W6kzNicvoWhDbQcVSKLRUpGjIdlPSEYyrHqrDDoRnQwE7Q
         </div><div class="code-snippet__cnt highlight"><pre><code class="language-python" data-lang="python"><span class="n">webhook_api</span> <span class="o">=</span> <span class="n">dwollaswagger</span><span class="o">.</span><span class="n">WebhooksubscriptionsApi</span><span class="p">(</span><span class="n">client</span><span class="p">)</span>
 
 <span class="n">subscription</span> <span class="o">=</span> <span class="n">webhook_api</span><span class="o">.</span><span class="n">create</span><span class="p">({</span>
-  <span class="s">"url"</span><span class="p">:</span> <span class="s">"http://myapplication.com/webhooks"</span><span class="p">,</span>
-  <span class="s">"secret"</span><span class="p">:</span> <span class="s">"sshhhhhh"</span>
+  <span class="s">'url'</span><span class="p">:</span> <span class="s">'http://myapplication.com/webhooks'</span><span class="p">,</span>
+  <span class="s">'secret'</span><span class="p">:</span> <span class="s">'sshhhhhh'</span>
 <span class="p">})</span>
 <span class="n">subscription</span> <span class="c"># =&gt; 'https://api-uat.dwolla.com/webhook-subscriptions/5af4c10a-f6de-4ac8-840d-42cb65454216'</span>
 </code></pre></div></div><div class="code-snippet js-code-snippet language-php"><button class="btn alternative">copy</button><div class="code-snippet__selector">
@@ -8029,7 +8032,7 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
         </div><div class="code-snippet__cnt highlight"><pre><code class="language-php" data-lang="php"><span class="cp">&lt;?php</span>
 <span class="nv">$webhookUrl</span> <span class="o">=</span> <span class="s1">'https://api.dwolla.com/webhooks/9ece9660-aa34-41eb-80d7-0125d53b45e8'</span><span class="p">;</span>
 
-<span class="nv">$webhooksApi</span> <span class="o">=</span> <span class="nx">DwollaSwagger\WebhooksApi</span><span class="p">(</span><span class="nv">$apiClient</span><span class="p">);</span>
+<span class="nv">$webhooksApi</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">DwollaSwagger\WebhooksApi</span><span class="p">(</span><span class="nv">$apiClient</span><span class="p">);</span>
 
 <span class="nv">$webhook</span> <span class="o">=</span> <span class="nv">$webhooksApi</span><span class="o">-&gt;</span><span class="na">id</span><span class="p">(</span><span class="nv">$webhookUrl</span><span class="p">);</span>
 <span class="nv">$webhook</span><span class="o">-&gt;</span><span class="na">topic</span><span class="p">;</span> <span class="c1"># =&gt; "transfer_created"
