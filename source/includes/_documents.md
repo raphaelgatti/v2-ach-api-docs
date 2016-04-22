@@ -27,7 +27,7 @@ Customers of type `personal` or `business` and of status `document` require phot
 
 ## Create a document
 
-Create a document for a Customer pending verification by uploading a photo of the document.  This requires a multipart form-data POST request.  The file must be either a `.jpg`, `.jpeg`, `.png`, .tif, or .pdf up to 10MB in size.
+Create a document for a Customer pending verification by uploading a photo of the document.  This requires a multipart form-data POST request.  The file must be either a `.jpg`, `.jpeg`, `.png`, `.tif`, or `.pdf` up to 10MB in size.
 
 <ol class="alerts">
     <li class="alert icon-alert-alert">This endpoint <a href="#authentication">requires</a> an OAuth account access token with the `ManageCustomers` <a href="#oauth-scopes">scope</a>.</li>
