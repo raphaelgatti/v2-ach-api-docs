@@ -678,7 +678,7 @@ An unverified Customer can be upgraded to a verified Customer by supplying the n
 ### Suspend a Customer
 An unverified and verified Customer can be suspended by supplying the status of `suspend`. You'll need to contact Dwolla to unsuspend a Customer.
 
-##### Request parameters -  unverified Customer
+##### Request parameters
 Parameter | Optional? | Description
 ----------|----------|-------------
 status | no | Value of `suspend`.
