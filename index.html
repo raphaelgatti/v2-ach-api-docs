@@ -4452,6 +4452,10 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 <td>created</td>
 <td>ISO-8601 timestamp</td>
 </tr>
+<tr>
+<td>removed</td>
+<td>A value of <code class="prettyprint">true</code> if the funding source has been <a href="#remove-a-funding-source">removed</a> or <code class="prettyprint">false</code> if the funding source is not removed.</td>
+</tr>
 </tbody></table>
 <div class="code-snippet js-code-snippet language-nohide"><button class="btn alternative">copy</button><div class="code-snippet__cnt highlight"><pre><code class="language-nohide" data-lang="nohide"><span class="p">{</span><span class="w">
     </span><span class="nt">"routingNumber"</span><span class="p">:</span><span class="w"> </span><span class="s2">"222222226"</span><span class="p">,</span><span class="w">
@@ -4971,7 +4975,9 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 <p>Remove a funding source by id.</p>
 <ol class="alerts"><li class="alert icon-alert-alert"><p>This endpoint requires an OAuth account access token with the <code>Funding</code> scope.</p>
 </li></ol><h3 id='http-request'>HTTP request</h3>
-<p><code class="prettyprint">DELETE https://api.dwolla.com/funding-sources/{id}</code></p>
+<p><code class="prettyprint">DELETE https://api.dwolla.com/funding-sources/{id}</code> - <strong>Deprecating on May 23, 2016</strong></p>
+
+<p><code class="prettyprint">POST https://api.dwolla.com/funding-sources/{id}</code> - <strong>New method beginning May 23, 2016</strong></p>
 <h3 id='request-parameters'>Request parameters</h3>
 <table><thead>
 <tr>
@@ -4984,6 +4990,11 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 <td>id</td>
 <td>no</td>
 <td>id of funding source to delete.</td>
+</tr>
+<tr>
+<td>removed</td>
+<td>no</td>
+<td>Specify a value of <code class="prettyprint">true</code> to remove the associated funding source.</td>
 </tr>
 </tbody></table>
 <h3 id='errors'>Errors</h3>
