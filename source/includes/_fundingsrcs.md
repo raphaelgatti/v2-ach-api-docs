@@ -11,6 +11,7 @@ status | Is the funding source verified?
 type | Type of funding source
 name | Customer’s arbitrary nickname for the funding source
 created | ISO-8601 timestamp
+removed | A value of `true` if the funding source has been [removed](#remove-a-funding-source) or `false` if the funding source is not removed.
 
 ```noselect
 {
@@ -370,13 +371,16 @@ Remove a funding source by id.
 </ol>
 
 ### HTTP request
-`DELETE https://api.dwolla.com/funding-sources/{id}`
+`DELETE https://api.dwolla.com/funding-sources/{id}` - **Deprecating on May 23, 2016**
+
+`POST https://api.dwolla.com/funding-sources/{id}` - **New method beginning May 23, 2016**
 
 ### Request parameters
 
 Parameter | Optional? | Description
 ----------|------------|-------------
 id | no | id of funding source to delete.
+removed | no | Specify a value of `true` to remove the associated funding source.
 
 ### Errors
 | HTTP Status | Message |
