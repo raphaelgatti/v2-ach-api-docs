@@ -1731,7 +1731,7 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 </tr>
 <tr>
 <td>status</td>
-<td>Either <code class="prettyprint">unverified</code>, <code class="prettyprint">retry</code>, <code class="prettyprint">document</code>, <code class="prettyprint">verified</code>, or <code class="prettyprint">suspended</code>.</td>
+<td>If type is <strong>unverified</strong> or <strong>receive-only</strong>: status is <code class="prettyprint">unverified</code> or <code class="prettyprint">suspended</code>. <br> If type is <strong>personal</strong> or <strong>business</strong>: status is <code class="prettyprint">retry</code>, <code class="prettyprint">document</code>, <code class="prettyprint">verified</code>, or <code class="prettyprint">suspended</code>.</td>
 </tr>
 <tr>
 <td>created</td>
@@ -1747,23 +1747,23 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 </thead><tbody>
 <tr>
 <td>unverified</td>
-<td>Customers of type <code class="prettyprint">unverified</code> always have this status.</td>
+<td>Customers of type <code class="prettyprint">unverified</code> or <code class="prettyprint">receive-only</code> always have this status.</td>
 </tr>
 <tr>
 <td>retry</td>
-<td>The initial verification attempt failed because the information provided did not satisfy our verification check.  You can make one additional attempt by changing some or all the attributes of the existing Customer with a POST request. If the additional attempt fails, the resulting status will be either <code class="prettyprint">document</code> or <code class="prettyprint">suspended</code>.</td>
+<td>Customers of type <code class="prettyprint">personal</code> or <code class="prettyprint">business</code> can have this status. The initial verification attempt failed because the information provided did not satisfy our verification check.  You can make one additional attempt by changing some or all the attributes of the existing Customer with a POST request. If the additional attempt fails, the resulting status will be either <code class="prettyprint">document</code> or <code class="prettyprint">suspended</code>.</td>
 </tr>
 <tr>
 <td>document</td>
-<td>Dwolla requires additional documentation to identify the Customer.  Read about <a href="#documents">Documents</a>.</td>
+<td>Customers of type <code class="prettyprint">personal</code> or <code class="prettyprint">business</code> can have this status. Dwolla requires additional documentation to identify the Customer in the <code class="prettyprint">document</code> status.  Read about <a href="#documents">Documents</a>.</td>
 </tr>
 <tr>
 <td>verified</td>
-<td>The Customer is currently verified.</td>
+<td>Customers of type <code class="prettyprint">personal</code> or <code class="prettyprint">business</code> can have this status. The Customer is currently verified.</td>
 </tr>
 <tr>
 <td>suspended</td>
-<td>The Customer is suspended and may neither send nor receive funds.</td>
+<td>All Customer types can have a status of <code class="prettyprint">suspended</code>. The Customer is suspended and may neither send nor receive funds. Contact Dwolla support for more information.</td>
 </tr>
 </tbody></table>
 <div class="code-snippet js-code-snippet language-nohide"><button class="btn alternative">copy</button><div class="code-snippet__cnt highlight"><pre><code class="language-nohide" data-lang="nohide"><span class="p">{</span><span class="w">
