@@ -371,9 +371,9 @@ Remove a funding source by id.
 </ol>
 
 ### HTTP request
-`DELETE https://api.dwolla.com/funding-sources/{id}` - **Deprecating on May 23, 2016**
+`DELETE https://api.dwolla.com/funding-sources/{id}` - **Deprecating on June 1, 2016**
 
-`POST https://api.dwolla.com/funding-sources/{id}` - **New method beginning May 23, 2016**
+`POST https://api.dwolla.com/funding-sources/{id}` - **New method beginning June 1, 2016**
 
 ### Request parameters
 
