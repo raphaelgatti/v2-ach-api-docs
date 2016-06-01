@@ -676,12 +676,12 @@ website | yes | www.domain.com |
 An unverified Customer can be upgraded to a verified Customer by supplying the necessary information required to create a verified Customer. See [this table](#request-parameters-verified-customer) for required information.
 
 ### Suspend a Customer
-An unverified and verified Customer can be suspended by supplying the status of `suspend`. You'll need to contact Dwolla to unsuspend a Customer.
+An unverified and verified Customer can be suspended by supplying the status of `suspended`. You'll need to contact Dwolla to unsuspend a Customer.
 
 ##### Request parameters
 Parameter | Optional? | Description
 ----------|----------|-------------
-status | no | Value of `suspend`.
+status | no | Value of `suspended`.
 
 ### Retry verification
 If the verified Customer has a status of `retry`, some information may have been miskeyed. You have one more opportunity to correct any mistakes using this endpoint. This time, you’ll need to provide the Customer’s full SSN. If the additional attempt fails, the resulting status will be either `document` or `suspended`.
