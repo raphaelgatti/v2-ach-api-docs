@@ -7819,7 +7819,7 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 </span><span class="cp">?&gt;</span>
 </code></pre></div></div>
             <h1 id='webhooks'>Webhooks</h1>
-<p>When a new <a href="#events">event</a> is created and there is an active <a href="#webhook-subscriptions">webhook subscription</a>, a new webhook is created in order to deliver that event.  Attempted deliveries are recorded under the webhook&rsquo;s <code class="prettyprint">attempts</code> property.  Each attempt includes the recorded request and response of the delivery attempt.</p>
+<p>When a new <a href="#events">event</a> is created and there is an active <a href="#webhook-subscriptions">webhook subscription</a>, a new webhook is created in order to deliver that event.  Attempted deliveries are recorded under the webhook&rsquo;s <code class="prettyprint">attempts</code> property.  Each attempt includes the recorded request and response of the delivery attempt. Webhooks are sent asynchronously and are not guaranteed to be delivered in order. We recommend that applications protect against duplicated events by making event processing idempotent.</p>
 
 <p><strong>Note:</strong> Webhooks containing an <a href="#events">event</a> are only fired if an application has a valid refresh_token for the Dwolla user Account that an event is created on.</p>
 <div class="code-snippet js-code-snippet language-nohide"><button class="btn alternative">copy</button><div class="code-snippet__cnt highlight"><pre><code class="language-nohide" data-lang="nohide"><span class="p">{</span><span class="w">
