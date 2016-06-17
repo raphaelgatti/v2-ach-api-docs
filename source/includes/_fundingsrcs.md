@@ -371,9 +371,8 @@ Remove a funding source by id.
 </ol>
 
 ### HTTP request
-`DELETE https://api.dwolla.com/funding-sources/{id}` - **Deprecating on June 1, 2016**
 
-`POST https://api.dwolla.com/funding-sources/{id}` - **New method beginning June 1, 2016**
+`POST https://api.dwolla.com/funding-sources/{id}`
 
 ### Request parameters
 
@@ -390,21 +389,44 @@ removed | no | Specify a value of `true` to remove the associated funding source
 ### Request and response
 
 ```raw
-DELETE /funding-sources/6c8ac833-444a-4eff-979c-c56cef6be26b
+POST /funding-sources/692486f8-29f6-4516-a6a5-c69fd2ce854c
 Content-Type: application/vnd.dwolla.v1.hal+json
 Accept: application/vnd.dwolla.v1.hal+json
 Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
+{
+    "removed": true
+}
+
+...
 
 HTTP 200 OK
+{
+  "_links": {
+    "self": {
+      "href": "https://api.dwolla.com/funding-sources/692486f8-29f6-4516-a6a5-c69fd2ce854c",
+      "type": "funding-source"
+    }
+  },
+  "id": "692486f8-29f6-4516-a6a5-c69fd2ce854c",
+  "status": "verified",
+  "type": "bank",
+  "name": "Test bank account",
+  "created": "2016-06-08T21:37:30.000Z",
+  "removed": true
+}
 ```
 ```ruby
 funding_source_url = 'https://api.dwolla.com/funding-sources/692486f8-29f6-4516-a6a5-c69fd2ce854c'
 
+request_body = {
+  :removed => true
+}
+
 # Using DwollaV2 - https://github.com/Dwolla/dwolla-v2-ruby (Recommended)
-account_token.delete funding_source_url
+account_token.post "#{funding_source_url}", request_body
 
 # Using DwollaSwagger - https://github.com/Dwolla/dwolla-swagger-ruby
-DwollaSwagger::FundingsourcesApi.delete(funding_source_url)
+DwollaSwagger::FundingsourcesApi.soft_delete(funding_source_url, :body => request_body)
 ```
 ```php
 <?php
@@ -412,17 +434,22 @@ $fundingSourceUrl = 'https://api.dwolla.com/funding-sources/692486f8-29f6-4516-a
 
 $fsApi = new DwollaSwagger\FundingsourcesApi($apiClient);
 
-$fsApi->delete($fundingSourceUrl);
+$fsApi->soft_delete(['removed' => true ], $fundingSourceUrl);
 ?>
 ```
 ```python
 funding_source_url = 'https://api.dwolla.com/funding-sources/692486f8-29f6-4516-a6a5-c69fd2ce854c'
 
 fs_api = dwollaswagger.FundingsourcesApi(client)
-fs_api.delete(funding_source_url)
+fs_api.soft_delete(funding_source_url, body = {
+  'removed': true
+})
 ```
 ```javascript
 var fundingSourceUrl = 'https://api.dwolla.com/funding-sources/692486f8-29f6-4516-a6a5-c69fd2ce854c';
+var requestBody = {
+  removed: true
+};
 
-accountToken.delete(fundingSourceUrl);
+accountToken.post(fundingSourceUrl, requestBody);
 ```

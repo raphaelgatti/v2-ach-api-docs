@@ -46,7 +46,7 @@ Requests that require an client_id and client_secret are passed in the JSON requ
 
 **Sandbox:** https://api-uat.dwolla.com
 
-## Idempotency Key
+## Idempotency key
 
 To prevent an operation from being performed more than once, Dwolla supports passing in an `Idempotency-Key` header with a unique key as the value. Multiple `POSTs` with the same idempotency key won't result in multiple resources being created.
 
