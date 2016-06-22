@@ -650,6 +650,8 @@ A limited set of information can be updated on an existing created Customer. **N
 ##### Request parameters -  unverified Customer
 Parameter | Optional? | Description
 ----------|----------|-------------
+firstName | no | Customer's first name.
+lastName | no | Customer's last name.
 email | no | Customer's email address.
 
 ##### Request parameters -  verified Customer

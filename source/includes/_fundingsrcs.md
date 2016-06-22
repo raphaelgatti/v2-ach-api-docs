@@ -434,7 +434,7 @@ $fundingSourceUrl = 'https://api.dwolla.com/funding-sources/692486f8-29f6-4516-a
 
 $fsApi = new DwollaSwagger\FundingsourcesApi($apiClient);
 
-$fsApi->soft_delete(['removed' => true ], $fundingSourceUrl);
+$fsApi->softDelete(['removed' => true ], $fundingSourceUrl);
 ?>
 ```
 ```python
