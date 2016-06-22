@@ -172,7 +172,7 @@ This section covers how to initiate and verify micro-deposits for bank verificat
 Parameter | Optional? | Description
 ----------|------------|-------------
 amount1 | no | An amount JSON object of first micro-deposit. Contains `value` and `currency`.
-amount2 | no | An amount JSON object of first micro-deposit. Contains `value` and `currency`.
+amount2 | no | An amount JSON object of second micro-deposit. Contains `value` and `currency`.
 
 
 ### HTTP Status and Error Codes
