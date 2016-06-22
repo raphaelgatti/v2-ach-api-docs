@@ -2590,6 +2590,16 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 </tr>
 </thead><tbody>
 <tr>
+<td>firstName</td>
+<td>no</td>
+<td>Customer&rsquo;s first name.</td>
+</tr>
+<tr>
+<td>lastName</td>
+<td>no</td>
+<td>Customer&rsquo;s last name.</td>
+</tr>
+<tr>
 <td>email</td>
 <td>no</td>
 <td>Customer&rsquo;s email address.</td>
@@ -5113,7 +5123,7 @@ HTTP 200 OK
 
 <span class="nv">$fsApi</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">DwollaSwagger\FundingsourcesApi</span><span class="p">(</span><span class="nv">$apiClient</span><span class="p">);</span>
 
-<span class="nv">$fsApi</span><span class="o">-&gt;</span><span class="na">soft_delete</span><span class="p">([</span><span class="s1">'removed'</span> <span class="o">=&gt;</span> <span class="kc">true</span> <span class="p">],</span> <span class="nv">$fundingSourceUrl</span><span class="p">);</span>
+<span class="nv">$fsApi</span><span class="o">-&gt;</span><span class="na">softDelete</span><span class="p">([</span><span class="s1">'removed'</span> <span class="o">=&gt;</span> <span class="kc">true</span> <span class="p">],</span> <span class="nv">$fundingSourceUrl</span><span class="p">);</span>
 <span class="cp">?&gt;</span>
 </code></pre></div></div><div class="code-snippet js-code-snippet language-python"><button class="btn alternative">copy</button><div class="code-snippet__selector">
           <nav>
