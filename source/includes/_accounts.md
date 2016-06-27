@@ -307,7 +307,7 @@ accountToken
 
 ## List an Account's transfers
 
-This section covers how to retrieve an Account's list of transfers.
+This section covers how to retrieve an Account's list of transfers. Transaction search is supported by passing in optional querystring parameters such as: `search` which represents a term to search on, `startAmount`, `endAmount`, `startDate`, and `endDate`.
 
 <ol class="alerts">
     <li class="alert icon-alert-alert">This endpoint <a href="#authentication">requires</a> an OAuth account access token with the `Transactions` <a href="#oauth-scopes">scope</a>.</li>
@@ -321,6 +321,13 @@ This section covers how to retrieve an Account's list of transfers.
 Parameter | Optional? | Description
 ----------|------------|-------------
 id | no | Account unique identifier to get transfers for.
+search | yes | A string to be matched with `firstName`, `lastName`, `email`, `businessName`, Customer Id, and Account Id. (`/transfers?search=Smith`)
+startAmount | yes | Only include transactions with an amount equal to or greater than `startAmount`. Can optionally be used with `endAmount` to specify an amount range.
+endAmount | yes | Only include transactions with an amount equal to or less than `endAmount`. Can optionally be used with `startAmount` to specify an amount range.
+startDate | yes | Only include transactions created after this date. ISO-8601 format: `YYYY-MM-DD`. Can optionally be used with `endDate` to specify a date range.
+endDate | yes | Only include transactions created before than this date. ISO-8601 format: `YYYY-MM-DD`. Can optionally be used with `startDate` to specify a date range.
+limit | yes | Number of search results to return. Defaults to 25.
+offset | yes | Number of search results to skip. Used for pagination.
 
 ### Errors
 | HTTP Status | Message |
