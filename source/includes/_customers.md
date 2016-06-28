@@ -1375,7 +1375,7 @@ $('#start').click(function() {
 
 ## List a Customer's funding sources
 
-Retrieve a list of funding sources that belong to a Customer.
+Retrieve a list of funding sources that belong to a Customer. By default, all funding sources are returned unless the `removed` querystring parameter is set to `false` in the request.
 
 <ol class="alerts">
     <li class="alert icon-alert-alert">This endpoint <a href="#authentication">requires</a> an OAuth account access token with the `ManageCustomers` <a href="#oauth-scopes">scope</a>.</li>
@@ -1389,6 +1389,7 @@ Retrieve a list of funding sources that belong to a Customer.
 Parameter | Optional? | Description
 ----------|------------|-------------
 id | no | Customer's unique identifier.
+removed | yes | Filter removed funding sources. Defaults to `true`. Set to `false` to filter out removed funding sources from list (i.e. - /customers/{id}/funding-sources?removed=false).
 
 ### Errors
 | HTTP Status | Message |

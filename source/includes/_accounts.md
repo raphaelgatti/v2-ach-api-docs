@@ -191,7 +191,7 @@ Location: https://api-uat.dwolla.com/funding-sources/04173e17-6398-4d36-a167-9d9
 ```
 ## List an Account's funding sources
 
-Retrieve a list of funding sources that belong to an Account.
+Retrieve a list of funding sources that belong to an Account. By default, all funding sources are returned unless the `removed` querystring parameter is set to `false` in the request.
 
 <ol class="alerts">
     <li class="alert icon-alert-alert">This endpoint <a href="#authentication">requires</a> an OAuth account access token with the `Funding` <a href="#oauth-scopes">scope</a>.</li>
@@ -205,6 +205,7 @@ Retrieve a list of funding sources that belong to an Account.
 Parameter | Optional? | Description
 ----------|------------|-------------
 id | no | Account's unique identifier.
+removed | yes | Filter removed funding sources. Defaults to `true`. Set to `false` to filter out removed funding sources from list (i.e. - /accounts/{id}/funding-sources?removed=false).
 
 ### Errors
 | HTTP Status | Message |
