@@ -935,9 +935,9 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
           }
         },
         "id": "FC451A7A-AE30-4404-AB95-E3553FCD733F",
-        "firstName": "Elizabeth",
-        "lastName": "Warren",
-        "email": "liz@nomail.com",
+        "firstName": "Jane",
+        "lastName": "Doe",
+        "email": "janedoe@nomail.com",
         "type": "unverified",
         "status": "unverified",
         "created": "2015-09-03T23:56:10.023Z"
@@ -950,18 +950,18 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 ```ruby
 # Using DwollaV2 - https://github.com/Dwolla/dwolla-v2-ruby (Recommended)
 customers = account_token.get "customers", limit: 10
-customers._embedded.customers[0].firstName # => "Elizabeth"
+customers._embedded.customers[0].firstName # => "Jane"
 
 # Using DwollaSwagger - https://github.com/Dwolla/dwolla-swagger-ruby
 customers = DwollaSwagger::CustomersApi.list(:limit => 10)
-customers._embedded[:customers][0][:firstName] # => "Elizabeth"
+customers._embedded[:customers][0][:firstName] # => "Jane"
 ```
 ```php
 <?php
 $customersApi = new DwollaSwagger\CustomersApi($apiClient);
 
 $customers = $customersApi->_list(10, 0);
-$customers->_embedded->customers[0]->firstName; # => "Elizabeth"
+$customers->_embedded->customers[0]->firstName; # => "Jane"
 ?>
 ```
 ```python
@@ -978,7 +978,7 @@ customers._embedded['customers'][0]['firstName'] # => 'Elizabeth'
 accountToken
   .get('customers', { limit: 10 })
   .then(function(res) {
-    res.body._embedded.customers[0].firstName; // => 'Elizabeth'
+    res.body._embedded.customers[0].firstName; // => 'Jane'
   });
 ```
 
@@ -1019,9 +1019,9 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
     }
   },
   "id": "FC451A7A-AE30-4404-AB95-E3553FCD733F",
-  "firstName": "Elizabeth",
-  "lastName": "Warren",
-  "email": "liz@nomail.com",
+  "firstName": "Jane",
+  "lastName": "Doe",
+  "email": "janedoe@nomail.com",
   "type": "unverified",
   "status": "unverified",
   "created": "2015-09-03T23:56:10.023Z"
@@ -1032,11 +1032,11 @@ customer_url = 'https://api-uat.dwolla.com/customers/07D59716-EF22-4FE6-98E8-F31
 
 # Using DwollaV2 - https://github.com/Dwolla/dwolla-v2-ruby (Recommended)
 customer = account_token.get customer_url
-customer.firstName # => "Elizabeth"
+customer.firstName # => "Jane"
 
 # Using DwollaSwagger - https://github.com/Dwolla/dwolla-swagger-ruby
 customer = DwollaSwagger::CustomersApi.get_customer(customer_url)
-customer.firstName # => "Elizabeth"
+customer.firstName # => "Jane"
 ```
 ```php
 <?php
@@ -1045,7 +1045,7 @@ $customerUrl = 'https://api-uat.dwolla.com/customers/07D59716-EF22-4FE6-98E8-F31
 $customersApi = new DwollaSwagger\CustomersApi($apiClient);
 
 $customer = $customersApi->getCustomer($customerUrl);
-$customer->firstName; # => "Elizabeth"
+$customer->firstName; # => "Jane"
 ?>
 ```
 ```python
@@ -1058,7 +1058,7 @@ customer.body['firstName']
 # Using dwollaswagger - https://github.com/Dwolla/dwolla-swagger-python
 customers_api = dwollaswagger.CustomersApi(client)
 customer = customers_api.get_customer(customer_url)
-customer.firstName # => 'Elizabeth'
+customer.firstName # => 'Jane'
 ```
 ```javascript
 var customerUrl = 'https://api-uat.dwolla.com/customers/07D59716-EF22-4FE6-98E8-F3190233DFB8';
@@ -1066,7 +1066,7 @@ var customerUrl = 'https://api-uat.dwolla.com/customers/07D59716-EF22-4FE6-98E8-
 accountToken
   .get(customerUrl)
   .then(function(res) {
-    res.body.firstName; // => 'Elizabeth'
+    res.body.firstName; // => 'Jane'
   });
 ```
 
@@ -1498,7 +1498,7 @@ accountToken
 
 ## List a Customer's transfers
 
-This section details how to retrieve a Customer's list of transfers.
+This section details how to retrieve a Customer's list of transfers. Transaction search is supported by passing in optional querystring parameters such as: `search` which represents a term to search on, `startAmount`, `endAmount`, `startDate`, and `endDate`.
 
 <ol class="alerts">
     <li class="alert icon-alert-alert">This endpoint <a href="#authentication">requires</a> an OAuth account access token with the `ManageCustomers` <a href="#oauth-scopes">scope</a>.</li>
@@ -1512,8 +1512,13 @@ This section details how to retrieve a Customer's list of transfers.
 Parameter | Optional? | Description
 ----------|------------|-------------
 id | no | Customer unique identifier to get transfers for.
-limit | yes | How many results to return.
-offset | yes | How many results to skip.
+search | yes | A string to be matched with `firstName`, `lastName`, `email`, `businessName`, Customer Id, and Account Id. (`/transfers?search=Smith`)
+startAmount | yes | Only include transactions with an amount equal to or greater than `startAmount`. Can optionally be used with `endAmount` to specify an amount range.
+endAmount | yes | Only include transactions with an amount equal to or less than `endAmount`. Can optionally be used with `startAmount` to specify an amount range.
+startDate | yes | Only include transactions created after this date. ISO-8601 format: `YYYY-MM-DD`. Can optionally be used with `endDate` to specify a date range.
+endDate | yes | Only include transactions created before than this date. ISO-8601 format: `YYYY-MM-DD`. Can optionally be used with `startDate` to specify a date range.
+limit | yes | Number of search results to return. Defaults to 25.
+offset | yes | Number of search results to skip. Used for pagination.
 
 ### Errors
 | HTTP Status | Message |
