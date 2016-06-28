@@ -10,7 +10,7 @@ Please note: white label is a premium product that cannot be activated in our pr
 
 ## Making requests
 
-All requests should supply the `Accept: application/vnd.dwolla.v1.hal+json` header. `POST` requests must have a JSON encoded body and the `Content-Type: application/vnd.dwolla.v1.hal+json` header.
+All requests should supply the `Accept: application/vnd.dwolla.v1.hal+json` header. `POST` requests must specify the `Content-Type: application/vnd.dwolla.v1.hal+json` header. Request and response bodies are JSON encoded.
 
 Requests must be made over HTTPS.  Any non-secure requests are met with a redirect (HTTP 302) to the HTTPS equivalent URI.
 
@@ -30,8 +30,6 @@ GET https://api.dwolla.com/accounts/a84222d5-31d2-4290-9a96-089813ef96b3/transfe
 ```
 
 ### Authorization
-
-Request and response bodies are JSON encoded.
 
 All requests require either an OAuth access token or a `client_id` and `client_secret`.  OAuth access tokens are passed via the `Authorization` HTTP header:
 

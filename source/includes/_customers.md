@@ -967,12 +967,12 @@ $customers->_embedded->customers[0]->firstName; # => "Jane"
 ```python
 # Using dwollav2 - https://github.com/Dwolla/dwolla-v2-python (Recommended)
 customer = account_token.get('customers', limit = 10)
-customer.body['_embedded']['customers'][0]['firstName'] # => 'Elizabeth'
+customer.body['_embedded']['customers'][0]['firstName'] # => 'Jane'
 
 # Using dwollaswagger - https://github.com/Dwolla/dwolla-swagger-python
 customers_api = dwollaswagger.CustomersApi(client)
 customers = customers_api.list(limit = 10)
-customers._embedded['customers'][0]['firstName'] # => 'Elizabeth'
+customers._embedded['customers'][0]['firstName'] # => 'Jane'
 ```
 ```javascript
 accountToken

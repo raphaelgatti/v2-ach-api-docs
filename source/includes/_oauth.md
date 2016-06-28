@@ -55,15 +55,9 @@ Funding | Access names of funding sources the user has connected to Dwolla, acce
 ManageCustomers | Includes create Customers, manage their funding sources, and allow related money movement
 
 ```php
-<?php
-
-$OAuth = new Dwolla\OAuth();
-$OAuth->settings->client_id = $apiKey;
-$OAuth->settings->client_secret = $apiSecret;
-
-$url = $OAuth->genAuthUrl("https://myredirect.com/redirect");
-
-?>
+/**
+ *  No example for this language yet.
+ **/
 ```
 ```python
 # you can find your client id and secret at dwolla.com/applications

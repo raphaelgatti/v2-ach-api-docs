@@ -426,7 +426,7 @@ $transfers->_embedded->transfers[0]->status; # => "processed"
 ```python
 account_url = 'https://api-uat.dwolla.com/accounts/a84222d5-31d2-4290-9a96-089813ef96b3'
 
-# Using dwollav2 - https://github.com/Dwolla/dwolla-v2-python
+# Using dwollav2 - https://github.com/Dwolla/dwolla-v2-python (Recommended)
 transfers = account_token.get('%s/transfers' % account_url)
 transfers.body['_embedded']['transfers'][0]['status'] # => "processed"
 
