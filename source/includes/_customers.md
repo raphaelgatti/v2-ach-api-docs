@@ -944,7 +944,7 @@ customers_api = dwollaswagger.CustomersApi(client)
 
 customers = customers_api.list(limit = 10)
 
-customers._embedded['customers'][0]['firstName'] # => 'Jane'
+customers._embedded['customers'][0]['firstName'] # => 'Elizabeth'
 ```
 ```javascript
 accountToken
