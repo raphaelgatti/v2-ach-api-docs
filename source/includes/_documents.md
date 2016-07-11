@@ -80,7 +80,11 @@ document.headers['location'] # => 'https://api.dwolla.com/documents/fb919e0b-ffb
 var customerUrl = 'https://api.dwolla.com/customers/1DE32EC7-FF0B-4C0C-9F09-19629E6788CE';
 
 var requestBody = new FormData();
-body.append('file', fs.createReadStream('mclovin.jpg'), { filename: 'mclovin.jpg', contentType: 'image/jpeg', knownLength: 12345 });
+body.append('file', fs.createReadStream('mclovin.jpg'), {
+  filename: 'mclovin.jpg',
+  contentType: 'image/jpeg',
+  knownLength: fs.statSync('mclovin.jpg').size
+});
 body.append('documentType', 'license');
 
 accountToken
