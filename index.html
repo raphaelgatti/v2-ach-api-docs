@@ -4397,7 +4397,11 @@ Location: https://api.dwolla.com/documents/11fe0bab-39bd-42ee-bb39-275afcc050d0
         </div><div class="code-snippet__cnt highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="kd">var</span> <span class="nx">customerUrl</span> <span class="o">=</span> <span class="s1">'https://api.dwolla.com/customers/1DE32EC7-FF0B-4C0C-9F09-19629E6788CE'</span><span class="p">;</span>
 
 <span class="kd">var</span> <span class="nx">requestBody</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">FormData</span><span class="p">();</span>
-<span class="nx">body</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="s1">'file'</span><span class="p">,</span> <span class="nx">fs</span><span class="p">.</span><span class="nx">createReadStream</span><span class="p">(</span><span class="s1">'mclovin.jpg'</span><span class="p">),</span> <span class="p">{</span> <span class="na">filename</span><span class="p">:</span> <span class="s1">'mclovin.jpg'</span><span class="p">,</span> <span class="na">contentType</span><span class="p">:</span> <span class="s1">'image/jpeg'</span><span class="p">,</span> <span class="na">knownLength</span><span class="p">:</span> <span class="mi">12345</span> <span class="p">});</span>
+<span class="nx">body</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="s1">'file'</span><span class="p">,</span> <span class="nx">fs</span><span class="p">.</span><span class="nx">createReadStream</span><span class="p">(</span><span class="s1">'mclovin.jpg'</span><span class="p">),</span> <span class="p">{</span>
+  <span class="na">filename</span><span class="p">:</span> <span class="s1">'mclovin.jpg'</span><span class="p">,</span>
+  <span class="na">contentType</span><span class="p">:</span> <span class="s1">'image/jpeg'</span><span class="p">,</span>
+  <span class="na">knownLength</span><span class="p">:</span> <span class="nx">fs</span><span class="p">.</span><span class="nx">statSync</span><span class="p">(</span><span class="s1">'mclovin.jpg'</span><span class="p">).</span><span class="nx">size</span>
+<span class="p">});</span>
 <span class="nx">body</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="s1">'documentType'</span><span class="p">,</span> <span class="s1">'license'</span><span class="p">);</span>
 
 <span class="nx">accountToken</span>
@@ -5966,6 +5970,8 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
   <span class="p">});</span>
 </code></pre></div></div><h2 id='get-transfer-failure-reason'>Get transfer failure reason</h2>
 <p>When a bank transfer fails for an Account or Customer, Dwolla returns a <code class="prettyprint">failure</code> link when <a href="#get-a-transfer-by-id">getting the transfer by Id</a>. This failure link is used to retrieve the return code and description. For reference, the list of possible failure codes and descriptions are shown in the <a href="https://developers.dwolla.com/resources/bank-transfer-workflow/transfer-failures.html">Transfer failures</a> resource article.</p>
+
+<p><strong>Note:</strong> If a transfer fails to/from a bank account then the <code class="prettyprint">bank</code> will automatically be removed from the Dwolla system for all ACH return codes except an <code class="prettyprint">R01</code>.</p>
 <ol class="alerts"><li class="alert icon-alert-alert"><p>This endpoint requires an OAuth account access token with the <code>Transactions</code> scope.</p>
 </li></ol><h3 id='http-request'>HTTP Request</h3>
 <p><code class="prettyprint">GET https://api.dwolla.com/transfers/{id}/failure</code></p>
