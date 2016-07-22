@@ -71,9 +71,9 @@ Dwolla offers a seamless process for migrating existing user [Accounts](#account
     }
   },
   "id": "730CA23F-06C5-45CC-AA6B-8EC2D6EE109F",
-  "firstName": "Charlotte",
-  "lastName": "Gillman",
-  "email": "yellowwallpaper@nomail.com",
+  "firstName": "Jane",
+  "lastName": "Doe",
+  "email": "janedoe@nomail.com",
   "type": "personal",
   "status": "verified",
   "created": "2015-10-06T01:18:26.923Z"
@@ -233,9 +233,9 @@ Accept: application/vnd.dwolla.v1.hal+json
 Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 
 {
-  "firstName": "Bill",
-  "lastName": "Bibbit",
-  "email": "bbibbit@nomail.net",
+  "firstName": "John",
+  "lastName": "Doe",
+  "email": "johndoe@nomail.net",
   "ipAddress": "10.10.10.10",
   "type": "personal",
   "address1": "99-99 33rd St",
@@ -244,7 +244,7 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
   "postalCode": "11101",
   "dateOfBirth": "1970-01-01",
   "ssn": "1234",
-  "phone": "3478589191"
+  "phone": "5155555555"
 }
 
 HTTP/1.1 201 Created
@@ -255,9 +255,9 @@ Location: https://api.dwolla.com/customers/FC451A7A-AE30-4404-AB95-E3553FCD733F
 $customersApi = new DwollaSwagger\CustomersApi($apiClient);
 
 $customer = $customersApi->create([
-  'firstName' => 'Bill',
-  'lastName' => 'Bibbit',
-  'email' => 'bbibbit@nomail.net',
+  'firstName' => 'John',
+  'lastName' => 'Doe',
+  'email' => 'jdoe@nomail.net',
   'type' => 'personal',
   'address1' => '99-99 33rd St',
   'city' => 'Some City',
@@ -271,7 +271,7 @@ $customer = $customersApi->create([
   # If the entire SSN is provided,
   # it will still be accepted
   'ssn' => '1234',
-  'phone' => '3478589191'
+  'phone' => '5155555555'
 ]);
 
 $customer; # => "https://api-uat.dwolla.com/customers/AB443D36-3757-44C1-A1B4-29727FB3111C"
@@ -279,9 +279,9 @@ $customer; # => "https://api-uat.dwolla.com/customers/AB443D36-3757-44C1-A1B4-29
 ```
 ```ruby
 request_body = {
-  :firstName => 'Bill',
-  :lastName => 'Bibbit',
-  :email => 'bbibbit@nomail.net',
+  :firstName => 'John',
+  :lastName => 'Doe',
+  :email => 'jdoe@nomail.net',
   :type => 'personal',
   :address1 => '99-99 33rd St',
   :city => 'Some City',
@@ -296,7 +296,7 @@ request_body = {
   # it will still be accepted
 
   :ssn => '1234',
-  :phone => '3478589191'
+  :phone => '5155555555'
 }
 
 # Using DwollaV2 - https://github.com/Dwolla/dwolla-v2-ruby (Recommended)
@@ -309,9 +309,9 @@ customer # => "https://api-uat.dwolla.com/customers/AB443D36-3757-44C1-A1B4-2972
 ```
 ```python
 request_body = {
-  'firstName': 'Bill',
-  'lastName': 'Bibbit',
-  'email': 'bbibbit@nomail.net',
+  'firstName': 'John',
+  'lastName': 'Doe',
+  'email': 'jdoe@nomail.net',
   'type': 'personal',
   'address1': '99-99 33rd St',
   'city': 'Some City',
@@ -323,7 +323,7 @@ request_body = {
   # If the entire SSN is provided,
   # it will still be accepted
   'ssn': '1234',
-  'phone': '3478589191'
+  'phone': '5155555555'
 }
 
 # Using dwollav2 - https://github.com/Dwolla/dwolla-v2-python (Recommended)
@@ -337,9 +337,9 @@ customer # => 'https://api-uat.dwolla.com/customers/AB443D36-3757-44C1-A1B4-2972
 ```
 ```javascript
 var requestBody = {
-  firstName: 'Bill',
-  lastName: 'Bibbit',
-  email: 'bbibbit@nomail.net',
+  firstName: 'John',
+  lastName: 'Doe',
+  email: 'jdoe@nomail.net',
   type: 'personal',
   address1: '99-99 33rd St',
   city: 'Some City',
@@ -351,7 +351,7 @@ var requestBody = {
   // If the entire SSN is provided,
   // it will still be accepted
   ssn: '1234',
-  phone: '3478589191'
+  phone: '5155555555'
 };
 
 accountToken
@@ -724,9 +724,9 @@ If the verified Customer has a status of `retry`, some information may have been
     }
   },
   "id": "730CA23F-06C5-45CC-AA6B-8EC2D6EE109F",
-  "firstName": "Missy",
-  "lastName": "Elliott",
-  "email": "missye@nomail.com",
+  "firstName": "Jane",
+  "lastName": "Doe",
+  "email": "jdoe@nomail.com",
   "type": "personal",
   "status": "retry",
   "created": "2015-10-06T01:18:26.923Z"
@@ -742,9 +742,9 @@ Accept: application/vnd.dwolla.v1.hal+json
 Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 
 {
-  "firstName": "Missy",
-  "lastName": "Elliott",
-  "email": "missye@nomail.com",
+  "firstName": "John",
+  "lastName": "Doe",
+  "email": "jdoe@nomail.com",
   "ipAddress": "10.10.10.10",
   "type": "personal",
   "address1": "221 Corrected Address St..",
@@ -765,9 +765,9 @@ $customersApi = new DwollaSwagger\CustomersApi($apiClient);
 
 $customerUrl = 'https://api.dwolla.com/customers/FC451A7A-AE30-4404-AB95-E3553FCD733F';
 $customer = $customersApi->updateCustomer($customerUrl, array (
-  'firstName' => 'Missy',
-  'lastName' => 'Elliott',
-  'email' => 'missye@nomail.com',
+  'firstName' => 'John',
+  'lastName' => 'Doe',
+  'email' => 'jdoe@nomail.com',
   'ipAddress' => '10.10.10.10',
   'type' => 'personal',
   'address1' => '221 Corrected Address St..',
@@ -784,9 +784,9 @@ $customer->id; # => "FC451A7A-AE30-4404-AB95-E3553FCD733F"
 ```ruby
 customer_url = 'https://api.dwolla.com/customers/FC451A7A-AE30-4404-AB95-E3553FCD733F'
 request_body = {
-      "firstName" => "Missy",
-       "lastName" => "Elliott",
-          "email" => "missey@nomail.com",
+      "firstName" => "John",
+       "lastName" => "Doe",
+          "email" => "jdoe@nomail.com",
       "ipAddress" => "10.10.10.10",
            "type" => "personal",
        "address1" => "221 Corrected Address St..",
@@ -809,9 +809,9 @@ customer.id # => "FC451A7A-AE30-4404-AB95-E3553FCD733F"
 ```python
 customer_url = 'https://api.dwolla.com/customers/FC451A7A-AE30-4404-AB95-E3553FCD733F'
 request_body = {
-  "firstName": "Missy",
-  "lastName": "Elliott",
-  "email": "missey@nomail.com",
+  "firstName": "John",
+  "lastName": "Doe",
+  "email": "jdoe@nomail.com",
   "ipAddress": "10.10.10.10",
   "type": "personal",
   "address1": "221 Corrected Address St..",
@@ -835,9 +835,9 @@ customer.id # => 'FC451A7A-AE30-4404-AB95-E3553FCD733F'
 ```javascript
 var customerUrl = 'https://api.dwolla.com/customers/FC451A7A-AE30-4404-AB95-E3553FCD733F';
 var requestBody = {
-  firstName: "Gordon",
-  lastName: "Zheng",
-  email: "gordon+15@dwolla.com",
+  firstName: "John",
+  lastName: "Doe",
+  email: "johndoe@dwolla.com",
   ipAddress: "10.10.10.10",
   type: "personal",
   address1: "221 Corrected Address St..",
@@ -905,7 +905,7 @@ Parameter | Optional? | Description
 ----------|------------|-------------
 limit | yes | How many results to return
 offset | yes | How many results to skip
-search | yes | Searches on `firstName`, `lastName`, and `email` fields. (`/customers?search=Smith`)
+search | yes | Searches on `firstName`, `lastName`, and `email` fields. (`/customers?search=Doe`)
 
 ### Request and response
 
@@ -1174,7 +1174,7 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
   "routingNumber": "222222226",
   "accountNumber": "123456789",
   "type": "checking",
-  "name": "Vera Brittain’s Checking"
+  "name": "Jane Doe’s Checking"
 }
 
 HTTP/1.1 201 Created
@@ -1188,7 +1188,7 @@ $fundingSource = $fundingApi->createCustomerFundingSource([
   "routingNumber" => "222222226",
   "accountNumber" => "123456789",
   "type" => "checking",
-  "name" => "Vera Brittain’s Checking"
+  "name" => "Jane Doe’s Checking"
 ], "https://api-uat.dwolla.com/customers/AB443D36-3757-44C1-A1B4-29727FB3111C");
 $fundingSource; # => "https://api-uat.dwolla.com/funding-sources/375c6781-2a17-476c-84f7-db7d2f6ffb31"
 ?>
@@ -1199,7 +1199,7 @@ request_body = {
   routingNumber: '222222226',
   accountNumber: '123456789',
   type: 'checking',
-  name: 'Vera Brittain’s Checking'
+  name: 'Jane Doe’s Checking'
 }
 
 # Using DwollaV2 - https://github.com/Dwolla/dwolla-v2-ruby (Recommended)
@@ -1216,7 +1216,7 @@ request_body = {
   'routingNumber': '222222226',
   'accountNumber': '123456789',
   'type': 'checking',
-  'name': 'Vera Brittain’s Checking'
+  'name': 'Jane Doe’s Checking'
 }
 
 # Using dwollav2 - https://github.com/Dwolla/dwolla-v2-python (Recommended)
@@ -1234,7 +1234,7 @@ var requestBody = {
   'routingNumber': '222222226',
   'accountNumber': '123456789',
   'type': 'checking',
-  'name': 'Vera Brittain’s Checking'
+  'name': 'Jane Doe’s Checking'
 };
 
 accountToken
@@ -1279,7 +1279,7 @@ id | no | Customer unique identifier.
 
 ### Request and response
 
-```noselect
+```raw
 POST /customers/99bfb139-eadd-4cdf-b346-7504f0c16c60/iav-token
 Content-Type: application/vnd.dwolla.v1.hal+json
 Accept: application/vnd.dwolla.v1.hal+json
@@ -1295,6 +1295,42 @@ HTTP/1.1 200 OK
   },
   "token": "4adF858jPeQ9RnojMHdqSD2KwsvmhO7Ti7cI5woOiBGCpH5krY"
 }
+```
+```ruby
+customer_url = 'https://api-uat.dwolla.com/customers/06b51d56-7a6c-4535-a0cc-2c0106f56ba6'
+
+# Using DwollaV2 - https://github.com/Dwolla/dwolla-v2-ruby (Recommended)
+customer = account_token.post "#{customer_url}/iav-token"
+customer.token # => "lr0Ax1zwIpeXXt8sJDiVXjPbwEeGO6QKFWBIaKvnFG0Sm2j7vL"
+
+# Using DwollaSwagger - https://github.com/Dwolla/dwolla-swagger-ruby
+customer = DwollaSwagger::CustomersApi.get_customer_iav_token(customer_url)
+customer.token # => "lr0Ax1zwIpeXXt8sJDiVXjPbwEeGO6QKFWBIaKvnFG0Sm2j7vL"
+```
+```javascript
+// Using dwolla-v2 - https://github.com/Dwolla/dwolla-v2-node
+var customerUrl = 'https://api-uat.dwolla.com/customers/06b51d56-7a6c-4535-a0cc-2c0106f56ba6';
+
+accountToken
+  .post(`${customerUrl}/iav-token`)
+  .then(function(res) {
+    res.body.token; // => 'lr0Ax1zwIpeXXt8sJDiVXjPbwEeGO6QKFWBIaKvnFG0Sm2j7vL'
+  });
+```
+```python
+customer_url = 'http://api.dwolla.com/customers/06b51d56-7a6c-4535-a0cc-2c0106f56ba6'
+customers_api = dwollaswagger.CustomersApi(client)
+
+token = customers_api.get_customer_iav_token(customer_url)
+print token['token'] # => 'lr0Ax1zwIpeXXt8sJDiVXjPbwEeGO6QKFWBIaKvnFG0Sm2j7vL'
+```
+```php
+<?php
+$customersApi = new DwollaSwagger\CustomersApi($apiClient);
+
+$fsToken = $customersApi->getCustomerIavToken("https://api-uat.dwolla.com/customers/06b51d56-7a6c-4535-a0cc-2c0106f56ba6");
+$fsToken->token; # => "lr0Ax1zwIpeXXt8sJDiVXjPbwEeGO6QKFWBIaKvnFG0Sm2j7vL"
+?>
 ```
 
 ### Initiate IAV flow
@@ -1447,7 +1483,7 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
         "id": "98c209d3-02d6-4bee-bc0f-61e18acf0e33",
         "status": "verified",
         "type": "bank",
-        "name": "Vera Brittain’s Checking",
+        "name": "Jane Doe’s Checking",
         "created": "2015-10-02T22:03:45.537Z"
       }
     ]
@@ -1459,11 +1495,11 @@ customer_url = 'https://api.dwolla.com/customers/5b29279d-6359-4c87-a318-e090955
 
 # Using DwollaV2 - https://github.com/Dwolla/dwolla-v2-ruby (Recommended)
 funding_sources = account_token.get "#{customer}/funding-sources"
-funding_sources._embedded['funding-sources'][0].name # => "Vera Brittain’s Checking"
+funding_sources._embedded['funding-sources'][0].name # => "Jane Doe’s Checking"
 
 # Using DwollaSwagger - https://github.com/Dwolla/dwolla-swagger-ruby
 funding_sources = DwollaSwagger::FundingsourcesApi.get_customer_funding_sources(customer_url)
-funding_sources._embedded[:'funding-sources'][0][:name] # => "Vera Brittain’s Checking"
+funding_sources._embedded[:'funding-sources'][0][:name] # => "Jane Doe’s Checking"
 ```
 ```php
 <?php
@@ -1472,7 +1508,7 @@ $customerUrl = 'https://api.dwolla.com/customers/5b29279d-6359-4c87-a318-e090955
 $fsApi = new DwollaSwagger\FundingsourcesApi($apiClient);
 
 $fundingSources = $fsApi->getCustomerFundingSources($customerUrl);
-$fundingSources->_embedded->{'funding-sources'}[0]->name; # => "Vera Brittain’s Checking"
+$fundingSources->_embedded->{'funding-sources'}[0]->name; # => "Jane Doe’s Checking"
 ?>
 ```
 ```python
@@ -1480,12 +1516,12 @@ customer_url = 'https://api.dwolla.com/customers/5b29279d-6359-4c87-a318-e090955
 
 # Using dwollav2 - https://github.com/Dwolla/dwolla-v2-python (Recommended)
 funding_sources = account_token.get('%s/funding-sources' % customer_url)
-funding_sources.body['_embedded']['funding-sources'][0]['name'] # => 'Vera Brittain’s Checking'
+funding_sources.body['_embedded']['funding-sources'][0]['name'] # => 'Jane Doe’s Checking'
 
 # Using dwollaswagger - https://github.com/Dwolla/dwolla-swagger-python
 fs_api = dwollaswagger.FundingsourcesApi(client)
 funding_sources = fs_api.get_customer_funding_sources(customer_url)
-funding_sources._embedded['funding-sources'][0]['name'] # => 'Vera Brittain’s Checking'
+funding_sources._embedded['funding-sources'][0]['name'] # => 'Jane Doe’s Checking'
 ```
 ```javascript
 var customerUrl = 'https://api.dwolla.com/customers/5b29279d-6359-4c87-a318-e09095532733';
@@ -1493,7 +1529,7 @@ var customerUrl = 'https://api.dwolla.com/customers/5b29279d-6359-4c87-a318-e090
 accountToken
   .get(`${customerUrl}/funding-sources`)
   .then(function(res) {
-    res.body._embedded['funding-sources'][0].name; // => 'Vera Brittain’s Checking'
+    res.body._embedded['funding-sources'][0].name; // => 'Jane Doe’s Checking'
   });
 ```
 
@@ -1513,7 +1549,7 @@ This section details how to retrieve a Customer's list of transfers. Transaction
 Parameter | Optional? | Description
 ----------|------------|-------------
 id | no | Customer unique identifier to get transfers for.
-search | yes | A string to be matched with `firstName`, `lastName`, `email`, `businessName`, Customer Id, and Account Id. (`/transfers?search=Smith`)
+search | yes | A string to be matched with `firstName`, `lastName`, `email`, `businessName`, Customer Id, and Account Id. (`/transfers?search=Doe`)
 startAmount | yes | Only include transactions with an amount equal to or greater than `startAmount`. Can optionally be used with `endAmount` to specify an amount range.
 endAmount | yes | Only include transactions with an amount equal to or less than `endAmount`. Can optionally be used with `startAmount` to specify an amount range.
 startDate | yes | Only include transactions created after this date. ISO-8601 format: `YYYY-MM-DD`. Can optionally be used with `endDate` to specify a date range.

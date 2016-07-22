@@ -2,6 +2,8 @@
 
 Customers of type `personal` or `business` and of status `document` require photos of identifying documents to be uploaded for manual review in order to be verified. Currently, SDK support only exists for retrieving data with regards to a `Document` resource. To create a document, you must use an external HTTP library.
 
+For more information on handling the Customer verifiation status of `document`, reference our [Customer verification](https://developers.dwolla.com/resources/customer-verification/handling-verification-statuses.html) resource article.
+
 ### Document resource
 
 | Parameter | Description
@@ -9,7 +11,8 @@ Customers of type `personal` or `business` and of status `document` require phot
 |id | Document unique identifier
 |type | Either `passport`, `license`, `idCard`, or `other`.
 |status| Either `pending` or `reviewed`.  When a document has been manually reviewed by Dwolla, its status will be `reviewed`.  A reviewed document does not necessarily indicate that the customer has completed the identity verification process.
-| created | ISO 8601 Timestamp of document upload time and date
+| created | ISO 8601 Timestamp of document upload time and date.
+| failureReason | The reason an uploaded document was rejected. Can be: `ScanNotReadable`, `ScanNotUploaded`, `ScanIdTypeNotSupported`, `ScanNameMismatch`, `ScanFailedOther`, or `FailedOther`.
 
 ```noselect
 {

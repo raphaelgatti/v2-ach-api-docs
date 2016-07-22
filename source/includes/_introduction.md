@@ -171,8 +171,8 @@ Responses which contain a collection of resources have pagination links, `first`
   },
   "id": "132681FA-1B4D-4181-8FF2-619CA46235B1",
   "firstName": "Jane",
-  "lastName": "Jones",
-  "email": "jjones@nomail.com",
+  "lastName": "doe",
+  "email": "jdoe@nomail.com",
   "type": "personal",
   "status": "retry",
   "created": "2015-09-29T19:47:28.920Z"

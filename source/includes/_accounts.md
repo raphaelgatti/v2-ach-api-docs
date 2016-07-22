@@ -44,7 +44,7 @@ Dwolla offers a seamless process for migrating existing user [Accounts](#account
     }
   },
   "id": "ca32853c-48fa-40be-ae75-77b37504581b",
-  "name": "Charlotte Gillman"
+  "name": "Jane Doe"
 }
 ```
 
@@ -100,7 +100,7 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
     }
   },
   "id": "ca32853c-48fa-40be-ae75-77b37504581b",
-  "name": "Charlotte Gillman"
+  "name": "Jane Doe"
 }
 ```
 ```ruby
@@ -108,11 +108,11 @@ account_url = 'https://api-uat.dwolla.com/accounts/ca32853c-48fa-40be-ae75-77b37
 
 # Using DwollaV2 - https://github.com/Dwolla/dwolla-v2-ruby (Recommended)
 account = account_token.get account_url
-account.name # => "Charlotte Gillman"
+account.name # => "Jane Doe"
 
 # Using DwollaSwagger - https://github.com/Dwolla/dwolla-swagger-ruby
 account = DwollaSwagger::AccountsApi.id(account_url)
-account.name # => "Charlotte Gillman"
+account.name # => "Jane Doe"
 ```
 ```php
 <?php
@@ -121,7 +121,7 @@ $accountUrl = 'https://api-uat.dwolla.com/accounts/ca32853c-48fa-40be-ae75-77b37
 $accountsApi = new DwollaSwagger\AccountsApi($apiClient);
 
 $account = $accountsApi->id($accountUrl);
-print($account->name); # => "Charlotte Gillman"
+print($account->name); # => "Jane Doe"
 ?>
 ```
 ```python
@@ -130,7 +130,7 @@ account_url = 'https://api-uat.dwolla.com/accounts/ca32853c-48fa-40be-ae75-77b37
 accounts_api = dwollaswagger.AccountsApi(client)
 
 account = accounts_api.id(account_url)
-print(account.name) # => Charlotte Gillman
+print(account.name) # => Jane Doe
 ```
 ```javascript
 var accountUrl = 'https://api-uat.dwolla.com/accounts/ca32853c-48fa-40be-ae75-77b37504581b';
@@ -138,7 +138,7 @@ var accountUrl = 'https://api-uat.dwolla.com/accounts/ca32853c-48fa-40be-ae75-77
 accountToken
   .get(accountUrl)
   .then(function(res) {
-    res.body.name; // => 'Charlotte Gillman'
+    res.body.name; // => 'Jane Doe'
   });
 ```
 
@@ -272,11 +272,11 @@ account_url = 'https://api.dwolla.com/accounts/ca32853c-48fa-40be-ae75-77b375045
 
 # Using DwollaV2 - https://github.com/Dwolla/dwolla-v2-ruby (Recommended)
 funding_sources = account_token.get "#{account_url}/funding-sources"
-funding_sources._embedded['funding-sources'][0].name # => "Vera Brittain’s Checking"
+funding_sources._embedded['funding-sources'][0].name # => "Jane Doe's Checking"
 
 # Using DwollaSwagger - https://github.com/Dwolla/dwolla-swagger-ruby
 funding_sources = DwollaSwagger::FundingsourcesApi.get_account_funding_sources(account_url)
-funding_sources._embedded[:'funding-sources'][0][:name] # => "Vera Brittain’s Checking"
+funding_sources._embedded[:'funding-sources'][0][:name] # => "Jane Doe’s Checking"
 ```
 ```php
 <?php
@@ -285,7 +285,7 @@ $accountUrl = 'https://api.dwolla.com/accounts/ca32853c-48fa-40be-ae75-77b375045
 $fsApi = new DwollaSwagger\FundingsourcesApi($apiClient);
 
 $fundingSources = $fsApi->getAccountFundingSources($accountUrl);
-$fundingSources->_embedded->{'funding-sources'}[0]->name); # => "Vera Brittain’s Checking"
+$fundingSources->_embedded->{'funding-sources'}[0]->name); # => "Jane Doe’s Checking"
 ?>
 ```
 ```python
@@ -294,7 +294,7 @@ account_url = 'https://api.dwolla.com/accounts/ca32853c-48fa-40be-ae75-77b375045
 fs_api = dwollaswagger.FundingsourcesApi(client)
 funding_sources = fs_api.get_account_funding_sources(account_url)
 
-funding_sources._embedded['funding-sources'][0]['name'] # => Vera Brittain’s Checking
+funding_sources._embedded['funding-sources'][0]['name'] # => Jane Doe’s Checking
 ```
 ```javascript
 var accountUrl = 'https://api-uat.dwolla.com/accounts/ca32853c-48fa-40be-ae75-77b37504581b';
@@ -302,7 +302,7 @@ var accountUrl = 'https://api-uat.dwolla.com/accounts/ca32853c-48fa-40be-ae75-77
 accountToken
   .get(`${accountUrl}/funding-sources`)
   .then(function(res) {
-    res.body._embedded['funding-sources'][0].name; // => 'US Bank Checking'
+    res.body._embedded['funding-sources'][0].name; // => 'ABC Bank Checking'
   });
 ```
 
@@ -322,7 +322,7 @@ This section covers how to retrieve an Account's list of transfers. Transaction 
 Parameter | Optional? | Description
 ----------|------------|-------------
 id | no | Account unique identifier to get transfers for.
-search | yes | A string to be matched with `firstName`, `lastName`, `email`, `businessName`, Customer Id, and Account Id. (`/transfers?search=Smith`)
+search | yes | A string to be matched with `firstName`, `lastName`, `email`, `businessName`, Customer Id, and Account Id. (`/transfers?search=Doe`)
 startAmount | yes | Only include transactions with an amount equal to or greater than `startAmount`. Can optionally be used with `endAmount` to specify an amount range.
 endAmount | yes | Only include transactions with an amount equal to or less than `endAmount`. Can optionally be used with `startAmount` to specify an amount range.
 startDate | yes | Only include transactions created after this date. ISO-8601 format: `YYYY-MM-DD`. Can optionally be used with `endDate` to specify a date range.
