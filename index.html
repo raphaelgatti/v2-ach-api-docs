@@ -330,8 +330,8 @@ GET https://api.dwolla.com/accounts/a84222d5-31d2-4290-9a96-089813ef96b3/transfe
   </span><span class="p">},</span><span class="w">
   </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"132681FA-1B4D-4181-8FF2-619CA46235B1"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"firstName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Jane"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"lastName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Jones"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"jjones@nomail.com"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"lastName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"doe"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"jdoe@nomail.com"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"personal"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"retry"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"created"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-09-29T19:47:28.920Z"</span><span class="w">
@@ -1019,7 +1019,7 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
     </span><span class="p">}</span><span class="w">
   </span><span class="p">},</span><span class="w">
   </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ca32853c-48fa-40be-ae75-77b37504581b"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Charlotte Gillman"</span><span class="w">
+  </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Jane Doe"</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div></div><h2 id='get-an-account-by-id'>Get an Account by id</h2>
 <p>This section shows you how to retrieve account information belonging to the authorized user. The developer can pass either an <code class="prettyprint">id</code> or the entire <code class="prettyprint">location</code> resource to make this request.</p>
@@ -1090,7 +1090,7 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
     }
   },
   "id": "ca32853c-48fa-40be-ae75-77b37504581b",
-  "name": "Charlotte Gillman"
+  "name": "Jane Doe"
 }
 </code></pre></div></div><div class="code-snippet js-code-snippet language-ruby"><button class="btn alternative">copy</button><div class="code-snippet__selector">
           <nav>
@@ -1104,11 +1104,11 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 
 <span class="c1"># Using DwollaV2 - https://github.com/Dwolla/dwolla-v2-ruby (Recommended)</span>
 <span class="n">account</span> <span class="o">=</span> <span class="n">account_token</span><span class="p">.</span><span class="nf">get</span> <span class="n">account_url</span>
-<span class="n">account</span><span class="p">.</span><span class="nf">name</span> <span class="c1"># =&gt; "Charlotte Gillman"</span>
+<span class="n">account</span><span class="p">.</span><span class="nf">name</span> <span class="c1"># =&gt; "Jane Doe"</span>
 
 <span class="c1"># Using DwollaSwagger - https://github.com/Dwolla/dwolla-swagger-ruby</span>
 <span class="n">account</span> <span class="o">=</span> <span class="no">DwollaSwagger</span><span class="o">::</span><span class="no">AccountsApi</span><span class="p">.</span><span class="nf">id</span><span class="p">(</span><span class="n">account_url</span><span class="p">)</span>
-<span class="n">account</span><span class="p">.</span><span class="nf">name</span> <span class="c1"># =&gt; "Charlotte Gillman"</span>
+<span class="n">account</span><span class="p">.</span><span class="nf">name</span> <span class="c1"># =&gt; "Jane Doe"</span>
 </code></pre></div></div><div class="code-snippet js-code-snippet language-php"><button class="btn alternative">copy</button><div class="code-snippet__selector">
           <nav>
               <button class="selector_switch" id="raw">raw</button>
@@ -1123,7 +1123,7 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 <span class="nv">$accountsApi</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">DwollaSwagger\AccountsApi</span><span class="p">(</span><span class="nv">$apiClient</span><span class="p">);</span>
 
 <span class="nv">$account</span> <span class="o">=</span> <span class="nv">$accountsApi</span><span class="o">-&gt;</span><span class="na">id</span><span class="p">(</span><span class="nv">$accountUrl</span><span class="p">);</span>
-<span class="k">print</span><span class="p">(</span><span class="nv">$account</span><span class="o">-&gt;</span><span class="na">name</span><span class="p">);</span> <span class="c1"># =&gt; "Charlotte Gillman"
+<span class="k">print</span><span class="p">(</span><span class="nv">$account</span><span class="o">-&gt;</span><span class="na">name</span><span class="p">);</span> <span class="c1"># =&gt; "Jane Doe"
 </span><span class="cp">?&gt;</span>
 </code></pre></div></div><div class="code-snippet js-code-snippet language-python"><button class="btn alternative">copy</button><div class="code-snippet__selector">
           <nav>
@@ -1138,7 +1138,7 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 <span class="n">accounts_api</span> <span class="o">=</span> <span class="n">dwollaswagger</span><span class="o">.</span><span class="n">AccountsApi</span><span class="p">(</span><span class="n">client</span><span class="p">)</span>
 
 <span class="n">account</span> <span class="o">=</span> <span class="n">accounts_api</span><span class="o">.</span><span class="nb">id</span><span class="p">(</span><span class="n">account_url</span><span class="p">)</span>
-<span class="k">print</span><span class="p">(</span><span class="n">account</span><span class="o">.</span><span class="n">name</span><span class="p">)</span> <span class="c"># =&gt; Charlotte Gillman</span>
+<span class="k">print</span><span class="p">(</span><span class="n">account</span><span class="o">.</span><span class="n">name</span><span class="p">)</span> <span class="c"># =&gt; Jane Doe</span>
 </code></pre></div></div><div class="code-snippet js-code-snippet language-javascript"><button class="btn alternative">copy</button><div class="code-snippet__selector">
           <nav>
               <button class="selector_switch" id="raw">raw</button>
@@ -1152,7 +1152,7 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 <span class="nx">accountToken</span>
   <span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="nx">accountUrl</span><span class="p">)</span>
   <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">res</span><span class="p">)</span> <span class="p">{</span>
-    <span class="nx">res</span><span class="p">.</span><span class="nx">body</span><span class="p">.</span><span class="nx">name</span><span class="p">;</span> <span class="c1">// =&gt; 'Charlotte Gillman'</span>
+    <span class="nx">res</span><span class="p">.</span><span class="nx">body</span><span class="p">.</span><span class="nx">name</span><span class="p">;</span> <span class="c1">// =&gt; 'Jane Doe'</span>
   <span class="p">});</span>
 </code></pre></div></div><h2 id='create-an-account-funding-source'>Create an Account funding source</h2>
 <p>This section details how to add a bank account to a Dwolla account. The bank account will have a status of <code class="prettyprint">unverified</code> upon creation. Before a Dwolla account is eligible to transfer money from their bank or credit union account they need to verify ownership of the account via <a href="#initiate-or-verify-micro-deposits">micro-deposit verification</a>.</p>
@@ -1326,11 +1326,11 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 
 <span class="c1"># Using DwollaV2 - https://github.com/Dwolla/dwolla-v2-ruby (Recommended)</span>
 <span class="n">funding_sources</span> <span class="o">=</span> <span class="n">account_token</span><span class="p">.</span><span class="nf">get</span> <span class="s2">"</span><span class="si">#{</span><span class="n">account_url</span><span class="si">}</span><span class="s2">/funding-sources"</span>
-<span class="n">funding_sources</span><span class="p">.</span><span class="nf">_embedded</span><span class="p">[</span><span class="s1">'funding-sources'</span><span class="p">][</span><span class="mi">0</span><span class="p">].</span><span class="nf">name</span> <span class="c1"># =&gt; "Vera Brittain’s Checking"</span>
+<span class="n">funding_sources</span><span class="p">.</span><span class="nf">_embedded</span><span class="p">[</span><span class="s1">'funding-sources'</span><span class="p">][</span><span class="mi">0</span><span class="p">].</span><span class="nf">name</span> <span class="c1"># =&gt; "Jane Doe's Checking"</span>
 
 <span class="c1"># Using DwollaSwagger - https://github.com/Dwolla/dwolla-swagger-ruby</span>
 <span class="n">funding_sources</span> <span class="o">=</span> <span class="no">DwollaSwagger</span><span class="o">::</span><span class="no">FundingsourcesApi</span><span class="p">.</span><span class="nf">get_account_funding_sources</span><span class="p">(</span><span class="n">account_url</span><span class="p">)</span>
-<span class="n">funding_sources</span><span class="p">.</span><span class="nf">_embedded</span><span class="p">[</span><span class="ss">:'funding-sources'</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="ss">:name</span><span class="p">]</span> <span class="c1"># =&gt; "Vera Brittain’s Checking"</span>
+<span class="n">funding_sources</span><span class="p">.</span><span class="nf">_embedded</span><span class="p">[</span><span class="ss">:'funding-sources'</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="ss">:name</span><span class="p">]</span> <span class="c1"># =&gt; "Jane Doe’s Checking"</span>
 </code></pre></div></div><div class="code-snippet js-code-snippet language-php"><button class="btn alternative">copy</button><div class="code-snippet__selector">
           <nav>
               <button class="selector_switch" id="raw">raw</button>
@@ -1345,7 +1345,7 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 <span class="nv">$fsApi</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">DwollaSwagger\FundingsourcesApi</span><span class="p">(</span><span class="nv">$apiClient</span><span class="p">);</span>
 
 <span class="nv">$fundingSources</span> <span class="o">=</span> <span class="nv">$fsApi</span><span class="o">-&gt;</span><span class="na">getAccountFundingSources</span><span class="p">(</span><span class="nv">$accountUrl</span><span class="p">);</span>
-<span class="nv">$fundingSources</span><span class="o">-&gt;</span><span class="na">_embedded</span><span class="o">-&gt;</span><span class="p">{</span><span class="s1">'funding-sources'</span><span class="p">}[</span><span class="mi">0</span><span class="p">]</span><span class="o">-&gt;</span><span class="na">name</span><span class="p">);</span> <span class="c1"># =&gt; "Vera Brittain’s Checking"
+<span class="nv">$fundingSources</span><span class="o">-&gt;</span><span class="na">_embedded</span><span class="o">-&gt;</span><span class="p">{</span><span class="s1">'funding-sources'</span><span class="p">}[</span><span class="mi">0</span><span class="p">]</span><span class="o">-&gt;</span><span class="na">name</span><span class="p">);</span> <span class="c1"># =&gt; "Jane Doe’s Checking"
 </span><span class="cp">?&gt;</span>
 </code></pre></div></div><div class="code-snippet js-code-snippet language-python"><button class="btn alternative">copy</button><div class="code-snippet__selector">
           <nav>
@@ -1360,7 +1360,7 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 <span class="n">fs_api</span> <span class="o">=</span> <span class="n">dwollaswagger</span><span class="o">.</span><span class="n">FundingsourcesApi</span><span class="p">(</span><span class="n">client</span><span class="p">)</span>
 <span class="n">funding_sources</span> <span class="o">=</span> <span class="n">fs_api</span><span class="o">.</span><span class="n">get_account_funding_sources</span><span class="p">(</span><span class="n">account_url</span><span class="p">)</span>
 
-<span class="n">funding_sources</span><span class="o">.</span><span class="n">_embedded</span><span class="p">[</span><span class="s">'funding-sources'</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="s">'name'</span><span class="p">]</span> <span class="c"># =&gt; Vera Brittain’s Checking</span>
+<span class="n">funding_sources</span><span class="o">.</span><span class="n">_embedded</span><span class="p">[</span><span class="s">'funding-sources'</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="s">'name'</span><span class="p">]</span> <span class="c"># =&gt; Jane Doe’s Checking</span>
 </code></pre></div></div><div class="code-snippet js-code-snippet language-javascript"><button class="btn alternative">copy</button><div class="code-snippet__selector">
           <nav>
               <button class="selector_switch" id="raw">raw</button>
@@ -1374,7 +1374,7 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 <span class="nx">accountToken</span>
   <span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="err">`</span><span class="nx">$</span><span class="p">{</span><span class="nx">accountUrl</span><span class="p">}</span><span class="sr">/funding-sources`</span><span class="err">)
 </span>  <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">res</span><span class="p">)</span> <span class="p">{</span>
-    <span class="nx">res</span><span class="p">.</span><span class="nx">body</span><span class="p">.</span><span class="nx">_embedded</span><span class="p">[</span><span class="s1">'funding-sources'</span><span class="p">][</span><span class="mi">0</span><span class="p">].</span><span class="nx">name</span><span class="p">;</span> <span class="c1">// =&gt; 'US Bank Checking'</span>
+    <span class="nx">res</span><span class="p">.</span><span class="nx">body</span><span class="p">.</span><span class="nx">_embedded</span><span class="p">[</span><span class="s1">'funding-sources'</span><span class="p">][</span><span class="mi">0</span><span class="p">].</span><span class="nx">name</span><span class="p">;</span> <span class="c1">// =&gt; 'ABC Bank Checking'</span>
   <span class="p">});</span>
 </code></pre></div></div><h2 id='list-an-account39s-transfers'>List an Account&rsquo;s transfers</h2>
 <p>This section covers how to retrieve an Account&rsquo;s list of transfers. Transaction search is supported by passing in optional querystring parameters such as: <code class="prettyprint">search</code> which represents a term to search on, <code class="prettyprint">startAmount</code>, <code class="prettyprint">endAmount</code>, <code class="prettyprint">startDate</code>, and <code class="prettyprint">endDate</code>.</p>
@@ -1397,7 +1397,7 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 <tr>
 <td>search</td>
 <td>yes</td>
-<td>A string to be matched with <code class="prettyprint">firstName</code>, <code class="prettyprint">lastName</code>, <code class="prettyprint">email</code>, <code class="prettyprint">businessName</code>, Customer Id, and Account Id. (<code class="prettyprint">/transfers?search=Smith</code>)</td>
+<td>A string to be matched with <code class="prettyprint">firstName</code>, <code class="prettyprint">lastName</code>, <code class="prettyprint">email</code>, <code class="prettyprint">businessName</code>, Customer Id, and Account Id. (<code class="prettyprint">/transfers?search=Doe</code>)</td>
 </tr>
 <tr>
 <td>startAmount</td>
@@ -1862,9 +1862,9 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
     </span><span class="p">}</span><span class="w">
   </span><span class="p">},</span><span class="w">
   </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"730CA23F-06C5-45CC-AA6B-8EC2D6EE109F"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"firstName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Charlotte"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"lastName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Gillman"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"yellowwallpaper@nomail.com"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"firstName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Jane"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"lastName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Doe"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"janedoe@nomail.com"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"personal"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"verified"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"created"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-10-06T01:18:26.923Z"</span><span class="w">
@@ -2194,9 +2194,9 @@ Accept: application/vnd.dwolla.v1.hal+json
 Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 
 {
-  "firstName": "Bill",
-  "lastName": "Bibbit",
-  "email": "bbibbit@nomail.net",
+  "firstName": "John",
+  "lastName": "Doe",
+  "email": "johndoe@nomail.net",
   "ipAddress": "10.10.10.10",
   "type": "personal",
   "address1": "99-99 33rd St",
@@ -2205,7 +2205,7 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
   "postalCode": "11101",
   "dateOfBirth": "1970-01-01",
   "ssn": "1234",
-  "phone": "3478589191"
+  "phone": "5155555555"
 }
 
 HTTP/1.1 201 Created
@@ -2222,9 +2222,9 @@ Location: https://api.dwolla.com/customers/FC451A7A-AE30-4404-AB95-E3553FCD733F
 <span class="nv">$customersApi</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">DwollaSwagger\CustomersApi</span><span class="p">(</span><span class="nv">$apiClient</span><span class="p">);</span>
 
 <span class="nv">$customer</span> <span class="o">=</span> <span class="nv">$customersApi</span><span class="o">-&gt;</span><span class="na">create</span><span class="p">([</span>
-  <span class="s1">'firstName'</span> <span class="o">=&gt;</span> <span class="s1">'Bill'</span><span class="p">,</span>
-  <span class="s1">'lastName'</span> <span class="o">=&gt;</span> <span class="s1">'Bibbit'</span><span class="p">,</span>
-  <span class="s1">'email'</span> <span class="o">=&gt;</span> <span class="s1">'bbibbit@nomail.net'</span><span class="p">,</span>
+  <span class="s1">'firstName'</span> <span class="o">=&gt;</span> <span class="s1">'John'</span><span class="p">,</span>
+  <span class="s1">'lastName'</span> <span class="o">=&gt;</span> <span class="s1">'Doe'</span><span class="p">,</span>
+  <span class="s1">'email'</span> <span class="o">=&gt;</span> <span class="s1">'jdoe@nomail.net'</span><span class="p">,</span>
   <span class="s1">'type'</span> <span class="o">=&gt;</span> <span class="s1">'personal'</span><span class="p">,</span>
   <span class="s1">'address1'</span> <span class="o">=&gt;</span> <span class="s1">'99-99 33rd St'</span><span class="p">,</span>
   <span class="s1">'city'</span> <span class="o">=&gt;</span> <span class="s1">'Some City'</span><span class="p">,</span>
@@ -2238,7 +2238,7 @@ Location: https://api.dwolla.com/customers/FC451A7A-AE30-4404-AB95-E3553FCD733F
   <span class="c1"># If the entire SSN is provided,
 </span>  <span class="c1"># it will still be accepted
 </span>  <span class="s1">'ssn'</span> <span class="o">=&gt;</span> <span class="s1">'1234'</span><span class="p">,</span>
-  <span class="s1">'phone'</span> <span class="o">=&gt;</span> <span class="s1">'3478589191'</span>
+  <span class="s1">'phone'</span> <span class="o">=&gt;</span> <span class="s1">'5155555555'</span>
 <span class="p">]);</span>
 
 <span class="nv">$customer</span><span class="p">;</span> <span class="c1"># =&gt; "https://api-uat.dwolla.com/customers/AB443D36-3757-44C1-A1B4-29727FB3111C"
@@ -2252,9 +2252,9 @@ Location: https://api.dwolla.com/customers/FC451A7A-AE30-4404-AB95-E3553FCD733F
               <button class="selector_switch" id="javascript">javascript</button>
           </nav>
         </div><div class="code-snippet__cnt highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="n">request_body</span> <span class="o">=</span> <span class="p">{</span>
-  <span class="ss">:firstName</span> <span class="o">=&gt;</span> <span class="s1">'Bill'</span><span class="p">,</span>
-  <span class="ss">:lastName</span> <span class="o">=&gt;</span> <span class="s1">'Bibbit'</span><span class="p">,</span>
-  <span class="ss">:email</span> <span class="o">=&gt;</span> <span class="s1">'bbibbit@nomail.net'</span><span class="p">,</span>
+  <span class="ss">:firstName</span> <span class="o">=&gt;</span> <span class="s1">'John'</span><span class="p">,</span>
+  <span class="ss">:lastName</span> <span class="o">=&gt;</span> <span class="s1">'Doe'</span><span class="p">,</span>
+  <span class="ss">:email</span> <span class="o">=&gt;</span> <span class="s1">'jdoe@nomail.net'</span><span class="p">,</span>
   <span class="ss">:type</span> <span class="o">=&gt;</span> <span class="s1">'personal'</span><span class="p">,</span>
   <span class="ss">:address1</span> <span class="o">=&gt;</span> <span class="s1">'99-99 33rd St'</span><span class="p">,</span>
   <span class="ss">:city</span> <span class="o">=&gt;</span> <span class="s1">'Some City'</span><span class="p">,</span>
@@ -2269,7 +2269,7 @@ Location: https://api.dwolla.com/customers/FC451A7A-AE30-4404-AB95-E3553FCD733F
   <span class="c1"># it will still be accepted</span>
 
   <span class="ss">:ssn</span> <span class="o">=&gt;</span> <span class="s1">'1234'</span><span class="p">,</span>
-  <span class="ss">:phone</span> <span class="o">=&gt;</span> <span class="s1">'3478589191'</span>
+  <span class="ss">:phone</span> <span class="o">=&gt;</span> <span class="s1">'5155555555'</span>
 <span class="p">}</span>
 
 <span class="c1"># Using DwollaV2 - https://github.com/Dwolla/dwolla-v2-ruby (Recommended)</span>
@@ -2288,9 +2288,9 @@ Location: https://api.dwolla.com/customers/FC451A7A-AE30-4404-AB95-E3553FCD733F
               <button class="selector_switch" id="javascript">javascript</button>
           </nav>
         </div><div class="code-snippet__cnt highlight"><pre><code class="language-python" data-lang="python"><span class="n">request_body</span> <span class="o">=</span> <span class="p">{</span>
-  <span class="s">'firstName'</span><span class="p">:</span> <span class="s">'Bill'</span><span class="p">,</span>
-  <span class="s">'lastName'</span><span class="p">:</span> <span class="s">'Bibbit'</span><span class="p">,</span>
-  <span class="s">'email'</span><span class="p">:</span> <span class="s">'bbibbit@nomail.net'</span><span class="p">,</span>
+  <span class="s">'firstName'</span><span class="p">:</span> <span class="s">'John'</span><span class="p">,</span>
+  <span class="s">'lastName'</span><span class="p">:</span> <span class="s">'Doe'</span><span class="p">,</span>
+  <span class="s">'email'</span><span class="p">:</span> <span class="s">'jdoe@nomail.net'</span><span class="p">,</span>
   <span class="s">'type'</span><span class="p">:</span> <span class="s">'personal'</span><span class="p">,</span>
   <span class="s">'address1'</span><span class="p">:</span> <span class="s">'99-99 33rd St'</span><span class="p">,</span>
   <span class="s">'city'</span><span class="p">:</span> <span class="s">'Some City'</span><span class="p">,</span>
@@ -2302,7 +2302,7 @@ Location: https://api.dwolla.com/customers/FC451A7A-AE30-4404-AB95-E3553FCD733F
   <span class="c"># If the entire SSN is provided,</span>
   <span class="c"># it will still be accepted</span>
   <span class="s">'ssn'</span><span class="p">:</span> <span class="s">'1234'</span><span class="p">,</span>
-  <span class="s">'phone'</span><span class="p">:</span> <span class="s">'3478589191'</span>
+  <span class="s">'phone'</span><span class="p">:</span> <span class="s">'5155555555'</span>
 <span class="p">}</span>
 
 <span class="c"># Using dwollav2 - https://github.com/Dwolla/dwolla-v2-python (Recommended)</span>
@@ -2322,9 +2322,9 @@ Location: https://api.dwolla.com/customers/FC451A7A-AE30-4404-AB95-E3553FCD733F
               <button class="selector_switch" id="javascript">javascript</button>
           </nav>
         </div><div class="code-snippet__cnt highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="kd">var</span> <span class="nx">requestBody</span> <span class="o">=</span> <span class="p">{</span>
-  <span class="na">firstName</span><span class="p">:</span> <span class="s1">'Bill'</span><span class="p">,</span>
-  <span class="na">lastName</span><span class="p">:</span> <span class="s1">'Bibbit'</span><span class="p">,</span>
-  <span class="na">email</span><span class="p">:</span> <span class="s1">'bbibbit@nomail.net'</span><span class="p">,</span>
+  <span class="na">firstName</span><span class="p">:</span> <span class="s1">'John'</span><span class="p">,</span>
+  <span class="na">lastName</span><span class="p">:</span> <span class="s1">'Doe'</span><span class="p">,</span>
+  <span class="na">email</span><span class="p">:</span> <span class="s1">'jdoe@nomail.net'</span><span class="p">,</span>
   <span class="na">type</span><span class="p">:</span> <span class="s1">'personal'</span><span class="p">,</span>
   <span class="na">address1</span><span class="p">:</span> <span class="s1">'99-99 33rd St'</span><span class="p">,</span>
   <span class="na">city</span><span class="p">:</span> <span class="s1">'Some City'</span><span class="p">,</span>
@@ -2336,7 +2336,7 @@ Location: https://api.dwolla.com/customers/FC451A7A-AE30-4404-AB95-E3553FCD733F
   <span class="c1">// If the entire SSN is provided,</span>
   <span class="c1">// it will still be accepted</span>
   <span class="na">ssn</span><span class="p">:</span> <span class="s1">'1234'</span><span class="p">,</span>
-  <span class="na">phone</span><span class="p">:</span> <span class="s1">'3478589191'</span>
+  <span class="na">phone</span><span class="p">:</span> <span class="s1">'5155555555'</span>
 <span class="p">};</span>
 
 <span class="nx">accountToken</span>
@@ -2784,9 +2784,9 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
     </span><span class="p">}</span><span class="w">
   </span><span class="p">},</span><span class="w">
   </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"730CA23F-06C5-45CC-AA6B-8EC2D6EE109F"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"firstName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Missy"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"lastName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Elliott"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"missye@nomail.com"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"firstName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Jane"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"lastName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Doe"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"jdoe@nomail.com"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"personal"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"retry"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"created"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-10-06T01:18:26.923Z"</span><span class="w">
@@ -2805,9 +2805,9 @@ Accept: application/vnd.dwolla.v1.hal+json
 Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 
 {
-  "firstName": "Missy",
-  "lastName": "Elliott",
-  "email": "missye@nomail.com",
+  "firstName": "John",
+  "lastName": "Doe",
+  "email": "jdoe@nomail.com",
   "ipAddress": "10.10.10.10",
   "type": "personal",
   "address1": "221 Corrected Address St..",
@@ -2834,9 +2834,9 @@ Location: https://api.dwolla.com/customers/FC451A7A-AE30-4404-AB95-E3553FCD733F
 
 <span class="nv">$customerUrl</span> <span class="o">=</span> <span class="s1">'https://api.dwolla.com/customers/FC451A7A-AE30-4404-AB95-E3553FCD733F'</span><span class="p">;</span>
 <span class="nv">$customer</span> <span class="o">=</span> <span class="nv">$customersApi</span><span class="o">-&gt;</span><span class="na">updateCustomer</span><span class="p">(</span><span class="nv">$customerUrl</span><span class="p">,</span> <span class="k">array</span> <span class="p">(</span>
-  <span class="s1">'firstName'</span> <span class="o">=&gt;</span> <span class="s1">'Missy'</span><span class="p">,</span>
-  <span class="s1">'lastName'</span> <span class="o">=&gt;</span> <span class="s1">'Elliott'</span><span class="p">,</span>
-  <span class="s1">'email'</span> <span class="o">=&gt;</span> <span class="s1">'missye@nomail.com'</span><span class="p">,</span>
+  <span class="s1">'firstName'</span> <span class="o">=&gt;</span> <span class="s1">'John'</span><span class="p">,</span>
+  <span class="s1">'lastName'</span> <span class="o">=&gt;</span> <span class="s1">'Doe'</span><span class="p">,</span>
+  <span class="s1">'email'</span> <span class="o">=&gt;</span> <span class="s1">'jdoe@nomail.com'</span><span class="p">,</span>
   <span class="s1">'ipAddress'</span> <span class="o">=&gt;</span> <span class="s1">'10.10.10.10'</span><span class="p">,</span>
   <span class="s1">'type'</span> <span class="o">=&gt;</span> <span class="s1">'personal'</span><span class="p">,</span>
   <span class="s1">'address1'</span> <span class="o">=&gt;</span> <span class="s1">'221 Corrected Address St..'</span><span class="p">,</span>
@@ -2859,9 +2859,9 @@ Location: https://api.dwolla.com/customers/FC451A7A-AE30-4404-AB95-E3553FCD733F
           </nav>
         </div><div class="code-snippet__cnt highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="n">customer_url</span> <span class="o">=</span> <span class="s1">'https://api.dwolla.com/customers/FC451A7A-AE30-4404-AB95-E3553FCD733F'</span>
 <span class="n">request_body</span> <span class="o">=</span> <span class="p">{</span>
-      <span class="s2">"firstName"</span> <span class="o">=&gt;</span> <span class="s2">"Missy"</span><span class="p">,</span>
-       <span class="s2">"lastName"</span> <span class="o">=&gt;</span> <span class="s2">"Elliott"</span><span class="p">,</span>
-          <span class="s2">"email"</span> <span class="o">=&gt;</span> <span class="s2">"missey@nomail.com"</span><span class="p">,</span>
+      <span class="s2">"firstName"</span> <span class="o">=&gt;</span> <span class="s2">"John"</span><span class="p">,</span>
+       <span class="s2">"lastName"</span> <span class="o">=&gt;</span> <span class="s2">"Doe"</span><span class="p">,</span>
+          <span class="s2">"email"</span> <span class="o">=&gt;</span> <span class="s2">"jdoe@nomail.com"</span><span class="p">,</span>
       <span class="s2">"ipAddress"</span> <span class="o">=&gt;</span> <span class="s2">"10.10.10.10"</span><span class="p">,</span>
            <span class="s2">"type"</span> <span class="o">=&gt;</span> <span class="s2">"personal"</span><span class="p">,</span>
        <span class="s2">"address1"</span> <span class="o">=&gt;</span> <span class="s2">"221 Corrected Address St.."</span><span class="p">,</span>
@@ -2890,9 +2890,9 @@ Location: https://api.dwolla.com/customers/FC451A7A-AE30-4404-AB95-E3553FCD733F
           </nav>
         </div><div class="code-snippet__cnt highlight"><pre><code class="language-python" data-lang="python"><span class="n">customer_url</span> <span class="o">=</span> <span class="s">'https://api.dwolla.com/customers/FC451A7A-AE30-4404-AB95-E3553FCD733F'</span>
 <span class="n">request_body</span> <span class="o">=</span> <span class="p">{</span>
-  <span class="s">"firstName"</span><span class="p">:</span> <span class="s">"Missy"</span><span class="p">,</span>
-  <span class="s">"lastName"</span><span class="p">:</span> <span class="s">"Elliott"</span><span class="p">,</span>
-  <span class="s">"email"</span><span class="p">:</span> <span class="s">"missey@nomail.com"</span><span class="p">,</span>
+  <span class="s">"firstName"</span><span class="p">:</span> <span class="s">"John"</span><span class="p">,</span>
+  <span class="s">"lastName"</span><span class="p">:</span> <span class="s">"Doe"</span><span class="p">,</span>
+  <span class="s">"email"</span><span class="p">:</span> <span class="s">"jdoe@nomail.com"</span><span class="p">,</span>
   <span class="s">"ipAddress"</span><span class="p">:</span> <span class="s">"10.10.10.10"</span><span class="p">,</span>
   <span class="s">"type"</span><span class="p">:</span> <span class="s">"personal"</span><span class="p">,</span>
   <span class="s">"address1"</span><span class="p">:</span> <span class="s">"221 Corrected Address St.."</span><span class="p">,</span>
@@ -2922,9 +2922,9 @@ Location: https://api.dwolla.com/customers/FC451A7A-AE30-4404-AB95-E3553FCD733F
           </nav>
         </div><div class="code-snippet__cnt highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="kd">var</span> <span class="nx">customerUrl</span> <span class="o">=</span> <span class="s1">'https://api.dwolla.com/customers/FC451A7A-AE30-4404-AB95-E3553FCD733F'</span><span class="p">;</span>
 <span class="kd">var</span> <span class="nx">requestBody</span> <span class="o">=</span> <span class="p">{</span>
-  <span class="na">firstName</span><span class="p">:</span> <span class="s2">"Gordon"</span><span class="p">,</span>
-  <span class="na">lastName</span><span class="p">:</span> <span class="s2">"Zheng"</span><span class="p">,</span>
-  <span class="na">email</span><span class="p">:</span> <span class="s2">"gordon+15@dwolla.com"</span><span class="p">,</span>
+  <span class="na">firstName</span><span class="p">:</span> <span class="s2">"John"</span><span class="p">,</span>
+  <span class="na">lastName</span><span class="p">:</span> <span class="s2">"Doe"</span><span class="p">,</span>
+  <span class="na">email</span><span class="p">:</span> <span class="s2">"johndoe@dwolla.com"</span><span class="p">,</span>
   <span class="na">ipAddress</span><span class="p">:</span> <span class="s2">"10.10.10.10"</span><span class="p">,</span>
   <span class="na">type</span><span class="p">:</span> <span class="s2">"personal"</span><span class="p">,</span>
   <span class="na">address1</span><span class="p">:</span> <span class="s2">"221 Corrected Address St.."</span><span class="p">,</span>
@@ -3061,7 +3061,7 @@ Location: https://api.dwolla.com/customers/FC451A7A-AE30-4404-AB95-E3553FCD733F
 <tr>
 <td>search</td>
 <td>yes</td>
-<td>Searches on <code class="prettyprint">firstName</code>, <code class="prettyprint">lastName</code>, and <code class="prettyprint">email</code> fields. (<code class="prettyprint">/customers?search=Smith</code>)</td>
+<td>Searches on <code class="prettyprint">firstName</code>, <code class="prettyprint">lastName</code>, and <code class="prettyprint">email</code> fields. (<code class="prettyprint">/customers?search=Doe</code>)</td>
 </tr>
 </tbody></table>
 <h3 id='request-and-response'>Request and response</h3><div class="code-snippet js-code-snippet language-raw"><button class="btn alternative">copy</button><div class="code-snippet__selector">
@@ -3464,7 +3464,7 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
   "routingNumber": "222222226",
   "accountNumber": "123456789",
   "type": "checking",
-  "name": "Vera Brittain’s Checking"
+  "name": "Jane Doe’s Checking"
 }
 
 HTTP/1.1 201 Created
@@ -3484,7 +3484,7 @@ Location: https://api.dwolla.com/funding-sources/AB443D36-3757-44C1-A1B4-29727FB
   <span class="s2">"routingNumber"</span> <span class="o">=&gt;</span> <span class="s2">"222222226"</span><span class="p">,</span>
   <span class="s2">"accountNumber"</span> <span class="o">=&gt;</span> <span class="s2">"123456789"</span><span class="p">,</span>
   <span class="s2">"type"</span> <span class="o">=&gt;</span> <span class="s2">"checking"</span><span class="p">,</span>
-  <span class="s2">"name"</span> <span class="o">=&gt;</span> <span class="s2">"Vera Brittain’s Checking"</span>
+  <span class="s2">"name"</span> <span class="o">=&gt;</span> <span class="s2">"Jane Doe’s Checking"</span>
 <span class="p">],</span> <span class="s2">"https://api-uat.dwolla.com/customers/AB443D36-3757-44C1-A1B4-29727FB3111C"</span><span class="p">);</span>
 <span class="nv">$fundingSource</span><span class="p">;</span> <span class="c1"># =&gt; "https://api-uat.dwolla.com/funding-sources/375c6781-2a17-476c-84f7-db7d2f6ffb31"
 </span><span class="cp">?&gt;</span>
@@ -3501,7 +3501,7 @@ Location: https://api.dwolla.com/funding-sources/AB443D36-3757-44C1-A1B4-29727FB
   <span class="ss">routingNumber: </span><span class="s1">'222222226'</span><span class="p">,</span>
   <span class="ss">accountNumber: </span><span class="s1">'123456789'</span><span class="p">,</span>
   <span class="ss">type: </span><span class="s1">'checking'</span><span class="p">,</span>
-  <span class="ss">name: </span><span class="s1">'Vera Brittain’s Checking'</span>
+  <span class="ss">name: </span><span class="s1">'Jane Doe’s Checking'</span>
 <span class="p">}</span>
 
 <span class="c1"># Using DwollaV2 - https://github.com/Dwolla/dwolla-v2-ruby (Recommended)</span>
@@ -3524,7 +3524,7 @@ Location: https://api.dwolla.com/funding-sources/AB443D36-3757-44C1-A1B4-29727FB
   <span class="s">'routingNumber'</span><span class="p">:</span> <span class="s">'222222226'</span><span class="p">,</span>
   <span class="s">'accountNumber'</span><span class="p">:</span> <span class="s">'123456789'</span><span class="p">,</span>
   <span class="s">'type'</span><span class="p">:</span> <span class="s">'checking'</span><span class="p">,</span>
-  <span class="s">'name'</span><span class="p">:</span> <span class="s">'Vera Brittain’s Checking'</span>
+  <span class="s">'name'</span><span class="p">:</span> <span class="s">'Jane Doe’s Checking'</span>
 <span class="p">}</span>
 
 <span class="c"># Using dwollav2 - https://github.com/Dwolla/dwolla-v2-python (Recommended)</span>
@@ -3548,7 +3548,7 @@ Location: https://api.dwolla.com/funding-sources/AB443D36-3757-44C1-A1B4-29727FB
   <span class="s1">'routingNumber'</span><span class="p">:</span> <span class="s1">'222222226'</span><span class="p">,</span>
   <span class="s1">'accountNumber'</span><span class="p">:</span> <span class="s1">'123456789'</span><span class="p">,</span>
   <span class="s1">'type'</span><span class="p">:</span> <span class="s1">'checking'</span><span class="p">,</span>
-  <span class="s1">'name'</span><span class="p">:</span> <span class="s1">'Vera Brittain’s Checking'</span>
+  <span class="s1">'name'</span><span class="p">:</span> <span class="s1">'Jane Doe’s Checking'</span>
 <span class="p">};</span>
 
 <span class="nx">accountToken</span>
@@ -3596,7 +3596,15 @@ Location: https://api.dwolla.com/funding-sources/AB443D36-3757-44C1-A1B4-29727FB
 <td>Customer not found.</td>
 </tr>
 </tbody></table>
-<h3 id='request-and-response'>Request and response</h3><div class="code-snippet js-code-snippet language-nohide"><button class="btn alternative">copy</button><div class="code-snippet__cnt highlight"><pre><code class="language-nohide" data-lang="nohide">POST /customers/99bfb139-eadd-4cdf-b346-7504f0c16c60/iav-token
+<h3 id='request-and-response'>Request and response</h3><div class="code-snippet js-code-snippet language-raw"><button class="btn alternative">copy</button><div class="code-snippet__selector">
+          <nav>
+              <button class="selector_switch" id="raw">raw</button>
+              <button class="selector_switch" id="php">php</button>
+              <button class="selector_switch" id="ruby">ruby</button>
+              <button class="selector_switch" id="python">python</button>
+              <button class="selector_switch" id="javascript">javascript</button>
+          </nav>
+        </div><div class="code-snippet__cnt highlight"><pre><code class="language-raw" data-lang="raw">POST /customers/99bfb139-eadd-4cdf-b346-7504f0c16c60/iav-token
 Content-Type: application/vnd.dwolla.v1.hal+json
 Accept: application/vnd.dwolla.v1.hal+json
 Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
@@ -3611,6 +3619,66 @@ HTTP/1.1 200 OK
   },
   "token": "4adF858jPeQ9RnojMHdqSD2KwsvmhO7Ti7cI5woOiBGCpH5krY"
 }
+</code></pre></div></div><div class="code-snippet js-code-snippet language-ruby"><button class="btn alternative">copy</button><div class="code-snippet__selector">
+          <nav>
+              <button class="selector_switch" id="raw">raw</button>
+              <button class="selector_switch" id="php">php</button>
+              <button class="selector_switch" id="ruby">ruby</button>
+              <button class="selector_switch" id="python">python</button>
+              <button class="selector_switch" id="javascript">javascript</button>
+          </nav>
+        </div><div class="code-snippet__cnt highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="n">customer_url</span> <span class="o">=</span> <span class="s1">'https://api-uat.dwolla.com/customers/06b51d56-7a6c-4535-a0cc-2c0106f56ba6'</span>
+
+<span class="c1"># Using DwollaV2 - https://github.com/Dwolla/dwolla-v2-ruby (Recommended)</span>
+<span class="n">customer</span> <span class="o">=</span> <span class="n">account_token</span><span class="p">.</span><span class="nf">post</span> <span class="s2">"</span><span class="si">#{</span><span class="n">customer_url</span><span class="si">}</span><span class="s2">/iav-token"</span>
+<span class="n">customer</span><span class="p">.</span><span class="nf">token</span> <span class="c1"># =&gt; "lr0Ax1zwIpeXXt8sJDiVXjPbwEeGO6QKFWBIaKvnFG0Sm2j7vL"</span>
+
+<span class="c1"># Using DwollaSwagger - https://github.com/Dwolla/dwolla-swagger-ruby</span>
+<span class="n">customer</span> <span class="o">=</span> <span class="no">DwollaSwagger</span><span class="o">::</span><span class="no">CustomersApi</span><span class="p">.</span><span class="nf">get_customer_iav_token</span><span class="p">(</span><span class="n">customer_url</span><span class="p">)</span>
+<span class="n">customer</span><span class="p">.</span><span class="nf">token</span> <span class="c1"># =&gt; "lr0Ax1zwIpeXXt8sJDiVXjPbwEeGO6QKFWBIaKvnFG0Sm2j7vL"</span>
+</code></pre></div></div><div class="code-snippet js-code-snippet language-javascript"><button class="btn alternative">copy</button><div class="code-snippet__selector">
+          <nav>
+              <button class="selector_switch" id="raw">raw</button>
+              <button class="selector_switch" id="php">php</button>
+              <button class="selector_switch" id="ruby">ruby</button>
+              <button class="selector_switch" id="python">python</button>
+              <button class="selector_switch" id="javascript">javascript</button>
+          </nav>
+        </div><div class="code-snippet__cnt highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="c1">// Using dwolla-v2 - https://github.com/Dwolla/dwolla-v2-node</span>
+<span class="kd">var</span> <span class="nx">customerUrl</span> <span class="o">=</span> <span class="s1">'https://api-uat.dwolla.com/customers/06b51d56-7a6c-4535-a0cc-2c0106f56ba6'</span><span class="p">;</span>
+
+<span class="nx">accountToken</span>
+  <span class="p">.</span><span class="nx">post</span><span class="p">(</span><span class="err">`</span><span class="nx">$</span><span class="p">{</span><span class="nx">customerUrl</span><span class="p">}</span><span class="sr">/iav-token`</span><span class="err">)
+</span>  <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">res</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">res</span><span class="p">.</span><span class="nx">body</span><span class="p">.</span><span class="nx">token</span><span class="p">;</span> <span class="c1">// =&gt; 'lr0Ax1zwIpeXXt8sJDiVXjPbwEeGO6QKFWBIaKvnFG0Sm2j7vL'</span>
+  <span class="p">});</span>
+</code></pre></div></div><div class="code-snippet js-code-snippet language-python"><button class="btn alternative">copy</button><div class="code-snippet__selector">
+          <nav>
+              <button class="selector_switch" id="raw">raw</button>
+              <button class="selector_switch" id="php">php</button>
+              <button class="selector_switch" id="ruby">ruby</button>
+              <button class="selector_switch" id="python">python</button>
+              <button class="selector_switch" id="javascript">javascript</button>
+          </nav>
+        </div><div class="code-snippet__cnt highlight"><pre><code class="language-python" data-lang="python"><span class="n">customer_url</span> <span class="o">=</span> <span class="s">'http://api.dwolla.com/customers/06b51d56-7a6c-4535-a0cc-2c0106f56ba6'</span>
+<span class="n">customers_api</span> <span class="o">=</span> <span class="n">dwollaswagger</span><span class="o">.</span><span class="n">CustomersApi</span><span class="p">(</span><span class="n">client</span><span class="p">)</span>
+
+<span class="n">token</span> <span class="o">=</span> <span class="n">customers_api</span><span class="o">.</span><span class="n">get_customer_iav_token</span><span class="p">(</span><span class="n">customer_url</span><span class="p">)</span>
+<span class="k">print</span> <span class="n">token</span><span class="p">[</span><span class="s">'token'</span><span class="p">]</span> <span class="c"># =&gt; 'lr0Ax1zwIpeXXt8sJDiVXjPbwEeGO6QKFWBIaKvnFG0Sm2j7vL'</span>
+</code></pre></div></div><div class="code-snippet js-code-snippet language-php"><button class="btn alternative">copy</button><div class="code-snippet__selector">
+          <nav>
+              <button class="selector_switch" id="raw">raw</button>
+              <button class="selector_switch" id="php">php</button>
+              <button class="selector_switch" id="ruby">ruby</button>
+              <button class="selector_switch" id="python">python</button>
+              <button class="selector_switch" id="javascript">javascript</button>
+          </nav>
+        </div><div class="code-snippet__cnt highlight"><pre><code class="language-php" data-lang="php"><span class="cp">&lt;?php</span>
+<span class="nv">$customersApi</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">DwollaSwagger\CustomersApi</span><span class="p">(</span><span class="nv">$apiClient</span><span class="p">);</span>
+
+<span class="nv">$fsToken</span> <span class="o">=</span> <span class="nv">$customersApi</span><span class="o">-&gt;</span><span class="na">getCustomerIavToken</span><span class="p">(</span><span class="s2">"https://api-uat.dwolla.com/customers/06b51d56-7a6c-4535-a0cc-2c0106f56ba6"</span><span class="p">);</span>
+<span class="nv">$fsToken</span><span class="o">-&gt;</span><span class="na">token</span><span class="p">;</span> <span class="c1"># =&gt; "lr0Ax1zwIpeXXt8sJDiVXjPbwEeGO6QKFWBIaKvnFG0Sm2j7vL"
+</span><span class="cp">?&gt;</span>
 </code></pre></div></div><h3 id='initiate-iav-flow'>Initiate IAV flow</h3>
 <p>Initiate instant account verification for a Customer.</p>
 <ol class="alerts"><li class="alert icon-alert-alert"><p>An <a href="#generate-an-iav-token">IAV token</a> is required to render the IAV flow.</p>
@@ -3773,7 +3841,7 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
         "id": "98c209d3-02d6-4bee-bc0f-61e18acf0e33",
         "status": "verified",
         "type": "bank",
-        "name": "Vera Brittain’s Checking",
+        "name": "Jane Doe’s Checking",
         "created": "2015-10-02T22:03:45.537Z"
       }
     ]
@@ -3791,11 +3859,11 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 
 <span class="c1"># Using DwollaV2 - https://github.com/Dwolla/dwolla-v2-ruby (Recommended)</span>
 <span class="n">funding_sources</span> <span class="o">=</span> <span class="n">account_token</span><span class="p">.</span><span class="nf">get</span> <span class="s2">"</span><span class="si">#{</span><span class="n">customer</span><span class="si">}</span><span class="s2">/funding-sources"</span>
-<span class="n">funding_sources</span><span class="p">.</span><span class="nf">_embedded</span><span class="p">[</span><span class="s1">'funding-sources'</span><span class="p">][</span><span class="mi">0</span><span class="p">].</span><span class="nf">name</span> <span class="c1"># =&gt; "Vera Brittain’s Checking"</span>
+<span class="n">funding_sources</span><span class="p">.</span><span class="nf">_embedded</span><span class="p">[</span><span class="s1">'funding-sources'</span><span class="p">][</span><span class="mi">0</span><span class="p">].</span><span class="nf">name</span> <span class="c1"># =&gt; "Jane Doe’s Checking"</span>
 
 <span class="c1"># Using DwollaSwagger - https://github.com/Dwolla/dwolla-swagger-ruby</span>
 <span class="n">funding_sources</span> <span class="o">=</span> <span class="no">DwollaSwagger</span><span class="o">::</span><span class="no">FundingsourcesApi</span><span class="p">.</span><span class="nf">get_customer_funding_sources</span><span class="p">(</span><span class="n">customer_url</span><span class="p">)</span>
-<span class="n">funding_sources</span><span class="p">.</span><span class="nf">_embedded</span><span class="p">[</span><span class="ss">:'funding-sources'</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="ss">:name</span><span class="p">]</span> <span class="c1"># =&gt; "Vera Brittain’s Checking"</span>
+<span class="n">funding_sources</span><span class="p">.</span><span class="nf">_embedded</span><span class="p">[</span><span class="ss">:'funding-sources'</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="ss">:name</span><span class="p">]</span> <span class="c1"># =&gt; "Jane Doe’s Checking"</span>
 </code></pre></div></div><div class="code-snippet js-code-snippet language-php"><button class="btn alternative">copy</button><div class="code-snippet__selector">
           <nav>
               <button class="selector_switch" id="raw">raw</button>
@@ -3810,7 +3878,7 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 <span class="nv">$fsApi</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">DwollaSwagger\FundingsourcesApi</span><span class="p">(</span><span class="nv">$apiClient</span><span class="p">);</span>
 
 <span class="nv">$fundingSources</span> <span class="o">=</span> <span class="nv">$fsApi</span><span class="o">-&gt;</span><span class="na">getCustomerFundingSources</span><span class="p">(</span><span class="nv">$customerUrl</span><span class="p">);</span>
-<span class="nv">$fundingSources</span><span class="o">-&gt;</span><span class="na">_embedded</span><span class="o">-&gt;</span><span class="p">{</span><span class="s1">'funding-sources'</span><span class="p">}[</span><span class="mi">0</span><span class="p">]</span><span class="o">-&gt;</span><span class="na">name</span><span class="p">;</span> <span class="c1"># =&gt; "Vera Brittain’s Checking"
+<span class="nv">$fundingSources</span><span class="o">-&gt;</span><span class="na">_embedded</span><span class="o">-&gt;</span><span class="p">{</span><span class="s1">'funding-sources'</span><span class="p">}[</span><span class="mi">0</span><span class="p">]</span><span class="o">-&gt;</span><span class="na">name</span><span class="p">;</span> <span class="c1"># =&gt; "Jane Doe’s Checking"
 </span><span class="cp">?&gt;</span>
 </code></pre></div></div><div class="code-snippet js-code-snippet language-python"><button class="btn alternative">copy</button><div class="code-snippet__selector">
           <nav>
@@ -3824,12 +3892,12 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 
 <span class="c"># Using dwollav2 - https://github.com/Dwolla/dwolla-v2-python (Recommended)</span>
 <span class="n">funding_sources</span> <span class="o">=</span> <span class="n">account_token</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">'</span><span class="si">%</span><span class="s">s/funding-sources'</span> <span class="o">%</span> <span class="n">customer_url</span><span class="p">)</span>
-<span class="n">funding_sources</span><span class="o">.</span><span class="n">body</span><span class="p">[</span><span class="s">'_embedded'</span><span class="p">][</span><span class="s">'funding-sources'</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="s">'name'</span><span class="p">]</span> <span class="c"># =&gt; 'Vera Brittain’s Checking'</span>
+<span class="n">funding_sources</span><span class="o">.</span><span class="n">body</span><span class="p">[</span><span class="s">'_embedded'</span><span class="p">][</span><span class="s">'funding-sources'</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="s">'name'</span><span class="p">]</span> <span class="c"># =&gt; 'Jane Doe’s Checking'</span>
 
 <span class="c"># Using dwollaswagger - https://github.com/Dwolla/dwolla-swagger-python</span>
 <span class="n">fs_api</span> <span class="o">=</span> <span class="n">dwollaswagger</span><span class="o">.</span><span class="n">FundingsourcesApi</span><span class="p">(</span><span class="n">client</span><span class="p">)</span>
 <span class="n">funding_sources</span> <span class="o">=</span> <span class="n">fs_api</span><span class="o">.</span><span class="n">get_customer_funding_sources</span><span class="p">(</span><span class="n">customer_url</span><span class="p">)</span>
-<span class="n">funding_sources</span><span class="o">.</span><span class="n">_embedded</span><span class="p">[</span><span class="s">'funding-sources'</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="s">'name'</span><span class="p">]</span> <span class="c"># =&gt; 'Vera Brittain’s Checking'</span>
+<span class="n">funding_sources</span><span class="o">.</span><span class="n">_embedded</span><span class="p">[</span><span class="s">'funding-sources'</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="s">'name'</span><span class="p">]</span> <span class="c"># =&gt; 'Jane Doe’s Checking'</span>
 </code></pre></div></div><div class="code-snippet js-code-snippet language-javascript"><button class="btn alternative">copy</button><div class="code-snippet__selector">
           <nav>
               <button class="selector_switch" id="raw">raw</button>
@@ -3843,7 +3911,7 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 <span class="nx">accountToken</span>
   <span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="err">`</span><span class="nx">$</span><span class="p">{</span><span class="nx">customerUrl</span><span class="p">}</span><span class="sr">/funding-sources`</span><span class="err">)
 </span>  <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">res</span><span class="p">)</span> <span class="p">{</span>
-    <span class="nx">res</span><span class="p">.</span><span class="nx">body</span><span class="p">.</span><span class="nx">_embedded</span><span class="p">[</span><span class="s1">'funding-sources'</span><span class="p">][</span><span class="mi">0</span><span class="p">].</span><span class="nx">name</span><span class="p">;</span> <span class="c1">// =&gt; 'Vera Brittain’s Checking'</span>
+    <span class="nx">res</span><span class="p">.</span><span class="nx">body</span><span class="p">.</span><span class="nx">_embedded</span><span class="p">[</span><span class="s1">'funding-sources'</span><span class="p">][</span><span class="mi">0</span><span class="p">].</span><span class="nx">name</span><span class="p">;</span> <span class="c1">// =&gt; 'Jane Doe’s Checking'</span>
   <span class="p">});</span>
 </code></pre></div></div><h2 id='list-a-customer39s-transfers'>List a Customer&rsquo;s transfers</h2>
 <p>This section details how to retrieve a Customer&rsquo;s list of transfers. Transaction search is supported by passing in optional querystring parameters such as: <code class="prettyprint">search</code> which represents a term to search on, <code class="prettyprint">startAmount</code>, <code class="prettyprint">endAmount</code>, <code class="prettyprint">startDate</code>, and <code class="prettyprint">endDate</code>.</p>
@@ -3866,7 +3934,7 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 <tr>
 <td>search</td>
 <td>yes</td>
-<td>A string to be matched with <code class="prettyprint">firstName</code>, <code class="prettyprint">lastName</code>, <code class="prettyprint">email</code>, <code class="prettyprint">businessName</code>, Customer Id, and Account Id. (<code class="prettyprint">/transfers?search=Smith</code>)</td>
+<td>A string to be matched with <code class="prettyprint">firstName</code>, <code class="prettyprint">lastName</code>, <code class="prettyprint">email</code>, <code class="prettyprint">businessName</code>, Customer Id, and Account Id. (<code class="prettyprint">/transfers?search=Doe</code>)</td>
 </tr>
 <tr>
 <td>startAmount</td>
@@ -4274,6 +4342,8 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 </code></pre></div></div>
             <h1 id='documents'>Documents</h1>
 <p>Customers of type <code class="prettyprint">personal</code> or <code class="prettyprint">business</code> and of status <code class="prettyprint">document</code> require photos of identifying documents to be uploaded for manual review in order to be verified. Currently, SDK support only exists for retrieving data with regards to a <code class="prettyprint">Document</code> resource. To create a document, you must use an external HTTP library.</p>
+
+<p>For more information on handling the Customer verifiation status of <code class="prettyprint">document</code>, reference our <a href="https://developers.dwolla.com/resources/customer-verification/handling-verification-statuses.html">Customer verification</a> resource article.</p>
 <h3 id='document-resource'>Document resource</h3>
 <table><thead>
 <tr>
@@ -4295,7 +4365,11 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 </tr>
 <tr>
 <td>created</td>
-<td>ISO 8601 Timestamp of document upload time and date</td>
+<td>ISO 8601 Timestamp of document upload time and date.</td>
+</tr>
+<tr>
+<td>failureReason</td>
+<td>The reason an uploaded document was rejected. Can be: <code class="prettyprint">ScanNotReadable</code>, <code class="prettyprint">ScanNotUploaded</code>, <code class="prettyprint">ScanIdTypeNotSupported</code>, <code class="prettyprint">ScanNameMismatch</code>, <code class="prettyprint">ScanFailedOther</code>, or <code class="prettyprint">FailedOther</code>.</td>
 </tr>
 </tbody></table>
 <div class="code-snippet js-code-snippet language-nohide"><button class="btn alternative">copy</button><div class="code-snippet__cnt highlight"><pre><code class="language-nohide" data-lang="nohide"><span class="p">{</span><span class="w">
