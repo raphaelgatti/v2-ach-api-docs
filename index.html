@@ -1961,7 +1961,7 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 <tr>
 <td>postalCode</td>
 <td>no</td>
-<td>Postal code of Customer&rsquo;s permanent residence.</td>
+<td>Postal code of Customer&rsquo;s permanent residence. Should be a five digit postal code, e.g. <code class="prettyprint">50314</code>.</td>
 </tr>
 <tr>
 <td>dateOfBirth</td>
@@ -3421,7 +3421,7 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 <tr>
 <td>name</td>
 <td>no</td>
-<td>Arbitrary nickname for the funding source.</td>
+<td>Arbitrary nickname for the funding source. Must be 50 characters or less.</td>
 </tr>
 </tbody></table>
 <h3 id='http-status-and-error-codes'>HTTP Status and Error Codes</h3>
@@ -4933,6 +4933,138 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
   <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">res</span><span class="p">)</span> <span class="p">{</span>
     <span class="nx">res</span><span class="p">.</span><span class="nx">body</span><span class="p">.</span><span class="nx">name</span><span class="p">;</span> <span class="c1">// =&gt; "Test checking account"</span>
   <span class="p">});</span>
+</code></pre></div></div><h2 id='update-a-funding-source'>Update a funding source</h2>
+<p>This section covers how to update a <code class="prettyprint">bank</code> funding source name.</p>
+<ol class="alerts"><li class="alert icon-alert-alert"><p>This endpoint requires an OAuth account access token with the <code>Funding</code> scope.</p>
+</li></ol><h3 id='http-request'>HTTP request</h3>
+<p><code class="prettyprint">POST https://api.dwolla.com/funding-sources/{id}</code></p>
+<h3 id='request-parameters'>Request parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Optional?</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>id</td>
+<td>no</td>
+<td>id of funding source to update.</td>
+</tr>
+<tr>
+<td>name</td>
+<td>no</td>
+<td>Arbitrary nickname for the funding source. Must be 50 characters or less.</td>
+</tr>
+</tbody></table>
+<h3 id='http-status-and-error-codes'>HTTP Status and Error Codes</h3>
+<table><thead>
+<tr>
+<th>HTTP Status</th>
+<th>Code</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>404</td>
+<td>NotFound</td>
+<td>Funding source not found.</td>
+</tr>
+<tr>
+<td>400</td>
+<td>ValidationError</td>
+<td>Only funding sources of type=&ldquo;bank&rdquo; can be updated.</td>
+</tr>
+<tr>
+<td>400</td>
+<td>ValidationError</td>
+<td>Invalid bank name.</td>
+</tr>
+<tr>
+<td>403</td>
+<td>InvalidResourceState</td>
+<td>A removed bank cannot be updated.</td>
+</tr>
+</tbody></table>
+<h3 id='request-and-response'>Request and response</h3><div class="code-snippet js-code-snippet language-raw"><button class="btn alternative">copy</button><div class="code-snippet__selector">
+          <nav>
+              <button class="selector_switch" id="raw">raw</button>
+              <button class="selector_switch" id="php">php</button>
+              <button class="selector_switch" id="ruby">ruby</button>
+              <button class="selector_switch" id="python">python</button>
+              <button class="selector_switch" id="javascript">javascript</button>
+          </nav>
+        </div><div class="code-snippet__cnt highlight"><pre><code class="language-raw" data-lang="raw">POST https://api.dwolla.com/funding-sources/692486f8-29f6-4516-a6a5-c69fd2ce854c
+Accept: application/vnd.dwolla.v1.hal+json
+Content-Type: application/vnd.dwolla.v1.hal+json
+Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
+
+...
+
+{
+  "name": "Test Checking - 1234"
+}
+</code></pre></div></div><div class="code-snippet js-code-snippet language-ruby"><button class="btn alternative">copy</button><div class="code-snippet__selector">
+          <nav>
+              <button class="selector_switch" id="raw">raw</button>
+              <button class="selector_switch" id="php">php</button>
+              <button class="selector_switch" id="ruby">ruby</button>
+              <button class="selector_switch" id="python">python</button>
+              <button class="selector_switch" id="javascript">javascript</button>
+          </nav>
+        </div><div class="code-snippet__cnt highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="n">funding_source_url</span> <span class="o">=</span> <span class="s1">'https://api.dwolla.com/funding-sources/692486f8-29f6-4516-a6a5-c69fd2ce854c'</span>
+<span class="n">request_body</span> <span class="o">=</span> <span class="p">{</span>
+      <span class="s2">"name"</span> <span class="o">=&gt;</span> <span class="s2">"Test Checking - 1234"</span><span class="p">,</span>
+<span class="p">}</span>
+
+<span class="c1"># Using DwollaV2 - https://github.com/Dwolla/dwolla-v2-ruby (Recommended)</span>
+<span class="n">funding_source</span> <span class="o">=</span> <span class="n">account_token</span><span class="p">.</span><span class="nf">post</span> <span class="s2">"</span><span class="si">#{</span><span class="n">funding_source_url</span><span class="si">}</span><span class="s2">"</span><span class="p">,</span> <span class="n">request_body</span>
+<span class="n">funding_source</span><span class="p">.</span><span class="nf">name</span> <span class="c1"># =&gt; "Test Checking - 1234"</span>
+</code></pre></div></div><div class="code-snippet js-code-snippet language-php"><button class="btn alternative">copy</button><div class="code-snippet__selector">
+          <nav>
+              <button class="selector_switch" id="raw">raw</button>
+              <button class="selector_switch" id="php">php</button>
+              <button class="selector_switch" id="ruby">ruby</button>
+              <button class="selector_switch" id="python">python</button>
+              <button class="selector_switch" id="javascript">javascript</button>
+          </nav>
+        </div><div class="code-snippet__cnt highlight"><pre><code class="language-php" data-lang="php">/**
+ *  No example for this language yet. Coming soon.
+ **/
+</code></pre></div></div><div class="code-snippet js-code-snippet language-python"><button class="btn alternative">copy</button><div class="code-snippet__selector">
+          <nav>
+              <button class="selector_switch" id="raw">raw</button>
+              <button class="selector_switch" id="php">php</button>
+              <button class="selector_switch" id="ruby">ruby</button>
+              <button class="selector_switch" id="python">python</button>
+              <button class="selector_switch" id="javascript">javascript</button>
+          </nav>
+        </div><div class="code-snippet__cnt highlight"><pre><code class="language-python" data-lang="python"><span class="n">funding_source_url</span> <span class="o">=</span> <span class="s">'https://api.dwolla.com/funding-sources/692486f8-29f6-4516-a6a5-c69fd2ce854c'</span>
+<span class="n">request_body</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="s">"name"</span><span class="p">:</span> <span class="s">"Test Checking - 1234"</span>
+<span class="p">}</span>
+
+<span class="c"># Using dwollav2 - https://github.com/Dwolla/dwolla-v2-python (Recommended)</span>
+<span class="n">funding_source</span> <span class="o">=</span> <span class="n">account_token</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="s">'funding-sources'</span><span class="p">,</span> <span class="n">request_body</span><span class="p">)</span>
+<span class="n">funding_source</span><span class="o">.</span><span class="n">body</span><span class="p">[</span><span class="s">'name'</span><span class="p">]</span> <span class="c"># =&gt; 'Test Checking - 1234'</span>
+</code></pre></div></div><div class="code-snippet js-code-snippet language-javascript"><button class="btn alternative">copy</button><div class="code-snippet__selector">
+          <nav>
+              <button class="selector_switch" id="raw">raw</button>
+              <button class="selector_switch" id="php">php</button>
+              <button class="selector_switch" id="ruby">ruby</button>
+              <button class="selector_switch" id="python">python</button>
+              <button class="selector_switch" id="javascript">javascript</button>
+          </nav>
+        </div><div class="code-snippet__cnt highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="kd">var</span> <span class="nx">fundingSourceUrl</span> <span class="o">=</span> <span class="s1">'https://api.dwolla.com/funding-sources/692486f8-29f6-4516-a6a5-c69fd2ce854c'</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">requestBody</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="na">name</span><span class="p">:</span> <span class="s2">"Test Checking - 1234"</span>
+<span class="p">};</span>
+
+<span class="nx">accountToken</span>
+  <span class="p">.</span><span class="nx">post</span><span class="p">(</span><span class="nx">fundingSourceUrl</span><span class="p">,</span> <span class="nx">requestBody</span><span class="p">)</span>
+  <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">res</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">res</span><span class="p">.</span><span class="nx">body</span><span class="p">.</span><span class="nx">name</span><span class="p">;</span> <span class="c1">// =&gt; "Test Checking - 1234"</span>
+  <span class="p">});</span>
 </code></pre></div></div><h2 id='initiate-or-verify-micro-deposits'>Initiate or verify micro-deposits</h2>
 <p>This section covers how to initiate and verify micro-deposits for bank verification. Reference the <a href="https://developers.dwolla.com/resources/funding-source-verification.html">funding source verification</a> resource article for more information on the micro-deposit method of bank account verification.</p>
 <ol class="alerts"><li class="alert icon-alert-alert"><p>This endpoint requires an OAuth account access token with the <code>Funding</code> scope.</p>
@@ -5215,8 +5347,8 @@ HTTP 200 OK
   <span class="p">]</span>
 <span class="p">]);</span>
 <span class="cp">?&gt;</span>
-</code></pre></div></div><h2 id='verify-pending-micro-deposits-exist'>Verify pending micro-deposits exist</h2>
-<p>This section shows how to check if pending verification for micro-deposits exists.</p>
+</code></pre></div></div><h2 id='retrieve-micro-deposits-status'>Retrieve micro-deposits status</h2>
+<p>This section shows how to retrieve the status of micro-deposits and check if pending verification for completed micro-deposits exists.</p>
 <ol class="alerts"><li class="alert icon-alert-alert"><p>This endpoint requires an OAuth account access token with the <code>Funding</code> scope.</p>
 </li></ol><h3 id='http-request'>HTTP request</h3>
 <p><code class="prettyprint">GET https://api.dwolla.com/funding-sources/{id}/micro-deposits</code></p>
@@ -5234,34 +5366,36 @@ HTTP 200 OK
 <td>id of funding source to check status of validation deposits.</td>
 </tr>
 </tbody></table>
-<h3 id='errors'>Errors</h3>
+<h3 id='http-status-and-error-codes'>HTTP Status and Error Codes</h3>
 <table><thead>
 <tr>
 <th>HTTP Status</th>
-<th>Message</th>
+<th>Code</th>
+<th>Description</th>
 </tr>
 </thead><tbody>
 <tr>
 <td>200</td>
+<td>Ok</td>
 <td>Pending micro-deposits exist.</td>
 </tr>
 </tbody></table>
-<h3 id='request-and-response'>Request and response</h3><div class="code-snippet js-code-snippet language-nohide"><button class="btn alternative">copy</button><div class="code-snippet__cnt highlight"><pre><code class="language-nohide" data-lang="nohide">GET /funding-sources/ab9cd5de-9435-47af-96fb-8d2fa5db51e8
+<h3 id='request-and-response'>Request and response</h3><div class="code-snippet js-code-snippet language-nohide"><button class="btn alternative">copy</button><div class="code-snippet__cnt highlight"><pre><code class="language-nohide" data-lang="nohide">GET https://api.dwolla.com/funding-sources/ab9cd5de-9435-47af-96fb-8d2fa5db51e8/micro-deposits
 Accept: application/vnd.dwolla.v1.hal+json
 Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 
 {
   "_links": {
     "self": {
-      "href": "https://api-uat.dwolla.com/funding-sources/6c7de5af-e73e-45a9-946a-cdadec1ee0bb/micro-deposits"
-    },
-    "verify-micro-deposits": {
-      "href": "https://api-uat.dwolla.com/funding-sources/6c7de5af-e73e-45a9-946a-cdadec1ee0bb/micro-deposits"
+      "href": "https://api.dwolla.com/funding-sources/ab9cd5de-9435-47af-96fb-8d2fa5db51e8/micro-deposits",
+      "type": "micro-deposits"
     }
-  }
+  },
+  "status": "pending"
+  "created": "2016-07-25T19:46:35.000Z"
 }
 </code></pre></div></div><h2 id='remove-a-funding-source'>Remove a funding source</h2>
-<p>Remove a funding source by id.</p>
+<p>Remove a funding source by id. A removed funding source is soft deleted and can still be accessed when retrieved.</p>
 <ol class="alerts"><li class="alert icon-alert-alert"><p>This endpoint requires an OAuth account access token with the <code>Funding</code> scope.</p>
 </li></ol><h3 id='http-request'>HTTP request</h3>
 <p><code class="prettyprint">POST https://api.dwolla.com/funding-sources/{id}</code></p>
@@ -6997,6 +7131,10 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 <td>The two &lt;=10¢ transfers to a Dwolla account’s linked bank account have cleared successfully.</td>
 </tr>
 <tr>
+<td>microdeposits_maxattempts</td>
+<td>The account has reached their max verification attempts limit of three. The account can no longer verify their funding source with the completed micro-deposit amounts.</td>
+</tr>
+<tr>
 <td>bank_transfer_created</td>
 <td>A bank transfer was created.</td>
 </tr>
@@ -7119,6 +7257,10 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 <tr>
 <td>customer_microdeposits_completed</td>
 <td>The two &lt;=10¢ transfers to a Customer’s linked bank account have cleared successfully.</td>
+</tr>
+<tr>
+<td>customer_microdeposits_maxattempts</td>
+<td>The Customer has reached their max verification attempts limit of three. The Customer can no longer verify their funding source with the completed micro-deposit amounts.</td>
 </tr>
 <tr>
 <td>customer_bank_transfer_created</td>
