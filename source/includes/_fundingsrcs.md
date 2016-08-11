@@ -159,6 +159,83 @@ accountToken
     res.body.name; // => "Test checking account"
   });
 ```
+## Update a funding source
+
+This section covers how to update a `bank` funding source name.
+
+<ol class="alerts">
+    <li class="alert icon-alert-alert">This endpoint <a href="#authentication">requires</a> an OAuth account access token with the `Funding` <a href="#oauth-scopes">scope</a>.</li>
+</ol>
+
+### HTTP request
+`POST https://api.dwolla.com/funding-sources/{id}`
+
+### Request parameters
+
+Parameter | Optional? | Description
+----------|------------|-------------
+id | no | id of funding source to update.
+name | no | Arbitrary nickname for the funding source. Must be 50 characters or less.
+
+### HTTP Status and Error Codes
+| HTTP Status | Code | Description |
+|--------------|-------------|-------------------|
+| 404 | NotFound | Funding source not found. |
+| 400 | ValidationError | Only funding sources of type="bank" can be updated. |
+| 400 | ValidationError | Invalid bank name. |
+| 403 | InvalidResourceState | A removed bank cannot be updated. |
+
+### Request and response
+
+```raw
+POST https://api.dwolla.com/funding-sources/692486f8-29f6-4516-a6a5-c69fd2ce854c
+Accept: application/vnd.dwolla.v1.hal+json
+Content-Type: application/vnd.dwolla.v1.hal+json
+Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
+
+...
+
+{
+  "name": "Test Checking - 1234"
+}
+```
+```ruby
+funding_source_url = 'https://api.dwolla.com/funding-sources/692486f8-29f6-4516-a6a5-c69fd2ce854c'
+request_body = {
+      "name" => "Test Checking - 1234",
+}
+
+# Using DwollaV2 - https://github.com/Dwolla/dwolla-v2-ruby (Recommended)
+funding_source = account_token.post "#{funding_source_url}", request_body
+funding_source.name # => "Test Checking - 1234"
+```
+```php
+/**
+ *  No example for this language yet. Coming soon.
+ **/
+```
+```python
+funding_source_url = 'https://api.dwolla.com/funding-sources/692486f8-29f6-4516-a6a5-c69fd2ce854c'
+request_body = {
+  "name": "Test Checking - 1234"
+}
+
+# Using dwollav2 - https://github.com/Dwolla/dwolla-v2-python (Recommended)
+funding_source = account_token.post('funding-sources', request_body)
+funding_source.body['name'] # => 'Test Checking - 1234'
+```
+```javascript
+var fundingSourceUrl = 'https://api.dwolla.com/funding-sources/692486f8-29f6-4516-a6a5-c69fd2ce854c';
+var requestBody = {
+  name: "Test Checking - 1234"
+};
+
+accountToken
+  .post(fundingSourceUrl, requestBody)
+  .then(function(res) {
+    res.body.name; // => "Test Checking - 1234"
+  });
+```
 
 ## Initiate or verify micro-deposits
 
@@ -334,9 +411,9 @@ $fsApi->micro_deposits($fundingSourceUrl, [
 ?>
 ```
 
-## Verify pending micro-deposits exist
+## Retrieve micro-deposits status
 
-This section shows how to check if pending verification for micro-deposits exists.
+This section shows how to retrieve the status of micro-deposits and check if pending verification for completed micro-deposits exists.
 
 <ol class="alerts">
     <li class="alert icon-alert-alert">This endpoint <a href="#authentication">requires</a> an OAuth account access token with the `Funding` <a href="#oauth-scopes">scope</a>.</li>
@@ -351,33 +428,33 @@ Parameter | Optional? | Description
 ----------|------------|-------------
 id | no | id of funding source to check status of validation deposits.
 
-### Errors
-| HTTP Status | Message |
-|--------------|-------------|
-| 200 | Pending micro-deposits exist. |
+### HTTP Status and Error Codes
+| HTTP Status | Code | Description
+|--------------|-------------|-----------|
+| 200 | Ok | Pending micro-deposits exist. |
 
 ### Request and response
 
 ```noselect
-GET /funding-sources/ab9cd5de-9435-47af-96fb-8d2fa5db51e8
+GET https://api.dwolla.com/funding-sources/ab9cd5de-9435-47af-96fb-8d2fa5db51e8/micro-deposits
 Accept: application/vnd.dwolla.v1.hal+json
 Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 
 {
   "_links": {
     "self": {
-      "href": "https://api-uat.dwolla.com/funding-sources/6c7de5af-e73e-45a9-946a-cdadec1ee0bb/micro-deposits"
-    },
-    "verify-micro-deposits": {
-      "href": "https://api-uat.dwolla.com/funding-sources/6c7de5af-e73e-45a9-946a-cdadec1ee0bb/micro-deposits"
+      "href": "https://api.dwolla.com/funding-sources/ab9cd5de-9435-47af-96fb-8d2fa5db51e8/micro-deposits",
+      "type": "micro-deposits"
     }
-  }
+  },
+  "status": "pending"
+  "created": "2016-07-25T19:46:35.000Z"
 }
 ```
 
 ## Remove a funding source
 
-Remove a funding source by id.
+Remove a funding source by id. A removed funding source is soft deleted and can still be accessed when retrieved.
 
 <ol class="alerts">
     <li class="alert icon-alert-alert">This endpoint <a href="#authentication">requires</a> an OAuth account access token with the `Funding` <a href="#oauth-scopes">scope</a>.</li>
