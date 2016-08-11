@@ -113,7 +113,7 @@ address1 | no | First line of the street address of the Customer's permanent res
 address2 | yes | Second line of the street address of the Customer's permanent residence. Must be 50 characters or less.
 city | no | City of Customer's permanent residence.
 state | no | Two letter abbreviation of the state in which the Customer resides, e.g. `CA`.
-postalCode | no | Postal code of Customer's permanent residence.
+postalCode | no | Postal code of Customer's permanent residence. Should be a five digit postal code, e.g. `50314`.
 dateOfBirth | no | Customer or if business, authorized representative’s date of birth in `YYYY-MM-DD` format.
 ssn | no | Last four digits of the Customer's Social Security Number.
 phone | no | Customer or if business, authorized representative’s 10 digit phone number.  No hyphens or other separators, e.g. `3334447777`.
@@ -1150,7 +1150,7 @@ _links | yes | A <code>_links</code> JSON object containing an `on-demand-author
 routingNumber | no | The bank account's routing number.
 accountNumber | no | The bank account number.
 type | no | Type of bank account: `checking` or `savings`.
-name | no | Arbitrary nickname for the funding source.
+name | no | Arbitrary nickname for the funding source. Must be 50 characters or less.
 
 ### HTTP Status and Error Codes
 | HTTP Status | Code | Description |
