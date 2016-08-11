@@ -42,6 +42,7 @@ When the state of a resource changes, we create a new event resource to record t
 | microdeposits_added | Two <=10¢ transfers to a Dwolla account’s linked bank account were initiated. |
 | microdeposits_failed | The two <=10¢ transfers to a Dwolla account’s linked bank account failed to clear successfully. |
 | microdeposits_completed | The two <=10¢ transfers to a Dwolla account’s linked bank account have cleared successfully. |
+| microdeposits_maxattempts | The account has reached their max verification attempts limit of three. The account can no longer verify their funding source with the completed micro-deposit amounts. |
 | bank_transfer_created | A bank transfer was created. |
 | bank_transfer_cancelled | A pending bank transfer has been cancelled, and will not process further. |
 | bank_transfer_failed | A transfer failed to clear successfully. Usually, this is a result of an ACH failure (insufficient funds, etc.). |
@@ -75,6 +76,7 @@ When the state of a resource changes, we create a new event resource to record t
 | customer_microdeposits_added | Two <=10¢ transfers to a Customer’s linked bank account were initiated. |
 | customer_microdeposits_failed | The two <=10¢ transfers to a Customer’s linked bank account failed to clear successfully. |
 | customer_microdeposits_completed | The two <=10¢ transfers to a Customer’s linked bank account have cleared successfully. |
+| customer_microdeposits_maxattempts | The Customer has reached their max verification attempts limit of three. The Customer can no longer verify their funding source with the completed micro-deposit amounts. |
 | customer_bank_transfer_created | A bank transfer was created for a Customer. Represents funds moving either from a verified Customer's bank to the Dwolla network or from the Dwolla network to a verified Customer's bank. |
 | customer_bank_transfer_cancelled | A pending Customer bank transfer has been cancelled, and will not process further. Represents a cancellation of funds either transferring from a verified Customer's bank to the Dwolla network or from the Dwolla network to a verified Customer's bank. |
 | customer_bank_transfer_failed | A Customer bank transfer failed to clear successfully. Usually, this is a result of an ACH failure (insufficient funds, etc.). Represents funds failing to clear either from a verified Customer's bank to the Dwolla network or from the Dwolla network to a verified Customer's bank. |
