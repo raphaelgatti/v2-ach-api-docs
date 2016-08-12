@@ -528,3 +528,66 @@ accountToken
     res.body.code; // => 'R1'
   });
 ```
+
+## Cancel a transfer
+
+When a bank transfer is eligible for cancellation, Dwolla returns a `cancel` link  when [getting the transfer by Id](#get-a-transfer-by-id). This cancel link is used to trigger the cancellation, preventing the bank transfer from processing further. A bank transfer is cancellable up until 4pm CT on that same business day if the transfer was initiated prior to 4PM CT. If a transfer was initiated after 4pm CT, it can be cancelled anytime before 4pm CT on the following business day.
+
+<ol class="alerts">
+    <li class="alert icon-alert-alert">This endpoint <a href="#authentication">requires</a> an OAuth account access token with the `Transactions` <a href="#oauth-scopes">scope</a>.</li>
+</ol>
+
+### HTTP Request
+`POST https://api.dwolla.com/transfers/{id}`
+
+### Request Parameters
+
+Parameter | Optional? | Description
+----------|------------|-------------
+status | no | Possible value: `cancelled`
+
+### Request and Response
+
+```noselect
+POST https://api-uat.dwolla.com/transfers/3d48c13a-0fc6-e511-80de-0aa34a9b2388
+Content-Type: application/vnd.dwolla.v1.hal+json
+Accept: application/vnd.dwolla.v1.hal+json
+Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
+
+{
+    "status": "cancelled"
+}
+
+...
+
+{
+  "_links": {
+    "cancel": {
+      "href": "https://api-uat.dwolla.com/transfers/3d48c13a-0fc6-e511-80de-0aa34a9b2388"
+    },
+    "source": {
+      "href": "https://api-uat.dwolla.com/accounts/ca32853c-48fa-40be-ae75-77b37504581b"
+    },
+    "funding-transfer": {
+      "href": "https://api-uat.dwolla.com/transfers/3c48c13a-0fc6-e511-80de-0aa34a9b2388"
+    },
+    "self": {
+      "href": "https://api-uat.dwolla.com/transfers/3d48c13a-0fc6-e511-80de-0aa34a9b2388"
+    },
+    "destination": {
+      "href": "https://api-uat.dwolla.com/customers/05e267e5-c13d-491a-93a8-da52b721f123"
+    }
+  },
+  "id": "3d48c13a-0fc6-e511-80de-0aa34a9b2388",
+  "status": "cancelled",
+  "amount": {
+    "value": "22.00",
+    "currency": "usd"
+  },
+  "created": "2016-01-28T22:34:02.663Z",
+  "metadata": {
+    "foo": "bar",
+    "baz": "boo"
+  }
+}
+```
