@@ -4280,65 +4280,6 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 </span>  <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">res</span><span class="p">)</span> <span class="p">{</span>
     <span class="nx">res</span><span class="p">.</span><span class="nx">body</span><span class="p">.</span><span class="nx">_embedded</span><span class="p">[</span><span class="s1">'mass-payments'</span><span class="p">][</span><span class="mi">0</span><span class="p">].</span><span class="nx">status</span><span class="p">;</span> <span class="err">#</span> <span class="o">=&gt;</span> <span class="s2">"complete"</span>
   <span class="p">});</span>
-</code></pre></div></div><h2 id='cancel-a-customer39s-transfer-by-id'>Cancel a Customer&rsquo;s transfer by id</h2>
-<p>When a Customer&rsquo;s bank transfer is eligible for cancellation, Dwolla returns a <code class="prettyprint">cancel</code> link  when <a href="#get-a-transfer-by-id">getting the transfer by Id</a>. This cancel link is used to trigger the cancellation, preventing the bank transfer from processing further. A bank transfer is cancellable up until 4pm CT on that same business day if initiated prior to 4PM CT. If a transfer was initiated after 4pm CT, it can be cancelled anytime before 4pm CT on the following business day.</p>
-<ol class="alerts"><li class="alert icon-alert-alert"><p>This endpoint requires an OAuth account access token with the <code>ManageCustomers</code> scope.</p>
-</li></ol><h3 id='http-request'>HTTP Request</h3>
-<p><code class="prettyprint">POST https://api.dwolla.com/transfers/{id}</code></p>
-<h3 id='request-parameters'>Request Parameters</h3>
-<table><thead>
-<tr>
-<th>Parameter</th>
-<th>Optional?</th>
-<th>Description</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>status</td>
-<td>no</td>
-<td>Possible value: <code class="prettyprint">cancelled</code></td>
-</tr>
-</tbody></table>
-<h3 id='request-and-response'>Request and Response</h3><div class="code-snippet js-code-snippet language-nohide"><button class="btn alternative">copy</button><div class="code-snippet__cnt highlight"><pre><code class="language-nohide" data-lang="nohide">POST https://api-uat.dwolla.com/transfers/3d48c13a-0fc6-e511-80de-0aa34a9b2388
-Content-Type: application/vnd.dwolla.v1.hal+json
-Accept: application/vnd.dwolla.v1.hal+json
-Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
-
-{
-    "status": "cancelled"
-}
-
-
-{
-  "_links": {
-    "cancel": {
-      "href": "https://api-uat.dwolla.com/transfers/3d48c13a-0fc6-e511-80de-0aa34a9b2388"
-    },
-    "source": {
-      "href": "https://api-uat.dwolla.com/accounts/ca32853c-48fa-40be-ae75-77b37504581b"
-    },
-    "funding-transfer": {
-      "href": "https://api-uat.dwolla.com/transfers/3c48c13a-0fc6-e511-80de-0aa34a9b2388"
-    },
-    "self": {
-      "href": "https://api-uat.dwolla.com/transfers/3d48c13a-0fc6-e511-80de-0aa34a9b2388"
-    },
-    "destination": {
-      "href": "https://api-uat.dwolla.com/customers/05e267e5-c13d-491a-93a8-da52b721f123"
-    }
-  },
-  "id": "3d48c13a-0fc6-e511-80de-0aa34a9b2388",
-  "status": "cancelled",
-  "amount": {
-    "value": "22.00",
-    "currency": "usd"
-  },
-  "created": "2016-01-28T22:34:02.663Z",
-  "metadata": {
-    "foo": "bar",
-    "baz": "boo"
-  }
-}
 </code></pre></div></div>
             <h1 id='documents'>Documents</h1>
 <p>Customers of type <code class="prettyprint">personal</code> or <code class="prettyprint">business</code> and of status <code class="prettyprint">document</code> require photos of identifying documents to be uploaded for manual review in order to be verified. Currently, SDK support only exists for retrieving data with regards to a <code class="prettyprint">Document</code> resource. To create a document, you must use an external HTTP library.</p>
@@ -6270,6 +6211,66 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 </span>  <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">res</span><span class="p">)</span> <span class="p">{</span>
     <span class="nx">res</span><span class="p">.</span><span class="nx">body</span><span class="p">.</span><span class="nx">code</span><span class="p">;</span> <span class="c1">// =&gt; 'R1'</span>
   <span class="p">});</span>
+</code></pre></div></div><h2 id='cancel-a-transfer'>Cancel a transfer</h2>
+<p>When a bank transfer is eligible for cancellation, Dwolla returns a <code class="prettyprint">cancel</code> link  when <a href="#get-a-transfer-by-id">getting the transfer by Id</a>. This cancel link is used to trigger the cancellation, preventing the bank transfer from processing further. A bank transfer is cancellable up until 4pm CT on that same business day if the transfer was initiated prior to 4PM CT. If a transfer was initiated after 4pm CT, it can be cancelled anytime before 4pm CT on the following business day.</p>
+<ol class="alerts"><li class="alert icon-alert-alert"><p>This endpoint requires an OAuth account access token with the <code>Transactions</code> scope.</p>
+</li></ol><h3 id='http-request'>HTTP Request</h3>
+<p><code class="prettyprint">POST https://api.dwolla.com/transfers/{id}</code></p>
+<h3 id='request-parameters'>Request Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Optional?</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>status</td>
+<td>no</td>
+<td>Possible value: <code class="prettyprint">cancelled</code></td>
+</tr>
+</tbody></table>
+<h3 id='request-and-response'>Request and Response</h3><div class="code-snippet js-code-snippet language-nohide"><button class="btn alternative">copy</button><div class="code-snippet__cnt highlight"><pre><code class="language-nohide" data-lang="nohide">POST https://api-uat.dwolla.com/transfers/3d48c13a-0fc6-e511-80de-0aa34a9b2388
+Content-Type: application/vnd.dwolla.v1.hal+json
+Accept: application/vnd.dwolla.v1.hal+json
+Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
+
+{
+    "status": "cancelled"
+}
+
+...
+
+{
+  "_links": {
+    "cancel": {
+      "href": "https://api-uat.dwolla.com/transfers/3d48c13a-0fc6-e511-80de-0aa34a9b2388"
+    },
+    "source": {
+      "href": "https://api-uat.dwolla.com/accounts/ca32853c-48fa-40be-ae75-77b37504581b"
+    },
+    "funding-transfer": {
+      "href": "https://api-uat.dwolla.com/transfers/3c48c13a-0fc6-e511-80de-0aa34a9b2388"
+    },
+    "self": {
+      "href": "https://api-uat.dwolla.com/transfers/3d48c13a-0fc6-e511-80de-0aa34a9b2388"
+    },
+    "destination": {
+      "href": "https://api-uat.dwolla.com/customers/05e267e5-c13d-491a-93a8-da52b721f123"
+    }
+  },
+  "id": "3d48c13a-0fc6-e511-80de-0aa34a9b2388",
+  "status": "cancelled",
+  "amount": {
+    "value": "22.00",
+    "currency": "usd"
+  },
+  "created": "2016-01-28T22:34:02.663Z",
+  "metadata": {
+    "foo": "bar",
+    "baz": "boo"
+  }
+}
 </code></pre></div></div>
             <h1 id='masspay'>MassPay</h1>
 <p>Dwolla MassPay allows you to easily send up to 5,000 payments one API request. The payments are funded from a single user&rsquo;s specified funding source and processed asynchronously upon submission.</p>
