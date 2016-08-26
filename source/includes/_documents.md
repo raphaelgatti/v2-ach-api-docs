@@ -41,7 +41,7 @@ Create a document for a Customer pending verification by uploading a photo of th
 |Form Field| Description|
 |----------|-------------|
 | documentType | One of `passport`, `license`, `idCard`, or `other` |
-| file | File contents.
+| file | File contents. |
 
 ### Request and response
 
@@ -107,6 +107,11 @@ This section contains information on how to retrieve a list of documents that be
 
 ### HTTP request
 `GET https://api.dwolla.com/customers/{id}/documents`
+
+### Request parameters
+| Parameter | Required | Type | Description |
+|-----------|----------|----------------|-------------|
+| id | yes | string | Customer unique identifier. |
 
 ### Request and response
 
@@ -205,6 +210,11 @@ This section contains information on how to retrieve a document by its id.
 
 ### HTTP request
 `GET https://api.dwolla.com/documents/{id}`
+
+### Request parameters
+| Parameter | Required | Type | Description |
+|-----------|----------|----------------|-------------|
+| id | yes | string | Document unique identifier. |
 
 ### Request and response
 

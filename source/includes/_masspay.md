@@ -38,12 +38,11 @@ This section covers how to initiate a mass payment from an [Account](#accounts) 
 `POST https://api.dwolla.com/mass-payments`
 
 ### Request parameters
-
-Parameter | Optional? | Description
-----------|------------|-------------
-_links | no | A _links JSON object describing the desired `source` of a mass payment. [See below](#source-and-destination-values) for possible values for `source` and `destination`.
-items | no | an array of item JSON objects that contain unique payments. [See below](#mass-payment-item)
-metadata | yes | A metadata JSON object with a maximum of 10 key-value pairs (each key and value must be less than 255 characters).
+| Parameter | Required | Type | Description |
+|-----------|----------|----------------|-------------|
+| _links | yes | object | A _links JSON object describing the desired `source` of a mass payment. [See below](#source-and-destination-values) for possible values for `source` and `destination`. |
+| items | yes | array | an array of item JSON objects that contain unique payments. [See below](#mass-payment-item) |
+| metadata | no | object | A metadata JSON object with a maximum of 10 key-value pairs (each key and value must be less than 255 characters). |
 
 ### Source and destination values
 
@@ -261,10 +260,9 @@ This section outlines how to retrieve a mass payment by its id. All mass payment
 `GET https://api.dwolla.com/mass-payments/{id}`
 
 ### Request parameters
-
-Parameter | Optional? | Description
-----------|------------|-------------
-id | no | The id of the mass payment to retrieve information for.
+| Parameter | Required | Type | Description |
+|-----------|----------|----------------|-------------|
+| id | yes | string | The id of the mass payment to retrieve information for. |
 
 ### HTTP Status and Error Codes
 
@@ -336,14 +334,13 @@ A mass payment contains a list of payments called `items`. An `item` is distinct
 ### HTTP Request
 `GET https://api.dwolla.com/mass-payments/{id}/items`
 
-### Request Parameters
-
-Parameter | Optional? | Description
-----------|------------|-------------
-id | no | Mass payment unique identifier
-limit | yes | How many results to return. Defaults to 25.
-offset | yes | How many results to skip
-status | yes | Filter results on item status. Possible values: `failed`, `pending`, and `success`. Values delimited by `&status=` (i.e. - `/items?status=failed&status=pending`).
+### Request parameters
+| Parameter | Required | Type | Description |
+|-----------|----------|----------------|-------------|
+| id | yes | string | Mass payment unique identifier. |
+| limit | no | integer | How many results to return. Defaults to 25. |
+| offset | no | integer | How many results to skip. |
+| status | no | string | Filter results on item status. Possible values: `failed`, `pending`, and `success`. Values delimited by `&status=` (i.e. - `/items?status=failed&status=pending`). |
 
 ### HTTP Status and Error Codes
 
@@ -467,10 +464,9 @@ This section covers how to retrieve a mass payment item by its unique identifier
 `GET https://api.dwolla.com/mass-payment-items/{id}`
 
 ### Request parameters
-
-Parameter | Optional? | Description
-----------|------------|-------------
-id | no | The id of the item to be retrieved in a mass payment.
+| Parameter | Required | Type | Description |
+|-----------|----------|----------------|-------------|
+| id | yes | string | The id of the item to be retrieved in a mass payment. |
 
 ### HTTP Status and Error Codes
 

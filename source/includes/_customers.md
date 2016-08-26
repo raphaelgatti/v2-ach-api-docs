@@ -94,49 +94,49 @@ For more information on verified Customers, reference our [Customer verification
 `POST https://api.dwolla.com/customers`
 
 ### Request parameters - unverified Customer
-Parameter | Optional? | Description
-----------|----------|-------------
-firstName | no | Customer's first name.
-lastName | no | Customer's last name.
-email | no | Customer's email address.
-ipAddress | yes | Customer's IP address.
+| Parameter | Required | Type | Description |
+|-----------|----------|----------------|-----------|
+| firstName | yes | string | Customer's first name. |
+| lastName | yes | string | Customer's last name. |
+| email | yes | string | Customer's email address. |
+| ipAddress | no | string | Customer's IP address. |
 
 ### Request parameters - verified Customer
-Parameter | Optional? | Description
-----------|----------|-------------
-firstName | no | Customer or if business, authorized representative’s first name.
-lastName | no | Customer or if business, authorized representative’s last name.
-email | no | Customer's email address.
-ipAddress | yes | Customer's IP address.
-type | no | Either `personal` or `business`. If business, [see below](#additional-request-parameters-for-verified-customer-with-typebusiness) for additional required information.
-address1 | no | First line of the street address of the Customer's permanent residence. Must be 50 characters or less.
-address2 | yes | Second line of the street address of the Customer's permanent residence. Must be 50 characters or less.
-city | no | City of Customer's permanent residence.
-state | no | Two letter abbreviation of the state in which the Customer resides, e.g. `CA`.
-postalCode | no | Postal code of Customer's permanent residence. Should be a five digit postal code, e.g. `50314`.
-dateOfBirth | no | Customer or if business, authorized representative’s date of birth in `YYYY-MM-DD` format.
-ssn | no | Last four digits of the Customer's Social Security Number.
-phone | no | Customer or if business, authorized representative’s 10 digit phone number.  No hyphens or other separators, e.g. `3334447777`.
+| Parameter | Required | Type | Description |
+|-----------|----------|----------------|-----------|
+| firstName | yes | string | Customer or if business, authorized representative’s first name.
+| lastName | yes | string | Customer or if business, authorized representative’s last name.
+| email | yes | string | Customer's email address.
+| ipAddress | no | string | Customer's IP address.
+| type | yes | string | Either `personal` or `business`. If business, [see below](#additional-request-parameters-for-verified-customer-with-typebusiness) for additional required information.
+| address1 | yes | string | First line of the street address of the Customer's permanent residence. Must be 50 characters or less.
+| address2 | no | string | Second line of the street address of the Customer's permanent residence. Must be 50 characters or less.
+| city | yes | string | City of Customer's permanent residence.
+| state | yes | string | Two letter abbreviation of the state in which the Customer resides, e.g. `CA`.
+| postalCode | yes | string | Postal code of Customer's permanent residence. Should be a five digit postal code, e.g. `50314`.
+| dateOfBirth | yes | string | Customer or if business, authorized representative’s date of birth in `YYYY-MM-DD` format.
+| ssn | yes | string | Last four digits of the Customer's Social Security Number.
+| phone | yes | string | Customer or if business, authorized representative’s 10 digit phone number.  No hyphens or other separators, e.g. `3334447777`.
 
 ### Additional request parameters for verified Customer with type=business
-Parameter | Optional? | Description |
-----------|----------|-------------|
-businessClassification | no | The [industry classification](#list-business-classifications) id that corresponds to Customer’s business  |
-businessType | no | Business structure. Possible values are `corporation`, `llc`, `partnership`, and `soleproprietorship` |
-businessName | no | Customer’s registered business name. |
-ein | no | Employer Identification Number. |
-doingBusinessAs | yes | Name that is different from the officially registered name of Customer’s business. |
-website | yes | www.domain.com |
+| Parameter | Required | Type | Description |
+|-----------|----------|----------------|-----------|
+| businessClassification | yes | string | The [industry classification](#list-business-classifications) id that corresponds to Customer’s business  |
+| businessType | yes | string | Business structure. Possible values are `corporation`, `llc`, `partnership`, and `soleproprietorship` |
+| businessName | yes | string | Customer’s registered business name. |
+| ein | yes | string | Employer Identification Number. |
+| doingBusinessAs | no | string | Name that is different from the officially registered name of Customer’s business. |
+| website | no | string | www.domain.com |
 
 ### Request parameters - receive-only
-Parameter | Optional? | Description
-----------|----------|-------------
-firstName | no | Customer's first name.
-lastName | no | Customer's last name.
-email | no | Customer's email address.
-type | no | Value of `receive-only`.
-businessName | no | Customer's registered business name. (Optional if not a business entity)
-ipAddress | yes | Customer's IP address.
+| Parameter | Required | Type | Description |
+|-----------|----------|----------------|-----------|
+| firstName | yes | string | Customer's first name. |
+| lastName | yes | string | Customer's last name. |
+| email | yes | string | Customer's email address. |
+| type | yes | string | Value of `receive-only`. |
+| businessName | yes | string | Customer's registered business name. (**Optional** if not a business entity) |
+| ipAddress | no | string | Customer's IP address. |
 
 ### Errors
 | HTTP Status | Message |
@@ -555,10 +555,9 @@ This section shows you how to retrieve a business classification from a list of 
 `GET https://api.dwolla.com/business-classifications/{id}`
 
 ### Request parameters
-
-Parameter | Optional? | Description
-----------|------------|-------------
-id | no | Business classification unique identifier.
+| Parameter | Required | Type | Description |
+|-----------|----------|----------------|-------------|
+| id | yes | string | Business classification unique identifier. |
 
 ### Request and response
 
@@ -665,31 +664,31 @@ This endpoint can be used to facilitate the following use cases: Update Customer
 A limited set of information can be updated on an existing created Customer. **Note:** A Customer's information cannot be updated when in a [status](#customer-statuses) of `document` or `suspended`.
 
 ##### Request parameters -  unverified Customer
-Parameter | Optional? | Description
-----------|----------|-------------
-firstName | no | Customer's first name.
-lastName | no | Customer's last name.
-email | no | Customer's email address.
+| Parameter | Required | Type | Description |
+|-----------|----------|----------------|-----------|
+| firstName | no | string | Customer's first name. |
+| lastName | no | string | Customer's last name. |
+| email | no | string | Customer's email address. |
 
 ##### Request parameters -  verified Customer
-Parameter | Optional? | Description
-----------|----------|-------------
-email | no | Customer's email address.
-ipAddress | yes | Customer's IP address
-address1 | no | First line of the street address of the customer's permanent residence
-address2 | yes | Second line of the street address of the customer's permanent residence
-city | no | City of customer's peramanent residence
-state | no | Two letter abbreviation of the state in which the customer resides.  e.g. `NY`
-postalCode | no | Postal code of customer's permanent residence
-phone | no | Customer's 10 digit phone number.  No hyphens or other separators.  e.g. `3334447777`
+| Parameter | Required | Type | Description |
+|-----------|----------|----------------|-----------|
+| email | no | string | Customer's email address.
+| ipAddress | no | string | Customer's IP address
+| address1 | no | string | First line of the street address of the customer's permanent residence
+| address2 | no | string | Second line of the street address of the customer's permanent residence
+| city | no | string | City of customer's peramanent residence
+| state | no | string | Two letter abbreviation of the state in which the customer resides.  e.g. `NY`
+| postalCode | no | string | Postal code of customer's permanent residence
+| phone | no | string | Customer's 10 digit phone number.  No hyphens or other separators.  e.g. `3334447777`
 
 ##### Request parameters - verified Customer with type=business
 In addition to the table above, business verified Customers can update the following fields.
 
-Parameter | Optional? | Description
-----------|----------|-------------
-doingBusinessAs | yes | Name that is different from the officially registered name of Customer’s business. |
-website | yes | www.domain.com |
+| Parameter | Required | Type | Description |
+|-----------|----------|----------------|-----------|
+| doingBusinessAs | no | string | Name that is different from the officially registered name of Customer’s business. |
+| website | no | string | www.domain.com |
 
 ### Upgrade an unverified Customer to verified Customer
 An unverified Customer can be upgraded to a verified Customer by supplying the necessary information required to create a verified Customer. See [this table](#request-parameters-verified-customer) for required information.
@@ -698,9 +697,9 @@ An unverified Customer can be upgraded to a verified Customer by supplying the n
 An unverified and verified Customer can be suspended by supplying the status of `suspended`. You'll need to contact Dwolla to unsuspend a Customer.
 
 ##### Request parameters
-Parameter | Optional? | Description
-----------|----------|-------------
-status | no | Value of `suspended`.
+| Parameter | Required | Type | Description |
+|-----------|----------|----------------|-----------|
+| status | yes | string | Value of `suspended`. |
 
 ### Retry verification
 If the verified Customer has a status of `retry`, some information may have been miskeyed. You have one more opportunity to correct any mistakes using this endpoint. This time, you’ll need to provide the Customer’s full SSN. If the additional attempt fails, the resulting status will be either `document` or `suspended`.
@@ -866,21 +865,21 @@ accountToken
 ```
 
 ### Request parameters - retry verified Customer
-Parameter | Optional? | Description
-----------|----------|-------------
-firstName | no | Customer's first name.
-lastName | no | Customer's last name.
-email | no | Customer's email address.
-ipAddress | yes | Customer's IP address
-type | no | Either `personal` or `business`. If business, [see above](#additional-request-parameters-for-verified-customer-with-typebusiness) for additional required information.
-address1 | no | First line of the street address of the Customer's permanent residence
-address2 | yes | Second line of the street address of the Customer's permanent residence
-city | no | City of Customer's permanent residence
-state | no | Two letter abbreviation of the state in which the customer resides, e.g. `CA`
-postalCode | no | Postal code of Customer's permanent residence
-dateOfBirth | no | Customer's date of birth in `YYYY-MM-DD` format
-ssn | no | Customer's *full* Social Security Number
-phone | yes | Customer's 10 digit phone number.  No hyphens or other separators, e.g. `3334447777`
+| Parameter | Required | Type | Description |
+|-----------|----------|----------------|-----------|
+| firstName | yes | string | Customer's first name. |
+| lastName | yes | string | Customer's last name. |
+| email | yes | string | Customer's email address. |
+| ipAddress | no | string | Customer's IP address |
+| type | yes | string | Either `personal` or `business`. If business, [see above](#additional-request-parameters-for-verified-customer-with-typebusiness) for additional required information. |
+| address1 | yes | string | First line of the street address of the Customer's permanent residence |
+| address2 | no | string | Second line of the street address of the Customer's permanent residence |
+| city | yes | string | City of Customer's permanent residence |
+| state | yes | string | Two letter abbreviation of the state in which the customer resides, e.g. `CA` |
+| postalCode | yes | string | Postal code of Customer's permanent residence |
+| dateOfBirth | yes | string | Customer's date of birth in `YYYY-MM-DD` format |
+| ssn | yes | string | Customer's **full** Social Security Number |
+| phone | yes | string | Customer's 10 digit phone number.  No hyphens or other separators, e.g. `3334447777` |
 
 ### Errors
 | HTTP Status | Message |
@@ -900,12 +899,11 @@ This section outlines how to retrieve your list of created Customers.
 `GET https://api.dwolla.com/customers`
 
 ### Request parameters
-
-Parameter | Optional? | Description
-----------|------------|-------------
-limit | yes | How many results to return
-offset | yes | How many results to skip
-search | yes | Searches on `firstName`, `lastName`, and `email` fields. (`/customers?search=Doe`)
+| Parameter | Required | Type | Description |
+|-----------|----------|----------------|-------------|
+| limit | no | integer | How many results to return. |
+| offset | no | integer | How many results to skip. |
+| search | no | string | Searches on `firstName`, `lastName`, and `email` fields. (`/customers?search=Doe`) |
 
 ### Request and response
 
@@ -994,10 +992,9 @@ This section shows you how to retrieve a Customer belonging to the authorized us
 `GET https://api.dwolla.com/customers/{id}`
 
 ### Request parameters
-
-Parameter | Optional? | Description
-----------|------------|-------------
-id | no | Customer unique identifier.
+| Parameter | Required | Type | Description |
+|-----------|----------|----------------|-------------|
+| id | yes | string | Customer unique identifier. |
 
 ### Errors
 | HTTP Status | Message |
@@ -1144,13 +1141,13 @@ Create a new Funding Source for a Customer.  Customers can have a maximum of 6 f
 `POST https://api.dwolla.com/customers/{id}/funding-sources`
 
 ### Request parameters
-Parameter | Optional? | Description
-----------|------------|------------
-_links | yes | A <code>_links</code> JSON object containing an `on-demand-authorization` link relation. See example raw request and response below.
-routingNumber | no | The bank account's routing number.
-accountNumber | no | The bank account number.
-type | no | Type of bank account: `checking` or `savings`.
-name | no | Arbitrary nickname for the funding source. Must be 50 characters or less.
+| Parameter | Required | Type | Description |
+|-----------|----------|----------------|-----------|
+| _links | no | object | A <code>_links</code> JSON object containing an `on-demand-authorization` link relation. See example raw request and response below. |
+| routingNumber | yes | string | The bank account's routing number. |
+| accountNumber | yes | string | The bank account number. |
+| type | yes | string | Type of bank account: `checking` or `savings`. |
+| name | yes | string | Arbitrary nickname for the funding source. Must be 50 characters or less. |
 
 ### HTTP Status and Error Codes
 | HTTP Status | Code | Description |
@@ -1267,10 +1264,10 @@ Get a single-use IAV token for a Customer.
 ### HTTP Request
 `POST https://api.dwolla.com/customers/{id}/iav-token`
 
-### Request Parameters
-Parameter | Optional? | Description
-----------|------------|------------
-id | no | Customer unique identifier.
+### Request parameters
+| Parameter | Required | Type | Description |
+|-----------|----------|----------------|-------------|
+| id | yes | string | Customer unique identifier. |
 
 ### Errors
 | HTTP Status | Message |
@@ -1421,11 +1418,10 @@ Retrieve a list of funding sources that belong to a Customer. By default, all fu
 `GET https://api.dwolla.com/customers/{id}/funding-sources`
 
 ### Request parameters
-
-Parameter | Optional? | Description
-----------|------------|-------------
-id | no | Customer's unique identifier.
-removed | yes | Filter removed funding sources. Defaults to `true`. Set to `false` to filter out removed funding sources from list (i.e. - /customers/{id}/funding-sources?removed=false).
+| Parameter | Required | Type | Description |
+|-----------|----------|----------------|-----------|
+| id | yes | string | Customer's unique identifier. |
+| removed | no | string | Filter removed funding sources. Defaults to `true`. Set to `false` to filter out removed funding sources from list (i.e. - /customers/{id}/funding-sources?removed=false). |
 
 ### Errors
 | HTTP Status | Message |
@@ -1545,17 +1541,16 @@ This section details how to retrieve a Customer's list of transfers. Transaction
 `GET https://api.dwolla.com/customers/{id}/transfers`
 
 ### Request parameters
-
-Parameter | Optional? | Description
-----------|------------|-------------
-id | no | Customer unique identifier to get transfers for.
-search | yes | A string to be matched with `firstName`, `lastName`, `email`, `businessName`, Customer Id, and Account Id. (`/transfers?search=Doe`)
-startAmount | yes | Only include transactions with an amount equal to or greater than `startAmount`. Can optionally be used with `endAmount` to specify an amount range.
-endAmount | yes | Only include transactions with an amount equal to or less than `endAmount`. Can optionally be used with `startAmount` to specify an amount range.
-startDate | yes | Only include transactions created after this date. ISO-8601 format: `YYYY-MM-DD`. Can optionally be used with `endDate` to specify a date range.
-endDate | yes | Only include transactions created before than this date. ISO-8601 format: `YYYY-MM-DD`. Can optionally be used with `startDate` to specify a date range.
-limit | yes | Number of search results to return. Defaults to 25.
-offset | yes | Number of search results to skip. Used for pagination.
+| Parameter | Required | Type | Description |
+|-----------|----------|----------------|-------------|
+| id | yes | string | Customer unique identifier to get transfers for. |
+| search | no | string | A string to be matched with `firstName`, `lastName`, `email`, `businessName`, Customer Id, and Account Id. (`/transfers?search=Doe`) |
+| startAmount | no | string | Only include transactions with an amount equal to or greater than `startAmount`. Can optionally be used with `endAmount` to specify an amount range. |
+| endAmount | no | string | Only include transactions with an amount equal to or less than `endAmount`. Can optionally be used with `startAmount` to specify an amount range. |
+| startDate | no | string | Only include transactions created after this date. ISO-8601 format: `YYYY-MM-DD`. Can optionally be used with `endDate` to specify a date range. |
+| endDate | no | string | Only include transactions created before than this date. ISO-8601 format: `YYYY-MM-DD`. Can optionally be used with `startDate` to specify a date range. |
+| limit | no | integer | Number of search results to return. Defaults to 25. |
+| offset | no | integer | Number of search results to skip. Used for pagination. |
 
 ### Errors
 | HTTP Status | Message |
@@ -1694,12 +1689,11 @@ This section covers how to retrieve a [verified Customer's](#customers) list of 
 `GET https://api.dwolla.com/customers/{id}/mass-payments`
 
 ### Request parameters
-
-| Parameter | Optional? | Description |
-| ----------|------------|-------------|
-| id | no | Customer unique identifier to get mass payments for. |
-| limit | yes | How many results to return. Defaults to 25. |
-| offset | yes | How many results to skip. |
+| Parameter | Required | Type | Description |
+|-----------|----------|----------------|-------------|
+| id | yes | string | Customer unique identifier to get mass payments for. |
+| limit | no | integer | How many results to return. Defaults to 25. |
+| offset | no | integer | How many results to skip. |
 
 ### HTTP Status and Error Codes
 | HTTP Status | Code | Description |

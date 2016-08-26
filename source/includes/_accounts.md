@@ -60,10 +60,9 @@ This section shows you how to retrieve account information belonging to the auth
 `GET https://api.dwolla.com/accounts/{id}`
 
 ### Request parameters
-
-Parameter | Optional? | Description
-----------|------------|-------------
-id | no | Account unique identifier.
+| Parameter | Required | Type | Description |
+|-----------|----------|----------------|-------------|
+| id | yes | string | Account unique identifier. |
 
 ### Errors
 | HTTP Status | Message |
@@ -156,12 +155,12 @@ For more information on micro-deposit verification, reference the [funding sourc
 `POST https://api.dwolla.com/funding-sources`
 
 ### Request parameters
-Parameter | Description
-----------|------------
-accountNumber | The bank account number.
-routingNumber | The bank account's routing number.
-type | Type of bank account: `checking` or `savings`.
-name | Arbitrary nickname for the funding source.
+| Parameter | Required | Type | Description |
+|-----------|----------|----------------|-------------|
+| accountNumber | yes | string | The bank account number. |
+| routingNumber | yes | string | The bank account's routing number. |
+| type | yes | string | Type of bank account: `checking` or `savings`. |
+| name | yes | string | Arbitrary nickname for the funding source. |
 
 ### Errors
 | HTTP Status | Message |
@@ -201,11 +200,10 @@ Retrieve a list of funding sources that belong to an Account. By default, all fu
 `GET https://api.dwolla.com/accounts/{id}/funding-sources`
 
 ### Request parameters
-
-Parameter | Optional? | Description
-----------|------------|-------------
-id | no | Account's unique identifier.
-removed | yes | Filter removed funding sources. Defaults to `true`. Set to `false` to filter out removed funding sources from list (i.e. - /accounts/{id}/funding-sources?removed=false).
+| Parameter | Required | Type | Description |
+|-----------|----------|----------------|-------------|
+| id | yes | string | Account's unique identifier. |
+| removed | no | boolean | Filter removed funding sources. Defaults to `true`. Set to `false` to filter out removed funding sources from list (i.e. - /accounts/{id}/funding-sources?removed=false). |
 
 ### Errors
 | HTTP Status | Message |
@@ -318,17 +316,16 @@ This section covers how to retrieve an Account's list of transfers. Transaction 
 `GET https://api.dwolla.com/accounts/{id}/transfers`
 
 ### Request parameters
-
-Parameter | Optional? | Description
-----------|------------|-------------
-id | no | Account unique identifier to get transfers for.
-search | yes | A string to be matched with `firstName`, `lastName`, `email`, `businessName`, Customer Id, and Account Id. (`/transfers?search=Doe`)
-startAmount | yes | Only include transactions with an amount equal to or greater than `startAmount`. Can optionally be used with `endAmount` to specify an amount range.
-endAmount | yes | Only include transactions with an amount equal to or less than `endAmount`. Can optionally be used with `startAmount` to specify an amount range.
-startDate | yes | Only include transactions created after this date. ISO-8601 format: `YYYY-MM-DD`. Can optionally be used with `endDate` to specify a date range.
-endDate | yes | Only include transactions created before than this date. ISO-8601 format: `YYYY-MM-DD`. Can optionally be used with `startDate` to specify a date range.
-limit | yes | Number of search results to return. Defaults to 25.
-offset | yes | Number of search results to skip. Used for pagination.
+| Parameter | Required | Type | Description |
+|-----------|----------|----------------|-------------|
+| id | yes | string | Account unique identifier to get transfers for. |
+| search | no | string | A string to search on fields: `firstName`, `lastName`, `email`, `businessName`, Customer Id, and Account Id. (`/transfers?search=Doe`) |
+| startAmount | no | string | Only include transactions with an amount equal to or greater than `startAmount`. Can optionally be used with `endAmount` to specify an amount range. |
+| endAmount | no | string | Only include transactions with an amount equal to or less than `endAmount`. Can optionally be used with `startAmount` to specify an amount range. |
+| startDate | no | string | Only include transactions created after this date. ISO-8601 format: `YYYY-MM-DD`. Can optionally be used with `endDate` to specify a date range. |
+| endDate | no | string | Only include transactions created before than this date. ISO-8601 format: `YYYY-MM-DD`. Can optionally be used with `startDate` to specify a date range. |
+| limit | no | integer | Number of search results to return. Defaults to 25. |
+| offset | no | integer | Number of search results to skip. Used for pagination. |
 
 ### Errors
 | HTTP Status | Message |
@@ -458,12 +455,11 @@ This section covers how to retrieve an Account's list of previously created mass
 `GET https://api.dwolla.com/accounts/{id}/mass-payments`
 
 ### Request parameters
-
-| Parameter | Optional? | Description |
-| ----------|------------|-------------|
-| id | no | Account unique identifier to get mass payments for. |
-| limit | yes | How many results to return. Defaults to 25. |
-| offset | yes | How many results to skip. |
+| Parameter | Required | Type | Description |
+|-----------|----------|----------------|-------------|
+| id | yes | string | Account unique identifier to get mass payments for. |
+| limit | no | integer | How many results to return. Defaults to 25. |
+| offset | no | integer | How many results to skip. |
 
 ### HTTP Status and Error Codes
 | HTTP Status | Code | Description |

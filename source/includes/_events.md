@@ -100,10 +100,10 @@ Retrieve a list of events for the authorized user.
 `GET https://api.dwolla.com/events`
 
 ### Request parameters
-Parameter | Optional? | Description
-----------|------------|-------------
-limit | yes | How many results to return.
-offset | yes | How many results to skip.
+| Parameter | Required | Type | Description |
+|-----------|----------|----------------|-----------|-------------|
+| limit | no | integer | How many results to return |
+| offset | no | integer | How many results to skip |
 
 ### Errors
 | HTTP Status | Message |
@@ -259,9 +259,9 @@ This section covers how to retrieve an event by id.
 `GET https://api.dwolla.com/events/{id}`
 
 ### Request parameters
-Parameter | Optional? | Description
-----------|------------|-------------
-id | no | ID of application event to get.
+| Parameter | Required | Type | Description |
+|-----------|----------|----------------|-------------|
+| id | yes | string | ID of application event to get. |
 
 ### Errors
 | HTTP Status | Message |

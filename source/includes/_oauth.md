@@ -30,14 +30,15 @@ https://www.dwolla.com/oauth/v2/authenticate?client_id={client_id}&response_type
 https://uat.dwolla.com/oauth/v2/authenticate?client_id={client_id}&response_type=code&redirect_uri={redirect_uri}&scope={scope}
 `
 
-Parameter | Optional |Description
-----------|----------|------------
-client_id | | Application key
-response_type | | This must always be set to `code`
-redirect_uri | | URL where the user will be redirected to afterwards. The value of this parameter must match one of the values that appear in your [application details](https://www.dwolla.com/applications) page. (We compare: protocol, subdomain, domain, tld, and file path. Querystring parameters are ignored)
-scope | | Permissions you are requesting.  See [below](#oauth-scopes) for list of available scopes.  Scopes are delimited by a pipe ("&#124;")
-verified_account | yes | Require new users opting to register for Dwolla to create a fully-verified Dwolla account instead of a default lightweight Direct account.
-dwolla_landing | yes | An optional override that force displays either the login or create an account screen. Valid values are: `login`, `register`, or `null`.
+### Request parameters
+| Parameter | Required | Type | Description |
+|-----------|----------|----------------|-------------|
+| client_id | yes | string | Application key. |
+| response_type | yes | string | This must always be set to `code`. |
+| redirect_uri | yes | string | URL where the user will be redirected to afterwards. The value of this parameter must match one of the values that appear in your [application details](https://www.dwolla.com/applications) page. (We compare: protocol, subdomain, domain, tld, and file path. Querystring parameters are ignored) |
+| scope | yes | string | Permissions you are requesting.  See [below](#oauth-scopes) for list of available scopes.  Scopes are delimited by a pipe ("&#124;") |
+| verified_account | no | string | Require new users opting to register for Dwolla to create a fully-verified Dwolla account instead of a default lightweight Direct account. |
+| dwolla_landing | no | string | An optional override that force displays either the login or create an account screen. Possible values are: `login`, `register`, or `null`. |
 
 <ol class="alerts">
     <li class="information icon-alert-info">Remember to url-encode all querystring parameters!</li>
@@ -126,13 +127,14 @@ Once the user returns to your application via the `redirect_uri` you specified, 
 
 **UAT:** `POST https://uat.dwolla.com/oauth/v2/token`
 
-Parameter | Description
-----------|------------
-client_id | Application key
-client_secret | Application secret
-code | The authorization code included in the redirect URL. Single use `code` with an expiration of 30 minutes.
-grant_type | This must be set to `authorization_code`
-redirect_uri | The same redirect_uri specified in the intiation step
+### Request parameters
+| Parameter | Required | Type | Description |
+|-----------|----------|----------------|-------------|
+| client_id | yes | string | Application key. |
+| client_secret | yes | string | Application secret. |
+| code | yes | string | The authorization code included in the redirect URL. Single use `code` with an expiration of 30 minutes. |
+| grant_type | yes | string | This must be set to `authorization_code`. |
+| redirect_uri | yes | string | The same redirect_uri specified in the intiation step. |
 
 ### Response parameters
 
@@ -188,12 +190,13 @@ Use a valid `refresh_token` to generate a new `access_token` and `refresh_token`
 
 **UAT:** `POST https://uat.dwolla.com/oauth/v2/token`
 
-Parameter | Description
-----------|------------
-client_id | Application key
-client_secret | Application secret
-refresh_token | A valid refresh token
-grant_type | This must be set to `refresh_token`
+### Request parameters
+| Parameter | Required | Type | Description |
+|-----------|----------|----------------|-------------|
+| client_id | yes | string | Application key. |
+| client_secret | yes | string | Application secret. |
+| refresh_token | yes | string | A valid refresh token. |
+| grant_type | yes | string | This must be set to `refresh_token`. |
 
 ### Response parameters
 
@@ -260,12 +263,11 @@ Some endpoints require an *application access token*, which is different from a 
 **UAT:** `POST https://uat.dwolla.com/oauth/v2/token`
 
 ### Request parameters
-
-Parameter | Description
-----------|------------
-client_id | Application key
-client_secret | Application secret
-grant_type | This must be set to `client_credentials`
+| Parameter | Required | Type | Description |
+|-----------|----------|----------------|-------------|
+| client_id | yes | string | Application key. |
+| client_secret | yes | string | Application secret. |
+| grant_type | yes | string | This must be set to `client_credentials`. |
 
 ### Response parameters
 

@@ -33,12 +33,13 @@ Create a new funding source for an [Account](#accounts).
 ### HTTP request
 `POST https://api.dwolla.com/funding-sources`
 
-Parameter | Optional? | Description
-----------|------------|-------------
-accountNumber | no | The bank account number.
-routingNumber | no | The bank account's routing number.
-type | no | Type of bank account: `checking` or `savings`.
-name | no | Arbitrary nickname for the funding source.
+### Request parameters
+| Parameter | Required | Type | Description |
+|-----------|----------|----------------|-------------|
+| accountNumber | yes | string | The bank account number. |
+| routingNumber | yes | string | The bank account's routing number. |
+| type | yes | string | Type of bank account: `checking` or `savings`. |
+| name | yes | string | Arbitrary nickname for the funding source. |
 
 ### Errors
 | HTTP Status | Message |
@@ -79,10 +80,9 @@ This section covers how to retrieve a funding source by id.
 `GET https://api.dwolla.com/funding-sources/{id}`
 
 ### Request parameters
-
-Parameter | Optional? | Description
-----------|------------|-------------
-id | no | id of funding source to retrieve.
+| Parameter | Required | Type | Description |
+|-----------|----------|----------------|-------------|
+| id | yes | string | id of funding source to retrieve. |
 
 ### Errors
 | HTTP Status | Message |
@@ -171,11 +171,10 @@ This section covers how to update a `bank` funding source name.
 `POST https://api.dwolla.com/funding-sources/{id}`
 
 ### Request parameters
-
-Parameter | Optional? | Description
-----------|------------|-------------
-id | no | id of funding source to update.
-name | no | Arbitrary nickname for the funding source. Must be 50 characters or less.
+| Parameter | Required | Type | Description |
+|-----------|----------|----------------|-------------|
+| id | yes | string | id of funding source to update. |
+| name | yes | string | Arbitrary nickname for the funding source. Must be 50 characters or less. |
 
 ### HTTP Status and Error Codes
 | HTTP Status | Code | Description |
@@ -249,11 +248,10 @@ This section covers how to initiate and verify micro-deposits for bank verificat
 `POST https://api.dwolla.com/funding-sources/{id}/micro-deposits`
 
 ### Request parameters
-
-Parameter | Optional? | Description
-----------|------------|-------------
-amount1 | no | An amount JSON object of first micro-deposit. Contains `value` and `currency`.
-amount2 | no | An amount JSON object of second micro-deposit. Contains `value` and `currency`.
+| Parameter | Required | Type | Description |
+|-----------|----------|----------------|-------------|
+| amount1 | yes | string | An amount JSON object of first micro-deposit. Contains `value` and `currency`. |
+| amount2 | yes | string | An amount JSON object of second micro-deposit. Contains `value` and `currency`. |
 
 
 ### HTTP Status and Error Codes
@@ -423,10 +421,9 @@ This section shows how to retrieve the status of micro-deposits and check if pen
 `GET https://api.dwolla.com/funding-sources/{id}/micro-deposits`
 
 ### Request parameters
-
-Parameter | Optional? | Description
-----------|------------|-------------
-id | no | id of funding source to check status of validation deposits.
+| Parameter | Required | Type | Description |
+|-----------|----------|----------------|-------------|
+| id | no | string | id of funding source to check status of validation deposits. |
 
 ### HTTP Status and Error Codes
 | HTTP Status | Code | Description
@@ -465,11 +462,10 @@ Remove a funding source by id. A removed funding source is soft deleted and can 
 `POST https://api.dwolla.com/funding-sources/{id}`
 
 ### Request parameters
-
-Parameter | Optional? | Description
-----------|------------|-------------
-id | no | id of funding source to delete.
-removed | no | Specify a value of `true` to remove the associated funding source.
+| Parameter | Required | Type | Description |
+|-----------|----------|----------------|-------------|
+| id | yes | id of funding source to delete. |
+| removed | yes | Specify a value of `true` to remove the associated funding source. |
 
 ### Errors
 | HTTP Status | Message |

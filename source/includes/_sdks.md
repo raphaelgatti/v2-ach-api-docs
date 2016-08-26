@@ -162,10 +162,10 @@ Let's fetch a page of customers:
 var dwolla = require('dwolla-v2');
 
 # see dwolla.com/applications for your client id and secret
-var client = new dwolla.Client(id: "...", secret: "...");
+var client = new dwolla.Client({id: "...", secret: "..."});
 
 # generate a token on dwolla.com/applications
-var accountToken = new client.Token(access_token: "...");
+var accountToken = new client.Token({access_token: "..."});
 
 accountToken
   .get('customers', { limit: 10 })

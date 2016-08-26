@@ -74,10 +74,10 @@ This section details how to create a webhook subscription to deliver [webhooks](
 `POST https://api.dwolla.com/webhook-subscriptions`
 
 ### Request parameters
-| Parameter | Description |
-|----------|--------------|
-| url | Where Dwolla should deliver the webhook notification. |
-| secret | A random, secret key, only known by your application. This secret key should be securely stored and used later when [validating the authenticity](https://developers.dwolla.com/guides/webhooks/03-validating-webhooks.html) of the webhook request from Dwolla. |
+| Parameter | Required | Type | Description |
+|-----------|----------|----------------|-------------|
+| url | yes | string | Where Dwolla should deliver the webhook notification. |
+| secret | yes | string | A random, secret key, only known by your application. This secret key should be securely stored and used later when [validating the authenticity](https://developers.dwolla.com/guides/webhooks/03-validating-webhooks.html) of the webhook request from Dwolla. |
 
 ### Request and response
 
@@ -156,9 +156,9 @@ Delete a Webhook Subscription to stop receiving Webhooks at the URL specified. I
 `DELETE https://api.dwolla.com/webhook-subscriptions/{id}`
 
 ### Request parameters
-| Parameter | Description |
-|----------|--------------|
-| id | Webhook unique identifier. |
+| Parameter | Required | Type | Description |
+|-----------|----------|----------------|-------------|
+| id | yes | string | Webhook unique identifier. |
 
 ### Errors
 | HTTP Status | Message |
@@ -295,6 +295,11 @@ This section details how to retrieve a webhook subscription by its id.
 ### HTTP request
 `GET https://api.dwolla.com/webhook-subscriptions/{id}`
 
+### Request parameters
+| Parameter | Required | Type | Description |
+|-----------|----------|----------------|-------------|
+| id | yes | string | Webhook subscription unique identifier. |
+
 ### Errors
 | HTTP Status | Message |
 |--------------|-------------|
@@ -374,6 +379,11 @@ This section covers how to view all fired [webhooks](#webhooks) for a webhook su
 
 ### HTTP request
 `GET https://api.dwolla.com/webhook-subscriptions/{id}/webhooks`
+
+### Request parameters
+| Parameter | Required | Type | Description |
+|-----------|----------|----------------|-------------|
+| id | yes | string | Webhook subscription unique identifier. |
 
 ### Request and response
 

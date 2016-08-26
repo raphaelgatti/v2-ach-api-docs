@@ -46,13 +46,12 @@ This section covers how to initiate a transfer for either an [Account](#accounts
 `POST https://api.dwolla.com/transfers`
 
 ### Request parameters
-
-Parameter | Optional? | Description
-----------|------------|-------------
-_links | no | A _links JSON object describing the desired `source` and `destination` of a transfer. [See below](#source-and-destination-types) for possible values for `source` and `destination`.
-amount | no | An amount JSON object. [See above](#amount-json-object)
-metadata | yes | A metadata JSON object with a maximum of 10 key-value pairs (each key and value must be less than 255 characters).
-fees | yes | an array of fee JSON objects that contain unique fee transfers. [See below](#a-fee-json-object)
+| Parameter | Required | Type | Description |
+|-----------|----------|----------------|-------------|
+| _links | yes | object | A _links JSON object describing the desired `source` and `destination` of a transfer. [See below](#source-and-destination-types) for possible values for `source` and `destination`. |
+| amount | yes | object | An amount JSON object. [See above](#amount-json-object). |
+| metadata | no | object | A metadata JSON object with a maximum of 10 key-value pairs (each key and value must be less than 255 characters). |
+| fees | no | array | an array of fee JSON objects that contain unique fee transfers. [See below](#a-fee-json-object). |
 
 ### Source and destination types
 
@@ -266,10 +265,9 @@ This section covers how to retrieve a transfer belonging to an Account or Custom
 `GET https://api.dwolla.com/transfers/{id}`
 
 ### Request parameters
-
-Parameter | Optional? | Description
-----------|------------|-------------
-id | no | The id of the transfer to be retrieved.
+| Parameter | Required | Type | Description |
+|-----------|----------|----------------|-------------|
+| id | yes | string | The id of the transfer to be retrieved. |
 
 ### Errors
 | HTTP Status | Message |
@@ -364,10 +362,9 @@ This section outlines how to retrieve fees charged on a created transfer. Fees a
 `GET https://api.dwolla.com/transfers/{id}/fees`
 
 ### Request parameters
-
-Parameter | Optional? | Description
-----------|------------|-------------
-id | no | The id of the transfer to retrieve fees for.
+| Parameter | Required | Type | Description |
+|-----------|----------|----------------|-------------|
+| id | yes | string | The id of the transfer to retrieve fees for. |
 
 ### Errors
 | HTTP Status | Message |
@@ -477,11 +474,10 @@ When a bank transfer fails for an Account or Customer, Dwolla returns a `failure
 ### HTTP Request
 `GET https://api.dwolla.com/transfers/{id}/failure`
 
-### Request Parameters
-
-Parameter | Optional? | Description
-----------|------------|-------------
-id | no | Transfer unique identifier
+### Request parameters
+| Parameter | Required | Type | Description |
+|-----------|----------|----------------|-------------|
+| id | yes | string | Transfer unique identifier. |
 
 ### Request and Response
 
@@ -540,11 +536,10 @@ When a bank transfer is eligible for cancellation, Dwolla returns a `cancel` lin
 ### HTTP Request
 `POST https://api.dwolla.com/transfers/{id}`
 
-### Request Parameters
-
-Parameter | Optional? | Description
-----------|------------|-------------
-status | no | Possible value: `cancelled`
+### Request parameters
+| Parameter | Required | Type | Description |
+|-----------|----------|----------------|-------------|
+| status | yes | string | Possible value: `cancelled`. |
 
 ### Request and Response
 

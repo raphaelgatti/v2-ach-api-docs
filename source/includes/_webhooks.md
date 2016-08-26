@@ -103,9 +103,9 @@ This section covers how to retrieve a single webhook.
 `GET https://api.dwolla.com/webhooks/{id}`
 
 ### Request parameters
-Parameter | Optional? | Description
-----------|------------|-------------
-id | no | Id of webhook to get.
+| Parameter | Required | Type | Description |
+|-----------|----------|----------------|-------------|
+| id | yes | string | Id of webhook to retrieve. |
 
 ### Errors
 | HTTP Status | Message |
@@ -261,9 +261,9 @@ This section details how to retry a webhook by id.
 `POST https://api.dwolla.com/webhooks/{id}/retries`
 
 ### Request parameters
-Parameter | Optional? | Description
-----------|------------|-------------
-id | no | Id of webhook to retry.
+| Parameter | Required | Type | Description |
+|-----------|----------|----------------|-------------|
+| id | yes | string | Id of webhook to retry. |
 
 ### Errors
 | HTTP Status | Message |
@@ -329,10 +329,9 @@ This section covers how to retrieve webhook retries by id.
 `GET https://api.dwolla.com/webhooks/{id}/retries`
 
 ### Request parameters
-
-Parameter | Optional? | Description
-----------|------------|-------------
-id | no | Id of webhook to get retries for.
+| Parameter | Required | Type | Description |
+|-----------|----------|----------------|-------------|
+| id | yes | string | Id of webhook to get retries for. |
 
 ### Errors
 | HTTP Status | Message |
