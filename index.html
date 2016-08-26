@@ -434,10 +434,10 @@ mvn install package
 <div class="code-snippet js-code-snippet language-rubynohide"><button class="btn alternative">copy</button><div class="code-snippet__cnt highlight"><pre><code class="language-rubynohide" data-lang="rubynohide"><span class="n">var</span> <span class="n">dwolla</span> <span class="o">=</span> <span class="nb">require</span><span class="p">(</span><span class="s1">'dwolla-v2'</span><span class="p">);</span>
 
 <span class="c1"># see dwolla.com/applications for your client id and secret</span>
-<span class="n">var</span> <span class="n">client</span> <span class="o">=</span> <span class="kp">new</span> <span class="n">dwolla</span><span class="o">.</span><span class="no">Client</span><span class="p">(</span><span class="ss">id: </span><span class="s2">"..."</span><span class="p">,</span> <span class="ss">secret: </span><span class="s2">"..."</span><span class="p">);</span>
+<span class="n">var</span> <span class="n">client</span> <span class="o">=</span> <span class="kp">new</span> <span class="n">dwolla</span><span class="o">.</span><span class="no">Client</span><span class="p">({</span><span class="ss">id: </span><span class="s2">"..."</span><span class="p">,</span> <span class="ss">secret: </span><span class="s2">"..."</span><span class="p">});</span>
 
 <span class="c1"># generate a token on dwolla.com/applications</span>
-<span class="n">var</span> <span class="n">accountToken</span> <span class="o">=</span> <span class="kp">new</span> <span class="n">client</span><span class="o">.</span><span class="no">Token</span><span class="p">(</span><span class="ss">access_token: </span><span class="s2">"..."</span><span class="p">);</span>
+<span class="n">var</span> <span class="n">accountToken</span> <span class="o">=</span> <span class="kp">new</span> <span class="n">client</span><span class="o">.</span><span class="no">Token</span><span class="p">({</span><span class="ss">access_token: </span><span class="s2">"..."</span><span class="p">});</span>
 
 <span class="n">accountToken</span>
   <span class="p">.</span><span class="nf">get</span><span class="p">(</span><span class="s1">'customers'</span><span class="p">,</span> <span class="p">{</span> <span class="ss">limit: </span><span class="mi">10</span> <span class="p">})</span>
@@ -467,43 +467,50 @@ https://www.dwolla.com/oauth/v2/authenticate?client_id={client_id}&amp;response_
 <p><code class="prettyprint">
 https://uat.dwolla.com/oauth/v2/authenticate?client_id={client_id}&amp;response_type=code&amp;redirect_uri={redirect_uri}&amp;scope={scope}
 </code></p>
-
+<h3 id='request-parameters'>Request parameters</h3>
 <table><thead>
 <tr>
 <th>Parameter</th>
-<th>Optional</th>
+<th>Required</th>
+<th>Type</th>
 <th>Description</th>
 </tr>
 </thead><tbody>
 <tr>
 <td>client_id</td>
-<td></td>
-<td>Application key</td>
+<td>yes</td>
+<td>string</td>
+<td>Application key.</td>
 </tr>
 <tr>
 <td>response_type</td>
-<td></td>
-<td>This must always be set to <code class="prettyprint">code</code></td>
+<td>yes</td>
+<td>string</td>
+<td>This must always be set to <code class="prettyprint">code</code>.</td>
 </tr>
 <tr>
 <td>redirect_uri</td>
-<td></td>
+<td>yes</td>
+<td>string</td>
 <td>URL where the user will be redirected to afterwards. The value of this parameter must match one of the values that appear in your <a href="https://www.dwolla.com/applications">application details</a> page. (We compare: protocol, subdomain, domain, tld, and file path. Querystring parameters are ignored)</td>
 </tr>
 <tr>
 <td>scope</td>
-<td></td>
+<td>yes</td>
+<td>string</td>
 <td>Permissions you are requesting.  See <a href="#oauth-scopes">below</a> for list of available scopes.  Scopes are delimited by a pipe (&ldquo;&#124;&rdquo;)</td>
 </tr>
 <tr>
 <td>verified_account</td>
-<td>yes</td>
+<td>no</td>
+<td>string</td>
 <td>Require new users opting to register for Dwolla to create a fully-verified Dwolla account instead of a default lightweight Direct account.</td>
 </tr>
 <tr>
 <td>dwolla_landing</td>
-<td>yes</td>
-<td>An optional override that force displays either the login or create an account screen. Valid values are: <code class="prettyprint">login</code>, <code class="prettyprint">register</code>, or <code class="prettyprint">null</code>.</td>
+<td>no</td>
+<td>string</td>
+<td>An optional override that force displays either the login or create an account screen. Possible values are: <code class="prettyprint">login</code>, <code class="prettyprint">register</code>, or <code class="prettyprint">null</code>.</td>
 </tr>
 </tbody></table>
 <ol class="alerts"><li class="alert icon-alert-alert"><p>Remember to url-encode all querystring parameters!</p>
@@ -626,32 +633,44 @@ https://uat.dwolla.com/oauth/v2/authenticate?client_id={client_id}&amp;response_
 <p><strong>Production:</strong> <code class="prettyprint">POST https://www.dwolla.com/oauth/v2/token</code></p>
 
 <p><strong>UAT:</strong> <code class="prettyprint">POST https://uat.dwolla.com/oauth/v2/token</code></p>
-
+<h3 id='request-parameters'>Request parameters</h3>
 <table><thead>
 <tr>
 <th>Parameter</th>
+<th>Required</th>
+<th>Type</th>
 <th>Description</th>
 </tr>
 </thead><tbody>
 <tr>
 <td>client_id</td>
-<td>Application key</td>
+<td>yes</td>
+<td>string</td>
+<td>Application key.</td>
 </tr>
 <tr>
 <td>client_secret</td>
-<td>Application secret</td>
+<td>yes</td>
+<td>string</td>
+<td>Application secret.</td>
 </tr>
 <tr>
 <td>code</td>
+<td>yes</td>
+<td>string</td>
 <td>The authorization code included in the redirect URL. Single use <code class="prettyprint">code</code> with an expiration of 30 minutes.</td>
 </tr>
 <tr>
 <td>grant_type</td>
-<td>This must be set to <code class="prettyprint">authorization_code</code></td>
+<td>yes</td>
+<td>string</td>
+<td>This must be set to <code class="prettyprint">authorization_code</code>.</td>
 </tr>
 <tr>
 <td>redirect_uri</td>
-<td>The same redirect_uri specified in the intiation step</td>
+<td>yes</td>
+<td>string</td>
+<td>The same redirect_uri specified in the intiation step.</td>
 </tr>
 </tbody></table>
 <h3 id='response-parameters'>Response parameters</h3>
@@ -723,28 +742,38 @@ https://uat.dwolla.com/oauth/v2/authenticate?client_id={client_id}&amp;response_
 <p><strong>Production:</strong> <code class="prettyprint">POST https://www.dwolla.com/oauth/v2/token</code></p>
 
 <p><strong>UAT:</strong> <code class="prettyprint">POST https://uat.dwolla.com/oauth/v2/token</code></p>
-
+<h3 id='request-parameters'>Request parameters</h3>
 <table><thead>
 <tr>
 <th>Parameter</th>
+<th>Required</th>
+<th>Type</th>
 <th>Description</th>
 </tr>
 </thead><tbody>
 <tr>
 <td>client_id</td>
-<td>Application key</td>
+<td>yes</td>
+<td>string</td>
+<td>Application key.</td>
 </tr>
 <tr>
 <td>client_secret</td>
-<td>Application secret</td>
+<td>yes</td>
+<td>string</td>
+<td>Application secret.</td>
 </tr>
 <tr>
 <td>refresh_token</td>
-<td>A valid refresh token</td>
+<td>yes</td>
+<td>string</td>
+<td>A valid refresh token.</td>
 </tr>
 <tr>
 <td>grant_type</td>
-<td>This must be set to <code class="prettyprint">refresh_token</code></td>
+<td>yes</td>
+<td>string</td>
+<td>This must be set to <code class="prettyprint">refresh_token</code>.</td>
 </tr>
 </tbody></table>
 <h3 id='response-parameters'>Response parameters</h3>
@@ -825,20 +854,28 @@ https://uat.dwolla.com/oauth/v2/authenticate?client_id={client_id}&amp;response_
 <table><thead>
 <tr>
 <th>Parameter</th>
+<th>Required</th>
+<th>Type</th>
 <th>Description</th>
 </tr>
 </thead><tbody>
 <tr>
 <td>client_id</td>
-<td>Application key</td>
+<td>yes</td>
+<td>string</td>
+<td>Application key.</td>
 </tr>
 <tr>
 <td>client_secret</td>
-<td>Application secret</td>
+<td>yes</td>
+<td>string</td>
+<td>Application secret.</td>
 </tr>
 <tr>
 <td>grant_type</td>
-<td>This must be set to <code class="prettyprint">client_credentials</code></td>
+<td>yes</td>
+<td>string</td>
+<td>This must be set to <code class="prettyprint">client_credentials</code>.</td>
 </tr>
 </tbody></table>
 <h3 id='response-parameters'>Response parameters</h3>
@@ -1030,13 +1067,15 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 <table><thead>
 <tr>
 <th>Parameter</th>
-<th>Optional?</th>
+<th>Required</th>
+<th>Type</th>
 <th>Description</th>
 </tr>
 </thead><tbody>
 <tr>
 <td>id</td>
-<td>no</td>
+<td>yes</td>
+<td>string</td>
 <td>Account unique identifier.</td>
 </tr>
 </tbody></table>
@@ -1165,23 +1204,33 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 <table><thead>
 <tr>
 <th>Parameter</th>
+<th>Required</th>
+<th>Type</th>
 <th>Description</th>
 </tr>
 </thead><tbody>
 <tr>
 <td>accountNumber</td>
+<td>yes</td>
+<td>string</td>
 <td>The bank account number.</td>
 </tr>
 <tr>
 <td>routingNumber</td>
+<td>yes</td>
+<td>string</td>
 <td>The bank account&rsquo;s routing number.</td>
 </tr>
 <tr>
 <td>type</td>
+<td>yes</td>
+<td>string</td>
 <td>Type of bank account: <code class="prettyprint">checking</code> or <code class="prettyprint">savings</code>.</td>
 </tr>
 <tr>
 <td>name</td>
+<td>yes</td>
+<td>string</td>
 <td>Arbitrary nickname for the funding source.</td>
 </tr>
 </tbody></table>
@@ -1225,18 +1274,21 @@ Location: https://api-uat.dwolla.com/funding-sources/04173e17-6398-4d36-a167-9d9
 <table><thead>
 <tr>
 <th>Parameter</th>
-<th>Optional?</th>
+<th>Required</th>
+<th>Type</th>
 <th>Description</th>
 </tr>
 </thead><tbody>
 <tr>
 <td>id</td>
-<td>no</td>
+<td>yes</td>
+<td>string</td>
 <td>Account&rsquo;s unique identifier.</td>
 </tr>
 <tr>
 <td>removed</td>
-<td>yes</td>
+<td>no</td>
+<td>boolean</td>
 <td>Filter removed funding sources. Defaults to <code class="prettyprint">true</code>. Set to <code class="prettyprint">false</code> to filter out removed funding sources from list (i.e. - /accounts/{id}/funding-sources?removed=false).</td>
 </tr>
 </tbody></table>
@@ -1385,48 +1437,63 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 <table><thead>
 <tr>
 <th>Parameter</th>
-<th>Optional?</th>
+<th>Required</th>
+<th>Type</th>
 <th>Description</th>
 </tr>
 </thead><tbody>
 <tr>
 <td>id</td>
-<td>no</td>
+<td>yes</td>
+<td>string</td>
 <td>Account unique identifier to get transfers for.</td>
 </tr>
 <tr>
 <td>search</td>
-<td>yes</td>
-<td>A string to be matched with <code class="prettyprint">firstName</code>, <code class="prettyprint">lastName</code>, <code class="prettyprint">email</code>, <code class="prettyprint">businessName</code>, Customer Id, and Account Id. (<code class="prettyprint">/transfers?search=Doe</code>)</td>
+<td>no</td>
+<td>string</td>
+<td>A string to search on fields: <code class="prettyprint">firstName</code>, <code class="prettyprint">lastName</code>, <code class="prettyprint">email</code>, <code class="prettyprint">businessName</code>, Customer Id, and Account Id. (<code class="prettyprint">/transfers?search=Doe</code>)</td>
 </tr>
 <tr>
 <td>startAmount</td>
-<td>yes</td>
+<td>no</td>
+<td>string</td>
 <td>Only include transactions with an amount equal to or greater than <code class="prettyprint">startAmount</code>. Can optionally be used with <code class="prettyprint">endAmount</code> to specify an amount range.</td>
 </tr>
 <tr>
 <td>endAmount</td>
-<td>yes</td>
+<td>no</td>
+<td>string</td>
 <td>Only include transactions with an amount equal to or less than <code class="prettyprint">endAmount</code>. Can optionally be used with <code class="prettyprint">startAmount</code> to specify an amount range.</td>
 </tr>
 <tr>
 <td>startDate</td>
-<td>yes</td>
+<td>no</td>
+<td>string</td>
 <td>Only include transactions created after this date. ISO-8601 format: <code class="prettyprint">YYYY-MM-DD</code>. Can optionally be used with <code class="prettyprint">endDate</code> to specify a date range.</td>
 </tr>
 <tr>
 <td>endDate</td>
-<td>yes</td>
+<td>no</td>
+<td>string</td>
 <td>Only include transactions created before than this date. ISO-8601 format: <code class="prettyprint">YYYY-MM-DD</code>. Can optionally be used with <code class="prettyprint">startDate</code> to specify a date range.</td>
 </tr>
 <tr>
+<td>status</td>
+<td>no</td>
+<td>string</td>
+<td>Filter results on transaction status. Possible values: <code class="prettyprint">pending</code>, <code class="prettyprint">processed</code>, <code class="prettyprint">failed</code>, <code class="prettyprint">reclaimed</code>, or <code class="prettyprint">cancelled</code>.</td>
+</tr>
+<tr>
 <td>limit</td>
-<td>yes</td>
+<td>no</td>
+<td>integer</td>
 <td>Number of search results to return. Defaults to 25.</td>
 </tr>
 <tr>
 <td>offset</td>
-<td>yes</td>
+<td>no</td>
+<td>integer</td>
 <td>Number of search results to skip. Used for pagination.</td>
 </tr>
 </tbody></table>
@@ -1589,23 +1656,27 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 <table><thead>
 <tr>
 <th>Parameter</th>
-<th>Optional?</th>
+<th>Required</th>
+<th>Type</th>
 <th>Description</th>
 </tr>
 </thead><tbody>
 <tr>
 <td>id</td>
-<td>no</td>
+<td>yes</td>
+<td>string</td>
 <td>Account unique identifier to get mass payments for.</td>
 </tr>
 <tr>
 <td>limit</td>
-<td>yes</td>
+<td>no</td>
+<td>integer</td>
 <td>How many results to return. Defaults to 25.</td>
 </tr>
 <tr>
 <td>offset</td>
-<td>yes</td>
+<td>no</td>
+<td>integer</td>
 <td>How many results to skip.</td>
 </tr>
 </tbody></table>
@@ -1880,28 +1951,33 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 <table><thead>
 <tr>
 <th>Parameter</th>
-<th>Optional?</th>
+<th>Required</th>
+<th>Type</th>
 <th>Description</th>
 </tr>
 </thead><tbody>
 <tr>
 <td>firstName</td>
-<td>no</td>
+<td>yes</td>
+<td>string</td>
 <td>Customer&rsquo;s first name.</td>
 </tr>
 <tr>
 <td>lastName</td>
-<td>no</td>
+<td>yes</td>
+<td>string</td>
 <td>Customer&rsquo;s last name.</td>
 </tr>
 <tr>
 <td>email</td>
-<td>no</td>
+<td>yes</td>
+<td>string</td>
 <td>Customer&rsquo;s email address.</td>
 </tr>
 <tr>
 <td>ipAddress</td>
-<td>yes</td>
+<td>no</td>
+<td>string</td>
 <td>Customer&rsquo;s IP address.</td>
 </tr>
 </tbody></table>
@@ -1909,73 +1985,87 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 <table><thead>
 <tr>
 <th>Parameter</th>
-<th>Optional?</th>
+<th>Required</th>
+<th>Type</th>
 <th>Description</th>
 </tr>
 </thead><tbody>
 <tr>
 <td>firstName</td>
-<td>no</td>
+<td>yes</td>
+<td>string</td>
 <td>Customer or if business, authorized representative’s first name.</td>
 </tr>
 <tr>
 <td>lastName</td>
-<td>no</td>
+<td>yes</td>
+<td>string</td>
 <td>Customer or if business, authorized representative’s last name.</td>
 </tr>
 <tr>
 <td>email</td>
-<td>no</td>
+<td>yes</td>
+<td>string</td>
 <td>Customer&rsquo;s email address.</td>
 </tr>
 <tr>
 <td>ipAddress</td>
-<td>yes</td>
+<td>no</td>
+<td>string</td>
 <td>Customer&rsquo;s IP address.</td>
 </tr>
 <tr>
 <td>type</td>
-<td>no</td>
+<td>yes</td>
+<td>string</td>
 <td>Either <code class="prettyprint">personal</code> or <code class="prettyprint">business</code>. If business, <a href="#additional-request-parameters-for-verified-customer-with-typebusiness">see below</a> for additional required information.</td>
 </tr>
 <tr>
 <td>address1</td>
-<td>no</td>
+<td>yes</td>
+<td>string</td>
 <td>First line of the street address of the Customer&rsquo;s permanent residence. Must be 50 characters or less.</td>
 </tr>
 <tr>
 <td>address2</td>
-<td>yes</td>
+<td>no</td>
+<td>string</td>
 <td>Second line of the street address of the Customer&rsquo;s permanent residence. Must be 50 characters or less.</td>
 </tr>
 <tr>
 <td>city</td>
-<td>no</td>
+<td>yes</td>
+<td>string</td>
 <td>City of Customer&rsquo;s permanent residence.</td>
 </tr>
 <tr>
 <td>state</td>
-<td>no</td>
+<td>yes</td>
+<td>string</td>
 <td>Two letter abbreviation of the state in which the Customer resides, e.g. <code class="prettyprint">CA</code>.</td>
 </tr>
 <tr>
 <td>postalCode</td>
-<td>no</td>
+<td>yes</td>
+<td>string</td>
 <td>Postal code of Customer&rsquo;s permanent residence. Should be a five digit postal code, e.g. <code class="prettyprint">50314</code>.</td>
 </tr>
 <tr>
 <td>dateOfBirth</td>
-<td>no</td>
+<td>yes</td>
+<td>string</td>
 <td>Customer or if business, authorized representative’s date of birth in <code class="prettyprint">YYYY-MM-DD</code> format.</td>
 </tr>
 <tr>
 <td>ssn</td>
-<td>no</td>
+<td>yes</td>
+<td>string</td>
 <td>Last four digits of the Customer&rsquo;s Social Security Number.</td>
 </tr>
 <tr>
 <td>phone</td>
-<td>no</td>
+<td>yes</td>
+<td>string</td>
 <td>Customer or if business, authorized representative’s 10 digit phone number.  No hyphens or other separators, e.g. <code class="prettyprint">3334447777</code>.</td>
 </tr>
 </tbody></table>
@@ -1983,38 +2073,45 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 <table><thead>
 <tr>
 <th>Parameter</th>
-<th>Optional?</th>
+<th>Required</th>
+<th>Type</th>
 <th>Description</th>
 </tr>
 </thead><tbody>
 <tr>
 <td>businessClassification</td>
-<td>no</td>
+<td>yes</td>
+<td>string</td>
 <td>The <a href="#list-business-classifications">industry classification</a> id that corresponds to Customer’s business</td>
 </tr>
 <tr>
 <td>businessType</td>
-<td>no</td>
+<td>yes</td>
+<td>string</td>
 <td>Business structure. Possible values are <code class="prettyprint">corporation</code>, <code class="prettyprint">llc</code>, <code class="prettyprint">partnership</code>, and <code class="prettyprint">soleproprietorship</code></td>
 </tr>
 <tr>
 <td>businessName</td>
-<td>no</td>
+<td>yes</td>
+<td>string</td>
 <td>Customer’s registered business name.</td>
 </tr>
 <tr>
 <td>ein</td>
-<td>no</td>
+<td>yes</td>
+<td>string</td>
 <td>Employer Identification Number.</td>
 </tr>
 <tr>
 <td>doingBusinessAs</td>
-<td>yes</td>
+<td>no</td>
+<td>string</td>
 <td>Name that is different from the officially registered name of Customer’s business.</td>
 </tr>
 <tr>
 <td>website</td>
-<td>yes</td>
+<td>no</td>
+<td>string</td>
 <td>www.domain.com</td>
 </tr>
 </tbody></table>
@@ -2022,38 +2119,45 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 <table><thead>
 <tr>
 <th>Parameter</th>
-<th>Optional?</th>
+<th>Required</th>
+<th>Type</th>
 <th>Description</th>
 </tr>
 </thead><tbody>
 <tr>
 <td>firstName</td>
-<td>no</td>
+<td>yes</td>
+<td>string</td>
 <td>Customer&rsquo;s first name.</td>
 </tr>
 <tr>
 <td>lastName</td>
-<td>no</td>
+<td>yes</td>
+<td>string</td>
 <td>Customer&rsquo;s last name.</td>
 </tr>
 <tr>
 <td>email</td>
-<td>no</td>
+<td>yes</td>
+<td>string</td>
 <td>Customer&rsquo;s email address.</td>
 </tr>
 <tr>
 <td>type</td>
-<td>no</td>
+<td>yes</td>
+<td>string</td>
 <td>Value of <code class="prettyprint">receive-only</code>.</td>
 </tr>
 <tr>
 <td>businessName</td>
-<td>no</td>
-<td>Customer&rsquo;s registered business name. (Optional if not a business entity)</td>
+<td>yes</td>
+<td>string</td>
+<td>Customer&rsquo;s registered business name. (<strong>Optional</strong> if not a business entity)</td>
 </tr>
 <tr>
 <td>ipAddress</td>
-<td>yes</td>
+<td>no</td>
+<td>string</td>
 <td>Customer&rsquo;s IP address.</td>
 </tr>
 </tbody></table>
@@ -2552,13 +2656,15 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 <table><thead>
 <tr>
 <th>Parameter</th>
-<th>Optional?</th>
+<th>Required</th>
+<th>Type</th>
 <th>Description</th>
 </tr>
 </thead><tbody>
 <tr>
 <td>id</td>
-<td>no</td>
+<td>yes</td>
+<td>string</td>
 <td>Business classification unique identifier.</td>
 </tr>
 </tbody></table>
@@ -2658,23 +2764,27 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 <table><thead>
 <tr>
 <th>Parameter</th>
-<th>Optional?</th>
+<th>Required</th>
+<th>Type</th>
 <th>Description</th>
 </tr>
 </thead><tbody>
 <tr>
 <td>firstName</td>
 <td>no</td>
+<td>string</td>
 <td>Customer&rsquo;s first name.</td>
 </tr>
 <tr>
 <td>lastName</td>
 <td>no</td>
+<td>string</td>
 <td>Customer&rsquo;s last name.</td>
 </tr>
 <tr>
 <td>email</td>
 <td>no</td>
+<td>string</td>
 <td>Customer&rsquo;s email address.</td>
 </tr>
 </tbody></table>
@@ -2682,48 +2792,57 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 <table><thead>
 <tr>
 <th>Parameter</th>
-<th>Optional?</th>
+<th>Required</th>
+<th>Type</th>
 <th>Description</th>
 </tr>
 </thead><tbody>
 <tr>
 <td>email</td>
 <td>no</td>
+<td>string</td>
 <td>Customer&rsquo;s email address.</td>
 </tr>
 <tr>
 <td>ipAddress</td>
-<td>yes</td>
+<td>no</td>
+<td>string</td>
 <td>Customer&rsquo;s IP address</td>
 </tr>
 <tr>
 <td>address1</td>
 <td>no</td>
+<td>string</td>
 <td>First line of the street address of the customer&rsquo;s permanent residence</td>
 </tr>
 <tr>
 <td>address2</td>
-<td>yes</td>
+<td>no</td>
+<td>string</td>
 <td>Second line of the street address of the customer&rsquo;s permanent residence</td>
 </tr>
 <tr>
 <td>city</td>
 <td>no</td>
+<td>string</td>
 <td>City of customer&rsquo;s peramanent residence</td>
 </tr>
 <tr>
 <td>state</td>
 <td>no</td>
+<td>string</td>
 <td>Two letter abbreviation of the state in which the customer resides.  e.g. <code class="prettyprint">NY</code></td>
 </tr>
 <tr>
 <td>postalCode</td>
 <td>no</td>
+<td>string</td>
 <td>Postal code of customer&rsquo;s permanent residence</td>
 </tr>
 <tr>
 <td>phone</td>
 <td>no</td>
+<td>string</td>
 <td>Customer&rsquo;s 10 digit phone number.  No hyphens or other separators.  e.g. <code class="prettyprint">3334447777</code></td>
 </tr>
 </tbody></table>
@@ -2733,18 +2852,21 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 <table><thead>
 <tr>
 <th>Parameter</th>
-<th>Optional?</th>
+<th>Required</th>
+<th>Type</th>
 <th>Description</th>
 </tr>
 </thead><tbody>
 <tr>
 <td>doingBusinessAs</td>
-<td>yes</td>
+<td>no</td>
+<td>string</td>
 <td>Name that is different from the officially registered name of Customer’s business.</td>
 </tr>
 <tr>
 <td>website</td>
-<td>yes</td>
+<td>no</td>
+<td>string</td>
 <td>www.domain.com</td>
 </tr>
 </tbody></table>
@@ -2756,13 +2878,15 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 <table><thead>
 <tr>
 <th>Parameter</th>
-<th>Optional?</th>
+<th>Required</th>
+<th>Type</th>
 <th>Description</th>
 </tr>
 </thead><tbody>
 <tr>
 <td>status</td>
-<td>no</td>
+<td>yes</td>
+<td>string</td>
 <td>Value of <code class="prettyprint">suspended</code>.</td>
 </tr>
 </tbody></table>
@@ -2949,73 +3073,87 @@ Location: https://api.dwolla.com/customers/FC451A7A-AE30-4404-AB95-E3553FCD733F
 <table><thead>
 <tr>
 <th>Parameter</th>
-<th>Optional?</th>
+<th>Required</th>
+<th>Type</th>
 <th>Description</th>
 </tr>
 </thead><tbody>
 <tr>
 <td>firstName</td>
-<td>no</td>
+<td>yes</td>
+<td>string</td>
 <td>Customer&rsquo;s first name.</td>
 </tr>
 <tr>
 <td>lastName</td>
-<td>no</td>
+<td>yes</td>
+<td>string</td>
 <td>Customer&rsquo;s last name.</td>
 </tr>
 <tr>
 <td>email</td>
-<td>no</td>
+<td>yes</td>
+<td>string</td>
 <td>Customer&rsquo;s email address.</td>
 </tr>
 <tr>
 <td>ipAddress</td>
-<td>yes</td>
+<td>no</td>
+<td>string</td>
 <td>Customer&rsquo;s IP address</td>
 </tr>
 <tr>
 <td>type</td>
-<td>no</td>
+<td>yes</td>
+<td>string</td>
 <td>Either <code class="prettyprint">personal</code> or <code class="prettyprint">business</code>. If business, <a href="#additional-request-parameters-for-verified-customer-with-typebusiness">see above</a> for additional required information.</td>
 </tr>
 <tr>
 <td>address1</td>
-<td>no</td>
+<td>yes</td>
+<td>string</td>
 <td>First line of the street address of the Customer&rsquo;s permanent residence</td>
 </tr>
 <tr>
 <td>address2</td>
-<td>yes</td>
+<td>no</td>
+<td>string</td>
 <td>Second line of the street address of the Customer&rsquo;s permanent residence</td>
 </tr>
 <tr>
 <td>city</td>
-<td>no</td>
+<td>yes</td>
+<td>string</td>
 <td>City of Customer&rsquo;s permanent residence</td>
 </tr>
 <tr>
 <td>state</td>
-<td>no</td>
+<td>yes</td>
+<td>string</td>
 <td>Two letter abbreviation of the state in which the customer resides, e.g. <code class="prettyprint">CA</code></td>
 </tr>
 <tr>
 <td>postalCode</td>
-<td>no</td>
+<td>yes</td>
+<td>string</td>
 <td>Postal code of Customer&rsquo;s permanent residence</td>
 </tr>
 <tr>
 <td>dateOfBirth</td>
-<td>no</td>
+<td>yes</td>
+<td>string</td>
 <td>Customer&rsquo;s date of birth in <code class="prettyprint">YYYY-MM-DD</code> format</td>
 </tr>
 <tr>
 <td>ssn</td>
-<td>no</td>
-<td>Customer&rsquo;s <em>full</em> Social Security Number</td>
+<td>yes</td>
+<td>string</td>
+<td>Customer&rsquo;s <strong>full</strong> Social Security Number</td>
 </tr>
 <tr>
 <td>phone</td>
 <td>yes</td>
+<td>string</td>
 <td>Customer&rsquo;s 10 digit phone number.  No hyphens or other separators, e.g. <code class="prettyprint">3334447777</code></td>
 </tr>
 </tbody></table>
@@ -3044,23 +3182,27 @@ Location: https://api.dwolla.com/customers/FC451A7A-AE30-4404-AB95-E3553FCD733F
 <table><thead>
 <tr>
 <th>Parameter</th>
-<th>Optional?</th>
+<th>Required</th>
+<th>Type</th>
 <th>Description</th>
 </tr>
 </thead><tbody>
 <tr>
 <td>limit</td>
-<td>yes</td>
-<td>How many results to return</td>
+<td>no</td>
+<td>integer</td>
+<td>How many results to return.</td>
 </tr>
 <tr>
 <td>offset</td>
-<td>yes</td>
-<td>How many results to skip</td>
+<td>no</td>
+<td>integer</td>
+<td>How many results to skip.</td>
 </tr>
 <tr>
 <td>search</td>
-<td>yes</td>
+<td>no</td>
+<td>string</td>
 <td>Searches on <code class="prettyprint">firstName</code>, <code class="prettyprint">lastName</code>, and <code class="prettyprint">email</code> fields. (<code class="prettyprint">/customers?search=Doe</code>)</td>
 </tr>
 </tbody></table>
@@ -3175,13 +3317,15 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 <table><thead>
 <tr>
 <th>Parameter</th>
-<th>Optional?</th>
+<th>Required</th>
+<th>Type</th>
 <th>Description</th>
 </tr>
 </thead><tbody>
 <tr>
 <td>id</td>
-<td>no</td>
+<td>yes</td>
+<td>string</td>
 <td>Customer unique identifier.</td>
 </tr>
 </tbody></table>
@@ -3394,33 +3538,39 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 <table><thead>
 <tr>
 <th>Parameter</th>
-<th>Optional?</th>
+<th>Required</th>
+<th>Type</th>
 <th>Description</th>
 </tr>
 </thead><tbody>
 <tr>
 <td>_links</td>
-<td>yes</td>
+<td>no</td>
+<td>object</td>
 <td>A <code>_links</code> JSON object containing an <code class="prettyprint">on-demand-authorization</code> link relation. See example raw request and response below.</td>
 </tr>
 <tr>
 <td>routingNumber</td>
-<td>no</td>
+<td>yes</td>
+<td>string</td>
 <td>The bank account&rsquo;s routing number.</td>
 </tr>
 <tr>
 <td>accountNumber</td>
-<td>no</td>
+<td>yes</td>
+<td>string</td>
 <td>The bank account number.</td>
 </tr>
 <tr>
 <td>type</td>
-<td>no</td>
+<td>yes</td>
+<td>string</td>
 <td>Type of bank account: <code class="prettyprint">checking</code> or <code class="prettyprint">savings</code>.</td>
 </tr>
 <tr>
 <td>name</td>
-<td>no</td>
+<td>yes</td>
+<td>string</td>
 <td>Arbitrary nickname for the funding source. Must be 50 characters or less.</td>
 </tr>
 </tbody></table>
@@ -3570,17 +3720,19 @@ Location: https://api.dwolla.com/funding-sources/AB443D36-3757-44C1-A1B4-29727FB
 <ol class="alerts"><li class="alert icon-alert-alert"><p>This endpoint requires an OAuth account access token with the <code>ManageCustomers</code> scope.</p>
 </li></ol><h3 id='http-request'>HTTP Request</h3>
 <p><code class="prettyprint">POST https://api.dwolla.com/customers/{id}/iav-token</code></p>
-<h3 id='request-parameters'>Request Parameters</h3>
+<h3 id='request-parameters'>Request parameters</h3>
 <table><thead>
 <tr>
 <th>Parameter</th>
-<th>Optional?</th>
+<th>Required</th>
+<th>Type</th>
 <th>Description</th>
 </tr>
 </thead><tbody>
 <tr>
 <td>id</td>
-<td>no</td>
+<td>yes</td>
+<td>string</td>
 <td>Customer unique identifier.</td>
 </tr>
 </tbody></table>
@@ -3755,18 +3907,21 @@ $('#start').click(function() {
 <table><thead>
 <tr>
 <th>Parameter</th>
-<th>Optional?</th>
+<th>Required</th>
+<th>Type</th>
 <th>Description</th>
 </tr>
 </thead><tbody>
 <tr>
 <td>id</td>
-<td>no</td>
+<td>yes</td>
+<td>string</td>
 <td>Customer&rsquo;s unique identifier.</td>
 </tr>
 <tr>
 <td>removed</td>
-<td>yes</td>
+<td>no</td>
+<td>string</td>
 <td>Filter removed funding sources. Defaults to <code class="prettyprint">true</code>. Set to <code class="prettyprint">false</code> to filter out removed funding sources from list (i.e. - /customers/{id}/funding-sources?removed=false).</td>
 </tr>
 </tbody></table>
@@ -3922,48 +4077,63 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 <table><thead>
 <tr>
 <th>Parameter</th>
-<th>Optional?</th>
+<th>Required</th>
+<th>Type</th>
 <th>Description</th>
 </tr>
 </thead><tbody>
 <tr>
 <td>id</td>
-<td>no</td>
+<td>yes</td>
+<td>string</td>
 <td>Customer unique identifier to get transfers for.</td>
 </tr>
 <tr>
 <td>search</td>
-<td>yes</td>
+<td>no</td>
+<td>string</td>
 <td>A string to be matched with <code class="prettyprint">firstName</code>, <code class="prettyprint">lastName</code>, <code class="prettyprint">email</code>, <code class="prettyprint">businessName</code>, Customer Id, and Account Id. (<code class="prettyprint">/transfers?search=Doe</code>)</td>
 </tr>
 <tr>
 <td>startAmount</td>
-<td>yes</td>
+<td>no</td>
+<td>string</td>
 <td>Only include transactions with an amount equal to or greater than <code class="prettyprint">startAmount</code>. Can optionally be used with <code class="prettyprint">endAmount</code> to specify an amount range.</td>
 </tr>
 <tr>
 <td>endAmount</td>
-<td>yes</td>
+<td>no</td>
+<td>string</td>
 <td>Only include transactions with an amount equal to or less than <code class="prettyprint">endAmount</code>. Can optionally be used with <code class="prettyprint">startAmount</code> to specify an amount range.</td>
 </tr>
 <tr>
 <td>startDate</td>
-<td>yes</td>
+<td>no</td>
+<td>string</td>
 <td>Only include transactions created after this date. ISO-8601 format: <code class="prettyprint">YYYY-MM-DD</code>. Can optionally be used with <code class="prettyprint">endDate</code> to specify a date range.</td>
 </tr>
 <tr>
 <td>endDate</td>
-<td>yes</td>
+<td>no</td>
+<td>string</td>
 <td>Only include transactions created before than this date. ISO-8601 format: <code class="prettyprint">YYYY-MM-DD</code>. Can optionally be used with <code class="prettyprint">startDate</code> to specify a date range.</td>
 </tr>
 <tr>
+<td>status</td>
+<td>no</td>
+<td>string</td>
+<td>Filter results on transaction status. Possible values: <code class="prettyprint">pending</code>, <code class="prettyprint">processed</code>, <code class="prettyprint">failed</code>, or <code class="prettyprint">cancelled</code>.</td>
+</tr>
+<tr>
 <td>limit</td>
-<td>yes</td>
+<td>no</td>
+<td>integer</td>
 <td>Number of search results to return. Defaults to 25.</td>
 </tr>
 <tr>
 <td>offset</td>
-<td>yes</td>
+<td>no</td>
+<td>integer</td>
 <td>Number of search results to skip. Used for pagination.</td>
 </tr>
 </tbody></table>
@@ -4138,23 +4308,27 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 <table><thead>
 <tr>
 <th>Parameter</th>
-<th>Optional?</th>
+<th>Required</th>
+<th>Type</th>
 <th>Description</th>
 </tr>
 </thead><tbody>
 <tr>
 <td>id</td>
-<td>no</td>
+<td>yes</td>
+<td>string</td>
 <td>Customer unique identifier to get mass payments for.</td>
 </tr>
 <tr>
 <td>limit</td>
-<td>yes</td>
+<td>no</td>
+<td>integer</td>
 <td>How many results to return. Defaults to 25.</td>
 </tr>
 <tr>
 <td>offset</td>
-<td>yes</td>
+<td>no</td>
+<td>integer</td>
 <td>How many results to skip.</td>
 </tr>
 </tbody></table>
@@ -4429,6 +4603,22 @@ Location: https://api.dwolla.com/documents/11fe0bab-39bd-42ee-bb39-275afcc050d0
 <ol class="alerts"><li class="alert icon-alert-alert"><p>This endpoint requires an OAuth account access token with the <code>ManageCustomers</code> scope.</p>
 </li></ol><h3 id='http-request'>HTTP request</h3>
 <p><code class="prettyprint">GET https://api.dwolla.com/customers/{id}/documents</code></p>
+<h3 id='request-parameters'>Request parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Required</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>id</td>
+<td>yes</td>
+<td>string</td>
+<td>Customer unique identifier.</td>
+</tr>
+</tbody></table>
 <h3 id='request-and-response'>Request and response</h3><div class="code-snippet js-code-snippet language-raw"><button class="btn alternative">copy</button><div class="code-snippet__selector">
           <nav>
               <button class="selector_switch" id="raw">raw</button>
@@ -4548,6 +4738,22 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 <ol class="alerts"><li class="alert icon-alert-alert"><p>This endpoint requires an OAuth account access token with the <code>ManageCustomers</code> scope.</p>
 </li></ol><h3 id='http-request'>HTTP request</h3>
 <p><code class="prettyprint">GET https://api.dwolla.com/documents/{id}</code></p>
+<h3 id='request-parameters'>Request parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Required</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>id</td>
+<td>yes</td>
+<td>string</td>
+<td>Document unique identifier.</td>
+</tr>
+</tbody></table>
 <h3 id='request-and-response'>Request and response</h3><div class="code-snippet js-code-snippet language-raw"><button class="btn alternative">copy</button><div class="code-snippet__selector">
           <nav>
               <button class="selector_switch" id="raw">raw</button>
@@ -4685,32 +4891,37 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 <ol class="alerts"><li class="alert icon-alert-alert"><p>This endpoint requires an OAuth account access token with the <code>Funding</code> scope.</p>
 </li></ol><h3 id='http-request'>HTTP request</h3>
 <p><code class="prettyprint">POST https://api.dwolla.com/funding-sources</code></p>
-
+<h3 id='request-parameters'>Request parameters</h3>
 <table><thead>
 <tr>
 <th>Parameter</th>
-<th>Optional?</th>
+<th>Required</th>
+<th>Type</th>
 <th>Description</th>
 </tr>
 </thead><tbody>
 <tr>
 <td>accountNumber</td>
-<td>no</td>
+<td>yes</td>
+<td>string</td>
 <td>The bank account number.</td>
 </tr>
 <tr>
 <td>routingNumber</td>
-<td>no</td>
+<td>yes</td>
+<td>string</td>
 <td>The bank account&rsquo;s routing number.</td>
 </tr>
 <tr>
 <td>type</td>
-<td>no</td>
+<td>yes</td>
+<td>string</td>
 <td>Type of bank account: <code class="prettyprint">checking</code> or <code class="prettyprint">savings</code>.</td>
 </tr>
 <tr>
 <td>name</td>
-<td>no</td>
+<td>yes</td>
+<td>string</td>
 <td>Arbitrary nickname for the funding source.</td>
 </tr>
 </tbody></table>
@@ -4754,13 +4965,15 @@ Location: https://api-uat.dwolla.com/funding-sources/04173e17-6398-4d36-a167-9d9
 <table><thead>
 <tr>
 <th>Parameter</th>
-<th>Optional?</th>
+<th>Required</th>
+<th>Type</th>
 <th>Description</th>
 </tr>
 </thead><tbody>
 <tr>
 <td>id</td>
-<td>no</td>
+<td>yes</td>
+<td>string</td>
 <td>id of funding source to retrieve.</td>
 </tr>
 </tbody></table>
@@ -4883,18 +5096,21 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 <table><thead>
 <tr>
 <th>Parameter</th>
-<th>Optional?</th>
+<th>Required</th>
+<th>Type</th>
 <th>Description</th>
 </tr>
 </thead><tbody>
 <tr>
 <td>id</td>
-<td>no</td>
+<td>yes</td>
+<td>string</td>
 <td>id of funding source to update.</td>
 </tr>
 <tr>
 <td>name</td>
-<td>no</td>
+<td>yes</td>
+<td>string</td>
 <td>Arbitrary nickname for the funding source. Must be 50 characters or less.</td>
 </tr>
 </tbody></table>
@@ -5015,18 +5231,21 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 <table><thead>
 <tr>
 <th>Parameter</th>
-<th>Optional?</th>
+<th>Required</th>
+<th>Type</th>
 <th>Description</th>
 </tr>
 </thead><tbody>
 <tr>
 <td>amount1</td>
-<td>no</td>
+<td>yes</td>
+<td>string</td>
 <td>An amount JSON object of first micro-deposit. Contains <code class="prettyprint">value</code> and <code class="prettyprint">currency</code>.</td>
 </tr>
 <tr>
 <td>amount2</td>
-<td>no</td>
+<td>yes</td>
+<td>string</td>
 <td>An amount JSON object of second micro-deposit. Contains <code class="prettyprint">value</code> and <code class="prettyprint">currency</code>.</td>
 </tr>
 </tbody></table>
@@ -5297,13 +5516,15 @@ HTTP 200 OK
 <table><thead>
 <tr>
 <th>Parameter</th>
-<th>Optional?</th>
+<th>Required</th>
+<th>Type</th>
 <th>Description</th>
 </tr>
 </thead><tbody>
 <tr>
 <td>id</td>
 <td>no</td>
+<td>string</td>
 <td>id of funding source to check status of validation deposits.</td>
 </tr>
 </tbody></table>
@@ -5344,19 +5565,22 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 <table><thead>
 <tr>
 <th>Parameter</th>
-<th>Optional?</th>
+<th>Required</th>
+<th>Type</th>
 <th>Description</th>
 </tr>
 </thead><tbody>
 <tr>
 <td>id</td>
-<td>no</td>
+<td>yes</td>
 <td>id of funding source to delete.</td>
+<td></td>
 </tr>
 <tr>
 <td>removed</td>
-<td>no</td>
+<td>yes</td>
 <td>Specify a value of <code class="prettyprint">true</code> to remove the associated funding source.</td>
+<td></td>
 </tr>
 </tbody></table>
 <h3 id='errors'>Errors</h3>
@@ -5538,29 +5762,34 @@ HTTP 200 OK
 <table><thead>
 <tr>
 <th>Parameter</th>
-<th>Optional?</th>
+<th>Required</th>
+<th>Type</th>
 <th>Description</th>
 </tr>
 </thead><tbody>
 <tr>
 <td>_links</td>
-<td>no</td>
+<td>yes</td>
+<td>object</td>
 <td>A _links JSON object describing the desired <code class="prettyprint">source</code> and <code class="prettyprint">destination</code> of a transfer. <a href="#source-and-destination-types">See below</a> for possible values for <code class="prettyprint">source</code> and <code class="prettyprint">destination</code>.</td>
 </tr>
 <tr>
 <td>amount</td>
-<td>no</td>
-<td>An amount JSON object. <a href="#amount-json-object">See above</a></td>
+<td>yes</td>
+<td>object</td>
+<td>An amount JSON object. <a href="#amount-json-object">See above</a>.</td>
 </tr>
 <tr>
 <td>metadata</td>
-<td>yes</td>
+<td>no</td>
+<td>object</td>
 <td>A metadata JSON object with a maximum of 10 key-value pairs (each key and value must be less than 255 characters).</td>
 </tr>
 <tr>
 <td>fees</td>
-<td>yes</td>
-<td>an array of fee JSON objects that contain unique fee transfers. <a href="#a-fee-json-object">See below</a></td>
+<td>no</td>
+<td>array</td>
+<td>an array of fee JSON objects that contain unique fee transfers. <a href="#a-fee-json-object">See below</a>.</td>
 </tr>
 </tbody></table>
 <h3 id='source-and-destination-types'>Source and destination types</h3>
@@ -5843,13 +6072,15 @@ Location: https://api.dwolla.com/transfers/74c9129b-d14a-e511-80da-0aa34a9b2388
 <table><thead>
 <tr>
 <th>Parameter</th>
-<th>Optional?</th>
+<th>Required</th>
+<th>Type</th>
 <th>Description</th>
 </tr>
 </thead><tbody>
 <tr>
 <td>id</td>
-<td>no</td>
+<td>yes</td>
+<td>string</td>
 <td>The id of the transfer to be retrieved.</td>
 </tr>
 </tbody></table>
@@ -5978,13 +6209,15 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 <table><thead>
 <tr>
 <th>Parameter</th>
-<th>Optional?</th>
+<th>Required</th>
+<th>Type</th>
 <th>Description</th>
 </tr>
 </thead><tbody>
 <tr>
 <td>id</td>
-<td>no</td>
+<td>yes</td>
+<td>string</td>
 <td>The id of the transfer to retrieve fees for.</td>
 </tr>
 </tbody></table>
@@ -6124,18 +6357,20 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 <ol class="alerts"><li class="alert icon-alert-alert"><p>This endpoint requires an OAuth account access token with the <code>Transactions</code> scope.</p>
 </li></ol><h3 id='http-request'>HTTP Request</h3>
 <p><code class="prettyprint">GET https://api.dwolla.com/transfers/{id}/failure</code></p>
-<h3 id='request-parameters'>Request Parameters</h3>
+<h3 id='request-parameters'>Request parameters</h3>
 <table><thead>
 <tr>
 <th>Parameter</th>
-<th>Optional?</th>
+<th>Required</th>
+<th>Type</th>
 <th>Description</th>
 </tr>
 </thead><tbody>
 <tr>
 <td>id</td>
-<td>no</td>
-<td>Transfer unique identifier</td>
+<td>yes</td>
+<td>string</td>
+<td>Transfer unique identifier.</td>
 </tr>
 </tbody></table>
 <h3 id='request-and-response'>Request and Response</h3><div class="code-snippet js-code-snippet language-raw"><button class="btn alternative">copy</button><div class="code-snippet__selector">
@@ -6216,18 +6451,20 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 <ol class="alerts"><li class="alert icon-alert-alert"><p>This endpoint requires an OAuth account access token with the <code>Transactions</code> scope.</p>
 </li></ol><h3 id='http-request'>HTTP Request</h3>
 <p><code class="prettyprint">POST https://api.dwolla.com/transfers/{id}</code></p>
-<h3 id='request-parameters'>Request Parameters</h3>
+<h3 id='request-parameters'>Request parameters</h3>
 <table><thead>
 <tr>
 <th>Parameter</th>
-<th>Optional?</th>
+<th>Required</th>
+<th>Type</th>
 <th>Description</th>
 </tr>
 </thead><tbody>
 <tr>
 <td>status</td>
-<td>no</td>
-<td>Possible value: <code class="prettyprint">cancelled</code></td>
+<td>yes</td>
+<td>string</td>
+<td>Possible value: <code class="prettyprint">cancelled</code>.</td>
 </tr>
 </tbody></table>
 <h3 id='request-and-response'>Request and Response</h3><div class="code-snippet js-code-snippet language-nohide"><button class="btn alternative">copy</button><div class="code-snippet__cnt highlight"><pre><code class="language-nohide" data-lang="nohide">POST https://api-uat.dwolla.com/transfers/3d48c13a-0fc6-e511-80de-0aa34a9b2388
@@ -6319,23 +6556,27 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 <table><thead>
 <tr>
 <th>Parameter</th>
-<th>Optional?</th>
+<th>Required</th>
+<th>Type</th>
 <th>Description</th>
 </tr>
 </thead><tbody>
 <tr>
 <td>_links</td>
-<td>no</td>
+<td>yes</td>
+<td>object</td>
 <td>A _links JSON object describing the desired <code class="prettyprint">source</code> of a mass payment. <a href="#source-and-destination-values">See below</a> for possible values for <code class="prettyprint">source</code> and <code class="prettyprint">destination</code>.</td>
 </tr>
 <tr>
 <td>items</td>
-<td>no</td>
+<td>yes</td>
+<td>array</td>
 <td>an array of item JSON objects that contain unique payments. <a href="#mass-payment-item">See below</a></td>
 </tr>
 <tr>
 <td>metadata</td>
-<td>yes</td>
+<td>no</td>
+<td>object</td>
 <td>A metadata JSON object with a maximum of 10 key-value pairs (each key and value must be less than 255 characters).</td>
 </tr>
 </tbody></table>
@@ -6633,13 +6874,15 @@ Location: https://api.dwolla.com/mass-payments/d093bcd1-d0c1-41c2-bcb5-a5cc011be
 <table><thead>
 <tr>
 <th>Parameter</th>
-<th>Optional?</th>
+<th>Required</th>
+<th>Type</th>
 <th>Description</th>
 </tr>
 </thead><tbody>
 <tr>
 <td>id</td>
-<td>no</td>
+<td>yes</td>
+<td>string</td>
 <td>The id of the mass payment to retrieve information for.</td>
 </tr>
 </tbody></table>
@@ -6741,32 +6984,37 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 <ol class="alerts"><li class="alert icon-alert-alert"><p>This endpoint requires an OAuth account access token with the <code>Transactions</code> scope.</p>
 </li></ol><h3 id='http-request'>HTTP Request</h3>
 <p><code class="prettyprint">GET https://api.dwolla.com/mass-payments/{id}/items</code></p>
-<h3 id='request-parameters'>Request Parameters</h3>
+<h3 id='request-parameters'>Request parameters</h3>
 <table><thead>
 <tr>
 <th>Parameter</th>
-<th>Optional?</th>
+<th>Required</th>
+<th>Type</th>
 <th>Description</th>
 </tr>
 </thead><tbody>
 <tr>
 <td>id</td>
-<td>no</td>
-<td>Mass payment unique identifier</td>
+<td>yes</td>
+<td>string</td>
+<td>Mass payment unique identifier.</td>
 </tr>
 <tr>
 <td>limit</td>
-<td>yes</td>
+<td>no</td>
+<td>integer</td>
 <td>How many results to return. Defaults to 25.</td>
 </tr>
 <tr>
 <td>offset</td>
-<td>yes</td>
-<td>How many results to skip</td>
+<td>no</td>
+<td>integer</td>
+<td>How many results to skip.</td>
 </tr>
 <tr>
 <td>status</td>
-<td>yes</td>
+<td>no</td>
+<td>string</td>
 <td>Filter results on item status. Possible values: <code class="prettyprint">failed</code>, <code class="prettyprint">pending</code>, and <code class="prettyprint">success</code>. Values delimited by <code class="prettyprint">&amp;status=</code> (i.e. - <code class="prettyprint">/items?status=failed&amp;status=pending</code>).</td>
 </tr>
 </tbody></table>
@@ -6928,13 +7176,15 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 <table><thead>
 <tr>
 <th>Parameter</th>
-<th>Optional?</th>
+<th>Required</th>
+<th>Type</th>
 <th>Description</th>
 </tr>
 </thead><tbody>
 <tr>
 <td>id</td>
-<td>no</td>
+<td>yes</td>
+<td>string</td>
 <td>The id of the item to be retrieved in a mass payment.</td>
 </tr>
 </tbody></table>
@@ -7313,19 +7563,22 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 <table><thead>
 <tr>
 <th>Parameter</th>
-<th>Optional?</th>
+<th>Required</th>
+<th>Type</th>
 <th>Description</th>
 </tr>
 </thead><tbody>
 <tr>
 <td>limit</td>
-<td>yes</td>
-<td>How many results to return.</td>
+<td>no</td>
+<td>integer</td>
+<td>How many results to return</td>
 </tr>
 <tr>
 <td>offset</td>
-<td>yes</td>
-<td>How many results to skip.</td>
+<td>no</td>
+<td>integer</td>
+<td>How many results to skip</td>
 </tr>
 </tbody></table>
 <h3 id='errors'>Errors</h3>
@@ -7513,13 +7766,15 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 <table><thead>
 <tr>
 <th>Parameter</th>
-<th>Optional?</th>
+<th>Required</th>
+<th>Type</th>
 <th>Description</th>
 </tr>
 </thead><tbody>
 <tr>
 <td>id</td>
-<td>no</td>
+<td>yes</td>
+<td>string</td>
 <td>ID of application event to get.</td>
 </tr>
 </tbody></table>
@@ -7789,15 +8044,21 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 <table><thead>
 <tr>
 <th>Parameter</th>
+<th>Required</th>
+<th>Type</th>
 <th>Description</th>
 </tr>
 </thead><tbody>
 <tr>
 <td>url</td>
+<td>yes</td>
+<td>string</td>
 <td>Where Dwolla should deliver the webhook notification.</td>
 </tr>
 <tr>
 <td>secret</td>
+<td>yes</td>
+<td>string</td>
 <td>A random, secret key, only known by your application. This secret key should be securely stored and used later when <a href="https://developers.dwolla.com/guides/webhooks/03-validating-webhooks.html">validating the authenticity</a> of the webhook request from Dwolla.</td>
 </tr>
 </tbody></table>
@@ -7902,11 +8163,15 @@ Authorization: Bearer 0Sn0W6kzNicvoWhDbQcVSKLRUpGjIdlPSEYyrHqrDDoRnQwE7Q
 <table><thead>
 <tr>
 <th>Parameter</th>
+<th>Required</th>
+<th>Type</th>
 <th>Description</th>
 </tr>
 </thead><tbody>
 <tr>
 <td>id</td>
+<td>yes</td>
+<td>string</td>
 <td>Webhook unique identifier.</td>
 </tr>
 </tbody></table>
@@ -8094,6 +8359,22 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 <ol class="alerts"><li class="alert icon-alert-alert"><p>This endpoint requires an OAuth <em>Application</em> access token.</p>
 </li></ol><h3 id='http-request'>HTTP request</h3>
 <p><code class="prettyprint">GET https://api.dwolla.com/webhook-subscriptions/{id}</code></p>
+<h3 id='request-parameters'>Request parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Required</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>id</td>
+<td>yes</td>
+<td>string</td>
+<td>Webhook subscription unique identifier.</td>
+</tr>
+</tbody></table>
 <h3 id='errors'>Errors</h3>
 <table><thead>
 <tr>
@@ -8202,6 +8483,22 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 <ol class="alerts"><li class="alert icon-alert-alert"><p>This endpoint requires an OAuth <em>Application</em> access token.</p>
 </li></ol><h3 id='http-request'>HTTP request</h3>
 <p><code class="prettyprint">GET https://api.dwolla.com/webhook-subscriptions/{id}/webhooks</code></p>
+<h3 id='request-parameters'>Request parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Required</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>id</td>
+<td>yes</td>
+<td>string</td>
+<td>Webhook subscription unique identifier.</td>
+</tr>
+</tbody></table>
 <h3 id='request-and-response'>Request and response</h3><div class="code-snippet js-code-snippet language-raw"><button class="btn alternative">copy</button><div class="code-snippet__selector">
           <nav>
               <button class="selector_switch" id="raw">raw</button>
@@ -8419,14 +8716,16 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 <table><thead>
 <tr>
 <th>Parameter</th>
-<th>Optional?</th>
+<th>Required</th>
+<th>Type</th>
 <th>Description</th>
 </tr>
 </thead><tbody>
 <tr>
 <td>id</td>
-<td>no</td>
-<td>Id of webhook to get.</td>
+<td>yes</td>
+<td>string</td>
+<td>Id of webhook to retrieve.</td>
 </tr>
 </tbody></table>
 <h3 id='errors'>Errors</h3>
@@ -8614,13 +8913,15 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 <table><thead>
 <tr>
 <th>Parameter</th>
-<th>Optional?</th>
+<th>Required</th>
+<th>Type</th>
 <th>Description</th>
 </tr>
 </thead><tbody>
 <tr>
 <td>id</td>
-<td>no</td>
+<td>yes</td>
+<td>string</td>
 <td>Id of webhook to retry.</td>
 </tr>
 </tbody></table>
@@ -8719,13 +9020,15 @@ Location: https://api.dwolla.com/webhooks/9ece9660-aa34-41eb-80d7-0125d53b45e8/r
 <table><thead>
 <tr>
 <th>Parameter</th>
-<th>Optional?</th>
+<th>Required</th>
+<th>Type</th>
 <th>Description</th>
 </tr>
 </thead><tbody>
 <tr>
 <td>id</td>
-<td>no</td>
+<td>yes</td>
+<td>string</td>
 <td>Id of webhook to get retries for.</td>
 </tr>
 </tbody></table>
