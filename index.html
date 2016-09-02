@@ -155,7 +155,7 @@ GET https://api.dwolla.com/accounts/a84222d5-31d2-4290-9a96-089813ef96b3/transfe
 <h2 id='idempotency-key'>Idempotency key</h2>
 <p>To prevent an operation from being performed more than once, Dwolla supports passing in an <code class="prettyprint">Idempotency-Key</code> header with a unique key as the value. Multiple <code class="prettyprint">POSTs</code> with the same idempotency key won&rsquo;t result in multiple resources being created.</p>
 
-<p>For example, if a request to <a href="#initiate-transfer">initiate a transfer</a> fails due to a network connection issue, you can reattempt the request with the same idempotency key to guarantee that only a single transfer is created.</p>
+<p>For example, if a request to <a href="#initiate-a-transfer">initiate a transfer</a> fails due to a network connection issue, you can reattempt the request with the same idempotency key to guarantee that only a single transfer is created.</p>
 
 <p>If you reattempt a <code class="prettyprint">POST</code> request with the same value for the <code class="prettyprint">Idempotency-Key</code>, you will receive the original response. It is recommended to use a random value for the idempotency key, like a UUID (i.e. - <code class="prettyprint">Idempotency-Key: d2adcbab-4e4e-430b-9181-ac9346be723a</code>). Idempotency keys are intented to prevent conflicts over a short period of time, therefore keys will expire after 24 hours. If the Dwolla server is still processing the original <code class="prettyprint">POST</code>, you will receive a <code class="prettyprint">409 Conflict</code> error response on the subsequent request.</p>
 <h4 id='example-transfer-using-an-idempotency-key'>Example transfer using an Idempotency Key</h4><div class="code-snippet js-code-snippet language-nohide"><button class="btn alternative">copy</button><div class="code-snippet__cnt highlight"><pre><code class="language-nohide" data-lang="nohide">curl -X POST -H "Content-Type: application/vnd.dwolla.v1.hal+json" -H "Accept: application/vnd.dwolla.v1.hal+json" -H "Authorization: Bearer asdfwXTdDQFimVQOMdn9bOGHJh8KrqnFi34sugYqgrULRCb" -H "Idempotency-Key: d2adcbab-4e4e-430b-9181-ac9346be723a" -d '{
@@ -337,6 +337,8 @@ GET https://api.dwolla.com/accounts/a84222d5-31d2-4290-9a96-089813ef96b3/transfe
   </span><span class="nt">"created"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-09-29T19:47:28.920Z"</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div></div>
+<hr>
+
             <h1 id='sdk-support'>SDK Support</h1>
 <p>The Dwolla API V2 has officially maintained software packages to make it easier for developers to get started with making requests against the API. This section is here to provide basic instructions on how to install these packages and get up and running with them. We recommend you use a POSIX-standardized shell on your development machine, and assume that you are already familiar and set-up with any tools required for your specific technical ecosystem.</p>
 
@@ -445,12 +447,14 @@ mvn install package
     <span class="n">console</span><span class="p">.</span><span class="nf">log</span><span class="p">(</span><span class="n">res</span><span class="p">.</span><span class="nf">body</span><span class="p">);</span>
   <span class="p">});</span>
 </code></pre></div></div>
+<hr>
+
             <h1 id='oauth'>OAuth</h1>
 <p>Dwolla&rsquo;s API lets you interact with a user&rsquo;s Dwolla account and act on its behalf to transfer money, add funding sources, and more.  To do so, your application first needs to request authorization from users.  </p>
 
-<p>Dwolla implements the <a href="http://oauth.net/2/">OAuth 2.0 standard</a> to facilitate this authorization. Similar to Facebook and Twitter&rsquo;s authentication flow, the user is first presented with a permission dialog for your application, at which point the user can either approve the permissions requested, or reject them. Once the user approves, an <code class="prettyprint">authorization_code</code> is sent to your application, which will then <a href="#finish-authorization">be exchanged</a> for an <code class="prettyprint">access_token</code> and a <code class="prettyprint">refresh_token</code> pair.</p>
+<p>Dwolla implements the <a href="http://oauth.net/2/">OAuth 2.0 standard</a> to facilitate this authorization. Similar to Facebook and Twitter&rsquo;s authentication flow, the user is first presented with a permission dialog for your application, at which point the user can either approve the permissions requested, or reject them. Once the user approves, an <code class="prettyprint">authorization_code</code> is sent to your application, which will then <a href="#finish-user-authorization">be exchanged</a> for an <code class="prettyprint">access_token</code> and a <code class="prettyprint">refresh_token</code> pair.</p>
 
-<p>The <code class="prettyprint">access_token</code> can then be used to make API calls which require user authentication like <a href="#initiate-transfer">Initiate a Transfer</a> or <a href="#get-transfers-account">List Transfers</a>.</p>
+<p>The <code class="prettyprint">access_token</code> can then be used to make API calls which require user authentication like <a href="#initiate-a-transfer">Initiate a Transfer</a> or <a href="#list-and-search-transfers-for-an-account">List Transfers</a>.</p>
 <h3 id='token-lifetimes'>Token lifetimes</h3>
 <p><strong>Access tokens</strong> are <em>short lived</em>: 1 hour.</p>
 
@@ -525,11 +529,11 @@ https://uat.dwolla.com/oauth/v2/authenticate?client_id={client_id}&amp;response_
 </thead><tbody>
 <tr>
 <td>Transactions</td>
-<td>Access the user&rsquo;s transfer data</td>
+<td>Access the user&rsquo;s transfer data.</td>
 </tr>
 <tr>
 <td>Send</td>
-<td>Transfer money on the user&rsquo;s behalf</td>
+<td>Transfer money on the user&rsquo;s behalf.</td>
 </tr>
 <tr>
 <td>Funding</td>
@@ -537,7 +541,7 @@ https://uat.dwolla.com/oauth/v2/authenticate?client_id={client_id}&amp;response_
 </tr>
 <tr>
 <td>ManageCustomers</td>
-<td>Includes create Customers, manage their funding sources, and allow related money movement</td>
+<td>Includes create Customers, manage their funding sources, and allow related money movement. <br/> <strong>Note:</strong> This is a privileged scope available within our <a href="https://www.dwolla.com/white-label?b=apidocs">White Label API</a>(v2). While fully available in our testing environment, White Label integrations will not be permitted to launch in production without first agreeing to a paid contract. <a href="https://www.dwolla.com/contact?b=apidocs">Contact sales</a> to learn more.</td>
 </tr>
 </tbody></table>
 <div class="code-snippet js-code-snippet language-php"><button class="btn alternative">copy</button><div class="code-snippet__selector">
@@ -914,6 +918,8 @@ https://uat.dwolla.com/oauth/v2/authenticate?client_id={client_id}&amp;response_
   </span><span class="nt">"scope"</span><span class="p">:</span><span class="w"> </span><span class="s2">"AccountInfoFull|ManageAccount|Contacts|Transactions|Balance|Send|Request|Funding"</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div></div>
+<hr>
+
             <h1 id='root'>Root</h1>
 <p>The &ldquo;root&rdquo; serves as an entry point to the API, providing your application with the ability to fetch and discover resources available based on the OAuth <code class="prettyprint">access_token</code> provided in the request. If a user <a href="#request-user-authorization">account access token</a> is provided in the request, the API will return links to resources that belong to a Dwolla account of that user (i.e. &ldquo;accounts&rdquo; and &ldquo;customers&rdquo;). Alternatively, if an <a href="#application-access-token">application access token</a> is provided in the request, the API will return links to resources that belong to the Dwolla application (i.e. &ldquo;events&rdquo; and &ldquo;webhook-subscriptions&rdquo;).</p>
 <ol class="alerts"><li class="alert icon-alert-alert"><p>This endpoint requires an OAuth account access token or an <em>Application</em> access token but does not require a particular scope.</p>
@@ -994,6 +1000,8 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
     <span class="nx">res</span><span class="p">.</span><span class="nx">body</span><span class="p">.</span><span class="nx">_links</span><span class="p">.</span><span class="nx">account</span><span class="p">.</span><span class="nx">href</span><span class="p">;</span> <span class="c1">// =&gt; 'https://api-uat.dwolla.com/accounts/ad5f2162-404a-4c4c-994e-6ab6c3a13254'</span>
   <span class="p">});</span>
 </code></pre></div></div>
+<hr>
+
             <h1 id='accounts'>Accounts</h1>
 <p>An <code class="prettyprint">Account</code> represents a Dwolla account that was either established on dwolla.com, or created inline with the capture of the user account&rsquo;s permissions via Dwolla&rsquo;s OAuth flow. A user account grants authorization to an application via <a href="#oauth">OAuth</a>, which gives the application permission to interact with the API on their behalf.</p>
 <h3 id='verified-and-unverified-accounts'>Verified and unverified Accounts</h3>
@@ -1058,7 +1066,7 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
   </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ca32853c-48fa-40be-ae75-77b37504581b"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Jane Doe"</span><span class="w">
 </span><span class="p">}</span><span class="w">
-</span></code></pre></div></div><h2 id='get-an-account-by-id'>Get an Account by id</h2>
+</span></code></pre></div></div><h2 id='retrieve-account-details'>Retrieve account details</h2>
 <p>This section shows you how to retrieve account information belonging to the authorized user. The developer can pass either an <code class="prettyprint">id</code> or the entire <code class="prettyprint">location</code> resource to make this request.</p>
 <ol class="alerts"><li class="alert icon-alert-alert"><p>This endpoint requires an OAuth account access token but does not require a particular scope.</p>
 </li></ol><h3 id='http-request'>HTTP request</h3>
@@ -1193,8 +1201,8 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
   <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">res</span><span class="p">)</span> <span class="p">{</span>
     <span class="nx">res</span><span class="p">.</span><span class="nx">body</span><span class="p">.</span><span class="nx">name</span><span class="p">;</span> <span class="c1">// =&gt; 'Jane Doe'</span>
   <span class="p">});</span>
-</code></pre></div></div><h2 id='create-an-account-funding-source'>Create an Account funding source</h2>
-<p>This section details how to add a bank account to a Dwolla account. The bank account will have a status of <code class="prettyprint">unverified</code> upon creation. Before a Dwolla account is eligible to transfer money from their bank or credit union account they need to verify ownership of the account via <a href="#initiate-or-verify-micro-deposits">micro-deposit verification</a>.</p>
+</code></pre></div></div><h2 id='create-a-funding-source-for-an-account'>Create a funding source for an account</h2>
+<p>This section details how to add a bank account to a Dwolla account. The bank account will have a status of <code class="prettyprint">unverified</code> upon creation. Before a Dwolla account is eligible to transfer money from their bank or credit union account they need to verify ownership of the account via micro-deposit verification.</p>
 
 <p>For more information on micro-deposit verification, reference the <a href="https://developers.dwolla.com/resources/funding-source-verification.html">funding source verification</a> resource article.</p>
 <ol class="alerts"><li class="alert icon-alert-alert"><p>This endpoint requires an OAuth account access token with the <code>Funding</code> scope.</p>
@@ -1265,7 +1273,7 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 
 HTTP/1.1 201 Created
 Location: https://api-uat.dwolla.com/funding-sources/04173e17-6398-4d36-a167-9d98c4b1f1c3
-</code></pre></div></div><h2 id='list-an-account39s-funding-sources'>List an Account&rsquo;s funding sources</h2>
+</code></pre></div></div><h2 id='list-funding-sources-for-an-account'>List funding sources for an account</h2>
 <p>Retrieve a list of funding sources that belong to an Account. By default, all funding sources are returned unless the <code class="prettyprint">removed</code> querystring parameter is set to <code class="prettyprint">false</code> in the request.</p>
 <ol class="alerts"><li class="alert icon-alert-alert"><p>This endpoint requires an OAuth account access token with the <code>Funding</code> scope.</p>
 </li></ol><h3 id='http-request'>HTTP request</h3>
@@ -1428,7 +1436,7 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 </span>  <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">res</span><span class="p">)</span> <span class="p">{</span>
     <span class="nx">res</span><span class="p">.</span><span class="nx">body</span><span class="p">.</span><span class="nx">_embedded</span><span class="p">[</span><span class="s1">'funding-sources'</span><span class="p">][</span><span class="mi">0</span><span class="p">].</span><span class="nx">name</span><span class="p">;</span> <span class="c1">// =&gt; 'ABC Bank Checking'</span>
   <span class="p">});</span>
-</code></pre></div></div><h2 id='list-an-account39s-transfers'>List an Account&rsquo;s transfers</h2>
+</code></pre></div></div><h2 id='list-and-search-transfers-for-an-account'>List and search transfers for an account</h2>
 <p>This section covers how to retrieve an Account&rsquo;s list of transfers. Transaction search is supported by passing in optional querystring parameters such as: <code class="prettyprint">search</code> which represents a term to search on, <code class="prettyprint">startAmount</code>, <code class="prettyprint">endAmount</code>, <code class="prettyprint">startDate</code>, and <code class="prettyprint">endDate</code>.</p>
 <ol class="alerts"><li class="alert icon-alert-alert"><p>This endpoint requires an OAuth account access token with the <code>Transactions</code> scope.</p>
 </li></ol><h3 id='http-request'>HTTP request</h3>
@@ -1647,7 +1655,7 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 </span>  <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">res</span><span class="p">)</span> <span class="p">{</span>
     <span class="nx">res</span><span class="p">.</span><span class="nx">body</span><span class="p">.</span><span class="nx">_embedded</span><span class="p">.</span><span class="nx">transfers</span><span class="p">.[</span><span class="mi">0</span><span class="p">].</span><span class="nx">status</span><span class="p">;</span> <span class="c1">// =&gt; 'processed'</span>
   <span class="p">});</span>
-</code></pre></div></div><h2 id='list-an-account39s-mass-payments'>List an Account&rsquo;s mass payments</h2>
+</code></pre></div></div><h2 id='list-mass-payments-for-an-account'>List mass payments for an account</h2>
 <p>This section covers how to retrieve an Account&rsquo;s list of previously created mass payments. Mass payments are returned ordered by date created, with most recent mass payments appearing first.</p>
 <ol class="alerts"><li class="alert icon-alert-alert"><p>This endpoint requires an OAuth account access token with the <code>Transactions</code> scope.</p>
 </li></ol><h3 id='http-request'>HTTP request</h3>
@@ -1803,6 +1811,8 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
     <span class="nx">res</span><span class="p">.</span><span class="nx">body</span><span class="p">.</span><span class="nx">_embedded</span><span class="p">[</span><span class="s1">'mass-payments'</span><span class="p">][</span><span class="mi">0</span><span class="p">].</span><span class="nx">status</span><span class="p">;</span> <span class="c1">// =&gt; 'complete'</span>
   <span class="p">});</span>
 </code></pre></div></div>
+<hr>
+
             <h1 id='customers'>Customers</h1>
 <p>A Customer represents an individual or business with whom you intend to transact with and is programmatically created and managed by a Dwolla account via the API. In order for a Dwolla <code class="prettyprint">Account</code> to create and manage Customers, an OAuth access token with the <code class="prettyprint">ManageCustomers</code> OAuth scope is required.</p>
 <ol class="alerts"><li class="alert icon-alert-alert"><p>This section outlines functionality for <a href="https://www.dwolla.com/white-label">Dwolla White Label</a>, a premium product that only approved partners may access in production. To learn more about entering into a White Label agreement, please <a href="https://www.dwolla.com/contact?b=apidocs">contact Sales</a>.</p>
@@ -1940,7 +1950,7 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
   </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"verified"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"created"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-10-06T01:18:26.923Z"</span><span class="w">
 </span><span class="p">}</span><span class="w">
-</span></code></pre></div></div><h2 id='create-a-customer'>Create a Customer</h2>
+</span></code></pre></div></div><h2 id='create-a-customer'>Create a customer</h2>
 <p>This section details how to create a new Customer.  To create an unverified Customer, you need to provide only the customer&rsquo;s full name and email address.  Verified Customers require additional information that will give Dwolla the ability to confirm the identity of the individual or business. Verified Customers can include type <code class="prettyprint">business</code> or <code class="prettyprint">personal</code>. For businesses, Dwolla will need to verify information about both the business and the “authorized representative” for that business. For receive-only customers, you&rsquo;ll provide the customer&rsquo;s full name, <code class="prettyprint">type</code> with the value of <code class="prettyprint">receive-only</code>, and <code class="prettyprint">businessName</code> if applicable.</p>
 
 <p>For more information on verified Customers, reference our <a href="https://developers.dwolla.com/resources/customer-verification.html">Customer verification</a> resource article.</p>
@@ -2569,7 +2579,7 @@ Location: https://api.dwolla.com/customers/FC451A7A-AE30-4404-AB95-E3553FCD733F
 <ol class="alerts"><li class="alert icon-alert-alert"><p>This endpoint requires an OAuth account access token with the <code>ManageCustomers</code> scope.</p>
 </li></ol><h3 id='http-request'>HTTP request</h3>
 <p><code class="prettyprint">GET https://api.dwolla.com/business-classifications</code></p>
-<h3 id='request-and-response'>Request and response:</h3><div class="code-snippet js-code-snippet language-nohide"><button class="btn alternative">copy</button><div class="code-snippet__cnt highlight"><pre><code class="language-nohide" data-lang="nohide">GET https://api-uat.dwolla.com/business-classifications
+<h3 id='request-and-response'>Request and response</h3><div class="code-snippet js-code-snippet language-nohide"><button class="btn alternative">copy</button><div class="code-snippet__cnt highlight"><pre><code class="language-nohide" data-lang="nohide">GET https://api-uat.dwolla.com/business-classifications
 Accept: application/vnd.dwolla.v1.hal+json
 Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 
@@ -2647,7 +2657,7 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
   },
   "total": 27
 }
-</code></pre></div></div><h2 id='get-business-classification-by-id'>Get business classification by id</h2>
+</code></pre></div></div><h2 id='retrieve-a-business-classification'>Retrieve a business classification</h2>
 <p>This section shows you how to retrieve a business classification from a list of industry classifications. An industry classification id is needed in order to verify a <code class="prettyprint">business</code> Customer.</p>
 <ol class="alerts"><li class="alert icon-alert-alert"><p>This endpoint requires an OAuth account access token with the <code>ManageCustomers</code> scope.</p>
 </li></ol><h3 id='http-request'>HTTP request</h3>
@@ -2753,7 +2763,7 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
   "id": "9ed3a866-7d6f-11e3-a0ce-5404a6144203",
   "name": "Entertainment and media"
 }
-</code></pre></div></div><h2 id='update-a-customer'>Update a Customer</h2>
+</code></pre></div></div><h2 id='update-a-customer'>Update a customer</h2>
 <p>This endpoint can be used to facilitate the following use cases: Update Customer information, upgrade an <code class="prettyprint">unverified</code> Customer to a <code class="prettyprint">verified</code> Customer, <code class="prettyprint">suspend</code> a Customer, and update a verified Customer&rsquo;s information to <code class="prettyprint">retry</code> verification.</p>
 <ol class="alerts"><li class="alert icon-alert-alert"><p>This endpoint requires an OAuth account access token with the <code>ManageCustomers</code> scope.</p>
 </li></ol><h3 id='http-request'>HTTP request</h3>
@@ -3173,7 +3183,7 @@ Location: https://api.dwolla.com/customers/FC451A7A-AE30-4404-AB95-E3553FCD733F
 <td>Not authorized to create customers.</td>
 </tr>
 </tbody></table>
-<h2 id='list-customers'>List Customers</h2>
+<h2 id='list-and-search-customers'>List and search customers</h2>
 <p>This section outlines how to retrieve your list of created Customers.</p>
 <ol class="alerts"><li class="alert icon-alert-alert"><p>This endpoint requires an OAuth account access token with the <code>ManageCustomers</code> scope.</p>
 </li></ol><h3 id='http-request'>HTTP request</h3>
@@ -3308,7 +3318,7 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
   <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">res</span><span class="p">)</span> <span class="p">{</span>
     <span class="nx">res</span><span class="p">.</span><span class="nx">body</span><span class="p">.</span><span class="nx">_embedded</span><span class="p">.</span><span class="nx">customers</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="nx">firstName</span><span class="p">;</span> <span class="c1">// =&gt; 'Jane'</span>
   <span class="p">});</span>
-</code></pre></div></div><h2 id='get-a-customer-by-id'>Get a Customer by id</h2>
+</code></pre></div></div><h2 id='retrieve-a-customer'>Retrieve a customer</h2>
 <p>This section shows you how to retrieve a Customer belonging to the authorized user. Each <code class="prettyprint">Customer</code> id is a part of its location resource. The developer can pass either an <code class="prettyprint">id</code> or the entire <code class="prettyprint">location</code> resource to make this request.</p>
 <ol class="alerts"><li class="alert icon-alert-alert"><p>This endpoint requires an OAuth account access token with the <code>ManageCustomers</code> scope.</p>
 </li></ol><h3 id='http-request'>HTTP request</h3>
@@ -3437,8 +3447,8 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
   <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">res</span><span class="p">)</span> <span class="p">{</span>
     <span class="nx">res</span><span class="p">.</span><span class="nx">body</span><span class="p">.</span><span class="nx">firstName</span><span class="p">;</span> <span class="c1">// =&gt; 'Jane'</span>
   <span class="p">});</span>
-</code></pre></div></div><h2 id='create-on-demand-transfer-authorization'>Create on-demand transfer authorization</h2>
-<p>This section outlines how to create an on-demand bank transfer authorization for your Customer. On-demand authorization allows Customers to authorize Dwolla to transfer variable amounts from their bank account using ACH at a later point in time for products or services delivered. This on-demand authorization is supplied along with the Customer&rsquo;s bank details when creating a <a href="#new-customer-funding-source">new Customer funding source</a>.</p>
+</code></pre></div></div><h2 id='create-an-on-demand-transfer-authorization'>Create an on-demand transfer authorization</h2>
+<p>This section outlines how to create an on-demand bank transfer authorization for your Customer. On-demand authorization allows Customers to authorize Dwolla to transfer variable amounts from their bank account using ACH at a later point in time for products or services delivered. This on-demand authorization is supplied along with the Customer&rsquo;s bank details when creating a <a href="#new-funding-source-for-a-customer">new Customer funding source</a>.</p>
 
 <p>When on-demand authorization is enabled for your application the Customer is presented with text on a “add bank account” screen in your user interface(UI) giving authorization to Dwolla for future variable payments. <strong>Note:</strong> On-demand payments come as part of our White Label product and requires additional approval before getting started. Please <a href="https://www.dwolla.com/contact?b=apidocs">contact Sales</a> for more information on enabling.</p>
 <ol class="alerts"><li class="alert icon-alert-alert"><p>This endpoint requires an OAuth account access token with the <code>ManageCustomers</code> scope.</p>
@@ -3525,11 +3535,11 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
   <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">res</span><span class="p">)</span> <span class="p">{</span>
     <span class="nx">res</span><span class="p">.</span><span class="nx">body</span><span class="p">.</span><span class="nx">buttonText</span><span class="p">;</span> <span class="c1">// =&gt; "Agree &amp; Continue"</span>
   <span class="p">});</span>
-</code></pre></div></div><h2 id='create-a-customer-funding-source'>Create a Customer funding source</h2>
-<p>There are two methods available for adding a bank or credit union account to a Customer. You can either collect the Customer&rsquo;s bank account information and pass it to Dwolla via the <a href="#new-customer-funding-source">new Customer funding source</a> endpoint, or you can send the Customer through the the <a href="#instant-account-verification-iav">Instant Account Verification</a> (IAV) flow which will add and verify a bank account within seconds.</p>
+</code></pre></div></div><h2 id='create-a-funding-source-for-a-customer'>Create a funding source for a customer</h2>
+<p>There are two methods available for adding a bank or credit union account to a Customer. You can either collect the Customer&rsquo;s bank account information and pass it to Dwolla via the <a href="#new-funding-source-for-a-customer">new Customer funding source</a> endpoint, or you can send the Customer through the the <a href="#instant-account-verification-iav">Instant Account Verification</a> (IAV) flow which will add and verify a bank account within seconds.</p>
 
 <p>Before a Dwolla account or white label Customer is eligible to transfer money from their bank or credit union account they need to verify ownership of the account, either via Instant Account Verification (IAV) or micro-deposits. For more information on bank account verification, reference this <a href="https://developers.dwolla.com/resources/funding-source-verification.html">funding source verification</a> resource article.</p>
-<h3 id='new-customer-funding-source'>New Customer funding source</h3>
+<h3 id='new-funding-source-for-a-customer'>New funding source for a customer</h3>
 <p>Create a new Funding Source for a Customer.  Customers can have a maximum of 6 funding sources.</p>
 <ol class="alerts"><li class="alert icon-alert-alert"><p>This endpoint requires an OAuth account access token with the <code>ManageCustomers</code> scope.</p>
 </li></ol><h3 id='http-request'>HTTP request</h3>
@@ -3898,7 +3908,7 @@ $('#start').click(function() {
 <td>The customer exceeded the max # of IAV attempts.</td>
 </tr>
 </tbody></table>
-<h2 id='list-a-customer39s-funding-sources'>List a Customer&rsquo;s funding sources</h2>
+<h2 id='list-funding-sources-for-a-customer'>List funding sources for a customer</h2>
 <p>Retrieve a list of funding sources that belong to a Customer. By default, all funding sources are returned unless the <code class="prettyprint">removed</code> querystring parameter is set to <code class="prettyprint">false</code> in the request.</p>
 <ol class="alerts"><li class="alert icon-alert-alert"><p>This endpoint requires an OAuth account access token with the <code>ManageCustomers</code> scope.</p>
 </li></ol><h3 id='http-request'>HTTP request</h3>
@@ -4068,7 +4078,7 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 </span>  <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">res</span><span class="p">)</span> <span class="p">{</span>
     <span class="nx">res</span><span class="p">.</span><span class="nx">body</span><span class="p">.</span><span class="nx">_embedded</span><span class="p">[</span><span class="s1">'funding-sources'</span><span class="p">][</span><span class="mi">0</span><span class="p">].</span><span class="nx">name</span><span class="p">;</span> <span class="c1">// =&gt; 'Jane Doe’s Checking'</span>
   <span class="p">});</span>
-</code></pre></div></div><h2 id='list-a-customer39s-transfers'>List a Customer&rsquo;s transfers</h2>
+</code></pre></div></div><h2 id='list-and-search-transfers-for-a-customer'>List and search transfers for a customer</h2>
 <p>This section details how to retrieve a Customer&rsquo;s list of transfers. Transaction search is supported by passing in optional querystring parameters such as: <code class="prettyprint">search</code> which represents a term to search on, <code class="prettyprint">startAmount</code>, <code class="prettyprint">endAmount</code>, <code class="prettyprint">startDate</code>, and <code class="prettyprint">endDate</code>.</p>
 <ol class="alerts"><li class="alert icon-alert-alert"><p>This endpoint requires an OAuth account access token with the <code>ManageCustomers</code> scope.</p>
 </li></ol><h3 id='http-request'>HTTP request</h3>
@@ -4299,7 +4309,7 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 </span>  <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">res</span><span class="p">)</span> <span class="p">{</span>
     <span class="nx">res</span><span class="p">.</span><span class="nx">body</span><span class="p">.</span><span class="nx">_embedded</span><span class="p">.</span><span class="nx">transfers</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="nx">status</span><span class="p">;</span> <span class="c1">// =&gt; "pending"</span>
   <span class="p">});</span>
-</code></pre></div></div><h2 id='list-a-customer39s-mass-payments'>List a Customer&rsquo;s mass payments</h2>
+</code></pre></div></div><h2 id='list-mass-payments-for-a-customer'>List mass payments for a customer</h2>
 <p>This section covers how to retrieve a <a href="#customers">verified Customer&rsquo;s</a> list of previously created mass payments. Mass payments are returned ordered by date created, with most recent mass payments appearing first.</p>
 <ol class="alerts"><li class="alert icon-alert-alert"><p>This endpoint requires an OAuth account access token with the <code>Transactions</code> scope.</p>
 </li></ol><h3 id='http-request'>HTTP request</h3>
@@ -4455,6 +4465,8 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
     <span class="nx">res</span><span class="p">.</span><span class="nx">body</span><span class="p">.</span><span class="nx">_embedded</span><span class="p">[</span><span class="s1">'mass-payments'</span><span class="p">][</span><span class="mi">0</span><span class="p">].</span><span class="nx">status</span><span class="p">;</span> <span class="err">#</span> <span class="o">=&gt;</span> <span class="s2">"complete"</span>
   <span class="p">});</span>
 </code></pre></div></div>
+<hr>
+
             <h1 id='documents'>Documents</h1>
 <p>Customers of type <code class="prettyprint">personal</code> or <code class="prettyprint">business</code> and of status <code class="prettyprint">document</code> require photos of identifying documents to be uploaded for manual review in order to be verified. Currently, SDK support only exists for retrieving data with regards to a <code class="prettyprint">Document</code> resource. To create a document, you must use an external HTTP library.</p>
 
@@ -4846,6 +4858,8 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
     <span class="nx">res</span><span class="p">.</span><span class="nx">body</span><span class="p">.</span><span class="nx">type</span><span class="p">;</span> <span class="c1">// =&gt; "passport"</span>
   <span class="p">});</span>
 </code></pre></div></div>
+<hr>
+
             <h1 id='funding-sources'>Funding sources</h1>
 <p>Add and retrieve ACH bank account information via funding sources, which are available to the <code class="prettyprint">Customers</code> and <code class="prettyprint">Accounts</code> resources.  Customers can have a maximum of 6 funding sources.</p>
 <h3 id='funding-source-resource'>Funding source resource</h3>
@@ -4956,7 +4970,7 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 
 HTTP/1.1 201 Created
 Location: https://api-uat.dwolla.com/funding-sources/04173e17-6398-4d36-a167-9d98c4b1f1c3
-</code></pre></div></div><h2 id='get-a-funding-source-by-id'>Get a funding source by id</h2>
+</code></pre></div></div><h2 id='retrieve-a-funding-source'>Retrieve a funding source</h2>
 <p>This section covers how to retrieve a funding source by id.</p>
 <ol class="alerts"><li class="alert icon-alert-alert"><p>This endpoint requires an OAuth account access token with the <code>Funding</code> scope.</p>
 </li></ol><h3 id='http-request'>HTTP request</h3>
@@ -5222,8 +5236,8 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
   <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">res</span><span class="p">)</span> <span class="p">{</span>
     <span class="nx">res</span><span class="p">.</span><span class="nx">body</span><span class="p">.</span><span class="nx">name</span><span class="p">;</span> <span class="c1">// =&gt; "Test Checking - 1234"</span>
   <span class="p">});</span>
-</code></pre></div></div><h2 id='initiate-or-verify-micro-deposits'>Initiate or verify micro-deposits</h2>
-<p>This section covers how to initiate and verify micro-deposits for bank verification. Reference the <a href="https://developers.dwolla.com/resources/funding-source-verification.html">funding source verification</a> resource article for more information on the micro-deposit method of bank account verification.</p>
+</code></pre></div></div><h2 id='initiate-micro-deposits'>Initiate micro-deposits</h2>
+<p>This section covers how to initiate micro-deposits for bank verification. Reference the <a href="https://developers.dwolla.com/resources/funding-source-verification.html">funding source verification</a> resource article for more information on the micro-deposit method of bank account verification.</p>
 <ol class="alerts"><li class="alert icon-alert-alert"><p>This endpoint requires an OAuth account access token with the <code>Funding</code> scope.</p>
 </li></ol><h3 id='http-request'>HTTP request</h3>
 <p><code class="prettyprint">POST https://api.dwolla.com/funding-sources/{id}/micro-deposits</code></p>
@@ -5237,16 +5251,10 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 </tr>
 </thead><tbody>
 <tr>
-<td>amount1</td>
+<td>id</td>
 <td>yes</td>
 <td>string</td>
-<td>An amount JSON object of first micro-deposit. Contains <code class="prettyprint">value</code> and <code class="prettyprint">currency</code>.</td>
-</tr>
-<tr>
-<td>amount2</td>
-<td>yes</td>
-<td>string</td>
-<td>An amount JSON object of second micro-deposit. Contains <code class="prettyprint">value</code> and <code class="prettyprint">currency</code>.</td>
+<td>id of funding source to initiate micro-deposits to.</td>
 </tr>
 </tbody></table>
 <h3 id='http-status-and-error-codes'>HTTP Status and Error Codes</h3>
@@ -5258,62 +5266,17 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 </tr>
 </thead><tbody>
 <tr>
-<td>200</td>
-<td>OK</td>
-<td>Micro deposits verified</td>
-</tr>
-<tr>
 <td>201</td>
 <td>Created</td>
 <td>Micro deposits initiated</td>
-</tr>
-<tr>
-<td>202</td>
-<td>TryAgainLater</td>
-<td>&ldquo;Invalid wait time.&rdquo;</td>
-</tr>
-<tr>
-<td>400</td>
-<td>NotFound</td>
-<td>Funding source not found.</td>
-</tr>
-<tr>
-<td>400</td>
-<td>ValidationError</td>
-<td>InvalidAmount</td>
-</tr>
-<tr>
-<td>400</td>
-<td>ValidationError</td>
-<td>&ldquo;Wrong amount(s).&rdquo;</td>
-</tr>
-<tr>
-<td>403</td>
-<td>InvalidResourceState</td>
-<td>&ldquo;Too many attempts.&rdquo;</td>
-</tr>
-<tr>
-<td>403</td>
-<td>InvalidResourceState</td>
-<td>&ldquo;Bank already verified.&rdquo;</td>
-</tr>
-<tr>
-<td>404</td>
-<td>NotFound</td>
-<td>Micro deposits not initiated</td>
 </tr>
 <tr>
 <td>404</td>
 <td>NotFound</td>
 <td>Funding source not found</td>
 </tr>
-<tr>
-<td>500</td>
-<td>Unknown</td>
-<td>&ldquo;Verify microdeposits returned an unknown error.&rdquo;</td>
-</tr>
 </tbody></table>
-<h4 id='request-and-response-initiate'>Request and response (Initiate)</h4><div class="code-snippet js-code-snippet language-raw"><button class="btn alternative">copy</button><div class="code-snippet__selector">
+<h4 id='request-and-response'>Request and response</h4><div class="code-snippet js-code-snippet language-raw"><button class="btn alternative">copy</button><div class="code-snippet__selector">
           <nav>
               <button class="selector_switch" id="raw">raw</button>
               <button class="selector_switch" id="php">php</button>
@@ -5386,7 +5349,94 @@ Location: https://api.dwolla.com/funding-sources/e52006c3-7560-4ff1-99d5-b0f3a6f
 
 <span class="nv">$fsApi</span><span class="o">-&gt;</span><span class="na">micro_deposits</span><span class="p">(</span><span class="nv">$fundingSourceUrl</span><span class="p">);</span>
 <span class="cp">?&gt;</span>
-</code></pre></div></div><h4 id='request-and-response-verify'>Request and response (Verify)</h4><div class="code-snippet js-code-snippet language-raw"><button class="btn alternative">copy</button><div class="code-snippet__selector">
+</code></pre></div></div><h2 id='verify-micro-deposits'>Verify micro-deposits</h2>
+<p>This section covers how to verify micro-deposits for bank verification. Reference the <a href="https://developers.dwolla.com/resources/funding-source-verification.html">funding source verification</a> resource article for more information on the micro-deposit method of bank account verification.</p>
+<ol class="alerts"><li class="alert icon-alert-alert"><p>This endpoint requires an OAuth account access token with the <code>Funding</code> scope.</p>
+</li></ol><h3 id='http-request'>HTTP request</h3>
+<p><code class="prettyprint">POST https://api.dwolla.com/funding-sources/{id}/micro-deposits</code></p>
+<h3 id='request-parameters'>Request parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Required</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>id</td>
+<td>yes</td>
+<td>string</td>
+<td>id of funding source to verify micro-deposits on.</td>
+</tr>
+<tr>
+<td>amount1</td>
+<td>yes</td>
+<td>string</td>
+<td>An amount JSON object of first micro-deposit. Contains <code class="prettyprint">value</code> and <code class="prettyprint">currency</code>.</td>
+</tr>
+<tr>
+<td>amount2</td>
+<td>yes</td>
+<td>string</td>
+<td>An amount JSON object of second micro-deposit. Contains <code class="prettyprint">value</code> and <code class="prettyprint">currency</code>.</td>
+</tr>
+</tbody></table>
+<h3 id='http-status-and-error-codes'>HTTP Status and Error Codes</h3>
+<table><thead>
+<tr>
+<th>HTTP Status</th>
+<th>Code</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>200</td>
+<td>OK</td>
+<td>Micro deposits verified</td>
+</tr>
+<tr>
+<td>202</td>
+<td>TryAgainLater</td>
+<td>&ldquo;Invalid wait time.&rdquo;</td>
+</tr>
+<tr>
+<td>400</td>
+<td>ValidationError</td>
+<td>InvalidAmount</td>
+</tr>
+<tr>
+<td>400</td>
+<td>ValidationError</td>
+<td>&ldquo;Wrong amount(s).&rdquo;</td>
+</tr>
+<tr>
+<td>403</td>
+<td>InvalidResourceState</td>
+<td>&ldquo;Too many attempts.&rdquo;</td>
+</tr>
+<tr>
+<td>403</td>
+<td>InvalidResourceState</td>
+<td>&ldquo;Bank already verified.&rdquo;</td>
+</tr>
+<tr>
+<td>404</td>
+<td>NotFound</td>
+<td>Micro deposits not initiated</td>
+</tr>
+<tr>
+<td>404</td>
+<td>NotFound</td>
+<td>Funding source not found</td>
+</tr>
+<tr>
+<td>500</td>
+<td>Unknown</td>
+<td>&ldquo;Verify microdeposits returned an unknown error.&rdquo;</td>
+</tr>
+</tbody></table>
+<h4 id='request-and-response'>Request and response</h4><div class="code-snippet js-code-snippet language-raw"><button class="btn alternative">copy</button><div class="code-snippet__selector">
           <nav>
               <button class="selector_switch" id="raw">raw</button>
               <button class="selector_switch" id="php">php</button>
@@ -5507,7 +5557,7 @@ HTTP 200 OK
   <span class="p">]</span>
 <span class="p">]);</span>
 <span class="cp">?&gt;</span>
-</code></pre></div></div><h2 id='retrieve-micro-deposits-status'>Retrieve micro-deposits status</h2>
+</code></pre></div></div><h2 id='retrieve-micro-deposits-details'>Retrieve micro-deposits details</h2>
 <p>This section shows how to retrieve the status of micro-deposits and check if pending verification for completed micro-deposits exists.</p>
 <ol class="alerts"><li class="alert icon-alert-alert"><p>This endpoint requires an OAuth account access token with the <code>Funding</code> scope.</p>
 </li></ol><h3 id='http-request'>HTTP request</h3>
@@ -5695,6 +5745,8 @@ HTTP 200 OK
 
 <span class="nx">accountToken</span><span class="p">.</span><span class="nx">post</span><span class="p">(</span><span class="nx">fundingSourceUrl</span><span class="p">,</span> <span class="nx">requestBody</span><span class="p">);</span>
 </code></pre></div></div>
+<hr>
+
             <h1 id='transfers'>Transfers</h1>
 <p>A transfer represents money being transferred from a <code class="prettyprint">source</code> to a <code class="prettyprint">destination</code>. Transfers are available for the <code class="prettyprint">Customer</code> and <code class="prettyprint">Account</code> resources.</p>
 <h3 id='transfer-resource'>Transfer resource</h3>
@@ -5753,7 +5805,7 @@ HTTP 200 OK
 <td>String, <code class="prettyprint">USD</code></td>
 </tr>
 </tbody></table>
-<h2 id='initiate-transfer'>Initiate transfer</h2>
+<h2 id='initiate-a-transfer'>Initiate a transfer</h2>
 <p>This section covers how to initiate a transfer for either an <a href="#accounts">Account</a> or <a href="#customers">Customer</a> resource.</p>
 <ol class="alerts"><li class="alert icon-alert-alert"><p>This endpoint requires an OAuth account access token with the <code>Send</code> scope.</p>
 </li></ol><h3 id='http-request'>HTTP request</h3>
@@ -6063,7 +6115,7 @@ Location: https://api.dwolla.com/transfers/74c9129b-d14a-e511-80da-0aa34a9b2388
   <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">res</span><span class="p">)</span> <span class="p">{</span>
     <span class="nx">res</span><span class="p">.</span><span class="nx">headers</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">'location'</span><span class="p">);</span> <span class="c1">// =&gt; 'https://api.dwolla.com/transfers/74c9129b-d14a-e511-80da-0aa34a9b2388'</span>
   <span class="p">});</span>
-</code></pre></div></div><h2 id='get-a-transfer-by-id'>Get a transfer by id</h2>
+</code></pre></div></div><h2 id='retrieve-a-transfer'>Retrieve a transfer</h2>
 <p>This section covers how to retrieve a transfer belonging to an Account or Customer by its id.</p>
 <ol class="alerts"><li class="alert icon-alert-alert"><p>This endpoint requires an OAuth account access token with the <code>Transactions</code> scope.</p>
 </li></ol><h3 id='http-request'>HTTP request</h3>
@@ -6200,7 +6252,7 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
   <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">res</span><span class="p">)</span> <span class="p">{</span>
     <span class="nx">res</span><span class="p">.</span><span class="nx">body</span><span class="p">.</span><span class="nx">status</span><span class="p">;</span> <span class="c1">// =&gt; 'pending'</span>
   <span class="p">});</span>
-</code></pre></div></div><h2 id='get-a-transfer39s-fees'>Get a transfer&rsquo;s fees</h2>
+</code></pre></div></div><h2 id='list-fees-for-a-transfer'>List fees for a transfer</h2>
 <p>This section outlines how to retrieve fees charged on a created transfer. Fees are visible to the <code class="prettyprint">Customer</code> or <code class="prettyprint">Account</code> that is charged the fee, as well as the Dwolla <code class="prettyprint">Account</code> that is involved in receiving the fee.</p>
 <ol class="alerts"><li class="alert icon-alert-alert"><p>This endpoint requires an OAuth account access token with the <code>Transactions</code> scope.</p>
 </li></ol><h3 id='http-request'>HTTP request</h3>
@@ -6350,8 +6402,8 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 </span>  <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">res</span><span class="p">)</span> <span class="p">{</span>
     <span class="nx">res</span><span class="p">.</span><span class="nx">body</span><span class="p">.</span><span class="nx">total</span><span class="p">;</span> <span class="c1">// =&gt; 2</span>
   <span class="p">});</span>
-</code></pre></div></div><h2 id='get-transfer-failure-reason'>Get transfer failure reason</h2>
-<p>When a bank transfer fails for an Account or Customer, Dwolla returns a <code class="prettyprint">failure</code> link when <a href="#get-a-transfer-by-id">getting the transfer by Id</a>. This failure link is used to retrieve the return code and description. For reference, the list of possible failure codes and descriptions are shown in the <a href="https://developers.dwolla.com/resources/bank-transfer-workflow/transfer-failures.html">Transfer failures</a> resource article.</p>
+</code></pre></div></div><h2 id='retrieve-a-transfer-failure-reason'>Retrieve a transfer failure reason</h2>
+<p>When a bank transfer fails for an Account or Customer, Dwolla returns a <code class="prettyprint">failure</code> link when <a href="#retrieve-a-transfer">getting the transfer by Id</a>. This failure link is used to retrieve the return code and description. For reference, the list of possible failure codes and descriptions are shown in the <a href="https://developers.dwolla.com/resources/bank-transfer-workflow/transfer-failures.html">Transfer failures</a> resource article.</p>
 
 <p><strong>Note:</strong> If a transfer fails to/from a bank account then the <code class="prettyprint">bank</code> will automatically be removed from the Dwolla system for all ACH return codes except an <code class="prettyprint">R01</code>.</p>
 <ol class="alerts"><li class="alert icon-alert-alert"><p>This endpoint requires an OAuth account access token with the <code>Transactions</code> scope.</p>
@@ -6447,7 +6499,7 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
     <span class="nx">res</span><span class="p">.</span><span class="nx">body</span><span class="p">.</span><span class="nx">code</span><span class="p">;</span> <span class="c1">// =&gt; 'R1'</span>
   <span class="p">});</span>
 </code></pre></div></div><h2 id='cancel-a-transfer'>Cancel a transfer</h2>
-<p>When a bank transfer is eligible for cancellation, Dwolla returns a <code class="prettyprint">cancel</code> link  when <a href="#get-a-transfer-by-id">getting the transfer by Id</a>. This cancel link is used to trigger the cancellation, preventing the bank transfer from processing further. A bank transfer is cancellable up until 4pm CT on that same business day if the transfer was initiated prior to 4PM CT. If a transfer was initiated after 4pm CT, it can be cancelled anytime before 4pm CT on the following business day.</p>
+<p>When a bank transfer is eligible for cancellation, Dwolla returns a <code class="prettyprint">cancel</code> link  when <a href="#retrieve-a-transfer">getting the transfer by Id</a>. This cancel link is used to trigger the cancellation, preventing the bank transfer from processing further. A bank transfer is cancellable up until 4pm CT on that same business day if the transfer was initiated prior to 4PM CT. If a transfer was initiated after 4pm CT, it can be cancelled anytime before 4pm CT on the following business day.</p>
 <ol class="alerts"><li class="alert icon-alert-alert"><p>This endpoint requires an OAuth account access token with the <code>Transactions</code> scope.</p>
 </li></ol><h3 id='http-request'>HTTP Request</h3>
 <p><code class="prettyprint">POST https://api.dwolla.com/transfers/{id}</code></p>
@@ -6509,6 +6561,8 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
   }
 }
 </code></pre></div></div>
+<hr>
+
             <h1 id='masspay'>MassPay</h1>
 <p>Dwolla MassPay allows you to easily send up to 5,000 payments one API request. The payments are funded from a single user&rsquo;s specified funding source and processed asynchronously upon submission.</p>
 
@@ -6681,7 +6735,7 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 <td>OAuth token does not have Send scope.</td>
 </tr>
 </tbody></table>
-<h3 id='request-and-response-transfer-from-account-to-customer'>Request and response (transfer from Account to Customer)</h3><div class="code-snippet js-code-snippet language-raw"><button class="btn alternative">copy</button><div class="code-snippet__selector">
+<h3 id='request-and-response-transfer-from-account-to-customers'>Request and response (transfer from Account to Customers)</h3><div class="code-snippet js-code-snippet language-raw"><button class="btn alternative">copy</button><div class="code-snippet__selector">
           <nav>
               <button class="selector_switch" id="raw">raw</button>
               <button class="selector_switch" id="php">php</button>
@@ -6865,8 +6919,8 @@ Location: https://api.dwolla.com/mass-payments/d093bcd1-d0c1-41c2-bcb5-a5cc011be
   <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">res</span><span class="p">)</span> <span class="p">{</span>
     <span class="nx">res</span><span class="p">.</span><span class="nx">headers</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">'location'</span><span class="p">);</span> <span class="c1">// =&gt; 'https://api-uat.dwolla.com/mass-payments/cf1e9e00-09cf-43da-b8b5-a43b3f6192d4'</span>
   <span class="p">});</span>
-</code></pre></div></div><h2 id='get-a-mass-payment-by-id'>Get a mass payment by id</h2>
-<p>This section outlines how to retrieve a mass payment by its id. All mass payments will have a status of <code class="prettyprint">pending</code> upon creation and will move to <code class="prettyprint">processing</code> and finally <code class="prettyprint">complete</code> as the service runs. It is recommended that you retrieve your <a href="#list-mass-payment-items">list of mass payment items</a> when your mass payment has a status of <code class="prettyprint">complete</code> to determine if any items failed to process successfully.</p>
+</code></pre></div></div><h2 id='retrieve-a-mass-payment'>Retrieve a mass payment</h2>
+<p>This section outlines how to retrieve a mass payment by its id. All mass payments will have a status of <code class="prettyprint">pending</code> upon creation and will move to <code class="prettyprint">processing</code> and finally <code class="prettyprint">complete</code> as the service runs. It is recommended that you retrieve your <a href="#list-items-for-a-mass-payment">list of mass payment items</a> when your mass payment has a status of <code class="prettyprint">complete</code> to determine if any items failed to process successfully.</p>
 <ol class="alerts"><li class="alert icon-alert-alert"><p>This endpoint requires an OAuth account access token with the <code>Transactions</code> scope.</p>
 </li></ol><h3 id='http-request'>HTTP request</h3>
 <p><code class="prettyprint">GET https://api.dwolla.com/mass-payments/{id}</code></p>
@@ -6979,7 +7033,7 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
   <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">res</span><span class="p">)</span> <span class="p">{</span>
     <span class="nx">res</span><span class="p">.</span><span class="nx">body</span><span class="p">.</span><span class="nx">status</span><span class="p">;</span> <span class="c1">// =&gt; 'processing'</span>
   <span class="p">});</span>
-</code></pre></div></div><h2 id='list-mass-payment-items'>List mass payment items</h2>
+</code></pre></div></div><h2 id='list-items-for-a-mass-payment'>List items for a mass payment</h2>
 <p>A mass payment contains a list of payments called <code class="prettyprint">items</code>. An <code class="prettyprint">item</code> is distinct from the transfer which it creates. An item can contain a status of either <code class="prettyprint">failed</code>, <code class="prettyprint">pending</code>, or <code class="prettyprint">success</code> depending on whether the payment was created by the Dwolla service or not. A mass payment item status of <code class="prettyprint">success</code> is an indication that a transfer was successfully created. A mass payment&rsquo;s items will be returned in the <code class="prettyprint">_embedded</code> object as a list of <code class="prettyprint">items</code>.</p>
 <ol class="alerts"><li class="alert icon-alert-alert"><p>This endpoint requires an OAuth account access token with the <code>Transactions</code> scope.</p>
 </li></ol><h3 id='http-request'>HTTP Request</h3>
@@ -7167,7 +7221,7 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 </span>  <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">res</span><span class="p">)</span> <span class="p">{</span>
     <span class="nx">res</span><span class="p">.</span><span class="nx">body</span><span class="p">.</span><span class="nx">total</span><span class="p">;</span> <span class="c1">// =&gt; 2</span>
   <span class="p">});</span>
-</code></pre></div></div><h2 id='get-a-mass-payment-item-by-id'>Get a mass payment item by id</h2>
+</code></pre></div></div><h2 id='retrieve-a-mass-payment-item'>Retrieve a mass payment item</h2>
 <p>This section covers how to retrieve a mass payment item by its unique identifier. An item can contain <code class="prettyprint">_links</code> to: the mass payment the item belongs to, the transfer created from the item, and the destination user.</p>
 <ol class="alerts"><li class="alert icon-alert-alert"><p>This endpoint requires an OAuth account access token with the <code>Transactions</code> scope.</p>
 </li></ol><h3 id='http-request'>HTTP request</h3>
@@ -7299,6 +7353,8 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
     <span class="nx">res</span><span class="p">.</span><span class="nx">body</span><span class="p">.</span><span class="nx">status</span><span class="p">;</span> <span class="c1">// =&gt; 'success'</span>
   <span class="p">});</span>
 </code></pre></div></div>
+<hr>
+
             <h1 id='events'>Events</h1>
 <p>When the state of a resource changes, we create a new event resource to record the change.  For instance, if a Customer&rsquo;s status changes to <code class="prettyprint">verified</code>, a <code class="prettyprint">customer_verified</code> event will be created.  When an Event is created, a <a href="#webhooks">Webhook</a> will be created to deliver the Event to any URLs specified by your active <a href="#webhook-subscriptions">Webhook Subscriptions</a>.</p>
 <h3 id='events-resource'>Events resource</h3>
@@ -7555,8 +7611,8 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 </tr>
 </tbody></table>
 <h2 id='list-events'>List events</h2>
-<p>Retrieve a list of events for the authorized user.</p>
-<ol class="alerts"><li class="alert icon-alert-alert"><p>This endpoint requires an OAuth <em>Application</em> access token.</p>
+<p>Retrieve a list of events for the application.</p>
+<ol class="alerts"><li class="alert icon-alert-alert"><p>This endpoint requires an OAuth <a href="#application-access-token">application access token</a>.</p>
 </li></ol><h3 id='http-request'>HTTP request</h3>
 <p><code class="prettyprint">GET https://api.dwolla.com/events</code></p>
 <h3 id='request-parameters'>Request parameters</h3>
@@ -7757,9 +7813,9 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
   <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">res</span><span class="p">)</span> <span class="p">{</span>
     <span class="nx">res</span><span class="p">.</span><span class="nx">body</span><span class="p">.</span><span class="nx">total</span><span class="p">;</span> <span class="c1">// =&gt; 4</span>
   <span class="p">});</span>
-</code></pre></div></div><h2 id='get-event-by-id'>Get event by id</h2>
+</code></pre></div></div><h2 id='retrieve-an-event'>Retrieve an event</h2>
 <p>This section covers how to retrieve an event by id.</p>
-<ol class="alerts"><li class="alert icon-alert-alert"><p>This endpoint requires an OAuth <em>Application</em> access token.</p>
+<ol class="alerts"><li class="alert icon-alert-alert"><p>This endpoint requires an OAuth <a href="#application-access-token">application access token</a>.</p>
 </li></ol><h3 id='http-request'>HTTP Request</h3>
 <p><code class="prettyprint">GET https://api.dwolla.com/events/{id}</code></p>
 <h3 id='request-parameters'>Request parameters</h3>
@@ -7891,8 +7947,10 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
     <span class="nx">res</span><span class="p">.</span><span class="nx">body</span><span class="p">.</span><span class="nx">topic</span><span class="p">;</span> <span class="c1">// =&gt; 'customer_transfer_created'</span>
   <span class="p">});</span>
 </code></pre></div></div>
+<hr>
+
             <h1 id='webhook-subscriptions'>Webhook subscriptions</h1>
-<p>Create a webhook subscription to receive <code class="prettyprint">POST</code> requests from Dwolla (called webhooks) when events associated with your application occur.  <a href="#webhooks">Webhooks</a> are sent to a URL which you provide when creating a webhook subscription. If you are a white label partner, you will use these events to notify your customers via email as described in the white label terms of service. Refer to the <a href="#available-events">events</a> section for the list of events that trigger webhooks.</p>
+<p>Create a webhook subscription to receive <code class="prettyprint">POST</code> requests from Dwolla (called webhooks) when events associated with your application occur.  <a href="#webhooks">Webhooks</a> are sent to a URL which you provide when creating a webhook subscription. If you are a white label partner, you will use these events to notify your customers via email as described in the white label terms of service. Refer to the <a href="#events">events</a> section for the list of events that trigger webhooks.</p>
 <div class="code-snippet js-code-snippet language-nohide"><button class="btn alternative">copy</button><div class="code-snippet__cnt highlight"><pre><code class="language-nohide" data-lang="nohide"><span class="p">{</span><span class="w">
   </span><span class="nt">"_links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="nt">"self"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
@@ -7909,7 +7967,7 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 </span></code></pre></div></div><h3 id='acknowledgement-and-retries'>Acknowledgement and retries</h3>
 <p>When your application receives a <a href="#webhooks">webhook</a>, it should respond with a HTTP 2xx status code to indicate successful receipt. If Dwolla receives a status code greater than a HTTP 400, or your application fails to respond within 20 seconds of the attempt, another attempt will be made.</p>
 
-<p>Dwolla will re-attempt delivery 8 times over the course of 72 hours according the backoff schedule below. If a webhook was successfully received but you would like the information again, you can call <a href="#get-webhook-by-id">retrieve webhook by ID</a>.</p>
+<p>Dwolla will re-attempt delivery 8 times over the course of 72 hours according the backoff schedule below. If a webhook was successfully received but you would like the information again, you can call <a href="#retrieve-a-webhook">retrieve a webhook by its Id</a>.</p>
 
 <table><thead>
 <tr>
@@ -8037,7 +8095,7 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 </tbody></table>
 <h2 id='create-a-webhook-subscription'>Create a webhook subscription</h2>
 <p>This section details how to create a webhook subscription to deliver <a href="#webhooks">webhooks</a> to a specified URL.</p>
-<ol class="alerts"><li class="alert icon-alert-alert"><p>This endpoint requires an OAuth <em>Application</em> access token.</p>
+<ol class="alerts"><li class="alert icon-alert-alert"><p>This endpoint requires an OAuth <a href="#application-access-token">application access token</a>.</p>
 </li></ol><h3 id='http-request'>HTTP Request</h3>
 <p><code class="prettyprint">POST https://api.dwolla.com/webhook-subscriptions</code></p>
 <h3 id='request-parameters'>Request parameters</h3>
@@ -8154,11 +8212,11 @@ Authorization: Bearer 0Sn0W6kzNicvoWhDbQcVSKLRUpGjIdlPSEYyrHqrDDoRnQwE7Q
 <span class="p">));</span>
 <span class="nv">$subscription</span><span class="p">;</span> <span class="c1"># =&gt; "https://api-uat.dwolla.com/webhook-subscriptions/5af4c10a-f6de-4ac8-840d-42cb65454216"
 </span><span class="cp">?&gt;</span>
-</code></pre></div></div><h2 id='delete-a-subscription'>Delete a subscription</h2>
-<p>Delete a Webhook Subscription to stop receiving Webhooks at the URL specified. If using an SDK, the request was successful unless an exception was thrown stating otherwise.</p>
-<ol class="alerts"><li class="alert icon-alert-alert"><p>This endpoint requires an OAuth <em>Application</em> access token.</p>
+</code></pre></div></div><h2 id='retrieve-a-webhook-subscription'>Retrieve a webhook subscription</h2>
+<p>This section details how to retrieve a webhook subscription by its id.</p>
+<ol class="alerts"><li class="alert icon-alert-alert"><p>This endpoint requires an OAuth <a href="#application-access-token">application access token</a>.</p>
 </li></ol><h3 id='http-request'>HTTP request</h3>
-<p><code class="prettyprint">DELETE https://api.dwolla.com/webhook-subscriptions/{id}</code></p>
+<p><code class="prettyprint">GET https://api.dwolla.com/webhook-subscriptions/{id}</code></p>
 <h3 id='request-parameters'>Request parameters</h3>
 <table><thead>
 <tr>
@@ -8172,7 +8230,7 @@ Authorization: Bearer 0Sn0W6kzNicvoWhDbQcVSKLRUpGjIdlPSEYyrHqrDDoRnQwE7Q
 <td>id</td>
 <td>yes</td>
 <td>string</td>
-<td>Webhook unique identifier.</td>
+<td>Webhook subscription unique identifier.</td>
 </tr>
 </tbody></table>
 <h3 id='errors'>Errors</h3>
@@ -8195,9 +8253,25 @@ Authorization: Bearer 0Sn0W6kzNicvoWhDbQcVSKLRUpGjIdlPSEYyrHqrDDoRnQwE7Q
               <button class="selector_switch" id="python">python</button>
               <button class="selector_switch" id="javascript">javascript</button>
           </nav>
-        </div><div class="code-snippet__cnt highlight"><pre><code class="language-raw" data-lang="raw">DELETE https://api-uat.dwolla.com/webhook-subscriptions/5af4c10a-f6de-4ac8-840d-42cb65454216
+        </div><div class="code-snippet__cnt highlight"><pre><code class="language-raw" data-lang="raw">GET https://api-uat.dwolla.com/webhook-subscriptions/5af4c10a-f6de-4ac8-840d-42cb65454216
 Accept: application/vnd.dwolla.v1.hal+json
 Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
+
+...
+
+{
+  "_links": {
+    "self": {
+      "href": "https://api-uat.dwolla.com/webhook-subscriptions/077dfffb-4852-412f-96b6-0fe668066589"
+    },
+    "webhooks": {
+      "href": "https://api-uat.dwolla.com/webhook-subscriptions/077dfffb-4852-412f-96b6-0fe668066589/webhooks"
+    }
+  },
+  "id": "077dfffb-4852-412f-96b6-0fe668066589",
+  "url": "http://myapplication.com/webhooks",
+  "created": "2015-10-28T16:20:47+00:00"
+}
 </code></pre></div></div><div class="code-snippet js-code-snippet language-ruby"><button class="btn alternative">copy</button><div class="code-snippet__selector">
           <nav>
               <button class="selector_switch" id="raw">raw</button>
@@ -8209,10 +8283,12 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
         </div><div class="code-snippet__cnt highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="n">webhook_subscription_url</span> <span class="o">=</span> <span class="s1">'https://api-uat.dwolla.com/webhook-subscriptions/5af4c10a-f6de-4ac8-840d-42cb65454216'</span>
 
 <span class="c1"># Using DwollaV2 - https://github.com/Dwolla/dwolla-v2-ruby (Recommended)</span>
-<span class="n">application_token</span><span class="p">.</span><span class="nf">delete</span> <span class="n">webhook_subscription_url</span>
+<span class="n">webhook_subscription</span> <span class="o">=</span> <span class="n">application_token</span><span class="p">.</span><span class="nf">get</span> <span class="n">webhook_subscription_url</span>
+<span class="n">webhook_subscription</span><span class="p">.</span><span class="nf">created</span> <span class="c1"># =&gt; 2015-10-28T16:20:47+00:00</span>
 
 <span class="c1"># Using DwollaSwagger - https://github.com/Dwolla/dwolla-swagger-ruby</span>
-<span class="no">DwollaSwagger</span><span class="o">::</span><span class="no">WebhooksubscriptionApi</span><span class="p">.</span><span class="nf">delete_by_id</span><span class="p">(</span><span class="n">webhook_subscription_url</span><span class="p">)</span>
+<span class="n">webhook_subscription</span> <span class="o">=</span> <span class="no">DwollaSwagger</span><span class="o">::</span><span class="no">WebhooksubscriptionApi</span><span class="p">.</span><span class="nf">id</span> <span class="n">webhook_subscription_url</span>
+<span class="n">webhook_subscription</span><span class="p">.</span><span class="nf">created</span> <span class="c1"># =&gt; 2015-10-28T16:20:47+00:00</span>
 </code></pre></div></div><div class="code-snippet js-code-snippet language-javascript"><button class="btn alternative">copy</button><div class="code-snippet__selector">
           <nav>
               <button class="selector_switch" id="raw">raw</button>
@@ -8223,7 +8299,11 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
           </nav>
         </div><div class="code-snippet__cnt highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="kd">var</span> <span class="nx">webhookSubscriptionUrl</span> <span class="o">=</span> <span class="s1">'https://api-uat.dwolla.com/webhook-subscriptions/5af4c10a-f6de-4ac8-840d-42cb65454216'</span><span class="p">;</span>
 
-<span class="nx">applicationToken</span><span class="p">.</span><span class="k">delete</span><span class="p">(</span><span class="nx">webhookSubscriptionUrl</span><span class="p">);</span>
+<span class="nx">applicationToken</span>
+  <span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="nx">webhookSubscriptionUrl</span><span class="p">)</span>
+  <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">res</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">res</span><span class="p">.</span><span class="nx">body</span><span class="p">.</span><span class="nx">created</span><span class="p">;</span> <span class="c1">// =&gt; '2016-04-20T15:49:50.340Z'</span>
+  <span class="p">});</span>
 </code></pre></div></div><div class="code-snippet js-code-snippet language-python"><button class="btn alternative">copy</button><div class="code-snippet__selector">
           <nav>
               <button class="selector_switch" id="raw">raw</button>
@@ -8235,11 +8315,13 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
         </div><div class="code-snippet__cnt highlight"><pre><code class="language-python" data-lang="python"><span class="n">webhook_subscription_url</span> <span class="o">=</span> <span class="s">'https://api-uat.dwolla.com/webhook-subscriptions/5af4c10a-f6de-4ac8-840d-42cb65454216'</span>
 
 <span class="c"># Using dwollav2 - https://github.com/Dwolla/dwolla-v2-python (Recommended)</span>
-<span class="n">application_token</span><span class="o">.</span><span class="n">delete</span><span class="p">(</span><span class="n">webhook_subscription_url</span><span class="p">)</span>
+<span class="n">webhook_subscription</span> <span class="o">=</span> <span class="n">application_token</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">webhook_subscription_url</span><span class="p">)</span>
+<span class="n">webhook_subscription</span><span class="o">.</span><span class="n">body</span><span class="p">[</span><span class="s">'created'</span><span class="p">]</span> <span class="c"># =&gt; '2015-10-28T16:20:47+00:00'</span>
 
 <span class="c"># Using dwollaswagger - https://github.com/Dwolla/dwolla-swagger-python</span>
 <span class="n">webhook_api</span> <span class="o">=</span> <span class="n">dwollaswagger</span><span class="o">.</span><span class="n">WebhooksubscriptionsApi</span><span class="p">(</span><span class="n">client</span><span class="p">)</span>
-<span class="n">webhook_api</span><span class="o">.</span><span class="n">delete_by_id</span><span class="p">(</span><span class="n">webhook_subscription_url</span><span class="p">)</span>
+<span class="n">retrieved</span> <span class="o">=</span> <span class="n">webhook_api</span><span class="o">.</span><span class="nb">id</span><span class="p">(</span><span class="n">webhook_subscription_url</span><span class="p">)</span>
+<span class="n">retrieved</span><span class="o">.</span><span class="n">created</span> <span class="c"># =&gt; 2015-10-28T16:20:47+00:00</span>
 </code></pre></div></div><div class="code-snippet js-code-snippet language-php"><button class="btn alternative">copy</button><div class="code-snippet__selector">
           <nav>
               <button class="selector_switch" id="raw">raw</button>
@@ -8250,11 +8332,13 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
           </nav>
         </div><div class="code-snippet__cnt highlight"><pre><code class="language-php" data-lang="php"><span class="cp">&lt;?php</span>
 <span class="nv">$webhookApi</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">DwollaSwagger\WebhooksubscriptionsApi</span><span class="p">(</span><span class="nv">$apiClient</span><span class="p">);</span>
-<span class="nv">$webhookApi</span><span class="o">-&gt;</span><span class="na">deleteById</span><span class="p">(</span><span class="s1">'https://api-uat.dwolla.com/webhook-subscriptions/5af4c10a-f6de-4ac8-840d-42cb65454216'</span><span class="p">);</span>
-<span class="cp">?&gt;</span>
-</code></pre></div></div><h2 id='list-subscriptions'>List subscriptions</h2>
+<span class="nv">$retrieved</span> <span class="o">=</span> <span class="nv">$webhookApi</span><span class="o">-&gt;</span><span class="na">id</span><span class="p">(</span><span class="s1">'https://api-uat.dwolla.com/webhook-subscriptions/5af4c10a-f6de-4ac8-840d-42cb65454216'</span><span class="p">);</span>
+
+<span class="nv">$retrieved</span><span class="o">-&gt;</span><span class="na">created</span><span class="p">;</span> <span class="c1"># =&gt; 2015-10-28T16:20:47+00:00
+</span><span class="cp">?&gt;</span>
+</code></pre></div></div><h2 id='list-webhook-subscriptions'>List webhook subscriptions</h2>
 <p>This section covers how to retrieve a list of webhook subscriptions that belong to an application.</p>
-<ol class="alerts"><li class="alert icon-alert-alert"><p>This endpoint requires an OAuth <em>Application</em> access token.</p>
+<ol class="alerts"><li class="alert icon-alert-alert"><p>This endpoint requires an OAuth <a href="#application-access-token">application access token</a>.</p>
 </li></ol><h3 id='http-request'>HTTP request</h3>
 <p><code class="prettyprint">GET https://api.dwolla.com/webhook-subscriptions</code></p>
 <h3 id='request-and-response'>Request and response</h3><div class="code-snippet js-code-snippet language-raw"><button class="btn alternative">copy</button><div class="code-snippet__selector">
@@ -8354,11 +8438,11 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 <span class="nv">$retrieved</span> <span class="o">=</span> <span class="nv">$webhookApi</span><span class="o">-&gt;</span><span class="na">_list</span><span class="p">();</span>
 <span class="nv">$retrieved</span><span class="o">-&gt;</span><span class="na">total</span><span class="p">;</span> <span class="c1"># =&gt; 1
 </span><span class="cp">?&gt;</span>
-</code></pre></div></div><h2 id='get-a-subscription-by-id'>Get a subscription by id</h2>
-<p>This section details how to retrieve a webhook subscription by its id.</p>
-<ol class="alerts"><li class="alert icon-alert-alert"><p>This endpoint requires an OAuth <em>Application</em> access token.</p>
+</code></pre></div></div><h2 id='delete-a-webhook-subscription'>Delete a webhook subscription</h2>
+<p>Delete a Webhook Subscription to stop receiving Webhooks at the URL specified. If using an SDK, the request was successful unless an exception was thrown stating otherwise.</p>
+<ol class="alerts"><li class="alert icon-alert-alert"><p>This endpoint requires an OAuth <a href="#application-access-token">application access token</a>.</p>
 </li></ol><h3 id='http-request'>HTTP request</h3>
-<p><code class="prettyprint">GET https://api.dwolla.com/webhook-subscriptions/{id}</code></p>
+<p><code class="prettyprint">DELETE https://api.dwolla.com/webhook-subscriptions/{id}</code></p>
 <h3 id='request-parameters'>Request parameters</h3>
 <table><thead>
 <tr>
@@ -8372,7 +8456,7 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 <td>id</td>
 <td>yes</td>
 <td>string</td>
-<td>Webhook subscription unique identifier.</td>
+<td>Webhook unique identifier.</td>
 </tr>
 </tbody></table>
 <h3 id='errors'>Errors</h3>
@@ -8387,7 +8471,7 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 <td>Webhook subscription not found.</td>
 </tr>
 </tbody></table>
-<h3 id='request-and-response'>Request and response:</h3><div class="code-snippet js-code-snippet language-raw"><button class="btn alternative">copy</button><div class="code-snippet__selector">
+<h3 id='request-and-response'>Request and response</h3><div class="code-snippet js-code-snippet language-raw"><button class="btn alternative">copy</button><div class="code-snippet__selector">
           <nav>
               <button class="selector_switch" id="raw">raw</button>
               <button class="selector_switch" id="php">php</button>
@@ -8395,25 +8479,9 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
               <button class="selector_switch" id="python">python</button>
               <button class="selector_switch" id="javascript">javascript</button>
           </nav>
-        </div><div class="code-snippet__cnt highlight"><pre><code class="language-raw" data-lang="raw">GET https://api-uat.dwolla.com/webhook-subscriptions/5af4c10a-f6de-4ac8-840d-42cb65454216
+        </div><div class="code-snippet__cnt highlight"><pre><code class="language-raw" data-lang="raw">DELETE https://api-uat.dwolla.com/webhook-subscriptions/5af4c10a-f6de-4ac8-840d-42cb65454216
 Accept: application/vnd.dwolla.v1.hal+json
 Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
-
-...
-
-{
-  "_links": {
-    "self": {
-      "href": "https://api-uat.dwolla.com/webhook-subscriptions/077dfffb-4852-412f-96b6-0fe668066589"
-    },
-    "webhooks": {
-      "href": "https://api-uat.dwolla.com/webhook-subscriptions/077dfffb-4852-412f-96b6-0fe668066589/webhooks"
-    }
-  },
-  "id": "077dfffb-4852-412f-96b6-0fe668066589",
-  "url": "http://myapplication.com/webhooks",
-  "created": "2015-10-28T16:20:47+00:00"
-}
 </code></pre></div></div><div class="code-snippet js-code-snippet language-ruby"><button class="btn alternative">copy</button><div class="code-snippet__selector">
           <nav>
               <button class="selector_switch" id="raw">raw</button>
@@ -8425,12 +8493,10 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
         </div><div class="code-snippet__cnt highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="n">webhook_subscription_url</span> <span class="o">=</span> <span class="s1">'https://api-uat.dwolla.com/webhook-subscriptions/5af4c10a-f6de-4ac8-840d-42cb65454216'</span>
 
 <span class="c1"># Using DwollaV2 - https://github.com/Dwolla/dwolla-v2-ruby (Recommended)</span>
-<span class="n">webhook_subscription</span> <span class="o">=</span> <span class="n">application_token</span><span class="p">.</span><span class="nf">get</span> <span class="n">webhook_subscription_url</span>
-<span class="n">webhook_subscription</span><span class="p">.</span><span class="nf">created</span> <span class="c1"># =&gt; 2015-10-28T16:20:47+00:00</span>
+<span class="n">application_token</span><span class="p">.</span><span class="nf">delete</span> <span class="n">webhook_subscription_url</span>
 
 <span class="c1"># Using DwollaSwagger - https://github.com/Dwolla/dwolla-swagger-ruby</span>
-<span class="n">webhook_subscription</span> <span class="o">=</span> <span class="no">DwollaSwagger</span><span class="o">::</span><span class="no">WebhooksubscriptionApi</span><span class="p">.</span><span class="nf">id</span> <span class="n">webhook_subscription_url</span>
-<span class="n">webhook_subscription</span><span class="p">.</span><span class="nf">created</span> <span class="c1"># =&gt; 2015-10-28T16:20:47+00:00</span>
+<span class="no">DwollaSwagger</span><span class="o">::</span><span class="no">WebhooksubscriptionApi</span><span class="p">.</span><span class="nf">delete_by_id</span><span class="p">(</span><span class="n">webhook_subscription_url</span><span class="p">)</span>
 </code></pre></div></div><div class="code-snippet js-code-snippet language-javascript"><button class="btn alternative">copy</button><div class="code-snippet__selector">
           <nav>
               <button class="selector_switch" id="raw">raw</button>
@@ -8441,11 +8507,7 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
           </nav>
         </div><div class="code-snippet__cnt highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="kd">var</span> <span class="nx">webhookSubscriptionUrl</span> <span class="o">=</span> <span class="s1">'https://api-uat.dwolla.com/webhook-subscriptions/5af4c10a-f6de-4ac8-840d-42cb65454216'</span><span class="p">;</span>
 
-<span class="nx">applicationToken</span>
-  <span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="nx">webhookSubscriptionUrl</span><span class="p">)</span>
-  <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">res</span><span class="p">)</span> <span class="p">{</span>
-    <span class="nx">res</span><span class="p">.</span><span class="nx">body</span><span class="p">.</span><span class="nx">created</span><span class="p">;</span> <span class="c1">// =&gt; '2016-04-20T15:49:50.340Z'</span>
-  <span class="p">});</span>
+<span class="nx">applicationToken</span><span class="p">.</span><span class="k">delete</span><span class="p">(</span><span class="nx">webhookSubscriptionUrl</span><span class="p">);</span>
 </code></pre></div></div><div class="code-snippet js-code-snippet language-python"><button class="btn alternative">copy</button><div class="code-snippet__selector">
           <nav>
               <button class="selector_switch" id="raw">raw</button>
@@ -8457,13 +8519,11 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
         </div><div class="code-snippet__cnt highlight"><pre><code class="language-python" data-lang="python"><span class="n">webhook_subscription_url</span> <span class="o">=</span> <span class="s">'https://api-uat.dwolla.com/webhook-subscriptions/5af4c10a-f6de-4ac8-840d-42cb65454216'</span>
 
 <span class="c"># Using dwollav2 - https://github.com/Dwolla/dwolla-v2-python (Recommended)</span>
-<span class="n">webhook_subscription</span> <span class="o">=</span> <span class="n">application_token</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">webhook_subscription_url</span><span class="p">)</span>
-<span class="n">webhook_subscription</span><span class="o">.</span><span class="n">body</span><span class="p">[</span><span class="s">'created'</span><span class="p">]</span> <span class="c"># =&gt; '2015-10-28T16:20:47+00:00'</span>
+<span class="n">application_token</span><span class="o">.</span><span class="n">delete</span><span class="p">(</span><span class="n">webhook_subscription_url</span><span class="p">)</span>
 
 <span class="c"># Using dwollaswagger - https://github.com/Dwolla/dwolla-swagger-python</span>
 <span class="n">webhook_api</span> <span class="o">=</span> <span class="n">dwollaswagger</span><span class="o">.</span><span class="n">WebhooksubscriptionsApi</span><span class="p">(</span><span class="n">client</span><span class="p">)</span>
-<span class="n">retrieved</span> <span class="o">=</span> <span class="n">webhook_api</span><span class="o">.</span><span class="nb">id</span><span class="p">(</span><span class="n">webhook_subscription_url</span><span class="p">)</span>
-<span class="n">retrieved</span><span class="o">.</span><span class="n">created</span> <span class="c"># =&gt; 2015-10-28T16:20:47+00:00</span>
+<span class="n">webhook_api</span><span class="o">.</span><span class="n">delete_by_id</span><span class="p">(</span><span class="n">webhook_subscription_url</span><span class="p">)</span>
 </code></pre></div></div><div class="code-snippet js-code-snippet language-php"><button class="btn alternative">copy</button><div class="code-snippet__selector">
           <nav>
               <button class="selector_switch" id="raw">raw</button>
@@ -8474,13 +8534,11 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
           </nav>
         </div><div class="code-snippet__cnt highlight"><pre><code class="language-php" data-lang="php"><span class="cp">&lt;?php</span>
 <span class="nv">$webhookApi</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">DwollaSwagger\WebhooksubscriptionsApi</span><span class="p">(</span><span class="nv">$apiClient</span><span class="p">);</span>
-<span class="nv">$retrieved</span> <span class="o">=</span> <span class="nv">$webhookApi</span><span class="o">-&gt;</span><span class="na">id</span><span class="p">(</span><span class="s1">'https://api-uat.dwolla.com/webhook-subscriptions/5af4c10a-f6de-4ac8-840d-42cb65454216'</span><span class="p">);</span>
-
-<span class="nv">$retrieved</span><span class="o">-&gt;</span><span class="na">created</span><span class="p">;</span> <span class="c1"># =&gt; 2015-10-28T16:20:47+00:00
-</span><span class="cp">?&gt;</span>
-</code></pre></div></div><h2 id='get-a-subscription39s-webhooks'>Get a subscription&rsquo;s webhooks</h2>
+<span class="nv">$webhookApi</span><span class="o">-&gt;</span><span class="na">deleteById</span><span class="p">(</span><span class="s1">'https://api-uat.dwolla.com/webhook-subscriptions/5af4c10a-f6de-4ac8-840d-42cb65454216'</span><span class="p">);</span>
+<span class="cp">?&gt;</span>
+</code></pre></div></div><h2 id='list-webhooks-for-a-webhook-subscription'>List webhooks for a webhook subscription</h2>
 <p>This section covers how to view all fired <a href="#webhooks">webhooks</a> for a webhook subscription.</p>
-<ol class="alerts"><li class="alert icon-alert-alert"><p>This endpoint requires an OAuth <em>Application</em> access token.</p>
+<ol class="alerts"><li class="alert icon-alert-alert"><p>This endpoint requires an OAuth <a href="#application-access-token">application access token</a>.</p>
 </li></ol><h3 id='http-request'>HTTP request</h3>
 <p><code class="prettyprint">GET https://api.dwolla.com/webhook-subscriptions/{id}/webhooks</code></p>
 <h3 id='request-parameters'>Request parameters</h3>
@@ -8619,6 +8677,8 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 <span class="nv">$hooks</span><span class="o">-&gt;</span><span class="na">total</span><span class="p">;</span> <span class="c1"># =&gt; 5
 </span><span class="cp">?&gt;</span>
 </code></pre></div></div>
+<hr>
+
             <h1 id='webhooks'>Webhooks</h1>
 <p>When a new <a href="#events">event</a> is created and there is an active <a href="#webhook-subscriptions">webhook subscription</a>, a new webhook is created in order to deliver that event.  Attempted deliveries are recorded under the webhook&rsquo;s <code class="prettyprint">attempts</code> property.  Each attempt includes the recorded request and response of the delivery attempt. Webhooks are sent asynchronously and are not guaranteed to be delivered in order. We recommend that applications protect against duplicated events by making event processing idempotent.</p>
 
@@ -8709,7 +8769,7 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div></div><h2 id='retrieve-a-webhook'>Retrieve a webhook</h2>
 <p>This section covers how to retrieve a single webhook.</p>
-<ol class="alerts"><li class="alert icon-alert-alert"><p>This endpoint requires an OAuth <em>Application</em> access token.</p>
+<ol class="alerts"><li class="alert icon-alert-alert"><p>This endpoint requires an OAuth <a href="#application-access-token">application access token</a>.</p>
 </li></ol><h3 id='http-request'>HTTP request</h3>
 <p><code class="prettyprint">GET https://api.dwolla.com/webhooks/{id}</code></p>
 <h3 id='request-parameters'>Request parameters</h3>
@@ -8904,9 +8964,9 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
   <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">res</span><span class="p">)</span> <span class="p">{</span>
     <span class="nx">res</span><span class="p">.</span><span class="nx">body</span><span class="p">.</span><span class="nx">topic</span><span class="p">;</span> <span class="c1">// =&gt; 'transfer_created'</span>
   <span class="p">});</span>
-</code></pre></div></div><h2 id='retry-a-webhook-by-id'>Retry a webhook by id</h2>
+</code></pre></div></div><h2 id='retry-a-webhook'>Retry a webhook</h2>
 <p>This section details how to retry a webhook by id.</p>
-<ol class="alerts"><li class="alert icon-alert-alert"><p>This endpoint requires an OAuth <em>Application</em> access token.</p>
+<ol class="alerts"><li class="alert icon-alert-alert"><p>This endpoint requires an OAuth <a href="#application-access-token">application access token</a>.</p>
 </li></ol><h3 id='http-request'>HTTP Request</h3>
 <p><code class="prettyprint">POST https://api.dwolla.com/webhooks/{id}/retries</code></p>
 <h3 id='request-parameters'>Request parameters</h3>
@@ -9011,9 +9071,9 @@ Location: https://api.dwolla.com/webhooks/9ece9660-aa34-41eb-80d7-0125d53b45e8/r
         </div><div class="code-snippet__cnt highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="kd">var</span> <span class="nx">webhookUrl</span> <span class="o">=</span> <span class="s1">'https://api.dwolla.com/webhooks/9ece9660-aa34-41eb-80d7-0125d53b45e8'</span><span class="p">;</span>
 
 <span class="nx">applicationToken</span><span class="p">.</span><span class="nx">post</span><span class="p">(</span><span class="err">`</span><span class="nx">$</span><span class="p">{</span><span class="nx">webhookUrl</span><span class="p">}</span><span class="sr">/retries`</span><span class="se">)</span><span class="err">;
-</span></code></pre></div></div><h2 id='get-webhook-retries-by-id'>Get webhook retries by id</h2>
+</span></code></pre></div></div><h2 id='list-retries-for-a-webhook'>List retries for a webhook</h2>
 <p>This section covers how to retrieve webhook retries by id.</p>
-<ol class="alerts"><li class="alert icon-alert-alert"><p>This endpoint requires an OAuth <em>Application</em> access token.</p>
+<ol class="alerts"><li class="alert icon-alert-alert"><p>This endpoint requires an OAuth <a href="#application-access-token">application access token</a>.</p>
 </li></ol><h3 id='http-request'>HTTP Request</h3>
 <p><code class="prettyprint">GET https://api.dwolla.com/webhooks/{id}/retries</code></p>
 <h3 id='request-parameters'>Request parameters</h3>
