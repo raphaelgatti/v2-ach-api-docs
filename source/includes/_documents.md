@@ -279,3 +279,4 @@ accountToken
     res.body.type; // => "passport"
   });
 ```
+* * *

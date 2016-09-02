@@ -2,9 +2,9 @@
 
 Dwolla's API lets you interact with a user's Dwolla account and act on its behalf to transfer money, add funding sources, and more.  To do so, your application first needs to request authorization from users.  
 
-Dwolla implements the [OAuth 2.0 standard](http://oauth.net/2/) to facilitate this authorization. Similar to Facebook and Twitter's authentication flow, the user is first presented with a permission dialog for your application, at which point the user can either approve the permissions requested, or reject them. Once the user approves, an `authorization_code` is sent to your application, which will then [be exchanged](#finish-authorization) for an `access_token` and a `refresh_token` pair.
+Dwolla implements the [OAuth 2.0 standard](http://oauth.net/2/) to facilitate this authorization. Similar to Facebook and Twitter's authentication flow, the user is first presented with a permission dialog for your application, at which point the user can either approve the permissions requested, or reject them. Once the user approves, an `authorization_code` is sent to your application, which will then [be exchanged](#finish-user-authorization) for an `access_token` and a `refresh_token` pair.
 
-The `access_token` can then be used to make API calls which require user authentication like [Initiate a Transfer](#initiate-transfer) or [List Transfers](#get-transfers-account).
+The `access_token` can then be used to make API calls which require user authentication like [Initiate a Transfer](#initiate-a-transfer) or [List Transfers](#list-and-search-transfers-for-an-account).
 
 ### Token lifetimes
 
@@ -48,12 +48,12 @@ https://uat.dwolla.com/oauth/v2/authenticate?client_id={client_id}&response_type
 
 Applications may request the following permission scopes when generating an access token:
 
-Scope Name | Description
------------|-------------
-Transactions | Access the user's transfer data
-Send | Transfer money on the user's behalf
-Funding | Access names of funding sources the user has connected to Dwolla, access available balance information for Dwolla Balance and Dwolla Credit (if applicable), add new funding sources, verify funding sources, initiate transfers to and from funding sources.
-ManageCustomers | Includes create Customers, manage their funding sources, and allow related money movement
+| Scope Name | Description |
+|-----------|--------------|
+| Transactions | Access the user's transfer data. |
+| Send | Transfer money on the user's behalf. |
+| Funding | Access names of funding sources the user has connected to Dwolla, access available balance information for Dwolla Balance and Dwolla Credit (if applicable), add new funding sources, verify funding sources, initiate transfers to and from funding sources. |
+| ManageCustomers | Includes create Customers, manage their funding sources, and allow related money movement. <br/> **Note:** This is a privileged scope available within our [White Label API](https://www.dwolla.com/white-label?b=apidocs)(v2). While fully available in our testing environment, White Label integrations will not be permitted to launch in production without first agreeing to a paid contract. [Contact sales](https://www.dwolla.com/contact?b=apidocs) to learn more. |
 
 ```php
 /**
@@ -296,3 +296,4 @@ scope | Pipe <code>&#124;</code> delimited list of permission scopes granted
   "scope": "AccountInfoFull|ManageAccount|Contacts|Transactions|Balance|Send|Request|Funding"
 }
 ```
+* * *

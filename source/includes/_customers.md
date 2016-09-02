@@ -80,7 +80,7 @@ Dwolla offers a seamless process for migrating existing user [Accounts](#account
 }
 ```
 
-## Create a Customer
+## Create a customer
 
 This section details how to create a new Customer.  To create an unverified Customer, you need to provide only the customer's full name and email address.  Verified Customers require additional information that will give Dwolla the ability to confirm the identity of the individual or business. Verified Customers can include type `business` or `personal`. For businesses, Dwolla will need to verify information about both the business and the “authorized representative” for that business. For receive-only customers, you'll provide the customer's full name, `type` with the value of `receive-only`, and `businessName` if applicable.
 
@@ -460,7 +460,7 @@ Retrieve a list of industry classifications to identify the Customer’s busines
 ### HTTP request
 `GET https://api.dwolla.com/business-classifications`
 
-### Request and response:
+### Request and response
 
 ```noselect
 GET https://api-uat.dwolla.com/business-classifications
@@ -543,7 +543,7 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 }
 ```
 
-## Get business classification by id
+## Retrieve a business classification
 
 This section shows you how to retrieve a business classification from a list of industry classifications. An industry classification id is needed in order to verify a `business` Customer.
 
@@ -649,7 +649,7 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 }
 ```
 
-## Update a Customer
+## Update a customer
 
 This endpoint can be used to facilitate the following use cases: Update Customer information, upgrade an `unverified` Customer to a `verified` Customer, `suspend` a Customer, and update a verified Customer's information to `retry` verification.
 
@@ -887,7 +887,7 @@ accountToken
 | 400 | Duplicate customer or validation error.
 | 403 | Not authorized to create customers.
 
-## List Customers
+## List and search customers
 
 This section outlines how to retrieve your list of created Customers.
 
@@ -980,7 +980,7 @@ accountToken
   });
 ```
 
-## Get a Customer by id
+## Retrieve a customer
 
 This section shows you how to retrieve a Customer belonging to the authorized user. Each `Customer` id is a part of its location resource. The developer can pass either an `id` or the entire `location` resource to make this request.
 
@@ -1067,9 +1067,9 @@ accountToken
   });
 ```
 
-## Create on-demand transfer authorization
+## Create an on-demand transfer authorization
 
-This section outlines how to create an on-demand bank transfer authorization for your Customer. On-demand authorization allows Customers to authorize Dwolla to transfer variable amounts from their bank account using ACH at a later point in time for products or services delivered. This on-demand authorization is supplied along with the Customer's bank details when creating a [new Customer funding source](#new-customer-funding-source).
+This section outlines how to create an on-demand bank transfer authorization for your Customer. On-demand authorization allows Customers to authorize Dwolla to transfer variable amounts from their bank account using ACH at a later point in time for products or services delivered. This on-demand authorization is supplied along with the Customer's bank details when creating a [new Customer funding source](#new-funding-source-for-a-customer).
 
 When on-demand authorization is enabled for your application the Customer is presented with text on a “add bank account” screen in your user interface(UI) giving authorization to Dwolla for future variable payments. **Note:** On-demand payments come as part of our White Label product and requires additional approval before getting started. Please [contact Sales](https://www.dwolla.com/contact?b=apidocs) for more information on enabling.
 
@@ -1125,12 +1125,12 @@ accountToken
   });
 ```
 
-## Create a Customer funding source
-There are two methods available for adding a bank or credit union account to a Customer. You can either collect the Customer's bank account information and pass it to Dwolla via the [new Customer funding source](#new-customer-funding-source) endpoint, or you can send the Customer through the the [Instant Account Verification](#instant-account-verification-iav) (IAV) flow which will add and verify a bank account within seconds.
+## Create a funding source for a customer
+There are two methods available for adding a bank or credit union account to a Customer. You can either collect the Customer's bank account information and pass it to Dwolla via the [new Customer funding source](#new-funding-source-for-a-customer) endpoint, or you can send the Customer through the the [Instant Account Verification](#instant-account-verification-iav) (IAV) flow which will add and verify a bank account within seconds.
 
 Before a Dwolla account or white label Customer is eligible to transfer money from their bank or credit union account they need to verify ownership of the account, either via Instant Account Verification (IAV) or micro-deposits. For more information on bank account verification, reference this [funding source verification](https://developers.dwolla.com/resources/funding-source-verification.html) resource article.
 
-### New Customer funding source
+### New funding source for a customer
 Create a new Funding Source for a Customer.  Customers can have a maximum of 6 funding sources.
 
 <ol class="alerts">
@@ -1406,7 +1406,7 @@ $('#start').click(function() {
 | UnsupportedBank |The customer's bank is not supported by the IAV flow. |
 | RateLimitReached |The customer exceeded the max # of IAV attempts. |
 
-## List a Customer's funding sources
+## List funding sources for a customer
 
 Retrieve a list of funding sources that belong to a Customer. By default, all funding sources are returned unless the `removed` querystring parameter is set to `false` in the request.
 
@@ -1529,7 +1529,7 @@ accountToken
   });
 ```
 
-## List a Customer's transfers
+## List and search transfers for a customer
 
 This section details how to retrieve a Customer's list of transfers. Transaction search is supported by passing in optional querystring parameters such as: `search` which represents a term to search on, `startAmount`, `endAmount`, `startDate`, and `endDate`.
 
@@ -1678,7 +1678,7 @@ accountToken
   });
 ```
 
-## List a Customer's mass payments
+## List mass payments for a customer
 
 This section covers how to retrieve a [verified Customer's](#customers) list of previously created mass payments. Mass payments are returned ordered by date created, with most recent mass payments appearing first.
 
@@ -1777,3 +1777,4 @@ accountToken
     res.body._embedded['mass-payments'][0].status; # => "complete"
   });
 ```
+* * *

@@ -100,7 +100,7 @@ $slide-time: 0.3s;
     }
 
     &__nav {
-        min-width: 300px;
+        min-width: 320px;
         display: -webkit-flex;
         display: -ms-flexbox;
         display: flex;
@@ -200,7 +200,7 @@ $slide-time: 0.3s;
     &__content {
         width: 100%;
         max-width: $SIZE_MAX_CONTENT_WIDTH;
-        margin-left: -300px;
+        margin-left: -280px;
         padding: 35px 40px 30px 335px;
         overflow: hidden;
         z-index: 1;

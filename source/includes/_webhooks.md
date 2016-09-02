@@ -96,7 +96,7 @@ When a new [event](#events) is created and there is an active [webhook subscript
 This section covers how to retrieve a single webhook.
 
 <ol class="alerts">
-    <li class="alert icon-alert-alert">This endpoint <a href="#authentication">requires</a> an OAuth *Application* access token.</li>
+    <li class="alert icon-alert-alert">This endpoint requires an OAuth [application access token](#application-access-token).</li>
 </ol>
 
 ### HTTP request
@@ -249,12 +249,12 @@ applicationToken
   });
 ```
 
-## Retry a webhook by id
+## Retry a webhook
 
 This section details how to retry a webhook by id.
 
 <ol class="alerts">
-    <li class="alert icon-alert-alert">This endpoint <a href="#authentication">requires</a> an OAuth *Application* access token.</li>
+    <li class="alert icon-alert-alert">This endpoint requires an OAuth [application access token](#application-access-token).</li>
 </ol>
 
 ### HTTP Request
@@ -317,12 +317,12 @@ var webhookUrl = 'https://api.dwolla.com/webhooks/9ece9660-aa34-41eb-80d7-0125d5
 applicationToken.post(`${webhookUrl}/retries`);
 ```
 
-## Get webhook retries by id
+## List retries for a webhook
 
 This section covers how to retrieve webhook retries by id.
 
 <ol class="alerts">
-    <li class="alert icon-alert-alert">This endpoint <a href="#authentication">requires</a> an OAuth *Application* access token.</li>
+    <li class="alert icon-alert-alert">This endpoint requires an OAuth [application access token](#application-access-token).</li>
 </ol>
 
 ### HTTP Request

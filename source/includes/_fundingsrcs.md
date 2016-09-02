@@ -68,7 +68,7 @@ HTTP/1.1 201 Created
 Location: https://api-uat.dwolla.com/funding-sources/04173e17-6398-4d36-a167-9d98c4b1f1c3
 ```
 
-## Get a funding source by id
+## Retrieve a funding source
 
 This section covers how to retrieve a funding source by id.
 
@@ -236,9 +236,9 @@ accountToken
   });
 ```
 
-## Initiate or verify micro-deposits
+## Initiate micro-deposits
 
-This section covers how to initiate and verify micro-deposits for bank verification. Reference the [funding source verification](https://developers.dwolla.com/resources/funding-source-verification.html) resource article for more information on the micro-deposit method of bank account verification.
+This section covers how to initiate micro-deposits for bank verification. Reference the [funding source verification](https://developers.dwolla.com/resources/funding-source-verification.html) resource article for more information on the micro-deposit method of bank account verification.
 
 <ol class="alerts">
     <li class="alert icon-alert-alert">This endpoint <a href="#authentication">requires</a> an OAuth account access token with the `Funding` <a href="#oauth-scopes">scope</a>.</li>
@@ -250,26 +250,16 @@ This section covers how to initiate and verify micro-deposits for bank verificat
 ### Request parameters
 | Parameter | Required | Type | Description |
 |-----------|----------|----------------|-------------|
-| amount1 | yes | string | An amount JSON object of first micro-deposit. Contains `value` and `currency`. |
-| amount2 | yes | string | An amount JSON object of second micro-deposit. Contains `value` and `currency`. |
+| id | yes | string | id of funding source to initiate micro-deposits to. |
 
 
 ### HTTP Status and Error Codes
 | HTTP Status | Code | Description |
 |--------------|-------------|-------------------|
-| 200 | OK | Micro deposits verified  |
 | 201 | Created | Micro deposits initiated |
-| 202 | TryAgainLater | "Invalid wait time." |
-| 400 | NotFound | Funding source not found. |
-| 400 | ValidationError | InvalidAmount |
-| 400 | ValidationError | "Wrong amount(s)." |
-| 403 | InvalidResourceState | "Too many attempts." |
-| 403 | InvalidResourceState | "Bank already verified." |
-| 404 | NotFound | Micro deposits not initiated |
 | 404 | NotFound | Funding source not found |
-| 500 | Unknown | "Verify microdeposits returned an unknown error." |
 
-#### Request and response (Initiate)
+#### Request and response
 
 ```raw
 POST /funding-sources/e52006c3-7560-4ff1-99d5-b0f3a6f4f909/micro-deposits
@@ -315,7 +305,39 @@ $fsApi->micro_deposits($fundingSourceUrl);
 ?>
 ```
 
-#### Request and response (Verify)
+## Verify micro-deposits
+
+This section covers how to verify micro-deposits for bank verification. Reference the [funding source verification](https://developers.dwolla.com/resources/funding-source-verification.html) resource article for more information on the micro-deposit method of bank account verification.
+
+<ol class="alerts">
+    <li class="alert icon-alert-alert">This endpoint <a href="#authentication">requires</a> an OAuth account access token with the `Funding` <a href="#oauth-scopes">scope</a>.</li>
+</ol>
+
+### HTTP request
+`POST https://api.dwolla.com/funding-sources/{id}/micro-deposits`
+
+### Request parameters
+| Parameter | Required | Type | Description |
+|-----------|----------|----------------|-------------|
+| id | yes | string | id of funding source to verify micro-deposits on. |
+| amount1 | yes | string | An amount JSON object of first micro-deposit. Contains `value` and `currency`. |
+| amount2 | yes | string | An amount JSON object of second micro-deposit. Contains `value` and `currency`. |
+
+
+### HTTP Status and Error Codes
+| HTTP Status | Code | Description |
+|--------------|-------------|-------------------|
+| 200 | OK | Micro deposits verified  |
+| 202 | TryAgainLater | "Invalid wait time." |
+| 400 | ValidationError | InvalidAmount |
+| 400 | ValidationError | "Wrong amount(s)." |
+| 403 | InvalidResourceState | "Too many attempts." |
+| 403 | InvalidResourceState | "Bank already verified." |
+| 404 | NotFound | Micro deposits not initiated |
+| 404 | NotFound | Funding source not found |
+| 500 | Unknown | "Verify microdeposits returned an unknown error." |
+
+#### Request and response
 
 ```raw
 POST /funding-sources/e52006c3-7560-4ff1-99d5-b0f3a6f4f909/micro-deposits
@@ -409,7 +431,7 @@ $fsApi->micro_deposits($fundingSourceUrl, [
 ?>
 ```
 
-## Retrieve micro-deposits status
+## Retrieve micro-deposits details
 
 This section shows how to retrieve the status of micro-deposits and check if pending verification for completed micro-deposits exists.
 
@@ -543,3 +565,4 @@ var requestBody = {
 
 accountToken.post(fundingSourceUrl, requestBody);
 ```
+* * *

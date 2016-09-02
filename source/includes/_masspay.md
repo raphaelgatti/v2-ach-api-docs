@@ -91,7 +91,7 @@ Funding source | `https://api.dwolla.com/funding-sources/{id}` | Destination of 
 | 400 | ValidationError | Can be: Items exceeded maximum count of 5000, Invalid amount, Invalid metadata, or Invalid funding source. |
 | 401 | NotAuthorized | OAuth token does not have Send scope. |
 
-### Request and response (transfer from Account to Customer)
+### Request and response (transfer from Account to Customers)
 
 ```raw
 POST /mass-payments
@@ -248,9 +248,9 @@ accountToken
   });
 ```
 
-## Get a mass payment by id
+## Retrieve a mass payment
 
-This section outlines how to retrieve a mass payment by its id. All mass payments will have a status of `pending` upon creation and will move to `processing` and finally `complete` as the service runs. It is recommended that you retrieve your [list of mass payment items](#list-mass-payment-items) when your mass payment has a status of `complete` to determine if any items failed to process successfully.
+This section outlines how to retrieve a mass payment by its id. All mass payments will have a status of `pending` upon creation and will move to `processing` and finally `complete` as the service runs. It is recommended that you retrieve your [list of mass payment items](#list-items-for-a-mass-payment) when your mass payment has a status of `complete` to determine if any items failed to process successfully.
 
 <ol class="alerts">
     <li class="alert icon-alert-alert">This endpoint <a href="#authentication">requires</a> an OAuth account access token with the `Transactions` <a href="#oauth-scopes">scope</a>.</li>
@@ -322,7 +322,7 @@ accountToken
   });
 ```
 
-## List mass payment items
+## List items for a mass payment
 
 A mass payment contains a list of payments called `items`. An `item` is distinct from the transfer which it creates. An item can contain a status of either `failed`, `pending`, or `success` depending on whether the payment was created by the Dwolla service or not. A mass payment item status of `success` is an indication that a transfer was successfully created. A mass payment's items will be returned in the `_embedded` object as a list of `items`.
 
@@ -452,7 +452,7 @@ accountToken
   });
 ```
 
-## Get a mass payment item by id
+## Retrieve a mass payment item
 
 This section covers how to retrieve a mass payment item by its unique identifier. An item can contain `_links` to: the mass payment the item belongs to, the transfer created from the item, and the destination user.
 
@@ -538,3 +538,4 @@ accountToken
     res.body.status; // => 'success'
   });
 ```
+* * *

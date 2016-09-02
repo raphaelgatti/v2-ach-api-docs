@@ -48,7 +48,7 @@ Dwolla offers a seamless process for migrating existing user [Accounts](#account
 }
 ```
 
-## Get an Account by id
+## Retrieve account details
 
 This section shows you how to retrieve account information belonging to the authorized user. The developer can pass either an `id` or the entire `location` resource to make this request.
 
@@ -141,9 +141,9 @@ accountToken
   });
 ```
 
-## Create an Account funding source
+## Create a funding source for an account
 
-This section details how to add a bank account to a Dwolla account. The bank account will have a status of `unverified` upon creation. Before a Dwolla account is eligible to transfer money from their bank or credit union account they need to verify ownership of the account via [micro-deposit verification](#initiate-or-verify-micro-deposits).
+This section details how to add a bank account to a Dwolla account. The bank account will have a status of `unverified` upon creation. Before a Dwolla account is eligible to transfer money from their bank or credit union account they need to verify ownership of the account via micro-deposit verification.
 
 For more information on micro-deposit verification, reference the [funding source verification](https://developers.dwolla.com/resources/funding-source-verification.html) resource article.
 
@@ -188,7 +188,7 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 HTTP/1.1 201 Created
 Location: https://api-uat.dwolla.com/funding-sources/04173e17-6398-4d36-a167-9d98c4b1f1c3
 ```
-## List an Account's funding sources
+## List funding sources for an account
 
 Retrieve a list of funding sources that belong to an Account. By default, all funding sources are returned unless the `removed` querystring parameter is set to `false` in the request.
 
@@ -304,7 +304,7 @@ accountToken
   });
 ```
 
-## List an Account's transfers
+## List and search transfers for an account
 
 This section covers how to retrieve an Account's list of transfers. Transaction search is supported by passing in optional querystring parameters such as: `search` which represents a term to search on, `startAmount`, `endAmount`, `startDate`, and `endDate`.
 
@@ -444,7 +444,7 @@ accountToken
   });
 ```
 
-## List an Account's mass payments
+## List mass payments for an account
 
 This section covers how to retrieve an Account's list of previously created mass payments. Mass payments are returned ordered by date created, with most recent mass payments appearing first.
 
@@ -543,3 +543,4 @@ accountToken
     res.body._embedded['mass-payments'][0].status; // => 'complete'
   });
 ```
+* * *

@@ -1,6 +1,6 @@
 # Webhook subscriptions
 
-Create a webhook subscription to receive `POST` requests from Dwolla (called webhooks) when events associated with your application occur.  [Webhooks](#webhooks) are sent to a URL which you provide when creating a webhook subscription. If you are a white label partner, you will use these events to notify your customers via email as described in the white label terms of service. Refer to the [events](#available-events) section for the list of events that trigger webhooks.
+Create a webhook subscription to receive `POST` requests from Dwolla (called webhooks) when events associated with your application occur.  [Webhooks](#webhooks) are sent to a URL which you provide when creating a webhook subscription. If you are a white label partner, you will use these events to notify your customers via email as described in the white label terms of service. Refer to the [events](#events) section for the list of events that trigger webhooks.
 
 ```noselect
 {
@@ -21,7 +21,7 @@ Create a webhook subscription to receive `POST` requests from Dwolla (called web
 ### Acknowledgement and retries
 When your application receives a [webhook](#webhooks), it should respond with a HTTP 2xx status code to indicate successful receipt. If Dwolla receives a status code greater than a HTTP 400, or your application fails to respond within 20 seconds of the attempt, another attempt will be made.
 
-Dwolla will re-attempt delivery 8 times over the course of 72 hours according the backoff schedule below. If a webhook was successfully received but you would like the information again, you can call [retrieve webhook by ID](#get-webhook-by-id).
+Dwolla will re-attempt delivery 8 times over the course of 72 hours according the backoff schedule below. If a webhook was successfully received but you would like the information again, you can call [retrieve a webhook by its Id](#retrieve-a-webhook).
 
 | Retry number | Interval (relative to last retry) | Interval (relative to original attempt) |
 |:------------:|:---------------------------------:|:---------------------------------------:|
@@ -67,7 +67,7 @@ Dwolla will re-attempt delivery 8 times over the course of 72 hours according th
 This section details how to create a webhook subscription to deliver [webhooks](#webhooks) to a specified URL.
 
 <ol class="alerts">
-    <li class="alert icon-alert-alert">This endpoint <a href="#authentication">requires</a> an OAuth *Application* access token.</li>
+    <li class="alert icon-alert-alert">This endpoint requires an OAuth [application access token](#application-access-token).</li>
 </ol>
 
 ### HTTP Request
@@ -144,21 +144,21 @@ $subscription; # => "https://api-uat.dwolla.com/webhook-subscriptions/5af4c10a-f
 ?>
 ```
 
-## Delete a subscription
+## Retrieve a webhook subscription
 
-Delete a Webhook Subscription to stop receiving Webhooks at the URL specified. If using an SDK, the request was successful unless an exception was thrown stating otherwise.
+This section details how to retrieve a webhook subscription by its id.
 
 <ol class="alerts">
-    <li class="alert icon-alert-alert">This endpoint <a href="#authentication">requires</a> an OAuth *Application* access token.</li>
+    <li class="alert icon-alert-alert">This endpoint requires an OAuth [application access token](#application-access-token).</li>
 </ol>
 
 ### HTTP request
-`DELETE https://api.dwolla.com/webhook-subscriptions/{id}`
+`GET https://api.dwolla.com/webhook-subscriptions/{id}`
 
 ### Request parameters
 | Parameter | Required | Type | Description |
 |-----------|----------|----------------|-------------|
-| id | yes | string | Webhook unique identifier. |
+| id | yes | string | Webhook subscription unique identifier. |
 
 ### Errors
 | HTTP Status | Message |
@@ -168,47 +168,73 @@ Delete a Webhook Subscription to stop receiving Webhooks at the URL specified. I
 ### Request and response
 
 ```raw
-DELETE https://api-uat.dwolla.com/webhook-subscriptions/5af4c10a-f6de-4ac8-840d-42cb65454216
+GET https://api-uat.dwolla.com/webhook-subscriptions/5af4c10a-f6de-4ac8-840d-42cb65454216
 Accept: application/vnd.dwolla.v1.hal+json
 Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
+
+...
+
+{
+  "_links": {
+    "self": {
+      "href": "https://api-uat.dwolla.com/webhook-subscriptions/077dfffb-4852-412f-96b6-0fe668066589"
+    },
+    "webhooks": {
+      "href": "https://api-uat.dwolla.com/webhook-subscriptions/077dfffb-4852-412f-96b6-0fe668066589/webhooks"
+    }
+  },
+  "id": "077dfffb-4852-412f-96b6-0fe668066589",
+  "url": "http://myapplication.com/webhooks",
+  "created": "2015-10-28T16:20:47+00:00"
+}
 ```
 ```ruby
 webhook_subscription_url = 'https://api-uat.dwolla.com/webhook-subscriptions/5af4c10a-f6de-4ac8-840d-42cb65454216'
 
 # Using DwollaV2 - https://github.com/Dwolla/dwolla-v2-ruby (Recommended)
-application_token.delete webhook_subscription_url
+webhook_subscription = application_token.get webhook_subscription_url
+webhook_subscription.created # => 2015-10-28T16:20:47+00:00
 
 # Using DwollaSwagger - https://github.com/Dwolla/dwolla-swagger-ruby
-DwollaSwagger::WebhooksubscriptionApi.delete_by_id(webhook_subscription_url)
+webhook_subscription = DwollaSwagger::WebhooksubscriptionApi.id webhook_subscription_url
+webhook_subscription.created # => 2015-10-28T16:20:47+00:00
 ```
 ```javascript
 var webhookSubscriptionUrl = 'https://api-uat.dwolla.com/webhook-subscriptions/5af4c10a-f6de-4ac8-840d-42cb65454216';
 
-applicationToken.delete(webhookSubscriptionUrl);
+applicationToken
+  .get(webhookSubscriptionUrl)
+  .then(function(res) {
+    res.body.created; // => '2016-04-20T15:49:50.340Z'
+  });
 ```
 ```python
 webhook_subscription_url = 'https://api-uat.dwolla.com/webhook-subscriptions/5af4c10a-f6de-4ac8-840d-42cb65454216'
 
 # Using dwollav2 - https://github.com/Dwolla/dwolla-v2-python (Recommended)
-application_token.delete(webhook_subscription_url)
+webhook_subscription = application_token.get(webhook_subscription_url)
+webhook_subscription.body['created'] # => '2015-10-28T16:20:47+00:00'
 
 # Using dwollaswagger - https://github.com/Dwolla/dwolla-swagger-python
 webhook_api = dwollaswagger.WebhooksubscriptionsApi(client)
-webhook_api.delete_by_id(webhook_subscription_url)
+retrieved = webhook_api.id(webhook_subscription_url)
+retrieved.created # => 2015-10-28T16:20:47+00:00
 ```
 ```php
 <?php
 $webhookApi = new DwollaSwagger\WebhooksubscriptionsApi($apiClient);
-$webhookApi->deleteById('https://api-uat.dwolla.com/webhook-subscriptions/5af4c10a-f6de-4ac8-840d-42cb65454216');
+$retrieved = $webhookApi->id('https://api-uat.dwolla.com/webhook-subscriptions/5af4c10a-f6de-4ac8-840d-42cb65454216');
+
+$retrieved->created; # => 2015-10-28T16:20:47+00:00
 ?>
 ```
 
-## List subscriptions
+## List webhook subscriptions
 
 This section covers how to retrieve a list of webhook subscriptions that belong to an application.
 
 <ol class="alerts">
-    <li class="alert icon-alert-alert">This endpoint <a href="#authentication">requires</a> an OAuth *Application* access token.</li>
+    <li class="alert icon-alert-alert">This endpoint requires an OAuth [application access token](#application-access-token).</li>
 </ol>
 
 ### HTTP request
@@ -284,97 +310,71 @@ $retrieved->total; # => 1
 ?>
 ```
 
-## Get a subscription by id
+## Delete a webhook subscription
 
-This section details how to retrieve a webhook subscription by its id.
+Delete a Webhook Subscription to stop receiving Webhooks at the URL specified. If using an SDK, the request was successful unless an exception was thrown stating otherwise.
 
 <ol class="alerts">
-    <li class="alert icon-alert-alert">This endpoint <a href="#authentication">requires</a> an OAuth *Application* access token.</li>
+    <li class="alert icon-alert-alert">This endpoint requires an OAuth [application access token](#application-access-token).</li>
 </ol>
 
 ### HTTP request
-`GET https://api.dwolla.com/webhook-subscriptions/{id}`
+`DELETE https://api.dwolla.com/webhook-subscriptions/{id}`
 
 ### Request parameters
 | Parameter | Required | Type | Description |
 |-----------|----------|----------------|-------------|
-| id | yes | string | Webhook subscription unique identifier. |
+| id | yes | string | Webhook unique identifier. |
 
 ### Errors
 | HTTP Status | Message |
 |--------------|-------------|
 | 404 | Webhook subscription not found. |
 
-### Request and response:
+### Request and response
 
 ```raw
-GET https://api-uat.dwolla.com/webhook-subscriptions/5af4c10a-f6de-4ac8-840d-42cb65454216
+DELETE https://api-uat.dwolla.com/webhook-subscriptions/5af4c10a-f6de-4ac8-840d-42cb65454216
 Accept: application/vnd.dwolla.v1.hal+json
 Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
-
-...
-
-{
-  "_links": {
-    "self": {
-      "href": "https://api-uat.dwolla.com/webhook-subscriptions/077dfffb-4852-412f-96b6-0fe668066589"
-    },
-    "webhooks": {
-      "href": "https://api-uat.dwolla.com/webhook-subscriptions/077dfffb-4852-412f-96b6-0fe668066589/webhooks"
-    }
-  },
-  "id": "077dfffb-4852-412f-96b6-0fe668066589",
-  "url": "http://myapplication.com/webhooks",
-  "created": "2015-10-28T16:20:47+00:00"
-}
 ```
 ```ruby
 webhook_subscription_url = 'https://api-uat.dwolla.com/webhook-subscriptions/5af4c10a-f6de-4ac8-840d-42cb65454216'
 
 # Using DwollaV2 - https://github.com/Dwolla/dwolla-v2-ruby (Recommended)
-webhook_subscription = application_token.get webhook_subscription_url
-webhook_subscription.created # => 2015-10-28T16:20:47+00:00
+application_token.delete webhook_subscription_url
 
 # Using DwollaSwagger - https://github.com/Dwolla/dwolla-swagger-ruby
-webhook_subscription = DwollaSwagger::WebhooksubscriptionApi.id webhook_subscription_url
-webhook_subscription.created # => 2015-10-28T16:20:47+00:00
+DwollaSwagger::WebhooksubscriptionApi.delete_by_id(webhook_subscription_url)
 ```
 ```javascript
 var webhookSubscriptionUrl = 'https://api-uat.dwolla.com/webhook-subscriptions/5af4c10a-f6de-4ac8-840d-42cb65454216';
 
-applicationToken
-  .get(webhookSubscriptionUrl)
-  .then(function(res) {
-    res.body.created; // => '2016-04-20T15:49:50.340Z'
-  });
+applicationToken.delete(webhookSubscriptionUrl);
 ```
 ```python
 webhook_subscription_url = 'https://api-uat.dwolla.com/webhook-subscriptions/5af4c10a-f6de-4ac8-840d-42cb65454216'
 
 # Using dwollav2 - https://github.com/Dwolla/dwolla-v2-python (Recommended)
-webhook_subscription = application_token.get(webhook_subscription_url)
-webhook_subscription.body['created'] # => '2015-10-28T16:20:47+00:00'
+application_token.delete(webhook_subscription_url)
 
 # Using dwollaswagger - https://github.com/Dwolla/dwolla-swagger-python
 webhook_api = dwollaswagger.WebhooksubscriptionsApi(client)
-retrieved = webhook_api.id(webhook_subscription_url)
-retrieved.created # => 2015-10-28T16:20:47+00:00
+webhook_api.delete_by_id(webhook_subscription_url)
 ```
 ```php
 <?php
 $webhookApi = new DwollaSwagger\WebhooksubscriptionsApi($apiClient);
-$retrieved = $webhookApi->id('https://api-uat.dwolla.com/webhook-subscriptions/5af4c10a-f6de-4ac8-840d-42cb65454216');
-
-$retrieved->created; # => 2015-10-28T16:20:47+00:00
+$webhookApi->deleteById('https://api-uat.dwolla.com/webhook-subscriptions/5af4c10a-f6de-4ac8-840d-42cb65454216');
 ?>
 ```
 
-## Get a subscription's webhooks
+## List webhooks for a webhook subscription
 
 This section covers how to view all fired [webhooks](#webhooks) for a webhook subscription.
 
 <ol class="alerts">
-    <li class="alert icon-alert-alert">This endpoint <a href="#authentication">requires</a> an OAuth *Application* access token.</li>
+    <li class="alert icon-alert-alert">This endpoint requires an OAuth [application access token](#application-access-token).</li>
 </ol>
 
 ### HTTP request
@@ -476,3 +476,4 @@ $hooks = $webhookApi->hooksById('https://api-uat.dwolla.com/webhook-subscription
 $hooks->total; # => 5
 ?>
 ```
+* * *

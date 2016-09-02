@@ -34,7 +34,7 @@ A transfer represents money being transferred from a `source` to a `destination`
 |value | Amount of money
 |currency | String, `USD`
 
-## Initiate transfer
+## Initiate a transfer
 
 This section covers how to initiate a transfer for either an [Account](#accounts) or [Customer](#customers) resource.
 
@@ -253,7 +253,7 @@ accountToken
   });
 ```
 
-## Get a transfer by id
+## Retrieve a transfer
 
 This section covers how to retrieve a transfer belonging to an Account or Customer by its id.
 
@@ -350,7 +350,7 @@ accountToken
     res.body.status; // => 'pending'
   });
 ```
-## Get a transfer's fees
+## List fees for a transfer
 
 This section outlines how to retrieve fees charged on a created transfer. Fees are visible to the `Customer` or `Account` that is charged the fee, as well as the Dwolla `Account` that is involved in receiving the fee.
 
@@ -461,9 +461,9 @@ accountToken
   });
 ```
 
-## Get transfer failure reason
+## Retrieve a transfer failure reason
 
-When a bank transfer fails for an Account or Customer, Dwolla returns a `failure` link when [getting the transfer by Id](#get-a-transfer-by-id). This failure link is used to retrieve the return code and description. For reference, the list of possible failure codes and descriptions are shown in the [Transfer failures](https://developers.dwolla.com/resources/bank-transfer-workflow/transfer-failures.html) resource article.
+When a bank transfer fails for an Account or Customer, Dwolla returns a `failure` link when [getting the transfer by Id](#retrieve-a-transfer). This failure link is used to retrieve the return code and description. For reference, the list of possible failure codes and descriptions are shown in the [Transfer failures](https://developers.dwolla.com/resources/bank-transfer-workflow/transfer-failures.html) resource article.
 
 **Note:** If a transfer fails to/from a bank account then the `bank` will automatically be removed from the Dwolla system for all ACH return codes except an `R01`.
 
@@ -527,7 +527,7 @@ accountToken
 
 ## Cancel a transfer
 
-When a bank transfer is eligible for cancellation, Dwolla returns a `cancel` link  when [getting the transfer by Id](#get-a-transfer-by-id). This cancel link is used to trigger the cancellation, preventing the bank transfer from processing further. A bank transfer is cancellable up until 4pm CT on that same business day if the transfer was initiated prior to 4PM CT. If a transfer was initiated after 4pm CT, it can be cancelled anytime before 4pm CT on the following business day.
+When a bank transfer is eligible for cancellation, Dwolla returns a `cancel` link  when [getting the transfer by Id](#retrieve-a-transfer). This cancel link is used to trigger the cancellation, preventing the bank transfer from processing further. A bank transfer is cancellable up until 4pm CT on that same business day if the transfer was initiated prior to 4PM CT. If a transfer was initiated after 4pm CT, it can be cancelled anytime before 4pm CT on the following business day.
 
 <ol class="alerts">
     <li class="alert icon-alert-alert">This endpoint <a href="#authentication">requires</a> an OAuth account access token with the `Transactions` <a href="#oauth-scopes">scope</a>.</li>
@@ -586,3 +586,4 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
   }
 }
 ```
+* * *
