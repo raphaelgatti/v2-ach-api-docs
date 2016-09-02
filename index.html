@@ -8336,6 +8336,117 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 
 <span class="nv">$retrieved</span><span class="o">-&gt;</span><span class="na">created</span><span class="p">;</span> <span class="c1"># =&gt; 2015-10-28T16:20:47+00:00
 </span><span class="cp">?&gt;</span>
+</code></pre></div></div><h2 id='update-a-webhook-subscription'>Update a webhook subscription</h2>
+<p>This section details how to pause a webhook subscription. When a webhook subscription is paused Dwolla will continue to create webhooks but not send them to your subscribed webhook url. This is useful if your webhook endpoint is unavailable and you want to temporarily disable webhook requests.</p>
+<ol class="alerts"><li class="alert icon-alert-alert"><p>This endpoint requires an OAuth <a href="#application-access-token">application access token</a>.</p>
+</li></ol><h3 id='http-request'>HTTP Request</h3>
+<p><code class="prettyprint">POST https://api.dwolla.com/webhook-subscriptions/{id}</code></p>
+<h3 id='request-parameters'>Request parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Required</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>id</td>
+<td>yes</td>
+<td>string</td>
+<td>Webhook unique identifier.</td>
+</tr>
+<tr>
+<td>paused</td>
+<td>yes</td>
+<td>string</td>
+<td>Specify a value of <code class="prettyprint">true</code> to pause the associated webhook subscription.</td>
+</tr>
+</tbody></table>
+<h3 id='request-and-response'>Request and response</h3><div class="code-snippet js-code-snippet language-raw"><button class="btn alternative">copy</button><div class="code-snippet__selector">
+          <nav>
+              <button class="selector_switch" id="raw">raw</button>
+              <button class="selector_switch" id="php">php</button>
+              <button class="selector_switch" id="ruby">ruby</button>
+              <button class="selector_switch" id="python">python</button>
+              <button class="selector_switch" id="javascript">javascript</button>
+          </nav>
+        </div><div class="code-snippet__cnt highlight"><pre><code class="language-raw" data-lang="raw">POST https://api.dwolla.com/webhook-subscriptions/5af4c10a-f6de-4ac8-840d-42cb65454216
+Accept: application/vnd.dwolla.v1.hal+json
+Content-Type: application/vnd.dwolla.v1.hal+json
+Authorization: Bearer 0Sn0W6kzNicvoWhDbQcVSKLRUpGjIdlPSEYyrHqrDDoRnQwE7Q
+{
+    "paused": true
+}
+</code></pre></div></div><div class="code-snippet js-code-snippet language-ruby"><button class="btn alternative">copy</button><div class="code-snippet__selector">
+          <nav>
+              <button class="selector_switch" id="raw">raw</button>
+              <button class="selector_switch" id="php">php</button>
+              <button class="selector_switch" id="ruby">ruby</button>
+              <button class="selector_switch" id="python">python</button>
+              <button class="selector_switch" id="javascript">javascript</button>
+          </nav>
+        </div><div class="code-snippet__cnt highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="n">webhook_subscription_url</span> <span class="o">=</span> <span class="s1">'https://api.dwolla.com/webhook-subscriptions/5af4c10a-f6de-4ac8-840d-42cb65454216'</span>
+
+<span class="n">request_body</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="ss">:paused</span> <span class="o">=&gt;</span> <span class="kp">true</span>
+<span class="p">}</span>
+
+<span class="c1"># Using DwollaV2 - https://github.com/Dwolla/dwolla-v2-ruby (Recommended)</span>
+<span class="n">subscription</span> <span class="o">=</span> <span class="n">application_token</span><span class="p">.</span><span class="nf">post</span> <span class="s2">"</span><span class="si">#{</span><span class="n">webhook_subscription_url</span><span class="si">}</span><span class="s2">"</span><span class="p">,</span> <span class="n">request_body</span>
+</code></pre></div></div><div class="code-snippet js-code-snippet language-javascript"><button class="btn alternative">copy</button><div class="code-snippet__selector">
+          <nav>
+              <button class="selector_switch" id="raw">raw</button>
+              <button class="selector_switch" id="php">php</button>
+              <button class="selector_switch" id="ruby">ruby</button>
+              <button class="selector_switch" id="python">python</button>
+              <button class="selector_switch" id="javascript">javascript</button>
+          </nav>
+        </div><div class="code-snippet__cnt highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="kd">var</span> <span class="nx">webhookSubscriptionUrl</span> <span class="o">=</span> <span class="s1">'https://api.dwolla.com/funding-sources/692486f8-29f6-4516-a6a5-c69fd2ce854c'</span><span class="p">;</span>
+
+<span class="kd">var</span> <span class="nx">requestBody</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="na">paused</span><span class="p">:</span> <span class="kc">true</span>
+<span class="p">};</span>
+
+<span class="nx">applicationToken</span>
+  <span class="p">.</span><span class="nx">post</span><span class="p">(</span><span class="nx">webhookSubscriptionUrl</span><span class="p">,</span> <span class="nx">requestBody</span><span class="p">)</span>
+  <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">res</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">res</span><span class="p">.</span><span class="nx">body</span><span class="p">.</span><span class="nx">paused</span><span class="p">;</span> <span class="c1">// =&gt; 'true'</span>
+  <span class="p">});</span>
+</code></pre></div></div><div class="code-snippet js-code-snippet language-python"><button class="btn alternative">copy</button><div class="code-snippet__selector">
+          <nav>
+              <button class="selector_switch" id="raw">raw</button>
+              <button class="selector_switch" id="php">php</button>
+              <button class="selector_switch" id="ruby">ruby</button>
+              <button class="selector_switch" id="python">python</button>
+              <button class="selector_switch" id="javascript">javascript</button>
+          </nav>
+        </div><div class="code-snippet__cnt highlight"><pre><code class="language-python" data-lang="python"><span class="n">webhook_subscription_url</span> <span class="o">=</span> <span class="s">'https://api.dwolla.com/webhook-subscriptions/5af4c10a-f6de-4ac8-840d-42cb65454216'</span>
+
+<span class="n">request_body</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="s">'paused'</span><span class="p">:</span> <span class="n">true</span>
+<span class="p">}</span>
+
+<span class="c"># Using dwollav2 - https://github.com/Dwolla/dwolla-v2-python (Recommended)</span>
+<span class="n">subscription</span> <span class="o">=</span> <span class="n">application_token</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="n">webhook_subscription_url</span><span class="p">,</span> <span class="n">request_body</span><span class="p">)</span>
+<span class="n">subscription</span><span class="o">.</span><span class="n">body</span><span class="p">[</span><span class="s">'paused'</span><span class="p">]</span> <span class="c"># =&gt; true</span>
+</code></pre></div></div><div class="code-snippet js-code-snippet language-php"><button class="btn alternative">copy</button><div class="code-snippet__selector">
+          <nav>
+              <button class="selector_switch" id="raw">raw</button>
+              <button class="selector_switch" id="php">php</button>
+              <button class="selector_switch" id="ruby">ruby</button>
+              <button class="selector_switch" id="python">python</button>
+              <button class="selector_switch" id="javascript">javascript</button>
+          </nav>
+        </div><div class="code-snippet__cnt highlight"><pre><code class="language-php" data-lang="php"><span class="cp">&lt;?php</span>
+<span class="nv">$webhookSubscriptionUrl</span> <span class="o">=</span> <span class="s1">'https://api.dwolla.com/webhook-subscriptions/5af4c10a-f6de-4ac8-840d-42cb65454216'</span>
+
+<span class="nv">$webhookApi</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">DwollaSwagger\WebhooksubscriptionsApi</span><span class="p">(</span><span class="nv">$apiClient</span><span class="p">);</span>
+
+<span class="nv">$subscription</span> <span class="o">=</span> <span class="nv">$webhookApi</span><span class="o">-&gt;</span><span class="na">updateSubscription</span><span class="p">(</span><span class="k">array</span> <span class="p">(</span>
+  <span class="s1">'paused'</span> <span class="o">=&gt;</span> <span class="kc">true</span>
+<span class="p">),</span> <span class="nv">$webhookSubscriptionUrl</span><span class="p">);</span>
+<span class="cp">?&gt;</span>
 </code></pre></div></div><h2 id='list-webhook-subscriptions'>List webhook subscriptions</h2>
 <p>This section covers how to retrieve a list of webhook subscriptions that belong to an application.</p>
 <ol class="alerts"><li class="alert icon-alert-alert"><p>This endpoint requires an OAuth <a href="#application-access-token">application access token</a>.</p>
