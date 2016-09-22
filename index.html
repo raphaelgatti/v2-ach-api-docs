@@ -5,7 +5,7 @@
     <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <title>Dwolla API docs</title>
-    <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon" /> 
+    <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon" />
     <link href="stylesheets/screen.css" rel="stylesheet" type="text/css" media="screen" />
     <link href="stylesheets/print.css" rel="stylesheet" type="text/css" media="print" />
 
@@ -412,7 +412,7 @@ composer install
 
 <span class="cp">?&gt;</span>
 </code></pre></div></div><h2 id='java'>Java</h2>
-<p><code class="prettyprint">dwolla-swagger-java</code> will soon be available on Maven Central with <a href="https://github.com/Dwolla/dwolla-swagger-java">source code</a> available on our GitHub page. More information is available on the project&rsquo;s README.</p>
+<p><code class="prettyprint">dwolla-swagger-java</code> is not actively maintained by Dwolla, however <a href="https://github.com/Dwolla/dwolla-swagger-java">source code</a> is available on our GitHub page and community contribution is encouraged. More information is available on the project&rsquo;s README.</p>
 <h3 id='installation'>Installation</h3>
 <p>You will be required to install from source, please have <code class="prettyprint">Git</code> and <code class="prettyprint">mvn</code> installed and in your path, then:</p>
 <div class="code-snippet js-code-snippet language-bashnohide"><button class="btn alternative">copy</button><div class="code-snippet__cnt highlight"><pre><code class="language-bashnohide" data-lang="bashnohide">git clone https://github.com/Dwolla/dwolla-swagger-java
@@ -5349,7 +5349,7 @@ Location: https://api.dwolla.com/funding-sources/e52006c3-7560-4ff1-99d5-b0f3a6f
 
 <span class="nv">$fsApi</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">DwollaSwagger\FundingsourcesApi</span><span class="p">(</span><span class="nv">$apiClient</span><span class="p">);</span>
 
-<span class="nv">$fsApi</span><span class="o">-&gt;</span><span class="na">micro_deposits</span><span class="p">(</span><span class="nv">$fundingSourceUrl</span><span class="p">);</span>
+<span class="nv">$fsApi</span><span class="o">-&gt;</span><span class="na">microDeposits</span><span class="p">(</span><span class="kc">null</span><span class="p">,</span> <span class="nv">$fundingSourceUrl</span><span class="p">);</span>
 <span class="cp">?&gt;</span>
 </code></pre></div></div><h2 id='verify-micro-deposits'>Verify micro-deposits</h2>
 <p>This section covers how to verify micro-deposits for bank verification. Reference the <a href="https://developers.dwolla.com/resources/funding-source-verification.html">funding source verification</a> resource article for more information on the micro-deposit method of bank account verification.</p>
@@ -5548,7 +5548,7 @@ HTTP 200 OK
 
 <span class="nv">$fsApi</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">DwollaSwagger\FundingsourcesApi</span><span class="p">(</span><span class="nv">$apiClient</span><span class="p">);</span>
 
-<span class="nv">$fsApi</span><span class="o">-&gt;</span><span class="na">micro_deposits</span><span class="p">(</span><span class="nv">$fundingSourceUrl</span><span class="p">,</span> <span class="p">[</span>
+<span class="nv">$fsApi</span><span class="o">-&gt;</span><span class="na">microDeposits</span><span class="p">([</span>
   <span class="s1">'amount1'</span> <span class="o">=&gt;</span> <span class="p">[</span>
     <span class="s1">'value'</span> <span class="o">=&gt;</span> <span class="s1">'0.03'</span><span class="p">,</span>
     <span class="s1">'currency'</span> <span class="o">=&gt;</span> <span class="s1">'USD'</span>
@@ -5556,7 +5556,8 @@ HTTP 200 OK
   <span class="s1">'amount2'</span> <span class="o">=&gt;</span> <span class="p">[</span>
     <span class="s1">'value'</span> <span class="o">=&gt;</span> <span class="s1">'0.09'</span><span class="p">,</span>
     <span class="s1">'currency'</span> <span class="o">=&gt;</span> <span class="s1">'USD'</span>
-  <span class="p">]</span>
+  <span class="p">],</span>
+  <span class="nv">$fundingSourceUrl</span>
 <span class="p">]);</span>
 <span class="cp">?&gt;</span>
 </code></pre></div></div><h2 id='retrieve-micro-deposits-details'>Retrieve micro-deposits details</h2>
@@ -9327,9 +9328,10 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
               <nav>
                 <h6>Info</h6>
                 <a href="https://www.dwolla.com/about">Product</a>
+                <a href="https://www.dwolla.com/bank-transfers">Bank transfers</a>
                 <a href="https://developers.dwolla.com">API documentation</a>
+                <a href="https://www.dwolla.com/same-day-ach">Same day transfers</a>
                 <a href="https://www.dwolla.com/fisync">FiSync</a>
-                <a href="https://www.dwolla.com/security">Security</a>
                 <a href="https://www.dwolla.com/pricing?b=footer">Pricing</a>
                 <a href="https://www.dwolla.com/contact?b=footer">Contact sales</a>
               </nav>
@@ -9338,6 +9340,7 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
                 <a href="https://www.dwolla.com/register">Create account</a>
                 <a href="https://www.dwolla.com/login">Log in</a>
                 <a href="http://help.dwolla.com/">Support</a>
+                <a href="https://www.dwolla.com/security">Security</a>
                 <a href="https://www.dwolla.com/legal/privacy/">Privacy</a>
                 <a href="https://www.dwolla.com/legal/tos/">Legal</a>
               </nav>
@@ -9346,6 +9349,7 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
                 <a href="https://twitter.com/dwolla">Twitter</a>
                 <a href="https://www.facebook.com/dwolla">Facebook</a>
                 <a href="https://www.linkedin.com/company/dwolla">Linkedin</a>
+                <a href="https://github.com/dwolla">GitHub</a>
               </nav>
               <nav>
                 <h6>Learn more</h6>
