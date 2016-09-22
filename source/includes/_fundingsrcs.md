@@ -301,7 +301,7 @@ $fundingSourceUrl = 'https://api-uat.dwolla.com/funding-sources/e52006c3-7560-4f
 
 $fsApi = new DwollaSwagger\FundingsourcesApi($apiClient);
 
-$fsApi->micro_deposits($fundingSourceUrl);
+$fsApi->microDeposits(null, $fundingSourceUrl);
 ?>
 ```
 
@@ -418,7 +418,7 @@ $fundingSourceUrl = 'https://api-uat.dwolla.com/funding-sources/e52006c3-7560-4f
 
 $fsApi = new DwollaSwagger\FundingsourcesApi($apiClient);
 
-$fsApi->micro_deposits($fundingSourceUrl, [
+$fsApi->microDeposits([
   'amount1' => [
     'value' => '0.03',
     'currency' => 'USD'
@@ -426,7 +426,8 @@ $fsApi->micro_deposits($fundingSourceUrl, [
   'amount2' => [
     'value' => '0.09',
     'currency' => 'USD'
-  ]
+  ],
+  $fundingSourceUrl
 ]);
 ?>
 ```
