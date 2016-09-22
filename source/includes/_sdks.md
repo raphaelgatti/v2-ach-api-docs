@@ -118,7 +118,7 @@ $myCusties = $customersApi->_list(10);
 
 ## Java
 
-`dwolla-swagger-java` will soon be available on Maven Central with [source code](https://github.com/Dwolla/dwolla-swagger-java) available on our GitHub page. More information is available on the project's README.
+`dwolla-swagger-java` is not actively maintained by Dwolla, however [source code](https://github.com/Dwolla/dwolla-swagger-java) is available on our GitHub page and community contribution is encouraged. More information is available on the project's README.
 
 ### Installation
 
