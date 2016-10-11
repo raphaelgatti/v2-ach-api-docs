@@ -226,50 +226,6 @@ $rotation-time: 0.35s;
         }
     }
 
-    &__api-ver {
-        padding: 15px 15px 15px 25px;
-        color: $color-black;
-        @extend %clearfix;
-
-        @include breakpoint($SIZE_TABLET_SMALL){
-            padding: 0 20px 20px;
-        }
-
-        span {
-            padding-top: 8px;
-            display: inline-block;
-            text-transform: uppercase;
-            font-size: rem(12px);
-            font-weight: 600;
-            letter-spacing: 1px;
-        }
-
-        .toggle-buttons {
-            margin: 0;
-            float: right;
-
-            a {
-                @include breakpoint($SIZE_MOBILE){
-                    width: 50%;
-                }
-
-                &:first-child {
-                    @include breakpoint($SIZE_MOBILE){
-                        border-top-right-radius: 0;
-                        border-bottom-left-radius: 5px;
-                    }
-                }
-
-                &:last-child {
-                    @include breakpoint($SIZE_MOBILE){
-                        border-top-right-radius: 5px;
-                        border-bottom-left-radius: 0;
-                    }
-                }
-            }
-        }   
-    }
-
     &__dropdown {
         padding: 30px 25px;
 
