@@ -1,10 +1,8 @@
 # Introduction
 
-Welcome to the Dwolla API V2 documentation, with ongoing updates as functionality is released to the API. We plan to implement API V1 functionality in API V2, but in the meantime, the two versions will operate in parallel.
+Welcome to the Dwolla API v2 documentation. The API v2 centers around our premium product, [White Label](https://www.dwolla.com/white-label). Some co-branded experiences and capabilities have been and will continue to be migrated from the legacy [API v1](https://docs.dwolla.com/) (no longer supported). For more information on transitioning v1 to v2, see our [migration guide](https://developers.dwolla.com/guides/migrate-to-v2/).
 
-The initial focus of API Version 2 centers around a premium product: [white label](https://www.dwolla.com/white-label), and provides different functionality from API Version 1. Over time, we are adding the same functionality currently available in V1 to V2.
-
-Official SDKs for Java, Node.JS, PHP, Ruby, and Python are being actively developed.
+Officially maintained SDKs are available for [Ruby](https://github.com/Dwolla/dwolla-v2-ruby), [Node.js](https://github.com/Dwolla/dwolla-v2-node), and [Python](https://github.com/Dwolla/dwolla-v2-python) with support for PHP coming at a later date. Reference the [SDK support](https://docsv2.dwolla.com/#sdk-support) section in our API docs for more information on getting started.
 
 Please note: white label is a premium product that cannot be activated in our production environment until you’ve received our approval to use it and have entered into an agreement with us. Please [contact a sales representative](https://www.dwolla.com/contact?b=apidocs) to find a package that best meets your needs.
 
